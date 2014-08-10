@@ -1,0 +1,18 @@
+{
+    "css": {
+        "src": ["src/sass/**/*.scss"],
+        "dev": "assets/css",
+        "prod": "prod/assets/css"
+    },
+    "js": {
+        "src": ["src/js/**/*.js", "!src/js/lib/bootstrap/*.js"],
+        "lib": "src/js/lib",
+        "dev": "assets/js",
+        "prod": "prod/assets/js"
+    },
+    "imgs": {
+        "src": "src/imgs/**/*.+(jpg|png)",
+        "dev": "assets/imgs",
+        "prod": "prod/assets/imgs"
+    }
+}

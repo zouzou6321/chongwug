@@ -1,0 +1,14 @@
+{
+    "affix" : false,
+    "alert" : false,
+    "button" : false,
+    "carousel" : false,
+    "collapse" : false,
+    "dropdown" : false,
+    "modal" : false,
+    "popover" : false,
+    "scrollspy" : false,
+    "tab" : false,
+    "tooltip" : false,
+    "transition" : true
+}
