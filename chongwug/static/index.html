@@ -8,7 +8,9 @@
 	<title>test</title>
 	<script type="text/javascript" src="./static/js/hello.js"></script>
 	<script type="text/javascript">
-	
+	var css_mainfest = 	{{ config.css|safe }};
+	var imgs_mainfest = {{ config.imgs|safe }};
+	var js_mainfest = {{ config.js|safe }};
 	</script>
 	<link rel="stylesheet" type="text/css" href="assets/css/base.css">
 	<link rel="stylesheet" type="text/css" href="prod/assets/css/styles-cfbfd771.css">

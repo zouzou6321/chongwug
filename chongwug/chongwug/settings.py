@@ -8,15 +8,27 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
+if 'SERVER_SOFTWARE' in os.environ:
+   MYSQL_HOST = 'chongwug.mysql.rds.aliyuncs.com'
+   MYSQL_PORT = '3306'
+   MYSQL_USER = 'chongwug'
+   MYSQL_PASS = 'weet6321'
+   MYSQL_DB   = 'chongwug'
+else:
+   # Make `python manage.py syncdb` works happy!
+   MYSQL_HOST = 'localhost'
+   MYSQL_PORT = '3306'
+   MYSQL_USER = 'root'
+   MYSQL_PASS = ''
+   MYSQL_DB   = 'app_haidaoteam'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'app_haidaoteam',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': MYSQL_DB,                      # Or path to database file if using sqlite3.
+        'USER': MYSQL_USER,                      # Not used with sqlite3.
+        'PASSWORD': MYSQL_PASS,                  # Not used with sqlite3.
+        'HOST': MYSQL_HOST,                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': MYSQL_PORT,                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -56,6 +68,7 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = ''
 
+WEB_CONFIG_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static').replace('\\','/')
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
