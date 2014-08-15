@@ -25,9 +25,12 @@
     "gulp-sass": "^0.7.2",
     "gulp-uglify": "^0.3.1",
     "gulp-useref": "^0.6.0",
+    "gulp-util": "^3.0.0",
     "gulp-watch": "^0.6.9",
+    "map-stream": "^0.1.0",
     "merge-stream": "^0.1.5",
     "minimist": "^0.2.0",
-    "require-dir": "^0.1.0"
+    "require-dir": "^0.1.0",
+    "through2": "^0.6.1"
   }
 }

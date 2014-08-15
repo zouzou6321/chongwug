@@ -32,6 +32,9 @@ DATABASES = {
     }
 }
 
+#for local test min static files, set this value to True
+PROD_TEST = False
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
