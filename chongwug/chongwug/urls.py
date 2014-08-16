@@ -6,7 +6,8 @@ import settings
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^$',views.home_page_view),
+                       url(r'^$',views.nav_page_view),
+                       url(r'^home/$',views.buy_home_view),
                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':True  }),
     # Examples:
     # url(r'^$', 'chongwug.views.home', name='home'),
