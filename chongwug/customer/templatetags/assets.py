@@ -28,6 +28,6 @@ def assets(value):
         except:
             path = value
 
-        return '/prod/assets/' + path
+        return '/static/prod/assets/' + path
     else:
-        return '/assets/' + value
+        return '/static/assets/' + value

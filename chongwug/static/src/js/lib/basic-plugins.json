@@ -5,10 +5,10 @@
     "carousel" : false,
     "collapse" : false,
     "dropdown" : false,
-    "modal" : false,
+    "modal" : true,
     "popover" : false,
     "scrollspy" : false,
     "tab" : false,
     "tooltip" : false,
-    "transition" : true
+    "transition" : false
 }

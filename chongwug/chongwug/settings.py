@@ -76,7 +76,7 @@ WEB_CONFIG_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'sta
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static/src').replace('\\','/')
+STATIC_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static').replace('\\','/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"

@@ -21,7 +21,7 @@ gulp.task('css', dep, function(){
 //            style: 'expanded'
 //        }))
         .pipe(plugins.sass())
-        .pipe(plugins.newer(config.css.dev))
+//        .pipe(plugins.newer(config.css.dev))
         //.pipe(plugins.autoprefixer())
         // save to dev dir
         .pipe(gulp.dest(config.css.dev))
@@ -29,7 +29,7 @@ gulp.task('css', dep, function(){
         .pipe(plugins.if(prod, plugins.filter('**/*.css')))
         .pipe(plugins.if(prod, plugins.replace(reg, function(e){ return map[e]; })))
         //compress css
-        .pipe(plugins.if(prod, plugins.cssmin()))
+        .pipe(plugins.if(prod, plugins.cssmin({noAdvanced:true})))
         //version css
         .pipe(plugins.if(prod, plugins.rev()))
         //save to prod dir
@@ -83,6 +83,7 @@ gulp.task('clean', function(){
 gulp.task('default', ['clean'], function(){
     gulp.start(['css', 'js']);
 });
+
 
 gulp.task('watch', function(){
     plugins.watch({
