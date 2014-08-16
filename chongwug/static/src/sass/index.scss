@@ -1,4 +1,50 @@
+@import "bootstrap/variables";
+
 body{
-  background: url(../imgs/index.jpg) center no-repeat;
-  background-size: cover;
+  background: #FFD401;
+}
+.cwg-navbar{
+  background: #fff;
+  border: 0;
+  margin-bottom: 0;
+
+  .navbar-toggle .icon-bar{
+    background: #FFD401;
+  }
+
+  a{
+    color: #DDB93A;
+  }
+  .active a{
+    color: #8F7004;
+    background: #FFD401;
+  }
+
+  .navbar-brand{
+    @media (min-width: $screen-sm-min) {
+      display: none;
+    }
+  }
+}
+
+.footer{
+  .nav-pills .active a{
+    background: none;
+  }
+
+  .footer-bottom{
+    background: #DAA904;
+    color: #fff;
+  }
+
+  .copyright{
+    padding-top: 10px;
+    margin-bottom: 0;
+  }
+}
+
+/*test*/
+.item{
+  height: 500px;
+  background: #eee;
 }

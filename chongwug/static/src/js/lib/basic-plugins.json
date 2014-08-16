@@ -2,13 +2,13 @@
     "affix" : false,
     "alert" : false,
     "button" : false,
-    "carousel" : false,
-    "collapse" : false,
+    "carousel" : true,
+    "collapse" : true,
     "dropdown" : false,
-    "modal" : true,
+    "modal" : false,
     "popover" : false,
     "scrollspy" : false,
     "tab" : false,
     "tooltip" : false,
-    "transition" : false
+    "transition" : true
 }
