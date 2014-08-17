@@ -9,6 +9,7 @@
     "gulp-clean": "^0.3.1",
     "gulp-compile-handlebars": "^0.2.0",
     "gulp-concat": "^2.3.4",
+    "gulp-csscomb": "^3.0.2",
     "gulp-cssmin": "^0.1.6",
     "gulp-filter": "^1.0.0",
     "gulp-if": "^1.2.4",
