@@ -21,6 +21,7 @@ gulp.task('css', dep, function(){
 //            style: 'expanded'
 //        }))
         .pipe(plugins.sass())
+        .on( 'error', function(e){console.log(e)})
 //        .pipe(plugins.newer(config.css.dev))
         //.pipe(plugins.autoprefixer())
         //csscomb
