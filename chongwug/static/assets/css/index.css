@@ -1,3 +1,7 @@
+body {
+  font-family: "helvetica neue", tahoma, "hiragino sans gb", stheiti, "wenquanyi micro hei", \5FAE\8F6F\96C5\9ED1, \5B8B\4F53;
+}
+
 .cwg-navbar {
   margin-bottom: 0; 
 
@@ -23,15 +27,93 @@
 .footer .nav-pills .active a {
   background: none;
 }
+.footer .footer-top {
+  padding-top: 45px;
+  padding-bottom: 45px; 
+
+  background: #ffd401;
+}
+.footer .cwg-flow-chart {
+  width: 395px;
+  height: 98px;
+
+  background: url(../imgs/flow-chart.png);
+}
 .footer .footer-bottom {
   color: #fff; 
-  background: #daa904;
+  background: #dba903;
 }
 .footer .copyright {
   margin-bottom: 0; 
   padding-top: 10px;
 }
 
+/*carousel*/
+.cwg-carousel {
+  margin-right: -15px; 
+  margin-left: -15px;
+  padding-bottom: 70px;
+}
+.cwg-carousel .cwg-lace {
+  position: absolute;
+  bottom: 70px;
+
+  width: 100%;
+  height: 4px;
+
+  background: url(../imgs/lace.png) 9px 100% repeat-x;
+}
+.cwg-carousel .carousel-indicators {
+  bottom: 20px;
+}
+.cwg-carousel .carousel-indicators li {
+  border-color: #4c4c4c;
+}
+.cwg-carousel .carousel-indicators .active {
+  background-color: #4c4c4c;
+}
+
+/*carousel --end*/
+/*area*/
+.col-md-2_4 {
+  position: relative;
+
+  min-height: 1px;
+  padding-right: 15px; 
+  padding-left: 15px;
+}
+@media (min-width: 992px) {
+  .col-md-2_4 {
+    float: left;
+
+    width: 20%;
+  }
+}
+
+.cwg-area-row {
+  padding-bottom: 100px;
+}
+
+.cwg-area div {
+  position: relative;
+}
+.cwg-area div p {
+  font-weight: bold;
+  line-height: 1; 
+
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+
+  margin-bottom: 0;
+
+  color: #fff;
+}
+.cwg-area div .floor-price {
+  font-size: 30px;
+}
+
+/*area --end*/
 /*test*/
 .item {
   height: 500px;

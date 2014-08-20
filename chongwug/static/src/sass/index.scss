@@ -1,4 +1,9 @@
 @import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+body{
+  font-family: 'helvetica neue',tahoma,'hiragino sans gb',stheiti,'wenquanyi micro hei', \5FAE\8F6F\96C5\9ED1,\5B8B\4F53;
+}
 
 .cwg-navbar{
   background: #fff;
@@ -29,8 +34,20 @@
     background: none;
   }
 
+  .footer-top{
+    background: #ffd401;
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+  .cwg-flow-chart{
+    width: 395px;
+    height: 98px;
+    background: url(../imgs/flow-chart.png);
+  }
+
   .footer-bottom{
-    background: #DAA904;
+    background: #dba903;
     color: #fff;
   }
 
@@ -40,8 +57,73 @@
   }
 }
 
+
+/*carousel*/
+.cwg-carousel{
+  padding-bottom: 70px;
+  margin-left: -15px;
+  margin-right: -15px;
+
+  .cwg-lace{
+    position: absolute;
+    bottom: 70px;
+
+    height: 4px;
+    width: 100%;
+    background: url(../imgs/lace.png) 9px 100% repeat-x;
+  }
+  .carousel-indicators{
+    bottom: 20px;
+    li{
+      border-color: #4c4c4c;
+    }
+    .active{
+      background-color: #4c4c4c;
+    }
+  }
+}
+
+
+/*carousel --end*/
+
+/*area*/
+
+.col-md-2_4 {
+  @include make-md-column(2.4);
+}
+
+.cwg-area-row{
+  padding-bottom: 100px;
+}
+
+.cwg-area{
+  div{
+    position: relative;
+
+    p{
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      margin-bottom: 0;
+      color: #fff;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .floor-price{
+      font-size: 30px;
+    }
+  }
+}
+
+/*area --end*/
+
+
+
+
 /*test*/
 .item{
   height: 500px;
   background: #eee;
 }
+
