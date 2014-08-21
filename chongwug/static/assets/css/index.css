@@ -90,6 +90,21 @@ body {
   }
 }
 
+.col-sm-2_4 {
+  position: relative;
+
+  min-height: 1px;
+  padding-right: 15px; 
+  padding-left: 15px;
+}
+@media (min-width: 768px) {
+  .col-sm-2_4 {
+    float: left;
+
+    width: 20%;
+  }
+}
+
 .cwg-area-row {
   padding-bottom: 100px;
 }

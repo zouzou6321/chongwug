@@ -92,6 +92,10 @@ body{
   @include make-md-column(2.4);
 }
 
+.col-sm-2_4 {
+  @include make-sm-column(2.4);
+}
+
 .cwg-area-row{
   padding-bottom: 100px;
 }
