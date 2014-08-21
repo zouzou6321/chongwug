@@ -25,7 +25,7 @@ gulp.task('css', dep, function(){
 //        .pipe(plugins.newer(config.css.dev))
         //.pipe(plugins.autoprefixer())
         //csscomb
-        .pipe(plugins.csscomb())
+        //.pipe(plugins.csscomb())
         // save to dev dir
         .pipe(gulp.dest(config.css.dev))
         //filter *.map

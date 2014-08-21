@@ -4,7 +4,7 @@
     "button" : false,
     "carousel" : true,
     "collapse" : true,
-    "dropdown" : false,
+    "dropdown" : true,
     "modal" : false,
     "popover" : false,
     "scrollspy" : false,

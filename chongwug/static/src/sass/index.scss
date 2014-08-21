@@ -1,22 +1,71 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
+@import "iconfont";
 
 body{
   font-family: 'helvetica neue',tahoma,'hiragino sans gb',stheiti,'wenquanyi micro hei', \5FAE\8F6F\96C5\9ED1,\5B8B\4F53;
+}
+
+.cwg-social {
+  list-style: none;
+  margin-bottom: 0;
+
+  .navbar &{
+    padding-top: 3px;
+  }
+
+  li{
+    float: left;
+
+    .footer &{
+      padding: 0 25px;
+    }
+  }
+  a{
+    display: block;
+    color: #fff;
+    background-color: #ffd401;
+    border-radius: 50%;
+    text-align: center;
+
+    .navbar &{
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      margin-right: 6px;
+    }
+
+    .footer &{
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      i{
+          font-size: 40px;
+      }
+    }
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
 }
 
 .cwg-navbar{
   background: #fff;
   border: 0;
   margin-bottom: 0;
+  min-height: 30px;
 
   .navbar-toggle .icon-bar{
     background: #FFD401;
   }
 
-  a{
+  .navbar-nav a{
     color: #DDB93A;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
+
   .active a{
     color: #8F7004;
     background: #FFD401;
@@ -29,9 +78,76 @@ body{
   }
 }
 
+/*head*/
+.header-top{
+  background: #ffd401;
+
+  .cwg-btn-wrap{
+    .btn-default{
+      background-color: transparent;
+      border: 0;
+    }
+  }
+
+  .cwg-login{
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .cwg-search-wrap{
+    .input-group-addon{
+      background-color: #dba903;
+      border: 0;
+      border-radius: 0;
+      cursor: pointer;
+    }
+    .form-control{
+      border: 0;
+      border-radius: 0;
+    }
+    .glyphicon-search{
+      color: #fff;
+    }
+  }
+
+  .cwg-tel{
+    color: #49250c;
+    padding-top: 10px;
+  }
+  .cwg-tel-main{
+    font-size: 16px;
+    margin-bottom: 0;
+
+    .glyphicon{
+      margin-right: 5px;
+    }
+
+    .glyphicon, span{
+      vertical-align: middle;
+    }
+  }
+
+  .cwg-tel-detail{
+    padding-left: 10px;
+    font-size: 12px;
+  }
+}
+
+/*head --end*/
+
 .footer{
   .nav-pills .active a{
     background: none;
+  }
+
+  .cwg-weibo{
+    background-color: #ec5342;
+  }
+  .cwg-weixin{
+    background-color: #05B410;
+  }
+  .cwg-youjian{
+    background-color: #56ACEE;
   }
 
   .footer-top{
