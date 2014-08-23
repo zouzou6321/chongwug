@@ -1,13 +1,20 @@
 from django.conf.urls import patterns, include, url
-from customer import views
+from customer.views import nav_page_view,buy_home_view
+from back_manager.views import manage_home_view,manage_pet_farm_view,manage_pet_farm_add_view,manage_pet_farm_mod_view,manage_pet_farm_picadd_view,manage_pet_farm_picmod_view
 import settings
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^$',views.nav_page_view),
-                       url(r'^home/$',views.buy_home_view),
+                       url(r'^$',nav_page_view),
+                       url(r'^home/$',buy_home_view),
+                       url(r'^back_manage/$',manage_home_view),
+                       url(r'^back_manage/petfarm/$',manage_pet_farm_view),
+                       url(r'^back_manage/petfarm/add/$',manage_pet_farm_add_view),
+                       url(r'^back_manage/petfarm/mod/$',manage_pet_farm_mod_view),
+                       url(r'^back_manage/petfarm/picadd/$',manage_pet_farm_picadd_view),
+                       url(r'^back_manage/petfarm/picmod/$',manage_pet_farm_picmod_view),
                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':True  }),
     # Examples:
     # url(r'^$', 'chongwug.views.home', name='home'),

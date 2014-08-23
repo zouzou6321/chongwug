@@ -86,13 +86,25 @@
     <div class="carousel slide cwg-carousel" data-ride="carousel">
       <div class="carousel-inner">
         <div class="item active">
+        	{% if ads0 %}
+            <p><a target="_blank" href="{{ ads0.tar_url }}"><img src="{{ ads0.img_url }}" /></a></p>
+            {% else %}
             <p>111</p>
+            {% endif %}
         </div>
         <div class="item">
+            {% if ads1 %}
+            <p><a target="_blank" href="{{ ads1.tar_url }}"><img src="{{ ads1.img_url }}" /></a></p>
+            {% else %}
             <p>222</p>
+            {% endif %}
         </div>
         <div class="item">
+            {% if ads2 %}
+            <p><a target="_blank" href="{{ ads2.tar_url }}"><img src="{{ ads2.img_url }}" /></a></p>
+            {% else %}
             <p>333</p>
+            {% endif %}
         </div>
       </div>
       <ol class="carousel-indicators">
@@ -106,43 +118,43 @@
         <div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
             <div class="row cwg-area-row">
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城南狗舍</h2>
-                    <p>高新片区</p>
+                    <h2>城东狗舍</h2>
+                    <p>{% if east_farm %}{{ east_farm.district }}{% else %}{% endif %}片区</p>
                     <div>
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
-                        <p><span class="floor-price">&yen;800</span><span> 起</span></p>
+                        <img src="{{ east_farm_img.img_url }}" class="img-responsive">
+                        <p><span class="floor-price">&yen;{{ east_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
                     <h2>城南狗舍</h2>
-                    <p>高新片区</p>
+                    <p>{{ south_farm.district }}片区</p>
                     <div>
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
-                        <p><span class="floor-price">&yen;800</span><span> 起</span></p>
+                        <img src="{{ south_farm_img.img_url }}" class="img-responsive">
+                        <p><span class="floor-price">&yen;{{ south_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城南狗舍</h2>
-                    <p>高新片区</p>
+                    <h2>城西狗舍</h2>
+                    <p>{{ west_farm.district }}片区</p>
                     <div>
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
-                        <p><span class="floor-price">&yen;800</span><span> 起</span></p>
+                        <img src="{{ west_farm_img.img_url }}" class="img-responsive">
+                        <p><span class="floor-price">&yen;{{ west_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城南狗舍</h2>
-                    <p>高新片区</p>
+                    <h2>城北狗舍</h2>
+                    <p>{{ north_farm.district }}片区</p>
                     <div>
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
-                        <p><span class="floor-price">&yen;800</span><span> 起</span></p>
+                        <img src="{{ north_farm_img.img_url }}" class="img-responsive">
+                        <p><span class="floor-price">&yen;{{ north_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城南狗舍</h2>
-                    <p>高新片区</p>
+                    <h2>城中狗舍</h2>
+                    <p>{{ center_farm.district }}片区</p>
                     <div>
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
-                        <p><span class="floor-price">&yen;800</span><span> 起</span></p>
+                        <img src="{{ center_farm_img.img_url }}" class="img-responsive">
+                        <p><span class="floor-price">&yen;{{ center_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
             </div>
