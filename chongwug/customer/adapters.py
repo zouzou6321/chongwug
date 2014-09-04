@@ -10,13 +10,14 @@ def buy_home_adapter(request):
     enum_farms = []
     
     #获取首页需要展示的广告信息
-    ads = ad.objects.filter(Q(type__exact = 'buy_home',dele__exact = False,start_time__lte = datetime.datetime.now,end_time__gte = datetime.datetime.now)).order_by('prince')
+    ads = ad.objects.get(Q(type__exact = 'nav_m'),Q(dele__exact = False),Q(start_time__lte = datetime.datetime.now),Q(end_time__gte = datetime.datetime.now)).order_by('prince')
     
     #目前是3个广告，需要考虑数据库中找不全可用广告的场景
     ads0 = False
     ads1 = False
     ads2 = False
     ads_count = ads.count()
+    print(ads_count)
     if ads_count > 0:
         ads0 = ads[0]
     if ads_count > 1:

@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
+from django.views.decorators.csrf import csrf_exempt
 import adapters
 MANAGE_ROOT='/back_manage/'
 def manage_login(request):
@@ -38,8 +39,19 @@ def manage_pet_farm_mod_view(request):
 def manage_pet_farm_picadd_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
+    page_data = adapters.manage_pet_farm_picadd(request)
     data = adapters.manage_home_data_get(request)
-    return render_to_response('tpl/manage_pet_farm.html',data)
+    page_data['manager'] = data['manager']
+    return render_to_response('tpl/manage_pet_farm_picadd.html',page_data,context_instance=RequestContext(request))
+
+@csrf_exempt
+def manage_pet_farm_pic_upload_view(request):
+    photo = request.FILES.get('Filedata',None)
+    return HttpResponse(adapters.manage_pet_farm_picupload(photo))
+def manage_pet_farm_picpre_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponse('false')
+    return HttpResponse(adapters.manage_pet_farm_picpreupload(request))
 def manage_pet_farm_picmod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
@@ -50,3 +62,27 @@ def manage_pet_farm_view(request):
         return HttpResponseRedirect(MANAGE_ROOT)
     data = adapters.manage_home_data_get(request)
     return render_to_response('tpl/manage_pet_farm.html',data)
+
+def manage_ad_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    data = adapters.manage_home_data_get(request)
+    return render_to_response('tpl/manage_ad.html',data)
+
+def manage_ad_add_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    data = adapters.manage_home_data_get(request)
+    return render_to_response('tpl/manage_ad_picadd.html',data,context_instance=RequestContext(request))
+
+@csrf_exempt
+def manage_ad_pic_upload_view(request):
+    photo = request.FILES.get('Filedata',None)
+    return HttpResponse(adapters.manage_pet_farm_picupload(photo))
+def manage_ad_picpre_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponse('false')
+    return HttpResponse(adapters.manage_ad_picpreupload(request))
+
+def manage_ad_mod_view(request):
+    return True

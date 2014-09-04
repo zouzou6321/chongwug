@@ -77,7 +77,10 @@ WEB_CONFIG_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'sta
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static').replace('\\','/')
-
+ROOT = os.path.split(os.path.dirname(__file__))[0].replace('\\','/')
+PIC_ROOT = "http://chongwug-pic.b0.upaiyun.com"
+PET_FARM_PIC_ROOT = "/farmpic/"
+PET_AD_ROOT = "/ad/"
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = 'http://www.chongwug.com/static/'
