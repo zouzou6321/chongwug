@@ -112,9 +112,9 @@ class ad(models.Model):
     #当前是否展示
     current_show = models.BooleanField(default=False)
     #广告需要启动展示的时间
-    start_time = models.TimeField()
+    start_time = models.DateTimeField()
     #广告结束展示的时间
-    end_time = models.TimeField()
+    end_time = models.DateTimeField()
     dele = models.BooleanField(default=False)
     
 #管理员帐号，不一定每个都有，主要是负责数据编辑的人员使用
