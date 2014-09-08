@@ -76,6 +76,17 @@ body {
       display: none; } }
 
 /*head*/
+.cwg-search-wrap .input-group-addon, .dog-search-wrap .input-group-addon {
+  background-color: #dba903;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer; }
+.cwg-search-wrap .form-control, .dog-search-wrap .form-control {
+  border: 0;
+  border-radius: 0; }
+.cwg-search-wrap .glyphicon-search, .dog-search-wrap .glyphicon-search {
+  color: #fff; }
+
 .header-top {
   background: #ffd401; }
   .header-top .cwg-btn-wrap .btn-default {
@@ -84,16 +95,6 @@ body {
   .header-top .cwg-login {
     padding-top: 15px;
     padding-bottom: 15px; }
-  .header-top .cwg-search-wrap .input-group-addon {
-    background-color: #dba903;
-    border: 0;
-    border-radius: 0;
-    cursor: pointer; }
-  .header-top .cwg-search-wrap .form-control {
-    border: 0;
-    border-radius: 0; }
-  .header-top .cwg-search-wrap .glyphicon-search {
-    color: #fff; }
   .header-top .cwg-tel {
     color: #49250c;
     padding-top: 10px; }
@@ -193,3 +194,79 @@ body {
 .item {
   height: 500px;
   background: #eee; }
+
+/*--------------------buy-------------------------*/
+.buy-container {
+  background-color: #e5e5e5;
+  padding: 20px 0; }
+
+.dog-search-wrap {
+  padding-top: 30px;
+  padding-bottom: 30px; }
+  .dog-search-wrap .form-control {
+    border: 1px solid #ffdd37;
+    border-right: 0; }
+
+.dog-select-title {
+  padding-right: 0; }
+
+.dog-select-row {
+  color: #414141;
+  padding-bottom: 20px; }
+  .dog-select-row .nav-pills a {
+    padding: 1px 6px;
+    color: #414141; }
+  .dog-select-row .nav-pills li {
+    margin-right: 8px;
+    margin-bottom: 5px; }
+  .dog-select-row .nav-pills .active a {
+    background-color: #ffd401; }
+  .dog-select-row .dog-selected a {
+    color: #e4bd3f;
+    border: 1px solid #e4bd3f; }
+
+.dog-separate {
+  border-top: 1px solid #e5e5e5;
+  padding-bottom: 40px; }
+
+.buy-inner {
+  width: 860px;
+  background-color: #fff;
+  padding-left: 10px;
+  padding-right: 10px; }
+  .buy-inner .row, .buy-inner .dog-list {
+    margin-left: -10px;
+    margin-right: -10px; }
+  .buy-inner .col-md-4 {
+    padding-left: 10px;
+    padding-right: 10px; }
+  .buy-inner .dog-img {
+    width: 100%; }
+  .buy-inner .dog-desc {
+    padding: 15px; }
+    .buy-inner .dog-desc h4 {
+      line-height: 22px;
+      font-size: 16px;
+      height: 42px;
+      overflow: hidden;
+      margin-top: 0; }
+      .buy-inner .dog-desc h4 a {
+        color: #333;
+        font-weight: bold; }
+    .buy-inner .dog-desc .dog-addr {
+      color: #828282;
+      font-size: 14px; }
+    .buy-inner .dog-desc .glyphicon-map-marker {
+      color: #ff3500;
+      margin-right: 5px; }
+    .buy-inner .dog-desc .dog-price {
+      color: #ff3500;
+      font-size: 22px;
+      font-weight: bold; }
+    .buy-inner .dog-desc .dog-unit {
+      font-size: 14px;
+      font-weight: normal; }
+    .buy-inner .dog-desc .btn-dog {
+      color: #fff;
+      background-color: #ff3500;
+      border: 0; }

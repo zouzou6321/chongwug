@@ -1,0 +1,310 @@
+{% load assets %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>首页</title>
+    <link rel="stylesheet" href="{{ 'css/base.css'|assets }}"/>
+    <link rel="stylesheet" href="{{ 'css/index.css'|assets }}"/>
+    <!--[if lt IE 9]>
+    <script src="{{ 'js/lib/respond.js'|assets }}"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+               <div class="col-md-2 col-md-offset-10">
+                   <div class="cwg-login">
+                       注册 登录
+                   </div>
+               </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 col-md-offset-3">
+                    <div class="btn-group cwg-btn-wrap">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        成都 <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">北京</a></li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group cwg-search-wrap">
+                      <input type="text" class="form-control">
+                      <span class="input-group-addon">
+                          <i class="glyphicon glyphicon-search"></i>
+                      </span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-md-offset-2">
+                    <div class="cwg-tel">
+                        <p class="cwg-tel-main"><i class="glyphicon glyphicon-earphone"></i><span>028-12345678</span></p>
+                        <p class="cwg-tel-detail">客服热线：9:00-21:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar cwg-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cwg-navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand">宠物购</a>
+            </div>
+            <div class="collapse navbar-collapse cwg-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">首页</a></li>
+                    <li><a href="#about">我要买狗</a></li>
+                    <li><a href="#contact">宠物用品</a></li>
+                    <li><a href="#contact">购犬须知</a></li>
+                    <li><a href="#contact">养犬必知</a></li>
+                </ul>
+                <ul class="cwg-social pull-right">
+                    <li><a href="#"><i class="iconfont icon-aixin"></i></a></li>
+                    <li><a href="#"><i class="iconfont icon-xinlangweibo"></i></a></li>
+                    <li><a href="#"><i class="iconfont icon-weixin"></i></a></li>
+                    <li><a href="#"><i class="iconfont icon-youjian"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="buy-container">
+    <div class="container buy-inner">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1">
+                <div class="input-group dog-search-wrap">
+                      <input type="text" class="form-control" placeholder="宠物品种，宠物食品，宠物玩具">
+                      <span class="input-group-addon">
+                          <i class="glyphicon glyphicon-search"></i>
+                      </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row dog-select-row">
+            <div class="col-sm-1 text-right dog-select-title">犬种：</div>
+            <div class="col-sm-11">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">全部</a></li>
+                    <li><a href="#">泰迪</a></li>
+                    <li><a href="#">比熊</a></li>
+                    <li><a href="#">金毛</a></li>
+                    <li><a href="#">萨摩耶</a></li>
+                    <li><a href="#">哈士奇</a></li>
+                    <li><a href="#">拉布拉多</a></li>
+                    <li><a href="#">边牧</a></li>
+                    <li><a href="#">松狮</a></li>
+                    <li><a href="#">阿拉斯加</a></li>
+                    <li><a href="#">博美</a></li>
+                    <li><a href="#">巴哥</a></li>
+                    <li><a href="#">雪纳瑞</a></li>
+                    <li><a href="#">约克夏</a></li>
+                    <li><a href="#">德牧</a></li>
+                    <li><a href="#">古牧</a></li>
+                    <li><a href="#">比格</a></li>
+                    <li><a href="#">喜乐蒂</a></li>
+                    <li><a href="#">斗牛犬</a></li>
+                    <li><a href="#">杜宾</a></li>
+                    <li><a href="#">罗威纳</a></li>
+                    <li><a href="#">吉娃娃</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 text-right dog-select-title">价格：</div>
+            <div class="col-sm-11">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">全部</a></li>
+                    <li><a href="#">800-1000</a></li>
+                    <li><a href="#">1000-1500</a></li>
+                    <li><a href="#">1500-2000</a></li>
+                    <li><a href="#">2000-2500</a></li>
+                    <li><a href="#">2500以上</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 text-right dog-select-title">区域：</div>
+            <div class="col-sm-11">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">全部</a></li>
+                    <li><a href="#">城东</a></li>
+                    <li><a href="#">城南</a></li>
+                    <li><a href="#">城西</a></li>
+                    <li><a href="#">城北</a></li>
+                    <li><a href="#">其他</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 text-right dog-select-title">疫苗：</div>
+            <div class="col-sm-11">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">全部</a></li>
+                    <li><a href="#">已种疫苗</a></li>
+                    <li><a href="#">可种疫苗</a></li>
+                    <li><a href="#">未种疫苗</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 text-right dog-select-title">月龄：</div>
+            <div class="col-sm-11">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#">全部</a></li>
+                    <li><a href="#">3月以下</a></li>
+                    <li><a href="#">3-5月</a></li>
+                    <li><a href="#">5-12月</a></li>
+                    <li><a href="#">1岁以上</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 text-right dog-select-title">筛选：</div>
+            <div class="col-sm-11">
+                <ul class="nav nav-pills dog-selected">
+                    <li><a href="#">泰迪 &times;</a></li>
+                    <li><a href="#">城东 &times;</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="dog-separate row"></div>
+        <div class="row">
+            <div class="dog-list">
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
+                    </a>
+                    <div class="dog-desc">
+                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
+                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
+                        <p>
+                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
+                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
+                    </a>
+                    <div class="dog-desc">
+                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
+                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
+                        <p>
+                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
+                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
+                    </a>
+                    <div class="dog-desc">
+                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
+                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
+                        <p>
+                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
+                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
+                    </a>
+                    <div class="dog-desc">
+                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
+                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
+                        <p>
+                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
+                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
+                    </a>
+                    <div class="dog-desc">
+                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
+                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
+                        <p>
+                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
+                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
+                    </a>
+                    <div class="dog-desc">
+                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
+                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
+                        <p>
+                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
+                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-1">
+                    <div class="cwg-flow-chart"></div>
+                </div>
+                <div class="col-md-5">
+                    <ul class="cwg-social">
+                        <li><a href="#" class="cwg-weibo"><i class="iconfont icon-xinlangweibo"></i></a></li>
+                        <li><a href="#" class="cwg-weixin"><i class="iconfont icon-weixin"></i></a></li>
+                        <li><a href="#" class="cwg-youjian"><i class="iconfont icon-youjian"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-md-offset-1">
+                    <p class="copyright">Copyright &copy; 2014 chongwug.com, All Right Reserved</p>
+                </div>
+                <div class="col-md-4">
+                    <ul class="nav nav-pills">
+                      <li class="active"><a href="#">关于我们</a></li>
+                      <li><a href="#">工作机会</a></li>
+                      <li><a href="#">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>
