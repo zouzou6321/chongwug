@@ -16,3 +16,10 @@ def nav_page_view(request):
 def buy_home_view(request):
     data = adapters.buy_home_adapter(request)
     return render_to_response('tpl/buy_index.html',data)
+
+#auth:renwei
+#date:2014/9/8
+#discription:购宠购买展示页
+def buy_main_view(request):
+    data = adapters.buy_home_adapter(request)
+    return render_to_response('tpl/buy_main.html',data)
