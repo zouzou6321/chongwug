@@ -80,7 +80,8 @@ STATIC_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static'
 ROOT = os.path.split(os.path.dirname(__file__))[0].replace('\\','/')
 PIC_ROOT = "http://chongwug-pic.b0.upaiyun.com"
 PET_FARM_PIC_ROOT = "/farmpic/"
-PET_AD_ROOT = "/ad/"
+PET_AD_PIC_ROOT = "/ad/"
+PET_PIC_ROOT = "/petpic/"
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = 'http://www.chongwug.com/static/'

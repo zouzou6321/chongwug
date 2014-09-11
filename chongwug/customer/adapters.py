@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from back_manager.models import ad,pet_farm,pet_farm_img
+from back_manager.models import ad,pet_farm,pet_farm_img,pet,pet_img
 import datetime
 from django.db.models import Q
 def buy_home_adapter(request):
@@ -48,3 +48,14 @@ def buy_home_adapter(request):
         data[farm['name']] = tmp_farm
         data[farm['picname']] = tmp_farm_img
     return data
+
+def buy_main_adapter(request):
+    pets_imgs = []
+    pets = pet.objects.filter(dele=False,sale_out=False)
+    for pet_one in pets:
+        try:
+            petimg = pet_img.objects.filter(pet_id = pet_one,dele=False,img_usefor='buy_main')[0]
+            pets_imgs.append({'pet':pet_one,'img':petimg})
+        except:
+            None
+    return {'pets_imgs':pets_imgs}

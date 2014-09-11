@@ -44,19 +44,46 @@ def manage_pet_farm_picadd_view(request):
     page_data['manager'] = data['manager']
     return render_to_response('tpl/manage_pet_farm_picadd.html',page_data,context_instance=RequestContext(request))
 
+def manage_pet_picadd_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    page_data = adapters.manage_pet_picadd(request)
+    data = adapters.manage_home_data_get(request)
+    page_data['manager'] = data['manager']
+    return render_to_response('tpl/manage_pet_picadd.html',page_data,context_instance=RequestContext(request))
+
+@csrf_exempt
+def manage_pet_pic_upload_view(request):
+    photo = request.FILES.get('Filedata',None)
+    return HttpResponse(adapters.manage_picupload(photo))
+
 @csrf_exempt
 def manage_pet_farm_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
-    return HttpResponse(adapters.manage_pet_farm_picupload(photo))
+    return HttpResponse(adapters.manage_picupload(photo))
+
 def manage_pet_farm_picpre_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponse('false')
     return HttpResponse(adapters.manage_pet_farm_picpreupload(request))
+
+def manage_pet_picpre_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponse('false')
+    print('11')
+    return HttpResponse(adapters.manage_pet_picpreupload(request))
+
+def manage_pet_farmselect_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponse('false')
+    return HttpResponse(adapters.manage_pet_farmselect(request))
+
 def manage_pet_farm_picmod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     data = adapters.manage_home_data_get(request)
     return render_to_response('tpl/manage_pet_farm.html',data)
+
 def manage_pet_farm_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
@@ -69,6 +96,24 @@ def manage_ad_view(request):
     data = adapters.manage_home_data_get(request)
     return render_to_response('tpl/manage_ad.html',data)
 
+def manage_pet_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    data = adapters.manage_home_data_get(request)
+    return render_to_response('tpl/manage_pet.html',data)
+
+def manage_pet_add_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.method == 'POST':
+        if adapters.manage_pet_add(request) == False:
+            return HttpResponse("data error occur!!!")
+    page_data = adapters.pet_farm_all()
+    data = adapters.manage_home_data_get(request)
+    page_data['manager'] = data['manager']
+    return render_to_response('tpl/manage_pet_add.html',page_data,context_instance=RequestContext(request))
+
+
 def manage_ad_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
@@ -78,7 +123,7 @@ def manage_ad_add_view(request):
 @csrf_exempt
 def manage_ad_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
-    return HttpResponse(adapters.manage_pet_farm_picupload(photo))
+    return HttpResponse(adapters.manage_picupload(photo))
 def manage_ad_picpre_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponse('false')
@@ -86,3 +131,9 @@ def manage_ad_picpre_view(request):
 
 def manage_ad_mod_view(request):
     return True
+
+def manage_manager_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    data = adapters.manage_home_data_get(request)
+    return render_to_response('tpl/manage_manager.html',data,context_instance=RequestContext(request))

@@ -42,7 +42,7 @@ class pet(models.Model):
     mam_id = models.ForeignKey(pet_mam,blank=True, null=True)
     dad_id = models.ForeignKey(pet_dad,blank=True, null=True)
     color = models.TextField()
-    #宠物上架年龄
+    #宠物上架月龄
     age = models.IntegerField()
     #防疫阶段
     epidemic_period = models.TextField()
@@ -81,6 +81,8 @@ class pet_mam_img(models.Model):
     img_with = models.IntegerField()
     img_height = models.IntegerField()
     img_type = models.TextField()
+    #图片用途
+    img_usefor = models.TextField()
     dele = models.BooleanField(default=False)
     
 class pet_dad_img(models.Model):
@@ -89,6 +91,8 @@ class pet_dad_img(models.Model):
     img_with = models.IntegerField()
     img_height = models.IntegerField()
     img_type = models.TextField()
+    #图片用途
+    img_usefor = models.TextField()
     dele = models.BooleanField(default=False)
 
 class pet_img(models.Model):
@@ -97,6 +101,8 @@ class pet_img(models.Model):
     img_with = models.IntegerField()
     img_height = models.IntegerField()
     img_type = models.TextField()
+    #图片用途
+    img_usefor = models.TextField()
     dele = models.BooleanField(default=False)
 
 #ad:广告专用

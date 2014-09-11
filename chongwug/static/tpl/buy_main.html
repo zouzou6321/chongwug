@@ -64,7 +64,7 @@
             </div>
             <div class="collapse navbar-collapse cwg-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">首页</a></li>
+                    <li class="active"><a href="/home/">首页</a></li>
                     <li><a href="#about">我要买狗</a></li>
                     <li><a href="#contact">宠物用品</a></li>
                     <li><a href="#contact">购犬须知</a></li>
@@ -184,12 +184,13 @@
         <div class="dog-separate row"></div>
         <div class="row">
             <div class="dog-list">
+            	{% for pet_img in pets_imgs %}
                 <div class="col-md-4">
                     <a href="">
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
+                        <img src="{{ pet_img.img.img_url }}" class="dog-img"/>
                     </a>
                     <div class="dog-desc">
-                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
+                        <h4><a href="">[城{{ pet_img.pet.farm.direct }}-{{ pet_img.pet.farm.district }}]{{ pet_img.pet.farm.name }} {{ pet_img.pet.color }}{{ pet_img.pet.type }}{{ pet_img.pet.txt_desc }}</a></h4>
                         <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
                         <p>
                             <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
@@ -197,71 +198,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <a href="">
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
-                    </a>
-                    <div class="dog-desc">
-                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
-                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
-                        <p>
-                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
-                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <a href="">
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
-                    </a>
-                    <div class="dog-desc">
-                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
-                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
-                        <p>
-                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
-                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <a href="">
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
-                    </a>
-                    <div class="dog-desc">
-                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
-                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
-                        <p>
-                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
-                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <a href="">
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
-                    </a>
-                    <div class="dog-desc">
-                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
-                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
-                        <p>
-                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
-                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <a href="">
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="dog-img"/>
-                    </a>
-                    <div class="dog-desc">
-                        <h4><a href="">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</a></h4>
-                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>武侯区簇锦南路94号</p>
-                        <p>
-                            <span class="dog-price">&yen; 800-1500<span class="dog-unit">元/只</span></span>
-                            <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
-                        </p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
