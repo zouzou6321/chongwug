@@ -54,7 +54,7 @@ def buy_main_adapter(re):
     
     types = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加',u'博美',u'巴哥',u'雪纳瑞',u'约克夏',u'德牧',u'古牧',u'比格',u'喜乐蒂',u'斗牛犬',u'杜宾',u'罗威纳',u'吉娃娃']
     princes = [{'a':'1','b':600,'c':1000},{'a':'2','b':1000,'c':1500},{'a':'3','b':1500,'c':2000},{'a':'4','b':2000,'c':2500},{'a':'5','b':2500,'c':1000000}]
-    directs = [u'东',u'西',u'南',u'北','中']
+    directs = [u'东',u'西',u'南',u'北',u'中']
     epidemics = [u'已种疫苗',u'可种疫苗',u'未种疫苗']
     ages = [{'a':'1','b':0,'c':3},{'a':'2','b':3,'c':5},{'a':'3','b':5,'c':12},{'a':'4','b':12,'c':100000}]
     
@@ -64,8 +64,6 @@ def buy_main_adapter(re):
     epidemickey = None
     agekey = None
     
-    pets_imgs = []
-    urls = {}
     kwargs = {}
     kwargs['dele'] = False
     kwargs['sale_out'] = False
@@ -110,6 +108,7 @@ def buy_main_adapter(re):
                 agekey = re.REQUEST.get(enum[0])
                 prince_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
     
+    urls = {}
     urls['url'] = url
     urls['type_all_url'] = type_all_url
     urls['prince_all_url'] = prince_all_url
@@ -117,6 +116,7 @@ def buy_main_adapter(re):
     urls['epidemic_all_url'] = epidemic_all_url
     urls['age_all_url'] = age_all_url
     
+    pets_imgs = []
     pets = pet.objects.filter(**kwargs)
     for pet_one in pets:
         try:

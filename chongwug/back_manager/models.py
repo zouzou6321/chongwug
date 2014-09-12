@@ -12,6 +12,7 @@ class pet_farm(models.Model):
     district = models.TextField()
     #direct代指宠物养殖场相对city的方向位置
     direct = models.TextField()
+    detail_address = models.TextField()
     sale_count = models.IntegerField(default=0)
     sale_score = models.FloatField(default=0)
     min_prince = models.FloatField()
