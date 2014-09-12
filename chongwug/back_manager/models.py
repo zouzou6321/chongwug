@@ -50,9 +50,9 @@ class pet(models.Model):
     type = models.TextField()
     txt_desc = models.TextField()
     #上架时间
-    start_time = models.TimeField(default=datetime.datetime.now)
+    start_time = models.DateTimeField(default=datetime.datetime.now)
     #卖出时间
-    sale_time = models.TimeField(blank=True, null=True)
+    sale_time = models.DateTimeField(blank=True, null=True)
     price = models.FloatField()
     sale_out = models.BooleanField(default=False)
     dele = models.BooleanField(default=False)

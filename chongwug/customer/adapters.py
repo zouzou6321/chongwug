@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from back_manager.models import ad,pet_farm,pet_farm_img,pet,pet_img
-import datetime
+import datetime,string
 from django.db.models import Q
 def buy_home_adapter(request):
     #前期只有一个城市：成都
@@ -49,13 +49,81 @@ def buy_home_adapter(request):
         data[farm['picname']] = tmp_farm_img
     return data
 
-def buy_main_adapter(request):
+def buy_main_adapter(re):
+    url = '/buy/?'
+    
+    types = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加',u'博美',u'巴哥',u'雪纳瑞',u'约克夏',u'德牧',u'古牧',u'比格',u'喜乐蒂',u'斗牛犬',u'杜宾',u'罗威纳',u'吉娃娃']
+    princes = [{'a':'1','b':600,'c':1000},{'a':'2','b':1000,'c':1500},{'a':'3','b':1500,'c':2000},{'a':'4','b':2000,'c':2500},{'a':'5','b':2500,'c':1000000}]
+    directs = [u'东',u'西',u'南',u'北','中']
+    epidemics = [u'已种疫苗',u'可种疫苗',u'未种疫苗']
+    ages = [{'a':'1','b':0,'c':3},{'a':'2','b':3,'c':5},{'a':'3','b':5,'c':12},{'a':'4','b':12,'c':100000}]
+    
+    typekey = None
+    princekey = None
+    directkey = None
+    epidemickey = None
+    agekey = None
+    
     pets_imgs = []
-    pets = pet.objects.filter(dele=False,sale_out=False)
+    urls = {}
+    kwargs = {}
+    kwargs['dele'] = False
+    kwargs['sale_out'] = False
+    
+    type_all_url = url
+    prince_all_url = url
+    direct_all_url = url
+    epidemic_all_url = url
+    age_all_url = url
+    
+    enums = [['type','type'],['prince','price'],['direct','farm__direct'],['age','age'],['epidemic','epidemic_period']]
+    for enum in enums:
+        if enum[0] in re.GET:
+            url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+            if enum[0] != 'type':
+                type_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+            else:
+                typekey = re.REQUEST.get(enum[0])
+                
+            if enum[0] != 'direct':
+                direct_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+            else:
+                directkey = re.REQUEST.get(enum[0])
+            
+            if enum[0] != 'epidemic':
+                epidemic_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+            else:
+                epidemickey = re.REQUEST.get(enum[0])
+                
+            if enum[0] != 'prince' and enum[0] != 'age':
+                kwargs[enum[1]] = re.REQUEST.get(enum[0])
+                prince_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+                age_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+            elif enum[0] == 'prince':
+                kwargs[enum[1] + '__gte'] = princes[string.atoi(re.REQUEST.get(enum[0])) - 1]['b']
+                kwargs[enum[1] + '__lte'] = princes[string.atoi(re.REQUEST.get(enum[0])) - 1]['c']
+                princekey = re.REQUEST.get(enum[0])
+                age_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+            elif enum[0] == 'age':
+                kwargs[enum[1] + '__gte'] = ages[string.atoi(re.REQUEST.get(enum[0])) - 1]['b']
+                kwargs[enum[1] + '__lte'] = ages[string.atoi(re.REQUEST.get(enum[0])) - 1]['c']
+                agekey = re.REQUEST.get(enum[0])
+                prince_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+    
+    urls['url'] = url
+    urls['type_all_url'] = type_all_url
+    urls['prince_all_url'] = prince_all_url
+    urls['direct_all_url'] = direct_all_url
+    urls['epidemic_all_url'] = epidemic_all_url
+    urls['age_all_url'] = age_all_url
+    
+    pets = pet.objects.filter(**kwargs)
     for pet_one in pets:
         try:
             petimg = pet_img.objects.filter(pet_id = pet_one,dele=False,img_usefor='buy_main')[0]
             pets_imgs.append({'pet':pet_one,'img':petimg})
         except:
             None
-    return {'pets_imgs':pets_imgs}
+    return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
+            'princekey':princekey,'directs':directs,'directkey':directkey,'epidemics':epidemics,
+            'epidemickey':epidemickey,'ages':ages,'agekey':agekey}
