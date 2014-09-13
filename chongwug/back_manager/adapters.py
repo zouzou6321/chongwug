@@ -48,6 +48,7 @@ def manage_pet_farm_add(request):
             manage_score = string.atof(request.POST['manage_score'])
         new_pet_farm = pet_farm(name = request.POST['name'],
                                 desc = request.POST['desc'],
+                                detail_address = request.POST['dest'],
                                 province = province,
                                 city = city,
                                 district = request.POST['district'],
