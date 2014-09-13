@@ -1,6 +1,6 @@
 {
   "lib/jquery.js": "lib/jquery-125bece9.js",
   "lib/respond.js": "lib/respond-1f7768c6.js",
-  "lib/sea.js": "lib/sea-61394e0e.js",
-  "lib/plugins.js": "lib/plugins-96fe0ffa.js"
+  "lib/plugins.js": "lib/plugins-96fe0ffa.js",
+  "lib/sea.js": "lib/sea-61394e0e.js"
 }
