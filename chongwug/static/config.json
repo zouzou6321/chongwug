@@ -14,5 +14,10 @@
         "src": "src/imgs/**/*.+(jpg|png)",
         "dev": "assets/imgs",
         "prod": "prod/assets/imgs"
+    },
+    "fonts": {
+        "src": "src/fonts/*",
+        "dev": "assets/fonts",
+        "prod": "prod/assets/fonts"
     }
 }
