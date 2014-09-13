@@ -28,6 +28,53 @@
 body {
   font-family: 'helvetica neue', tahoma, 'hiragino sans gb', stheiti, 'wenquanyi micro hei', \5FAE\8F6F\96C5\9ED1, \5B8B\4F53; }
 
+.guide-on {
+  overflow: hidden; }
+
+.cwg-guide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background-color: #ffd401; }
+  .cwg-guide .cwg-guide-main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -205px;
+    margin-left: -450px;
+    width: 900px;
+    height: 410px;
+    background: url(../imgs/guide.png) no-repeat; }
+  .cwg-guide .steps {
+    background: url(../imgs/steps.png) no-repeat;
+    position: absolute;
+    display: none; }
+  .cwg-guide .step1 {
+    background-position: 0 0;
+    width: 90px;
+    height: 96px;
+    top: 0;
+    left: 130px; }
+  .cwg-guide .step2 {
+    background-position: -90px 0;
+    width: 90px;
+    height: 97px;
+    top: 125px;
+    left: 425px; }
+  .cwg-guide .step3, .cwg-guide .step4 {
+    background-position: -180px 0;
+    width: 113px;
+    height: 95px;
+    bottom: 40px;
+    left: 30px; }
+  .cwg-guide .step4 {
+    background-position: -293px 0;
+    left: 652px;
+    bottom: 35px; }
+
 .cwg-social {
   list-style: none;
   margin-bottom: 0; }

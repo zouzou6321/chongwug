@@ -5,6 +5,15 @@
 
 {% block content %}
 
+<div class="cwg-guide">
+    <div class="cwg-guide-main">
+        <div class="steps step1"></div>
+        <div class="steps step2"></div>
+        <div class="steps step3"></div>
+        <div class="steps step4"></div>
+    </div>
+</div>
+
 <div class="container">
     <div class="carousel slide cwg-carousel" data-ride="carousel">
       <div class="carousel-inner">
@@ -105,4 +114,28 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function($){
+    var $body = $('body').addClass('guide-on'),
+        duration = 1000;
+
+    $('.step1').fadeIn(duration, function(){
+        $('.step2').fadeIn(duration, function(){
+            $('.step3').fadeIn(duration, function(){
+                $('.step4').fadeIn(duration, function(){
+                    setTimeout(function(){
+                        $('.cwg-guide').fadeOut(function(){
+                            $body.removeClass('guide-on');
+                        });
+                    }, 500);
+                });
+            });
+        });
+    });
+
+})(jQuery);
+</script>
 {% endblock %}
