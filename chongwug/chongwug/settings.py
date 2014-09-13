@@ -34,6 +34,7 @@ DATABASES = {
 
 #for local test min static files, set this value to True
 PROD_TEST = False
+CDN_TEST = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
@@ -82,6 +83,7 @@ PIC_ROOT = "http://chongwug-pic.b0.upaiyun.com"
 PET_FARM_PIC_ROOT = "/farmpic/"
 PET_AD_PIC_ROOT = "/ad/"
 PET_PIC_ROOT = "/petpic/"
+CDN_ROOT = "//chongwug-cdn.b0.upaiyun.com"
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = 'http://www.chongwug.com/static/'

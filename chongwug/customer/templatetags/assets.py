@@ -1,6 +1,6 @@
 import os,json,string
 from django import template
-from chongwug.settings import WEB_CONFIG_ROOT, PROD_TEST
+from chongwug.settings import WEB_CONFIG_ROOT, PROD_TEST, CDN_TEST, CDN_ROOT
 
 register = template.Library()
 
@@ -15,8 +15,10 @@ def process_json_file(json_file):
 @register.filter
 def assets(value):
     flag = 'SERVER_SOFTWARE' in os.environ
+    cdn = CDN_ROOT if (flag or CDN_TEST) else ''
+    production = '' if (flag or CDN_TEST) else 'static/prod/'
 
-    if flag or PROD_TEST:
+    if flag or PROD_TEST or CDN_TEST:
         arr = value.strip().split('/')
         prefix = arr[0]
         del arr[0]
@@ -28,6 +30,6 @@ def assets(value):
         except:
             path = value
 
-        return '/static/prod/assets/' + path
+        return cdn + '/' + production + 'assets/' + path
     else:
         return '/static/assets/' + value
