@@ -47,6 +47,7 @@ def buy_home_adapter(request):
             tmp_farm_img = None
         data[farm['name']] = tmp_farm
         data[farm['picname']] = tmp_farm_img
+    data['page'] = 'home'
     return data
 
 def buy_main_adapter(re):
@@ -126,4 +127,4 @@ def buy_main_adapter(re):
             None
     return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
             'princekey':princekey,'directs':directs,'directkey':directkey,'epidemics':epidemics,
-            'epidemickey':epidemickey,'ages':ages,'agekey':agekey}
+            'epidemickey':epidemickey,'ages':ages,'agekey':agekey,'page':'buy'}
