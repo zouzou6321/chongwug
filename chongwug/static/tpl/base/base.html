@@ -1,0 +1,23 @@
+{% load assets %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {% include 'tpl/base/meta.html' %}
+	<title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ 'css/base.css'|assets }}"/>
+    <link rel="stylesheet" href="{{ 'css/index.css'|assets }}"/>
+    <!--[if lt IE 9]>
+    <script src="{{ 'js/lib/respond.js'|assets }}"></script>
+    <![endif]-->
+</head>
+<body>
+{% include 'tpl/base/header.html' %}
+{% block content %}{% endblock %}
+
+<script src="{{'js/lib/jquery.js'|assets}}"></script>
+<script src="{{'js/lib/plugins.js'|assets}}"></script>
+{% block scripts %}{% endblock %}
+
+{% include 'tpl/base/footer.html' %}
+</body>
+</html>
