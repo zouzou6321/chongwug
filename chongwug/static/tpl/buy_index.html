@@ -50,61 +50,61 @@
         <div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
             <div class="row cwg-area-row">
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城东狗舍</h2>
+                    <h2><a href="/buy/?direct=东" style="color:#000">城东狗舍</a></h2>
                     <p>{% if east_farm %}{{ east_farm.district }}{% else %}{% endif %}片区</p>
                     <div>
                     	{% if east_farm_img %}
-                        <img src="{{ east_farm_img.img_url }}" class="img-responsive">
+                        <a href="/buy/?direct=东"><img src="{{ east_farm_img.img_url }}" class="img-responsive"></a>
                         {% else %}
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
+                        <a href="/buy/?direct=东"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
                      	{% endif %}
                         <p><span class="floor-price">&yen;{{ east_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城南狗舍</h2>
+                    <h2><a href="/buy/?direct=南" style="color:#000">城南狗舍</a></h2>
                     <p>{{ south_farm.district }}片区</p>
                     <div>
                         {% if south_farm_img %}
-                        <img src="{{ south_farm_img.img_url }}" class="img-responsive">
+                        <a href="/buy/?direct=南"><img src="{{ south_farm_img.img_url }}" class="img-responsive"></a>
                         {% else %}
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
+                        <a href="/buy/?direct=南"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
                      	{% endif %}
                         <p><span class="floor-price">&yen;{{ south_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城西狗舍</h2>
+                    <h2><a href="/buy/?direct=西" style="color:#000">城西狗舍</a></h2>
                     <p>{{ west_farm.district }}片区</p>
                     <div>
                         {% if west_farm_img %}
-                        <img src="{{ west_farm_img.img_url }}" class="img-responsive">
+                        <a href="/buy/?direct=西"><img src="{{ west_farm_img.img_url }}" class="img-responsive"></a>
                         {% else %}
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
+                        <a href="/buy/?direct=西"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
                      	{% endif %}
                         <p><span class="floor-price">&yen;{{ west_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城北狗舍</h2>
+                    <h2><a href="/buy/?direct=北" style="color:#000">城北狗舍</a></h2>
                     <p>{{ north_farm.district }}片区</p>
                     <div>
                         {% if north_farm_img %}
-                        <img src="{{ north_farm_img.img_url }}" class="img-responsive">
+                        <a href="/buy/?direct=北"><img src="{{ north_farm_img.img_url }}" class="img-responsive"></a>
                         {% else %}
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
+                        <a href="/buy/?direct=北"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
                      	{% endif %}
                         <p><span class="floor-price">&yen;{{ north_farm.min_prince }}</span><span> 起</span></p>
                     </div>
                 </div>
                 <div class="col-sm-2_4 col-xs-6 cwg-area">
-                    <h2>城中狗舍</h2>
+                    <h2><a href="/buy/?direct=中" style="color:#000">城中狗舍</a></h2>
                     <p>{{ center_farm.district }}片区</p>
                     <div>
                         {% if center_farm_img %}
-                        <img src="{{ center_farm_img.img_url }}" class="img-responsive">
+                        <a href="/buy/?direct=中"><img src="{{ center_farm_img.img_url }}" class="img-responsive"></a>
                         {% else %}
-                        <img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive">
+                        <a href="/buy/?direct=中"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
                      	{% endif %}
                         <p><span class="floor-price">&yen;{{ center_farm.min_prince }}</span><span> 起</span></p>
                     </div>

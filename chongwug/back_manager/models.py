@@ -38,7 +38,7 @@ class pet_dad(models.Model):
     alive = models.BooleanField(default=True)
     dele = models.BooleanField(default=False)
 
-class pet(models.Model):
+class nestofpet(models.Model):
     farm = models.ForeignKey(pet_farm,blank=True, null=True)
     mam_id = models.ForeignKey(pet_mam,blank=True, null=True)
     dad_id = models.ForeignKey(pet_dad,blank=True, null=True)
@@ -52,15 +52,14 @@ class pet(models.Model):
     txt_desc = models.TextField()
     #上架时间
     start_time = models.DateTimeField(default=datetime.datetime.now)
-    #卖出时间
-    sale_time = models.DateTimeField(blank=True, null=True)
-    price = models.FloatField()
+    min_price = models.FloatField()
+    max_price = models.FloatField()
     sale_out = models.BooleanField(default=False)
     dele = models.BooleanField(default=False)
 
-class pet_attention(models.Model):
-    time = models.TimeField(default=datetime.datetime.now)
-    pet_id = models.ForeignKey(pet)
+class nestofpet_attention(models.Model):
+    time = models.DateTimeField(default=datetime.datetime.now)
+    nestofpet_id = models.ForeignKey(nestofpet)
     #attention_type：表示关注、预约、预定
     attention_type = models.TextField(default=0)
     dele = models.BooleanField(default=False)
@@ -96,8 +95,8 @@ class pet_dad_img(models.Model):
     img_usefor = models.TextField()
     dele = models.BooleanField(default=False)
 
-class pet_img(models.Model):
-    pet_id = models.ForeignKey(pet)
+class nestofpet_img(models.Model):
+    nestofpet_id = models.ForeignKey(nestofpet)
     img_url = models.URLField()
     img_with = models.IntegerField()
     img_height = models.IntegerField()

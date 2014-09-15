@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from back_manager.models import ad,pet_farm,pet_farm_img,pet,pet_img
+from back_manager.models import ad,pet_farm,pet_farm_img,nestofpet,nestofpet_img
 import datetime,string
 from django.db.models import Q
 def buy_home_adapter(request):
@@ -75,7 +75,7 @@ def buy_main_adapter(re):
     epidemic_all_url = url
     age_all_url = url
     
-    enums = [['type','type'],['prince','price'],['direct','farm__direct'],['age','age'],['epidemic','epidemic_period']]
+    enums = [['type','type'],['prince','min_price'],['direct','farm__direct'],['age','age'],['epidemic','epidemic_period']]
     for enum in enums:
         if enum[0] in re.GET:
             url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
@@ -118,13 +118,10 @@ def buy_main_adapter(re):
     urls['age_all_url'] = age_all_url
     
     pets_imgs = []
-    pets = pet.objects.filter(**kwargs)
+    pets = nestofpet.objects.filter(**kwargs)
     for pet_one in pets:
-        try:
-            petimg = pet_img.objects.filter(pet_id = pet_one,dele=False,img_usefor='buy_main')[0]
+            petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor='buy_main')[0]
             pets_imgs.append({'pet':pet_one,'img':petimg})
-        except:
-            None
     return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
             'princekey':princekey,'directs':directs,'directkey':directkey,'epidemics':epidemics,
             'epidemickey':epidemickey,'ages':ages,'agekey':agekey,'page':'buy'}

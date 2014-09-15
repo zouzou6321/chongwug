@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from customer.views import nav_page_view,buy_home_view,buy_main_view
-from back_manager.views import manage_home_view,manage_pet_farm_view,manage_pet_farm_add_view,manage_pet_farm_mod_view,manage_pet_farm_picadd_view,manage_pet_farm_picmod_view,manage_pet_farm_pic_upload_view,manage_pet_farm_picpre_view,manage_ad_view,manage_ad_add_view,manage_ad_mod_view,manage_ad_pic_upload_view,manage_ad_picpre_view,manage_manager_view,manage_pet_view,manage_pet_add_view
-from back_manager.views import manage_pet_picadd_view,manage_pet_farmselect_view,manage_pet_pic_upload_view,manage_pet_picpre_view
+from back_manager.views import manage_home_view,manage_pet_farm_view,manage_pet_farm_add_view,manage_pet_farm_mod_view,manage_pet_farm_picadd_view,manage_pet_farm_picmod_view,manage_pet_farm_pic_upload_view,manage_pet_farm_picpre_view,manage_ad_view,manage_ad_add_view,manage_ad_mod_view,manage_ad_pic_upload_view,manage_ad_picpre_view,manage_manager_view,manage_pet_view,manage_nestofpet_add_view
+from back_manager.views import manage_nestofpet_picadd_view,manage_nestofpet_farmselect_view,manage_nestofpet_pic_upload_view,manage_nestofpet_picpre_view,manage_nestofpet_view
 import settings
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -18,12 +18,12 @@ urlpatterns = patterns('',
                        url(r'^back_manage/ad/picadd/upload/$',manage_ad_pic_upload_view),
                        url(r'^back_manage/ad/picadd/preupload/$',manage_ad_picpre_view),
                        url(r'^back_manage/manager/$',manage_manager_view),
-                       url(r'^back_manage/pet/$',manage_pet_view),
-                       url(r'^back_manage/pet/add/$',manage_pet_add_view),
-                       url(r'^back_manage/pet/picadd/$',manage_pet_picadd_view),
-                       url(r'^back_manage/pet/picadd/upload/$',manage_pet_pic_upload_view),
-                       url(r'^back_manage/pet/picadd/preupload/$',manage_pet_picpre_view),
-                       url(r'^back_manage/pet/picadd/farmselect/$',manage_pet_farmselect_view),
+                       url(r'^back_manage/nestofpet/$',manage_nestofpet_view),
+                       url(r'^back_manage/nestofpet/add/$',manage_nestofpet_add_view),
+                       url(r'^back_manage/nestofpet/picadd/$',manage_nestofpet_picadd_view),
+                       url(r'^back_manage/nestofpet/picadd/upload/$',manage_nestofpet_pic_upload_view),
+                       url(r'^back_manage/nestofpet/picadd/preupload/$',manage_nestofpet_picpre_view),
+                       url(r'^back_manage/nestofpet/picadd/farmselect/$',manage_nestofpet_farmselect_view),
                        url(r'^back_manage/petfarm/$',manage_pet_farm_view),
                        url(r'^back_manage/petfarm/add/$',manage_pet_farm_add_view),
                        url(r'^back_manage/petfarm/mod/$',manage_pet_farm_mod_view),
