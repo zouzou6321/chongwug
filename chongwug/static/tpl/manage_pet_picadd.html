@@ -71,7 +71,7 @@ Browser.Moz=/gecko/.test(Browser.userAgent);
 
 	function farmslected(){
 		data = {'pet_farm_id':$("#pet_farm_id").val()};
-		$.post("/back_manage/pet/picadd/farmselect/", data, function(recive){
+		$.post("/back_manage/nestofpet/picadd/farmselect/", data, function(recive){
 			if(recive != 'false'){
 				$("#pet_id").empty();
 				$("#pet_id").append(recive);
@@ -162,7 +162,7 @@ function Imagess(url,imgid,callback){
 			//$('#personhead').imgAreaSelect({imageHeight:494,imageWidth:800,x1:0,y1:0,x2:160,y2:99,aspectRatio: '1:0.618', handles: true, fadeSpeed: 200, minHeight:99,minWidth:160,onSelectChange: preview });
 			$("#photo").uploadify({
                 'uploader': '/static/manage/uploadify/uploadify.swf',
-                'script': '/back_manage/pet/picadd/upload/',
+                'script': '/back_manage/nestofpet/picadd/upload/',
                 'cancelImg': '/static/manage/uploadify/cancel.png',
                 'fileDesc': '图片文件',
                 'buttonText': '选择上传',
@@ -239,7 +239,7 @@ function Imagess(url,imgid,callback){
 			'usefor':$("#usefor").val(),
 			'source':timg
 		};
-		$.post("/back_manage/pet/picadd/preupload/", data, function(recive){
+		$.post("/back_manage/nestofpet/picadd/preupload/", data, function(recive){
 			if(recive == 'true'){
 				if(alert('保存头像成功,请等待系统验证通过后启用')){
 					window.location.href="/back_manage/petfarm/picadd/";
