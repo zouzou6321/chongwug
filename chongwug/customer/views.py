@@ -23,3 +23,7 @@ def buy_home_view(request):
 def buy_main_view(request):
     data = adapters.buy_main_adapter(request)
     return render_to_response('tpl/buy_main.html',data)
+
+
+def buy_detail_view(request):
+    return render_to_response('tpl/buy_detail.html')
