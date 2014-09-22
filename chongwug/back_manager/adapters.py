@@ -7,7 +7,9 @@ import os,uuid,datetime
 from chongwug import settings
 from upyun import UpYun
 from django.shortcuts import get_object_or_404
-
+'''
+管理员鉴权
+'''
 def manage_authentication(request):
     try:
         if (request.session['manage_id'] == ''):
@@ -94,7 +96,7 @@ def pet_farm_all():
     farms = pet_farm.objects.filter(dele=False)
     return {'farms':farms}
 
-def manage_picupload(photo):
+def manage_picupload(photo,width,height):
     if photo == None:
         return 'false'
     try:
@@ -105,7 +107,7 @@ def manage_picupload(photo):
     if w > 1170:
         img.thumbnail((1170,3000))
         w,h = img.size
-    if (w < 1170) or (h < 500):
+    if (w < width) or (h < height):
         return 'size error'
     url=('/manage/pictest/'+photo.name).encode('utf8')
     name = settings.STATIC_ROOT + url

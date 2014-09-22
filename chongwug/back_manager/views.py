@@ -55,12 +55,12 @@ def manage_nestofpet_picadd_view(request):
 @csrf_exempt
 def manage_nestofpet_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
-    return HttpResponse(adapters.manage_picupload(photo))
+    return HttpResponse(adapters.manage_picupload(photo,200,160))
 
 @csrf_exempt
 def manage_pet_farm_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
-    return HttpResponse(adapters.manage_picupload(photo))
+    return HttpResponse(adapters.manage_picupload(photo,200,160))
 
 def manage_pet_farm_picpre_view(request):
     if adapters.manage_authentication(request) == False:
@@ -131,7 +131,7 @@ def manage_ad_pic_upload_view(request):
 def manage_ad_picpre_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponse('false')
-    return HttpResponse(adapters.manage_ad_picpreupload(request))
+    return HttpResponse(adapters.manage_ad_picpreupload(request,1170,500))
 
 def manage_ad_mod_view(request):
     return True

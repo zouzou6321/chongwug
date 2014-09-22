@@ -1,7 +1,16 @@
 # -*- coding: UTF-8 -*-
+'''
+文件功能：针对购宠用户涉及的页面，根据展示的数据需要，整理出格式化的数据返回
+'''
 from back_manager.models import ad,pet_farm,pet_farm_img,nestofpet,nestofpet_img
 import datetime,string
 from django.db.models import Q
+
+'''
+函数功能：首页数据适配器
+作者：胡怀勇
+时间：2014-9-22
+'''
 def buy_home_adapter(request):
     #前期只有一个城市：成都
     contry = "china"
@@ -50,31 +59,41 @@ def buy_home_adapter(request):
     data['page'] = 'home'
     return data
 
+'''
+函数功能：购宠页面数据适配器，
+作者：胡怀勇
+时间：2014-9-22
+'''
 def buy_main_adapter(re):
     url = '/buy/?'
     
+    #筛选条件
     types = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加',u'博美',u'巴哥',u'雪纳瑞',u'约克夏',u'德牧',u'古牧',u'比格',u'喜乐蒂',u'斗牛犬',u'杜宾',u'罗威纳',u'吉娃娃']
     princes = [{'a':'1','b':600,'c':1000},{'a':'2','b':1000,'c':1500},{'a':'3','b':1500,'c':2000},{'a':'4','b':2000,'c':2500},{'a':'5','b':2500,'c':1000000}]
     directs = [u'东',u'西',u'南',u'北',u'中']
     epidemics = [u'已种疫苗',u'可种疫苗',u'未种疫苗']
     ages = [{'a':'1','b':0,'c':3},{'a':'2','b':3,'c':5},{'a':'3','b':5,'c':12},{'a':'4','b':12,'c':100000}]
     
+    #筛选条件所对应的数据表列名称，从enums中获取
     typekey = None
     princekey = None
     directkey = None
     epidemickey = None
     agekey = None
     
+    #数据库查询语句整合
     kwargs = {}
     kwargs['dele'] = False
     kwargs['sale_out'] = False
     
+    #取消某筛选条件时的url需要独立处理
     type_all_url = url
     prince_all_url = url
     direct_all_url = url
     epidemic_all_url = url
     age_all_url = url
     
+    #数据库查询语句生成和部分不依赖数据库的数据生成
     enums = [['type','type'],['prince','min_price'],['direct','farm__direct'],['age','age'],['epidemic','epidemic_period']]
     for enum in enums:
         if enum[0] in re.GET:
@@ -117,6 +136,7 @@ def buy_main_adapter(re):
     urls['epidemic_all_url'] = epidemic_all_url
     urls['age_all_url'] = age_all_url
     
+    #查询数据库获取数据
     pets_imgs = []
     pets = nestofpet.objects.filter(**kwargs)
     for pet_one in pets:
@@ -125,3 +145,11 @@ def buy_main_adapter(re):
     return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
             'princekey':princekey,'directs':directs,'directkey':directkey,'epidemics':epidemics,
             'epidemickey':epidemickey,'ages':ages,'agekey':agekey,'page':'buy'}
+
+'''
+函数功能：首页数据适配器
+作者：胡怀勇
+时间：2014-9-22
+'''
+def buy_detail_adapter(request):
+    return {}
