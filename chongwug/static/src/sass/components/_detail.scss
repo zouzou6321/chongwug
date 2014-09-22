@@ -1,0 +1,245 @@
+.cwg-thumbnail{
+  list-style: none;
+
+  li{
+    border: 3px solid transparent;
+    float: left;
+    cursor: pointer;
+  }
+
+  .active{
+    border-color: #ffd100;
+    cursor: default;
+  }
+
+  img{
+    width: 50px;
+  }
+}
+
+.cwg-thumb{
+  img{
+    width: 100%;
+  }
+}
+
+label{
+  font-weight: normal;
+}
+
+.cwg-detail-title{
+  font-size: 20px;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+%highlight{
+  color: #ff3400;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.cwg-detail-price{
+  @extend %highlight;
+}
+
+.cwg-detail-phone{
+  @extend %highlight;
+  padding-right: 20px;
+}
+
+.info-row{
+
+  padding: 10px 0;
+  border-bottom: 1px dashed #ddd;
+
+  .middle-space{
+    padding-left: 2em;
+  }
+
+  .info-td-left, .info-td-right{
+    float: left;
+  }
+
+  .info-td-left{
+    width: 80px;
+  }
+
+  .info-td-right{
+    max-width: 550px;
+  }
+
+  .nav-pills{
+    float: left;
+    a{
+      padding: 1px 6px;
+      color: #414141;
+    }
+    li{
+      margin-right: 8px;
+      margin-bottom: 5px;
+    }
+    .active a{
+      background-color: #ffd401;
+    }
+  }
+}
+
+.btn-order, .btn-consult{
+  border: 0;
+  margin-right: .5em;
+}
+
+.btn-order, .btn-order:hover{
+  background-color: #ff5300;
+  color: #fff;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.btn-consult, .btn-consult:hover{
+  background-color: #ffd401;
+  color: #fff;
+}
+
+.cwg-clause{
+  font-size: 12px;
+  padding-top: 5px;
+
+  i{
+    margin-right: 5px;
+  }
+}
+
+.cwg-detail-nav{
+  border-top: 2px solid #ffd10f;
+  margin-top: 50px;
+  padding-bottom: 20px;
+
+  a{
+    color: #544a2a;
+  }
+
+  .active{
+    a{
+      color: #fff;
+      background: #ffd401;
+    }
+  }
+}
+
+.desc-main{
+  margin-left: 15px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-left: 2px solid #e7e7e7;
+}
+.desc-sub-tit{
+  background: #ffd401;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.most-popular{
+  padding: 0 35px;
+
+  .dog-img{
+    width: 100%;
+  }
+
+  .dog-desc{
+    padding: 10px 0;
+
+    h4{
+      line-height: 22px;
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 14px;
+
+      a{
+        color: #333;
+      }
+    }
+
+    .dog-addr{
+      color: #828282;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .glyphicon-map-marker{
+      color: #ff3500;
+      margin-right: 5px;
+    }
+
+    .dog-price{
+      color: #ff3500;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .dog-unit{
+      font-size: 14px;
+      font-weight: normal;
+    }
+    .btn-dog{
+      color: #fff;
+      background-color: #ff3500;
+      border: 0;
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+  }
+}
+
+.dog-show{
+  .dog-show-info{
+    overflow: hidden;
+    position: relative;
+  }
+
+  .dog-mask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000,endColorstr=#B2000000);
+    background: rgba(0,0,0,.5);
+    bottom: -100%;
+    z-index: 9;
+    transition: bottom .5s ease;
+    color: #fff;
+  }
+
+  .dog-show-info:hover .dog-mask{
+    bottom: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

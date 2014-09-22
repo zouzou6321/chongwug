@@ -242,7 +242,6 @@ body {
   height: 500px;
   background: #eee; }
 
-/*--------------------buy-------------------------*/
 .buy-container {
   background-color: #e5e5e5;
   padding: 20px 0; }
@@ -317,3 +316,149 @@ body {
       color: #fff;
       background-color: #ff3500;
       border: 0; }
+
+.cwg-thumbnail {
+  list-style: none; }
+  .cwg-thumbnail li {
+    border: 3px solid transparent;
+    float: left;
+    cursor: pointer; }
+  .cwg-thumbnail .active {
+    border-color: #ffd100;
+    cursor: default; }
+  .cwg-thumbnail img {
+    width: 50px; }
+
+.cwg-thumb img {
+  width: 100%; }
+
+label {
+  font-weight: normal; }
+
+.cwg-detail-title {
+  font-size: 20px;
+  margin-top: 0;
+  font-weight: bold; }
+
+.cwg-detail-price, .cwg-detail-phone {
+  color: #ff3400;
+  font-size: 16px;
+  font-weight: bold; }
+
+.cwg-detail-phone {
+  padding-right: 20px; }
+
+.info-row {
+  padding: 10px 0;
+  border-bottom: 1px dashed #ddd; }
+  .info-row .middle-space {
+    padding-left: 2em; }
+  .info-row .info-td-left, .info-row .info-td-right {
+    float: left; }
+  .info-row .info-td-left {
+    width: 80px; }
+  .info-row .info-td-right {
+    max-width: 550px; }
+  .info-row .nav-pills {
+    float: left; }
+    .info-row .nav-pills a {
+      padding: 1px 6px;
+      color: #414141; }
+    .info-row .nav-pills li {
+      margin-right: 8px;
+      margin-bottom: 5px; }
+    .info-row .nav-pills .active a {
+      background-color: #ffd401; }
+
+.btn-order, .btn-consult {
+  border: 0;
+  margin-right: 0.5em; }
+
+.btn-order, .btn-order:hover {
+  background-color: #ff5300;
+  color: #fff;
+  padding-left: 3em;
+  padding-right: 3em; }
+
+.btn-consult, .btn-consult:hover {
+  background-color: #ffd401;
+  color: #fff; }
+
+.cwg-clause {
+  font-size: 12px;
+  padding-top: 5px; }
+  .cwg-clause i {
+    margin-right: 5px; }
+
+.cwg-detail-nav {
+  border-top: 2px solid #ffd10f;
+  margin-top: 50px;
+  padding-bottom: 20px; }
+  .cwg-detail-nav a {
+    color: #544a2a; }
+  .cwg-detail-nav .active a {
+    color: #fff;
+    background: #ffd401; }
+
+.desc-main {
+  margin-left: 15px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-left: 2px solid #e7e7e7; }
+
+.desc-sub-tit {
+  background: #ffd401;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold; }
+
+.most-popular {
+  padding: 0 35px; }
+  .most-popular .dog-img {
+    width: 100%; }
+  .most-popular .dog-desc {
+    padding: 10px 0; }
+    .most-popular .dog-desc h4 {
+      line-height: 22px;
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 14px; }
+      .most-popular .dog-desc h4 a {
+        color: #333; }
+    .most-popular .dog-desc .dog-addr {
+      color: #828282;
+      font-size: 14px;
+      margin-bottom: 5px; }
+    .most-popular .dog-desc .glyphicon-map-marker {
+      color: #ff3500;
+      margin-right: 5px; }
+    .most-popular .dog-desc .dog-price {
+      color: #ff3500;
+      font-size: 14px;
+      font-weight: bold; }
+    .most-popular .dog-desc .dog-unit {
+      font-size: 14px;
+      font-weight: normal; }
+    .most-popular .dog-desc .btn-dog {
+      color: #fff;
+      background-color: #ff3500;
+      border: 0;
+      padding-top: 2px;
+      padding-bottom: 2px; }
+
+.dog-show .dog-show-info {
+  overflow: hidden;
+  position: relative; }
+.dog-show .dog-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000,endColorstr=#B2000000);
+  background: rgba(0, 0, 0, 0.5);
+  bottom: -100%;
+  z-index: 9;
+  transition: bottom 0.5s ease;
+  color: #fff; }
+.dog-show .dog-show-info:hover .dog-mask {
+  bottom: 0; }

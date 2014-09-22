@@ -1,0 +1,112 @@
+.buy-container{
+  background-color: #e5e5e5;
+  padding: 20px 0;
+}
+
+.dog-search-wrap{
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  .form-control{
+    border: 1px solid #ffdd37;
+    border-right: 0;
+  }
+}
+
+
+.dog-select-title{
+  padding-right: 0;
+}
+
+.dog-select-row{
+  color: #414141;
+  padding-bottom: 20px;
+
+  .nav-pills{
+    a{
+      padding: 1px 6px;
+      color: #414141;
+    }
+    li{
+      margin-right: 8px;
+      margin-bottom: 5px;
+    }
+    .active a{
+      background-color: #ffd401;
+    }
+  }
+  .dog-selected{
+    a{
+      color: #e4bd3f;
+      border: 1px solid #e4bd3f;
+    }
+  }
+}
+.dog-separate{
+  border-top: 1px solid #e5e5e5;
+  padding-bottom: 40px;
+}
+
+.buy-inner{
+  width: 860px;
+  background-color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  .row, .dog-list{
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  .dog-list{
+
+  }
+  .col-md-4{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .dog-img{
+    width: 100%;
+  }
+
+  .dog-desc{
+    padding: 15px;
+
+    h4{
+      line-height: 22px;
+      font-size: 16px;
+      height: 42px;
+      overflow: hidden;
+      margin-top: 0;
+
+      a{
+        color: #333;
+        font-weight: bold;
+      }
+    }
+
+    .dog-addr{
+      color: #828282;
+      font-size: 14px;
+    }
+
+    .glyphicon-map-marker{
+      color: #ff3500;
+      margin-right: 5px;
+    }
+
+    .dog-price{
+      color: #ff3500;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .dog-unit{
+      font-size: 14px;
+      font-weight: normal;
+    }
+    .btn-dog{
+      color: #fff;
+      background-color: #ff3500;
+      border: 0;
+    }
+  }
+}
