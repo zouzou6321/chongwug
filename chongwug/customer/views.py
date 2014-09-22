@@ -27,4 +27,4 @@ def buy_main_view(request):
 
 def buy_detail_view(request):
     data = adapters.buy_detail_adapter(request)
-    return render_to_response('tpl/buy_detail.html')
+    return render_to_response('tpl/buy_detail.html',data)
