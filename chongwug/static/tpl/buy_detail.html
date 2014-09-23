@@ -52,33 +52,12 @@
                         犬<span class="middle-space"></span>种：
                     </div>
                     <div class="info-td-right">
-                    	<div id="example" class="modal fade in" style="display: none; background-color: white;width:1000px;height:543px;margin-bottom: 0px;margin-left: 180px;margin-right: 0px;margin-top: 100px;max-height: 500px">
-                    	<div class="modal-header">
-						<span>本养殖场其他该类宠物</span>
-						</div>
-                    	<div class="modal-body" id="otherpet">	        
-						</div>
-                    	</div>
                         <ul class="nav nav-pills cwg-detail-pills">
-                        <script type="text/javascript">
-						function ajaxGetType(type,farmid){
-							$.get("?farmid=" + farmid + "&type=" + type, function(recive){
-								if(recive != 'false'){
-									//alert(recive);
-									$("#otherpet").html(recive);
-									$("#example").modal('show');
-								}
-								else{
-									alert('数据异常');
-								}
-							});
-						}
-                        </script>
                         	{% for pettype in pet_types %}
                         	{% if pettype == curtype %}
-                            <li class="active"><a href="javascript:ajaxGetType('{{ pettype }}',{{ nestpet.farm.id }});">{{ pettype }}</a></li>
+                            <li class="active"><a href="javascript:" data-type="{{ pettype }}" data-id="{{ nestpet.farm.id }}">{{ pettype }}</a></li>
                             {% else %}
-                            <li><a href="javascript:void(0);" onclick="ajaxGetType('{{ pettype }}',{{ nestpet.farm.id }});">{{ pettype }}</a></li>
+                            <li><a href="javascript:" data-type="{{ pettype }}" data-id="{{ nestpet.farm.id }}">{{ pettype }}</a></li>
                             {% endif %}
                             {% endfor %}
                         </ul>
@@ -105,13 +84,24 @@
     </div>
 </div>
 
+<div class="modal fade" id="cwg-farm-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">本养殖场其它宠物</h4>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
+
 <div class="cwg-detail-nav">
    <div class="container">
        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">详细信息</a></li>
-            <li><a href="#">狗狗资料</a></li>
-            <li><a href="#">地理位置</a></li>
-            <li><a href="#">保障服务</a></li>
+            <li class="active"><a href="#kennel-intro">详细信息</a></li>
+            <li><a href="#show-window">狗狗资料</a></li>
+            <li><a href="#guarantee-service">保障服务</a></li>
         </ul>
    </div>
 </div>
@@ -219,6 +209,25 @@
                 $img.attr('src', $curr.data('src'));
             }
         });
+
+        //type
+        var $farmModal = $('#cwg-farm-modal'),
+            $farmBody = $farmModal.find('.modal-body');
+
+        $('.cwg-detail-pills').on('click', 'a', function(){
+            var $this = $(this),
+                type = $this.data('type'),
+                id = $this.data('id');
+
+            $.ajax('/buy/detail', {
+                data: {farmid: id, type: type}
+            }).done(function(data){
+                $farmBody.html(data);
+                $farmModal.modal('show');
+            });
+
+        });
+
     }(jQuery));
 
 </script>
