@@ -2952,6 +2952,8 @@ $.magnificPopup.registerModule(RETINA_NS, {
                $prev = $(settings.prev),
                $next = $(settings.next);
 
+            $ul.width($li.length * $curr.outerWidth());
+
             $next.on('click', function(){
                 $curr.removeClass('active');
                 ($curr = nextLi()).addClass('active');
@@ -2961,6 +2963,18 @@ $.magnificPopup.registerModule(RETINA_NS, {
             $prev.on('click', function(){
                 $curr.removeClass('active');
                 ($curr = prevLi()).addClass('active');
+                settings.callback($curr);
+            });
+
+            $ul.on('click', 'li', function(){
+                var $this = $(this);
+
+                if($this.hasClass('active')){
+                    return;
+                }
+
+                $curr.removeClass('active');
+                ($curr = $this).addClass('active');
                 settings.callback($curr);
             });
 

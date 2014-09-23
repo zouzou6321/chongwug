@@ -30,6 +30,7 @@
                         <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
                         <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
                         <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
+                        <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
                     </ul>
                 </div>
                 <a class="next-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-right"></i></a>
@@ -208,7 +209,7 @@
             prev: '.prev-thumb',
             next: '.next-thumb',
             callback: function($curr){
-                $img.src($curr.data('src'));
+                $img.attr('src', $curr.data('src'));
             }
         });
     }(jQuery));
