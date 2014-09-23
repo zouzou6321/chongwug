@@ -228,7 +228,7 @@ function Imagess(url,imgid,callback){
 			            (function(){
 			            	if (selected < 10)
 			            	{
-				            	$('#personhead').imgAreaSelect({imageHeight:imgh,imageWidth:imgw,x1:0,y1:0,x2:minimgw,y2:minimgh,aspectRatio: '1.25:1', handles: true, fadeSpeed: 200, minHeight:minimgh,minWidth:minimgw,onSelectChange: preview });
+				            	$('#personhead').imgAreaSelect({imageHeight:imgh,imageWidth:imgw,x1:0,y1:0,x2:minimgw,y2:minimgh,aspectRatio: minimgw + ':' + minimgh, handles: true, fadeSpeed: 200, minHeight:minimgh,minWidth:minimgw,onSelectChange: preview });
 				            	prepreview(imgw,imgh);
 				            	setTimeout(arguments.callee, 100);
 				            	selected = selected + 1;
