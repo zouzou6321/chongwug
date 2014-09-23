@@ -2949,10 +2949,13 @@ $.magnificPopup.registerModule(RETINA_NS, {
                $ul = $wrapper.find('ul'),
                $li = $ul.find('li'),
                $curr = $li.filter('.active'),
+               itemWidth = $curr.outerWidth(),
+               totalWidth = itemWidth * $li.length,
+               visible = $wrapper.width / itemWidth,
                $prev = $(settings.prev),
                $next = $(settings.next);
 
-            $ul.width($li.length * $curr.outerWidth());
+            $ul.width(totalWidth);
 
             $next.on('click', function(){
                 $curr.removeClass('active');
@@ -2986,6 +2989,10 @@ $.magnificPopup.registerModule(RETINA_NS, {
             function prevLi(){
                 var $prev = $curr.prev('li');
                 return $prev.length ? $prev : $li.last();
+            }
+
+            function animateUl(){
+
             }
         });
     }

@@ -326,7 +326,9 @@ body {
 .cwg-thumbnail {
   list-style: none;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  position: relative;
+  left: 0; }
   .cwg-thumbnail li {
     border: 3px solid transparent;
     float: left;
