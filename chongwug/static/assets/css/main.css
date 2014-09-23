@@ -1,3 +1,23 @@
+.col-md-2_4 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px; }
+  @media (min-width: 992px) {
+    .col-md-2_4 {
+      float: left;
+      width: 20%; } }
+
+.col-sm-2_4 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px; }
+  @media (min-width: 768px) {
+    .col-sm-2_4 {
+      float: left;
+      width: 20%; } }
+
 @font-face {
   font-family: "iconfont";
   src: url('../fonts/iconfont.eot');
@@ -119,9 +139,9 @@
 .footer .cwg-weibo {
   background-color: #ec5342; }
 .footer .cwg-weixin {
-  background-color: #05B410; }
+  background-color: #05b410; }
 .footer .cwg-youjian {
-  background-color: #56ACEE; }
+  background-color: #56acee; }
 .footer .footer-top {
   background: #ffd401;
   padding-top: 45px;
@@ -158,26 +178,6 @@
 
 /*carousel --end*/
 /*area*/
-.col-md-2_4 {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px; }
-  @media (min-width: 992px) {
-    .col-md-2_4 {
-      float: left;
-      width: 20%; } }
-
-.col-sm-2_4 {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px; }
-  @media (min-width: 768px) {
-    .col-sm-2_4 {
-      float: left;
-      width: 20%; } }
-
 .cwg-area-row {
   padding-bottom: 100px; }
 

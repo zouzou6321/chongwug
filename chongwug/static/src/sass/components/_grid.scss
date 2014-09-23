@@ -1,0 +1,11 @@
+@import "../bootstrap/variables";
+@import "override-bootstrap-variables";
+@import "../bootstrap/mixins";
+
+.col-md-2_4 {
+  @include make-md-column(2.4);
+}
+
+.col-sm-2_4 {
+  @include make-sm-column(2.4);
+}
