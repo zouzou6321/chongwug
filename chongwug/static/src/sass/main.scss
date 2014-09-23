@@ -109,34 +109,6 @@ body{
   }
 }
 
-.cwg-navbar{
-  background: #fff;
-  border: 0;
-  margin-bottom: 0;
-  min-height: 30px;
-
-  .navbar-toggle .icon-bar{
-    background: #FFD401;
-  }
-
-  .navbar-nav a{
-    color: #DDB93A;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
-  .active a{
-    color: #8F7004;
-    background: #FFD401;
-  }
-
-  .navbar-brand{
-    @media (min-width: $screen-sm-min) {
-      display: none;
-    }
-  }
-}
-
 /*head*/
 
 .cwg-search-wrap, .dog-search-wrap{
@@ -152,44 +124,6 @@ body{
   }
   .glyphicon-search{
     color: #fff;
-  }
-}
-
-.header-top{
-  background: #ffd401;
-
-  .cwg-btn-wrap{
-    .btn-default{
-      background-color: transparent;
-      border: 0;
-    }
-  }
-
-  .cwg-login{
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
-
-  .cwg-tel{
-    color: #49250c;
-    padding-top: 10px;
-  }
-  .cwg-tel-main{
-    font-size: 16px;
-    margin-bottom: 0;
-
-    .glyphicon{
-      margin-right: 5px;
-    }
-
-    .glyphicon, span{
-      vertical-align: middle;
-    }
-  }
-
-  .cwg-tel-detail{
-    padding-left: 10px;
-    font-size: 12px;
   }
 }
 
@@ -236,6 +170,7 @@ body{
 
 /*carousel*/
 .cwg-carousel{
+  margin-top: 20px;
   padding-bottom: 70px;
   margin-left: -15px;
   margin-right: -15px;
@@ -308,7 +243,7 @@ body{
 }
 
 
-
+@import "components/header";
 @import "components/_buy";
 @import "components/_detail";
 @import "magnific-popup/main";

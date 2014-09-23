@@ -104,24 +104,6 @@ body {
     .cwg-social a:hover {
       text-decoration: none; }
 
-.cwg-navbar {
-  background: #fff;
-  border: 0;
-  margin-bottom: 0;
-  min-height: 30px; }
-  .cwg-navbar .navbar-toggle .icon-bar {
-    background: #FFD401; }
-  .cwg-navbar .navbar-nav a {
-    color: #DDB93A;
-    padding-top: 5px;
-    padding-bottom: 5px; }
-  .cwg-navbar .active a {
-    color: #8F7004;
-    background: #FFD401; }
-  @media (min-width: 768px) {
-    .cwg-navbar .navbar-brand {
-      display: none; } }
-
 /*head*/
 .cwg-search-wrap .input-group-addon, .dog-search-wrap .input-group-addon {
   background-color: #dba903;
@@ -133,28 +115,6 @@ body {
   border-radius: 0; }
 .cwg-search-wrap .glyphicon-search, .dog-search-wrap .glyphicon-search {
   color: #fff; }
-
-.header-top {
-  background: #ffd401; }
-  .header-top .cwg-btn-wrap .btn-default {
-    background-color: transparent;
-    border: 0; }
-  .header-top .cwg-login {
-    padding-top: 15px;
-    padding-bottom: 15px; }
-  .header-top .cwg-tel {
-    color: #49250c;
-    padding-top: 10px; }
-  .header-top .cwg-tel-main {
-    font-size: 16px;
-    margin-bottom: 0; }
-    .header-top .cwg-tel-main .glyphicon {
-      margin-right: 5px; }
-    .header-top .cwg-tel-main .glyphicon, .header-top .cwg-tel-main span {
-      vertical-align: middle; }
-  .header-top .cwg-tel-detail {
-    padding-left: 10px;
-    font-size: 12px; }
 
 /*head --end*/
 .footer .nav-pills .active a {
@@ -182,6 +142,7 @@ body {
 
 /*carousel*/
 .cwg-carousel {
+  margin-top: 20px;
   padding-bottom: 70px;
   margin-left: -15px;
   margin-right: -15px; }
@@ -241,6 +202,36 @@ body {
 .item {
   height: 500px;
   background: #eee; }
+
+.cwg-navbar {
+  background: #ffd401;
+  border: 0;
+  margin-bottom: 0;
+  border-radius: 0;
+  min-height: 45px; }
+  .cwg-navbar .navbar-toggle .icon-bar {
+    background: #FFD401; }
+  .cwg-navbar .navbar-nav a, .cwg-navbar .navbar-brand {
+    color: #fff;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    line-height: 19px;
+    font-size: 16px; }
+  .cwg-navbar .active a {
+    color: #ffd401;
+    background: #fff; }
+  .cwg-navbar .cwg-tel {
+    color: #49250c;
+    padding-top: 2px; }
+  .cwg-navbar .cwg-tel-main {
+    margin-bottom: 0; }
+    .cwg-navbar .cwg-tel-main .glyphicon {
+      margin-right: 5px; }
+    .cwg-navbar .cwg-tel-main .glyphicon, .cwg-navbar .cwg-tel-main span {
+      vertical-align: middle; }
+  .cwg-navbar .cwg-tel-detail {
+    margin-bottom: 0;
+    font-size: 12px; }
 
 .buy-container {
   background-color: #e5e5e5;
