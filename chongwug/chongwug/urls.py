@@ -9,7 +9,7 @@ urlpatterns = patterns('',
                        url(r'^$',nav_page_view),
                        url(r'^home/$',buy_home_view),
                        url(r'^buy/$',buy_main_view),
-                       url(r'^detail/$',buy_detail_view),
+                       url(r'^buy/detail/$',buy_detail_view),
                        url(r'^back_manage/', include('back_manager.urls')),
                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':True  }),
     # Examples:

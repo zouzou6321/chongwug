@@ -37,14 +37,14 @@
             </div>
         </div>
         <div class="col-md-7">
-            <h1 class="cwg-detail-title">[城南-武侯区]城南狗舍 这里有优质的品种 想被萌翻 那就过来吧</h1>
+            <h1 class="cwg-detail-title">[城{{ nestpet.farm.direct }}-{{ nestpet.farm.district }}]{{ nestpet.farm.name }} {{ nestpet.color }}{{ nestpet.type }}{{ nestpet.txt_desc }}</h1>
             <div class="cwg-detail-info">
                 <div class="info-row clearfix">
                     <div class="info-td-left">
                         价<span class="middle-space"></span>格：
                     </div>
                     <div class="info-td-right">
-                        <span>&yen;<span class="cwg-detail-price"> 800-1500 </span></span>元/只
+                        <span>&yen;<span class="cwg-detail-price"> {{ nestpet.min_price }}-{{ nestpet.max_price }} </span></span>元/只
                     </div>
                 </div>
                 <div class="info-row clearfix">
@@ -52,28 +52,35 @@
                         犬<span class="middle-space"></span>种：
                     </div>
                     <div class="info-td-right">
+                    	<div id="example" class="modal fade in" style="display: none; background-color: white;width:1000px;height:543px;margin-bottom: 0px;margin-left: 180px;margin-right: 0px;margin-top: 100px;max-height: 500px">
+                    	<div class="modal-header">
+						<span>本养殖场其他该类宠物</span>
+						</div>
+                    	<div class="modal-body" id="otherpet">	        
+						</div>
+                    	</div>
                         <ul class="nav nav-pills cwg-detail-pills">
-                            <li class="active"><a href="/buy/?type=泰迪">泰迪</a></li>
-                            <li><a href="/buy/?type=比熊">比熊</a></li>
-                            <li><a href="/buy/?type=金毛">金毛</a></li>
-                            <li><a href="/buy/?type=萨摩耶">萨摩耶</a></li>
-                            <li><a href="/buy/?type=哈士奇">哈士奇</a></li>
-                            <li><a href="/buy/?type=拉布拉多">拉布拉多</a></li>
-                            <li><a href="/buy/?type=边牧">边牧</a></li>
-                            <li><a href="/buy/?type=松狮">松狮</a></li>
-                            <li><a href="/buy/?type=阿拉斯加">阿拉斯加</a></li>
-                            <li><a href="/buy/?type=博美">博美</a></li>
-                            <li><a href="/buy/?type=巴哥">巴哥</a></li>
-                            <li><a href="/buy/?type=雪纳瑞">雪纳瑞</a></li>
-                            <li><a href="/buy/?type=约克夏">约克夏</a></li>
-                            <li><a href="/buy/?type=德牧">德牧</a></li>
-                            <li><a href="/buy/?type=古牧">古牧</a></li>
-                            <li><a href="/buy/?type=比格">比格</a></li>
-                            <li><a href="/buy/?type=喜乐蒂">喜乐蒂</a></li>
-                            <li><a href="/buy/?type=斗牛犬">斗牛犬</a></li>
-                            <li><a href="/buy/?type=杜宾">杜宾</a></li>
-                            <li><a href="/buy/?type=罗威纳">罗威纳</a></li>
-                            <li><a href="/buy/?type=吉娃娃">吉娃娃</a></li>
+                        <script type="text/javascript">
+						function ajaxGetType(type,farmid){
+							$.get("?farmid=" + farmid + "&type=" + type, function(recive){
+								if(recive != 'false'){
+									//alert(recive);
+									$("#otherpet").html(recive);
+									$("#example").modal('show');
+								}
+								else{
+									alert('数据异常');
+								}
+							});
+						}
+                        </script>
+                        	{% for pettype in pet_types %}
+                        	{% if pettype == curtype %}
+                            <li class="active"><a href="javascript:ajaxGetType('{{ pettype }}',{{ nestpet.farm.id }});">{{ pettype }}</a></li>
+                            {% else %}
+                            <li><a href="javascript:void(0);" onclick="ajaxGetType('{{ pettype }}',{{ nestpet.farm.id }});">{{ pettype }}</a></li>
+                            {% endif %}
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
