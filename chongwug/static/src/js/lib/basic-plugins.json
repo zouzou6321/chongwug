@@ -5,10 +5,11 @@
     "carousel" : true,
     "collapse" : true,
     "dropdown" : true,
-    "modal" : false,
+    "modal" : true,
     "popover" : false,
     "scrollspy" : false,
     "tab" : false,
     "tooltip" : false,
-    "transition" : true
+    "transition" : true,
+    "jquery.magnific-popup": true
 }
