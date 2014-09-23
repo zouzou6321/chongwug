@@ -2951,7 +2951,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
                $curr = $li.filter('.active'),
                itemWidth = $curr.outerWidth(),
                totalWidth = itemWidth * $li.length,
-               visible = $wrapper.width / itemWidth,
+               wrapperWidth = $wrapper.width(),
                $prev = $(settings.prev),
                $next = $(settings.next);
 
@@ -2992,7 +2992,9 @@ $.magnificPopup.registerModule(RETINA_NS, {
             }
 
             function animateUl(){
+                var len = $curr.index() + 1;
 
+                
             }
         });
     }
