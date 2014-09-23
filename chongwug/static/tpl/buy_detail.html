@@ -175,8 +175,6 @@
 
 {% block scripts %}
 <script>
-
-
     (function($){
         //lightbox
         var $thumb = $('.cwg-thumb'),
@@ -227,6 +225,17 @@
             });
 
         });
+
+        //scroll fixed nav
+//        var $detailNav = $('.cwg-detail-nav');
+//        $(window).on('scroll', function(){
+//            var $this = $(this);
+//            if($this.scrollTop() - $detailNav.offset().top > 0){
+//                $detailNav.addClass('cwg-detail-nav-fixed');
+//            }else{
+//                $detailNav.removeClass('cwg-detail-nav-fixed');
+//            }
+//        });
 
     }(jQuery));
 

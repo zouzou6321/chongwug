@@ -161,6 +161,17 @@ label{
   }
 }
 
+.cwg-detail-nav-fixed{
+  position: fixed;
+  background: #fff;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  z-index: 19;
+}
+
 .desc-main{
   margin-left: 15px;
   padding-left: 20px;
