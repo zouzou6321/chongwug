@@ -147,15 +147,11 @@
                 <div class="col-md-4">
                 	<img src="{{ pet_img.img.img_url }}" class="dog-img"/>
                     <div class="dog-desc">
-                        <h4><a href="">[城{{ pet_img.pet.farm.direct }}-{{ pet_img.pet.farm.district }}]{{ pet_img.pet.farm.name }} {{ pet_img.pet.color }}{{ pet_img.pet.type }}{{ pet_img.pet.txt_desc }}</a></h4>
+                    	<h4><a href="detail/?petid={{pet_img.pet.id}}">[城{{ pet_img.pet.farm.direct }}-{{ pet_img.pet.farm.district }}]{{ pet_img.pet.farm.name }} {{ pet_img.pet.color }}{{ pet_img.pet.type }}{{ pet_img.pet.txt_desc }}</a></h4>
                         <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>{{ pet_img.pet.farm.detail_address }}</p>
                         <p>
                             <span class="dog-price">&yen; {{ pet_img.pet.min_price }}-{{ pet_img.pet.max_price }}<span class="dog-unit">元/只</span></span>
-                            {% if typekey == None%}
                             <a href="detail/?petid={{pet_img.pet.id}}" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
-		                	{% else %}
-		                    <a href="detail/?petid={{pet_img.pet.id}}&type={{ typekey }}" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
-		                    {% endif %}
                         </p>
                     </div>
                 </div>

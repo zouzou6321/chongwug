@@ -27,4 +27,9 @@ def buy_main_view(request):
 
 def buy_detail_view(request):
     data = adapters.buy_detail_adapter(request)
-    return render_to_response('tpl/buy_detail.html',data)
+    if data == False:
+        return HttpResponse("DATA ERROR")
+    if 'pets_imgs' not in data:
+        return render_to_response('tpl/buy_detail.html',data)
+    else:
+        return render_to_response('tpl/buy_detail_ajax.html',data)
