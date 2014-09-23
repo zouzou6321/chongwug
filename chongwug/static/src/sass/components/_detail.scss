@@ -1,5 +1,14 @@
+.thumbnail-wrap{
+  width: 396px;
+  height: 46px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
 .cwg-thumbnail{
   list-style: none;
+  margin: 0;
+  padding: 0;
 
   li{
     border: 3px solid transparent;
@@ -13,13 +22,35 @@
   }
 
   img{
-    width: 50px;
+    width: 60px;
   }
 }
 
 .cwg-thumb{
   img{
     width: 100%;
+  }
+}
+
+.cwg-dog-imgs{
+  padding: 10px 0;
+  position: relative;
+
+  .prev-thumb, .next-thumb{
+    position: absolute;
+    font-size: 12px;
+    height: 46px;
+    border: 1px solid #e7e7e7;
+    top: 10px;
+    padding: 15px 1px;
+    color: #666;
+  }
+
+  .prev-thumb{
+    left: 0;
+  }
+  .next-thumb{
+    right: 0;
   }
 }
 
@@ -203,19 +234,22 @@ label{
     position: absolute;
     width: 100%;
     height: 100%;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000,endColorstr=#B2000000);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
     background: rgba(0,0,0,.5);
     bottom: -100%;
     z-index: 9;
     transition: bottom .5s ease;
     color: #fff;
+
+    :root &{
+      filter: none;
+    }
   }
 
   .dog-show-info:hover .dog-mask{
     bottom: 0;
   }
 }
-
 
 
 

@@ -11,5 +11,6 @@
     "tab" : false,
     "tooltip" : false,
     "transition" : true,
-    "jquery.magnific-popup": true
+    "jquery.magnific-popup": true,
+    "jquery.simple-carousel": true
 }

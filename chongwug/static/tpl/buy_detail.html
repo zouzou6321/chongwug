@@ -20,15 +20,19 @@
             <a href="javascript:" class="cwg-thumb">
                 <img src="{{ 'imgs/thumb.jpg' | assets }}" />
             </a>
-            <div>
-                <i class="glyphicon glyphicon-chevron-left"></i>
-                <div>
+            <div class="cwg-dog-imgs">
+                <a class="prev-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                <div class="thumbnail-wrap">
                     <ul class="cwg-thumbnail clearfix">
-                        <li class="active"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
-                        <li><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
+                        <li class="active" data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
+                        <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
+                        <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
+                        <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
+                        <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
+                        <li data-src="{{ 'imgs/thumb.jpg' | assets }}"><img src="{{ 'imgs/thumb.jpg' | assets }}"/></li>
                     </ul>
                 </div>
-                <i class="glyphicon glyphicon-chevron-right"></i>
+                <a class="next-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-right"></i></a>
             </div>
         </div>
         <div class="col-md-7">
@@ -175,7 +179,39 @@
 <script>
 
 
+    (function($){
+        //lightbox
+        var $thumb = $('.cwg-thumb'),
+            $img = $thumb.find('img'),
+            $thumbnail = $('.cwg-thumbnail'),
+            $li = $thumbnail.find('li'),
+            items = [];
 
+        $.each($li, function(i, e){
+            items.push({
+                src: $(e).data('src')
+            });
+        });
+
+        $thumb.on('click', function(){
+            $.magnificPopup.open({
+                items: items,
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            }, $li.filter('.active').index());
+        });
+
+        //carousel
+        $('.thumbnail-wrap').simpleCarousel({
+            prev: '.prev-thumb',
+            next: '.next-thumb',
+            callback: function($curr){
+                $img.src($curr.data('src'));
+            }
+        });
+    }(jQuery));
 
 </script>
 {% endblock %}
