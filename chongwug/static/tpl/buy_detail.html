@@ -18,19 +18,16 @@
     <div class="row">
         <div class="col-md-5">
             <a href="javascript:" class="cwg-thumb">
-                <img src="{{ 'imgs/thumb.jpg'|assets }}" />
+                <img src="{{ petimg_a.img_url }}" />
             </a>
             <div class="cwg-dog-imgs">
                 <a class="prev-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-left"></i></a>
                 <div class="thumbnail-wrap">
                     <ul class="cwg-thumbnail clearfix">
-                        <li class="active" data-src="{{ 'imgs/thumb.jpg'|assets }}"><img src="{{ 'imgs/thumb.jpg'|assets }}"/></li>
-                        <li data-src="{{ 'imgs/thumb.jpg'|assets }}"><img src="{{ 'imgs/thumb.jpg'|assets }}"/></li>
-                        <li data-src="{{ 'imgs/thumb.jpg'|assets }}"><img src="{{ 'imgs/thumb.jpg'|assets }}"/></li>
-                        <li data-src="{{ 'imgs/thumb.jpg'|assets }}"><img src="{{ 'imgs/thumb.jpg'|assets }}"/></li>
-                        <li data-src="{{ 'imgs/thumb.jpg'|assets }}"><img src="{{ 'imgs/thumb.jpg'|assets }}"/></li>
-                        <li data-src="{{ 'imgs/thumb.jpg'|assets }}"><img src="{{ 'imgs/thumb.jpg'|assets }}"/></li>
-                        <li data-src="{{ 'imgs/thumb.jpg'|assets }}"><img src="{{ 'imgs/thumb.jpg'|assets }}"/></li>
+                    <li class="active" data-src="{{ petimg_a.img_url }}"><img src="{{ petimg_a.img_url }}!small"/></li>
+                    {% for nowimg in nowimgs %}
+                        <li data-src="{{ nowimg.img_url }}"><img src="{{ nowimg.img_url }}!small"/></li>
+                    {% endfor %}
                     </ul>
                 </div>
                 <a class="next-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-right"></i></a>
@@ -114,12 +111,12 @@
                     犬舍简介
                 </p>
                 <div class="desc-main">
-                    <p class="desc-sub-tit">关于城南犬舍</p>
+                    <p class="desc-sub-tit">关于{{ nestpet.farm.name }}</p>
                     <p class="kennel-intro-main">
-                        城南犬舍专业繁殖金毛。。。
+                        {{ nestpet.farm.desc }}
                     </p>
                     <div>
-                        <img src="" alt="犬舍" style="width: 100%"/>
+                        <img src="{{ farmimg.img_url }}" alt="犬舍" style="width: 100%"/>
                     </div>
                 </div>
             </div>
@@ -129,14 +126,16 @@
                 </p>
                 <div class="desc-main">
                     <div class="row dog-show">
+                    	{% for pet_img in pets_img %}
                         <div class="col-md-6">
                             <div class="dog-show-info">
-                                <img src="" alt="xx" style="width: 100%"/>
+                                <img src="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" style="width: 100%"/>
                                 <div class="dog-mask">
-                                    hover 信息
+                                    {{ pet_img.pet.type }}:&yen;{{ pet_img.pet.min_price }}元-{{ pet_img.pet.max_price }}元
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
