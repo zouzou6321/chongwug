@@ -163,21 +163,26 @@ def buy_detail_adapter(re):
             curtype = nest_pet.type
         except:
             return False
-        petimgs = nestofpet_img.objects.filter(nestofpet_id = nest_pet,dele=False,img_usefor='normal')
+        petimgs = nestofpet_img.objects.filter(nestofpet_id = nest_pet,dele=False,img_usefor='narmol')
+        if petimgs.count() == 0:
+            petimg_first = None
+        else:
+            petimg_first = petimgs[0]
         farm_img = pet_farm_img.objects.filter(pet_farm_id=nest_pet.farm,dele=False)[0]
         pets_img = []
         farm_pet_types = []
         farm_pets = nestofpet.objects.filter(farm=nest_pet.farm,dele=False,sale_out=False)
         for farm_pet in farm_pets:
             try:
-                img = nestofpet_img.objects.filter(nestofpet_id = farm_pet,dele=False,img_usefor='normal')[0]
+                img = nestofpet_img.objects.filter(nestofpet_id = farm_pet,dele=False,img_usefor='buy_main')[0]
             except:
                 img = None
             if farm_pet.type not in farm_pet_types:
                 farm_pet_types.append(farm_pet.type)
+            print(img)
             pets_img.append({'pet':farm_pet,'img':img})
-        return {'nestpet':nest_pet,'nowimgs':petimgs,'farmimg':farm_img,'pets_img':pets_img,'curtype':curtype,
-                'pet_types':farm_pet_types,'page':'buy'}
+        return {'nestpet':nest_pet,'nowimgs':petimgs[1:],'farmimg':farm_img,'pets_img':pets_img,'curtype':curtype,
+                'pet_types':farm_pet_types,'petimg_a':petimg_first,'page':'buy'}
     elif 'farmid' in re.GET:
         farmid = string.atoi(re.REQUEST.get('farmid'))
         try:

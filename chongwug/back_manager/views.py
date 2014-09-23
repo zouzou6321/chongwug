@@ -55,7 +55,15 @@ def manage_nestofpet_picadd_view(request):
 @csrf_exempt
 def manage_nestofpet_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
-    return HttpResponse(adapters.manage_picupload(photo,200,160))
+    imgw = 200
+    imgh = 160
+    if request.REQUEST.get('usefor') == 'narmol':
+        imgw = 600
+        imgh = 400
+    elif request.REQUEST.get('usefor') == 'buy_main':
+        imgw = 200
+        imgh = 160
+    return HttpResponse(adapters.manage_picupload(photo,imgw,imgh))
 
 @csrf_exempt
 def manage_pet_farm_pic_upload_view(request):

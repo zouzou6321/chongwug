@@ -185,6 +185,12 @@ def manage_nestofpet_picpreupload(request):
     if 'source' in request.POST:
         max_height = 160
         max_width = 200
+        if request.POST['usefor'] == 'narmol':
+            max_width = 600
+            max_height = 400
+        elif request.POST['usefor'] == 'buy_main':
+            max_width = 200
+            max_height = 160
         img_url = pic_preupload(request,settings.PET_PIC_ROOT,max_height,max_width)
         if img_url == 'type error':
             return 'type error'
