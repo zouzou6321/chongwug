@@ -1,0 +1,68 @@
+.footer{
+  .nav-pills .active a{
+    background: none;
+  }
+
+  .footer-top{
+    background: $bg-color;
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+  .cwg-flow-chart{
+    width: 395px;
+    height: 98px;
+    background: url(../imgs/flow-chart.png);
+  }
+
+  .footer-bottom{
+    background: $copyright-bg-color;
+    color: #fff;
+  }
+
+  .copyright{
+    padding-top: 10px;
+    margin-bottom: 0;
+  }
+}
+
+.cwg-social {
+  list-style: none;
+  margin-bottom: 0;
+
+  li{
+    float: left;
+    padding: 0 25px;
+  }
+
+  a{
+    display: block;
+    color: #fff;
+    background-color: $bg-color;
+    border-radius: 50%;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+
+    i{
+        font-size: 40px;
+    }
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
+
+  .cwg-weibo{
+    background-color: $weibo-bg-color;
+  }
+
+  .cwg-weixin{
+    background-color: $weixin-bg-color;
+  }
+
+  .cwg-youjian{
+    background-color: $mail-bg-color;
+  }
+}

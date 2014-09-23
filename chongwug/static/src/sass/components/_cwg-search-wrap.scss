@@ -1,0 +1,20 @@
+.cwg-search-wrap{
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  .form-control{
+    border: 1px solid #ffdd37;
+    border-right: 0;
+  }
+
+  .input-group-addon{
+    background-color: #dba903;
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+  }
+
+  .glyphicon-search{
+    color: #fff;
+  }
+}

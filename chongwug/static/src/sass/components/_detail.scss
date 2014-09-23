@@ -119,20 +119,12 @@ label{
 }
 
 .btn-order, .btn-consult{
-  border: 0;
   margin-right: .5em;
 }
 
-.btn-order, .btn-order:hover{
-  background-color: #ff5300;
-  color: #fff;
+.btn-order{
   padding-left: 3em;
   padding-right: 3em;
-}
-
-.btn-consult, .btn-consult:hover{
-  background-color: #ffd401;
-  color: #fff;
 }
 
 .cwg-clause{
@@ -228,9 +220,6 @@ label{
       font-weight: normal;
     }
     .btn-dog{
-      color: #fff;
-      background-color: #ff3500;
-      border: 0;
       padding-top: 2px;
       padding-bottom: 2px;
     }
