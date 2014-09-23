@@ -25,9 +25,6 @@
 .icon-aixin:before {
   content: "\3443"; }
 
-body {
-  font-family: 'helvetica neue', tahoma, 'hiragino sans gb', stheiti, 'wenquanyi micro hei', \5FAE\8F6F\96C5\9ED1, \5B8B\4F53; }
-
 .guide-on {
   overflow: hidden; }
 
@@ -206,9 +203,7 @@ body {
 .cwg-navbar {
   background: #ffd401;
   border: 0;
-  margin-bottom: 0;
-  border-radius: 0;
-  min-height: 45px; }
+  margin-bottom: 0; }
   .cwg-navbar .navbar-toggle .icon-bar {
     background: #FFD401; }
   .cwg-navbar .navbar-nav a, .cwg-navbar .navbar-brand {
