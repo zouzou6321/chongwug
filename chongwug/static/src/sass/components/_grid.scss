@@ -9,3 +9,7 @@
 .col-sm-2_4 {
   @include make-sm-column(2.4);
 }
+
+.col-md-offset-0_5{
+  @include  make-md-column-offset(0.5);
+}
