@@ -254,7 +254,7 @@
   padding-bottom: 40px; }
 
 .buy-inner {
-  width: 860px;
+  width: 1000px;
   background-color: #fff;
   padding-left: 10px;
   padding-right: 10px; }
@@ -292,6 +292,9 @@
       font-weight: normal; }
 
 /*detail*/
+.detail-container {
+  width: 1000px; }
+
 .thumbnail-wrap {
   width: 396px;
   height: 46px;
