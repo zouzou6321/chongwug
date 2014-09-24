@@ -157,8 +157,8 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     
 def manage_pet_farm_picpreupload(request):
     if 'source' in request.POST:
-        max_height = 160
-        max_width = 200
+        max_height = 178
+        max_width = 250
         img_url = pic_preupload(request,settings.PET_FARM_PIC_ROOT,max_height,max_width)
         if img_url == 'type error':
             return 'type error'
@@ -183,14 +183,14 @@ def manage_nestofpet_farmselect(request):
 
 def manage_nestofpet_picpreupload(request):
     if 'source' in request.POST:
-        max_height = 160
-        max_width = 200
+        max_height = 180
+        max_width = 275
         if request.POST['usefor'] == 'narmol':
             max_width = 600
             max_height = 400
         elif request.POST['usefor'] == 'buy_main':
-            max_width = 200
-            max_height = 160
+            max_width = 275
+            max_height = 180
         img_url = pic_preupload(request,settings.PET_PIC_ROOT,max_height,max_width)
         if img_url == 'type error':
             return 'type error'
