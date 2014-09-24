@@ -20,7 +20,9 @@ gulp.task('css', dep, function(){
 //            sourcemap: false,
 //            style: 'expanded'
 //        }))
-        .pipe(plugins.sass())
+        .pipe(plugins.sass({
+            precision: 8
+        }))
         .on( 'error', function(e){console.log(e)})
 //        .pipe(plugins.newer(config.css.dev))
         //.pipe(plugins.autoprefixer())

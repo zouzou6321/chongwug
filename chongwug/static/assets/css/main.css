@@ -21,7 +21,7 @@
 
 @media (min-width: 992px) {
   .col-md-offset-0_5 {
-    margin-left: 4.16667%; } }
+    margin-left: 4.16666667%; } }
 
 @font-face {
   font-family: "iconfont";
@@ -58,7 +58,7 @@
     border-right: 0; }
   .cwg-search-wrap .btn-search {
     background-color: #dba903;
-    border: 1px solid #dba903; }
+    border-color: #dba903; }
   .cwg-search-wrap .glyphicon-search {
     color: #fff; }
 
