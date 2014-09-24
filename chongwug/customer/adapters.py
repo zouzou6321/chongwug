@@ -2,10 +2,11 @@
 '''
 文件功能：针对购宠用户涉及的页面，根据展示的数据需要，整理出格式化的数据返回
 '''
-from back_manager.models import ad,pet_farm,pet_farm_img,nestofpet,nestofpet_img
-import datetime,string
+from back_manager.models import ad,pet_farm,pet_farm_img,nestofpet,nestofpet_img,attention_user,nestofpet_attention
+import datetime,string,re
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from django.utils import simplejson
 
 '''
 函数功能：首页数据适配器
@@ -233,3 +234,37 @@ def buy_detail_adapter(re):
         return False
     else:
         return False
+
+def buy_attention_adapter(req):
+    data = {"status": "error", "message": "error"}
+    if 'petid' not in req.GET or 'name' not in req.GET or 'tel' not in req.GET:
+        data['message'] = "信息不完整，可能系统有虫子，请联系我们，谢谢~！"
+        return simplejson.dumps(data,ensure_ascii = False)
+    petid = string.atoi(req.REQUEST.get('petid'))
+    name = req.REQUEST.get('name')
+    tel = req.REQUEST.get('tel')
+    try:
+        nestofpet.objects.get(id=petid,dele=False,sale_out=False)
+    except:
+        data['message'] = "实在抱歉，您想预定的宠物售罄了！"
+        return simplejson.dumps(data,ensure_ascii = False)
+    p = re.compile(r'1\d{10}')
+    if not p.match(tel):
+        p = re.compile(r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})')
+        if not p.match(tel):
+            data['message'] = "您这电话号码不对哦，任谁都通过它联系不到您呢~！"
+            return simplejson.dumps(data,ensure_ascii = False)
+    p = re.compile(ur'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$')
+    if not p.match(name):
+        data['message'] = "您的名字~！"
+        return simplejson.dumps(data,ensure_ascii = False)
+    try:
+        user =  attention_user(name=name,tel=tel)
+        user.save()
+        attention = nestofpet_attention(nestofpet_id=get_object_or_404(nestofpet,pk=petid),user=user)
+        attention.save()
+    except:
+        data['message'] = "服务器内部错误，请反馈给我们，多谢亲！"
+        return simplejson.dumps(data,ensure_ascii = False)
+    data = {"status": "success"}
+    return simplejson.dumps(data,ensure_ascii = False)

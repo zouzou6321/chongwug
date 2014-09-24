@@ -2,7 +2,6 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
-from django.utils import simplejson
 import adapters
 #auth:huhuaiyong
 #date:2014/8/16
@@ -33,3 +32,7 @@ def buy_detail_view(request):
         return render_to_response('tpl/buy_detail.html',data)
     else:
         return render_to_response('tpl/buy_detail_ajax.html',data)
+
+def buy_attention_view(request):
+    data = adapters.buy_attention_adapter(request)
+    return HttpResponse(data)

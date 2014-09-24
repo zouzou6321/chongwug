@@ -294,8 +294,8 @@
 
         $orderModal.find('.btn-primary').on('click', function(){
             $.ajax({
-                url: '/buy/detail/attention',
-                type: 'post',
+                url: '/buy/detail/attention/',
+                type: 'get',
                 data: {name: $('#name').val(), tel: $('#tel').val(), petid: $.args('petid')},
                 dataType: 'json',
                 success: function(data){

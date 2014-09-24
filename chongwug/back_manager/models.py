@@ -57,9 +57,15 @@ class nestofpet(models.Model):
     sale_out = models.BooleanField(default=False)
     dele = models.BooleanField(default=False)
 
+class attention_user(models.Model):
+    name = models.TextField()
+    tel = models.TextField()
+    dele = models.BooleanField(default=False)
+
 class nestofpet_attention(models.Model):
     time = models.DateTimeField(default=datetime.datetime.now)
     nestofpet_id = models.ForeignKey(nestofpet)
+    user = models.ForeignKey(attention_user)
     #attention_type：表示关注、预约、预定
     attention_type = models.TextField(default=0)
     dele = models.BooleanField(default=False)
