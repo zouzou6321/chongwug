@@ -162,6 +162,21 @@
     </div>
 </div>
 
+<div class="modal fade" id="cwg-info-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">预约成功</h4>
+      </div>
+      <div class="modal-body">我们已经收到你的预约！</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="cwg-farm-modal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -274,6 +289,51 @@
 //                $detailNav.removeClass('cwg-detail-nav-fixed');
 //            }
 //        });
+
+        //order
+
+        function getQueryStringArgs(){
+            var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
+                args = {},
+                items = qs.length ? qs.split("&") : [],
+                item = null,
+                name = null,
+                value = null,
+                i = 0,
+                len = items.length;
+
+            for (i=0; i < len; i++){
+                item = items[i].split("=");
+                name = decodeURIComponent(item[0]);
+                value = decodeURIComponent(item[1]);
+
+                if (name.length){
+                    args[name] = value;
+                }
+            }
+
+            return args;
+        }
+
+        var $orderModal = $('#cwg-order-modal'),
+            $infoModal = $('#cwg-info-modal');
+
+        $orderModal.find('.btn-primary').on('click', function(){
+            $.ajax({
+                url: '/buy/detail/attention',
+                type: 'post',
+                data: {name: $('#name').val(), tel: $('#tel').val(), petid:getQueryStringArgs()['petid']},
+                dataType: 'json',
+                success: function(data){
+                    if(data.status == 'success'){
+                        $orderModal.modal('hide');
+                        $infoModal.modal('show');
+                    }else{
+                        alert(data.message);
+                    }
+                }
+            });
+        });
 
     }(jQuery));
 
