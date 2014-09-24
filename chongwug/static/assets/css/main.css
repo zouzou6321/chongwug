@@ -157,19 +157,24 @@
 
 .cwg-social {
   list-style: none;
-  margin-bottom: 0; }
+  color: #947305;
+  text-align: center;
+  padding: 0;
+  margin: 0; }
+  .cwg-social p {
+    margin-bottom: 20px; }
   .cwg-social li {
     float: left;
-    padding: 0 25px; }
+    padding: 0 20px; }
   .cwg-social a {
     display: block;
     color: #fff;
     background-color: #ffd401;
     border-radius: 50%;
-    text-align: center;
     width: 60px;
     height: 60px;
-    line-height: 60px; }
+    line-height: 60px;
+    margin: 0 auto; }
     .cwg-social a i {
       font-size: 40px; }
     .cwg-social a:hover {
@@ -180,6 +185,11 @@
     background-color: #05b410; }
   .cwg-social .cwg-youjian {
     background-color: #56acee; }
+  .cwg-social .footer-logo {
+    padding: 30px 20px 0 0; }
+    .cwg-social .footer-logo img {
+      padding-right: 20px;
+      border-right: 2px solid; }
 
 /*home*/
 .cwg-carousel {

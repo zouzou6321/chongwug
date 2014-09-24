@@ -86,11 +86,18 @@
 
 .cwg-social {
   list-style: none;
-  margin-bottom: 0;
+  color: $header-info-color;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+
+  p{
+    margin-bottom: 20px;
+  }
 
   li{
     float: left;
-    padding: 0 25px;
+    padding: 0 20px;
   }
 
   a{
@@ -98,10 +105,10 @@
     color: #fff;
     background-color: $bg-color;
     border-radius: 50%;
-    text-align: center;
     width: 60px;
     height: 60px;
     line-height: 60px;
+    margin: 0 auto;
 
     i{
         font-size: 40px;
@@ -122,5 +129,14 @@
 
   .cwg-youjian{
     background-color: $mail-bg-color;
+  }
+
+  .footer-logo{
+    padding: 30px 20px 0 0;
+
+    img{
+      padding-right: 20px;
+      border-right: 2px solid;
+    }
   }
 }
