@@ -197,6 +197,7 @@ def buy_detail_adapter(re):
         recommendpets_img = []
         recommendpets = nestofpet.objects.filter(Q(type = nest_pet.type)|Q(color=nest_pet.color)|Q(min_price__lte=nest_pet.min_price)
                                                  |Q(max_price__gte=nest_pet.max_price)|Q(farm__district=nest_pet.farm.district))
+        recommendpets = recommendpets.exclude(id=nest_pet.id)
         for recommendpet in recommendpets:
             try:
                 img = nestofpet_img.objects.filter(nestofpet_id = recommendpet,dele=False,img_usefor='buy_main')[0]
