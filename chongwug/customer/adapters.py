@@ -27,7 +27,6 @@ def buy_home_adapter(request):
     ads1 = False
     ads2 = False
     ads_count = ads.count()
-    print(ads_count)
     if ads_count > 0:
         ads0 = ads[0]
     if ads_count > 1:
@@ -38,6 +37,13 @@ def buy_home_adapter(request):
     
     #获取养殖场信息，同时考虑信息获取不完整的情况，确保页面不崩溃
     city_farms = pet_farm.objects.filter(contry=contry,province=province,city=city)
+    for city_farm in city_farms:
+        try:
+            pet = nestofpet.objects.filter(farm=city_farm,dele=False,sale_out=False).order_by('-min_price')[0]
+            city_farm.min_prince = pet.min_price
+            city_farm.save()
+        except:
+            None
     enum_farms.append({'direct':'东','name':'east_farm','picname':'east_farm_img'})
     enum_farms.append({'direct':'西','name':'west_farm','picname':'west_farm_img'})
     enum_farms.append({'direct':'南','name':'south_farm','picname':'south_farm_img'})
