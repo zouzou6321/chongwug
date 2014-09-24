@@ -60,6 +60,9 @@
   .cwg-search-wrap .glyphicon-search {
     color: #fff; }
 
+.header {
+  color: #947305; }
+
 .cwg-navbar {
   background: #ffd401;
   border: 0;
@@ -76,7 +79,6 @@
     color: #ffd401;
     background: #fff; }
   .cwg-navbar .cwg-tel {
-    color: #49250c;
     padding-top: 2px; }
   .cwg-navbar .cwg-tel-main {
     margin-bottom: 0; }
@@ -86,6 +88,11 @@
       vertical-align: middle; }
   .cwg-navbar .cwg-tel-detail {
     margin-bottom: 0;
+    font-size: 12px; }
+  .cwg-navbar .navbar-header {
+    margin-right: 30px; }
+  .cwg-navbar .location {
+    padding-left: 15px;
     font-size: 12px; }
 
 .footer .nav-pills .active a {
