@@ -209,7 +209,7 @@ def manage_nestofpet_picpreupload(request):
 
 def manage_ad_picpreupload(request):
     if 'source' in request.POST:
-        max_height = 500
+        max_height = 323
         max_width = 1170
         img_url = pic_preupload(request,settings.PET_AD_PIC_ROOT,max_height,max_width)
         if img_url == 'type error':

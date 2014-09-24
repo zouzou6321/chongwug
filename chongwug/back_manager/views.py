@@ -135,11 +135,11 @@ def manage_ad_add_view(request):
 @csrf_exempt
 def manage_ad_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
-    return HttpResponse(adapters.manage_picupload(photo))
+    return HttpResponse(adapters.manage_picupload(photo,1170,323))
 def manage_ad_picpre_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponse('false')
-    return HttpResponse(adapters.manage_ad_picpreupload(request,1170,500))
+    return HttpResponse(adapters.manage_ad_picpreupload(request))
 
 def manage_ad_mod_view(request):
     return True
