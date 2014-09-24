@@ -39,7 +39,7 @@
 		<div style="width: 805px; height: auto;float: left;border:3px solid #8FADB3; background-color: #fff;">
 			<img  border="0" alt="个人头像" id="personhead" style="display: block;max-width: 800px; height: auto;"  src="" />
 		</div>
-		<div style="width: 200px; height: 160px; overflow: hidden;border:2px solid #FFB5A1;">  
+		<div style="width: 250px; height: 178px; overflow: hidden;border:2px solid #FFB5A1;">  
 			<img  border="0"  id="personheadpre" src="" alt="头像预览"/> 
 		</div>
 	</div>
@@ -56,6 +56,8 @@
 		var selected = 0;
 var imgw = 0;
 var imgh = 0;
+var minimgw = 250;
+var minimgh = 178;
 var loadedover = true;
 var Browser=new Object(); 
 Browser.userAgent=window.navigator.userAgent.toLowerCase(); 
@@ -101,8 +103,8 @@ function Imagess(url,imgid,callback){
 		 });
 		x1 = 0;  
 		y1 = 0;  
-		x2 = 200;  
-		y2 = 160;
+		x2 = minimgw;  
+		y2 = minimgh;
 	}
 	function checkimg(obj,imgid){ 
 		document.getElementById(imgid).src=obj.src;
@@ -115,8 +117,8 @@ function Imagess(url,imgid,callback){
 		if (!selection.width || !selection.height)  
 		return false;
 		selected += 1;
-		var scaleX = 200 / selection.width;  
- 		var scaleY = 160 / selection.height; 
+		var scaleX = minimgw / selection.width;  
+ 		var scaleY = minimgh / selection.height; 
  		var width = img.width;
  		var height = img.height;
  		if(imgw > 800){
@@ -138,9 +140,8 @@ function Imagess(url,imgid,callback){
 		function () {
 			x1 = 0;  
 			y1 = 0;  
-			x2 = 200;
-			y2 = 160;
-			//$('#personhead').imgAreaSelect({imageHeight:494,imageWidth:800,x1:0,y1:0,x2:160,y2:99,aspectRatio: '1:0.618', handles: true, fadeSpeed: 200, minHeight:99,minWidth:160,onSelectChange: preview });
+			x2 = minimgw;
+			y2 = minimgh;
 			$("#photo").uploadify({
                 'uploader': '/static/manage/uploadify/uploadify.swf',
                 'script': '/back_manage/petfarm/picadd/upload/',
@@ -168,7 +169,7 @@ function Imagess(url,imgid,callback){
                 	var html = d;
                     if (html == 'size error')
 		        	{
-		        		alert('请上传宽度大于200像素，高度大于160像素的图片');
+		        		alert('请上传宽度大于'+minimgw+'像素，高度大于'+minimgh+'像素的图片');
 		        	}
 		        	else if (html == 'type error'){
 		        		alert('不能识别的图片格式');
@@ -191,7 +192,7 @@ function Imagess(url,imgid,callback){
 			            (function(){
 			            	if (selected < 10)
 			            	{
-				            	$('#personhead').imgAreaSelect({imageHeight:imgh,imageWidth:imgw,x1:0,y1:0,x2:200,y2:160,aspectRatio: '1.25:1', handles: true, fadeSpeed: 200, minHeight:160,minWidth:200,onSelectChange: preview });
+				            	$('#personhead').imgAreaSelect({imageHeight:imgh,imageWidth:imgw,x1:0,y1:0,x2:200,y2:160,aspectRatio: minimgw + ':' + minimgh, handles: true, fadeSpeed: 200, minHeight:minimgh,minWidth:minimgw,onSelectChange: preview });
 				            	prepreview(imgw,imgh);
 				            	setTimeout(arguments.callee, 100);
 				            	selected = selected + 1;

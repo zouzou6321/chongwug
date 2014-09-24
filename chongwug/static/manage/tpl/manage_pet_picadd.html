@@ -46,7 +46,7 @@
 		<div style="width: 805px; height: auto;float: left;border:3px solid #8FADB3; background-color: #fff;">
 			<img  border="0" alt="个人头像" id="personhead" style="display: block;max-width: 800px; height: auto;"  src="" />
 		</div>
-		<div id="preview" style="width: 200px; height: 160px; overflow: hidden;border:2px solid #FFB5A1;">  
+		<div id="preview" style="width: 275px; height: 180px; overflow: hidden;border:2px solid #FFB5A1;">  
 			<img  border="0"  id="personheadpre" src="" alt="头像预览"/> 
 		</div>
 	</div>
@@ -63,8 +63,8 @@
 		var selected = 0;
 var imgw = 0;
 var imgh = 0;
-var minimgw = 200;
-var minimgh = 160;
+var minimgw = 275;
+var minimgh = 180;
 var loadedover = true;
 var Browser=new Object(); 
 Browser.userAgent=window.navigator.userAgent.toLowerCase(); 
@@ -75,14 +75,16 @@ Browser.Moz=/gecko/.test(Browser.userAgent);
 		if ($("#usefor").val() == "narmol"){
 			minimgw = 600;
 			minimgh = 400;
-			$("#preview").css({width:"600px",height:"400px"});
+			$("#preview").css({width:minimgw + "px",height:minimgh + "px"});
+			$("#photo").uploadifySettings('scriptData',{'usefor':$("#usefor").val()});
 			$('#personhead').imgAreaSelect({imageHeight:imgh,imageWidth:imgw,x1:0,y1:0,x2:minimgw,y2:minimgh,aspectRatio: '1.25:1', handles: true, fadeSpeed: 200, minHeight:minimgh,minWidth:minimgw,onSelectChange: preview });
 			prepreview(imgw,imgh);
 		}
 		else if ($("#usefor").val() == "buy_main"){
-			minimgw = 200;
-			minimgh = 160;
-			$("#preview").css({width:"200px",height:"160px"});
+			minimgw = 275;
+			minimgh = 180;
+			$("#preview").css({width:minimgw + "px",height:minimgh + "px"});
+			$("#photo").uploadifySettings('scriptData',{'usefor':$("#usefor").val()});
 			$('#personhead').imgAreaSelect({imageHeight:imgh,imageWidth:imgw,x1:0,y1:0,x2:minimgw,y2:minimgh,aspectRatio: '1.25:1', handles: true, fadeSpeed: 200, minHeight:minimgh,minWidth:minimgw,onSelectChange: preview });
 			prepreview(imgw,imgh);
 		}

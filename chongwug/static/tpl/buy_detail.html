@@ -113,7 +113,7 @@
                 <div class="desc-main">
                     <p class="desc-sub-tit">关于{{ nestpet.farm.name }}</p>
                     <p class="kennel-intro-main">
-                        {{ nestpet.farm.desc }}
+                        {{ nestpet.farm.desc|safe }}
                     </p>
                     <div>
                         <img src="{{ farmimg.img_url }}" alt="犬舍" style="width: 100%"/>
