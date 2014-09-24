@@ -189,10 +189,23 @@ def buy_detail_adapter(re):
                 img = None
             if farm_pet.type not in farm_pet_types:
                 farm_pet_types.append(farm_pet.type)
-            print(img)
             pets_img.append({'pet':farm_pet,'img':img})
+        
+        '''
+                            以下部分是获取本页面推荐的内容
+        '''
+        recommendpets_img = []
+        recommendpets = nestofpet.objects.filter(Q(type = nest_pet.type)|Q(color=nest_pet.color)|Q(min_price__lte=nest_pet.min_price)
+                                                 |Q(max_price__gte=nest_pet.max_price)|Q(farm__district=nest_pet.farm.district),dele=False,sale_out=False)
+        recommendpets = recommendpets.exclude(id=nest_pet.id)
+        for recommendpet in recommendpets:
+            try:
+                img = nestofpet_img.objects.filter(nestofpet_id = recommendpet,dele=False,img_usefor='buy_main')[0]
+            except:
+                img = None
+            recommendpets_img.append({'pet':recommendpet,'img':img})
         return {'nestpet':nest_pet,'nowimgs':petimgs[1:],'farmimg':farm_img,'pets_img':pets_img,'curtype':curtype,
-                'pet_types':farm_pet_types,'petimg_a':petimg_first,'page':'buy'}
+                'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'page':'buy'}
     elif 'farmid' in re.GET:
         farmid = string.atoi(re.REQUEST.get('farmid'))
         try:
