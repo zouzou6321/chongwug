@@ -130,10 +130,19 @@
     padding-left: 3px; }
 .footer .footer-bottom {
   background: #dba903;
-  color: #fff; }
+  color: #fff;
+  font-size: 12px;
+  line-height: 30px; }
 .footer .copyright {
-  padding-top: 10px;
   margin-bottom: 0; }
+.footer .other-info {
+  list-style: none;
+  margin-bottom: 0; }
+  .footer .other-info li {
+    float: left;
+    padding: 0 5px; }
+  .footer .other-info a {
+    color: #fff; }
 
 .cwg-social {
   list-style: none;

@@ -61,11 +61,26 @@
   .footer-bottom{
     background: $copyright-bg-color;
     color: #fff;
+    font-size: 12px;
+    line-height: 30px;
   }
 
   .copyright{
-    padding-top: 10px;
     margin-bottom: 0;
+  }
+
+  .other-info{
+    list-style: none;
+    margin-bottom: 0;
+
+    li{
+      float: left;
+      padding: 0 5px;
+    }
+
+    a{
+      color: #fff;
+    }
   }
 }
 
