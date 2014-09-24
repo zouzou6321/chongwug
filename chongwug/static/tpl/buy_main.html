@@ -11,7 +11,11 @@
             <div class="col-md-6 col-md-offset-1">
                 <form action="/buy/" method="get">
                     <div class="input-group cwg-search-wrap">
-                        <input type="text" class="form-control" placeholder="输入养殖场名称、所处区县等" name="key">
+                    	{% if searchkey == None %}
+                    	<input type="text" class="form-control" placeholder="输入养殖场名称、所处区县等" name="key">
+	                	{% else %}
+	                	<input type="text" class="form-control" placeholder="输入养殖场名称、所处区县等" value="{{ searchkey }}" name="key">
+	                	{% endif %}
                         <span class="input-group-btn">
                             <button class="btn btn-search" type="submit">
                                 <i class="glyphicon glyphicon-search"></i>
