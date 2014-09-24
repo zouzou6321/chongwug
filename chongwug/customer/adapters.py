@@ -66,8 +66,8 @@ def buy_home_adapter(request):
 时间：2014-9-22
 '''
 def buy_main_adapter(re):
-    url = '/buy/?'
-    
+    cur_url = '/buy/?'
+    url = cur_url
     #筛选条件
     types = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加',u'博美',u'巴哥',u'雪纳瑞',u'约克夏',u'德牧',u'古牧',u'比格',u'喜乐蒂',u'斗牛犬',u'杜宾',u'罗威纳',u'吉娃娃']
     princes = [{'a':'1','b':600,'c':1000},{'a':'2','b':1000,'c':1500},{'a':'3','b':1500,'c':2000},{'a':'4','b':2000,'c':2500},{'a':'5','b':2500,'c':1000000}]
@@ -81,6 +81,11 @@ def buy_main_adapter(re):
     directkey = None
     epidemickey = None
     agekey = None
+    searchkey = None
+    if 'key' in re.GET:
+        #只是简单检索养殖场名称、养殖场地址
+        searchkey = re.REQUEST.get('key')
+        url = cur_url + 'key=' + searchkey + '&'
     
     #数据库查询语句整合
     kwargs = {}
@@ -93,12 +98,14 @@ def buy_main_adapter(re):
     direct_all_url = url
     epidemic_all_url = url
     age_all_url = url
+    search_all_url = cur_url
     
     #数据库查询语句生成和部分不依赖数据库的数据生成
     enums = [['type','type'],['prince','min_price'],['direct','farm__direct'],['age','age'],['epidemic','epidemic_period']]
     for enum in enums:
         if enum[0] in re.GET:
             url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+            search_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
             if enum[0] != 'type':
                 type_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
             else:
@@ -136,10 +143,13 @@ def buy_main_adapter(re):
     urls['direct_all_url'] = direct_all_url
     urls['epidemic_all_url'] = epidemic_all_url
     urls['age_all_url'] = age_all_url
+    urls['search_all_url'] = search_all_url
     
     #查询数据库获取数据
     pets_imgs = []
     pets = nestofpet.objects.filter(**kwargs)
+    if searchkey:
+        pets = pets.filter(Q(farm__name__contains=searchkey)|Q(farm__detail_address__contains=searchkey))
     for pet_one in pets:
         try:
             petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor='buy_main')[0]
@@ -147,7 +157,7 @@ def buy_main_adapter(re):
             petimg = None
         pets_imgs.append({'pet':pet_one,'img':petimg})
     return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
-            'princekey':princekey,'directs':directs,'directkey':directkey,'epidemics':epidemics,
+            'princekey':princekey,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,
             'epidemickey':epidemickey,'ages':ages,'agekey':agekey,'page':'buy'}
 
 '''
