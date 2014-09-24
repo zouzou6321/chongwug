@@ -121,6 +121,10 @@
             <div class="col-sm-1 text-right dog-select-title">筛选：</div>
             <div class="col-sm-11">
                 <ul class="nav nav-pills dog-selected">
+                	{% if searchkey == None %}
+                	{% else %}
+                	<li><a href="{{ urls.search_all_url }}">{{ searchkey }} &times;</a></li>
+                	{% endif %}
                 	{% if typekey == None%}
                 	{% else %}
                     <li><a href="{{ urls.type_all_url }}">{{ typekey }} &times;</a></li>
