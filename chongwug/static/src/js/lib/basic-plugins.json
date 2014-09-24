@@ -12,5 +12,5 @@
     "tooltip" : false,
     "transition" : true,
     "jquery.magnific-popup": true,
-    "jquery.simple-carousel": true
+    "custom-plugins": true
 }
