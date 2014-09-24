@@ -154,21 +154,23 @@
                 </div>
             </div>
         </div>
+        {% for recommendpet_img in recommendpets_img %}
         <div class="col-md-3 most-popular">
             <div>
                 <a href="">
-                    <img src="http://chongwug-pic.b0.upaiyun.com/petpic/9b613370-3990-11e4-a414-92595248e18a.jpg" class="dog-img">
+                    <img src="{{ recommendpet_img.img.img_url }}" class="dog-img">
                 </a>
                 <div class="dog-desc">
-                    <h4><a href="">[城南-高新]爱狗 红色泰迪阿斯达克拉力赛附近</a></h4>
+                    <h4><a href="">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
                     <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>高新区簇锦南路94号</p>
                     <p>
-                        <span class="dog-price">¥ 750-900<span class="dog-unit">元/只</span></span>
-                        <a href="#" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
+                        <span class="dog-price">¥ {{ recommendpet_img.pet.min_price }}-{{ recommendpet_img.pet.max_price }}<span class="dog-unit">元/只</span></span>
+                        <a href="?petid={{ recommendpet_img.pet.id }}" class="btn btn-default pull-right btn-dog" role="button">去看看</a>
                     </p>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 
