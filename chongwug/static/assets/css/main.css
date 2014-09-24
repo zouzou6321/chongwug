@@ -56,11 +56,9 @@
   .cwg-search-wrap .form-control {
     border: 1px solid #ffdd37;
     border-right: 0; }
-  .cwg-search-wrap .input-group-addon {
+  .cwg-search-wrap .btn-search {
     background-color: #dba903;
-    border: 0;
-    border-radius: 0;
-    cursor: pointer; }
+    border: 1px solid #dba903; }
   .cwg-search-wrap .glyphicon-search {
     color: #fff; }
 
