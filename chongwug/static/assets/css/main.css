@@ -54,8 +54,8 @@
   padding-top: 30px;
   padding-bottom: 30px; }
   .cwg-search-wrap .form-control {
-    border: 1px solid #ffdd37;
-    border-right: 0; }
+    border-color: #ffdd37;
+    border-right-color: #dba903; }
   .cwg-search-wrap .btn-search {
     background-color: #dba903;
     border-color: #dba903; }
