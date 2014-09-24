@@ -126,16 +126,20 @@
                 </p>
                 <div class="desc-main">
                     <div class="row dog-show">
-                    	{% for pet_img in pets_img %}
-                        <div class="col-md-6">
-                            <div class="dog-show-info">
-                                <img src="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" style="width: 100%"/>
-                                <div class="dog-mask">
-                                    {{ pet_img.pet.type }}:&yen;{{ pet_img.pet.min_price }}元-{{ pet_img.pet.max_price }}元
+                        <div class="col-md-10">
+                            <div class="row">
+                                {% for pet_img in pets_img %}
+                                <div class="col-md-6">
+                                    <div class="dog-show-info">
+                                        <img src="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" style="width: 100%"/>
+                                        <div class="dog-mask">
+                                            {{ pet_img.pet.type }}:&yen;{{ pet_img.pet.min_price }}元-{{ pet_img.pet.max_price }}元
+                                        </div>
+                                    </div>
                                 </div>
+                                {% endfor %}
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
                 </div>
             </div>

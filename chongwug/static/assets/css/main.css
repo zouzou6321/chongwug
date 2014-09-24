@@ -150,11 +150,6 @@
     .cwg-carousel .carousel-indicators .active {
       background-color: #4c4c4c; }
 
-/*test*/
-.item {
-  height: 500px;
-  background: #eee; }
-
 .cwg-area-row {
   padding-bottom: 100px; }
 
