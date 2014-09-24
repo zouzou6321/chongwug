@@ -9,8 +9,8 @@
     <div class="row">
         <div class="col-md-6">
             <ol class="breadcrumb">
-              <li><a href="#">首页</a></li>
-              <li><a href="#">我要买狗</a></li>
+              <li><a href="/home">首页</a></li>
+              <li><a href="/buy">我要买狗</a></li>
               <li class="active">城南狗舍</li>
             </ol>
         </div>
@@ -150,10 +150,8 @@
                 </a>
                 <div class="dog-desc">
                     <h4><a href="?petid={{ recommendpet_img.pet.id }}">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
-                    <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>高新区簇锦南路94号</p>
                     <p>
                         <span class="dog-price">¥ {{ recommendpet_img.pet.min_price }}-{{ recommendpet_img.pet.max_price }}<span class="dog-unit">元/只</span></span>
-                        <a href="?petid={{ recommendpet_img.pet.id }}" class="btn btn-primary pull-right btn-dog" role="button">去看看</a>
                     </p>
                 </div>
             </div>
