@@ -78,6 +78,8 @@ def manage_picupload(photo,width,height):
         img = Image.open(photo)
     except:
         return 'type error'
+    if img.mode != 'RGB':
+        img = img.convert('RGB')
     w,h = img.size
     if w > 1170:
         img.thumbnail((1170,3000))
@@ -107,9 +109,11 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     y1 = string.atoi(request.POST['y1'])
     x2 = string.atoi(request.POST['x2'])
     y2 = string.atoi(request.POST['y2'])
-    img = img.convert('RGB')
+    if img.mode != 'RGB':
+        img = img.convert('RGB')
     cropimg = img.crop((x1,y1,x2,y2))
-    cropimg.convert('RGB')
+    if cropimg.mode != 'RGB':
+        cropimg.convert('RGB')
     if (x2 - x1) > max_width:
         cropimg.thumbnail( (max_width,max_height) )
     #file_name = '%s'%str(uuid.uuid1()) + '.png'
@@ -117,7 +121,7 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     file_path_name = pic_dir + file_name
     url = ('/manage/pictest/'+file_name).encode('utf8')
     name = settings.STATIC_ROOT + url
-    cropimg.save(name,'png')
+    cropimg.save(name)
     cropimg.close()
     
     up = UpYun('chongwug-pic','chongwug','weet6321')
