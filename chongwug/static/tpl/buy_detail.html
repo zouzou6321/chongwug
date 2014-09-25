@@ -123,7 +123,9 @@
                                     <div class="dog-show-info">
                                         <img src="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" style="width: 100%"/>
                                         <div class="dog-mask">
-                                            {{ pet_img.pet.type }}:&yen;{{ pet_img.pet.min_price }}元-{{ pet_img.pet.max_price }}元
+                                            <p>{{ pet_img.pet.type }}</p>
+                                            <p>&yen;{{ pet_img.pet.min_price }}元 - {{ pet_img.pet.max_price }}元</p>
+                                            <button class="btn btn-primary">去看看</button>
                                         </div>
                                     </div>
                                 </div>
