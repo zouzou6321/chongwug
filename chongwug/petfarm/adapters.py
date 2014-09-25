@@ -1,83 +1,41 @@
 # -*- coding: UTF-8 -*-
-from django.core.exceptions import ObjectDoesNotExist
-from models import manage
-from manager.models import ad
-from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from customer.models import user
-import string,re
+from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from PIL import Image
-import os,uuid,datetime
 from chongwug import settings
 from upyun import UpYun
 from django.shortcuts import get_object_or_404
+from django.contrib import auth
+from django.contrib.auth.models import User
+
+import os,uuid,string
 '''
 管理员鉴权
 '''
 def manage_authentication(request):
-    try:
-        if (request.session['manage_id'] == ''):
-            return False
-    except:
+    if not request.user.is_authenticated():
+        return False
+    cur_user = user.objects.get(auth_user=auth.get_user(request),dele=False)
+    if cur_user.type < 1:
         return False
     return True
 
 def manage_login_check(request):
     name = request.REQUEST.get('username')
     passwd = request.REQUEST.get('userpassd')
-    request.session['manage_id'] = ''
-    try:
-        manage_id = manage.objects.get(name=name,passwd=passwd).id
-    except ObjectDoesNotExist:
-        print('ObjectDoesNotExist')
+    user = auth.authenticate(username=name, password=passwd)
+    if user is not None and user.is_active:
+        # Correct password, and the user is marked "active"
+        auth.login(request, user)
+        # Redirect to a success page.
+        return True
+    else:
+        # Show an error page
         return False
-    request.session['manage_id'] = manage_id
-    return True
 
 def manage_home_data_get(request):
-    manager = manage.objects.get(id=request.session['manage_id'])
+    manager = user.objects.get(id=string.atoi(request.session['petfarmuser']),type = 1,dele = False)
     return {'manager':manager}
-
-def manage_pet_farm_add(request):
-    try:
-        if request.POST['province'] == '':
-            province = '四川'
-        else:
-            province = request.POST['province']
-        if request.POST['city'] == '':
-            city = '成都'
-        else:
-            city = request.POST['city']
-        if request.POST['manage_score'] == '':
-            manage_score = 1.0
-        else:
-            manage_score = string.atof(request.POST['manage_score'])
-        if not re.match(r'1\d{10}',request.POST['tel']):
-            if not re.match(r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})',request.POST['tel']):
-                return False
-        if not re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", request.POST['email']):
-            return False
-        new_user = user(nickname = request.POST['name'],
-                        tel = request.POST['tel'],
-                        email = request.POST['email'],
-                        id_num = request.POST['idnum'],
-                        type = 1,
-                        pwd = request.POST['pwd'])
-        new_user.save()
-        new_pet_farm = pet_farm(name = request.POST['name'],
-                                desc = request.POST['desc'],
-                                detail_address = request.POST['dest'],
-                                province = province,
-                                city = city,
-                                district = request.POST['district'],
-                                direct = request.POST['direct'],
-                                min_prince = request.POST['min_prince'],
-                                manage_score = manage_score)
-        new_pet_farm.save()
-        new_user.petfarm = new_pet_farm
-        new_user.save()
-    except NameError:
-        return False
-    return True
 
 def manage_nestofpet_add(request):
     try:
@@ -191,13 +149,6 @@ def manage_pet_farm_picpreupload(request):
         pet_farm_sql.save()
     return 'true'
 
-def manage_nestofpet_farmselect(request):
-    farm_pets = nestofpet.objects.filter(farm=get_object_or_404(pet_farm,pk=string.atoi(request.POST['pet_farm_id'])),dele=False,sale_out=False)
-    options = ''
-    for farm_pet in farm_pets:
-        options = options + '<option value="' + str(farm_pet.id) + '">' + farm_pet.color + farm_pet.type + ',' + farm_pet.txt_desc + '</option>'
-    return options
-
 def manage_nestofpet_picpreupload(request):
     if 'source' in request.POST:
         max_height = 180
@@ -223,20 +174,3 @@ def manage_nestofpet_picpreupload(request):
         pet_sql.save()
         return 'true'
     return 'false'
-
-def manage_ad_picpreupload(request):
-    if 'source' in request.POST:
-        max_height = 323
-        max_width = 1170
-        img_url = pic_preupload(request,settings.PET_AD_PIC_ROOT,max_height,max_width)
-        if img_url == 'type error':
-            return 'type error'
-        #把url存入数据库
-        ad_sql = ad( type = request.POST['type'],
-                     tar_url = request.POST['tar_url'],
-                     prince = string.atoi(request.POST['prince']),
-                     start_time = datetime.datetime.strptime(request.POST['start_time'], "%Y-%m-%d %H:%M:%S"),
-                     end_time = datetime.datetime.strptime(request.POST['end_time'], "%Y-%m-%d %H:%M:%S"),
-                     img_url = img_url)
-        ad_sql.save()
-    return 'true'

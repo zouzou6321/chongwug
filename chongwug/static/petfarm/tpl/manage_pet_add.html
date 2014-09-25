@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>内容编辑</title>
+	</head>
+	<body>
+		<h1>管理员系统:添加一窝宠物信息</h1>
+		<h2>当前操作员：{{ manager.name }}</h2>
+		加*为必填项
+		<form method="post" action="./">
+		{% csrf_token %}
+		宠物主要颜色*：<input type="text" name="color"></input><br>
+		宠物月龄*：<input type="text" name="age"></input><br>
+		防疫状态*：<input type="text" name="epidemic"></input><br>
+		宠物品种*：<input type="text" name="type"></input><br>
+		详细描述*：<input type="text" name="desc"></input><br>
+		宠物最低价格*：<input type="text" name="min_prince"></input><br>
+		宠物最高价格*：<input type="text" name="max_prince"></input><br>
+		<input type="submit" value="提交"/>
+		</form>
+	</body>
+</html>
