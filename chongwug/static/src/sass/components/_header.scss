@@ -1,13 +1,14 @@
 .header{
   color: $header-info-color;
 }
+
 .cwg-navbar{
-  background: #ffd401;
+  background: $bg-color;
   border: 0;
   margin-bottom: 0;
 
   .navbar-toggle .icon-bar{
-    background: #FFD401;
+    background: $bg-color;
   }
 
   .navbar-nav a, .navbar-brand{
@@ -23,27 +24,6 @@
     background: #fff;
   }
 
-  .cwg-tel{
-    padding-top: 2px;
-  }
-
-  .cwg-tel-main{
-    margin-bottom: 0;
-
-    .glyphicon{
-      margin-right: 5px;
-    }
-
-    .glyphicon, span{
-      vertical-align: middle;
-    }
-  }
-
-  .cwg-tel-detail{
-    margin-bottom: 0;
-    font-size: 12px;
-  }
-
   .navbar-header{
     margin-right: 30px;
   }
@@ -54,8 +34,30 @@
   }
 }
 
+.cwg-tel{
+  padding-top: 2px;
+}
+
+.cwg-tel-detail{
+  margin-bottom: 0;
+  font-size: 12px;
+}
+
+.cwg-tel-main{
+  margin-bottom: 0;
+
+  .glyphicon{
+    margin-right: 5px;
+  }
+
+  .glyphicon, span{
+    vertical-align: middle;
+  }
+}
+
+
 .header-top{
-  background: #ffd401;
+  background: $bg-color;
 
   .cwg-btn-wrap{
     .btn-default{
@@ -69,25 +71,8 @@
     padding-bottom: 15px;
   }
 
-  .cwg-tel{
-    color: #49250c;
-    padding-top: 10px;
-  }
-  .cwg-tel-main{
-    font-size: 16px;
-    margin-bottom: 0;
-
-    .glyphicon{
-      margin-right: 5px;
-    }
-
-    .glyphicon, span{
-      vertical-align: middle;
-    }
-  }
-
-  .cwg-tel-detail{
-    padding-left: 10px;
-    font-size: 12px;
+  .cwg-search-wrap{
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
