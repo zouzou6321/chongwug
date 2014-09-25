@@ -12,6 +12,7 @@ urlpatterns = patterns('',
                        url(r'^buy/detail/$',buy_detail_view),
                        url(r'^buy/detail/attention/$',buy_attention_view),
                        url(r'^back_manage/', include('back_manager.urls')),
+                       url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':True  }),
     # Examples:
     # url(r'^$', 'chongwug.views.home', name='home'),

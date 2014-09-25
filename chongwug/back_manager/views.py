@@ -103,12 +103,6 @@ def manage_ad_view(request):
     data = adapters.manage_home_data_get(request)
     return render_to_response('manage/tpl/manage_ad.html',data)
 
-def manage_pet_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(MANAGE_ROOT)
-    data = adapters.manage_home_data_get(request)
-    return render_to_response('manage/tpl/manage_pet.html',data)
-
 def manage_nestofpet_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)

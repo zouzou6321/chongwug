@@ -1,5 +1,6 @@
+# -*- coding: UTF-8 -*-
 from django.conf.urls import patterns, url
-from back_manager.views import manage_home_view,manage_pet_farm_view,manage_pet_farm_add_view,manage_pet_farm_mod_view,manage_pet_farm_picadd_view,manage_pet_farm_picmod_view,manage_pet_farm_pic_upload_view,manage_pet_farm_picpre_view,manage_ad_view,manage_ad_add_view,manage_ad_mod_view,manage_ad_pic_upload_view,manage_ad_picpre_view,manage_manager_view,manage_pet_view,manage_nestofpet_add_view
+from back_manager.views import manage_home_view,manage_pet_farm_view,manage_pet_farm_add_view,manage_pet_farm_mod_view,manage_pet_farm_picadd_view,manage_pet_farm_picmod_view,manage_pet_farm_pic_upload_view,manage_pet_farm_picpre_view,manage_ad_view,manage_ad_add_view,manage_ad_mod_view,manage_ad_pic_upload_view,manage_ad_picpre_view,manage_manager_view,manage_nestofpet_add_view
 from back_manager.views import manage_nestofpet_picadd_view,manage_nestofpet_farmselect_view,manage_nestofpet_pic_upload_view,manage_nestofpet_picpre_view,manage_nestofpet_view
 urlpatterns = patterns(
                        '',

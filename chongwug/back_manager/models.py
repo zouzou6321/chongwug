@@ -3,6 +3,17 @@ from django.db import models
 import datetime
 
 # Create your models here.
+class user(models.Model):
+    nickname = models.TextField()
+    realname = models.TextField(blank=True, null=True)
+    tel = models.TextField(blank=True, null=True)
+    email = models.TextField(blank=True, null=True)
+    id_num = models.TextField(blank=True, null=True)
+    pwd = models.TextField()
+    desc = models.TextField(blank=True, null=True)
+    regtime = models.DateTimeField(default=datetime.datetime.now)
+    dele = models.BooleanField(default=False)
+
 class pet_farm(models.Model):
     name = models.TextField()
     desc = models.TextField(blank=True, null=True)
