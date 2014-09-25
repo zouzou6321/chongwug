@@ -1,37 +1,40 @@
 # -*- coding: UTF-8 -*-
-from django.core.exceptions import ObjectDoesNotExist
-from back_manager.models import manage,pet_farm,pet_farm_img,ad,nestofpet,nestofpet_img
-import string
+from customer.models import user
+from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from PIL import Image
-import os,uuid,datetime
 from chongwug import settings
 from upyun import UpYun
 from django.shortcuts import get_object_or_404
+from django.contrib import auth
+from django.contrib.auth.models import User
+
+import os,uuid,string
 '''
 管理员鉴权
 '''
 def manage_authentication(request):
-    try:
-        if (request.session['manage_id'] == ''):
-            return False
-    except:
+    if not request.user.is_authenticated():
+        return False
+    cur_user = user.objects.get(auth_user=auth.get_user(request),dele=False)
+    if cur_user.type < 1:
         return False
     return True
 
 def manage_login_check(request):
     name = request.REQUEST.get('username')
     passwd = request.REQUEST.get('userpassd')
-    request.session['manage_id'] = ''
-    try:
-        manage_id = manage.objects.get(name=name,passwd=passwd).id
-    except ObjectDoesNotExist:
-        print('ObjectDoesNotExist')
+    user = auth.authenticate(username=name, password=passwd)
+    if user is not None and user.is_active:
+        # Correct password, and the user is marked "active"
+        auth.login(request, user)
+        # Redirect to a success page.
+        return True
+    else:
+        # Show an error page
         return False
-    request.session['manage_id'] = manage_id
-    return True
 
 def manage_home_data_get(request):
-    manager = manage.objects.get(id=request.session['manage_id'])
+    manager = user.objects.get(id=string.atoi(request.session['petfarmuser']),type = 1,dele = False)
     return {'manager':manager}
 
 def manage_nestofpet_add(request):

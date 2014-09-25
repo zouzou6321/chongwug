@@ -1,15 +1,16 @@
 # -*- coding: UTF-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
-from models import manage
+from back_manager.models import manage
 from manager.models import ad
-from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from customer.models import user
-import string,re
+from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from PIL import Image
-import os,uuid,datetime
 from chongwug import settings
 from upyun import UpYun
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+import string,re
+import os,uuid,datetime
 '''
 管理员鉴权
 '''
@@ -56,11 +57,14 @@ def manage_pet_farm_add(request):
                 return False
         if not re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", request.POST['email']):
             return False
+        auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
+        auth_user.save()
         new_user = user(nickname = request.POST['name'],
                         tel = request.POST['tel'],
                         email = request.POST['email'],
                         id_num = request.POST['idnum'],
                         type = 1,
+                        auth_user=auth_user,
                         pwd = request.POST['pwd'])
         new_user.save()
         new_pet_farm = pet_farm(name = request.POST['name'],

@@ -2,12 +2,14 @@
 '''
 文件功能：针对购宠用户涉及的页面，根据展示的数据需要，整理出格式化的数据返回
 '''
-from back_manager.models import ad,pet_farm,pet_farm_img,nestofpet,nestofpet_img,attention_user,nestofpet_attention
-import datetime,string,re
+from manager.models import ad
+from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
+from customer.models import attention_user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
 
+import datetime,string,re
 '''
 函数功能：首页数据适配器
 作者：胡怀勇

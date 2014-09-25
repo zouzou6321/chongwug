@@ -4,10 +4,14 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import auth
+from django.contrib.auth.models import User
 import adapters
 PETFARM_ROOT='/petfarm/'
+
 def manage_login(request):
     return render_to_response('petfarm/tpl/manage_login.html')
+
 #auth:huhuaiyong
 #date:2014/8/23
 #discription:管理员首页展示
@@ -16,7 +20,7 @@ def manage_home_view(request):
         if adapters.manage_login_check(request) == True:
             return HttpResponseRedirect(PETFARM_ROOT)
     if request.method == 'GET' and 'logout' in request.GET:
-        request.session['manage_id'] = ''
+        auth.logout(request)
         return HttpResponseRedirect(PETFARM_ROOT)
     if adapters.manage_authentication(request) == False:
         return manage_login(request)
