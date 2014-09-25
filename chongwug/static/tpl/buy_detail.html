@@ -93,7 +93,7 @@
 
 <div class="container detail-container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-9 detail-main">
             <div id="kennel-intro">
                 <p class="desc-tit">
                     犬舍简介
@@ -103,8 +103,10 @@
                     <p class="kennel-intro-main">
                         {{ nestpet.farm.desc|safe }}
                     </p>
-                    <div>
-                        <img src="{{ farmimg.img_url }}" alt="犬舍" style="width: 100%"/>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img src="{{ farmimg.img_url }}" alt="犬舍" style="width: 100%;"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -142,8 +144,8 @@
                 </div>
             </div>
         </div>
-        {% for recommendpet_img in recommendpets_img %}
         <div class="col-md-3 most-popular">
+        {% for recommendpet_img in recommendpets_img %}
             <div>
                 <a href="?petid={{ recommendpet_img.pet.id }}">
                     <img src="{{ recommendpet_img.img.img_url }}" class="dog-img">
@@ -155,8 +157,8 @@
                     </p>
                 </div>
             </div>
-        </div>
         {% endfor %}
+        </div>
     </div>
 </div>
 
