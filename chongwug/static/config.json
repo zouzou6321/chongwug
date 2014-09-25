@@ -11,7 +11,7 @@
         "prod": "prod/assets/js"
     },
     "imgs": {
-        "src": "src/imgs/**/*.+(jpg|png)",
+        "src": "src/imgs/**/*.+(jpg|png|gif)",
         "dev": "assets/imgs",
         "prod": "prod/assets/imgs"
     },

@@ -12,5 +12,6 @@
     "tooltip" : false,
     "transition" : true,
     "jquery.magnific-popup": true,
-    "custom-plugins": true
+    "custom-plugins": true,
+    "jquery.lazyload": true
 }

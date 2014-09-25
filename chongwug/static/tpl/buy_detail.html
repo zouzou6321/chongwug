@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-5">
             <a href="javascript:" class="cwg-thumb">
-                <img src="{{ petimg_a.img_url }}" />
+                <img src="{{ petimg_a.img_url }}"/>
             </a>
             <div class="cwg-dog-imgs">
                 <a class="prev-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-left"></i></a>
@@ -105,7 +105,7 @@
                     </p>
                     <div class="row">
                         <div class="col-md-5">
-                            <img src="{{ farmimg.img_url }}" alt="犬舍" style="width: 100%;"/>
+                            <img data-original="{{ farmimg.img_url }}" alt="犬舍" style="width: 100%;" class="lazy" src="{{'imgs/loading.gif'|assets}}"/>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                                 {% for pet_img in pets_img %}
                                 <div class="col-md-6">
                                     <div class="dog-show-info">
-                                        <img src="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" style="width: 100%"/>
+                                        <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="lazy" src="{{'imgs/loading.gif'|assets}}" style="width: 100%"/>
                                         <div class="dog-mask">
                                             <p>{{ pet_img.pet.type }}</p>
                                             <p>&yen;{{ pet_img.pet.min_price }}元 - {{ pet_img.pet.max_price }}元</p>
@@ -150,7 +150,7 @@
         {% for recommendpet_img in recommendpets_img %}
             <div>
                 <a href="?petid={{ recommendpet_img.pet.id }}">
-                    <img src="{{ recommendpet_img.img.img_url }}" class="dog-img">
+                    <img data-original="{{ recommendpet_img.img.img_url }}" class="dog-img lazy" src="{{'imgs/loading.gif'|assets}}" >
                 </a>
                 <div class="dog-desc">
                     <h4><a href="?petid={{ recommendpet_img.pet.id }}">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
