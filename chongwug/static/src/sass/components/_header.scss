@@ -53,3 +53,41 @@
     font-size: 12px;
   }
 }
+
+.header-top{
+  background: #ffd401;
+
+  .cwg-btn-wrap{
+    .btn-default{
+      background-color: transparent;
+      border: 0;
+    }
+  }
+
+  .cwg-login{
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .cwg-tel{
+    color: #49250c;
+    padding-top: 10px;
+  }
+  .cwg-tel-main{
+    font-size: 16px;
+    margin-bottom: 0;
+
+    .glyphicon{
+      margin-right: 5px;
+    }
+
+    .glyphicon, span{
+      vertical-align: middle;
+    }
+  }
+
+  .cwg-tel-detail{
+    padding-left: 10px;
+    font-size: 12px;
+  }
+}

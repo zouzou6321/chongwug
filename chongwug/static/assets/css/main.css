@@ -97,6 +97,28 @@
     padding-left: 15px;
     font-size: 12px; }
 
+.header-top {
+  background: #ffd401; }
+  .header-top .cwg-btn-wrap .btn-default {
+    background-color: transparent;
+    border: 0; }
+  .header-top .cwg-login {
+    padding-top: 15px;
+    padding-bottom: 15px; }
+  .header-top .cwg-tel {
+    color: #49250c;
+    padding-top: 10px; }
+  .header-top .cwg-tel-main {
+    font-size: 16px;
+    margin-bottom: 0; }
+    .header-top .cwg-tel-main .glyphicon {
+      margin-right: 5px; }
+    .header-top .cwg-tel-main .glyphicon, .header-top .cwg-tel-main span {
+      vertical-align: middle; }
+  .header-top .cwg-tel-detail {
+    padding-left: 10px;
+    font-size: 12px; }
+
 .footer .nav-pills .active a {
   background: none; }
 .footer .footer-top {
