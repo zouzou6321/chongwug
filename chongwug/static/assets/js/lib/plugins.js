@@ -2949,7 +2949,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
                $ul = $wrapper.find('ul'),
                $li = $ul.find('li'),
                $curr = $li.filter('.active'),
-               itemWidth = $curr.outerWidth(),
+               itemWidth = settings.itemWidth || $curr.outerWidth(),
                totalWidth = itemWidth * $li.length,
                wrapperWidth = $wrapper.width(),
                $prev = $(settings.prev),
