@@ -1,10 +1,8 @@
+{% extends 'petfarm/tpl/base/base.html' %}
 {% load assets %}
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>内容编辑</title>
-	</head>
-	<body>
+{% block title %}内容编辑{% endblock %}
+
+{% block content %}
 		<h1>管理员系统:添加宠物图片</h1>
 		<h2>当前操作员：{{ manager.name }}</h2>
 		<div>
@@ -256,5 +254,4 @@ function Imagess(url,imgid,callback){
 		});
 	}
 		</script>
-	</body>
-</html>
+{% endblock %}
