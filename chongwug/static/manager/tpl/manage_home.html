@@ -5,17 +5,18 @@
 		<title>内容编辑</title>
 	</head>
 	<body>
-		<h1>管理员系统</h1>
+		<h1>审核管理系统</h1>
 		<h2>当前操作员：{{ manager.name }}</h2>
-		<li><a href="./">养殖场信息修改审核</a></li>
-		<li><a href="./">养殖场图片修改审核</a></li>
-		<li><a href="./">宠物信息修改审核</a></li>
-		<li><a href="./">宠物图片修改审核</a></li>
-		<li><a href="./">养殖场图片修改审核</a></li>
-		
+		{% if manager.permission_score < 50 %}
+		<li><a href="./petfarm/ckmod/">养殖场信息修改审核</a></li>
+		<li><a href="./petfarm/ckpicmod/">养殖场图片修改审核</a></li>
+		<li><a href="./nestofpet/ckmod/">宠物信息修改审核</a></li>
+		<li><a href="./nestofpet/ckpicmod/">宠物图片修改审核</a></li>
+		{% else %}
 		<li><a href="./petfarm/add/">添加新养殖场</a></li>
 		<li><a href="./ad/add/">添加广告</a></li>
 		<li><a href="./ad/mod/">删除广告</a></li>
+		{% endif %}
 		<li><a href="./?logout=true">注销登录</a></li>
 	</body>
 </html>

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from customer.models import user
+from customer.models import user,pet_farm_mod
 from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from PIL import Image
@@ -7,9 +7,8 @@ from chongwug import settings
 from upyun import UpYun
 from django.shortcuts import get_object_or_404
 from django.contrib import auth
-from django.contrib.auth.models import User
 
-import os,uuid,string
+import os,uuid,string,re
 '''
 管理员鉴权
 '''
@@ -35,7 +34,7 @@ def manage_login_check(request):
         return False
 
 def manage_home_data_get(request):
-    manager = user.objects.get(id=string.atoi(request.session['petfarmuser']),type = 1,dele = False)
+    manager = user.objects.get(auth_user=auth.get_user(request),dele = False)
     return {'manager':manager}
 
 def manage_nestofpet_add(request):
@@ -71,6 +70,30 @@ def manage_pet_farm_picadd(request):
 def pet_farm_all():
     farms = pet_farm.objects.filter(dele=False)
     return {'farms':farms}
+
+def manage_pet_farm_mod(request):
+    try:
+        if request.POST['province'] == '':
+            province = '四川'
+        else:
+            province = request.POST['province']
+        if request.POST['city'] == '':
+            city = '成都'
+        else:
+            city = request.POST['city']
+        mod_pet_farm = pet_farm_mod(user = user.objects.get(auth_user=auth.get_user(request),dele=False),
+                                    name = request.POST['name'],
+                                    desc = request.POST['desc'],
+                                    detail_address = request.POST['detail_address'],
+                                    province = province,
+                                    city = city,
+                                    district = request.POST['district'],
+                                    direct = request.POST['direct'],
+                                    min_prince = request.POST['min_prince'])
+        mod_pet_farm.save()
+    except NameError:
+        return False
+    return True
 
 def manage_picupload(photo,width,height):
     if photo == None:

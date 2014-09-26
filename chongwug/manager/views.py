@@ -18,16 +18,50 @@ def manage_home_view(request):
         if adapters.manage_login_check(request) == True:
             return HttpResponseRedirect(MANAGE_ROOT)
     if request.method == 'GET' and 'logout' in request.GET:
-        request.session['manage_id'] = ''
+        del request.session['manage_id']
+        del request.session['score']
         return HttpResponseRedirect(MANAGE_ROOT)
     if adapters.manage_authentication(request) == False:
         return manage_login(request)
     data = adapters.manage_home_data_get(request)
     return render_to_response('manager/tpl/manage_home.html',data)
 
+def manage_pet_farm_ckmod_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] >= 50:
+        return HttpResponse("Page Not Find!!!")
+    page_data = adapters.pet_farm_ckmod(request)
+    data = adapters.manage_home_data_get(request)
+    page_data['manager'] = data['manager']
+    return render_to_response('manager/tpl/manage_pet_farm_ckmod.html',page_data)
+
+def manage_pet_farm_ckpicmod_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] >= 50:
+        return HttpResponse("Page Not Find!!!")
+    return HttpResponse('False')
+
+def manage_nestofpet_ckmod_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] >= 50:
+        return HttpResponse("Page Not Find!!!")
+    return HttpResponse('False')
+
+def manage_nestofpet_ckpicmod_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] >= 50:
+        return HttpResponse("Page Not Find!!!")
+    return HttpResponse('False')
+
 def manage_pet_farm_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return HttpResponse("Page Not Find!!!")
     if request.method == 'POST':
         if adapters.manage_pet_farm_add(request) == False:
             return HttpResponse("data error occur!!!")
@@ -37,18 +71,30 @@ def manage_pet_farm_add_view(request):
 def manage_ad_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return HttpResponse("Page Not Find!!!")
     data = adapters.manage_home_data_get(request)
     return render_to_response('manager/tpl/manage_ad_picadd.html',data,context_instance=RequestContext(request))
 
 @csrf_exempt
 def manage_ad_pic_upload_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponse('Page Not Find')
+    if request.session['score'] < 50:
+        return HttpResponse("Page Not Find!!!")
     photo = request.FILES.get('Filedata',None)
     return HttpResponse(adapters.manage_picupload(photo,1170,323))
 
 def manage_ad_picpre_view(request):
     if adapters.manage_authentication(request) == False:
-        return HttpResponse('false')
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return HttpResponse("Page Not Find!!!")
     return HttpResponse(adapters.manage_ad_picpreupload(request))
 
 def manage_ad_mod_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return HttpResponse("Page Not Find!!!")
     return True

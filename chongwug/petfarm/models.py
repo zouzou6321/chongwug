@@ -17,13 +17,15 @@ class pet_farm(models.Model):
     sale_score = models.FloatField(default=0)
     min_prince = models.FloatField()
     #添加时间
-    start_time = models.TimeField(default=datetime.datetime.now)
+    start_time = models.DateTimeField(default=datetime.datetime.now)
     #删除时间
-    end_time = models.TimeField(blank=True, null=True)
+    end_time = models.DateTimeField(blank=True, null=True)
     #manage_score：系统赋予的积分，用来限制养殖场卖家权限，小于等于0时，卖家被拉黑
     manage_score = models.FloatField(default=1.0)
     dele = models.BooleanField(default=False)
 
+
+    
 class pet_mam(models.Model):
     type = models.TextField()
     age = models.IntegerField()

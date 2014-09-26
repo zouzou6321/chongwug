@@ -2,7 +2,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
 from manager.models import ad,tmppic_monitor
-from customer.models import user
+from customer.models import user,pet_farm_mod
 from petfarm.models import pet_farm
 from PIL import Image
 from chongwug import settings
@@ -26,11 +26,12 @@ def manage_login_check(request):
     passwd = request.REQUEST.get('userpassd')
     request.session['manage_id'] = ''
     try:
-        manage_id = manage.objects.get(name=name,passwd=passwd).id
+        _manage = manage.objects.get(name=name,passwd=passwd)
     except ObjectDoesNotExist:
         print('ObjectDoesNotExist')
         return False
-    request.session['manage_id'] = manage_id
+    request.session['manage_id'] = _manage.id
+    request.session['score'] = _manage.permission_score
     return True
 
 def manage_home_data_get(request):
@@ -167,3 +168,19 @@ def manage_ad_picpreupload(request):
                      img_url = img_url)
         ad_sql.save()
     return 'true'
+
+def pet_farm_ckmod(request):
+    if request.method == 'POST':
+            cur_user = user.objects.get(auth_user=auth.get_user(request),dele=False)
+            cur_user.petfarm.name = request.POST['name']
+            cur_user.petfarm.desc = request.POST['desc']
+            cur_user.petfarm.detail_address = request.POST['dest']
+            cur_user.petfarm.province = province
+            cur_user.petfarm.city = city
+            cur_user.petfarm.district = request.POST['district']
+            cur_user.petfarm.direct = request.POST['direct']
+            cur_user.petfarm.min_prince = request.POST['min_prince']
+            cur_user.save()
+    else:
+        petfarms_mod = pet_farm_mod.objects.filter(dele=False,ckpass=False)
+        return {'petfarms':petfarms_mod}

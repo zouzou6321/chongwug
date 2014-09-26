@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>内容编辑</title>
+	</head>
+	<body>
+		<h1>养殖场数据管理系统:修改养殖场信息</h1>
+		<h2>当前操作员：{{ manager.nickname }}</h2>
+		加*为必填项
+		<form method="post" action="./">
+		{% csrf_token %}
+		养殖场名字*：<input type="text" name="name" value={{ manager.petfarm.name }}></input><br>
+		养殖场介绍*：<textarea name="desc">{{ manager.petfarm.desc }}</textarea><br>
+		省会（默认四川）：<input type="text" name="province" value={{ manager.petfarm.province }}></input><br>
+		城市（默认成都）：<input type="text" name="city" value={{ manager.petfarm.city }}></input><br>
+		片区（eg。高新）*：<input type="text" name="district" value={{ manager.petfarm.district }}></input><br>
+		所处方位*:<input type="radio" name="direct" value="东" {% if manager.petfarm.direct = '东' %}checked{% endif %}> 城东  
+			<input type="radio" name="direct" value="南" {% if manager.petfarm.direct = '南' %}checked{% endif %}> 城南 
+			<input type="radio" name="direct" value="西" {% if manager.petfarm.direct = '西' %}checked{% endif %}> 城西 
+			<input type="radio" name="direct" value="北" {% if manager.petfarm.direct = '北' %}checked{% endif %}> 城北  
+			<input type="radio" name="direct" value="中" {% if manager.petfarm.direct = '中' %}checked{% endif %}> 城中<br>
+		详细地址*：<input type="text" name="detail_address" value={{ manager.petfarm.detail_address }}></input><br>
+		宠物最低价格*：<input type="text" name="min_prince" value={{ manager.petfarm.min_prince }}></input><br>
+		<input type="submit" value="提交"/>
+		</form>
+	</body>
+</html>

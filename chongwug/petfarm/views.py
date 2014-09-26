@@ -30,8 +30,11 @@ def manage_home_view(request):
 def manage_pet_farm_mod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(PETFARM_ROOT)
+    if request.method == 'POST':
+        if adapters.manage_pet_farm_mod(request) == False:
+            return HttpResponse("data error occur!!!")
     data = adapters.manage_home_data_get(request)
-    return render_to_response('petfarm/tpl/manage_pet_farm.html',data)
+    return render_to_response('petfarm/tpl/manage_pet_farm_mod.html',data,context_instance=RequestContext(request))
 
 def manage_pet_farm_picadd_view(request):
     if adapters.manage_authentication(request) == False:
