@@ -105,10 +105,11 @@
     color: #fff;
     background-color: $bg-color;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
     line-height: 60px;
     margin: 0 auto;
+    border: 2px solid $copyright-bg-color;
 
     i{
         font-size: 40px;

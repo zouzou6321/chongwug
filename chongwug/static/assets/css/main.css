@@ -184,10 +184,11 @@
     color: #fff;
     background-color: #ffd401;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
     line-height: 60px;
-    margin: 0 auto; }
+    margin: 0 auto;
+    border: 2px solid #dba903; }
     .cwg-social a i {
       font-size: 40px; }
     .cwg-social a:hover {
@@ -331,10 +332,15 @@
     border-color: #ffd100;
     cursor: default; }
   .cwg-thumbnail img {
-    width: 60px; }
+    width: 60px;
+    height: 40px; }
 
-.cwg-thumb img {
-  width: 100%; }
+.cwg-thumb {
+  display: block;
+  width: 387px;
+  height: 258px; }
+  .cwg-thumb img {
+    width: 100%; }
 
 .cwg-dog-imgs {
   padding: 10px 0;
