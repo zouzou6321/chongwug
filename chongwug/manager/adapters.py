@@ -142,7 +142,7 @@ def manage_picupload(photo,width,height):
         photo.name = file+'.jpg'
         url = ('/manage/pictest/'+photo.name).encode('utf8')
         name = settings.STATIC_ROOT+url
-        img.save(name,'jpeg',quality=85)
+        img.save(name,'jpeg',quality=75)
     json = '{"url":"'+'/static'+url+'","width":"'+str(w)+'","height":"'+str(h)+'"}'
     return json
 
