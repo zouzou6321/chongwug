@@ -3,11 +3,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
 from manager.models import ad,tmppic_monitor
 from customer.models import user
-from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
+from petfarm.models import pet_farm
 from PIL import Image
 from chongwug import settings
 from upyun import UpYun
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 import string,re
 import os,uuid,datetime
@@ -83,36 +82,6 @@ def manage_pet_farm_add(request):
         return False
     return True
 
-def manage_nestofpet_add(request):
-    try:
-        new_nestofpet = nestofpet(farm = get_object_or_404(pet_farm,pk=string.atoi(request.POST['pet_farm_id'])),
-                                color = request.POST['color'],
-                                age = string.atoi(request.POST['age']),
-                                epidemic_period = request.POST['epidemic'],
-                                type = request.POST['type'],
-                                txt_desc = request.POST['desc'],
-                                min_price = string.atof(request.POST['min_prince']),
-                                max_price = string.atof(request.POST['max_prince']))
-        new_nestofpet.save()
-    except NameError:
-        return False
-    return True
-
-def manage_nestofpet_picadd(request):
-    farms = pet_farm.objects.filter(dele=False)
-    use_fors = []
-    use_fors.append('buy_main')
-    use_fors.append('narmol')
-    farm_pets = nestofpet.objects.filter(farm=farms[0],dele=False,sale_out=False)
-    return {'farms':farms,'use_fors':use_fors,'farm_pets':farm_pets}
-
-def manage_pet_farm_picadd(request):
-    farms = pet_farm.objects.filter(dele=False)
-    use_fors = []
-    use_fors.append('buy_home')
-    use_fors.append('narmol')
-    return {'farms':farms,'use_fors':use_fors}
-
 def pet_farm_all():
     farms = pet_farm.objects.filter(dele=False)
     return {'farms':farms}
@@ -181,58 +150,6 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     #writeFile方法不会返回图片地址，所以得自己写
     img_url = settings.PIC_ROOT + file_path_name
     return img_url
-    
-def manage_pet_farm_picpreupload(request):
-    if 'source' in request.POST:
-        max_height = 178
-        max_width = 250
-        img_url = pic_preupload(request,settings.PET_FARM_PIC_ROOT,max_height,max_width)
-        if img_url == 'type error':
-            return 'type error'
-        #把url存入数据库
-        pet_farm_sql = pet_farm_img( pet_farm_id = get_object_or_404(pet_farm,pk=string.atoi(request.POST['pet_farm_id'])),
-                                img_url = img_url,
-                                img_with = string.atoi(request.POST['x2']) - string.atoi(request.POST['x1']),
-                                img_height = string.atoi(request.POST['y2']) - string.atoi(request.POST['y1']),
-                                #img_type:jpg/png/...
-                                img_type = 'png',
-                                #图片用途
-                                img_usefor = request.POST['usefor'])
-        pet_farm_sql.save()
-    return 'true'
-
-def manage_nestofpet_farmselect(request):
-    farm_pets = nestofpet.objects.filter(farm=get_object_or_404(pet_farm,pk=string.atoi(request.POST['pet_farm_id'])),dele=False,sale_out=False)
-    options = ''
-    for farm_pet in farm_pets:
-        options = options + '<option value="' + str(farm_pet.id) + '">' + farm_pet.color + farm_pet.type + ',' + farm_pet.txt_desc + '</option>'
-    return options
-
-def manage_nestofpet_picpreupload(request):
-    if 'source' in request.POST:
-        max_height = 180
-        max_width = 275
-        if request.POST['usefor'] == 'narmol':
-            max_width = 600
-            max_height = 400
-        elif request.POST['usefor'] == 'buy_main':
-            max_width = 275
-            max_height = 180
-        img_url = pic_preupload(request,settings.PET_PIC_ROOT,max_height,max_width)
-        if img_url == 'type error':
-            return 'type error'
-        #把url存入数据库
-        pet_sql = nestofpet_img( nestofpet_id = get_object_or_404(nestofpet,pk=string.atoi(request.POST['pet_id'])),
-                                img_url = img_url,
-                                img_with = string.atoi(request.POST['x2']) - string.atoi(request.POST['x1']),
-                                img_height = string.atoi(request.POST['y2']) - string.atoi(request.POST['y1']),
-                                #img_type:jpg/png/...
-                                img_type = 'png',
-                                #图片用途
-                                img_usefor = request.POST['usefor'])
-        pet_sql.save()
-        return 'true'
-    return 'false'
 
 def manage_ad_picpreupload(request):
     if 'source' in request.POST:
