@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from customer.models import user
+from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from PIL import Image
 from chongwug import settings
@@ -97,6 +98,8 @@ def manage_picupload(photo,width,height):
         url = ('/manage/pictest/'+photo.name).encode('utf8')
         name = settings.STATIC_ROOT+url
         img.save(name,'jpeg',quality=75)
+        monitor = tmppic_monitor(fname=name)
+        monitor.save()
     json = '{"url":"'+'/static'+url+'","width":"'+str(w)+'","height":"'+str(h)+'"}'
     return json
 

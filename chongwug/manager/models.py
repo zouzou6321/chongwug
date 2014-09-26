@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
-
+import datetime
 # Create your models here.
 #ad:广告专用
 class ad(models.Model):
@@ -18,4 +18,9 @@ class ad(models.Model):
     start_time = models.DateTimeField()
     #广告结束展示的时间
     end_time = models.DateTimeField()
+    dele = models.BooleanField(default=False)
+
+class tmppic_monitor(models.Model):
+    fname = models.TextField()
+    monitor_time= models.DateTimeField(default=datetime.datetime.now)
     dele = models.BooleanField(default=False)
