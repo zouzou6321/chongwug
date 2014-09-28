@@ -2,7 +2,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
 from manager.models import ad,tmppic_monitor
-from customer.models import user,pet_farm_mod
+from customer.models import user
 from petfarm.models import pet_farm
 from PIL import Image
 from chongwug import settings
@@ -168,19 +168,3 @@ def manage_ad_picpreupload(request):
                      img_url = img_url)
         ad_sql.save()
     return 'true'
-
-def pet_farm_ckmod(request):
-    if request.method == 'POST':
-            cur_user = user.objects.get(auth_user=auth.get_user(request),dele=False)
-            cur_user.petfarm.name = request.POST['name']
-            cur_user.petfarm.desc = request.POST['desc']
-            cur_user.petfarm.detail_address = request.POST['dest']
-            cur_user.petfarm.province = province
-            cur_user.petfarm.city = city
-            cur_user.petfarm.district = request.POST['district']
-            cur_user.petfarm.direct = request.POST['direct']
-            cur_user.petfarm.min_prince = request.POST['min_prince']
-            cur_user.save()
-    else:
-        petfarms_mod = pet_farm_mod.objects.filter(dele=False,ckpass=False)
-        return {'petfarms':petfarms_mod}
