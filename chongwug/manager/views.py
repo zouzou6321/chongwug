@@ -32,16 +32,9 @@ def manage_pet_farm_ckmod_view(request):
     if request.session['score'] >= 50:
         return HttpResponse("Page Not Find!!!")
     page_data = adapters.pet_farm_ckmod(request)
-    if request.method == 'GET' and 'ckid' in request.GET and 'ckrel' in request.GET:
-        return HttpResponse(page_data)
-    elif request.method == 'GET' and 'id' in request.GET:
-        return render_to_response('manager/tpl/manage_pet_farm_ckmod_token.html',page_data)
-    else:
-        if page_data == 'no':
-            return HttpResponse("暂时没有数据需要审核")
-        data = adapters.manage_home_data_get(request)
-        page_data['manager'] = data['manager']
-        return render_to_response('manager/tpl/manage_pet_farm_ckmod.html',page_data)
+    data = adapters.manage_home_data_get(request)
+    page_data['manager'] = data['manager']
+    return render_to_response('manager/tpl/manage_pet_farm_ckmod.html',page_data)
 
 def manage_pet_farm_ckpicmod_view(request):
     if adapters.manage_authentication(request) == False:
@@ -62,8 +55,6 @@ def manage_nestofpet_ckpicmod_view(request):
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] >= 50:
         return HttpResponse("Page Not Find!!!")
-    data = adapters.pet_farm_ckmod(request)
-    render_to_response('manager/tpl/manage_pet_farm_ckmod.html',data,context_instance=RequestContext(request))
     return HttpResponse('False')
 
 def manage_pet_farm_add_view(request):
