@@ -1,12 +1,11 @@
-{% load assets %}
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>内容编辑</title>
-	</head>
-	<body>
-		<h1>管理员系统:添加广告</h1>
-		<h2>当前操作员：{{ manager.nickname }}</h2>
+{% extends 'manager/tpl/base/base.html' %}
+{% block title %}内容编辑{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/static/back-assets/dist/imgcut/css/imgareaselect-default.css"/>
+{% endblock %}
+
+{% block main %}
+<h1 class="page-header">添加广告</h1>
 		<div>
 		广告类型：<select id="type_id">
 		{% for ad_type in ad_types %}
@@ -42,6 +41,9 @@
 	</div>
 	<div><button onclick="submitpreimg();" class="button-modify-head">保存</button></div>
 </div>
+{% endblock %}
+
+{% block scripts %}
 		<script type="text/javascript" src="/static/manage/jquery-1.4.2.js"></script>
 		<script type="text/javascript" src="/static/manage/ajax_post.js"></script>
 		<script type="text/javascript" src="/static/manage/jquery.form.js"></script>
@@ -235,5 +237,4 @@ function Imagess(url,imgid,callback){
 		});
 	}
 		</script>
-	</body>
-</html>
+{% endblock %}

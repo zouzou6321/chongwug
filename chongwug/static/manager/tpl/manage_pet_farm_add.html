@@ -1,32 +1,105 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>内容编辑</title>
-	</head>
-	<body>
-		<h1>管理员系统:添加养殖场信息</h1>
-		<h2>当前操作员：{{ manager.nickname }}</h2>
-		加*为必填项
-		<form method="post" action="./">
-		{% csrf_token %}
-		养殖场名字*：<input type="text" name="name"></input><br>
-		养殖场介绍*：<input type="text" name="desc"></input><br>
-		联系电话*：<input type="text" name="tel"></input><br>
-		邮箱地址*：<input type="text" name="email"></input><br>
-		身份证号码*：<input type="text" name="idnum"></input><br>
-		省会（默认四川）：<input type="text" name="province"></input><br>
-		城市（默认成都）：<input type="text" name="city"></input><br>
-		片区（eg。高新）*：<input type="text" name="district"></input><br>
-		所处方位*:<input type="radio" name="direct" value="东" checked> 城东 </input> 
+{% extends 'manager/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+
+{% block main %}
+
+<h1 class="page-header">新增养殖场</h1>
+<p>加*为必填项</p>
+	<form method="post" action="./">
+	{% csrf_token %}
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">养殖场名字<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="name">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">联系电话<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="tel">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">邮箱地址<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="email">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">身份证号码<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="idnum">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">省会（默认四川）：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="province">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">城市（默认成都）：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="city">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">片区（eg。高新）<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="district">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">所处方位<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+		    <input type="radio" name="direct" value="东" checked> 城东 </input> 
 			<input type="radio" name="direct" value="南"> 城南 </input>
 			<input type="radio" name="direct" value="西"> 城西 </input>
 			<input type="radio" name="direct" value="北"> 城北  </input>
 			<input type="radio" name="direct" value="中"> 城中 </input><br>
-		详细地址*：<input type="text" name="dest"></input><br>
-		宠物最低价格*：<input type="text" name="min_prince"></input><br>
-		评分（高分会获得系统展示,默认1.0）：<input type="input" name="manage_score"></input>
-		<input type="submit" value="提交"/>
-		</form>
-	</body>
-</html>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">详细地址<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="dest">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">宠物最低价格<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="min_prince">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-color" class="col-sm-2 control-label">评分（高分会获得系统展示,默认1.0）<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="pet-color" name="manage_score">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="pet-desc" class="col-sm-2 control-label">养殖场介绍<span class="warn">*</span>：</label>
+	    <div class="col-sm-8">
+          <textarea class="form-control required" rows="3" id="pet-desc" name="desc"></textarea>
+        </div>
+	</div>
+	<div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button type="submit" class="btn btn-primary form-control">提交</button>
+        </div>
+    </div>
+	</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/back-assets/dist/ckeditor/ckeditor.js"></script>
+<script>
+
+CKEDITOR.replace('pet-desc');
+
+$('form').validate(commonvalidateConfig);
+
+</script>
+{% endblock %}
