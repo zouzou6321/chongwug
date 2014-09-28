@@ -12,8 +12,50 @@
 </head>
 <body>
 
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/petfarm">养殖场数据管理系统</a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">当前操作员：{{ manager.name }}<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="./?logout=true">注销</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
 
-{% block content %}{% endblock %}
+{% block container %}
+<div class="container-fluid">
+    <div class="row">
+        {% block sidebar %}
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="./nestofpet/add/">添加新宠物</a></li>
+                <li><a href="./nestofpet/picadd">添加宠物图片</a></li>
+                <li><a href="./nestofpet/mod/">修改或者删除宠物信息</a></li>
+                <li><a href="./nestofpet/picdel/">删除宠物图片</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="./petfarm/picadd/">添加养殖场图片</a></li>
+                <li class="divider"></li>
+                <li><a href="./petfarm/mod/">修改养殖场信息</a></li>
+                <li><a href="./petfarm/picdel/">删除养殖场展示图片</a></li>
+            </ul>
+        </div>
+        {% endblock %}
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {% block main %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
 
 
 <script src="/static/back-assets/dist/js/jquery.js"></script>

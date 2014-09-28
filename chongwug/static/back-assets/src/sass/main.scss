@@ -1,5 +1,14 @@
-/*login*/
-.login-form{
-  max-width: 300px;
-  margin: 10% auto 0 auto;
+@import "bootstrap/_variables";
+
+@import "components/login";
+@import "components/sidebar";
+@import "components/main";
+
+
+body {
+  padding-top: 50px;
+}
+
+.navbar-fixed-top {
+  border: 0;
 }
