@@ -21,22 +21,6 @@ class user(models.Model):
     auth_user = models.ForeignKey(User)
     dele = models.BooleanField(default=False)
 
-class pet_farm_mod(models.Model):
-    user = models.ForeignKey(user)
-    name = models.TextField()
-    desc = models.TextField(blank=True, null=True)
-    contry = models.TextField(default='china')
-    province = models.TextField()
-    city = models.TextField()
-    district = models.TextField()
-    #direct代指宠物养殖场相对city的方向位置
-    direct = models.TextField()
-    detail_address = models.TextField()
-    min_prince = models.FloatField()
-    time = models.DateTimeField(default=datetime.datetime.now)
-    ckpass = models.BooleanField(default=False)
-    dele = models.BooleanField(default=False)
-
 class attention_user(models.Model):
     name = models.TextField()
     tel = models.TextField()

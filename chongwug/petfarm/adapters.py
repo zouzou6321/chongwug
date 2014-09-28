@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from customer.models import user,pet_farm_mod
+from customer.models import user
 from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from PIL import Image
@@ -39,7 +39,7 @@ def manage_home_data_get(request):
 
 def manage_nestofpet_add(request):
     try:
-        new_nestofpet = nestofpet(farm = get_object_or_404(pet_farm,pk=string.atoi(request.POST['pet_farm_id'])),
+        new_nestofpet = nestofpet(farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm,
                                 color = request.POST['color'],
                                 age = string.atoi(request.POST['age']),
                                 epidemic_period = request.POST['epidemic'],
@@ -81,16 +81,16 @@ def manage_pet_farm_mod(request):
             city = '成都'
         else:
             city = request.POST['city']
-        mod_pet_farm = pet_farm_mod(user = user.objects.get(auth_user=auth.get_user(request),dele=False),
-                                    name = request.POST['name'],
-                                    desc = request.POST['desc'],
-                                    detail_address = request.POST['detail_address'],
-                                    province = province,
-                                    city = city,
-                                    district = request.POST['district'],
-                                    direct = request.POST['direct'],
-                                    min_prince = request.POST['min_prince'])
-        mod_pet_farm.save()
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        curuser.petfarm.name = request.POST['name']
+        curuser.petfarm.desc = request.POST['desc']
+        curuser.petfarm.detail_address = request.POST['detail_address']
+        curuser.petfarm.province = province
+        curuser.petfarm.city = city
+        curuser.petfarm.district = request.POST['district']
+        curuser.petfarm.direct = request.POST['direct']
+        curuser.petfarm.min_prince = request.POST['min_prince']
+        curuser.save()
     except NameError:
         return False
     return True
