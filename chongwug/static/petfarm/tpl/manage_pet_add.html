@@ -12,43 +12,43 @@
     <div class="form-group">
         <label for="pet-color" class="col-sm-2 control-label">宠物主要颜色<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="pet-color" name="color">
+          <input type="text" class="form-control required" id="pet-color" name="color">
         </div>
     </div>
     <div class="form-group">
         <label for="pet-age" class="col-sm-2 control-label">宠物月龄<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="pet-age" name="age">
+          <input type="text" class="form-control required number" id="pet-age" name="age">
         </div>
     </div>
     <div class="form-group">
         <label for="pet-epidemic" class="col-sm-2 control-label">防疫状态<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="pet-epidemic" name="epidemic">
+          <input type="text" class="form-control required" id="pet-epidemic" name="epidemic">
         </div>
     </div>
     <div class="form-group">
         <label for="pet-type" class="col-sm-2 control-label">宠物品种<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="pet-type" name="type">
+          <input type="text" class="form-control required" id="pet-type" name="type">
         </div>
     </div>
     <div class="form-group">
         <label for="pet-min_prince" class="col-sm-2 control-label">宠物最低价格<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="pet-min_prince" name="min_prince">
+          <input type="text" class="form-control required number" id="pet-min_prince" name="min_prince">
         </div>
     </div>
     <div class="form-group">
         <label for="pet-max_prince" class="col-sm-2 control-label">宠物最高价格<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="pet-max_prince" name="max_prince">
+          <input type="text" class="form-control required number" id="pet-max_prince" name="max_prince">
         </div>
     </div>
     <div class="form-group">
         <label for="pet-desc" class="col-sm-2 control-label">详细描述<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <textarea class="form-control" rows="3" id="pet-desc" name="desc"></textarea>
+          <textarea class="form-control required" rows="3" id="pet-desc" name="desc"></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -62,43 +62,8 @@
 
 {% block scripts %}
 <script>
-    $('form').validate({
-    errorElement: 'p',
-    errorClass: 'help-block',
-    focusInvalid: false,
-    rules: {
-       email: {
-          required: true,
-          email: true
-       },
-       name: {
-          required: true
-       },
-       url: {
-          required: true,
-          url: true
-       }
-    },
 
-    messages: {
-        email: {
-           required: "Please provide a valid email.",
-           email: "Please provide a valid email."
-        }
-    },
+$('form').validate(commonvalidateConfig);
 
-    highlight: function (e) {
-        $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-    },
-
-    success: function (e) {
-        $(e).closest('.form-group').removeClass('has-error').addClass('has-info');
-        $(e).remove();
-    },
-
-    errorPlacement: function (error, element) {
-        error.insertAfter(element.parent());
-    }
-});
 </script>
 {% endblock %}
