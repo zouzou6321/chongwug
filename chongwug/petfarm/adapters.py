@@ -53,19 +53,18 @@ def manage_nestofpet_add(request):
     return True
 
 def manage_nestofpet_picadd(request):
-    farms = pet_farm.objects.filter(dele=False)
+    curuser = user.objects.get(auth_user=auth.get_user(request),dele = False)
     use_fors = []
     use_fors.append('buy_main')
     use_fors.append('narmol')
-    farm_pets = nestofpet.objects.filter(farm=farms[0],dele=False,sale_out=False)
-    return {'farms':farms,'use_fors':use_fors,'farm_pets':farm_pets}
+    farm_pets = nestofpet.objects.filter(farm=curuser.petfarm,dele=False,sale_out=False)
+    return {'use_fors':use_fors,'farm_pets':farm_pets}
 
 def manage_pet_farm_picadd(request):
-    farms = pet_farm.objects.filter(dele=False)
     use_fors = []
     use_fors.append('buy_home')
     use_fors.append('narmol')
-    return {'farms':farms,'use_fors':use_fors}
+    return {'use_fors':use_fors}
 
 def pet_farm_all():
     farms = pet_farm.objects.filter(dele=False)
@@ -168,7 +167,7 @@ def manage_pet_farm_picpreupload(request):
         if img_url == 'type error':
             return 'type error'
         #把url存入数据库
-        pet_farm_sql = pet_farm_img( pet_farm_id = get_object_or_404(pet_farm,pk=string.atoi(request.POST['pet_farm_id'])),
+        pet_farm_sql = pet_farm_img( pet_farm_id = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm,
                                 img_url = img_url,
                                 img_with = string.atoi(request.POST['x2']) - string.atoi(request.POST['x1']),
                                 img_height = string.atoi(request.POST['y2']) - string.atoi(request.POST['y1']),
