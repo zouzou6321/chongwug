@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     fs = require('fs'),
-    argv = require('minimist')(process.argv.slice(2))
+    argv = require('minimist')(process.argv.slice(2)),
     merge = require('merge-stream'),
     plugins = require('gulp-load-plugins')();
 

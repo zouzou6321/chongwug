@@ -3,6 +3,12 @@
 <head lang="zh-CN">
     {% include 'petfarm/tpl/base/meta.html' %}
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/back-assets/dist/css/base.css"/>
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="/static/back-assets/dist/css/main.css"/>
+    <!--[if lt IE 9]>
+    <script src="/static/back-assets/dist/js/respond.js"></script>
+    <![endif]-->
 </head>
 <body>
 
@@ -10,8 +16,9 @@
 {% block content %}{% endblock %}
 
 
-
-
+<script src="/static/back-assets/dist/js/jquery.js"></script>
+<script src="/static/back-assets/dist/js/bootstrap.js"></script>
+{% block scripts %}{% endblock %}
 
 </body>
 </html>
