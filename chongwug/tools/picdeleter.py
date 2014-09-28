@@ -19,10 +19,10 @@ for name, monitor_time in cur.fetchall():
     time = datetime.datetime.now() - monitor_time
     if time.total_seconds() > 300:
         try:
-            #os.remove(name)
             sql = "update manager_tmppic_monitor set dele = 1 where fname ='" + name + "'"
             cur.execute(sql)
             conn.commit()
+            os.remove(name)
         except:
             None
 conn.close()
