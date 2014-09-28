@@ -26,37 +26,6 @@ def manage_home_view(request):
     data = adapters.manage_home_data_get(request)
     return render_to_response('manager/tpl/manage_home.html',data)
 
-def manage_pet_farm_ckmod_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(MANAGE_ROOT)
-    if request.session['score'] >= 50:
-        return HttpResponse("Page Not Find!!!")
-    page_data = adapters.pet_farm_ckmod(request)
-    data = adapters.manage_home_data_get(request)
-    page_data['manager'] = data['manager']
-    return render_to_response('manager/tpl/manage_pet_farm_ckmod.html',page_data)
-
-def manage_pet_farm_ckpicmod_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(MANAGE_ROOT)
-    if request.session['score'] >= 50:
-        return HttpResponse("Page Not Find!!!")
-    return HttpResponse('False')
-
-def manage_nestofpet_ckmod_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(MANAGE_ROOT)
-    if request.session['score'] >= 50:
-        return HttpResponse("Page Not Find!!!")
-    return HttpResponse('False')
-
-def manage_nestofpet_ckpicmod_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(MANAGE_ROOT)
-    if request.session['score'] >= 50:
-        return HttpResponse("Page Not Find!!!")
-    return HttpResponse('False')
-
 def manage_pet_farm_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
