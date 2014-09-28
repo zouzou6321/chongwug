@@ -1,25 +1,47 @@
 {% extends 'petfarm/tpl/base/base.html' %}
-{% load assets %}
 {% block title %}内容编辑{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/static/back-assets/dist/imgcut/css/imgareaselect-default.css"/>
+{% endblock %}
 
-{% block content %}
-		<h1>管理员系统:添加宠物图片</h1>
-		<h2>当前操作员：{{ manager.name }}</h2>
-		<div>
-		需要上传图片的宠物：<select id="pet_id">
-		{% for pet in farm_pets %}
-		<option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.txt_desc }}</option>
-		{% endfor %}
-		</select>
-		</div>
-		<div>
-		图片用途：<select id="usefor" onchange="useforChange();">
-		{% for use_for in use_fors %}
-		<option value="{{ use_for }}">{{ use_for }}</option>
-		{% endfor %}
-		</select>
-		</div>
-		<img src="" id="viewimg" style="display: none;" />
+{% block main %}
+<h1 class="page-header">添加宠物图片</h1>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="pet_id" class="col-sm-2 control-label">需要上传图片的宠物：</label>
+        <div class="col-sm-4">
+            <select id="pet_id" class="form-control">
+                {% for pet in farm_pets %}
+                <option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.txt_desc }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="usefor" class="col-sm-2 control-label">图片用途：</label>
+        <div class="col-sm-4">
+            <select id="usefor" onchange="useforChange();" class="form-control">
+                {% for use_for in use_fors %}
+                <option value="{{ use_for }}">{{ use_for }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <img src="" id="viewimg" style="display: none;" >
+    </div>
+    <div class="form-group">
+        <label for="" class="col-sm-2 control-label">宠物图片上传：</label>
+        <div class="col-sm-4">
+            <form id="UpLoadForm" name="UpLoadForm" method="post" enctype="multipart/form-data">
+                <input id="photo" name="photo" type="file" value="选择LOGO" />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div style="width:1000px;clear: both;min-height: 400px;">
 	<div style="height: 130px;">
 		<div style="margin-top:10px;clear:right;width:1000px;text-align:left;">
@@ -28,9 +50,6 @@
 			<img  border="0"  src="/static/manage/uploadify/ajax-loader-header.gif" style="width: 20px; margin-bottom: -5px;"/><span style="color: #999;">	图像加载中...</span>
 		</span>
 		</div>
-		<form id="UpLoadForm" name="UpLoadForm" method="post" enctype="multipart/form-data" style="margin-top:5px; margin-bottom:5px; clear:right;width:1000px;text-align:left;">
-			<input id="photo" name="photo" type="file" value="选择LOGO" />
-		</form>
 	</div>
 	
 	<div style="width: 1000px; height: auto;float: left;">
@@ -43,24 +62,27 @@
 	</div>
 	<div><button onclick="submitpreimg();" class="button-modify-head">保存</button></div>
 </div>
-		<script type="text/javascript" src="/static/manage/jquery-1.4.2.js"></script>
-		<script type="text/javascript" src="/static/manage/ajax_post.js"></script>
-		<script type="text/javascript" src="/static/manage/jquery.form.js"></script>
-		<link rel="stylesheet" href="/static/manage/imgcut/css/imgareaselect-default.css" />
-		<script type="text/javascript" src='/static/manage/imgcut/scripts/jquery.imgareaselect.min.js' ></script>
-		<script type="text/javascript" src='/static/manage/jquery.uploadify.v2.1.4.min.js' ></script>
-		<script type="text/javascript" src='/static/manage/swfobject.js' ></script>
-		<script type="text/javascript">
-		var selected = 0;
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="/static/manage/ajax_post.js"></script>
+<script type="text/javascript" src="/static/manage/jquery.form.js"></script>
+<script type="text/javascript" src='/static/back-assets/dist/imgcut/scripts/jquery.imgareaselect.min.js' ></script>
+<script type="text/javascript" src='/static/manage/jquery.uploadify.v2.1.4.min.js' ></script>
+<script type="text/javascript" src='/static/manage/swfobject.js' ></script>
+<script type="text/javascript">
+
+var selected = 0;
 var imgw = 0;
 var imgh = 0;
 var minimgw = 275;
 var minimgh = 180;
 var loadedover = true;
-var Browser=new Object(); 
-Browser.userAgent=window.navigator.userAgent.toLowerCase(); 
-Browser.ie=/msie/.test(Browser.userAgent); 
-Browser.Moz=/gecko/.test(Browser.userAgent); 
+var Browser=new Object();
+Browser.userAgent=window.navigator.userAgent.toLowerCase();
+Browser.ie=/msie/.test(Browser.userAgent);
+Browser.Moz=/gecko/.test(Browser.userAgent);
 
 	function useforChange(){
 		if ($("#usefor").val() == "narmol"){
@@ -80,82 +102,82 @@ Browser.Moz=/gecko/.test(Browser.userAgent);
 			prepreview(imgw,imgh);
 		}
 	}
-	
-//判断是否加载完成 
-function Imagess(url,imgid,callback){    
-    var val=url; 
-    var img=new Image(); 
-    if(Browser.ie){ 
-        img.onreadystatechange =function(){  
-            if(img.readyState=="complete"||img.readyState=="loaded"){ 
-                callback(img,imgid); 
-            } 
-        }        
-    }else if(Browser.Moz){ 
-        img.onload=function(){ 
-            if(img.complete==true){ 
-                callback(img,imgid); 
-            } 
-        }        
+
+//判断是否加载完成
+function Imagess(url,imgid,callback){
+    var val=url;
+    var img=new Image();
+    if(Browser.ie){
+        img.onreadystatechange =function(){
+            if(img.readyState=="complete"||img.readyState=="loaded"){
+                callback(img,imgid);
+            }
+        }
+    }else if(Browser.Moz){
+        img.onload=function(){
+            if(img.complete==true){
+                callback(img,imgid);
+            }
+        }
     }
 
     img.src=val;
-} 
+}
 	var source = '';
 	function prepreview(w,h)
 	{
-		var scaleX = 1;  
- 		var scaleY = 1;  
+		var scaleX = 1;
+ 		var scaleY = 1;
  		var width = w;
  		var height = h;
  		if(imgw > 800){
  			width = imgw;
  			height = imgh;
  		}
-		$('#personheadpre').css({  
-		 width: Math.round(scaleX * width),  
-		 height: Math.round(scaleY * height),  
-		 marginLeft: -Math.round(scaleX * 0),  
-		 marginTop: -Math.round(scaleY * 0)  
+		$('#personheadpre').css({
+		 width: Math.round(scaleX * width),
+		 height: Math.round(scaleY * height),
+		 marginLeft: -Math.round(scaleX * 0),
+		 marginTop: -Math.round(scaleY * 0)
 		 });
-		x1 = 0;  
-		y1 = 0;  
+		x1 = 0;
+		y1 = 0;
 		x2 = minimgw;
 		y2 = minimgh;
 	}
-	function checkimg(obj,imgid){ 
+	function checkimg(obj,imgid){
 		document.getElementById(imgid).src=obj.src;
 		loadedover = true;
 	}
-	function preview(img, selection) {  
+	function preview(img, selection) {
 		if (!loadedover){
 			return ;
 		}
-		if (!selection.width || !selection.height)  
+		if (!selection.width || !selection.height)
 		return false;
 		selected += 1;
-		var scaleX = minimgw / selection.width;  
- 		var scaleY = minimgh / selection.height; 
+		var scaleX = minimgw / selection.width;
+ 		var scaleY = minimgh / selection.height;
  		var width = img.width;
  		var height = img.height;
  		if(imgw > 800){
  			width = imgw;
  			height = imgh;
  		}
-		$('#personheadpre').css({  
-		 width: Math.round(scaleX * width),  
-		 height: Math.round(scaleY * height),  
-		 marginLeft: -Math.round(scaleX * selection.x1),  
-		 marginTop: -Math.round(scaleY * selection.y1)  
+		$('#personheadpre').css({
+		 width: Math.round(scaleX * width),
+		 height: Math.round(scaleY * height),
+		 marginLeft: -Math.round(scaleX * selection.x1),
+		 marginTop: -Math.round(scaleY * selection.y1)
 		 });
-		x1 = selection.x1;  
-		y1 = selection.y1;  
-		x2 = selection.x2;  
+		x1 = selection.x1;
+		y1 = selection.y1;
+		x2 = selection.x2;
 		y2 = selection.y2;
 	}
 	function fun_uploadify() {
-			x1 = 0;  
-			y1 = 0;  
+			x1 = 0;
+			y1 = 0;
 			x2 = minimgw;
 			y2 = minimgh;
 			$("#photo").uploadify({
@@ -196,7 +218,7 @@ function Imagess(url,imgid,callback){
 			            html = html.replace("</pre>", "");
 			            html = jQuery.parseJSON(html);
 			            var result = html.url;
-			            //alert(result); 
+			            //alert(result);
 			            loadedover = false;
 			            //document.getElementById('personhead').src = "/resources/"+result;
 			            Imagess(result,"personhead",checkimg);
@@ -220,16 +242,16 @@ function Imagess(url,imgid,callback){
             });
 		}
 	$(document).ready(fun_uploadify());
-		
+
 		var x1 = 0;
 	var x2 = 0;
 	var y1 = 0;
 	var y2 = 0;
-	
+
 	function submitpreimg()
 	{
 		var timg = source;
-		
+
 		data = {
 			'x1':x1,
 			'x2':x2,

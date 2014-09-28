@@ -1,28 +1,88 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>内容编辑</title>
-	</head>
-	<body>
-		<h1>养殖场数据管理系统:修改养殖场信息</h1>
-		<h2>当前操作员：{{ manager.nickname }}</h2>
-		加*为必填项
-		<form method="post" action="./">
-		{% csrf_token %}
-		养殖场名字*：<input type="text" name="name" value={{ manager.petfarm.name }}></input><br>
-		养殖场介绍*：<textarea name="desc">{{ manager.petfarm.desc }}</textarea><br>
-		省会（默认四川）：<input type="text" name="province" value={{ manager.petfarm.province }}></input><br>
-		城市（默认成都）：<input type="text" name="city" value={{ manager.petfarm.city }}></input><br>
-		片区（eg。高新）*：<input type="text" name="district" value={{ manager.petfarm.district }}></input><br>
-		所处方位*:<input type="radio" name="direct" value="东" {% if manager.petfarm.direct = '东' %}checked{% endif %}> 城东  
-			<input type="radio" name="direct" value="南" {% if manager.petfarm.direct = '南' %}checked{% endif %}> 城南 
-			<input type="radio" name="direct" value="西" {% if manager.petfarm.direct = '西' %}checked{% endif %}> 城西 
-			<input type="radio" name="direct" value="北" {% if manager.petfarm.direct = '北' %}checked{% endif %}> 城北  
-			<input type="radio" name="direct" value="中" {% if manager.petfarm.direct = '中' %}checked{% endif %}> 城中<br>
-		详细地址*：<input type="text" name="detail_address" value={{ manager.petfarm.detail_address }}></input><br>
-		宠物最低价格*：<input type="text" name="min_prince" value={{ manager.petfarm.min_prince }}></input><br>
-		<input type="submit" value="提交"/>
-		</form>
-	</body>
-</html>
+{% extends 'petfarm/tpl/base/base.html' %}
+{% block title %}内容编辑{% endblock %}
+
+{% block main %}
+
+<h1 class="page-header">修改养殖场信息</h1>
+<p>加*为必填项</p>
+<form class="form-horizontal" method="post" action="./">
+{% csrf_token %}
+    <div class="form-group">
+        <label for="farm-name" class="col-sm-2 control-label">养殖场名字<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="name" value="{{ manager.petfarm.name }}" class="form-control" id="farm-name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-desc" class="col-sm-2 control-label">养殖场介绍<span class="warn">*</span>：</label>
+        <div class="col-sm-8">
+            <textarea name="desc" class="form-control" rows="3" id="farm-desc">{{ manager.petfarm.desc }}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-province" class="col-sm-2 control-label">省会（默认四川）：</label>
+        <div class="col-sm-4">
+            <input type="text" name="province" value="{{ manager.petfarm.province }}" id="farm-province" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-city" class="col-sm-2 control-label">城市（默认成都）：</label>
+        <div class="col-sm-4">
+            <input type="text" name="city" value="{{ manager.petfarm.city }}" id="farm-city" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-district" class="col-sm-2 control-label">片区（eg：高新）<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="city" value="{{ manager.petfarm.district }}" id="farm-district" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">所处方位<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="东" {% if manager.petfarm.direct == '东' %}checked{% endif %}> 城东
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="南" {% if manager.petfarm.direct == '南' %}checked{% endif %}> 城南
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="西" {% if manager.petfarm.direct == '西' %}checked{% endif %}> 城西
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="北" {% if manager.petfarm.direct == '北' %}checked{% endif %}> 城北
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="中" {% if manager.petfarm.direct == '中' %}checked{% endif %}> 城中
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-address" class="col-sm-2 control-label">详细地址<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="detail_address" value="{{ manager.petfarm.detail_address }}" id="farm-address" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-min-prince" class="col-sm-2 control-label">宠物最低价格<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="min_prince" value="{{ manager.petfarm.min_prince }}" id="farm-min-prince" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button type="submit" class="btn btn-primary form-control">提交</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/back-assets/dist/ckeditor/ckeditor.js"></script>
+<script>
+
+CKEDITOR.replace('farm-desc');
+
+</script>
+{% endblock %}
