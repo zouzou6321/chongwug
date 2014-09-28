@@ -59,3 +59,46 @@
 </form>
 
 {% endblock %}
+
+{% block scripts %}
+<script>
+    $('form').validate({
+    errorElement: 'p',
+    errorClass: 'help-block',
+    focusInvalid: false,
+    rules: {
+       email: {
+          required: true,
+          email: true
+       },
+       name: {
+          required: true
+       },
+       url: {
+          required: true,
+          url: true
+       }
+    },
+
+    messages: {
+        email: {
+           required: "Please provide a valid email.",
+           email: "Please provide a valid email."
+        }
+    },
+
+    highlight: function (e) {
+        $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+    },
+
+    success: function (e) {
+        $(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+        $(e).remove();
+    },
+
+    errorPlacement: function (error, element) {
+        error.insertAfter(element.parent());
+    }
+});
+</script>
+{% endblock %}
