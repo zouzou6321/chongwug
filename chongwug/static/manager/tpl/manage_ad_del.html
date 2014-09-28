@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>内容编辑</title>
+	</head>
+	<body>
+		<h1>审核管理系统</h1>
+		<h2>当前操作员：{{ manager.name }}</h2>
+		<div>
+			<form method="post" action="./">
+				{% csrf_token %}
+				<div>
+				广告类型：	<select id="adtype" name="adtype" onchange="adtypeselected();">
+						{% for ad_type in adinfo.ad_types %}
+						<option value="{{ ad_type.value }}">{{ ad_type.text }}</option>
+						{% endfor %}
+						</select>
+				</div>
+				广告信息：
+				<div id="adinfo">
+					{% for ad in adinfo.ads %}
+					<p><input type="checkbox" name="ads" value="{{ ad.id }}"><img src="{{ ad.img_url }}" /></input></p>
+					{% endfor %} 
+				</div>
+				<button type="submit" >删除</button>
+			</form>
+		</div>
+		<script>
+		function adtypeselected(){
+			data = {'adtype':$("#adtype").val()};
+			$.get("./adtypeselect/", data, function(recive){
+				if(recive != 'False'){
+					$("#adinfo").empty();
+					$("#adinfo").append(recive);
+				}
+				else{
+					alert('数据异常');
+				}
+			});
+		}
+		</script>
+	</body>
+</html>
