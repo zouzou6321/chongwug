@@ -8,6 +8,7 @@ from PIL import Image
 from chongwug import settings
 from upyun import UpYun
 from django.contrib.auth.models import User
+from django.shortcuts import render_to_response
 import string,re
 import os,uuid,datetime
 '''
@@ -170,17 +171,48 @@ def manage_ad_picpreupload(request):
     return 'true'
 
 def pet_farm_ckmod(request):
-    if request.method == 'POST':
-            cur_user = user.objects.get(auth_user=auth.get_user(request),dele=False)
-            cur_user.petfarm.name = request.POST['name']
-            cur_user.petfarm.desc = request.POST['desc']
-            cur_user.petfarm.detail_address = request.POST['dest']
-            cur_user.petfarm.province = province
-            cur_user.petfarm.city = city
-            cur_user.petfarm.district = request.POST['district']
-            cur_user.petfarm.direct = request.POST['direct']
-            cur_user.petfarm.min_prince = request.POST['min_prince']
-            cur_user.save()
+    if request.method == 'GET' and 'ckid' in request.GET and 'ckrel' in request.GET:
+        if request.REQUEST.get('ckrel') == '0':
+            try:
+                petfarm_mod = pet_farm_mod.objects.get(id=string.atoi(request.REQUEST.get('ckid')),dele=False,ckpass=False)
+                petfarm_mod.dele = True
+                petfarm_mod.save()
+                return 'True'
+            except:
+                return 'False'
+        elif request.REQUEST.get('ckrel') == '1':
+            try:
+                print '1'
+                petfarm_mod = pet_farm_mod.objects.get(id=string.atoi(request.REQUEST.get('ckid')),dele=False,ckpass=False)
+                print '2'
+                petfarm_mod.user.petfarm.name = petfarm_mod.name
+                petfarm_mod.user.petfarm.desc = petfarm_mod.desc
+                petfarm_mod.user.petfarm.detail_address = petfarm_mod.detail_address
+                petfarm_mod.user.petfarm.province = petfarm_mod.province
+                petfarm_mod.user.petfarm.city = petfarm_mod.city
+                petfarm_mod.user.petfarm.district = petfarm_mod.district
+                petfarm_mod.user.petfarm.direct = petfarm_mod.direct
+                petfarm_mod.user.petfarm.min_prince = petfarm_mod.min_prince
+                print '4'
+                petfarm_mod.dele = True
+                petfarm_mod.ckpass = True
+                print '5'
+                petfarm_mod.save()
+                print '6'
+                return 'True'
+            except:
+                return 'False'
+        else:
+            return 'False'
+    elif request.method == 'GET' and 'id' in request.GET:
+        try:
+            petfarm_mod = pet_farm_mod.objects.get(id=string.atoi(request.REQUEST.get('id')),dele=False,ckpass=False)
+            return {'petfarm_mod':petfarm_mod}
+        except:
+            return False
     else:
         petfarms_mod = pet_farm_mod.objects.filter(dele=False,ckpass=False)
-        return {'petfarms':petfarms_mod}
+        try:
+            return {'petfarms':petfarms_mod,'htmltoken':render_to_response('manager/tpl/manage_pet_farm_ckmod_token.html',{'petfarm_mod':petfarms_mod[0]})}
+        except:
+            return "no"

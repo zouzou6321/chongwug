@@ -3,6 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>内容编辑</title>
+		<script type="text/javascript" src="/static/manage/jquery-1.4.2.js"></script>
+		<script type="text/javascript" src="/static/manage/ajax_post.js"></script>
 	</head>
 	<body>
 		<h1>管理审核系统:养殖场信息修改审核</h1>
@@ -10,32 +12,35 @@
 		{% for petfarm in petfarms %}
 		养殖场名字*：{{ petfarm.name }}
 		{% endfor %}
-		养殖场名字*：<select name="pet_farm_id" onchange="farmslected();">
+		养殖场名字*：<select id="pet_farm_id" onchange="farmslected();">
 		{% for petfarm in petfarms %}
 		<option value="{{ petfarm.id }}">{{ petfarm.name }}</option>
 		{% endfor %}
 		</select><br>
 		<div id="farm_id">
-		养殖场介绍：
-		联系电话：
-		邮箱地址：
-		省会（默认四川）：
-		城市（默认成都）：
-		片区：
-		所处方位:
-		详细地址：
-		宠物最低价格：
+		{{ htmltoken|safe }}
 		<div>
+		<button value="审核通过" onclick="ckcommit(1);">审核通过</button>
+		<button value="审核不通过" onclick="ckcommit(0);">审核不通过</button>
 		<script type="text/javascript">
 		function farmslected(){
-			data = {'pet_farm_id':$("#pet_farm_id").val()};
-			$.post("./modfarmselect/", data, function(recive){
+			$.get("./?id="+$("#pet_farm_id").val(), function(recive){
 				if(recive != 'false'){
 					$("#farm_id").empty();
 					$("#farm_id").append(recive);
 				}
 				else{
 					alert('数据异常');
+				}
+			});
+		}
+		function ckcommit(rel){
+			$.get("./?ckid=" + $("#pet_farm_id").val() + "&ckrel=" + rel,function(recive){
+				if(recive != 'False'){
+					window.location = "./"; 
+				}
+				else{
+					alert('网站出现问题了，请反馈哦！');
 				}
 			});
 		}
