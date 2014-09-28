@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-import adapters
+import adapters,config
 MANAGE_ROOT='/manage/'
 
 def manage_login(request):
@@ -43,6 +43,8 @@ def manage_ad_add_view(request):
     if request.session['score'] < 50:
         return HttpResponse("Page Not Find!!!")
     data = adapters.manage_home_data_get(request)
+    ad_types = adapters.manage_get_adtypes()
+    data['ad_types'] = ad_types
     return render_to_response('manager/tpl/manage_ad_picadd.html',data,context_instance=RequestContext(request))
 
 @csrf_exempt
@@ -61,9 +63,21 @@ def manage_ad_picpre_view(request):
         return HttpResponse("Page Not Find!!!")
     return HttpResponse(adapters.manage_ad_picpreupload(request))
 
-def manage_ad_mod_view(request):
+def manage_ad_del_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
         return HttpResponse("Page Not Find!!!")
-    return True
+    data = adapters.manage_home_data_get(request)
+    data['adinfo'] = adapters.manage_ad_del(request) 
+    if data['adinfo'] == 'False':
+        return HttpResponse("删除数据没有成功")
+    else:
+        return render_to_response('manager/tpl/manage_ad_del.html',data,context_instance=RequestContext(request))
+
+def manage_ad_select_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return HttpResponse("Page Not Find!!!")
+    return HttpResponse(adapters.manage_ad_select(request))

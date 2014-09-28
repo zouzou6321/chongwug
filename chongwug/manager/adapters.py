@@ -10,6 +10,7 @@ from upyun import UpYun
 from django.contrib.auth.models import User
 import string,re
 import os,uuid,datetime
+import config
 '''
 管理员鉴权
 '''
@@ -159,8 +160,15 @@ def manage_ad_picpreupload(request):
         img_url = pic_preupload(request,settings.PET_AD_PIC_ROOT,max_height,max_width)
         if img_url == 'type error':
             return 'type error'
+        ad_type = None
+        for adtype in config.__adtypes:
+            if adtype[1] == request.POST['type']:
+                ad_type = adtype[1]
+                break
+        if not ad_type:
+            return 'error'
         #把url存入数据库
-        ad_sql = ad( type = request.POST['type'],
+        ad_sql = ad( type = ad_type,
                      tar_url = request.POST['tar_url'],
                      prince = string.atoi(request.POST['prince']),
                      start_time = datetime.datetime.strptime(request.POST['start_time'], "%Y-%m-%d %H:%M:%S"),
@@ -168,3 +176,35 @@ def manage_ad_picpreupload(request):
                      img_url = img_url)
         ad_sql.save()
     return 'true'
+
+def manage_get_adtypes():
+    ad_types = []
+    for adtype in config.__adtypes:
+        ad_types.append({'value':adtype[1],'text':adtype[2]})
+    return ad_types
+
+def manage_ad_del(request):
+    if request.method == 'POST':
+        try:
+            ads_str = request.REQUEST.getlist('ads')
+            type = request.POST['adtype']
+            ads = ad.objects.filter(type=type,dele=False)
+            for tmp_ad in ads_str:
+                print ads.count()
+                curad = ads.get(id=string.atoi(tmp_ad))
+                curad.dele = True
+                curad.save()
+        except:
+            return 'False'
+    ad_types = manage_get_adtypes()
+    ads = ad.objects.filter(type = config.__adtypes[0][1],dele=False)
+    return {'ad_types':ad_types,'ads':ads}
+
+def manage_ad_select(request):
+    if request.method == 'GET'and 'adtype' in request.GET:
+        htmltoken = ""
+        ads = ad.objects.filter(type = request.REQUEST.get('adtype'),dele = False)
+        for tmp_ad in ads:
+            htmltoken = '<p><input type="checkbox" name="ads" value="' + tmp_ad.id + '"><img src="' + tmp_ad.img_url + '" /></input></p>'
+        return htmltoken
+    return  'False'

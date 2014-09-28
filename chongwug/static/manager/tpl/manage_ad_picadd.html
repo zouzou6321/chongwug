@@ -9,7 +9,9 @@
 		<h2>当前操作员：{{ manager.nickname }}</h2>
 		<div>
 		广告类型：<select id="type_id">
-		<option value="nav_m">首页主广告</option>
+		{% for ad_type in ad_types %}
+		<option value="{{ ad_type.value }}">{{ ad_type.text }}</option>
+		{% endfor %}
 		</select>
 		</div>
 		广告点击后跳转地址*：<input type="text" id="tar_url"></input><br>
