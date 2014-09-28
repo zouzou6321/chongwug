@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    {% include 'petfarm/tpl/base/meta.html' %}
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/back-assets/dist/css/base.css"/>
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="/static/back-assets/dist/css/main.css"/>
+    <!--[if lt IE 9]>
+    <script src="/static/back-assets/dist/js/respond.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/manage/">后台审核管理系统</a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">当前操作员：{{ manager.name }}<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/manage/?logout=true">注销</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block container %}
+<div class="container-fluid">
+    <div class="row">
+        {% block sidebar %}
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                {% if manager.permission_score < 50 %}
+				{% else %}
+				<li><a href="/manage/petfarm/add/">添加新养殖场</a></li>
+				<li><a href="/manage/ad/add/">添加广告</a></li>
+				<li><a href="/manage/ad/del/">删除广告</a></li>
+				{% endif %}
+            </ul>
+        </div>
+        {% endblock %}
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {% block main %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<script src="/static/back-assets/dist/js/jquery.js"></script>
+<script src="/static/back-assets/dist/js/bootstrap.js"></script>
+<script src="/static/back-assets/dist/js/validate/jquery.validate.js"></script>
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

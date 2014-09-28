@@ -1,13 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>内容编辑</title>
-	</head>
-	<body>
-		<h1>审核管理系统</h1>
-		<h2>当前操作员：{{ manager.name }}</h2>
-		<div>
+{% extends 'manager/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+
+{% block main %}
+
+<h1 class="page-header">删除广告</h1>
+<p>加*为必填项</p>
 			<form method="post" action="./">
 				{% csrf_token %}
 				<div>
@@ -20,7 +18,7 @@
 				广告信息：
 				<div id="adinfo">
 					{% for ad in adinfo.ads %}
-					<p><input type="checkbox" name="ads" value="{{ ad.id }}"><img src="{{ ad.img_url }}" /></input></p>
+					<p><input type="checkbox" name="ads" value="{{ ad.id }}"><img src="{{ ad.img_url }}" style="width:900px;"/></input></p>
 					{% endfor %} 
 				</div>
 				<button type="submit" >删除</button>
@@ -40,5 +38,4 @@
 			});
 		}
 		</script>
-	</body>
-</html>
+{% endblock %}
