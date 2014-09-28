@@ -47,7 +47,7 @@
     </div>
     <div class="form-group">
         <label for="pet-desc" class="col-sm-2 control-label">详细描述<span class="warn">*</span>：</label>
-        <div class="col-sm-4">
+        <div class="col-sm-8">
           <textarea class="form-control required" rows="3" id="pet-desc" name="desc"></textarea>
         </div>
     </div>
@@ -61,7 +61,10 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="/static/back-assets/dist/js/ckeditor/ckeditor.js"></script>
 <script>
+
+CKEDITOR.replace('pet-desc');
 
 $('form').validate(commonvalidateConfig);
 

@@ -17,7 +17,7 @@ gulp.task('css', function(){
 });
 
 gulp.task('js', function(){
-    gulp.src('./src/js/**/*.js')
+    gulp.src(['./src/js/**/*.js', '!./src/js/ckeditor/**/**'])
         .pipe(plugins.uglify())
         .pipe(gulp.dest('./dist/js'));
 });
