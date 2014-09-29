@@ -1,12 +1,17 @@
 .cwg-carousel{
-  margin-top: 20px;
-  padding-bottom: 35px;
-  margin-left: -15px;
-  margin-right: -15px;
+  padding-bottom: 45px;
+
+  img{
+    width: 100%;
+  }
+
+  p{
+    margin-bottom: 0;
+  }
 
   .cwg-lace{
     position: absolute;
-    bottom: 70px;
+    bottom: 45px;
 
     height: 4px;
     width: 100%;

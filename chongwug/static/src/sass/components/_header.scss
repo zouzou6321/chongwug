@@ -3,25 +3,21 @@
 }
 
 .cwg-navbar{
-  background: $bg-color;
+  background: #fff;
   border: 0;
   margin-bottom: 0;
+  min-height: 30px;
 
-  .navbar-toggle .icon-bar{
-    background: $bg-color;
-  }
-
-  .navbar-nav a, .navbar-brand{
-    color: #fff;
-    padding-top: 13px;
-    padding-bottom: 13px;
-    line-height: 19px;
-    font-size: 16px;
+  .navbar-nav a{
+    color: $nav-color;
+    line-height: 1;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .active a{
-    color: #ffd401;
-    background: #fff;
+    color: $nav-highlight-color;
+    background: $bg-color;
   }
 
   .navbar-header{
@@ -34,8 +30,15 @@
   }
 }
 
+.cwg-global-search{
+  position: relative;
+  padding-bottom: 20px;
+}
+
 .cwg-tel{
-  padding-top: 2px;
+  position: absolute;
+  right: 0;
+  bottom: 5px;
 }
 
 .cwg-tel-detail{

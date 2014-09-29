@@ -66,28 +66,32 @@
   color: #947305; }
 
 .cwg-navbar {
-  background: #ffd401;
+  background: #fff;
   border: 0;
-  margin-bottom: 0; }
-  .cwg-navbar .navbar-toggle .icon-bar {
-    background: #ffd401; }
-  .cwg-navbar .navbar-nav a, .cwg-navbar .navbar-brand {
-    color: #fff;
-    padding-top: 13px;
-    padding-bottom: 13px;
-    line-height: 19px;
-    font-size: 16px; }
+  margin-bottom: 0;
+  min-height: 30px; }
+  .cwg-navbar .navbar-nav a {
+    color: #d9a300;
+    line-height: 1;
+    padding-top: 8px;
+    padding-bottom: 8px; }
   .cwg-navbar .active a {
-    color: #ffd401;
-    background: #fff; }
+    color: #906e00;
+    background: #ffd401; }
   .cwg-navbar .navbar-header {
     margin-right: 30px; }
   .cwg-navbar .location {
     padding-left: 15px;
     font-size: 12px; }
 
+.cwg-global-search {
+  position: relative;
+  padding-bottom: 20px; }
+
 .cwg-tel {
-  padding-top: 2px; }
+  position: absolute;
+  right: 0;
+  bottom: 5px; }
 
 .cwg-tel-detail {
   margin-bottom: 0;
@@ -207,13 +211,14 @@
 
 /*home*/
 .cwg-carousel {
-  margin-top: 20px;
-  padding-bottom: 35px;
-  margin-left: -15px;
-  margin-right: -15px; }
+  padding-bottom: 45px; }
+  .cwg-carousel img {
+    width: 100%; }
+  .cwg-carousel p {
+    margin-bottom: 0; }
   .cwg-carousel .cwg-lace {
     position: absolute;
-    bottom: 70px;
+    bottom: 45px;
     height: 4px;
     width: 100%;
     background: url(../imgs/lace.png) 9px 100% repeat-x; }
@@ -227,6 +232,9 @@
 .cwg-area-row {
   padding-bottom: 60px; }
 
+.cwg-area a {
+  color: #4a4a4a;
+  font-weight: bold; }
 .cwg-area div {
   position: relative; }
   .cwg-area div p {
