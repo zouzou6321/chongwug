@@ -6,18 +6,43 @@
 
 {% block main %}
 <h1 class="page-header">添加广告</h1>
-		<div>
-		广告类型：<select id="type_id">
-		{% for ad_type in ad_types %}
-		<option value="{{ ad_type.value }}">{{ ad_type.text }}</option>
-		{% endfor %}
-		</select>
-		</div>
-		广告点击后跳转地址*：<input type="text" id="tar_url"></input><br>
-		广告价格*：<input type="text" id="prince"></input><br>
-		开始展示的时间*：<input type="text" id="start_time"></input><br>
-		结束展示的时间*：<input type="text" id="end_time"></input><br>
-		<img src="" id="viewimg" style="display: none;" />
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="pet_id" class="col-sm-2 control-label">广告类型：</label>
+        <div class="col-sm-4">
+            <select id="type_id"  class="form-control">
+				{% for ad_type in ad_types %}
+				<option value="{{ ad_type.value }}">{{ ad_type.text }}</option>
+				{% endfor %}
+			</select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-color" class="col-sm-2 control-label">广告点击后跳转地址<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required" id="tar_url" name="tar_url">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-color" class="col-sm-2 control-label">广告价格<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required" id="prince" name="prince">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-color" class="col-sm-2 control-label">开始展示的时间<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required" id="start_time" name="start_time">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-color" class="col-sm-2 control-label">结束展示的时间<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required" id="end_time" name="end_time">
+        </div>
+    </div>
+</div>
+<img src="" id="viewimg" style="display: none;" />
 <div style="width:1000px;clear: both;min-height: 400px;">
 	<div style="height: 130px;">
 		<div style="margin-top:10px;clear:right;width:1000px;text-align:left;">
