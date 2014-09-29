@@ -168,7 +168,7 @@ function Imagess(url,imgid,callback){
 			y2 = 99;
 			$("#photo").uploadify({
                 'uploader': '/static/manage/uploadify/uploadify.swf',
-                'script': '/back_manage/ad/picadd/upload/',
+                'script': '/manage/ad/picadd/upload/',
                 'cancelImg': '/static/manage/uploadify/cancel.png',
                 'fileDesc': '图片文件',
                 'buttonText': '选择上传',
@@ -247,7 +247,7 @@ function Imagess(url,imgid,callback){
 			'end_time':$("#end_time").val(),
 			'source':timg
 		};
-		$.post("/back_manage/ad/picadd/preupload/", data, function(recive){
+		$.post("/manage/ad/picadd/preupload/", data, function(recive){
 			if(recive == 'true'){
 				if(alert('保存成功,启动时间到达后会自动筛选启动')){
 					window.location.href="/back_manage/ad/picadd/";

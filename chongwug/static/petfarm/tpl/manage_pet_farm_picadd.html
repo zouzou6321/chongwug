@@ -210,7 +210,7 @@ function Imagess(url,imgid,callback){
 			'usefor':$("#usefor").val(),
 			'source':timg
 		};
-		$.post("/back_manage/petfarm/picadd/preupload/", data, function(recive){
+		$.post("/petfarm/petfarm/picadd/preupload/", data, function(recive){
 			if(recive == 'true'){
 				if(alert('保存头像成功,请等待系统验证通过后启用')){
 					window.location.href="/back_manage/petfarm/picadd/";
