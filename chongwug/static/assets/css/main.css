@@ -2,8 +2,8 @@
 .col-md-2_4 {
   position: relative;
   min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px; }
+  padding-left: 9px;
+  padding-right: 9px; }
   @media (min-width: 992px) {
     .col-md-2_4 {
       float: left;
@@ -12,8 +12,8 @@
 .col-sm-2_4 {
   position: relative;
   min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px; }
+  padding-left: 9px;
+  padding-right: 9px; }
   @media (min-width: 768px) {
     .col-sm-2_4 {
       float: left;
@@ -76,7 +76,7 @@
     padding-top: 8px;
     padding-bottom: 8px; }
   .cwg-navbar .active a {
-    color: #906e00;
+    color: #b38900;
     background: #ffd401; }
   .cwg-navbar .navbar-header {
     margin-right: 30px; }
@@ -157,7 +157,7 @@
   .footer .cwg-flow-chart .step-desc {
     padding-left: 3px; }
 .footer .footer-bottom {
-  background: #dba903;
+  background: #daa904;
   color: #fff;
   font-size: 12px;
   line-height: 30px; }
@@ -192,7 +192,7 @@
     height: 64px;
     line-height: 60px;
     margin: 0 auto;
-    border: 2px solid #dba903; }
+    border: 2px solid #daa904; }
     .cwg-social a i {
       font-size: 40px; }
     .cwg-social a:hover {
@@ -230,11 +230,15 @@
       background-color: #4c4c4c; }
 
 .cwg-area-row {
-  padding-bottom: 60px; }
+  padding-bottom: 60px;
+  margin-right: -8px;
+  margin-left: -8px; }
 
 .cwg-area a {
   color: #4a4a4a;
   font-weight: bold; }
+.cwg-area img {
+  width: 100%; }
 .cwg-area div {
   position: relative; }
   .cwg-area div p {

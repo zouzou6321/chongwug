@@ -3,11 +3,11 @@
 @import "../bootstrap/mixins";
 
 .col-md-2_4 {
-  @include make-md-column(2.4);
+  @include make-md-column(2.4, 18px);
 }
 
 .col-sm-2_4 {
-  @include make-sm-column(2.4);
+  @include make-sm-column(2.4, 18px);
 }
 
 .col-md-offset-0_5{
