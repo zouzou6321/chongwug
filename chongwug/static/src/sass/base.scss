@@ -1,6 +1,6 @@
 // Core variables and mixins
 @import "bootstrap/variables";
-@import "components/_override-bootstrap-variables";
+@import "components/override-bootstrap-variables";
 @import "bootstrap/mixins";
 
 // Reset and dependencies
@@ -25,19 +25,19 @@
 @import "bootstrap/navs";
 @import "bootstrap/navbar";
 @import "bootstrap/breadcrumbs";
-@import "bootstrap/pagination";
-@import "bootstrap/pager";
-@import "bootstrap/labels";
-@import "bootstrap/badges";
-@import "bootstrap/jumbotron";
+//@import "bootstrap/pagination";
+//@import "bootstrap/pager";
+//@import "bootstrap/labels";
+//@import "bootstrap/badges";
+//@import "bootstrap/jumbotron";
 @import "bootstrap/thumbnails";
-@import "bootstrap/alerts";
-@import "bootstrap/progress-bars";
+//@import "bootstrap/alerts";
+//@import "bootstrap/progress-bars";
 @import "bootstrap/media";
-@import "bootstrap/list-group";
-@import "bootstrap/panels";
+//@import "bootstrap/list-group";
+//@import "bootstrap/panels";
 @import "bootstrap/responsive-embed";
-@import "bootstrap/wells";
+//@import "bootstrap/wells";
 @import "bootstrap/close";
 
 // Components w/ JavaScript
