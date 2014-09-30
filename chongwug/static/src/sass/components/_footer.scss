@@ -4,7 +4,7 @@
   }
 
   .footer-top{
-    background: $bg-color;
+    background: $primary-bg-color;
     padding-top: 45px;
     padding-bottom: 45px;
   }
@@ -86,7 +86,6 @@
 
 .cwg-social {
   list-style: none;
-  color: $header-info-color;
   text-align: center;
   padding: 0;
   margin: 0;
@@ -103,7 +102,6 @@
   a{
     display: block;
     color: #fff;
-    background-color: $bg-color;
     border-radius: 50%;
     width: 64px;
     height: 64px;

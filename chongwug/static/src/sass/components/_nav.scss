@@ -1,22 +1,28 @@
-.cwg-navbar{
+.navbar{
   border: 0;
   margin-bottom: 0;
-  min-height: 30px;
+}
+
+.cwg-navbar{
+  min-height: $home-nav-height;
 
   .navbar-nav a{
-    color: $nav-color;
+    color: $home-nav-color;
     line-height: 1;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: $home-nav-padding;
+    padding-bottom: $home-nav-padding;
   }
 
   .active a{
-    color: $nav-highlight-color;
-    background: $bg-color;
+    color: $home-nav-highlight-color;
+    background-color: $primary-bg-color;
+
+    &:hover, &:focus{
+      background-color: $primary-bg-color;
+    }
   }
 
   .navbar-toggle .icon-bar{
-    background: $nav-highlight-color;
+    background: $home-nav-highlight-color;
   }
-
 }

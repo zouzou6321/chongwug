@@ -1,4 +1,16 @@
 /*public*/
+/*------------------------------------*\
+    #global
+\*------------------------------------*/
+/*------------------------------------*\
+    #nav
+\*------------------------------------*/
+/*------------------------------------*\
+    #global
+\*------------------------------------*/
+/*------------------------------------*\
+    #nav
+\*------------------------------------*/
 .col-md-2_4 {
   position: relative;
   min-height: 1px;
@@ -62,12 +74,11 @@
   .cwg-search-wrap .glyphicon-search {
     color: #fff; }
 
-.header {
-  color: #947305; }
+.navbar {
+  border: 0;
+  margin-bottom: 0; }
 
 .cwg-navbar {
-  border: 0;
-  margin-bottom: 0;
   min-height: 30px; }
   .cwg-navbar .navbar-nav a {
     color: #d9a300;
@@ -76,13 +87,22 @@
     padding-bottom: 8px; }
   .cwg-navbar .active a {
     color: #b38900;
-    background: #ffd401; }
+    background-color: #ffd401; }
+    .cwg-navbar .active a:hover, .cwg-navbar .active a:focus {
+      background-color: #ffd401; }
   .cwg-navbar .navbar-toggle .icon-bar {
     background: #b38900; }
 
 .cwg-global-search {
   position: relative;
+  padding-top: 20px;
   padding-bottom: 20px; }
+  .cwg-global-search .cwg-city {
+    margin-bottom: 0;
+    line-height: 34px; }
+  .cwg-global-search .cwg-search-wrap {
+    padding-top: 0;
+    padding-bottom: 0; }
 
 .cwg-tel {
   position: absolute;
@@ -105,12 +125,6 @@
   .header-top .cwg-btn-wrap .btn-default {
     background-color: transparent;
     border: 0; }
-  .header-top .cwg-login {
-    padding-top: 15px;
-    padding-bottom: 15px; }
-  .header-top .cwg-search-wrap {
-    padding-top: 0;
-    padding-bottom: 0; }
 
 .footer .nav-pills .active a {
   background: none; }
@@ -170,7 +184,6 @@
 
 .cwg-social {
   list-style: none;
-  color: #947305;
   text-align: center;
   padding: 0;
   margin: 0; }
@@ -182,7 +195,6 @@
   .cwg-social a {
     display: block;
     color: #fff;
-    background-color: #ffd401;
     border-radius: 50%;
     width: 64px;
     height: 64px;
@@ -207,6 +219,9 @@
 
 /*home*/
 .cwg-carousel {
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 40px; }
   .cwg-carousel img {
     width: 100%; }

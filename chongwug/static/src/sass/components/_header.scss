@@ -1,12 +1,20 @@
-.header{
-  color: $header-info-color;
-}
-
+@import "cwg-search-wrap";
 @import "nav";
 
 .cwg-global-search{
   position: relative;
+  padding-top: 20px;
   padding-bottom: 20px;
+
+  .cwg-city{
+    margin-bottom: 0;
+    line-height: 34px;
+  }
+
+  .cwg-search-wrap{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 .cwg-tel{
@@ -34,22 +42,12 @@
 
 
 .header-top{
-  background: $bg-color;
+  background: $primary-bg-color;
 
   .cwg-btn-wrap{
     .btn-default{
       background-color: transparent;
       border: 0;
     }
-  }
-
-  .cwg-login{
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
-
-  .cwg-search-wrap{
-    padding-top: 0;
-    padding-bottom: 0;
   }
 }
