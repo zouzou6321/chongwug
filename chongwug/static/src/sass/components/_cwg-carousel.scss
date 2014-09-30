@@ -1,0 +1,37 @@
+$carousel-padding-bottom: 40px;
+$indicator-color: #4c4c4c;
+
+.cwg-carousel{
+  padding-bottom: $carousel-padding-bottom;
+
+  img{
+    width: 100%;
+  }
+
+  .carousel-lace{
+    position: absolute;
+    bottom: $carousel-padding-bottom;
+
+    height: 4px;
+    width: 100%;
+    background: url(../imgs/lace.png) 9px 0 repeat-x;
+  }
+
+  .carousel-indicators{
+    bottom: 0;
+    font-size: 0;
+
+    li{
+      border-color: $indicator-color;
+      width: 12px;
+      height: 12px;
+      vertical-align: middle;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .active{
+      background-color: $indicator-color;
+    }
+  }
+}

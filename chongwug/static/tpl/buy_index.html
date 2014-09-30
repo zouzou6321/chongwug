@@ -5,38 +5,20 @@
 
 {% block content %}
 
-<div>
-    <div class="carousel slide cwg-carousel" data-ride="carousel">
-      <div class="carousel-inner">
-        <div class="item active">
-        	{% if ads0 %}
-            <p><a target="_blank" href="{{ ads0.tar_url }}"><img src="{{ ads0.img_url }}" /></a></p>
-            {% else %}
-            <p>111</p>
-            {% endif %}
-        </div>
-        <div class="item">
-            {% if ads1 %}
-            <p><a target="_blank" href="{{ ads1.tar_url }}"><img src="{{ ads1.img_url }}" /></a></p>
-            {% else %}
-            <p>222</p>
-            {% endif %}
-        </div>
-        <div class="item">
-            {% if ads2 %}
-            <p><a target="_blank" href="{{ ads2.tar_url }}"><img src="{{ ads2.img_url }}" /></a></p>
-            {% else %}
-            <p>333</p>
-            {% endif %}
-        </div>
-      </div>
-      <ol class="carousel-indicators">
-        <li data-target=".cwg-carousel" data-slide-to="0" class="active"></li>
-        <li data-target=".cwg-carousel" data-slide-to="1"></li>
-        <li data-target=".cwg-carousel" data-slide-to="2"></li>
-      </ol>
-      <div class="cwg-lace"></div>
+<div class="carousel slide cwg-carousel" data-ride="carousel">
+  <div class="carousel-inner">
+    {% for ad in ads %}
+    <div class="item{% if forloop.first %} active{% endif %}">
+        <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}"></a>
     </div>
+    {% endfor %}
+  </div>
+  <ol class="carousel-indicators">
+    {% for ad in ads %}
+    <li data-target=".cwg-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-lace"></div>
 </div>
 
 <div class="container">

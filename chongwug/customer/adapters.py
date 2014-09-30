@@ -36,8 +36,8 @@ def buy_home_adapter(request):
         ads1 = ads[1]
     if ads_count > 2:
         ads2 = ads[2]
-    data = {'ads0':ads0,'ads1':ads1,'ads2':ads2}
-    
+    data = {'ads': ads}
+
     #获取养殖场信息，同时考虑信息获取不完整的情况，确保页面不崩溃
     city_farms = pet_farm.objects.filter(contry=contry,province=province,city=city)
     for city_farm in city_farms:
