@@ -2,33 +2,7 @@
   color: $header-info-color;
 }
 
-.cwg-navbar{
-  background: #fff;
-  border: 0;
-  margin-bottom: 0;
-  min-height: 30px;
-
-  .navbar-nav a{
-    color: $nav-color;
-    line-height: 1;
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-
-  .active a{
-    color: $nav-highlight-color;
-    background: $bg-color;
-  }
-
-  .navbar-header{
-    margin-right: 30px;
-  }
-
-  .location{
-    padding-left: 15px;
-    font-size: 12px;
-  }
-}
+@import "nav";
 
 .cwg-global-search{
   position: relative;
