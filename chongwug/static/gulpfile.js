@@ -34,7 +34,7 @@ gulp.task('css', dep, function(){
         .pipe(plugins.if(prod, plugins.filter('**/*.css')))
         .pipe(plugins.if(prod, plugins.replace(reg, function(e){ return map[e]; })))
         //compress css
-        .pipe(plugins.if(prod, plugins.cssmin({noAdvanced:true})))
+        .pipe(plugins.if(prod, plugins.minifyCss({keepSpecialComments: 0, noAdvanced: true})))
         //version css
         .pipe(plugins.if(prod, plugins.rev()))
         //save to prod dir
