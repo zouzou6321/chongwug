@@ -1,0 +1,113 @@
+{% extends 'petfarm/tpl/base/base.html' %}
+{% block title %}内容编辑{% endblock %}
+
+{% block main %}
+
+<h1 class="page-header">修改宠物信息</h1>
+<p>加*为必填项</p>
+<form method="post" action="./" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+	    <label for="pet_id" class="col-sm-2 control-label">需要修改信息的宠物：</label>
+	    <div class="col-sm-4">
+	        <select id="pet_id" name="pet_id" class="form-control" onchange="petChange();">
+	            {% for pet in pets %}
+	            <option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.short_desc }}</option>
+	            {% endfor %}
+	        </select>
+	    </div>
+	</div>
+  <div id="form_main">
+    <div class="form-group">
+        <label for="pet-color" class="col-sm-2 control-label">宠物主要颜色<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required" id="pet-color" name="color" value="{{ pet_one.color }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-age" class="col-sm-2 control-label">宠物月龄<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required number" id="pet-age" name="age" value="{{ pet_one.age }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-epidemic" class="col-sm-2 control-label">防疫状态<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required" id="pet-epidemic" name="epidemic" value="{{ pet_one.epidemic_period }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-type" class="col-sm-2 control-label">宠物品种<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet_one.type }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-min_prince" class="col-sm-2 control-label">宠物最低价格<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required number" id="pet-min_prince" name="min_prince" value="{{ pet_one.min_price }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-max_prince" class="col-sm-2 control-label">宠物最高价格<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required number" id="pet-max_prince" name="max_prince" value="{{ pet_one.max_price }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-short_desc" class="col-sm-2 control-label">一句话介绍，最多20字<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required number" id="pet-short_desc" name="short_desc" value="{{ pet_one.short_desc }}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pet-desc" class="col-sm-2 control-label">详细描述<span class="warn">*</span>：</label>
+        <div class="col-sm-8">
+          <textarea class="form-control required" rows="3" id="pet-desc" name="desc">{{ pet_one.txt_desc|safe }}</textarea>
+        </div>
+    </div>
+  </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button type="submit" class="btn btn-primary form-control">提交</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button type="button" class="btn btn-primary form-control" onclick="deletepet();">删除</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/back-assets/dist/ckeditor/ckeditor.js"></script>
+<script>
+
+CKEDITOR.replace('pet-desc');
+function petChange(){
+	$.get("?id=" + $("#pet_id").val(),function(recive){
+		if (recive != "False"){
+			$("#form_main").html(recive);
+			CKEDITOR.replace('pet-desc');
+		}
+		else{
+			alert('data error!');
+		}
+	});
+}
+
+function deletepet(){
+	$.get("?id=" + $("#pet_id").val() + "&del=1",function(recive){
+		if (recive == "True"){
+			window.location.href = window.location.href;
+		}
+		else{
+			alert("data error!");
+			window.location.href = window.location.href;
+		}
+	});
+}
+</script>
+{% endblock %}

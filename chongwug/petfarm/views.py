@@ -80,11 +80,42 @@ def manage_nestofpet_picpre_view(request):
         return HttpResponse('false')
     return HttpResponse(adapters.manage_nestofpet_picpreupload(request))
 
-def manage_pet_farm_picmod_view(request):
+def manage_pet_farm_picdel_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(PETFARM_ROOT)
     data = adapters.manage_home_data_get(request)
-    return render_to_response('petfarm/tpl/manage_pet_farm.html',data)
+    data['farmpics'] = adapters.manage_get_del_farmpics(request)
+    return render_to_response('petfarm/tpl/manage_pet_farm_picdel.html',data,context_instance=RequestContext(request))
+
+def manage_nestofpet_picdel_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(PETFARM_ROOT)
+    data = adapters.manage_home_data_get(request)
+    
+    page_data = adapters.manage_get_del_petpics(request)
+    if 'pets' not in page_data:
+        return render_to_response('petfarm/tpl/manage_nestofpet_picdel_ajax.html',page_data)
+    page_data['manager'] = data['manager']
+    return render_to_response('petfarm/tpl/manage_nestofpet_picdel.html',page_data,context_instance=RequestContext(request))
+
+def manage_nestofpet_mod_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(PETFARM_ROOT)
+    
+    data = adapters.manage_home_data_get(request)
+    if request.method == 'POST':
+        if adapters.manage_nestofpet_mod(request) == False:
+            return HttpResponse("data error occur!!!")
+    else:
+        if "id" in request.GET:
+            if 'del' in request.GET:
+                return HttpResponse(adapters.manage_del_pet(request))
+            data['pet_one'] = adapters.manage_get_pets(request)
+            return render_to_response('petfarm/tpl/manage_nestofpet_mod_ajax.html',data)
+    pets = adapters.manage_get_pets(request)
+    data['pets'] = pets
+    data['pet_one'] = pets[0]
+    return render_to_response('petfarm/tpl/manage_nestofpet_mod.html',data,context_instance=RequestContext(request))
 
 def manage_nestofpet_add_view(request):
     if adapters.manage_authentication(request) == False:

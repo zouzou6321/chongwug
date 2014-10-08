@@ -44,6 +44,7 @@ def manage_nestofpet_add(request):
                                 age = string.atoi(request.POST['age']),
                                 epidemic_period = request.POST['epidemic'],
                                 type = request.POST['type'],
+                                short_desc = request.POST['short_desc'],
                                 txt_desc = request.POST['desc'],
                                 min_price = string.atof(request.POST['min_prince']),
                                 max_price = string.atof(request.POST['max_prince']))
@@ -203,3 +204,82 @@ def manage_nestofpet_picpreupload(request):
         pet_sql.save()
         return 'true'
     return 'false'
+
+def manage_get_pets(request):
+    curuser = user.objects.get(auth_user=auth.get_user(request),dele = False)
+    if 'id' in request.GET:
+        pet_one = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,dele=False,sale_out=False)
+        return pet_one
+    else:
+        pets = nestofpet.objects.filter(farm=curuser.petfarm,dele=False,sale_out=False)
+        return pets
+
+def manage_del_pet(request):
+    try:
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        new_nestofpet = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,sale_out=False)
+        new_nestofpet.dele = True
+        new_nestofpet.save()
+    except:
+        return 'False'
+    return 'True'
+        
+def manage_nestofpet_mod(request):
+    try:
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        new_nestofpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
+        new_nestofpet.color = request.POST['color']
+        new_nestofpet.age = string.atoi(request.POST['age'])
+        new_nestofpet.epidemic_period = request.POST['epidemic']
+        new_nestofpet.type = request.POST['type']
+        new_nestofpet.short_desc = request.POST['short_desc']
+        new_nestofpet.txt_desc = request.POST['desc']
+        new_nestofpet.min_price = string.atof(request.POST['min_prince'])
+        new_nestofpet.max_price = string.atof(request.POST['max_prince'])
+        new_nestofpet.save()
+    except NameError:
+        return False
+    return True
+
+def manage_get_del_farmpics(request):
+    try:
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        if request.method == 'POST':
+            pics_str = request.REQUEST.getlist('farmpics')
+            farmpics = pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
+            for tmp_pic in pics_str:
+                try:
+                    curpic = farmpics.get(id=string.atoi(tmp_pic))
+                    curpic.dele = True
+                    curpic.save()
+                except:
+                    return 'False'
+        return pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
+    except:
+        return 'False'
+
+def manage_get_del_petpics(request):
+    try:
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        if request.method == 'POST':
+            pics_str = request.REQUEST.getlist('petpics')
+            curpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=True,sale_out=False)
+            petpics = nestofpet_img.objects.filter(nestofpet_id=curpet,dele=False)
+            for tmp_pic in pics_str:
+                try:
+                    curpic = petpics.get(id=string.atoi(tmp_pic))
+                    curpic.dele = True
+                    curpic.save()
+                except:
+                    return 'False'
+        if 'id' not in request.GET:
+            pets = manage_get_pets(request)
+            petpics = nestofpet_img.objects.filter(nestofpet_id=pets[0],dele=False)
+            return {'pets':pets,'petpics':petpics}
+        else:
+            pet_one = manage_get_pets(request)
+            petpics = nestofpet_img.objects.filter(nestofpet_id=pet_one,dele=False)
+            return {'petpics':petpics}
+    except:
+        return 'False'
+    return 'False'

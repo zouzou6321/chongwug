@@ -51,6 +51,9 @@ class nestofpet(models.Model):
     epidemic_period = models.TextField()
     #宠物品种
     type = models.TextField()
+    #一句话介绍
+    short_desc = models.TextField(max_length=20)
+    #详细介绍
     txt_desc = models.TextField()
     #上架时间
     start_time = models.DateTimeField(default=datetime.datetime.now)
