@@ -1,0 +1,25 @@
+.title-icon{
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  font-weight: bold;
+  border: 0;
+  background-color: $primary-bg-color;
+
+  @include box-shadow(none);
+  border-radius: 3px;
+
+  .popover-content{
+    padding: 6px 9px;
+  }
+
+  &.top > .arrow{
+    border-top-color: transparent;
+
+    &:after{
+      border-width: 5px;
+      border-top-color: $primary-bg-color;
+      margin-left: -5px;
+    }
+  }
+}

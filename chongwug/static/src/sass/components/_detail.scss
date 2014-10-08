@@ -181,8 +181,14 @@ label{
   z-index: 19;
 }
 
+.desc-tit{
+  font-size: 16px;
+}
+
+@import "title-icon";
+
 .desc-main{
-  margin-left: 15px;
+  margin-left: 17px;
   padding-left: 20px;
   padding-bottom: 20px;
   border-left: 2px solid #e7e7e7;
