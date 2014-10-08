@@ -86,6 +86,31 @@ def manage_pet_farm_picmod_view(request):
     data = adapters.manage_home_data_get(request)
     return render_to_response('petfarm/tpl/manage_pet_farm.html',data)
 
+def manage_pet_farm_picdel_view(request):
+    return 0
+
+def manage_nestofpet_picdel_view(request):
+    return 0
+
+def manage_nestofpet_mod_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(PETFARM_ROOT)
+    
+    data = adapters.manage_home_data_get(request)
+    if request.method == 'POST':
+        if adapters.manage_nestofpet_mod(request) == False:
+            return HttpResponse("data error occur!!!")
+    else:
+        if "id" in request.GET:
+            if 'del' in request.GET:
+                return HttpResponse(adapters.manage_del_pet(request))
+            data['pet_one'] = adapters.manage_get_pets(request)
+            return render_to_response('petfarm/tpl/manage_nestofpet_mod_ajax.html',data)
+    pets = adapters.manage_get_pets(request)
+    data['pets'] = pets
+    data['pet_one'] = pets[0]
+    return render_to_response('petfarm/tpl/manage_nestofpet_mod.html',data,context_instance=RequestContext(request))
+
 def manage_nestofpet_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(PETFARM_ROOT)

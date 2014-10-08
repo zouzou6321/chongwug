@@ -203,3 +203,38 @@ def manage_nestofpet_picpreupload(request):
         pet_sql.save()
         return 'true'
     return 'false'
+
+def manage_get_pets(request):
+    curuser = user.objects.get(auth_user=auth.get_user(request),dele = False)
+    if 'id' in request.GET:
+        pet_one = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,dele=False,sale_out=False)
+        return pet_one
+    else:
+        pets = nestofpet.objects.filter(farm=curuser.petfarm,dele=False,sale_out=False)
+        return pets
+
+def manage_del_pet(request):
+    try:
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        new_nestofpet = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,sale_out=False)
+        new_nestofpet.dele = True
+        new_nestofpet.save()
+    except:
+        return 'False'
+    return 'True'
+        
+def manage_nestofpet_mod(request):
+    try:
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        new_nestofpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
+        new_nestofpet.color = request.POST['color']
+        new_nestofpet.age = string.atoi(request.POST['age'])
+        new_nestofpet.epidemic_period = request.POST['epidemic']
+        new_nestofpet.type = request.POST['type']
+        new_nestofpet.txt_desc = request.POST['desc']
+        new_nestofpet.min_price = string.atof(request.POST['min_prince'])
+        new_nestofpet.max_price = string.atof(request.POST['max_prince'])
+        new_nestofpet.save()
+    except NameError:
+        return False
+    return True
