@@ -1,11 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8" />
-    <meta property="wb:webmaster" content="97977991e32326ac" />
-    <title>宠物购on</title>
-</head>
-<body>
-NAV
-</body>
-</html>
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}导航{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+
+<div class="nav-page">
+    <div class="adg-health adg-item">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg1.png'|assets }}" class="img-responsive"/>
+        </div>
+        <div class="nav-dotted"></div>
+        <div class="nav-lace"></div>
+    </div>
+    <div class="adg-price adg-item">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg2.png'|assets }}" class="img-responsive"/>
+        </div>
+    </div>
+    <div class="adg-purebred adg-item">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg3.png'|assets }}" class="img-responsive"/>
+        </div>
+        <div class="nav-lace"></div>
+    </div>
+    <div class="adg-process adg-item">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg4.png'|assets }}" class="img-responsive"/>
+        </div>
+    </div>
+    <div class="adg-buy adg-item">
+        <div class="container">
+            <a href="/home">
+                <img src="{{ 'imgs/nav/adg5.png'|assets }}" class="img-responsive"/>
+            </a>
+        </div>
+        <div class="nav-lace lace-top"></div>
+        <div class="nav-lace"></div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

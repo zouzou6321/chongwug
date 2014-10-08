@@ -10,7 +10,10 @@
     <![endif]-->
 </head>
 <body>
-{% include 'tpl/base/header.html' %}
+{% block header %}
+    {% include 'tpl/base/header.html' %}
+{% endblock %}
+
 {% block content %}{% endblock %}
 
 <script src="{{'js/lib/jquery.js'|assets}}"></script>
@@ -18,6 +21,8 @@
 {#<script src="{{'js/lib/bootlint.js'|assets}}"></script>#}
 {% block scripts %}{% endblock %}
 
-{% include 'tpl/base/footer.html' %}
+{% block footer %}
+    {% include 'tpl/base/footer.html' %}
+{% endblock %}
 </body>
 </html>
