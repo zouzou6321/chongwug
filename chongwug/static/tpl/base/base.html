@@ -1,6 +1,6 @@
 {% load assets %}
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" {% block htmlhook %}{% endblock %}>
 <head>
     {% include 'tpl/base/meta.html' %}
 	<title>{% block title %}{% endblock %} - 宠物购</title>
@@ -9,15 +9,19 @@
     <script src="{{ 'js/lib/respond.js'|assets }}"></script>
     <![endif]-->
 </head>
-<body>
+<body {% block bodyhook %}{% endblock %}>
 {% block header %}
     {% include 'tpl/base/header.html' %}
 {% endblock %}
 
 {% block content %}{% endblock %}
 
+{% block jquery %}
 <script src="{{'js/lib/jquery.js'|assets}}"></script>
+{% endblock %}
+{% block plugins %}
 <script src="{{'js/lib/plugins.js'|assets}}"></script>
+{% endblock %}
 {#<script src="{{'js/lib/bootlint.js'|assets}}"></script>#}
 {% block scripts %}{% endblock %}
 

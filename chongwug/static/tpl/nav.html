@@ -5,44 +5,54 @@
 
 {% block header %}{% endblock %}
 
+{% block htmlhook %}class="full-page"{% endblock %}
+{% block bodyhook %}class="full-page"{% endblock %}
+
 {% block content %}
 
-<div class="nav-page">
-    <div class="adg-health adg-item">
+<div class="nav-page" id="full-page">
+    <div class="adg-health section">
         <div class="container">
             <img src="{{ 'imgs/nav/adg1.png'|assets }}" class="img-responsive"/>
         </div>
-        <div class="nav-dotted"></div>
-        <div class="nav-lace"></div>
     </div>
-    <div class="adg-price adg-item">
+    <div class="adg-price section">
         <div class="container">
             <img src="{{ 'imgs/nav/adg2.png'|assets }}" class="img-responsive"/>
         </div>
     </div>
-    <div class="adg-purebred adg-item">
+    <div class="adg-purebred section">
         <div class="container">
             <img src="{{ 'imgs/nav/adg3.png'|assets }}" class="img-responsive"/>
         </div>
-        <div class="nav-lace"></div>
     </div>
-    <div class="adg-process adg-item">
+    <div class="adg-process section">
         <div class="container">
             <img src="{{ 'imgs/nav/adg4.png'|assets }}" class="img-responsive"/>
         </div>
     </div>
-    <div class="adg-buy adg-item">
+    <div class="adg-buy section">
         <div class="container">
             <a href="/home">
                 <img src="{{ 'imgs/nav/adg5.png'|assets }}" class="img-responsive"/>
             </a>
         </div>
-        <div class="nav-lace lace-top"></div>
-        <div class="nav-lace"></div>
     </div>
 </div>
 
 
+{% endblock %}
+
+{% block plugins %}
+<script src="{{ 'js/lib/jquery.fullPage.js'|assets }}"></script>
+<script>
+$('#full-page').fullpage({
+    easing: 'swing',
+    'navigation': true,
+    'navigationPosition': 'right',
+    'navigationTooltips': ['健康有保障', '价格很公道', '品相很优质', '流程很标准', '赶紧去挑选吧']
+});
+</script>
 {% endblock %}
 
 {% block footer %}{% endblock %}
