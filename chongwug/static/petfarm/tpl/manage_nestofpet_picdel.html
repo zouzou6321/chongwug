@@ -13,7 +13,7 @@
 				    <div class="col-sm-6">
 				        <select id="pet_id" name="pet_id" class="form-control" onchange="petChange();">
 				            {% for pet in pets %}
-				            <option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.txt_desc }}</option>
+				            <option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.short_desc }}</option>
 				            {% endfor %}
 				        </select>
 				    </div>

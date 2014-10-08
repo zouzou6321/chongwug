@@ -44,6 +44,7 @@ def manage_nestofpet_add(request):
                                 age = string.atoi(request.POST['age']),
                                 epidemic_period = request.POST['epidemic'],
                                 type = request.POST['type'],
+                                short_desc = request.POST['short_desc'],
                                 txt_desc = request.POST['desc'],
                                 min_price = string.atof(request.POST['min_prince']),
                                 max_price = string.atof(request.POST['max_prince']))
@@ -231,6 +232,7 @@ def manage_nestofpet_mod(request):
         new_nestofpet.age = string.atoi(request.POST['age'])
         new_nestofpet.epidemic_period = request.POST['epidemic']
         new_nestofpet.type = request.POST['type']
+        new_nestofpet.short_desc = request.POST['short_desc']
         new_nestofpet.txt_desc = request.POST['desc']
         new_nestofpet.min_price = string.atof(request.POST['min_prince'])
         new_nestofpet.max_price = string.atof(request.POST['max_prince'])
