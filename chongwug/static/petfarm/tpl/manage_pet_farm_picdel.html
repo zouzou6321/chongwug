@@ -1,0 +1,20 @@
+{% extends 'petfarm/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+
+{% block main %}
+
+<h1 class="page-header">删除养殖场图片</h1>
+<p>加*为必填项</p>
+			<form method="post" action="./">
+				{% csrf_token %}
+				养殖场图片：
+				<div id="info">
+					{% for farmpic in farmpics %}
+					<p><input type="checkbox" name="farmpics" value="{{ farmpic.id }}"><img src="{{ farmpic.img_url }}" style="width:900px;"/></input></p>
+					{% endfor %} 
+				</div>
+				<button type="submit" >删除</button>
+			</form>
+		</div>
+{% endblock %}

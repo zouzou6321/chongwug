@@ -238,3 +238,46 @@ def manage_nestofpet_mod(request):
     except NameError:
         return False
     return True
+
+def manage_get_del_farmpics(request):
+    try:
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        if request.method == 'POST':
+            pics_str = request.REQUEST.getlist('farmpics')
+            farmpics = pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
+            for tmp_pic in pics_str:
+                try:
+                    curpic = farmpics.get(id=string.atoi(tmp_pic))
+                    curpic.dele = True
+                    curpic.save()
+                except:
+                    return 'False'
+        return pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
+    except:
+        return 'False'
+
+def manage_get_del_petpics(request):
+    try:
+        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        if request.method == 'POST':
+            pics_str = request.REQUEST.getlist('petpics')
+            curpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=True,sale_out=False)
+            petpics = nestofpet_img.objects.filter(nestofpet_id=curpet,dele=False)
+            for tmp_pic in pics_str:
+                try:
+                    curpic = petpics.get(id=string.atoi(tmp_pic))
+                    curpic.dele = True
+                    curpic.save()
+                except:
+                    return 'False'
+        if 'id' not in request.GET:
+            pets = manage_get_pets(request)
+            petpics = nestofpet_img.objects.filter(nestofpet_id=pets[0],dele=False)
+            return {'pets':pets,'petpics':petpics}
+        else:
+            pet_one = manage_get_pets(request)
+            petpics = nestofpet_img.objects.filter(nestofpet_id=pet_one,dele=False)
+            return {'petpics':petpics}
+    except:
+        return 'False'
+    return 'False'
