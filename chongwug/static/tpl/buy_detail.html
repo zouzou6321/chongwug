@@ -73,7 +73,7 @@
                             价<span class="middle-space"></span>格：
                         </div>
                         <div class="info-td-right">
-                            <span>&yen;<span class="cwg-detail-price"> {{ nestpet.min_price }}-{{ nestpet.max_price }} </span></span>元/只
+                            <span>&yen;<span class="cwg-detail-price"> {{ nestpet.min_price|floatformat }}-{{ nestpet.max_price|floatformat }} </span></span>元/只
                         </div>
                     </div>
                     <div class="info-row clearfix">
@@ -199,7 +199,7 @@
                     <div class="dog-desc">
                         <h4><a href="?petid={{ recommendpet_img.pet.id }}">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
                         <p>
-                            <span class="dog-price">¥ {{ recommendpet_img.pet.min_price }}-{{ recommendpet_img.pet.max_price }}<span class="dog-unit">元/只</span></span>
+                            <span class="dog-price">¥ {{ recommendpet_img.pet.min_price|floatformat }}-{{ recommendpet_img.pet.max_price|floatformat }}<span class="dog-unit">元/只</span></span>
                         </p>
                     </div>
                 </div>
