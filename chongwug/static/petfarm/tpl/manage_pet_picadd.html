@@ -13,7 +13,7 @@
         <div class="col-sm-4">
             <select id="pet_id" class="form-control">
                 {% for pet in farm_pets %}
-                <option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.txt_desc }}</option>
+                <option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.short_desc }}</option>
                 {% endfor %}
             </select>
         </div>
