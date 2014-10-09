@@ -99,7 +99,8 @@
   padding: 0;
   margin: 0;
 
-  a:hover{
+  a:hover, a:focus{
+    outline: 0;
     text-decoration: none;
   }
 

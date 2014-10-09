@@ -1327,6 +1327,12 @@
     return this
   }
 
+  $(function () {
+    $('[data-toggle="popover"]').each(function () {
+      Plugin.call($(this))
+    })
+  })
+
 }(jQuery);
 
 /*! Magnific Popup - v0.9.9 - 2014-09-06

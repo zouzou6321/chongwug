@@ -110,4 +110,10 @@
     return this
   }
 
+  $(function () {
+    $('[data-toggle="popover"]').each(function () {
+      Plugin.call($(this))
+    })
+  })
+
 }(jQuery);
