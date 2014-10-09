@@ -3890,14 +3890,22 @@ button.close {
   background: #daa904;
   color: #fff;
   font-size: 12px;
-  line-height: 30px; }
+  text-align: center;
+  line-height: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px; }
 .footer .copyright {
   margin-bottom: 0; }
+  @media (min-width: 768px) {
+    .footer .copyright {
+      text-align: left; } }
 .footer .other-info {
+  margin: 0;
+  padding: 0;
   list-style: none;
-  margin-bottom: 0; }
+  display: inline-block; }
   .footer .other-info li {
-    float: left;
+    display: inline;
     padding: 0 5px; }
   .footer .other-info a {
     color: #fff; }
