@@ -3766,8 +3766,8 @@ button.close {
   content: "\3443"; }
 
 .cwg-search-wrap {
-  padding-top: 30px;
-  padding-bottom: 30px; }
+  padding-top: 20px;
+  padding-bottom: 15px; }
   .cwg-search-wrap .form-control {
     border-color: #ffdd37;
     border-right-color: #dba903; }
@@ -4186,12 +4186,20 @@ button.close {
     font-size: 16px; }
 
 /*buy*/
-.buy-container {
+.cwg-container {
   background-color: #e5e5e5;
-  padding: 20px 0; }
+  padding-top: 1px; }
+  @media (min-width: 768px) {
+    .cwg-container {
+      padding: 20px 0; } }
 
 .dog-select-title {
-  padding-right: 0; }
+  padding-right: 0;
+  padding-bottom: 10px; }
+  @media (min-width: 768px) {
+    .dog-select-title {
+      text-align: right;
+      padding-bottom: 0; } }
 
 .dog-select-row {
   color: #414141;
@@ -4212,41 +4220,45 @@ button.close {
   border-top: 1px solid #e5e5e5;
   padding-bottom: 40px; }
 
-.buy-inner {
-  width: 1000px;
-  background-color: #fff;
-  padding-left: 10px;
-  padding-right: 10px; }
-  .buy-inner .row, .buy-inner .dog-list {
-    margin-left: -10px;
-    margin-right: -10px; }
-  .buy-inner .col-md-4 {
-    padding-left: 10px;
-    padding-right: 10px; }
-  .buy-inner .dog-img {
+.buy-main {
+  background-color: #fff; }
+  .buy-main .no-result {
+    margin-bottom: 40px; }
+  @media (min-width: 1200px) {
+    .buy-main {
+      width: 1000px; } }
+  @media (min-width: 992px) {
+    .buy-main .dog-list {
+      margin-left: -25px;
+      margin-right: -25px; } }
+  @media (min-width: 992px) {
+    .buy-main .col-md-4 {
+      padding-left: 10px;
+      padding-right: 10px; } }
+  .buy-main .dog-img {
     width: 100%; }
-  .buy-inner .dog-desc {
+  .buy-main .dog-desc {
     padding: 15px; }
-    .buy-inner .dog-desc h4 {
-      line-height: 22px;
+    .buy-main .dog-desc h4 {
+      line-height: 21px;
       font-size: 16px;
-      height: 42px;
+      max-height: 42px;
       overflow: hidden;
       margin-top: 0; }
-      .buy-inner .dog-desc h4 a {
+      .buy-main .dog-desc h4 a {
         color: #333;
         font-weight: bold; }
-    .buy-inner .dog-desc .dog-addr {
+    .buy-main .dog-desc .dog-addr {
       color: #828282;
       font-size: 14px; }
-    .buy-inner .dog-desc .glyphicon-map-marker {
+    .buy-main .dog-desc .glyphicon-map-marker {
       color: #ff3500;
       margin-right: 5px; }
-    .buy-inner .dog-desc .dog-price {
+    .buy-main .dog-desc .dog-price {
       color: #ff3500;
       font-size: 22px;
       font-weight: bold; }
-    .buy-inner .dog-desc .dog-unit {
+    .buy-main .dog-desc .dog-unit {
       font-size: 14px;
       font-weight: normal; }
 

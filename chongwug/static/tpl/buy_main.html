@@ -5,17 +5,13 @@
 
 {% block content %}
 
-<div class="buy-container">
-    <div class="container buy-inner">
+<div class="cwg-container">
+    <div class="container buy-main">
         <div class="row">
-            <div class="col-md-6 col-md-offset-1">
+            <div class="col-sm-8 col-sm-offset-1 col-md-6">
                 <form action="/buy/" method="get">
                     <div class="input-group cwg-search-wrap">
-                    	{% if searchkey == None %}
-                    	<input type="text" class="form-control" placeholder="输入养殖场名称、所处区县等" name="key">
-	                	{% else %}
-	                	<input type="text" class="form-control" placeholder="输入养殖场名称、所处区县等" value="{{ searchkey }}" name="key">
-	                	{% endif %}
+                    	<input type="text" class="form-control" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != None %}value="{{ searchkey }}"{% endif %}>
                         <span class="input-group-btn">
                             <button class="btn btn-search" type="submit">
                                 <i class="glyphicon glyphicon-search"></i>
@@ -25,10 +21,9 @@
                 </form>
             </div>
         </div>
-
         <div class="row dog-select-row">
-            <div class="col-sm-1 text-right dog-select-title">犬种：</div>
-            <div class="col-sm-11">
+            <div class="col-sm-1 dog-select-title">犬种：</div>
+            <div class="col-xs-12 col-sm-11">
                 <ul class="nav nav-pills">
                 	{% if typekey == None%}
                     <li class="active"><a href="{{ urls.type_all_url }}">全部</a></li>
@@ -46,8 +41,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 text-right dog-select-title">价格：</div>
-            <div class="col-sm-11">
+            <div class="col-sm-1 dog-select-title">价格：</div>
+            <div class="col-xs-12 col-sm-11">
                 <ul class="nav nav-pills">
                 	{% if princekey == None%}
                     <li class="active"><a href="{{ urls.prince_all_url }}">全部</a></li>
@@ -65,8 +60,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 text-right dog-select-title">区域：</div>
-            <div class="col-sm-11">
+            <div class="col-sm-1 dog-select-title">区域：</div>
+            <div class="col-xs-12 col-sm-11">
                 <ul class="nav nav-pills">
                 	{% if directkey == None%}
                     <li class="active"><a href="{{ urls.direct_all_url }}">全部</a></li>
@@ -84,8 +79,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 text-right dog-select-title">疫苗：</div>
-            <div class="col-sm-11">
+            <div class="col-sm-1 dog-select-title">疫苗：</div>
+            <div class="col-xs-12 col-sm-11">
                 <ul class="nav nav-pills">
                 	{% if epidemickey == None%}
                     <li class="active"><a href="{{ urls.epidemic_all_url }}">全部</a></li>
@@ -103,8 +98,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 text-right dog-select-title">月龄：</div>
-            <div class="col-sm-11">
+            <div class="col-sm-1 dog-select-title">月龄：</div>
+            <div class="col-xs-12 col-sm-11">
                 <ul class="nav nav-pills">
                 	{% if agekey == None%}
                     <li class="active"><a href="{{ urls.age_all_url }}">全部</a></li>
@@ -124,8 +119,8 @@
         {% if searchkey == None and  typekey == None and princekey == None and directkey == None and epidemickey == None and agekey == None %}
         {% else %}
         <div class="row dog-select-row">
-            <div class="col-sm-1 text-right dog-select-title">筛选：</div>
-            <div class="col-sm-11">
+            <div class="col-sm-1 dog-select-title">筛选：</div>
+            <div class="col-xs-12 col-sm-11">
                 <ul class="nav nav-pills dog-selected">
                 	{% if searchkey == None %}
                 	{% else %}
@@ -156,26 +151,25 @@
         </div>
         {% endif %}
         <div class="dog-separate row"></div>
-        <div class="row">
-            <div class="dog-list">
-            	{% if pets_imgs%}
-            	{% else %}
-            	<div>没有找到符合条件的宠物</div>
-            	{% endif %}
-            	{% for pet_img in pets_imgs %}
-                <div class="col-md-4">
-                	<a href="detail/?petid={{pet_img.pet.id}}"><img src="{{ pet_img.img.img_url }}" class="dog-img"/></a>
+        <div class="row dog-list">
+            {% if pets_imgs%}
+                {% for pet_img in pets_imgs %}
+                <div class="col-sm-6 col-md-4">
+                    <a href="detail/?petid={{pet_img.pet.id}}"><img src="{{ pet_img.img.img_url }}" class="dog-img"/></a>
                     <div class="dog-desc">
-                    	<h4><a href="detail/?petid={{pet_img.pet.id}}">[城{{ pet_img.pet.farm.direct }}-{{ pet_img.pet.farm.district }}]{{ pet_img.pet.farm.name }} {{ pet_img.pet.color }}{{ pet_img.pet.type }}{{ pet_img.pet.short_desc }}</a></h4>
-{#                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>{{ pet_img.pet.farm.detail_address }}</p>#}
+                        <h4><a href="detail/?petid={{pet_img.pet.id}}">[城{{ pet_img.pet.farm.direct }}-{{ pet_img.pet.farm.district }}]{{ pet_img.pet.farm.name }} {{ pet_img.pet.color }}{{ pet_img.pet.type }}{{ pet_img.pet.short_desc }}</a></h4>
                         <p>
-                            <span class="dog-price">&yen; {{ pet_img.pet.min_price }}-{{ pet_img.pet.max_price }}<span class="dog-unit">元/只</span></span>
+                            <span class="dog-price price">{{ pet_img.pet.min_price|floatformat }}-{{ pet_img.pet.max_price|floatformat }}<span class="dog-unit">元/只</span></span>
                             <a href="detail/?petid={{pet_img.pet.id}}" class="btn btn-primary pull-right btn-dog" role="button">去看看</a>
                         </p>
                     </div>
                 </div>
                 {% endfor %}
-            </div>
+            {% else %}
+                <div class="col-xs-12">
+                    <p class="text-center no-result">没有找到符合条件的宠物</p>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

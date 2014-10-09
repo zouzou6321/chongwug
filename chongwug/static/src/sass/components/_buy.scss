@@ -1,10 +1,20 @@
-.buy-container{
+.cwg-container{
   background-color: #e5e5e5;
-  padding: 20px 0;
+  padding-top: 1px;
+
+  @media (min-width: $screen-sm) {
+      padding: 20px 0;
+  }
 }
 
 .dog-select-title{
   padding-right: 0;
+  padding-bottom: 10px;
+
+  @media (min-width: $screen-sm) {
+    text-align: right;
+    padding-bottom: 0;
+  }
 }
 
 .dog-select-row{
@@ -36,22 +46,30 @@
   padding-bottom: 40px;
 }
 
-.buy-inner{
-  width: $content-width;
+.buy-main{
+
+  .no-result{
+    margin-bottom: 40px;
+  }
+  
+  @media (min-width: $screen-lg) {
+    width: $content-width;
+  }
+
   background-color: #fff;
-  padding-left: 10px;
-  padding-right: 10px;
 
-  .row, .dog-list{
-    margin-left: -10px;
-    margin-right: -10px;
-  }
   .dog-list{
-
+    @media (min-width: $screen-md) {
+      margin-left: -25px;
+      margin-right: -25px;
+    }
   }
+
   .col-md-4{
-    padding-left: 10px;
-    padding-right: 10px;
+    @media (min-width: $screen-md) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
   .dog-img{
     width: 100%;
@@ -61,9 +79,9 @@
     padding: 15px;
 
     h4{
-      line-height: 22px;
+      line-height: 21px;
       font-size: 16px;
-      height: 42px;
+      max-height: 42px;
       overflow: hidden;
       margin-top: 0;
 
