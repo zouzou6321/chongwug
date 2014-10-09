@@ -9,6 +9,18 @@
   margin: 0 auto;
 }
 
+.dog-name-tag{
+  background-color: $primary-color;
+  padding: 5px 15px;
+
+  position: absolute;
+  top: 0;
+  left: 10px;
+
+  color: #fff;
+  font-size: 18px;
+}
+
 .cwg-thumbnail{
   list-style: none;
   margin: 0;
@@ -249,6 +261,7 @@ label{
   .dog-show-info{
     overflow: hidden;
     position: relative;
+    padding-top: 2px;
   }
 
   .dog-mask{
@@ -261,9 +274,19 @@ label{
     z-index: 9;
     transition: bottom .5s ease;
     color: #fff;
+    text-align: center;
+    padding-top: 20px;
 
     :root &{
       filter: none;
+    }
+
+    .pet-type{
+      font-size: 24px;
+      color: $primary-color;
+      display: inline-block;
+      padding-right: 5px;
+      padding-bottom: 40px;
     }
 
     .btn{

@@ -162,10 +162,10 @@
                                     <div class="col-md-6">
                                         <div class="dog-show-info">
                                             <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="lazy" src="{{'imgs/loading.gif'|assets}}" style="width: 100%"/>
+                                            <div class="dog-name-tag">{{ pet_img.pet.type }}</div>
                                             <div class="dog-mask">
-                                                <p>{{ pet_img.pet.type }}</p>
-                                                <p>&yen;{{ pet_img.pet.min_price }}元 - {{ pet_img.pet.max_price }}元</p>
-                                                <button class="btn btn-primary">去看看</button>
+                                                <p><span class="pet-type">{{ pet_img.pet.type }}</span>&yen;{{ pet_img.pet.min_price|floatformat }}-{{ pet_img.pet.max_price|floatformat }}元</p>
+                                                <a class="btn btn-primary" href="/buy/detail/?petid={{ pet_img.pet.id }}">去看看</a>
                                             </div>
                                         </div>
                                     </div>

@@ -4279,6 +4279,15 @@ button.close {
   overflow: hidden;
   margin: 0 auto; }
 
+.dog-name-tag {
+  background-color: #ff3500;
+  padding: 5px 15px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color: #fff;
+  font-size: 18px; }
+
 .cwg-thumbnail {
   list-style: none;
   margin: 0;
@@ -4397,6 +4406,7 @@ label {
 
 .title-icon {
   position: relative;
+  z-index: 1;
   display: inline-block;
   color: #fff;
   font-weight: bold;
@@ -4460,7 +4470,8 @@ label {
 
 .dog-show .dog-show-info {
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  padding-top: 2px; }
 .dog-show .dog-mask {
   position: absolute;
   width: 100%;
@@ -4470,9 +4481,17 @@ label {
   bottom: -100%;
   z-index: 9;
   transition: bottom 0.5s ease;
-  color: #fff; }
+  color: #fff;
+  text-align: center;
+  padding-top: 20px; }
   :root .dog-show .dog-mask {
     filter: none; }
+  .dog-show .dog-mask .pet-type {
+    font-size: 24px;
+    color: #ff3500;
+    display: inline-block;
+    padding-right: 5px;
+    padding-bottom: 40px; }
   .dog-show .dog-mask .btn {
     background-color: transparent;
     color: #ff3500; }
