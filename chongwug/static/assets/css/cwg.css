@@ -3937,6 +3937,11 @@ button.close {
       padding-right: 20px;
       border-right: 2px solid; }
 
+/*util*/
+.price:before {
+  content: '¥';
+  padding-right: 5px; }
+
 /*nav*/
 .nav-page .container {
   padding: 0; }
@@ -4147,14 +4152,17 @@ button.close {
 
 .cwg-area-row {
   padding-bottom: 60px;
-  margin-right: -8px;
-  margin-left: -8px; }
+  margin-right: -9px;
+  margin-left: -9px; }
 
 .cwg-area h2 {
   font-size: 24px;
-  font-weight: bold; }
+  font-weight: bold;
+  text-align: center; }
 .cwg-area a {
   color: #4a4a4a; }
+  .cwg-area a:hover {
+    text-decoration: none; }
 .cwg-area img {
   width: 100%; }
 .cwg-area div {
@@ -4167,8 +4175,10 @@ button.close {
     color: #fff;
     font-weight: bold;
     line-height: 1; }
-  .cwg-area div .floor-price {
+  .cwg-area div .price {
     font-size: 30px; }
+  .cwg-area div .price-desc {
+    font-size: 16px; }
 
 /*buy*/
 .buy-container {
