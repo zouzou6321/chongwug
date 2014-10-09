@@ -3799,6 +3799,21 @@ button.close {
       background-color: #ffd401; }
   .cwg-navbar .navbar-toggle .icon-bar {
     background: #b38900; }
+  .cwg-navbar .cwg-social {
+    margin-top: 3px; }
+    .cwg-navbar .cwg-social .iconfont {
+      display: block;
+      width: 24px;
+      height: 24px;
+      background-color: #ffd401;
+      color: #fff;
+      border-radius: 50%;
+      border: 0;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center; }
+    .cwg-navbar .cwg-social li {
+      padding: 0 0 0 6px; }
 
 .cwg-global-search {
   position: relative;
