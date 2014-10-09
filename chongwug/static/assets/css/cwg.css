@@ -4228,6 +4228,10 @@ button.close {
     .content-container {
       width: 1000px; } }
 
+@media (min-width: 768px) {
+  .buy-main .cwg-search-wrap {
+    padding-top: 30px;
+    padding-bottom: 30px; } }
 .buy-main .no-result {
   margin-bottom: 40px; }
 @media (min-width: 992px) {
