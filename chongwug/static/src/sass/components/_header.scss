@@ -6,21 +6,39 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
+  .logo, .cwg-city{
+    display: inline-block;
+    vertical-align: top;
+  }
+
   .cwg-city{
-    margin-bottom: 0;
-    line-height: 34px;
+    font-size: 12px;
+    padding-top: 40px;
+    padding-left: 15px;
   }
 
   .cwg-search-wrap{
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    
+    @media (min-width: $screen-sm) {
+      padding-top: 35px;
+      padding-bottom: 0;
+    }
   }
 }
 
 .cwg-tel{
-  position: absolute;
-  right: 0;
-  bottom: 5px;
+  @media (min-width: $screen-sm){
+    padding-top: 32px;
+    padding-left: 15px;
+  }
+
+  @media (min-width: $screen-md) {
+    position: absolute;
+    right: 0;
+    bottom: -85px;
+  }
 }
 
 .cwg-tel-detail{

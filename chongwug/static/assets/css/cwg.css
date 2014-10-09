@@ -3804,17 +3804,30 @@ button.close {
   position: relative;
   padding-top: 20px;
   padding-bottom: 20px; }
+  .cwg-global-search .logo, .cwg-global-search .cwg-city {
+    display: inline-block;
+    vertical-align: top; }
   .cwg-global-search .cwg-city {
-    margin-bottom: 0;
-    line-height: 34px; }
+    font-size: 12px;
+    padding-top: 40px;
+    padding-left: 15px; }
   .cwg-global-search .cwg-search-wrap {
-    padding-top: 0;
-    padding-bottom: 0; }
+    padding-top: 15px;
+    padding-bottom: 10px; }
+    @media (min-width: 768px) {
+      .cwg-global-search .cwg-search-wrap {
+        padding-top: 35px;
+        padding-bottom: 0; } }
 
-.cwg-tel {
-  position: absolute;
-  right: 0;
-  bottom: 5px; }
+@media (min-width: 768px) {
+  .cwg-tel {
+    padding-top: 32px;
+    padding-left: 15px; } }
+@media (min-width: 992px) {
+  .cwg-tel {
+    position: absolute;
+    right: 0;
+    bottom: -85px; } }
 
 .cwg-tel-detail {
   margin-bottom: 0;
