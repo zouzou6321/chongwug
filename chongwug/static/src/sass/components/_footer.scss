@@ -76,6 +76,10 @@
     }
   }
 
+  a{
+    color: #fff;
+  }
+
   .other-info{
     margin: 0;
     padding: 0;
@@ -86,10 +90,6 @@
       display: inline;
       padding: 0 5px;
     }
-
-    a{
-      color: #fff;
-    }
   }
 }
 
@@ -98,6 +98,10 @@
   text-align: center;
   padding: 0;
   margin: 0;
+
+  a:hover{
+    text-decoration: none;
+  }
 
   p{
     margin-bottom: 20px;
@@ -108,35 +112,22 @@
     padding: 0 20px;
   }
 
-  a{
+  .icon-xinlangweibo{
     display: block;
     color: #fff;
     border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    line-height: 60px;
+    width: 54px;
+    height: 54px;
+    line-height: 50px;
     margin: 0 auto;
     border: 2px solid $copyright-bg-color;
-
-    i{
-        font-size: 40px;
-    }
-
-    &:hover{
-      text-decoration: none;
-    }
-  }
-
-  .cwg-weibo{
+    font-size: 34px;
     background-color: $weibo-bg-color;
   }
 
   .cwg-weixin{
-    background-color: $weixin-bg-color;
-  }
-
-  .cwg-youjian{
-    background-color: $mail-bg-color;
+    width: 57px;
+    border: 2px solid $copyright-bg-color;
   }
 
   .footer-logo{
@@ -144,7 +135,7 @@
 
     img{
       padding-right: 20px;
-      border-right: 2px solid;
+      border-right: 2px solid #333;
     }
   }
 }

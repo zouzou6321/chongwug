@@ -1,9 +1,9 @@
 {% load assets %}
 <div class="footer">
-    <div class="footer-top">
+    <div class="footer-top hidden-xs">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 col-md-offset-1 hidden-xs">
+                <div class="col-md-5 col-md-offset-1">
                     <div class="cwg-flow-chart">
                         <div class="step step1">
                             <p class="step-num pull-left">01</p>
@@ -37,20 +37,16 @@
                 </div>
                 <div class="col-md-6">
                     <ul class="cwg-social clearfix">
-{#                        <li class="footer-logo">#}
-{#                            <img src="{{'imgs/footer-logo.jpg'|assets}}" alt="footer-logo"/>#}
-{#                        </li>#}
-                        <li>
-                            <p>新浪微博</p>
-                            <a href="#" class="cwg-weibo"><i class="iconfont icon-xinlangweibo"></i></a>
+                        <li class="footer-logo hidden-sm">
+                            <a href="/home"><img src="{{'imgs/logo.jpg'|assets}}"/></a>
                         </li>
                         <li>
                             <p>微信服务号</p>
-                            <a href="#" class="cwg-weixin"><i class="iconfont icon-weixin"></i></a>
+                            <img src="{{ 'imgs/weixin.png'|assets }}" class="cwg-weixin"/>
                         </li>
                         <li>
-                            <p>电子邮件</p>
-                            <a href="#" class="cwg-youjian"><i class="iconfont icon-youjian"></i></a>
+                            <p>新浪微博</p>
+                            <a href="#" ><i class="iconfont icon-xinlangweibo"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -61,7 +57,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-7 col-md-offset-1">
-                    <p class="copyright">Copyright &copy; 2014 chongwug.com, All Right Reserved <span>蜀ICP备14023803号-1</span></p>
+                    <p class="copyright">Copyright &copy; 2014 <a href="//www.chongwug.com">chongwug.com</a>, All Right Reserved <span>蜀ICP备14023803号-1</span></p>
                 </div>
                 <div class="col-sm-4">
                     <ul class="other-info">

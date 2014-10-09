@@ -3899,6 +3899,8 @@ button.close {
   @media (min-width: 768px) {
     .footer .copyright {
       text-align: left; } }
+.footer a {
+  color: #fff; }
 .footer .other-info {
   margin: 0;
   padding: 0;
@@ -3907,43 +3909,38 @@ button.close {
   .footer .other-info li {
     display: inline;
     padding: 0 5px; }
-  .footer .other-info a {
-    color: #fff; }
 
 .cwg-social {
   list-style: none;
   text-align: center;
   padding: 0;
   margin: 0; }
+  .cwg-social a:hover {
+    text-decoration: none; }
   .cwg-social p {
     margin-bottom: 20px; }
   .cwg-social li {
     float: left;
     padding: 0 20px; }
-  .cwg-social a {
+  .cwg-social .icon-xinlangweibo {
     display: block;
     color: #fff;
     border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    line-height: 60px;
+    width: 54px;
+    height: 54px;
+    line-height: 50px;
     margin: 0 auto;
-    border: 2px solid #daa904; }
-    .cwg-social a i {
-      font-size: 40px; }
-    .cwg-social a:hover {
-      text-decoration: none; }
-  .cwg-social .cwg-weibo {
+    border: 2px solid #daa904;
+    font-size: 34px;
     background-color: #ec5342; }
   .cwg-social .cwg-weixin {
-    background-color: #05b410; }
-  .cwg-social .cwg-youjian {
-    background-color: #56acee; }
+    width: 57px;
+    border: 2px solid #daa904; }
   .cwg-social .footer-logo {
     padding: 30px 20px 0 0; }
     .cwg-social .footer-logo img {
       padding-right: 20px;
-      border-right: 2px solid; }
+      border-right: 2px solid #333; }
 
 /*util*/
 .price:before {
