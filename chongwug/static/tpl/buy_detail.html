@@ -5,204 +5,206 @@
 
 {% block content %}
 
-<div class="container detail-container">
-    <div class="row">
-        <div class="col-md-6">
-            <ol class="breadcrumb">
-              <li><a href="/home">首页</a></li>
-              <li><a href="/buy">我要买狗</a></li>
-              <li class="active">城南狗舍</li>
-            </ol>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-5">
-            <a href="javascript:" class="cwg-thumb">
-                <img src="{{ petimg_a.img_url }}"/>
-            </a>
-            <div class="cwg-dog-imgs">
-                <a class="prev-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                <div class="thumbnail-wrap">
-                    <ul class="cwg-thumbnail clearfix">
-                    <li class="active" data-src="{{ petimg_a.img_url }}"><img src="{{ petimg_a.img_url }}!small"/></li>
-                    {% for nowimg in nowimgs %}
-                        <li data-src="{{ nowimg.img_url }}"><img src="{{ nowimg.img_url }}!small"/></li>
-                    {% endfor %}
-                    </ul>
-                </div>
-                <a class="next-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-right"></i></a>
+<div class="cwg-container">
+    <div class="container content-container">
+        <div class="row">
+            <div class="col-md-6">
+                <ol class="breadcrumb">
+                  <li><a href="/home">首页</a></li>
+                  <li><a href="/buy">我要买狗</a></li>
+                  <li class="active">城南狗舍</li>
+                </ol>
             </div>
-            <!-- JiaThis Button BEGIN -->
-			<div class="jiathis_style">
-			<a class="jiathis_button_qzone"></a>
-			<a class="jiathis_button_tsina"></a>
-			<a class="jiathis_button_renren"></a>
-			<a class="jiathis_button_cqq"></a>
-			<a class="jiathis_button_weixin"></a>
-			<a class="jiathis_button_douban"></a>
-			</div>
-			<script type="text/javascript" >
-			var jiathis_config={
-				url:"chongwug.com",
-				summary:"摘要",
-				title:"标题 #微博话题#",
-				pic:"http://chongwug-pic.b0.upaiyun.com/petpic/8172c56e-4398-11e4-adc8-d9400486119f.jpeg",
-				ralateuid:{
-					"tsina":"关注新浪ID"
-				},
-				appkey:{
-					"tsina":"3677235683",
-					"tqq":"CWu2zuJD94Zi3pcv",
-					"t163":"网易key",
-					"tsouhu":"搜狐key",
-					"tpeople":"人民key"
-				},
-				shortUrl:true,
-				hideMore:true
-			}
-			</script>
-			<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-			<!-- JiaThis Button END -->
         </div>
-        <div class="col-md-7">
-            <h1 class="cwg-detail-title">[城{{ nestpet.farm.direct }}-{{ nestpet.farm.district }}]{{ nestpet.farm.name }} {{ nestpet.color }}{{ nestpet.type }}{{ nestpet.short_desc }}</h1>
-            <div class="cwg-detail-info">
-                <div class="info-row clearfix">
-                    <div class="info-td-left">
-                        价<span class="middle-space"></span>格：
-                    </div>
-                    <div class="info-td-right">
-                        <span>&yen;<span class="cwg-detail-price"> {{ nestpet.min_price }}-{{ nestpet.max_price }} </span></span>元/只
-                    </div>
-                </div>
-                <div class="info-row clearfix">
-                    <div class="info-td-left">
-                        犬<span class="middle-space"></span>种：
-                    </div>
-                    <div class="info-td-right">
-                        <ul class="nav nav-pills cwg-detail-pills">
-                        	{% for pettype in pet_types %}
-                        	{% if pettype == curtype %}
-                            <li class="active"><a href="javascript:" data-type="{{ pettype }}" data-id="{{ nestpet.farm.id }}">{{ pettype }}</a></li>
-                            {% else %}
-                            <li><a href="javascript:" data-type="{{ pettype }}" data-id="{{ nestpet.farm.id }}">{{ pettype }}</a></li>
-                            {% endif %}
-                            {% endfor %}
+        <div class="row">
+            <div class="col-md-5">
+                <a href="javascript:" class="cwg-thumb">
+                    <img src="{{ petimg_a.img_url }}"/>
+                </a>
+                <div class="cwg-dog-imgs">
+                    <a class="prev-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                    <div class="thumbnail-wrap">
+                        <ul class="cwg-thumbnail clearfix">
+                        <li class="active" data-src="{{ petimg_a.img_url }}"><img src="{{ petimg_a.img_url }}!small"/></li>
+                        {% for nowimg in nowimgs %}
+                            <li data-src="{{ nowimg.img_url }}"><img src="{{ nowimg.img_url }}!small"/></li>
+                        {% endfor %}
                         </ul>
                     </div>
+                    <a class="next-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-right"></i></a>
                 </div>
-                <div class="info-row clearfix">
-                    <div class="info-td-left">
-                        电话咨询：
-                    </div>
-                    <div class="info-td-right">
-                        <span class="cwg-detail-phone">13912345678</span> <span class="cwg-detail-phone">13912345678</span>
-                    </div>
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                <a class="jiathis_button_qzone"></a>
+                <a class="jiathis_button_tsina"></a>
+                <a class="jiathis_button_renren"></a>
+                <a class="jiathis_button_cqq"></a>
+                <a class="jiathis_button_weixin"></a>
+                <a class="jiathis_button_douban"></a>
                 </div>
-                <div class="info-row clearfix">
-                    <div class="info-td-left">&nbsp;</div>
-                    <div class="info-td-right">
-                        <a href="" class="btn btn-primary btn-order" data-toggle="modal" data-target="#cwg-order-modal">预约看狗</a>
-                        <a href="" class="btn btn-info btn-consult">在线咨询</a>
-                        <a href="" class="cwg-clause"><i class="glyphicon glyphicon-question-sign"></i>购犬须知</a>
-                    </div>
-                </div>
+                <script type="text/javascript" >
+                var jiathis_config={
+                    url:"chongwug.com",
+                    summary:"摘要",
+                    title:"标题 #微博话题#",
+                    pic:"http://chongwug-pic.b0.upaiyun.com/petpic/8172c56e-4398-11e4-adc8-d9400486119f.jpeg",
+                    ralateuid:{
+                        "tsina":"关注新浪ID"
+                    },
+                    appkey:{
+                        "tsina":"3677235683",
+                        "tqq":"CWu2zuJD94Zi3pcv",
+                        "t163":"网易key",
+                        "tsouhu":"搜狐key",
+                        "tpeople":"人民key"
+                    },
+                    shortUrl:true,
+                    hideMore:true
+                }
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                <!-- JiaThis Button END -->
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="cwg-detail-nav">
-   <div class="container detail-container">
-       <ul class="nav navbar-nav">
-            <li class="active"><a href="#kennel-intro">详细信息</a></li>
-            <li><a href="#show-window">狗狗资料</a></li>
-            <li><a href="#guarantee-service">保障服务</a></li>
-        </ul>
-   </div>
-</div>
-
-<div class="container detail-container">
-    <div class="row">
-        <div class="col-md-9 detail-main">
-            <div id="kennel-intro">
-                <h2 class="desc-tit">
-                    <div class="popover top title-icon">
-                      <div class="arrow"></div>
-                      <div class="popover-content">详</div>
+            <div class="col-md-7">
+                <h1 class="cwg-detail-title">[城{{ nestpet.farm.direct }}-{{ nestpet.farm.district }}]{{ nestpet.farm.name }} {{ nestpet.color }}{{ nestpet.type }}{{ nestpet.short_desc }}</h1>
+                <div class="cwg-detail-info">
+                    <div class="info-row clearfix">
+                        <div class="info-td-left">
+                            价<span class="middle-space"></span>格：
+                        </div>
+                        <div class="info-td-right">
+                            <span>&yen;<span class="cwg-detail-price"> {{ nestpet.min_price }}-{{ nestpet.max_price }} </span></span>元/只
+                        </div>
                     </div>
-                    犬舍简介
-                </h2>
-                <div class="desc-main">
-                    <p class="desc-sub-tit">关于{{ nestpet.farm.name }}</p>
-                    <p class="kennel-intro-main">
-                        {{ nestpet.farm.desc|safe }}
-                    </p>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <img data-original="{{ farmimg.img_url }}" alt="犬舍" style="width: 100%;" class="lazy" src="{{'imgs/loading.gif'|assets}}"/>
+                    <div class="info-row clearfix">
+                        <div class="info-td-left">
+                            犬<span class="middle-space"></span>种：
+                        </div>
+                        <div class="info-td-right">
+                            <ul class="nav nav-pills cwg-detail-pills">
+                                {% for pettype in pet_types %}
+                                {% if pettype == curtype %}
+                                <li class="active"><a href="javascript:" data-type="{{ pettype }}" data-id="{{ nestpet.farm.id }}">{{ pettype }}</a></li>
+                                {% else %}
+                                <li><a href="javascript:" data-type="{{ pettype }}" data-id="{{ nestpet.farm.id }}">{{ pettype }}</a></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info-row clearfix">
+                        <div class="info-td-left">
+                            电话咨询：
+                        </div>
+                        <div class="info-td-right">
+                            <span class="cwg-detail-phone">13912345678</span> <span class="cwg-detail-phone">13912345678</span>
+                        </div>
+                    </div>
+                    <div class="info-row clearfix">
+                        <div class="info-td-left">&nbsp;</div>
+                        <div class="info-td-right">
+                            <a href="" class="btn btn-primary btn-order" data-toggle="modal" data-target="#cwg-order-modal">预约看狗</a>
+                            <a href="" class="btn btn-info btn-consult">在线咨询</a>
+                            <a href="" class="cwg-clause"><i class="glyphicon glyphicon-question-sign"></i>购犬须知</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="show-window">
-                <h2 class="desc-tit">
-                    <div class="popover top title-icon">
-                      <div class="arrow"></div>
-                      <div class="popover-content">犬</div>
-                    </div>
-                    狗狗资料
-                </h2>
-                <div class="desc-main">
-                    <div class="row dog-show">
-                        <div class="col-md-10">
-                            <div class="row">
-                                {% for pet_img in pets_img %}
-                                <div class="col-md-6">
-                                    <div class="dog-show-info">
-                                        <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="lazy" src="{{'imgs/loading.gif'|assets}}" style="width: 100%"/>
-                                        <div class="dog-mask">
-                                            <p>{{ pet_img.pet.type }}</p>
-                                            <p>&yen;{{ pet_img.pet.min_price }}元 - {{ pet_img.pet.max_price }}元</p>
-                                            <button class="btn btn-primary">去看看</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
+        </div>
+    </div>
+
+    <div class="cwg-detail-nav">
+       <div class="container content-container">
+           <ul class="nav navbar-nav">
+                <li class="active"><a href="#kennel-intro">详细信息</a></li>
+                <li><a href="#show-window">狗狗资料</a></li>
+                <li><a href="#guarantee-service">保障服务</a></li>
+            </ul>
+       </div>
+    </div>
+
+    <div class="container content-container">
+        <div class="row">
+            <div class="col-md-9 detail-main">
+                <div id="kennel-intro">
+                    <h2 class="desc-tit">
+                        <div class="popover top title-icon">
+                          <div class="arrow"></div>
+                          <div class="popover-content">详</div>
+                        </div>
+                        犬舍简介
+                    </h2>
+                    <div class="desc-main">
+                        <p class="desc-sub-tit">关于{{ nestpet.farm.name }}</p>
+                        <p class="kennel-intro-main">
+                            {{ nestpet.farm.desc|safe }}
+                        </p>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img data-original="{{ farmimg.img_url }}" alt="犬舍" style="width: 100%;" class="lazy" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="guarantee-service">
-                <h2 class="desc-tit">
-                    <div class="popover top title-icon">
-                      <div class="arrow"></div>
-                      <div class="popover-content">保</div>
+                <div id="show-window">
+                    <h2 class="desc-tit">
+                        <div class="popover top title-icon">
+                          <div class="arrow"></div>
+                          <div class="popover-content">犬</div>
+                        </div>
+                        狗狗资料
+                    </h2>
+                    <div class="desc-main">
+                        <div class="row dog-show">
+                            <div class="col-md-10">
+                                <div class="row">
+                                    {% for pet_img in pets_img %}
+                                    <div class="col-md-6">
+                                        <div class="dog-show-info">
+                                            <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="lazy" src="{{'imgs/loading.gif'|assets}}" style="width: 100%"/>
+                                            <div class="dog-mask">
+                                                <p>{{ pet_img.pet.type }}</p>
+                                                <p>&yen;{{ pet_img.pet.min_price }}元 - {{ pet_img.pet.max_price }}元</p>
+                                                <button class="btn btn-primary">去看看</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    保障服务
-                </h2>
-                <div class="desc-main">
-                    <p class="kennel-intro-main">
-                        城南犬舍专业繁殖金毛。。。
-                    </p>
+                </div>
+                <div id="guarantee-service">
+                    <h2 class="desc-tit">
+                        <div class="popover top title-icon">
+                          <div class="arrow"></div>
+                          <div class="popover-content">保</div>
+                        </div>
+                        保障服务
+                    </h2>
+                    <div class="desc-main">
+                        <p class="kennel-intro-main">
+                            城南犬舍专业繁殖金毛。。。
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 most-popular">
-        {% for recommendpet_img in recommendpets_img %}
-            <div>
-                <a href="?petid={{ recommendpet_img.pet.id }}">
-                    <img data-original="{{ recommendpet_img.img.img_url }}" class="dog-img lazy" src="{{'imgs/loading.gif'|assets}}" >
-                </a>
-                <div class="dog-desc">
-                    <h4><a href="?petid={{ recommendpet_img.pet.id }}">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
-                    <p>
-                        <span class="dog-price">¥ {{ recommendpet_img.pet.min_price }}-{{ recommendpet_img.pet.max_price }}<span class="dog-unit">元/只</span></span>
-                    </p>
+            <div class="col-md-3 most-popular">
+            {% for recommendpet_img in recommendpets_img %}
+                <div>
+                    <a href="?petid={{ recommendpet_img.pet.id }}">
+                        <img data-original="{{ recommendpet_img.img.img_url }}" class="dog-img lazy" src="{{'imgs/loading.gif'|assets}}" >
+                    </a>
+                    <div class="dog-desc">
+                        <h4><a href="?petid={{ recommendpet_img.pet.id }}">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
+                        <p>
+                            <span class="dog-price">¥ {{ recommendpet_img.pet.min_price }}-{{ recommendpet_img.pet.max_price }}<span class="dog-unit">元/只</span></span>
+                        </p>
+                    </div>
                 </div>
+            {% endfor %}
             </div>
-        {% endfor %}
         </div>
     </div>
 </div>

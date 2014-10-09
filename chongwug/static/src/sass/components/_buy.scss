@@ -5,6 +5,10 @@
   @media (min-width: $screen-sm) {
       padding: 20px 0;
   }
+
+  .container{
+    background-color: #fff;
+  }
 }
 
 .dog-select-title{
@@ -46,17 +50,19 @@
   padding-bottom: 40px;
 }
 
-.buy-main{
-
-  .no-result{
-    margin-bottom: 40px;
-  }
-  
+.content-container{
   @media (min-width: $screen-lg) {
     width: $content-width;
   }
 
   background-color: #fff;
+}
+
+.buy-main{
+
+  .no-result{
+    margin-bottom: 40px;
+  }
 
   .dog-list{
     @media (min-width: $screen-md) {
