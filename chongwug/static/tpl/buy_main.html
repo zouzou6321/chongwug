@@ -121,6 +121,8 @@
                 </ul>
             </div>
         </div>
+        {% if searchkey == None and  typekey == None and princekey == None and directkey == None and epidemickey == None and agekey == None %}
+        {% else %}
         <div class="row dog-select-row">
             <div class="col-sm-1 text-right dog-select-title">筛选：</div>
             <div class="col-sm-11">
@@ -129,35 +131,40 @@
                 	{% else %}
                 	<li><a href="{{ urls.search_all_url }}">{{ searchkey }} &times;</a></li>
                 	{% endif %}
-                	{% if typekey == None%}
+                	{% if typekey == None %}
                 	{% else %}
                     <li><a href="{{ urls.type_all_url }}">{{ typekey }} &times;</a></li>
                     {% endif %}
-                    {% if princekey == None%}
+                    {% if princekey == None %}
                 	{% else %}
                     <li><a href="{{ urls.prince_all_url }}">价格 &times;</a></li>
                     {% endif %}
-                    {% if directkey == None%}
+                    {% if directkey == None %}
                 	{% else %}
                     <li><a href="{{ urls.direct_all_url }}">城{{ directkey }} &times;</a></li>
                     {% endif %}
-                    {% if epidemickey == None%}
+                    {% if epidemickey == None %}
                 	{% else %}
                     <li><a href="{{ urls.epidemic_all_url }}">{{ epidemickey }} &times;</a></li>
                     {% endif %}
-                    {% if agekey == None%}
+                    {% if agekey == None %}
                 	{% else %}
                     <li><a href="{{ urls.age_all_url }}">月龄 &times;</a></li>
                     {% endif %}
                 </ul>
             </div>
         </div>
+        {% endif %}
         <div class="dog-separate row"></div>
         <div class="row">
             <div class="dog-list">
+            	{% if pets_imgs%}
+            	{% else %}
+            	<div>没有找到符合条件的宠物</div>
+            	{% endif %}
             	{% for pet_img in pets_imgs %}
                 <div class="col-md-4">
-                	<img src="{{ pet_img.img.img_url }}" class="dog-img"/>
+                	<a href="detail/?petid={{pet_img.pet.id}}"><img src="{{ pet_img.img.img_url }}" class="dog-img"/></a>
                     <div class="dog-desc">
                     	<h4><a href="detail/?petid={{pet_img.pet.id}}">[城{{ pet_img.pet.farm.direct }}-{{ pet_img.pet.farm.district }}]{{ pet_img.pet.farm.name }} {{ pet_img.pet.color }}{{ pet_img.pet.type }}{{ pet_img.pet.short_desc }}</a></h4>
 {#                        <p class="dog-addr"><span class="glyphicon glyphicon-map-marker"></span>{{ pet_img.pet.farm.detail_address }}</p>#}
