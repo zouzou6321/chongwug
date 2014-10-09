@@ -20,7 +20,7 @@ else:
    MYSQL_PORT = '3306'
    MYSQL_USER = 'root'
    MYSQL_PASS = ''
-   MYSQL_DB   = 'app_haidaoteam'
+   MYSQL_DB   = 'chongwug'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
