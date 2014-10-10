@@ -1,7 +1,3 @@
-@import "../bootstrap/variables";
-@import "override-bootstrap-variables";
-@import "../bootstrap/mixins";
-
 .col-md-2_4 {
   @include make-md-column(2.4, 18px);
 }

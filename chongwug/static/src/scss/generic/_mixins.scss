@@ -1,0 +1,21 @@
+///**
+//*  filter: progid:DXImageTransform.Microsoft.gradient
+//*  @param
+//*  startColorstr(String): 可选项，设置渐变的开始颜色和透明度
+//*  endColorstr(String): 可选项，设置渐变的结束颜色和透明度
+//*  颜色格式：#AARRGGBB
+//*  enabled(Boolean): 可选项，设置滤镜是否激活
+//*  GradientType(Integer): 设置色彩渐变的方向；0（默认）纵向，1横向
+//**/
+
+@mixin rgba($color, $opacity){
+  $rgba: rgba($color, $opacity);
+  $ie-color: ie-hex-str($rgba);
+
+  background-color: $rgba;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-color}, endColorstr=#{$ie-color});
+
+  :root &{
+    filter: none;
+  }
+}

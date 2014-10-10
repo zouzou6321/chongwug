@@ -1,5 +1,5 @@
-@import "cwg-search-wrap";
-@import "nav";
+@import "../objects/_cwg-search-wrap";
+@import "../objects/_nav";
 
 .cwg-global-search{
   position: relative;
@@ -20,7 +20,7 @@
   .cwg-search-wrap{
     padding-top: 0;
     padding-bottom: 10px;
-    
+
     @media (min-width: $screen-sm) {
       padding-top: 35px;
       padding-bottom: 0;
