@@ -117,6 +117,13 @@ $(document).ready(function() {
             ]
         }
     } );
+    
+    $("#example tbody").dblclick(function(e){
+		var aa = 0;
+		var e = jQuery.Event("keydown");//模拟一个键盘事件 
+		e.keyCode = 13;//keyCode=13是回车 
+		$(".DTE_Inline").parent().parent().trigger(e);//模拟页码框按下回车 
+ 	});
 } );
 </script>
 {% block scripts %}{% endblock %}
