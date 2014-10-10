@@ -4296,8 +4296,6 @@ button.close {
   .buy-main .col-md-4 {
     padding-left: 10px;
     padding-right: 10px; } }
-.buy-main .dog-img {
-  width: 100%; }
 .buy-main .dog-desc {
   padding: 15px; }
   .buy-main .dog-desc h4 {
@@ -4349,8 +4347,6 @@ button.close {
   display: block;
   width: 387px;
   height: 258px; }
-  .cwg-thumb img {
-    width: 100%; }
 
 .cwg-dog-imgs {
   padding: 10px 0;
@@ -4492,8 +4488,6 @@ label {
 
 .most-popular {
   padding: 0 35px; }
-  .most-popular .dog-img {
-    width: 100%; }
   .most-popular .dog-desc {
     padding: 10px 0; }
     .most-popular .dog-desc h4 {

@@ -242,5 +242,5 @@
 })(jQuery, window, document);
 
 $(function(){
-    $(".lazy").lazyload();
+    $(".js-lazy").lazyload();
 });

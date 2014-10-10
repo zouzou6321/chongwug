@@ -3718,5 +3718,5 @@ $.magnificPopup.registerModule(RETINA_NS, {
 })(jQuery, window, document);
 
 $(function(){
-    $(".lazy").lazyload();
+    $(".js-lazy").lazyload();
 });

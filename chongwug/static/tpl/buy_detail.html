@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-5">
                 <a href="javascript:" class="cwg-thumb">
-                    <img src="{{ petimg_a.img_url }}"/>
+                    <img src="{{ petimg_a.img_url }}" class="img-full"/>
                 </a>
                 <div class="cwg-dog-imgs">
                     <a class="prev-thumb" href="javascript:"><i class="glyphicon glyphicon-chevron-left"></i></a>
@@ -193,16 +193,16 @@
                     <div class="desc-main">
                         <div class="row img-row">
                             <div class="col-xs-6">
-                                <img data-original="{{ farmimg.img_url }}" class="lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
                             <div class="col-xs-6">
-                                <img data-original="{{ farmimg.img_url }}" class="lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
                             <div class="col-xs-6">
-                                <img data-original="{{ farmimg.img_url }}" class="lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
                             <div class="col-xs-6">
-                                <img data-original="{{ farmimg.img_url }}" class="lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
                         </div>
                         <table class="table table-primary table-pet-kennel">
@@ -234,7 +234,7 @@
                             {% for pet_img in pets_img %}
                             <div class="col-md-6 padding-sm">
                                 <div class="pet-showcase-item shade shade-hover">
-                                    <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                    <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
                                     <p class="tag">{{ pet_img.pet.type }}</p>
                                     <div class="pet-showcase-detail shade-content">
                                         <p>数量：5只</p>
@@ -273,7 +273,7 @@
             {% for recommendpet_img in recommendpets_img %}
                 <div>
                     <a href="?petid={{ recommendpet_img.pet.id }}">
-                        <img data-original="{{ recommendpet_img.img.img_url }}" class="dog-img lazy" src="{{'imgs/loading.gif'|assets}}" >
+                        <img data-original="{{ recommendpet_img.img.img_url }}" class="img-full js-lazy" src="{{'imgs/loading.gif'|assets}}" >
                     </a>
                     <div class="dog-desc">
                         <h4><a href="?petid={{ recommendpet_img.pet.id }}">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
