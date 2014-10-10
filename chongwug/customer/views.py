@@ -36,11 +36,6 @@ def buy_detail_view(request):
     if 'visitor' not in request.session:
         request.session['visitor'] = 1
     data = adapters.buy_detail_adapter(request)
-    if request.META.has_key('HTTP_X_FORWARDED_FOR'):  
-        ip =  request.META['HTTP_X_FORWARDED_FOR']  
-    else:  
-        ip = request.META['REMOTE_ADDR']
-    print ip
     if data == False:
         return HttpResponse("DATA ERROR")
     
