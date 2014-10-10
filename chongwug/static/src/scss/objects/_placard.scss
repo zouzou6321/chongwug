@@ -1,0 +1,26 @@
+.placard{
+  $border-width: 8px;
+
+  display: inline-block;
+  border-radius: 3px;
+  background-color: $primary-bg-color;
+  color: #fff;
+  font-weight: bold;
+
+  padding: 6px 9px;
+
+  position: relative;
+
+  &:after{
+    content: " ";
+    display: inline-block;
+    border: $border-width / 2 solid transparent;
+    border-top-color: $primary-bg-color;
+
+    margin-left: -$border-width/2;
+
+    position: absolute;
+    left: 50%;
+    bottom: -$border-width;
+  }
+}

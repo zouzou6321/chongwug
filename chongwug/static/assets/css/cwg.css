@@ -4035,6 +4035,24 @@ button.close {
   text-align: center;
   padding-top: 5px; }
 
+.placard {
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #ffd401;
+  color: #fff;
+  font-weight: bold;
+  padding: 6px 9px;
+  position: relative; }
+  .placard:after {
+    content: " ";
+    display: inline-block;
+    border: 4px solid transparent;
+    border-top-color: #ffd401;
+    margin-left: -4px;
+    position: absolute;
+    left: 50%;
+    bottom: -8px; }
+
 /**
  * gui
 */
@@ -4427,30 +4445,9 @@ label {
 .desc-tit {
   font-size: 18px;
   margin-bottom: 13px; }
-  .desc-tit span {
-    padding-left: 5px; }
-  .desc-tit .popover-content {
-    font-size: 16px; }
-
-.tit-icon {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  color: #fff;
-  font-weight: bold;
-  border: 0;
-  background-color: #ffd401;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 3px; }
-  .tit-icon .popover-content {
-    padding: 6px 9px; }
-  .tit-icon.top > .arrow {
-    border-top-color: transparent; }
-    .tit-icon.top > .arrow:after {
-      border-width: 5px;
-      border-top-color: #ffd401;
-      margin-left: -5px; }
+  .desc-tit .placard {
+    font-size: 16px;
+    margin-right: 8px; }
 
 .desc-main {
   margin-left: 17px;
