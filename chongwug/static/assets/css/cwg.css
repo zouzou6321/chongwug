@@ -4103,22 +4103,87 @@ button.close {
   background-color: #b2b2b2;
   border-color: #b2b2b2; }
 
+.btn-trans, .btn-trans:hover {
+  background-color: transparent; }
+
 .img-full {
   width: 100%; }
+
+.margin-sm {
+  margin-left: -10px;
+  margin-right: -10px; }
+
+.padding-sm {
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.margin-none {
+  margin-left: 0;
+  margin-right: 0; }
+
+.padding-none {
+  padding-left: 0;
+  padding-right: 0; }
+
+.shade {
+  position: relative; }
+
+.shade-content {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#B3000000,endColorstr=#B3000000);
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9; }
+  :root .shade-content {
+    filter: none; }
+
+/*shade-hover*/
+.shade-hover {
+  overflow: hidden; }
+  .shade-hover .shade-content {
+    top: auto;
+    bottom: -100%;
+    -webkit-transition: bottom 0.5s ease;
+    -o-transition: bottom 0.5s ease;
+    transition: bottom 0.5s ease; }
+  .shade-hover:hover .shade-content {
+    bottom: 0; }
+
+.tag {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  z-index: 11;
+  width: 60px;
+  height: 34px;
+  background: url(../imgs/tag.png);
+  color: #fff;
+  text-align: center;
+  padding-top: 5px; }
 
 /*nav*/
 .nav-page .container {
   padding: 0; }
-.nav-page .adg-health {
+
+.adg-health {
   background: #00d7ad; }
-.nav-page .adg-price {
+
+.adg-price {
   background-color: #f7b52d; }
-.nav-page .adg-purebred {
+
+.adg-purebred {
   background-color: #9ada5d;
   padding-bottom: 22px; }
-.nav-page .adg-process {
+
+.adg-process {
   background-color: #00bde3; }
-.nav-page .adg-buy {
+
+.adg-buy {
   background-color: #ff8da0; }
 
 /**
@@ -4661,35 +4726,11 @@ label {
       padding-top: 2px;
       padding-bottom: 2px; }
 
-.dog-show .dog-show-info {
-  overflow: hidden;
-  position: relative;
+/*其他犬种*/
+.pet-showcase .pet-showcase-item {
   padding-top: 2px; }
-.dog-show .dog-mask {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
-  background: rgba(0, 0, 0, 0.7);
-  bottom: -100%;
-  z-index: 9;
-  transition: bottom 0.5s ease;
-  color: #fff;
-  text-align: center;
-  padding-top: 20px; }
-  :root .dog-show .dog-mask {
-    filter: none; }
-  .dog-show .dog-mask .pet-type {
-    font-size: 24px;
-    color: #ff3500;
-    display: inline-block;
-    padding-right: 5px;
-    padding-bottom: 40px; }
-  .dog-show .dog-mask .btn {
-    background-color: transparent;
-    color: #ff3500; }
-.dog-show .dog-show-info:hover .dog-mask {
-  bottom: 0; }
+.pet-showcase .btn-trans {
+  color: #ff3500; }
 
 /* Magnific Popup CSS */
 .mfp-bg {

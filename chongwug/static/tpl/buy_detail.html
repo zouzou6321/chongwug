@@ -190,7 +190,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="pet:kennel">
+                <div id="pet:farm">
                     <h2 class="desc-tit">
                         <div class="popover top tit-icon">
                           <div class="arrow"></div>
@@ -233,7 +233,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="pet:others">
+                <div id="pet:showcase" class="pet-showcase">
                     <h2 class="desc-tit">
                         <div class="popover top tit-icon">
                           <div class="arrow"></div>
@@ -242,23 +242,22 @@
                         <span>其他犬种</span>
                     </h2>
                     <div class="desc-main">
-                        <div class="row dog-show">
-                            <div class="col-md-10">
-                                <div class="row">
-                                    {% for pet_img in pets_img %}
-                                    <div class="col-md-6">
-                                        <div class="dog-show-info">
-                                            <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="lazy" src="{{'imgs/loading.gif'|assets}}" style="width: 100%"/>
-                                            <div class="dog-name-tag">{{ pet_img.pet.type }}</div>
-                                            <div class="dog-mask">
-                                                <p><span class="pet-type">{{ pet_img.pet.type }}</span>&yen;{{ pet_img.pet.min_price|floatformat }}-{{ pet_img.pet.max_price|floatformat }}元</p>
-                                                <a class="btn btn-primary" href="/buy/detail/?petid={{ pet_img.pet.id }}">去看看</a>
-                                            </div>
-                                        </div>
+                        <div class="row margin-sm">
+                            {% for pet_img in pets_img %}
+                            <div class="col-md-6 padding-sm">
+                                <div class="pet-showcase-item shade shade-hover">
+                                    <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                    <p class="tag">{{ pet_img.pet.type }}</p>
+                                    <div class="pet-showcase-detail shade-content">
+                                        <p>数量：5只</p>
+                                        <p>月龄：2个月</p>
+                                        <p>价格：&yen;{{ pet_img.pet.min_price|floatformat }}-{{ pet_img.pet.max_price|floatformat }}元</p>
+                                        <a class="btn btn-primary" href="/buy/detail/?petid={{ pet_img.pet.id }}">详细信息</a>
+                                        <a class="btn btn-primary btn-trans" href="">预约看狗</a>
                                     </div>
-                                    {% endfor %}
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -271,9 +270,18 @@
                         <span>保障服务</span>
                     </h2>
                     <div class="desc-main">
-                        <p class="kennel-intro-main">
-                            城南犬舍专业繁殖金毛。。。
-                        </p>
+                        <div class="adg-health">
+                            <img src="/static/assets/imgs/nav/adg1.png" class="img-full"/>
+                        </div>
+                        <div class="adg-price">
+                            <img src="/static/assets/imgs/nav/adg2.png" class="img-full"/>
+                        </div>
+                        <div class="adg-purebred">
+                            <img src="/static/assets/imgs/nav/adg3.png" class="img-full"/>
+                        </div>
+                        <div class="adg-process">
+                            <img src="/static/assets/imgs/nav/adg4.png" class="img-full"/>
+                        </div>
                     </div>
                 </div>
             </div>

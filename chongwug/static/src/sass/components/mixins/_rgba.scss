@@ -1,0 +1,19 @@
+//
+//filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffffff,endColorstr=#ff000000,enabled=true,gradientType='1');
+//startColorStr:可选项。字符串(String)。设置或检索色彩渐变的开始颜色和透明度。
+//其格式为 #AARRGGBB 。 AA 、 RR 、 GG 、 BB 为十六进制正整数。取值范围为 00 - FF 。 RR 指定红色值， GG 指定绿色值， BB 指定蓝色值，参阅 #RRGGBB 颜色单位。 AA 指定透明度。 00 是完全透明。 FF 是完全不透明。超出取值范围的值将被恢复为默认值。取值范围为 #FF000000 - #FFFFFFFF 。默认值为 #FF0000FF 。不透明蓝色。
+//EndColorStr:可选项。字符串(String)。设置或检索色彩渐变的结束颜色和透明度。默认值为 #FF000000 。不透明黑色。
+//enabled:可选项。布尔值(Boolean)。设置或检索滤镜是否激活。  true | falsej。
+//GradientType:可选项。整数值(Integer)。设置或检索色彩渐变的方向。1 | 0，0（默认）纵向，1横向。
+//
+
+@mixin rgba($color, $opacity){
+  $ie-color: ie-hex-str(rgba($color, $opacity));
+
+  background-color: rgba($color, $opacity);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-color},endColorstr=#{$ie-color});
+
+  :root &{
+    filter: none;
+  }
+}

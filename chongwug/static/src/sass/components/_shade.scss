@@ -1,0 +1,36 @@
+@import "mixins/rgba";
+
+.shade{
+  position: relative;
+}
+
+.shade-content{
+  color: #fff;
+  @include rgba(#000, .7);
+
+  width: 100%;
+  height: 100%;
+
+  padding: 20px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+
+/*shade-hover*/
+.shade-hover{
+  overflow: hidden;
+
+  .shade-content{
+    top: auto;
+    bottom: -100%;
+
+    @include transition(bottom .5s ease);
+  }
+
+  &:hover .shade-content{
+    bottom: 0;
+  }
+}

@@ -1,3 +1,25 @@
 .img-full{
   width: 100%;
 }
+
+$padding-sm: 10px;
+
+.margin-sm{
+  margin-left: -$padding-sm;
+  margin-right: -$padding-sm;
+}
+
+.padding-sm{
+  padding-left: $padding-sm;
+  padding-right: $padding-sm;
+}
+
+.margin-none{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.padding-none{
+  padding-left: 0;
+  padding-right: 0;
+}
