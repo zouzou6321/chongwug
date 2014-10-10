@@ -1,0 +1,60 @@
+.table-primary{
+  margin-bottom: 0;
+  font-size: 12px;
+
+  caption{
+    text-align: left;
+    color: #fff;
+    background-color: $primary-bg-color;
+    padding: 6px 20px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  >thead{
+    background-color: #fffcf0;
+    font-size: 14px;
+
+    >tr{
+      >th{
+        border: 0;
+        text-align: center;
+      }
+    }
+  }
+
+  >tbody{
+    >tr{
+      >td{
+        border: 0;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      &:last-child > td{
+        border-bottom: 0;
+      }
+    }
+  }
+
+  >tfoot{
+    background-color: #fffcf0;
+    font-size: 14px;
+
+    >tr{
+      >td{
+        border: 0;
+      }
+    }
+  }
+}
+
+.table-center{
+  >tbody {
+    > tr {
+      > td {
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+  }
+}
