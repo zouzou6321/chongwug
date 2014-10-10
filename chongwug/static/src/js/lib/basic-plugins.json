@@ -1,18 +1,18 @@
 {
+    "ie10-viewport-bug-workaround": true,
     "affix" : false,
     "alert" : false,
     "button" : false,
     "carousel" : true,
     "collapse" : true,
-    "dropdown" : true,
-    "modal" : true,
-    "popover" : false,
-    "scrollspy" : false,
+    "dropdown" : false,
     "tab" : false,
-    "tooltip" : false,
     "transition" : true,
+    "scrollspy" : false,
+    "modal" : true,
+    "tooltip" : true,
+    "popover" : true,
     "jquery.magnific-popup": true,
     "custom-plugins": true,
-    "jquery.lazyload": true,
-    "ie10-viewport-bug-workaround": true
+    "jquery.lazyload": true
 }

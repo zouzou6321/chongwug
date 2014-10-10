@@ -60,6 +60,13 @@
 
 .buy-main{
 
+  .cwg-search-wrap{
+    @media (min-width: $screen-sm) {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+  }
+
   .no-result{
     margin-bottom: 40px;
   }

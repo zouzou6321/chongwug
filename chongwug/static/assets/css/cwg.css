@@ -3799,6 +3799,23 @@ button.close {
       background-color: #ffd401; }
   .cwg-navbar .navbar-toggle .icon-bar {
     background: #b38900; }
+  .cwg-navbar .cwg-social {
+    margin-top: 3px; }
+    .cwg-navbar .cwg-social .iconfont {
+      display: block;
+      width: 24px;
+      height: 24px;
+      background-color: #ffd401;
+      color: #fff;
+      border-radius: 50%;
+      border: 0;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center; }
+    .cwg-navbar .cwg-social li {
+      padding: 0 0 0 6px; }
+    .cwg-navbar .cwg-social a {
+      display: inline-block; }
 
 .cwg-global-search {
   position: relative;
@@ -3915,7 +3932,8 @@ button.close {
   text-align: center;
   padding: 0;
   margin: 0; }
-  .cwg-social a:hover {
+  .cwg-social a:hover, .cwg-social a:focus {
+    outline: 0;
     text-decoration: none; }
   .cwg-social p {
     margin-bottom: 20px; }
@@ -4228,6 +4246,10 @@ button.close {
     .content-container {
       width: 1000px; } }
 
+@media (min-width: 768px) {
+  .buy-main .cwg-search-wrap {
+    padding-top: 30px;
+    padding-bottom: 30px; } }
 .buy-main .no-result {
   margin-bottom: 40px; }
 @media (min-width: 992px) {
@@ -4274,6 +4296,15 @@ button.close {
   height: 46px;
   overflow: hidden;
   margin: 0 auto; }
+
+.dog-name-tag {
+  background-color: #ff3500;
+  padding: 5px 15px;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color: #fff;
+  font-size: 18px; }
 
 .cwg-thumbnail {
   list-style: none;
@@ -4393,6 +4424,7 @@ label {
 
 .title-icon {
   position: relative;
+  z-index: 1;
   display: inline-block;
   color: #fff;
   font-weight: bold;
@@ -4456,7 +4488,8 @@ label {
 
 .dog-show .dog-show-info {
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  padding-top: 2px; }
 .dog-show .dog-mask {
   position: absolute;
   width: 100%;
@@ -4466,9 +4499,17 @@ label {
   bottom: -100%;
   z-index: 9;
   transition: bottom 0.5s ease;
-  color: #fff; }
+  color: #fff;
+  text-align: center;
+  padding-top: 20px; }
   :root .dog-show .dog-mask {
     filter: none; }
+  .dog-show .dog-mask .pet-type {
+    font-size: 24px;
+    color: #ff3500;
+    display: inline-block;
+    padding-right: 5px;
+    padding-bottom: 40px; }
   .dog-show .dog-mask .btn {
     background-color: transparent;
     color: #ff3500; }

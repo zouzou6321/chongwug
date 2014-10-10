@@ -32,4 +32,32 @@
   .navbar-toggle .icon-bar{
     background: $home-nav-highlight-color;
   }
+
+  .cwg-social{
+    margin-top: 3px;
+    .iconfont{
+      display: block;
+
+      width: 24px;
+      height: 24px;
+
+      background-color: $primary-bg-color;
+      color: #fff;
+
+      border-radius: 50%;
+      border: 0;
+
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+    }
+
+    li{
+      padding: 0 0 0 6px;
+    }
+
+    a{
+      display: inline-block;
+    }
+  }
 }
