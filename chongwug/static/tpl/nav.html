@@ -10,7 +10,7 @@
 
 {% block content %}
 
-<div class="nav-page" id="full-page">
+<div class="guide" id="js-full-page">
     <div class="adg-health section">
         <div class="container">
             <img src="{{ 'imgs/nav/adg1.png'|assets }}" class="img-responsive"/>
@@ -46,7 +46,7 @@
 {% block plugins %}
 <script src="{{ 'js/lib/jquery.fullPage.js'|assets }}"></script>
 <script>
-$('#full-page').fullpage({
+$('#js-full-page').fullpage({
     'easing': 'swing',
     'css3': true,
     'navigation': true,
@@ -54,6 +54,7 @@ $('#full-page').fullpage({
     'navigationTooltips': ['健康有保障', '价格很公道', '品相很优质', '流程很标准', '赶紧去挑选吧']
 });
 </script>
+<script src="{{'js/lib/plugins.js'|assets}}"></script>
 {% endblock %}
 
 {% block footer %}{% endblock %}

@@ -24,10 +24,10 @@
 @import "objects/cwg-area-row";
 @import "objects/price";
 @import "objects/table-primary";
-@import "objects/_buttons";
+@import "objects/buttons";
 @import "objects/shade";
 @import "objects/tag";
-@import "objects/_placard";
+@import "objects/placard";
 
 
 
@@ -36,7 +36,7 @@
 /**
  * gui
 */
-@import "gui/nav-page";
+@import "gui/guide";
 @import "gui/full-page";
 @import "gui/buy";
 @import "gui/detail";

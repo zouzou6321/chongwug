@@ -4056,7 +4056,7 @@ button.close {
 /**
  * gui
 */
-.nav-page .container {
+.guide .container {
   padding: 0; }
 
 .adg-health {
@@ -4066,8 +4066,7 @@ button.close {
   background-color: #f7b52d; }
 
 .adg-purebred {
-  background-color: #9ada5d;
-  padding-bottom: 22px; }
+  background-color: #9ada5d; }
 
 .adg-process {
   background-color: #00bde3; }
