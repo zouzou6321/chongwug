@@ -41,42 +41,18 @@ def manage_home_data_get(request):
     return {'manager':manager}
 
 def market_attention_mod(request):
-    try:
-        print request.POST
-        attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['data[0]']),dele=False)
-        attention.user.name = request.POST['data[1]']
-        attention.user.tel = request.POST['data[2]']
-        attention.attention_type = request.POST['data[4]']
-        if request.POST['data[6]'] == 'true':
-            attention.dele = True
-        attention.save()
-        return  '{\
-                  "row": {\
-                    "DT_RowId": ' + request.POST['id'] + ',\
-                    "id": ' + attention.id + ',\
-                    "name": ' + attention.user.name + ',\
-                    "tel": ' + attention.user.tel + ',\
-                    "nestofpet_id": ' + attention.nestofpet_id.farm.name + attention.nestofpet_id.type + ',\
-                    "attention_type": ' + attention.attention_type + ',\
-                    "time": ' + attention.time + ',\
-                    "dele": ' + attention.dele + ',\
-                  }}'
-    except:
-        attention = nestofpet_attention.objects.get(id=1)
-        delestr = 'false'
-        if attention.dele == False:
-            delestr = 'true'
-        return  '{\
-                  "row": {\
-                    "DT_RowId": "",\
-                    "id": ' + attention.id + ',\
-                    "name": ' + attention.user.name + ',\
-                    "tel": ' + attention.user.tel + ',\
-                    "nestofpet_id": ' + attention.nestofpet_id.farm.name + attention.nestofpet_id.type + ',\
-                    "attention_type": ' + attention.attention_type + ',\
-                    "time": ' + attention.time + ',\
-                    "dele": ' + delestr + ',\
-                  }}'
+    attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['data[0]']),dele=False)
+    attention.user.name = request.POST['data[1]']
+    attention.user.tel = request.POST['data[2]']
+    attention.attention_type = request.POST['data[4]']
+    if request.POST['data[6]'] == 'true':
+        attention.dele = True
+    attention.save()
+    data = u'''{"row": {"0":"%s","1":"%s","2":"%s","3":"%s","4":"%s","5":"%s","6":"%s"}}'''\
+     % (attention.id, attention.user.name, attention.user.tel, attention.nestofpet_id.farm.name + \
+        attention.nestofpet_id.type, attention.attention_type, attention.time, request.POST['data[6]'])
+    
+    return data
 class OrderListJson(BaseDatatableView):
             # The model we're going to show
             model = nestofpet_attention
