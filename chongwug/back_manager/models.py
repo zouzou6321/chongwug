@@ -9,5 +9,6 @@ class manage(models.Model):
     passwd = models.TextField()
     #作业类型
     type = models.TextField()
+    #权限值 20 即为市场人员，50以上为管理员
     permission_score = models.IntegerField()
     dele = models.BooleanField(default=False)
