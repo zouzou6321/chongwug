@@ -1,6 +1,6 @@
 {
     "css": {
-        "src": ["src/sass/**/*.scss"],
+        "src": ["src/scss/**/*.scss"],
         "dev": "assets/css",
         "prod": "prod/assets/css"
     },
