@@ -1,0 +1,21 @@
+@import "vars";
+
+$font-family-base: 'helvetica neue', Helvetica, Arial, tahoma, 'hiragino sans gb', stheiti, 'wenquanyi micro hei', \5FAE\8F6F\96C5\9ED1,\5B8B\4F53;
+
+$icon-font-path: '../fonts/';
+
+$breadcrumb-padding-vertical: 20px;
+$breadcrumb-padding-horizontal: 0;
+$breadcrumb-separator: ">";
+
+$btn-primary-color: #fff;
+$btn-primary-bg: #ff3500;
+$btn-primary-border: #ff3500;
+
+$btn-info-color: #fff;
+$btn-info-bg: $primary-bg-color;
+$btn-info-border: $primary-bg-color;
+
+$brand-primary: $primary-bg-color;
+
+

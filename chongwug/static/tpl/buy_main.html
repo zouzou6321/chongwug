@@ -159,7 +159,7 @@
                     <div class="dog-desc">
                         <h4><a href="detail/?petid={{pet_img.pet.id}}">[城{{ pet_img.pet.farm.direct }}-{{ pet_img.pet.farm.district }}]{{ pet_img.pet.farm.name }} {{ pet_img.pet.color }}{{ pet_img.pet.type }}{{ pet_img.pet.short_desc }}</a></h4>
                         <p>
-                            <span class="dog-price price">{{ pet_img.pet.min_price|floatformat }}-{{ pet_img.pet.max_price|floatformat }}<span class="dog-unit">元/只</span></span>
+                            <span class="price price-primary">{{ pet_img.pet.min_price|floatformat }}-{{ pet_img.pet.max_price|floatformat }}<span class="price-desc">元/只</span></span>
                             <a href="detail/?petid={{pet_img.pet.id}}" class="btn btn-primary pull-right btn-dog" role="button">去看看</a>
                         </p>
                     </div>

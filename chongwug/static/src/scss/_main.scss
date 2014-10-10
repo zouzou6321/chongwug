@@ -1,31 +1,53 @@
-/*public*/
-@import "vars";
-@import "base/_grid";
-@import "base/_iconfont";
-@import "gui/_header";
-@import "gui/_footer";
-
+/**
+ * Generic utility styles etc.
+ */
 @import "generic/mixins";
 
-/*util*/
-@import "objects/_price";
-@import "objects/_table-primary";
-@import "objects/_override-buttons";
-@import "objects/_img-full";
-@import "objects/_shade";
-@import "objects/_tag";
 
-/*nav*/
-@import "gui/_nav-page";
-@import "gui/_full-page";
 
-/*home*/
-@import "objects/_cwg-carousel";
-@import "objects/_cwg-area-row";
 
-/*buy*/
-@import "gui/_buy";
 
-/*detail*/
-@import "gui/_detail";
+/**
+ * Base styles; unclassed HTML elements etc.
+ */
+@import "base/grid";
+@import "base/iconfont";
+
+
+
+
+
+/**
+ * Objects and abstractions
+*/
+@import "objects/cwg-carousel";
+@import "objects/cwg-area-row";
+@import "objects/price";
+@import "objects/table-primary";
+@import "objects/_buttons";
+@import "objects/shade";
+@import "objects/tag";
+
+
+
+
+
+/**
+ * gui
+*/
+@import "gui/nav-page";
+@import "gui/full-page";
+@import "gui/buy";
+@import "gui/detail";
 @import "gui/magnific-popup/main";
+@import "gui/header";
+@import "gui/footer";
+
+
+
+
+
+/**
+ * Style trumps; helper and brand classes
+*/
+@import "generic/helper";

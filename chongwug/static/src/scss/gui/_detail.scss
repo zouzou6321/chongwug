@@ -93,10 +93,6 @@ label{
   font-weight: bold;
 }
 
-.cwg-detail-price{
-  @extend %highlight;
-}
-
 .cwg-detail-phone{
   @extend %highlight;
   padding-right: 20px;
@@ -294,15 +290,6 @@ label{
       margin-right: 5px;
     }
 
-    .dog-price{
-      color: #ff3500;
-      font-size: 14px;
-      font-weight: bold;
-    }
-    .dog-unit{
-      font-size: 14px;
-      font-weight: normal;
-    }
     .btn-dog{
       padding-top: 2px;
       padding-bottom: 2px;

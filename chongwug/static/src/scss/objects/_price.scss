@@ -1,5 +1,64 @@
-.price:before{
-  content: '¥';
-  padding-right: 5px;
+.price{
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+
+  &:before{
+    content: '¥';
+    padding-right: 5px;
+  }
+
+  .price-desc{
+    font-size: 14px;
+    padding-left: 1px;
+  }
 }
 
+.price-primary{
+  color: $primary-color;
+}
+
+.price-light{
+  color: $primary-color;
+
+  &:before, .price-desc{
+    color: #fff;
+  }
+}
+
+.price-dark{
+  color: $primary-color;
+
+  &:before, .price-desc{
+    color: $text-color;
+  }
+}
+
+.price-lg{
+  font-size: 30px;
+
+  .price-desc{
+    font-size: 16px;
+  }
+}
+
+.price-sm{
+  font-size: 16px;
+
+  &:before, .price-desc{
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  &:before{
+    padding-right: 3px;
+  }
+}
+
+.price-xs{
+  font-size: 14px;
+
+  &:before{
+    padding-right: 3px;
+  }
+}
