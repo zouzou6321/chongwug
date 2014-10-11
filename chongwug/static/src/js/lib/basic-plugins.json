@@ -1,6 +1,6 @@
 {
     "ie10-viewport-bug-workaround": true,
-    "affix" : false,
+    "affix" : true,
     "alert" : false,
     "button" : false,
     "carousel" : true,

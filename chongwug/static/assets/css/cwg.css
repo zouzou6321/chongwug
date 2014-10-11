@@ -4426,6 +4426,11 @@ label {
   margin-top: 50px;
   margin-bottom: 5px;
   background-color: #fffcf0; }
+  .detail-navbar.affix {
+    top: 0;
+    width: 100%;
+    margin-top: 0;
+    z-index: 21; }
   .detail-navbar .container {
     background-color: #fffcf0;
     padding-left: 0; }

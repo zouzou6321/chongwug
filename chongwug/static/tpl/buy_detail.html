@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    <div class="detail-navbar">
+    <div class="detail-navbar" id="js-affix">
        <div class="container content-container">
            <ul class="nav navbar-nav">
                 <li class="active"><a href="#pet:info" class="placard">狗狗资料</a></li>
@@ -443,6 +443,13 @@
             });
         });
 
+        //detail nav affix
+        var $affix = $('#js-affix');
+        $affix.affix({
+            offset: {
+                top: 600
+            }
+        });
     }(jQuery));
 
 </script>

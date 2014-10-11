@@ -159,6 +159,13 @@ label{
 }
 
 .detail-navbar{
+  &.affix{
+    top: 0;
+    width: 100%;
+    margin-top: 0;
+    z-index: 21;
+  }
+
   border-top: 2px solid $primary-bg-color;
 
   margin-top: 50px;
