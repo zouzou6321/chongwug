@@ -4,75 +4,180 @@
 
 {% block main %}
 
+<style>
+    .pet{
+        border: 1px solid #ccc;
+        padding-top: 15px;
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .pet .btn-del{
+        position: absolute;
+        top: 15px;
+        left: 15px;
+    }
+</style>
+
 <h1 class="page-header">添加一窝宠物信息</h1>
 <p>加*为必填项</p>
 
-<form method="post" action="./" class="form-horizontal">
+<form method="post" action="./" class="form-horizontal" id="js-form">
     {% csrf_token %}
+    <input name="count" type="hidden" id="pet-count" value="0"/>
     <div class="form-group">
-        <label for="pet-color" class="col-sm-2 control-label">宠物主要颜色<span class="warn">*</span>：</label>
+        <label for="nest-type" class="col-sm-3 control-label">本窝品种<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required" id="pet-color" name="color">
+          <input type="text" class="form-control required" id="nest-type" name="nest-type">
         </div>
     </div>
     <div class="form-group">
-        <label for="pet-age" class="col-sm-2 control-label">宠物月龄<span class="warn">*</span>：</label>
+        <label for="nest-color" class="col-sm-3 control-label">本窝颜色<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required number" id="pet-age" name="age">
+          <input type="text" class="form-control required" id="nest-color" name="nest-color">
         </div>
     </div>
     <div class="form-group">
-        <label for="pet-epidemic" class="col-sm-2 control-label">防疫状态<span class="warn">*</span>：</label>
+        <label for="nest-age" class="col-sm-3 control-label">本窝月龄<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required" id="pet-epidemic" name="epidemic">
+          <input type="text" class="form-control required number" id="nest-age" name="nest-age">
         </div>
     </div>
     <div class="form-group">
-        <label for="pet-type" class="col-sm-2 control-label">宠物品种<span class="warn">*</span>：</label>
+        <label for="nest-desc" class="col-sm-3 control-label">本窝简介（最多20字）<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required" id="pet-type" name="type">
+          <input type="text" class="form-control required number" id="nest-desc" name="nest-desc">
+        </div>
+    </div>
+    <div class="pet">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">宠物颜色<span class="warn">*</span>：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control required" name="color1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">宠物价格<span class="warn">*</span>：</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control required number" name="price1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">防疫状态<span class="warn">*</span>：</label>
+            <div class="col-sm-4">
+                <select name="epidemic1" class="form-control">
+                    <option value="未种疫苗">未种疫苗</option>
+                    <option value="未种疫苗">未种疫苗</option>
+                    <option value="已种疫苗">已种疫苗</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">宠物性别<span class="warn">*</span>：</label>
+            <div class="col-sm-4">
+                <select name="sex1" class="form-control">
+                    <option value="0">公</option>
+                    <option value="1">母</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">销售状态<span class="warn">*</span>：</label>
+            <div class="col-sm-4">
+                <select name="sale1" class="form-control">
+                    <option value="0">在售</option>
+                    <option value="1">售光</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="form-group">
-        <label for="pet-min_prince" class="col-sm-2 control-label">宠物最低价格<span class="warn">*</span>：</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control required number" id="pet-min_prince" name="min_prince">
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-success btn-add form-control">添加宠物</button>
         </div>
     </div>
     <div class="form-group">
-        <label for="pet-max_prince" class="col-sm-2 control-label">宠物最高价格<span class="warn">*</span>：</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control required number" id="pet-max_prince" name="max_prince">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="pet-short_desc" class="col-sm-2 control-label">一句话介绍，最多20字<span class="warn">*</span>：</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control required number" id="pet-short_desc" name="short_desc">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="pet-desc" class="col-sm-2 control-label">详细描述<span class="warn">*</span>：</label>
-        <div class="col-sm-8">
-          <textarea class="form-control required" rows="3" id="pet-desc" name="desc"></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-4">
+        <div class="col-sm-offset-3 col-sm-4">
           <button type="submit" class="btn btn-primary form-control">提交</button>
         </div>
     </div>
 </form>
 
+<script type="text/html" id="pet-tpl">
+
+<div class="pet">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">宠物颜色<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required" name="color{num}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">宠物价格<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control required number" name="price{num}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">防疫状态<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <select name="epidemic{num}" class="form-control">
+                <option value="未种疫苗">未种疫苗</option>
+                <option value="未种疫苗">未种疫苗</option>
+                <option value="已种疫苗">已种疫苗</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">宠物性别<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <select name="sex{num}" class="form-control">
+                <option value="0">公</option>
+                <option value="1">母</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">销售状态<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <select name="sale{num}" class="form-control">
+                <option value="0">在售</option>
+                <option value="1">售光</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn-del btn btn-danger" type="button">删除</button>
+</div>
+
+</script>
+
 {% endblock %}
 
 {% block scripts %}
-<script src="/static/back-assets/dist/ckeditor/ckeditor.js"></script>
 <script>
 
-CKEDITOR.replace('pet-desc');
+(function($){
+    var $form = $('#js-form');
 
-$('form').validate(commonvalidateConfig);
+    //$form.validate(commonvalidateConfig);
+
+    var petTpl = $('#pet-tpl').html(),
+        num = 1;
+
+    $form.on('click', '.btn-add', function(){
+        num++;
+        $(this).closest('.form-group').before(petTpl.replace(/\{num\}/g, num));
+    });
+
+    $form.on('click', '.btn-del', function(){
+        $(this).closest('.pet').remove();
+    });
+
+    $form.on('submit', function(){
+        $('#pet-count').val(num);
+    });
+
+})(jQuery);
 
 </script>
 {% endblock %}
