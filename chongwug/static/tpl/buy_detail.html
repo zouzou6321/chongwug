@@ -67,8 +67,33 @@
             </div>
             <div class="col-md-7">
                 <h1 class="cwg-detail-title">[城{{ nestpet.farm.direct }}-{{ nestpet.farm.district }}]{{ nestpet.farm.name }} {{ nestpet.color }}{{ nestpet.type }}{{ nestpet.short_desc }}</h1>
+                <p class="detail-title-desc">这里有优质的品种 想被萌翻 那就过来吧~</p>
                 <div class="cwg-detail-info">
                     <div class="info-row clearfix">
+                        <div class="info-td-left">
+                            犬<span class="middle-space"></span>种：
+                        </div>
+                        <div class="info-td-right">
+                            金毛
+                        </div>
+                    </div>
+                    <div class="info-row clearfix">
+                        <div class="info-td-left">
+                             月<span class="middle-space"></span>龄：
+                        </div>
+                        <div class="info-td-right">
+                            2个月
+                        </div>
+                    </div>
+                    <div class="info-row clearfix">
+                        <div class="info-td-left">
+                             疫<span class="middle-space"></span>苗：
+                        </div>
+                        <div class="info-td-right">
+                            已种疫苗
+                        </div>
+                    </div>
+                    <div class="info-row clearfix" style="border-bottom: 0">
                         <div class="info-td-left">
                             价<span class="middle-space"></span>格：
                         </div>
@@ -77,31 +102,6 @@
                         </div>
                     </div>
                     <div class="info-row clearfix">
-                        <div class="info-td-left">
-                            犬<span class="middle-space"></span>种：
-                        </div>
-                        <div class="info-td-right">
-                            <ul class="nav nav-pills cwg-detail-pills">
-                                {% for pettype in pet_types %}
-                                {% if pettype == curtype %}
-                                <li class="active"><a href="javascript:" data-type="{{ pettype }}" data-id="{{ nestpet.farm.id }}">{{ pettype }}</a></li>
-                                {% else %}
-                                <li><a href="javascript:" data-type="{{ pettype }}" data-id="{{ nestpet.farm.id }}">{{ pettype }}</a></li>
-                                {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="info-row clearfix">
-                        <div class="info-td-left">
-                            电话咨询：
-                        </div>
-                        <div class="info-td-right">
-                            <span class="cwg-detail-phone">13912345678</span> <span class="cwg-detail-phone">13912345678</span>
-                        </div>
-                    </div>
-                    <div class="info-row clearfix">
-                        <div class="info-td-left">&nbsp;</div>
                         <div class="info-td-right">
                             <a href="" class="btn btn-primary btn-order" data-toggle="modal" data-target="#cwg-order-modal">预约看狗</a>
                             <a href="" class="btn btn-info btn-consult">在线咨询</a>

@@ -78,8 +78,13 @@ label{
 }
 
 .cwg-detail-title{
-  font-size: 20px;
+  font-size: 18px;
   margin-top: 0;
+  font-weight: bold;
+}
+
+.detail-title-desc{
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -96,7 +101,7 @@ label{
 
 .info-row{
 
-  padding: 20px 0;
+  padding: 15px 0;
   border-bottom: 1px dashed #ddd;
 
   &:last-child{
