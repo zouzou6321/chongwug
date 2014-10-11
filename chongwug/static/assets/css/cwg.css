@@ -4511,8 +4511,22 @@ label {
 /*其他犬种*/
 .pet-showcase .pet-showcase-item {
   padding-top: 2px; }
+  .pet-showcase .pet-showcase-item:hover .shade-content {
+    bottom: -2px; }
+.pet-showcase .shade-content {
+  text-align: center; }
+  .pet-showcase .shade-content:before {
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%; }
+.pet-showcase .pet-showcase-detail {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle; }
 .pet-showcase .btn-trans {
-  color: #ff3500; }
+  color: #ff3500;
+  margin-left: 10px; }
 
 /* Magnific Popup CSS */
 .mfp-bg {
