@@ -153,19 +153,38 @@ label{
   }
 }
 
-.cwg-detail-nav{
-  border-top: 2px solid #ffd10f;
-  margin-top: 50px;
-  padding-bottom: 20px;
+.detail-navbar{
+  border-top: 2px solid $primary-bg-color;
 
-  a{
-    color: #544a2a;
+  margin-top: 50px;
+  margin-bottom: 5px;
+
+  background-color: #fffcf0;
+
+  .container{
+    background-color: #fffcf0;
+    padding-left: 0;
   }
 
-  .active{
-    a{
-      color: #fff;
-      background: #ffd401;
+  .placard{
+    font-weight: normal;
+    border-radius: 0;
+  }
+
+  .nav a{
+    line-height: 1;
+    font-size: 16px;
+    color: #544a2a;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+  .active a{
+    color: #fff;
+    background-color: $primary-bg-color;
+
+    &:hover, &:focus{
+      background-color: $primary-bg-color;
     }
   }
 }

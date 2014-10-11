@@ -4417,15 +4417,28 @@ label {
   .cwg-clause i {
     margin-right: 5px; }
 
-.cwg-detail-nav {
-  border-top: 2px solid #ffd10f;
+.detail-navbar {
+  border-top: 2px solid #ffd401;
   margin-top: 50px;
-  padding-bottom: 20px; }
-  .cwg-detail-nav a {
-    color: #544a2a; }
-  .cwg-detail-nav .active a {
+  margin-bottom: 5px;
+  background-color: #fffcf0; }
+  .detail-navbar .container {
+    background-color: #fffcf0;
+    padding-left: 0; }
+  .detail-navbar .placard {
+    font-weight: normal;
+    border-radius: 0; }
+  .detail-navbar .nav a {
+    line-height: 1;
+    font-size: 16px;
+    color: #544a2a;
+    padding-top: 11px;
+    padding-bottom: 11px; }
+  .detail-navbar .active a {
     color: #fff;
-    background: #ffd401; }
+    background-color: #ffd401; }
+    .detail-navbar .active a:hover, .detail-navbar .active a:focus {
+      background-color: #ffd401; }
 
 .cwg-detail-nav-fixed {
   position: fixed;
@@ -4919,7 +4932,7 @@ img.mfp-img {
 
 .cwg-navbar {
   min-height: 30px; }
-  .cwg-navbar .navbar-nav a {
+  .cwg-navbar .nav a {
     color: #d9a300;
     line-height: 1;
     padding-top: 8px;
