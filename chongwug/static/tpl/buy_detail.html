@@ -67,15 +67,15 @@
 {#                <!-- JiaThis Button END -->#}
             </div>
             <div class="col-md-7">
-                <h1 class="cwg-detail-title">[城{{ nestpet.farm.direct }}-{{ nestpet.farm.district }}]{{ nestpet.farm.name }} {{ nestpet.color }}{{ nestpet.type }}{{ nestpet.short_desc }}</h1>
-                <p class="detail-title-desc">这里有优质的品种 想被萌翻 那就过来吧~</p>
+                <h1 class="cwg-detail-title">[城{{ nestpet.farm.direct }}-{{ nestpet.farm.district }}]{{ nestpet.farm.name }} {{ nestpet.color }}{{ nestpet.type }}</h1>
+                <p class="detail-title-desc">{{ nestpet.short_desc }}</p>
                 <div class="cwg-detail-info">
                     <div class="info-row clearfix">
                         <div class="info-td-left">
                             犬<span class="middle-space"></span>种：
                         </div>
                         <div class="info-td-right">
-                            金毛
+                            {{ nestpet.type }}
                         </div>
                     </div>
                     <div class="info-row clearfix">
@@ -83,7 +83,7 @@
                              月<span class="middle-space"></span>龄：
                         </div>
                         <div class="info-td-right">
-                            2个月
+                            {{ nestpet.age }}个月
                         </div>
                     </div>
                     <div class="info-row clearfix">
@@ -99,7 +99,7 @@
                             价<span class="middle-space"></span>格：
                         </div>
                         <div class="info-td-right">
-                           <span class="price price-dark price-sm">{{ nestpet.min_price|floatformat }}-{{ nestpet.max_price|floatformat }}<span class="price-desc">元/只</span></span>
+                           <span class="price price-dark price-sm">{{ price.min_price }}-{{ price.max_price }}<span class="price-desc">元/只</span></span>
                         </div>
                     </div>
                     <div class="info-row clearfix">
@@ -149,34 +149,29 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            	{% for pet in allpets %}
                                 <tr>
                                     <td>A</td>
                                     <td>
                                         <i class="pet-icon"></i>
                                     </td>
-                                    <td>公</td>
-                                    <td>3个月</td>
-                                    <td>棕色</td>
+                                    <td>{{ pet.sex }}</td>
+                                    <td>{{ nestpet.age }}个月</td>
+                                    <td>{{ pet.color }}</td>
                                     <td>
+                                    	{% if pet.epidemic_period == '已种疫苗' %}
                                         <i class="glyphicon glyphicon-ok-sign text-primary"></i>
+                                        {% elif pet.epidemic_period == '未种疫苗' %}
+                                        <i class="glyphicon glyphicon-ok-sign text-muted"></i>
+                                        {% else %}
+                                        {{ pet.epidemic_period }}
+                                        {% endif %}
                                     </td>
-                                    <td>&yen; 500</td>
+                                    <td>&yen; {{ pet.price }}</td>
                                     <td>立即购买</td>
                                     <td><button class="btn btn-primary btn-xs">预约看狗</button></td>
                                 </tr>
-                                <tr>
-                                    <td>B</td>
-                                    <td><i class="pet-icon"></i></td>
-                                    <td>母</td>
-                                    <td>13个月</td>
-                                    <td>棕色</td>
-                                    <td>
-                                        <i class="glyphicon glyphicon-ok-sign text-muted"></i>
-                                    </td>
-                                    <td>&yen; 500</td>
-                                    <td>已出售</td>
-                                    <td><button class="btn btn-primary btn-xs disabled" disabled>预约看狗</button></td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -240,9 +235,9 @@
                                     <p class="tag">{{ pet_img.pet.type }}</p>
                                     <div class="shade-content">
                                         <div class="pet-showcase-detail">
-                                            <p>数量：5只</p>
-                                            <p>月龄：2个月</p>
-                                            <p>价格：<span class="price price-light price-sm">{{ pet_img.pet.min_price|floatformat }}-{{ pet_img.pet.max_price|floatformat }}<span class="price-desc">元</span></span></p>
+                                            <p>数量：{{ pet_img.count }}只</p>
+                                            <p>月龄：{{ pet_img.pet.age }}个月</p>
+                                            <p>价格：<span class="price price-light price-sm">{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元</span></span></p>
                                             <p>
                                                 <a class="btn btn-primary" href="/buy/detail/?petid={{ pet_img.pet.id }}">详细信息</a>
                                                 <a class="btn btn-primary btn-trans" href="">预约看狗</a>

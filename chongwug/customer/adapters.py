@@ -3,7 +3,7 @@
 文件功能：针对购宠用户涉及的页面，根据展示的数据需要，整理出格式化的数据返回
 '''
 from manager.models import ad
-from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
+from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import attention_user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -174,7 +174,10 @@ def buy_main_adapter(re):
             petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor='buy_main')[0]
         except:
             petimg = None
-        pets_imgs.append({'pet':pet_one,'img':petimg})
+        othor_pets = pet_one.pet_set.filter(dele=False)
+        min_price = othor_pets.order_by('-price')[0].price
+        max_price = othor_pets.order_by('price')[0].price
+        pets_imgs.append({'pet':pet_one,'img':petimg,'min_price':min_price,'max_price':max_price})
     return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
             'princekey':princekey,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,
             'epidemickey':epidemickey,'ages':ages,'agekey':agekey,'page':'buy'}
@@ -186,36 +189,46 @@ def buy_main_adapter(re):
 '''
 def buy_detail_adapter(re):
     if 'petid' in re.GET:
+        '''获取当前这窝宠物信息'''
         petid = string.atoi(re.REQUEST.get('petid'))
         try:
             nest_pet = nestofpet.objects.filter(id=petid,dele=False,sale_out=False)[0]
             curtype = nest_pet.type
         except:
             return False
-        petimgs = nestofpet_img.objects.filter(nestofpet_id = nest_pet,dele=False,img_usefor='narmol')
+        petimgs = nest_pet.nestofpet_img_set.filter(dele=False,img_usefor='narmol')
         if petimgs.count() == 0:
             petimg_first = None
         else:
             petimg_first = petimgs[0]
-        farm_img = pet_farm_img.objects.filter(pet_farm_id=nest_pet.farm,dele=False)[0]
+        allpets = nest_pet.pet_set.filter(dele=False).order_by('-price')
+        price = {'min_prince':allpets.order_by('-price')[0].price,'max_prince':allpets.order_by('price')[0].price}
+        price['min_price'] = allpets.order_by('-price')[0].price
+        price['max_price'] = allpets.order_by('price')[0].price
+        
+        '''获取本养殖场的所有宠物信息'''
+        farm_img = nest_pet.farm.pet_farm_img_set.filter(dele=False)[0]
         pets_img = []
         farm_pet_types = []
-        farm_pets = nestofpet.objects.filter(farm=nest_pet.farm,dele=False,sale_out=False)
+        farm_pets = nest_pet.farm.nestofpet_set.filter(dele=False,sale_out=False)
         for farm_pet in farm_pets:
             try:
-                img = nestofpet_img.objects.filter(nestofpet_id = farm_pet,dele=False,img_usefor='buy_main')[0]
+                img = farm_pet.nestofpet_img_set.filter(dele=False,img_usefor='buy_main')[0]
             except:
                 img = None
+            othor_pets = nest_pet.pet_set.filter(dele=False)
+            min_price = othor_pets.order_by('-price')[0].price
+            max_price = othor_pets.order_by('price')[0].price
+            count = othor_pets.count()
             if farm_pet.type not in farm_pet_types:
                 farm_pet_types.append(farm_pet.type)
-            pets_img.append({'pet':farm_pet,'img':img})
+            pets_img.append({'pet':farm_pet,'img':img,'min_price':min_price,'max_price':max_price,'count':count})
         
         '''
                             以下部分是获取本页面推荐的内容
         '''
         recommendpets_img = []
-        recommendpets = nestofpet.objects.filter(Q(type = nest_pet.type)|Q(color=nest_pet.color)|Q(min_price__lte=nest_pet.min_price)
-                                                 |Q(max_price__gte=nest_pet.max_price)|Q(farm__district=nest_pet.farm.district),dele=False,sale_out=False)
+        recommendpets = nestofpet.objects.filter(Q(type = nest_pet.type)|Q(color=nest_pet.color)|Q(farm__district=nest_pet.farm.district),dele=False,sale_out=False)
         recommendpets = recommendpets.exclude(id=nest_pet.id)
         for recommendpet in recommendpets:
             try:
@@ -223,8 +236,9 @@ def buy_detail_adapter(re):
             except:
                 img = None
             recommendpets_img.append({'pet':recommendpet,'img':img})
-        return {'nestpet':nest_pet,'nowimgs':petimgs[1:],'farmimg':farm_img,'pets_img':pets_img,'curtype':curtype,
-                'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'page':'buy'}
+        return {'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimg':farm_img,'pets_img':pets_img,'curtype':curtype,
+                'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
+        '''
     elif 'farmid' in re.GET:
         farmid = string.atoi(re.REQUEST.get('farmid'))
         try:
@@ -243,7 +257,7 @@ def buy_detail_adapter(re):
             return {'pets_imgs':pets_imgs}
         except:
             return False
-        return False
+        '''
     else:
         return False
 

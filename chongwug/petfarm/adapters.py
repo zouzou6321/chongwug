@@ -40,14 +40,10 @@ def manage_home_data_get(request):
 def manage_nestofpet_add(request):
     try:
         new_nestofpet = nestofpet(farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm,
-                                color = request.POST['color'],
-                                age = string.atoi(request.POST['age']),
-                                epidemic_period = request.POST['epidemic'],
-                                type = request.POST['type'],
-                                short_desc = request.POST['short_desc'],
-                                txt_desc = request.POST['desc'],
-                                min_price = string.atof(request.POST['min_prince']),
-                                max_price = string.atof(request.POST['max_prince']))
+                                color = request.POST['nest-color'],
+                                age = string.atoi(request.POST['nest-age']),
+                                type = request.POST['nest-type'],
+                                short_desc = request.POST['nest-desc'])
         new_nestofpet.save()
     except NameError:
         return False
@@ -56,14 +52,19 @@ def manage_nestofpet_add(request):
         petnum = 0
         while petnum < new_petscount:
             petnum += 1
-            new_pet = pet(  nestofpet = new_nestofpet,
-                            color = request.POST['color_%d' % petnum],
-                            epidemic_period = request.POST['epidemic_%d' % petnum],
-                            price = string.atof(request.POST['price_%d' % petnum]),
-                            #0为公，1为母
-                            sex = string.atoi(request.POST['sex_%d' % petnum]),
-                            sale_out = ((request.POST['sale_%d' % petnum] == 'true') and 1) or 0)
-            new_pet.save()
+            try:
+                new_pet = pet(  nestofpet = new_nestofpet,
+                                color = request.POST['color%d' % petnum],
+                                epidemic_period = request.POST['epidemic%d' % petnum],
+                                price = request.POST['price%d' % petnum],
+                                sex = request.POST['sex%d' % petnum],
+                                sale_out = ((request.POST['sale%d' % petnum] == '1') and 1) or 0)
+                new_pet.save()
+            except:
+                if petnum > 1:
+                    pass
+                else:
+                    raise NameError,("first pet can't create","in adapters.py")
     except:
         new_nestofpet.delete()
         return False
