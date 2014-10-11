@@ -181,6 +181,11 @@ label{
   .placard{
     font-weight: normal;
     border-radius: 0;
+    background-color: transparent;
+
+    &:after{
+      display: none;
+    }
   }
 
   .nav a{
@@ -197,6 +202,10 @@ label{
 
     &:hover, &:focus{
       background-color: $primary-bg-color;
+    }
+
+    &.placard:after{
+      display: inline-block;
     }
   }
 }

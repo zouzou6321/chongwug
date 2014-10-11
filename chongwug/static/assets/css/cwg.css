@@ -4436,7 +4436,10 @@ label {
     padding-left: 0; }
   .detail-navbar .placard {
     font-weight: normal;
-    border-radius: 0; }
+    border-radius: 0;
+    background-color: transparent; }
+    .detail-navbar .placard:after {
+      display: none; }
   .detail-navbar .nav a {
     line-height: 1;
     font-size: 16px;
@@ -4448,6 +4451,8 @@ label {
     background-color: #ffd401; }
     .detail-navbar .active a:hover, .detail-navbar .active a:focus {
       background-color: #ffd401; }
+    .detail-navbar .active a.placard:after {
+      display: inline-block; }
 
 .cwg-detail-nav-fixed {
   position: fixed;
@@ -5138,3 +5143,6 @@ img.mfp-img {
 
 .text-muted {
   color: #999; }
+
+.has-position {
+  position: relative; }

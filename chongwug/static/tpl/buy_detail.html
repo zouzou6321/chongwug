@@ -2,6 +2,7 @@
 {% load assets %}
 
 {% block title %}详情页{% endblock %}
+{% block bodyhook %}class="has-position"{% endblock %}
 
 {% block content %}
 
@@ -113,13 +114,13 @@
         </div>
     </div>
 
-    <div class="detail-navbar" id="js-affix">
+    <div class="detail-navbar" id="js-affix-scrollspy">
        <div class="container content-container">
            <ul class="nav navbar-nav">
-                <li class="active"><a href="#pet:info" class="placard">狗狗资料</a></li>
-                <li><a href="#pet:farm">犬舍简介</a></li>
-                <li><a href="#pet:showcase">其他犬种</a></li>
-                <li><a href="#pet:guarantee">保障服务</a></li>
+                <li class="active"><a href="#pet-info" class="placard">狗狗资料</a></li>
+                <li><a href="#pet-farm" class="placard">犬舍简介</a></li>
+                <li><a href="#pet-showcase" class="placard">其他犬种</a></li>
+                <li><a href="#pet-guarantee" class="placard">保障服务</a></li>
             </ul>
        </div>
     </div>
@@ -127,7 +128,7 @@
     <div class="container content-container">
         <div class="row">
             <div class="col-md-9 detail-main">
-                <div id="pet:info">
+                <div id="pet-info">
                     <h2 class="desc-tit">
                         <span class="placard">犬</span>狗狗资料
                     </h2>
@@ -187,7 +188,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="pet:farm">
+                <div id="pet-farm">
                     <h2 class="desc-tit">
                         <span class="placard">舍</span>犬舍简介
                     </h2>
@@ -226,7 +227,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="pet:showcase" class="pet-showcase">
+                <div id="pet-showcase" class="pet-showcase">
                     <h2 class="desc-tit">
                         <span class="placard">其</span>其他犬种
                     </h2>
@@ -254,7 +255,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="pet:guarantee">
+                <div id="pet-guarantee">
                     <h2 class="desc-tit">
                         <span class="placard">保</span>保障服务
                     </h2>
@@ -444,12 +445,14 @@
         });
 
         //detail nav affix
-        var $affix = $('#js-affix');
-        $affix.affix({
+        var $affixScrollspy = $('#js-affix-scrollspy');
+        $affixScrollspy.affix({
             offset: {
                 top: 600
             }
         });
+        //scroll spy
+        $('body').scrollspy({ target: '#js-affix-scrollspy' });
     }(jQuery));
 
 </script>
