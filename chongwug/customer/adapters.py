@@ -135,15 +135,25 @@ def buy_main_adapter(re):
                 prince_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
                 age_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
             elif enum[0] == 'prince':
-                kwargs[enum[1] + '__gte'] = princes[string.atoi(re.REQUEST.get(enum[0])) - 1]['b']
-                kwargs[enum[1] + '__lte'] = princes[string.atoi(re.REQUEST.get(enum[0])) - 1]['c']
-                princekey = re.REQUEST.get(enum[0])
-                age_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+                price = string.atoi(re.REQUEST.get(enum[0]))
+                if price > len(princes):
+                    price = len(princes)
+                elif price < 1:
+                    price = 1
+                kwargs[enum[1] + '__gte'] = princes[price - 1]['b']
+                kwargs[enum[1] + '__lte'] = princes[price - 1]['c']
+                princekey = price.__str__()
+                age_all_url += '%s=%d&' % (enum[0], price)
             elif enum[0] == 'age':
-                kwargs[enum[1] + '__gte'] = ages[string.atoi(re.REQUEST.get(enum[0])) - 1]['b']
-                kwargs[enum[1] + '__lte'] = ages[string.atoi(re.REQUEST.get(enum[0])) - 1]['c']
-                agekey = re.REQUEST.get(enum[0])
-                prince_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+                age = string.atoi(re.REQUEST.get(enum[0]))
+                if age > len(ages):
+                    age = len(ages)
+                elif age < 1:
+                    age = 1
+                kwargs[enum[1] + '__gte'] = ages[age - 1]['b']
+                kwargs[enum[1] + '__lte'] = ages[age - 1]['c']
+                agekey = age.__str__()
+                prince_all_url += '%s=%d&' % (enum[0], age)
     
     urls = {}
     urls['url'] = url
