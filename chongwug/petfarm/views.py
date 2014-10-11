@@ -123,7 +123,5 @@ def manage_nestofpet_add_view(request):
     if request.method == 'POST':
         if adapters.manage_nestofpet_add(request) == False:
             return HttpResponse("data error occur!!!")
-    page_data = adapters.pet_farm_all()
     data = adapters.manage_home_data_get(request)
-    page_data['manager'] = data['manager']
-    return render_to_response('petfarm/tpl/manage_pet_add.html',page_data,context_instance=RequestContext(request))
+    return render_to_response('petfarm/tpl/manage_pet_add.html',data,context_instance=RequestContext(request))

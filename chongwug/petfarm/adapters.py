@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from customer.models import user
 from manager.models import tmppic_monitor
-from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
+from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
 from upyun import UpYun
@@ -50,6 +50,22 @@ def manage_nestofpet_add(request):
                                 max_price = string.atof(request.POST['max_prince']))
         new_nestofpet.save()
     except NameError:
+        return False
+    try:
+        new_petscount = string.atoi(request.POST['count'])
+        petnum = 0
+        while petnum < new_petscount:
+            petnum += 1
+            new_pet = pet(  nestofpet = new_nestofpet,
+                            color = request.POST['color_%d' % petnum],
+                            epidemic_period = request.POST['epidemic_%d' % petnum],
+                            price = string.atof(request.POST['price_%d' % petnum]),
+                            #0为公，1为母
+                            sex = string.atoi(request.POST['sex_%d' % petnum]),
+                            sale_out = ((request.POST['sale_%d' % petnum] == 'true') and 1) or 0)
+            new_pet.save()
+    except:
+        new_nestofpet.delete()
         return False
     return True
 

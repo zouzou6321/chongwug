@@ -17,7 +17,7 @@ else:
    MYSQL_PORT = 3306
    MYSQL_USER = 'root'
    MYSQL_PASS = ''
-   MYSQL_DB   = 'app_haidaoteam'
+   MYSQL_DB   = 'chongwug'
 
 conn = MySQLdb.connect(host=MYSQL_HOST,user=MYSQL_USER,passwd=MYSQL_PASS,db=MYSQL_DB,port=MYSQL_PORT)
 conn.set_character_set('utf8')
