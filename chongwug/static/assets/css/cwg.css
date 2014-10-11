@@ -4430,7 +4430,9 @@ label {
     top: 0;
     width: 100%;
     margin-top: 0;
-    z-index: 21; }
+    z-index: 21;
+    -webkit-box-shadow: 0 2px 4px rgba(221, 221, 221, 0.6);
+    box-shadow: 0 2px 4px rgba(221, 221, 221, 0.6); }
   .detail-navbar .container {
     background-color: #fffcf0;
     padding-left: 0; }
