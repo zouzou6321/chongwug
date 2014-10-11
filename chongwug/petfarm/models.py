@@ -62,6 +62,16 @@ class nestofpet(models.Model):
     sale_out = models.BooleanField(default=False)
     dele = models.BooleanField(default=False)
 
+class pet(models.Model):
+    nestofpet = models.ForeignKey(nestofpet)
+    color = models.TextField()
+    epidemic_period = models.TextField()
+    price = models.FloatField()
+    #0为公，1为母
+    sex = models.IntegerField()
+    sale_out = models.BooleanField(default=False)
+    dele = models.BooleanField(default=False)
+
 class pet_farm_img(models.Model):
     pet_farm_id = models.ForeignKey(pet_farm)
     img_url = models.URLField()
