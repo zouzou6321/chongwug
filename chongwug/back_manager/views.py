@@ -138,8 +138,30 @@ def manage_ad_picpre_view(request):
 def manage_ad_mod_view(request):
     return True
 
-def manage_manager_view(request):
+def manage_manager_add_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.method == 'POST':
+        if adapters.manage_manager_add(request) == False:
+            return HttpResponse("data error occur!!!")
+    data = adapters.manage_home_data_get(request)
+    return render_to_response('manage/tpl/manage_manager_add.html',data,context_instance=RequestContext(request))
+
+def manage_manager_del_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    data = adapters.manage_manager_del(request)
+    if data == True or data == False:
+        return HttpResponse(data)
+    return render_to_response('manage/tpl/manage_manager_del.html',data)
+
+def manage_adshow_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     data = adapters.manage_home_data_get(request)
-    return render_to_response('manage/tpl/manage_manager.html',data,context_instance=RequestContext(request))
+    data['adinfo'] = adapters.manage_ad_info(request) 
+    if data['adinfo'] == 'False':
+        return HttpResponse("删除数据没有成功")
+    else:
+        return render_to_response('manage/tpl/manage_ad_show.html',data,context_instance=RequestContext(request))
+    return render_to_response('manage/tpl/manage_ad_show.html',data,context_instance=RequestContext(request))

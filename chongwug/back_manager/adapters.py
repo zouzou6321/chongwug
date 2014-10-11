@@ -10,6 +10,7 @@ import os,uuid,datetime
 from chongwug import settings
 from upyun import UpYun
 from django.shortcuts import get_object_or_404
+import config
 '''
 管理员鉴权
 '''
@@ -246,3 +247,49 @@ def manage_ad_picpreupload(request):
                      img_url = img_url)
         ad_sql.save()
     return 'true'
+
+def manage_get_adtypes():
+    ad_types = []
+    for adtype in config.__adtypes:
+        ad_types.append({'value':adtype[1],'text':adtype[2]})
+    return ad_types
+
+def manage_ad_info(request):
+    if request.method == 'POST':
+        try:
+            ads_str = request.REQUEST.getlist('ads')
+            type = request.POST['adtype']
+            ads = ad.objects.filter(type=type,dele=False)
+            for tmp_ad in ads_str:
+                print ads.count()
+                curad = ads.get(id=string.atoi(tmp_ad))
+                curad.dele = True
+                curad.save()
+        except:
+            return 'False'
+    ad_types = manage_get_adtypes()
+    ads = ad.objects.filter(type = config.__adtypes[0][1],dele=False)
+    return {'ad_types':ad_types,'ads':ads}
+
+def manage_manager_add(request):
+    try:
+        new_manage = manage(name = request.POST['name'],
+                            passwd = request.POST['passwd'],
+                            type = request.POST['type'],
+                            permission_score = string.atoi(request.POST['permission_score']))
+        new_manage.save()
+    except NameError:
+        return False
+    return True
+
+def manage_manager_del(request):
+    if request.method == 'GET' and 'id' in request.GET:
+        try:
+            print "aaa"
+            cumanage = manage.objects.get(id=string.atoi(request.REQUEST.get('id')),dele=False)
+            cumanage.dele = True
+            cumanage.save()
+            return True
+        except:
+            return False
+    return {'managers':manage.objects.filter(dele=False)}

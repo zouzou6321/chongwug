@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>内容编辑</title>
+	</head>
+	<body>
+
+<h1 class="page-header">广告展示</h1>
+				<div>
+				广告类型：	<select id="adtype" name="adtype" onchange="adtypeselected();">
+						{% for ad_type in adinfo.ad_types %}
+						<option value="{{ ad_type.value }}">{{ ad_type.text }}</option>
+						{% endfor %}
+						</select>
+				</div>
+				广告信息：
+				<div id="adinfo">
+					{% for ad in adinfo.ads %}
+					<p>
+					<div style="border:1px solid #ccc;border-radius:4px;width:90%;">
+					跳转地址：{{ ad.tar_url }}</br>
+					广告价格：{{ ad.prince }}</br>
+					开始展示时间：{{ ad.start_time }}</br>
+					结束展示时间：{{ ad.end_time }}</br>
+					<img src="{{ ad.img_url }}" style="width:900px;"/>
+					</div></p>
+					{% endfor %} 
+				</div>
+		</div>
+		<script>
+		function adtypeselected(){
+			data = {'adtype':$("#adtype").val()};
+			$.get("/manage/ad/del/adtypeselect/", data, function(recive){
+				if(recive != 'False'){
+					$("#adinfo").empty();
+					$("#adinfo").append(recive);
+				}
+				else{
+					alert('数据异常');
+				}
+			});
+		}
+		</script>
+	</body>
+</html>

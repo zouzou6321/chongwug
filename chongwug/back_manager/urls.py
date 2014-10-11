@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from django.conf.urls import patterns, url
-from back_manager.views import manage_home_view,manage_pet_farm_view,manage_pet_farm_add_view,manage_pet_farm_mod_view,manage_pet_farm_picadd_view,manage_pet_farm_picmod_view,manage_pet_farm_pic_upload_view,manage_pet_farm_picpre_view,manage_ad_view,manage_ad_add_view,manage_ad_mod_view,manage_ad_pic_upload_view,manage_ad_picpre_view,manage_manager_view,manage_nestofpet_add_view
-from back_manager.views import manage_nestofpet_picadd_view,manage_nestofpet_farmselect_view,manage_nestofpet_pic_upload_view,manage_nestofpet_picpre_view,manage_nestofpet_view
+from back_manager.views import manage_home_view,manage_pet_farm_view,manage_pet_farm_add_view,manage_pet_farm_mod_view,manage_pet_farm_picadd_view,manage_pet_farm_picmod_view,manage_pet_farm_pic_upload_view,manage_pet_farm_picpre_view,manage_ad_view,manage_ad_add_view,manage_ad_mod_view,manage_ad_pic_upload_view,manage_ad_picpre_view,manage_nestofpet_add_view
+from back_manager.views import manage_adshow_view,manage_manager_add_view,manage_manager_del_view,manage_nestofpet_picadd_view,manage_nestofpet_farmselect_view,manage_nestofpet_pic_upload_view,manage_nestofpet_picpre_view,manage_nestofpet_view
 urlpatterns = patterns(
                        '',
                        url(r'^$',manage_home_view),
@@ -10,7 +10,9 @@ urlpatterns = patterns(
                        url(r'^ad/mod/$',manage_ad_mod_view),
                        url(r'^ad/picadd/upload/$',manage_ad_pic_upload_view),
                        url(r'^ad/picadd/preupload/$',manage_ad_picpre_view),
-                       url(r'^manager/$',manage_manager_view),
+                       url(r'^ad/show/$',manage_adshow_view),
+                       url(r'^manager/add/$',manage_manager_add_view),
+                       url(r'^manager/del/$',manage_manager_del_view),
                        url(r'^nestofpet/$',manage_nestofpet_view),
                        url(r'^nestofpet/add/$',manage_nestofpet_add_view),
                        url(r'^nestofpet/picadd/$',manage_nestofpet_picadd_view),

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>内容编辑</title>
+		<script src="/static/back-assets/dist/js/jquery.js"></script>
+	</head>
+	<body>
+
+<h1 class="page-header">删除管理员</h1>
+				<div id="adinfo">
+					{% for manager in managers %}
+					<p>
+					<div style="border:1px solid #ccc;border-radius:4px;width:90%;" id="manage_{{ manager.id }}">
+					名字：{{ manager.name }}
+					密码：{{ manager.passwd }}
+					类型：{{ manager.type }}
+					权限：{{ manager.permission_score }}
+					<button onclick="delemanager({{ manager.id }})">删除</button>
+					</div></p>
+					{% endfor %} 
+				</div>
+		</div>
+		<script>
+		function delemanager(id){
+			$.get("./?id="+id, function(recive){
+				if(recive != 'False'){
+					$("#manage_" + id).hide();
+				}
+				else{
+					alert('删除失败');
+				}
+			});
+		}
+		</script>
+	</body>
+</html>
