@@ -42,6 +42,7 @@ class nestofpet(models.Model):
     farm = models.ForeignKey(pet_farm,blank=True, null=True)
     mam_id = models.ForeignKey(pet_mam,blank=True, null=True)
     dad_id = models.ForeignKey(pet_dad,blank=True, null=True)
+    num = models.TextField(blank=True, null=True)
     color = models.TextField()
     #宠物上架月龄
     age = models.IntegerField()
