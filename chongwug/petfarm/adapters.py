@@ -8,7 +8,7 @@ from upyun import UpYun
 from django.shortcuts import get_object_or_404
 from django.contrib import auth
 
-import os,uuid,string,re
+import os,uuid,string,re,datetime
 '''
 管理员鉴权
 '''
@@ -39,12 +39,17 @@ def manage_home_data_get(request):
 
 def manage_nestofpet_add(request):
     try:
-        new_nestofpet = nestofpet(farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm,
+        farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm
+        new_nestofpet = nestofpet(farm = farm,
                                 color = request.POST['nest-color'],
                                 age = string.atoi(request.POST['nest-age']),
                                 type = request.POST['nest-type'],
                                 short_desc = request.POST['nest-desc'])
         new_nestofpet.save()
+        cur_datetime = datetime.datetime.now()
+        new_nestofpet.num = "%d%d%d%d%d" % (farm.id,cur_datetime.year,cur_datetime.month,cur_datetime.day,new_nestofpet.id)
+        new_nestofpet.save()
+        print new_nestofpet.num
     except NameError:
         return False
     try:
