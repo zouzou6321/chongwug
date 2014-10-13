@@ -77,6 +77,7 @@ def buy_home_adapter(request):
 def buy_main_adapter(re):
     cur_url = '/buy/?'
     url = cur_url
+    price = None
     #筛选条件
     types = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加',u'博美',u'巴哥',u'雪纳瑞',u'约克夏',u'德牧',u'古牧',u'比格',u'喜乐蒂',u'斗牛犬',u'杜宾',u'罗威纳',u'吉娃娃']
     princes = [{'a':'1','b':600,'c':1000},{'a':'2','b':1000,'c':1500},{'a':'3','b':1500,'c':2000},{'a':'4','b':2000,'c':2500},{'a':'5','b':2500,'c':1000000}]
@@ -140,8 +141,8 @@ def buy_main_adapter(re):
                     price = len(princes)
                 elif price < 1:
                     price = 1
-                kwargs[enum[1] + '__gte'] = princes[price - 1]['b']
-                kwargs[enum[1] + '__lte'] = princes[price - 1]['c']
+                #kwargs[enum[1] + '__gte'] = princes[price - 1]['b']
+                #kwargs[enum[1] + '__lte'] = princes[price - 1]['c']
                 princekey = price.__str__()
                 age_all_url += '%s=%d&' % (enum[0], price)
             elif enum[0] == 'age':
@@ -175,8 +176,11 @@ def buy_main_adapter(re):
         except:
             petimg = None
         othor_pets = pet_one.pet_set.filter(dele=False)
-        min_price = othor_pets.order_by('-price')[0].price
-        max_price = othor_pets.order_by('price')[0].price
+        min_price = string.atoi(othor_pets.order_by('-price')[0].price)
+        max_price = string.atoi(othor_pets.order_by('price')[0].price)
+        if price != None:
+            if (max_price < princes[price - 1]['b'] or min_price > princes[price - 1]['c']):
+                continue
         pets_imgs.append({'pet':pet_one,'img':petimg,'min_price':min_price,'max_price':max_price})
     return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
             'princekey':princekey,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,
@@ -207,7 +211,7 @@ def buy_detail_adapter(re):
         price['max_price'] = allpets.order_by('price')[0].price
         
         '''获取本养殖场的所有宠物信息'''
-        farm_img = nest_pet.farm.pet_farm_img_set.filter(dele=False)[0]
+        farm_imgs = nest_pet.farm.pet_farm_img_set.filter(dele=False)[0:4]
         pets_img = []
         farm_pet_types = []
         farm_pets = nest_pet.farm.nestofpet_set.filter(dele=False,sale_out=False)
@@ -240,7 +244,7 @@ def buy_detail_adapter(re):
             max_price = othor_pets.order_by('price')[0].price
             recommendpets_img.append({'pet':recommendpet,'img':img,'min_price':min_price,'max_price':max_price})
             
-        return {'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimg':farm_img,'pets_img':pets_img,'curtype':curtype,
+        return {'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
         '''
     elif 'farmid' in re.GET:

@@ -31,39 +31,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="pet-epidemic" class="col-sm-2 control-label">防疫状态<span class="warn">*</span>：</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control required" id="pet-epidemic" name="epidemic" value="{{ pet_one.epidemic_period }}">
-        </div>
-    </div>
-    <div class="form-group">
         <label for="pet-type" class="col-sm-2 control-label">宠物品种<span class="warn">*</span>：</label>
         <div class="col-sm-4">
           <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet_one.type }}">
         </div>
     </div>
     <div class="form-group">
-        <label for="pet-min_prince" class="col-sm-2 control-label">宠物最低价格<span class="warn">*</span>：</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control required number" id="pet-min_prince" name="min_prince" value="{{ pet_one.min_price }}">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="pet-max_prince" class="col-sm-2 control-label">宠物最高价格<span class="warn">*</span>：</label>
-        <div class="col-sm-4">
-          <input type="text" class="form-control required number" id="pet-max_prince" name="max_prince" value="{{ pet_one.max_price }}">
-        </div>
-    </div>
-    <div class="form-group">
         <label for="pet-short_desc" class="col-sm-2 control-label">一句话介绍，最多20字<span class="warn">*</span>：</label>
         <div class="col-sm-4">
           <input type="text" class="form-control required number" id="pet-short_desc" name="short_desc" value="{{ pet_one.short_desc }}">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="pet-desc" class="col-sm-2 control-label">详细描述<span class="warn">*</span>：</label>
-        <div class="col-sm-8">
-          <textarea class="form-control required" rows="3" id="pet-desc" name="desc">{{ pet_one.txt_desc|safe }}</textarea>
         </div>
     </div>
   </div>
