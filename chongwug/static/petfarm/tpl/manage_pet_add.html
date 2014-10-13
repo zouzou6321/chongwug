@@ -2,6 +2,10 @@
 
 {% block title %}内容编辑{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/back-assets/dist/uploadify/uploadify.css"/>
+{% endblock %}
+
 {% block main %}
 
 <style>
@@ -47,6 +51,12 @@
         <label for="nest-desc" class="col-sm-3 control-label">本窝简介（最多20字）<span class="warn">*</span>：</label>
         <div class="col-sm-4">
           <input type="text" class="form-control required number" id="nest-desc" name="nest-desc">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">本窝图片（至少一张）<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <div id="js-uploadify"></div>
         </div>
     </div>
     <div class="pet">
@@ -102,6 +112,23 @@
         </div>
     </div>
 </form>
+
+<div class="modal fade" id="js-crop-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">裁剪图片</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+    <div class="modal-loading"></div>
+  </div>
+</div>
 
 <script type="text/html" id="pet-tpl">
 
@@ -175,6 +202,58 @@
 
     $form.on('submit', function(){
         $('#pet-count').val(num);
+    });
+
+})(jQuery);
+
+</script>
+<script src="/static/back-assets/dist/uploadify/jquery.uploadify.min.js"></script>
+<script>
+
+(function($){
+
+    var $cropModal = $('#js-crop-modal'),
+        $cropModalBody = $cropModal.find('.modal-body');
+
+    function loadImage(url, callback){
+        var $img = $('<img>');
+
+        $img.on('load', function(){
+            callback();
+        });
+
+        $img.attr('src', url);
+    }
+
+    $('#js-uploadify').uploadify({
+        buttonText: '浏览并上传',
+        buttonClass: 'btn-info',
+        swf: '/static/back-assets/dist/uploadify/uploadify.swf',
+        uploader: '/petfarm/petfarm/picadd/upload/',
+        fileTypeExts: '*.jpg;*.jpeg;*.gif;*.png;*.bmp;',
+        fileSizeLimit: '4MB',
+        multi: 'false',
+        onUploadError: function(file, errorCode, errorMsg, errorString){
+            if(errorMsg == "500"){
+                errorString = '服务器内部错误';
+            }
+
+            alert('"' + file.name + '" 上传失败：' + errorString + '，请重试！');
+        },
+        onUploadSuccess: function(file, data, response){
+            if (!response) {
+                alert('请求超时，请稍后重试！');
+                return;
+            }
+
+            data = $.parseJSON(data);
+
+            $cropModal.modal('show').addClass('loading');
+            loadImage(data.url, function(){
+                $cropModal.removeClass('loading');
+                $cropModalBody.html('<img src="'+ data.url +'">');
+            });
+        }
     });
 
 })(jQuery);
