@@ -169,7 +169,7 @@
                                     </td>
                                     <td>&yen; {{ pet.price }}</td>
                                     <td>立即购买</td>
-                                    <td><button class="btn btn-primary btn-xs">预约看狗</button></td>
+                                    <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#cwg-order-modal" data-id="{{ pet.id }}">预约看狗</button></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -240,7 +240,7 @@
                                             <p>价格：<span class="price price-light price-sm">{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元</span></span></p>
                                             <p>
                                                 <a class="btn btn-primary" href="/buy/detail/?petid={{ pet_img.pet.id }}">详细信息</a>
-                                                <a class="btn btn-primary btn-trans" href="">预约看狗</a>
+                                                <button class="btn btn-primary btn-trans" data-id="{{ pet_img.pet.id }}" data-toggle="modal" data-target="#cwg-order-modal">预约看狗</button>
                                             </p>
                                         </div>
                                     </div>
