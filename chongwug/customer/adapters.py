@@ -207,7 +207,7 @@ def buy_detail_adapter(re):
         price['max_price'] = allpets.order_by('price')[0].price
         
         '''获取本养殖场的所有宠物信息'''
-        farm_img = nest_pet.farm.pet_farm_img_set.filter(dele=False)[0]
+        farm_imgs = nest_pet.farm.pet_farm_img_set.filter(dele=False)[0:4]
         pets_img = []
         farm_pet_types = []
         farm_pets = nest_pet.farm.nestofpet_set.filter(dele=False,sale_out=False)
@@ -240,7 +240,7 @@ def buy_detail_adapter(re):
             max_price = othor_pets.order_by('price')[0].price
             recommendpets_img.append({'pet':recommendpet,'img':img,'min_price':min_price,'max_price':max_price})
             
-        return {'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimg':farm_img,'pets_img':pets_img,'curtype':curtype,
+        return {'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
         '''
     elif 'farmid' in re.GET:

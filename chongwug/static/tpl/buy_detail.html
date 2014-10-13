@@ -197,18 +197,11 @@
                     </h2>
                     <div class="desc-main">
                         <div class="row img-row">
+                        	{% for farmimg in farmimgs %}
                             <div class="col-xs-6">
                                 <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
-                            <div class="col-xs-6">
-                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
-                            </div>
-                            <div class="col-xs-6">
-                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
-                            </div>
-                            <div class="col-xs-6">
-                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
-                            </div>
+                            {% endfor %}
                         </div>
                         <table class="table table-primary table-pet-kennel">
                             <caption>犬舍信息</caption>
