@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    glob = require('glob'),
     fs = require('fs'),
     argv = require('minimist')(process.argv.slice(2)),
     merge = require('merge-stream'),
@@ -29,6 +30,10 @@ gulp.task('css', dep, function(){
         //csscomb
         //.pipe(plugins.csscomb())
         // save to dev dir
+        //.pipe(plugins.cssshrink())
+//        .pipe(plugins.uncss({
+//            html: ['http://localhost:8000', 'http://localhost:8000/home']
+//        }))
         .pipe(gulp.dest(config.css.dev))
         //filter *.map
         .pipe(plugins.if(prod, plugins.filter('**/*.css')))
