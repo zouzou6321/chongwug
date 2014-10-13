@@ -7,6 +7,7 @@ import adapters
 #date:2014/8/16
 #discription:导航页面展示
 def nav_page_view(request):
+    return render_to_response("tpl/delay.html")
     if 'visitor' not in request.session:
         request.session['visitor'] = 1
         return render_to_response('tpl/nav.html')
