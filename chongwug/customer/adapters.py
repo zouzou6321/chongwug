@@ -179,9 +179,7 @@ def buy_main_adapter(re):
         min_price = string.atoi(othor_pets.order_by('-price')[0].price)
         max_price = string.atoi(othor_pets.order_by('price')[0].price)
         if price != None:
-            if (min_price < princes[price - 1]['b'] or min_price > princes[price - 1]['c'])\
-            and (max_price < princes[price - 1]['b'] or max_price > princes[price - 1]['c'])\
-            and (min_price > princes[price - 1]['b'] and max_price < princes[price - 1]['c']):
+            if (max_price < princes[price - 1]['b'] or min_price > princes[price - 1]['c']):
                 continue
         pets_imgs.append({'pet':pet_one,'img':petimg,'min_price':min_price,'max_price':max_price})
     return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
