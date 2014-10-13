@@ -252,12 +252,8 @@ def manage_nestofpet_mod(request):
         new_nestofpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
         new_nestofpet.color = request.POST['color']
         new_nestofpet.age = string.atoi(request.POST['age'])
-        new_nestofpet.epidemic_period = request.POST['epidemic']
         new_nestofpet.type = request.POST['type']
         new_nestofpet.short_desc = request.POST['short_desc']
-        new_nestofpet.txt_desc = request.POST['desc']
-        new_nestofpet.min_price = string.atof(request.POST['min_prince'])
-        new_nestofpet.max_price = string.atof(request.POST['max_prince'])
         new_nestofpet.save()
     except NameError:
         return False
