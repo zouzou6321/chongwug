@@ -39,6 +39,7 @@
                 {% if manager.permission_score < 20 %}
 				{% else %}
 				<li><a href="/market/attention/">客户预约信息</a></li>
+				<li><a href="/market/nestofpet/">宠物数据信息</a></li>
 				{% endif %}
             </ul>
         </div>
@@ -55,78 +56,6 @@
 <script src="/static/back-assets/dist/js/jquery.js"></script>
 <script src="/static/back-assets/dist/js/bootstrap.js"></script>
 <script src="/static/back-assets/dist/js/validate/jquery.validate.js"></script>
-<script src="/static/market/js/jquery.dataTables.js"></script>
-<script src="/static/market/js/dataTables.tableTools.js"></script>
-<script src="/static/market/js/dataTables.editor.js"></script>
-<script type="text/javascript">
-var editor; // use a global for the submit and return data rendering in the examples
-
-$(document).ready(function() {
-    editor = new $.fn.dataTable.Editor( {
-        ajax: "/market/attention/mod/",
-        table: "#example",
-        fields: [ {
-                label: "id:",
-                name: 0
-            },{
-                label: "user:",
-                name: 1
-            }, {
-                label: "tel:",
-                name: 2
-            },{
-                label: "nestofpet_id:",
-                name: 3
-            }, {
-                label: "attention_type:",
-                name: 4
-            }, {
-                label: "time:",
-                name: 5
-            }, {
-                label: "dele:",
-                name: 6
-            }
-        ]
-    } );
- 
-    // Activate an inline edit on click of a table cell
-    $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        editor.inline( this );
-    } );
- 
-    $('#example').DataTable( {
-        dom: "Tfrtip",
-        ajax: "{% url order_list_json %}",
-        columns: [
-        { data: null, defaultContent: '', orderable: false },
-            { data: 0 },
-            { data: 1 },
-            { data: 2 },
-            { data: 3 },
-            { data: 4 },
-            { data: 5 },
-            { data: 6 }
-        ],
-        order: [ 1, 'asc' ],
-        tableTools: {
-            sRowSelect: "os",
-            sRowSelector: 'td:first-child',
-            aButtons: [
-                { sExtends: "editor_edit",   editor: editor }
-            ]
-        }
-    } );
-    
-    $("#example tbody").dblclick(function(e){
-		var aa = 0;
-		var e = jQuery.Event("keydown");//模拟一个键盘事件 
-		e.keyCode = 13;//keyCode=13是回车 
-		$(".DTE_Inline").parent().parent().trigger(e);//模拟页码框按下回车 
- 	});
-} );
-</script>
 {% block scripts %}{% endblock %}
-
 </body>
 </html>

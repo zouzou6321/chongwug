@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
 from manager.models import ad,tmppic_monitor
 from customer.models import user,nestofpet_attention
-from petfarm.models import pet_farm
+from petfarm.models import pet_farm,nestofpet
 from PIL import Image
 from chongwug import settings
 from upyun import UpYun
@@ -39,6 +39,24 @@ def manage_login_check(request):
 def manage_home_data_get(request):
     manager = manage.objects.get(id=request.session['manage_id'])
     return {'manager':manager}
+
+def market_nestofpet_info_get(request):
+    nestpets = nestofpet.objects.filter(sale_out=False,dele=False)
+    nest_pets = []
+    for nest_pet in nestpets:
+        nest_pets.append({'nest_pet':nest_pet,'min_price':nest_pet.pet_set.order_by('-price')[0].price,'max_price':nest_pet.pet_set.order_by('price')[0].price})
+    return nest_pets
+
+def market_nestofpet_sale_set(request):
+    try:
+        if request.REQUEST.get('sale') == '0' or request.REQUEST.get('sale') == '1':
+            nest_pet = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),dele=False)
+            nest_pet.sale_out = string.atoi(request.REQUEST.get('sale'))
+            nest_pet.save()
+            return "True"
+    except:
+        return "ERROR"
+    return "DATA ERROR"
 
 def market_attention_mod(request):
     attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['data[0]']),dele=False)

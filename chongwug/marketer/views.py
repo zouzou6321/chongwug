@@ -26,7 +26,7 @@ def manage_home_view(request):
     data = adapters.manage_home_data_get(request)
     return render_to_response('market/tpl/manage_home.html',data)
 
-def market_usr_attention_info(request):
+def market_usr_attention_info_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MARKET_ROOT)
     if request.session['score'] < 20:
@@ -35,10 +35,21 @@ def market_usr_attention_info(request):
     return render_to_response('market/tpl/market_attentions.html',data)
 
 @csrf_exempt
-def market_usr_attention_mod(request):
+def market_usr_attention_mod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MARKET_ROOT)
     if request.session['score'] < 20:
         return HttpResponse("Page Not Find!!!")
     data = adapters.market_attention_mod(request)
     return HttpResponse(data)
+
+def market_nestofpet_info_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MARKET_ROOT)
+    if request.session['score'] < 20:
+        return HttpResponse("Page Not Find!!!")
+    if 'id' and 'sale' in request.GET:
+        return HttpResponse(adapters.market_nestofpet_sale_set(request))
+    data = adapters.manage_home_data_get(request)
+    data['infos'] = adapters.market_nestofpet_info_get(request)
+    return render_to_response('market/tpl/market_nestofpet_info.html',data)

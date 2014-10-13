@@ -1,0 +1,67 @@
+{% extends 'market/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/static/market/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" href="/static/market/css/dataTables.editor.min.css"/>
+{% endblock %}
+{% block main %}
+<h1 class="page-header">欢迎使用！</h1>
+<p><input type="text" id="search"></input><button onclick="numsearch();">按照编号搜索</button></p>
+
+<table style="BORDER-COLLAPSE: collapse" borderColor=#000000 cellPadding=1 width=800 border=1>
+        <thead>
+          <tr>
+          <th></th>
+          <th>编号</th>
+          <th>所属养殖场</th>
+          <th>种类</th>
+          <th>颜色</th>
+          <th>价格</th>
+          <th>月龄</th>
+          <th>是否售罄</th>
+          </tr>
+        </thead>
+        <tbody>
+        	{% for info in infos %}
+        	<tr>
+	          <td></td>
+	          <td>{{ info.nest_pet.num }}</td>
+	          <td>{{ info.nest_pet.farm.name }}</td>
+	          <td>{{ info.nest_pet.type }}</td>
+	          <td>{{ info.nest_pet.color }}</td>
+	          <td>{{ info.min_price }}-{{ info.max_price }}</td>
+	          <td>{{ info.nest_pet.age }}</td>
+	          <td><select id="sale{{ info.nest_pet.id }}" style="width:80px;" onChange="saleSelect({{ info.nest_pet.id }});"><option value="0">否</option><option value="1">是</option></select></td>
+          </tr>
+        	{% endfor %}
+        </tbody>
+</table>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+function saleSelect(petid){
+	$.get("./?id="+petid+"&sale="+$("#sale"+petid).val(),function(recive){
+		if (recive != "True"){
+			alert(recive);
+		}
+	});
+}
+
+function numsearch(){
+	var tags = $("table tbody tr");
+	if ($("#search").val() == ""){
+		for (var i = 0; i < tags.length; i++){
+			tags.eq(i).show();
+		}
+	}
+	else {
+		for (var i = 0; i < tags.length; i++){
+			if (tags.eq(i).children().eq(1).text() != $("#search").val()){
+				tags.eq(i).hide();
+			}
+		}
+	}
+}
+</script>
+{% endblock %}
