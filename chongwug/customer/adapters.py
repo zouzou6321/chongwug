@@ -235,7 +235,11 @@ def buy_detail_adapter(re):
                 img = nestofpet_img.objects.filter(nestofpet_id = recommendpet,dele=False,img_usefor='buy_main')[0]
             except:
                 img = None
-            recommendpets_img.append({'pet':recommendpet,'img':img})
+            othor_pets = recommendpet.pet_set.filter(dele=False)
+            min_price = othor_pets.order_by('-price')[0].price
+            max_price = othor_pets.order_by('price')[0].price
+            recommendpets_img.append({'pet':recommendpet,'img':img,'min_price':min_price,'max_price':max_price})
+            
         return {'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimg':farm_img,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
         '''
@@ -292,5 +296,27 @@ def buy_attention_adapter(req):
     except:
         data['message'] = "服务器内部错误，请反馈给我们，多谢亲！"
         return simplejson.dumps(data,ensure_ascii = False)
+    sendTemplateSMS(tel,["chongwug","test1"])
     data = {"status": "success"}
     return simplejson.dumps(data,ensure_ascii = False)
+
+from yuntongxun.CCPRestSDK import REST
+
+accountSid= '8a48b55148fe48600149087c6c3105ae';
+
+accountToken= '4ac0351d9f384db99983e8d4683f24af';
+
+appId='aaf98f8948fe3e9c0149087cae01056e';
+
+serverIP='sandboxapp.cloopen.com';
+
+serverPort='8883';
+
+softVersion='2013-12-26';
+
+def sendTemplateSMS(to,datas,tempId=1):
+    rest = REST(serverIP,serverPort,softVersion)
+    rest.setAccount(accountSid,accountToken)
+    rest.setAppId(appId)
+    
+    rest.sendTemplateSMS(to,datas,tempId)
