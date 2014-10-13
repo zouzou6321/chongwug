@@ -4,6 +4,8 @@
 
 {% block css %}
 <link rel="stylesheet" href="/static/back-assets/dist/uploadify/uploadify.css"/>
+<link rel="stylesheet" href="/static/back-assets/dist/jcrop/jquery.Jcrop.css"/>
+<link rel="stylesheet" href="/static/back-assets/dist/imgcut/css/imgareaselect-default.css"/>
 {% endblock %}
 
 {% block main %}
@@ -57,6 +59,26 @@
         <label class="col-sm-3 control-label">本窝图片（至少一张）<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <div id="js-uploadify"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-4">
+            <ul class="preview-img">
+                <li>
+                    <img src="/static/manage/pictest/19fb58ee-52d2-11e4-bbbe-6c3be5803607.jpg"/>
+                    <div class="img-edit">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </div>
+                </li>
+                <li>
+                    <img src="/static/manage/pictest/19fb58ee-52d2-11e4-bbbe-6c3be5803607.jpg"/>
+                    <div class="img-edit">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="pet">
@@ -113,7 +135,7 @@
     </div>
 </form>
 
-<div class="modal fade" id="js-crop-modal">
+<div class="modal fade modal-auto-width" id="js-crop-modal" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -178,6 +200,16 @@
 
 </script>
 
+<script type="text/html" id="preview-item-tpl">
+<li>
+    <img src="{src}"/>
+    <div class="img-edit">
+        <i class="glyphicon glyphicon-pencil"></i>
+        <i class="glyphicon glyphicon-remove"></i>
+    </div>
+</li>
+</script>
+
 {% endblock %}
 
 {% block scripts %}
@@ -208,12 +240,15 @@
 
 </script>
 <script src="/static/back-assets/dist/uploadify/jquery.uploadify.min.js"></script>
+<script src="/static/back-assets/dist/jcrop/jquery.Jcrop.min.js"></script>
+<script src="/static/back-assets/dist/imgcut/scripts/jquery.imgareaselect.min.js"></script>
 <script>
 
 (function($){
 
     var $cropModal = $('#js-crop-modal'),
-        $cropModalBody = $cropModal.find('.modal-body');
+        $cropModalBody = $cropModal.find('.modal-body'),
+        jcrop = null;
 
     function loadImage(url, callback){
         var $img = $('<img>');
@@ -223,6 +258,16 @@
         });
 
         $img.attr('src', url);
+    }
+
+    function startCrop($img){
+        $img.Jcrop({
+            aspectRatio: 1.5,
+            minSize: [600, 400],
+            setSelect: [0, 0, 600, 400]
+        }, function(){
+            jcrop = this;
+        });
     }
 
     $('#js-uploadify').uploadify({
@@ -251,9 +296,15 @@
             $cropModal.modal('show').addClass('loading');
             loadImage(data.url, function(){
                 $cropModal.removeClass('loading');
-                $cropModalBody.html('<img src="'+ data.url +'">');
+                var $img = $cropModalBody.html('<img src="'+ data.url +'">').find('img');
+                startCrop($img);
             });
         }
+    });
+
+    $cropModal.on('hidden.bs.modal', function(){
+        jcrop && jcrop.destroy();
+        $cropModalBody.html('');
     });
 
 })(jQuery);

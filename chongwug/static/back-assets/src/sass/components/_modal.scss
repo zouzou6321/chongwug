@@ -5,21 +5,24 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: #fff url(../imgs/loading.gif) center;
+  background: #fff url(../imgs/loading.gif) center no-repeat;
 
   .loading &{
     display: block;
   }
 }
 
-.model{
+.modal-auto-width{
   text-align: center;
-}
 
-.modal-dialog{
-  @media (min-width: $screen-sm) {
-    width: auto;
-    min-width: 800px;
-    display: inline-block;
+  .modal-title{
+    text-align: left;
+  }
+
+  .modal-dialog{
+    @media (min-width: $screen-sm) {
+      width: auto;
+      display: inline-block;
+    }
   }
 }
