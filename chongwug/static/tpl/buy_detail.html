@@ -72,6 +72,14 @@
                 <div class="cwg-detail-info">
                     <div class="info-row clearfix">
                         <div class="info-td-left">
+                            编<span class="middle-space"></span>号：
+                        </div>
+                        <div class="info-td-right">
+                            89757
+                        </div>
+                    </div>
+                    <div class="info-row clearfix">
+                        <div class="info-td-left">
                             犬<span class="middle-space"></span>种：
                         </div>
                         <div class="info-td-right">
@@ -144,8 +152,8 @@
                                     <th>颜色</th>
                                     <th>疫苗</th>
                                     <th>价格</th>
-                                    <th>出售情况</th>
-                                    <th>&nbsp;</th>
+{#                                    <th>出售情况</th>#}
+{#                                    <th>&nbsp;</th>#}
                                 </tr>
                             </thead>
                             <tbody>
@@ -168,14 +176,14 @@
                                         {% endif %}
                                     </td>
                                     <td>&yen; {{ pet.price }}</td>
-                                    <td>立即购买</td>
-                                    <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#cwg-order-modal" data-id="{{ pet.id }}">预约看狗</button></td>
+{#                                    <td>立即购买</td>#}
+{#                                    <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#cwg-order-modal" data-id="{{ pet.id }}">预约看狗</button></td>#}
                                 </tr>
                                 {% endfor %}
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="9">
+                                    <td colspan="7">
                                         <p class="pet-tip"><i class="icon-car"></i><span>你看狗 我接送</span></p>
                                     </td>
                                 </tr>
