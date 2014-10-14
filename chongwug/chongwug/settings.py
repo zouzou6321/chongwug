@@ -15,7 +15,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     MYSQL_DB   = 'chongwug'
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
-    ALLOWED_HOSTS = ['*.chongwug.com']
+    ALLOWED_HOSTS = ['.chongwug.com','.chongwug.com.']
 else:
     DEBUG = False
     TEMPLATE_DEBUG = False
@@ -28,7 +28,7 @@ else:
     MYSQL_DB   = 'chongwug'
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['localhost']
 
 MANAGERS = ADMINS
 
