@@ -15,7 +15,7 @@ urlpatterns = patterns('',
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),
                        url(r'^market/', include('marketer.urls')),
-                       url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':True  }),
+                       #url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':True  }),
     # Examples:
     # url(r'^$', 'chongwug.views.home', name='home'),
     # url(r'^chongwug/', include('chongwug.foo.urls')),
