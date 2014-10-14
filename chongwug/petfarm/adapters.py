@@ -3,7 +3,7 @@ from customer.models import user
 from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
-from chongwug import settings
+from chongwug import settings,config
 from upyun import UpYun
 from django.shortcuts import get_object_or_404
 from django.contrib import auth
@@ -36,6 +36,22 @@ def manage_login_check(request):
 def manage_home_data_get(request):
     manager = user.objects.get(auth_user=auth.get_user(request),dele = False)
     return {'manager':manager}
+
+def get_petpic_types():
+    types = []
+    for petpictype in config.__petpictypes:
+        print petpictype
+        types.append({'type':petpictype[1],'desc':petpictype[2],'width':petpictype[3],'height':petpictype[4]})
+    return {'types':types}
+
+def petpic_upload_pre(request):
+    imgw,imgh = 0,0
+    for petpictype in config.__petpictypes:
+        if imgw < petpictype[3]:
+            imgw = petpictype[3]
+        if imgh < petpictype[4]:
+            imgh = petpictype[4]
+    return imgw,imgh
 
 def manage_nestofpet_add(request):
     try:

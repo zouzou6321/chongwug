@@ -55,14 +55,7 @@ def manage_nestofpet_picadd_view(request):
 @csrf_exempt
 def manage_nestofpet_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
-    imgw = 275
-    imgh = 180
-    if request.REQUEST.get('usefor') == 'narmol':
-        imgw = 600
-        imgh = 400
-    elif request.REQUEST.get('usefor') == 'buy_main':
-        imgw = 275
-        imgh = 180
+    imgw,imgh = adapters.petpic_upload_pre(request)
     return HttpResponse(adapters.manage_picupload(photo,imgw,imgh))
 
 @csrf_exempt
@@ -124,4 +117,5 @@ def manage_nestofpet_add_view(request):
         if adapters.manage_nestofpet_add(request) == False:
             return HttpResponse("data error occur!!!")
     data = adapters.manage_home_data_get(request)
+    data['types'] = adapters.get_petpic_types()['types']
     return render_to_response('petfarm/tpl/manage_pet_add.html',data,context_instance=RequestContext(request))

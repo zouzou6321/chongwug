@@ -28,10 +28,17 @@ if 'SERVER_SOFTWARE' in os.environ:
     
     STATIC_PATH_URL = ''
 else:
-    DEBUG = False
-    TEMPLATE_DEBUG = False
+    DEBUG = True
+    TEMPLATE_DEBUG = True
     
-    ADMINS = ()
+    ADMINS = (
+              (u'赱赱', '692673390@qq.com'),
+             )
+    #EMAIL_USE_TLS = True
+    #EMAIL_HOST = 'smtp.exmail.qq.com'
+    #EMAIL_PORT = 465
+    #EMAIL_HOST_USER = 'zouzou@chongwug.com'
+    #EMAIL_HOST_PASSWORD = 'weet6321'
     
    # Make `python manage.py syncdb` works happy!
     MYSQL_HOST = 'localhost'
