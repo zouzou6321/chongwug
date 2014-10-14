@@ -1,26 +1,37 @@
+# -*- coding: UTF-8 -*-
 # Django settings for chongwug project.
 import os
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
+if 'SERVER_SOFTWARE' in os.environ:
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+    ADMINS = (
+              (u'赱赱', '692673390@qq.com'),
+             )
+    MYSQL_HOST = 'chongwug.mysql.rds.aliyuncs.com'
+    MYSQL_PORT = '3306'
+    MYSQL_USER = 'chongwug'
+    MYSQL_PASS = 'weet6321'
+    MYSQL_DB   = 'chongwug'
+    # Hosts/domain names that are valid for this site; required if DEBUG is False
+    # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
+    ALLOWED_HOSTS = ['*.chongwug.com']
+else:
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+    ADMINS = ()
+   # Make `python manage.py syncdb` works happy!
+    MYSQL_HOST = 'localhost'
+    MYSQL_PORT = '3306'
+    MYSQL_USER = 'root'
+    MYSQL_PASS = ''
+    MYSQL_DB   = 'chongwug'
+    # Hosts/domain names that are valid for this site; required if DEBUG is False
+    # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 MANAGERS = ADMINS
-if 'SERVER_SOFTWARE' in os.environ:
-   MYSQL_HOST = 'chongwug.mysql.rds.aliyuncs.com'
-   MYSQL_PORT = '3306'
-   MYSQL_USER = 'chongwug'
-   MYSQL_PASS = 'weet6321'
-   MYSQL_DB   = 'chongwug'
-else:
-   # Make `python manage.py syncdb` works happy!
-   MYSQL_HOST = 'localhost'
-   MYSQL_PORT = '3306'
-   MYSQL_USER = 'root'
-   MYSQL_PASS = ''
-   MYSQL_DB   = 'chongwug'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -36,9 +47,7 @@ DATABASES = {
 PROD_TEST = False
 CDN_TEST = False
 
-# Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
