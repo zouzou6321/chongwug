@@ -322,31 +322,135 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">预约看狗</h4>
+        <h4 class="modal-title">我要预约看狗</h4>
+        <p class="text-uppercase">appointment form</p>
       </div>
       <div class="modal-body">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+        <div class="tab-content">
+          <div class="tab-pane" id="order-form">
               <form class="form-horizontal">
-                    <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">您的名字：</label>
+                <p class="text-muted">请如实填写信息，我们将尽快与您联系：</p>
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label text-muted">您的名字：</label>
                     <div class="col-sm-6">
-                      <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" id="name" autofocus>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="col-sm-3 control-label text-muted">您的手机：</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="phone">
                     </div>
-                    <div class="form-group">
-                        <label for="tel" class="col-sm-3 control-label">您的手机：</label>
-                        <div class="col-sm-6">
-                          <input type="text" class="form-control" id="tel">
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="location" class="col-sm-3 control-label text-muted">所在区域：</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="location">
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="time" class="col-sm-3 control-label text-muted">预约看狗时间：</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="time">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label text-muted">交通方式：</label>
+                    <div class="col-sm-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="transportation" value="drive"/>自驾
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="transportation" value="lift"/>接送
+                        </label>
+                    </div>
+                </div>
               </form>
-            </div>
+          </div>
+          <div class="tab-pane active" id="order-lift">
+              <div class="form-horizontal">
+                  <div class="form-group">
+                      <label class="col-sm-4 text-right text-muted">犬舍位置：</label>
+                      <div class="col-sm-6">
+                          成都市武侯区锦华路12号
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-4 text-right text-muted">等待接送地点：</label>
+                      <div class="col-sm-6">
+                          成都市武侯区桐梓林地铁站
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-4 text-right text-muted">等待接送时间：</label>
+                      <div class="col-sm-6">
+                          2014-10-13 （周二） 10:30
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-4 text-right text-muted">交通费：</label>
+                      <div class="col-sm-6">
+                          20元
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="tips col-sm-10 col-sm-offset-1">
+                          <i class="glyphicon glyphicon-info-sign tips-icon"></i>
+                          <p class="tips-content text-muted">
+                              提示：您需要在等待接送时间之前赶到等待接送地点，我们的工作人员会在此等候您，并接送或带领您去预约犬舍挑选、购买狗狗！我们会准时发车，请您务必在指定接送时间前到达指定接送地点集合！购犬成功后，将返还交通费给您！
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="tab-pane" id="order-confirm">
+              <div class="form-horizontal">
+                  <div class="form-group">
+                      <label class="col-sm-4 text-right text-muted">本窝犬已预约用户：</label>
+                      <div class="col-sm-6">
+                          10人
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-4 text-right text-muted">已预约用户看犬时间：</label>
+                      <div class="col-sm-6">
+                          2014-10-14 (周二) 9:00-12:00
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-4 text-right text-muted">您的排队号：</label>
+                      <div class="col-sm-6">
+                          XL10
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-4 text-right text-muted">用户编号：</label>
+                      <div class="col-sm-6">
+                          XL15448823150S5
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="col-sm-6 col-sm-offset-4">
+                          <label class="checkbox-inline">
+                              <input type="checkbox" checked> 同意<a href="" target="_blank">《用户够犬协议》</a>
+                          </label>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="tips col-sm-10 col-sm-offset-1">
+                          <i class="glyphicon glyphicon-info-sign tips-icon"></i>
+                          <p class="tips-content text-muted">
+                              提示：若看犬过程中多位用户同时看中某一只狗狗，则以用户编号顺序决定优先挑选权及购买权
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary">提交</button>
+        <a class="btn btn-default prev-step">取消</a>
+        <a class="btn btn-primary next-step">下一步</a>
       </div>
     </div>
   </div>
@@ -438,6 +542,22 @@
                     }
                 }
             });
+        });
+
+
+        //order steps
+        $orderModal.find('.modal-footer').on('click', '.btn', function(e){
+            e.preventDefault();
+            var $this = $(this),
+                href = $.trim($this.attr('href'));
+
+            if(href){
+                $this.tab('show');
+            }else{
+               if($this.hasClass('prev-step')){
+                   $orderModal.modal('hide');
+               }
+            }
         });
 
         //detail nav affix

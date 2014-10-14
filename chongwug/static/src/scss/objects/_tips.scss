@@ -1,0 +1,23 @@
+.tips{
+  position: relative;
+
+  padding-left: 32px;
+
+  .tips-icon{
+    position: absolute;
+    top: 4px;
+    left: 0;
+
+    color: #ff0000;
+  }
+
+  .tips-content{
+    margin-bottom: 0;
+  }
+}
+
+.tips-xs{
+  .tips-icon{
+    position: static;
+  }
+}
