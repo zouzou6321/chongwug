@@ -1,34 +1,50 @@
 # -*- coding: UTF-8 -*-
 # Django settings for chongwug project.
 import os
+from django.conf.urls import url
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/"
+STATIC_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static').replace('\\','/')
 
 if 'SERVER_SOFTWARE' in os.environ:
     DEBUG = False
     TEMPLATE_DEBUG = False
+    
     ADMINS = (
               (u'赱赱', '692673390@qq.com'),
              )
+    
     MYSQL_HOST = 'chongwug.mysql.rds.aliyuncs.com'
     MYSQL_PORT = '3306'
     MYSQL_USER = 'chongwug'
     MYSQL_PASS = 'weet6321'
     MYSQL_DB   = 'chongwug'
+    
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['.chongwug.com','.chongwug.com.']
+    
+    STATIC_PATH_URL = ''
 else:
     DEBUG = False
     TEMPLATE_DEBUG = False
+    
     ADMINS = ()
+    
    # Make `python manage.py syncdb` works happy!
     MYSQL_HOST = 'localhost'
     MYSQL_PORT = '3306'
     MYSQL_USER = 'root'
     MYSQL_PASS = ''
     MYSQL_DB   = 'chongwug'
+    
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['localhost']
+    
+    STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
 
 MANAGERS = ADMINS
 
@@ -82,11 +98,7 @@ MEDIA_ROOT = ''
 MEDIA_URL = ''
 
 WEB_CONFIG_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static').replace('\\','/')
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static').replace('\\','/')
+
 ROOT = os.path.split(os.path.dirname(__file__))[0].replace('\\','/')
 PIC_ROOT = "http://chongwug-pic.b0.upaiyun.com"
 PET_FARM_PIC_ROOT = "/farmpic/"
