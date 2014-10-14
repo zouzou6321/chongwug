@@ -3,27 +3,38 @@
   padding: 0;
   margin: 0;
 
+  $width: 122px;
+  $height: 82px;
+
   li{
     display: inline-block;
-    width: 122px;
-    height: 82px;
-    overflow: hidden;
+    width: $width;
+    height: $height;
 
-    margin-right: 10px;
+    margin: 28px 10px 24px 0;
     border: 1px solid #ccc;
 
     position: relative;
 
-    &:hover .img-edit{
-      display: block;
+    &:hover{
+      .img-edit{
+        display: block;
+      }
     }
   }
 
-  .img-edit{
-    position: absolute;
-    bottom: 0;
+  .img-box{
     width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
 
+  .img-edit, .img-tit{
+    position: absolute;
+    left: -1px;
+    bottom: 0;
+
+    width: $width;
     display: none;
 
     background-color: #000;
@@ -40,5 +51,16 @@
         color: #ffd401;
       }
     }
+  }
+
+  .img-tit{
+    display: block;
+    text-align: center;
+    bottom: auto;
+    color: #333;
+    background: none;
+    top: -24px;
+
+    line-height: 24px;
   }
 }

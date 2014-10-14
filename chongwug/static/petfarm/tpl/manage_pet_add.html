@@ -63,7 +63,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-10">
-            <ul class="preview-img"></ul>
+            <ul class="preview-img" id="js-preview-img"></ul>
         </div>
     </div>
     <div class="pet">
@@ -126,11 +126,19 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">裁剪图片</h4>
+        <div class="form-horizontal img-type-group">
+            <label class="col-sm-6 control-label">图片用途：</label>
+            <div class="col-sm-6">
+                <select class="form-control" id="js-img-type">
+                    <option value="normal" data-size="[600, 400]" selected>展示图</option>
+                    <option value="main" data-size="[800, 600]">主图</option>
+                </select>
+            </div>
+        </div>
       </div>
       <div class="modal-body"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary">确定</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
       </div>
     </div>
     <div class="modal-loading"></div>
@@ -187,8 +195,13 @@
 
 <script type="text/html" id="preview-item-tpl">
 <li>
-    <img src="{src}"/>
-    <input type="hidden"/>
+    <div class="img-box">
+        <img src="{src}"/>
+        <input type="hidden" name="img-{index}-position" class="img-position-input"/>
+        <input type="hidden" name="img-{index}-type" class="img-type-input"/>
+        <input type="hidden" name="img-{index}" value="{src}" class="img-index-input"/>
+    </div>
+    <p class="img-tit"></p>
     <div class="img-edit">
         <i class="glyphicon glyphicon-pencil img-crop"></i>
         <i class="glyphicon glyphicon-remove img-del"></i>
@@ -231,15 +244,65 @@
 <script>
 
 (function($){
-
+    /*modal*/
     var $cropModal = $('#js-crop-modal'),
         $cropModalBody = $cropModal.find('.modal-body'),
+
+    /*image type, min-size, radio*/
+        $imgType = $('#js-img-type'),
+        $imgTypeOption = $imgType.find('option'),
+
+    /*jcrop api*/
         jcrop = null,
-        $previewImg = $('.preview-img'),
+
+    /*preview wrapper*/
+        $previewImg = $('#js-preview-img'),
+    
+    /*preview item template for insert*/
         $previewItemTpl = $('#preview-item-tpl').html(),
+    
+    /*current preview item, for update preview*/
         $currPreview = null,
-        $currInput = null,
-        actualSize = null;
+        $currCropImg = null,
+    /*store current image's position data*/
+        $currPositionInput = null,
+        $currTypeInput = null,
+
+    /*point to current image's actual size*/
+        actualSize = null,
+
+    /*point to current image's preview size*/
+        previewSize = [120, 80],
+
+    /*point to current index of the upload image, start from 1*/
+        index = 0,
+
+        minSize = getSizeInfo().minSize,
+        typeObject = generateTypeObject();
+
+    function getSizeInfo(){
+        var $selected = $imgTypeOption.filter(':selected');
+
+        return {
+            minSize: $selected.data('size'),
+            type: $selected.attr('value')
+        };
+    }
+
+    function generateTypeObject(){
+        var o = {};
+
+        $.each($imgTypeOption, function(i, e){
+            var $e = $(e);
+
+            o[$e.attr('value')] = {
+              minSize: $e.data('size'),
+              text: $e.text()
+            };
+        });
+
+        return o;
+    }
 
     //预加载图片
     function loadImage(url, callback){
@@ -253,13 +316,13 @@
     }
 
     //开始截图
-    function startCrop($img, select){
+    function startCrop($img, minSize, select){
+        var radio = minSize[0] / minSize[1];
+
         $img.Jcrop({
-            aspectRatio: 1.5,
-            minSize: [600, 400],
-            setSelect: [0, 0, 600, 400],
-            onChange: syncPreview,
-            onSelect: syncPreview
+            aspectRatio: radio,
+            minSize: minSize,
+            setSelect: [0, 0, minSize[0], minSize[1]]
         }, function(){
             jcrop = this;
         });
@@ -271,13 +334,13 @@
 
     //同步截图数据到 input hidden
     function updateCoords(coords){
-        $currInput.val(JSON.stringify(coords));
+        $currPositionInput.val(JSON.stringify(coords));
     }
 
     //同步更新缩略图
     function syncPreview(coords){
-        var rx = 120 / coords.w;
-        var ry = 80 / coords.h;
+        var rx = previewSize[0] / coords.w;
+        var ry = previewSize[1] / coords.h;
 
         $currPreview.css({
             width: Math.round(rx * actualSize[0]) + 'px',
@@ -289,24 +352,46 @@
         updateCoords(coords);
     }
 
+    function compileTpl(data){
+        var tpl = $previewItemTpl;
+
+        for(var i in data){
+            tpl = tpl.replace(new RegExp('{'+ i +'}', 'gm'), data[i]);
+        }
+
+        return tpl;
+    }
+
     //上传图片成功后准备开始截图
     function afterUploadSuccess(data){
-        var $img = $cropModalBody.html('<img src="'+ data.url +'">').find('img');
-        $currPreview = data.img || $($previewItemTpl.replace('{src}', data.url)).appendTo($previewImg).find('img');
+        $currCropImg = $cropModalBody.html('<img src="'+ data.url +'">').find('img');
+
+        $currPreview = data.img || $(compileTpl({src: data.url, index: index})).appendTo($previewImg).find('img');
 
         if(!data.img){
             $currPreview.data({width: data.width, height: data.height});
         }
 
-        $currInput = data.input || $currPreview.closest('li').find('input');
+        $currPositionInput = data.positionInput || $currPreview.closest('li').find('.img-position-input');
+        $currTypeInput = data.typeInput || $currPreview.closest('li').find('.img-type-input');
+
         $cropModal.removeClass('loading');
-        startCrop($img, data.select);
+        startCrop($currCropImg, data.minSize || minSize, data.select);
     }
 
     //关闭截图弹窗后
     $cropModal.on('hidden.bs.modal', function(){
+        //store type info
+        var type = getSizeInfo().type;
+
+        $currTypeInput.val(type);
+        syncPreview(jcrop.tellSelect());
+
+        $currTypeInput.closest('li').find('.img-tit').text(typeObject[type].text);
+
         jcrop && jcrop.destroy();
         $cropModalBody.html('');
+        $imgType[0].selectedIndex = 0;
     });
 
     //重新截取图片
@@ -314,18 +399,31 @@
         $cropModal.modal('show').addClass('loading');
 
         var $currLi = $(this).closest('li'),
-            $input = $currLi.find('input'),
+            $positionInput = $currLi.find('.img-position-input'),
+            $typeInput = $currLi.find('.img-type-input'),
             $img = $currLi.find('img'),
-            select = $.parseJSON($input.val());
+            select = $.parseJSON($positionInput.val());
 
         actualSize = [$img.data('width'), $img.data('height')];
 
         afterUploadSuccess({
             url: $img.attr('src'),
-            input: $input,
+            positionInput: $positionInput,
+            typeInput: $typeInput,
             img: $img,
-            select: [select.x, select.y, select.x2, select.y2]
+            select: [select.x, select.y, select.x2, select.y2],
+            minSize: typeObject[$typeInput.val()].minSize
         });
+    });
+
+    //update crop area when image type select change
+    $imgType.on('change', function(){
+        var $this = $(this),
+            minSize = typeObject[$this.val()].minSize,
+            select = [0, 0].concat(minSize);
+
+        jcrop && jcrop.destroy();
+        startCrop($currCropImg, minSize, select);
     });
 
     //删除图片
@@ -360,10 +458,30 @@
 
             $cropModal.modal('show').addClass('loading');
             loadImage(data.url, function(){
+                index++;
                 afterUploadSuccess(data);
             });
         }
     });
+
+
+    //form submit
+    var $form = $('#js-form');
+
+    $form.on('submit', function(){
+        console.log($form.serializeArray())
+        var data = {
+            "img-count": index
+        };
+
+        $.each($form.serializeArray(), function(i, e){
+            data[e.name] = e.value;
+        });
+
+        console.log(data)
+        return false;
+    });
+
 
 })(jQuery);
 
