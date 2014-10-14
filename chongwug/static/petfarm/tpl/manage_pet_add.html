@@ -62,23 +62,8 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-4">
-            <ul class="preview-img">
-                <li>
-                    <img src="/static/manage/pictest/19fb58ee-52d2-11e4-bbbe-6c3be5803607.jpg"/>
-                    <div class="img-edit">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                        <i class="glyphicon glyphicon-remove"></i>
-                    </div>
-                </li>
-                <li>
-                    <img src="/static/manage/pictest/19fb58ee-52d2-11e4-bbbe-6c3be5803607.jpg"/>
-                    <div class="img-edit">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                        <i class="glyphicon glyphicon-remove"></i>
-                    </div>
-                </li>
-            </ul>
+        <div class="col-sm-offset-1 col-sm-10">
+            <ul class="preview-img"></ul>
         </div>
     </div>
     <div class="pet">
@@ -203,9 +188,10 @@
 <script type="text/html" id="preview-item-tpl">
 <li>
     <img src="{src}"/>
+    <input type="hidden"/>
     <div class="img-edit">
-        <i class="glyphicon glyphicon-pencil"></i>
-        <i class="glyphicon glyphicon-remove"></i>
+        <i class="glyphicon glyphicon-pencil img-crop"></i>
+        <i class="glyphicon glyphicon-remove img-del"></i>
     </div>
 </li>
 </script>
@@ -248,8 +234,14 @@
 
     var $cropModal = $('#js-crop-modal'),
         $cropModalBody = $cropModal.find('.modal-body'),
-        jcrop = null;
+        jcrop = null,
+        $previewImg = $('.preview-img'),
+        $previewItemTpl = $('#preview-item-tpl').html(),
+        $currPreview = null,
+        $currInput = null,
+        actualSize = null;
 
+    //预加载图片
     function loadImage(url, callback){
         var $img = $('<img>');
 
@@ -260,15 +252,86 @@
         $img.attr('src', url);
     }
 
-    function startCrop($img){
+    //开始截图
+    function startCrop($img, select){
         $img.Jcrop({
             aspectRatio: 1.5,
             minSize: [600, 400],
-            setSelect: [0, 0, 600, 400]
+            setSelect: [0, 0, 600, 400],
+            onChange: syncPreview,
+            onSelect: syncPreview
         }, function(){
             jcrop = this;
         });
+
+        if($.isArray(select)){
+            jcrop.setSelect(select);
+        }
     }
+
+    //同步截图数据到 input hidden
+    function updateCoords(coords){
+        $currInput.val(JSON.stringify(coords));
+    }
+
+    //同步更新缩略图
+    function syncPreview(coords){
+        var rx = 120 / coords.w;
+        var ry = 80 / coords.h;
+
+        $currPreview.css({
+            width: Math.round(rx * actualSize[0]) + 'px',
+            height: Math.round(ry * actualSize[1]) + 'px',
+            marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+            marginTop: '-' + Math.round(ry * coords.y) + 'px'
+        });
+
+        updateCoords(coords);
+    }
+
+    //上传图片成功后准备开始截图
+    function afterUploadSuccess(data){
+        var $img = $cropModalBody.html('<img src="'+ data.url +'">').find('img');
+        $currPreview = data.img || $($previewItemTpl.replace('{src}', data.url)).appendTo($previewImg).find('img');
+
+        if(!data.img){
+            $currPreview.data({width: data.width, height: data.height});
+        }
+
+        $currInput = data.input || $currPreview.closest('li').find('input');
+        $cropModal.removeClass('loading');
+        startCrop($img, data.select);
+    }
+
+    //关闭截图弹窗后
+    $cropModal.on('hidden.bs.modal', function(){
+        jcrop && jcrop.destroy();
+        $cropModalBody.html('');
+    });
+
+    //重新截取图片
+    $previewImg.on('click', '.img-crop', function(){
+        $cropModal.modal('show').addClass('loading');
+
+        var $currLi = $(this).closest('li'),
+            $input = $currLi.find('input'),
+            $img = $currLi.find('img'),
+            select = $.parseJSON($input.val());
+
+        actualSize = [$img.data('width'), $img.data('height')];
+
+        afterUploadSuccess({
+            url: $img.attr('src'),
+            input: $input,
+            img: $img,
+            select: [select.x, select.y, select.x2, select.y2]
+        });
+    });
+
+    //删除图片
+    $previewImg.on('click', '.img-del', function(){
+        $(this).closest('li').remove();
+    });
 
     $('#js-uploadify').uploadify({
         buttonText: '浏览并上传',
@@ -278,6 +341,7 @@
         fileTypeExts: '*.jpg;*.jpeg;*.gif;*.png;*.bmp;',
         fileSizeLimit: '4MB',
         multi: 'false',
+        formData: {},
         onUploadError: function(file, errorCode, errorMsg, errorString){
             if(errorMsg == "500"){
                 errorString = '服务器内部错误';
@@ -292,19 +356,13 @@
             }
 
             data = $.parseJSON(data);
+            actualSize = [data.width, data.height];
 
             $cropModal.modal('show').addClass('loading');
             loadImage(data.url, function(){
-                $cropModal.removeClass('loading');
-                var $img = $cropModalBody.html('<img src="'+ data.url +'">').find('img');
-                startCrop($img);
+                afterUploadSuccess(data);
             });
         }
-    });
-
-    $cropModal.on('hidden.bs.modal', function(){
-        jcrop && jcrop.destroy();
-        $cropModalBody.html('');
     });
 
 })(jQuery);
