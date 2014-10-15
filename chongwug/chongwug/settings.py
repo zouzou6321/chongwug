@@ -112,6 +112,7 @@ PET_FARM_PIC_ROOT = "/farmpic/"
 PET_AD_PIC_ROOT = "/ad/"
 PET_PIC_ROOT = "/petpic/"
 CDN_ROOT = "//chongwug-cdn.b0.upaiyun.com"
+PIC_TMP_PATH = "/manage/pictest/"
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = 'http://www.chongwug.com/static/'

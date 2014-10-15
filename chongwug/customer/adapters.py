@@ -8,7 +8,7 @@ from customer.models import attention_user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
-
+from chongwug.config import __petpictypes
 import datetime,string,re
 '''
 函数功能：首页数据适配器
@@ -172,7 +172,7 @@ def buy_main_adapter(re):
         pets = pets.filter(Q(farm__name__contains=searchkey)|Q(farm__detail_address__contains=searchkey))
     for pet_one in pets:
         try:
-            petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor='buy_main')[0]
+            petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor=__petpictypes[0][1])[0]
         except:
             petimg = None
         othor_pets = pet_one.pet_set.filter(dele=False)
@@ -200,7 +200,7 @@ def buy_detail_adapter(re):
             curtype = nest_pet.type
         except:
             return False
-        petimgs = nest_pet.nestofpet_img_set.filter(dele=False,img_usefor='narmol')
+        petimgs = nest_pet.nestofpet_img_set.filter(dele=False,img_usefor=__petpictypes[1][1])
         if petimgs.count() == 0:
             petimg_first = None
         else:
@@ -217,7 +217,7 @@ def buy_detail_adapter(re):
         farm_pets = nest_pet.farm.nestofpet_set.filter(dele=False,sale_out=False)
         for farm_pet in farm_pets:
             try:
-                img = farm_pet.nestofpet_img_set.filter(dele=False,img_usefor='buy_main')[0]
+                img = farm_pet.nestofpet_img_set.filter(dele=False,img_usefor=__petpictypes[0][1])[0]
             except:
                 img = None
             othor_pets = nest_pet.pet_set.filter(dele=False)
@@ -236,7 +236,7 @@ def buy_detail_adapter(re):
         recommendpets = recommendpets.exclude(id=nest_pet.id)
         for recommendpet in recommendpets:
             try:
-                img = nestofpet_img.objects.filter(nestofpet_id = recommendpet,dele=False,img_usefor='buy_main')[0]
+                img = nestofpet_img.objects.filter(nestofpet_id = recommendpet,dele=False,img_usefor=__petpictypes[0][1])[0]
             except:
                 img = None
             othor_pets = recommendpet.pet_set.filter(dele=False)

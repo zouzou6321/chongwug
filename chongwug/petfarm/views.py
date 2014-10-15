@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import auth
 from django.contrib.auth.models import User
 import adapters
+from chongwug.commom import __errorcode__
 PETFARM_ROOT='/petfarm/'
 
 def manage_login(request):
@@ -32,7 +33,7 @@ def manage_pet_farm_mod_view(request):
         return HttpResponseRedirect(PETFARM_ROOT)
     if request.method == 'POST':
         if adapters.manage_pet_farm_mod(request) == False:
-            return HttpResponse("data error occur!!!")
+            return HttpResponse(__errorcode__(2))
     data = adapters.manage_home_data_get(request)
     return render_to_response('petfarm/tpl/manage_pet_farm_mod.html',data,context_instance=RequestContext(request))
 
@@ -43,14 +44,6 @@ def manage_pet_farm_picadd_view(request):
     data = adapters.manage_home_data_get(request)
     page_data['manager'] = data['manager']
     return render_to_response('petfarm/tpl/manage_pet_farm_picadd.html',page_data,context_instance=RequestContext(request))
-
-def manage_nestofpet_picadd_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(PETFARM_ROOT)
-    page_data = adapters.manage_nestofpet_picadd(request)
-    data = adapters.manage_home_data_get(request)
-    page_data['manager'] = data['manager']
-    return render_to_response('petfarm/tpl/manage_pet_picadd.html',page_data,context_instance=RequestContext(request))
 
 @csrf_exempt
 def manage_nestofpet_pic_upload_view(request):
@@ -65,13 +58,8 @@ def manage_pet_farm_pic_upload_view(request):
 
 def manage_pet_farm_picpre_view(request):
     if adapters.manage_authentication(request) == False:
-        return HttpResponse('false')
+        return HttpResponse(__errorcode__(1))
     return HttpResponse(adapters.manage_pet_farm_picpreupload(request))
-
-def manage_nestofpet_picpre_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponse('false')
-    return HttpResponse(adapters.manage_nestofpet_picpreupload(request))
 
 def manage_pet_farm_picdel_view(request):
     if adapters.manage_authentication(request) == False:
@@ -98,7 +86,7 @@ def manage_nestofpet_mod_view(request):
     data = adapters.manage_home_data_get(request)
     if request.method == 'POST':
         if adapters.manage_nestofpet_mod(request) == False:
-            return HttpResponse("data error occur!!!")
+            return HttpResponse(__errorcode__(2))
     else:
         if "id" in request.GET:
             if 'del' in request.GET:
@@ -113,9 +101,10 @@ def manage_nestofpet_mod_view(request):
 def manage_nestofpet_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(PETFARM_ROOT)
+    
     if request.method == 'POST':
-        if adapters.manage_nestofpet_add(request) == False:
-            return HttpResponse("data error occur!!!")
+        return HttpResponse(adapters.manage_nestofpet_add(request))
+    
     data = adapters.manage_home_data_get(request)
     data['types'] = adapters.get_petpic_types()['types']
     return render_to_response('petfarm/tpl/manage_pet_add.html',data,context_instance=RequestContext(request))

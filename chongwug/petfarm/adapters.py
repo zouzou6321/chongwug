@@ -3,12 +3,83 @@ from customer.models import user
 from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
-from chongwug import settings,config
+from chongwug import settings
+from chongwug.config import __petpictypes
+from chongwug.commom import __errorcode__
 from upyun import UpYun
-from django.shortcuts import get_object_or_404
 from django.contrib import auth
 
-import os,uuid,string,re,datetime
+import os,uuid,string,re,datetime,json
+
+
+def pic_preupload(request,pic_dir,max_height,max_width): 
+    try:
+        img= Image.open(settings.ROOT + request.POST['source'])
+    except:
+        return 'type error'
+    x1 = string.atoi(request.POST['x1'])
+    y1 = string.atoi(request.POST['y1'])
+    x2 = string.atoi(request.POST['x2'])
+    y2 = string.atoi(request.POST['y2'])
+    if img.mode != 'RGB':
+        img = img.convert('RGB')
+    cropimg = img.crop((x1,y1,x2,y2))
+    if cropimg.mode != 'RGB':
+        cropimg.convert('RGB')
+    if (x2 - x1) > max_width:
+        cropimg.thumbnail( (max_width,max_height) )
+    #file_name = '%s'%str(uuid.uuid1()) + '.png'
+    file_name = request.POST['source'].split('/')[-1]
+    file_path_name = pic_dir + file_name
+    url = ('/manage/pictest/'+file_name).encode('utf8')
+    name = settings.STATIC_ROOT + url
+    cropimg.save(name)
+    cropimg.close()
+    
+    up = UpYun('chongwug-pic','chongwug','weet6321')
+    with open(name, 'rb') as f:
+        res = up.put(file_path_name, f, checksum=False)
+    #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 
+    #删除服务器本地缓存的图片
+    os.remove(name)
+    #writeFile方法不会返回图片地址，所以得自己写
+    img_url = settings.PIC_ROOT + file_path_name
+    return img_url
+
+def pic_crop_save(pic_args,pic_dir,max_height,max_width): 
+    try:
+        img= Image.open(settings.STATIC_ROOT + settings.PIC_TMP_PATH + pic_args['source'])
+    except:
+        return 'type error'
+    
+    x1 = int(pic_args['x1'])
+    y1 = int(pic_args['y1'])
+    x2 = int(pic_args['x2'])
+    y2 = int(pic_args['y2'])
+    if img.mode != 'RGB':
+        img = img.convert('RGB')
+    cropimg = img.crop((x1,y1,x2,y2))
+    if cropimg.mode != 'RGB':
+        cropimg.convert('RGB')
+    if (x2 - x1) > max_width:
+        cropimg.thumbnail( (max_width,max_height) )
+    #file_name = '%s'%str(uuid.uuid1()) + '.png'
+    file_name = pic_args['source'].split('/')[-1]
+    file_path_name = pic_dir + file_name
+    url = (settings.PIC_TMP_PATH + file_name).encode('utf8')
+    name = settings.STATIC_ROOT + url
+    cropimg.save(name)
+    cropimg.close()
+    up = UpYun('chongwug-pic','chongwug','weet6321')
+    with open(name, 'rb') as f:
+        res = up.put(file_path_name, f, checksum=False)
+    #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 
+    #删除服务器本地缓存的图片
+    os.remove(name)
+    #writeFile方法不会返回图片地址，所以得自己写
+    img_url = settings.PIC_ROOT + file_path_name
+    return img_url
+
 '''
 管理员鉴权
 '''
@@ -39,20 +110,60 @@ def manage_home_data_get(request):
 
 def get_petpic_types():
     types = []
-    for petpictype in config.__petpictypes:
-        print petpictype
+    for petpictype in __petpictypes:
         types.append({'type':petpictype[1],'desc':petpictype[2],'width':petpictype[3],'height':petpictype[4]})
     return {'types':types}
 
 def petpic_upload_pre(request):
     imgw,imgh = 0,0
-    for petpictype in config.__petpictypes:
+    for petpictype in __petpictypes:
         if imgw < petpictype[3]:
             imgw = petpictype[3]
         if imgh < petpictype[4]:
             imgh = petpictype[4]
     return imgw,imgh
 
+def manage_nestofpet_picpreupload(request,_nestofpet):
+    img_count = string.atoi(request.POST['img-count'])
+    #挨个处理上传的图片数据
+    itr = 0
+    while itr < img_count:
+        itr += 1
+        #挨个获取图片并且判断图片是否存在
+        try:
+            imgw,imgh = 0,0
+            for petpictype in __petpictypes:
+                if request.POST['img-%d-type' % itr] == petpictype[1]:
+                    imgw = petpictype[3]
+                    imgh = petpictype[4]
+                    break
+        except:
+            continue
+        
+        #判断图片类型是否有异常
+        if imgw == 0 or imgh == 0:
+            return False
+        imginfo_json = json.loads(request.POST['img-%d-position' % itr])
+        #整理 数据，以便截图保存模块使用
+        pic_args = {'source':request.POST['img-%d' % itr].split('/')[-1],'x1':imginfo_json['x'],
+                    'x2':imginfo_json['x2'],'y1':imginfo_json['y'],'y2':imginfo_json['y2']}
+
+        img_url = pic_crop_save(pic_args,settings.PET_PIC_ROOT,imgh,imgw)
+        if img_url == 'type error':
+            _nestofpet.delete()
+            return __errorcode__(4)
+        
+        #把图片信息存入数据库
+        pet_sql = nestofpet_img( nestofpet_id = _nestofpet,
+                                img_url = img_url,
+                                img_with = int(pic_args['x2'] - pic_args['x1']),
+                                img_height = int(pic_args['y2'] - pic_args['y1']),
+                                #img_type:jpg/png/...
+                                img_type = 'jpg',
+                                #图片用途
+                                img_usefor = request.POST['img-%d-type' % itr])
+        pet_sql.save()
+    return __errorcode__(0)
 def manage_nestofpet_add(request):
     try:
         farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm
@@ -65,9 +176,8 @@ def manage_nestofpet_add(request):
         cur_datetime = datetime.datetime.now()
         new_nestofpet.num = "%d%d%d%d%d" % (farm.id,cur_datetime.year,cur_datetime.month,cur_datetime.day,new_nestofpet.id)
         new_nestofpet.save()
-        print new_nestofpet.num
     except NameError:
-        return False
+        return __errorcode__(2)
     try:
         new_petscount = string.atoi(request.POST['count'])
         petnum = 0
@@ -88,16 +198,9 @@ def manage_nestofpet_add(request):
                     raise NameError,("first pet can't create","in adapters.py")
     except:
         new_nestofpet.delete()
-        return False
-    return True
-
-def manage_nestofpet_picadd(request):
-    curuser = user.objects.get(auth_user=auth.get_user(request),dele = False)
-    use_fors = []
-    use_fors.append('buy_main')
-    use_fors.append('narmol')
-    farm_pets = nestofpet.objects.filter(farm=curuser.petfarm,dele=False,sale_out=False)
-    return {'use_fors':use_fors,'farm_pets':farm_pets}
+        return __errorcode__(2)
+    
+    return manage_nestofpet_picpreupload(request,new_nestofpet)
 
 def manage_pet_farm_picadd(request):
     use_fors = []
@@ -148,7 +251,7 @@ def manage_picupload(photo,width,height):
         w,h = img.size
     if (w < width) or (h < height):
         return 'size error'
-    url=('/manage/pictest/'+photo.name).encode('utf8')
+    url=(settings.PIC_TMP_PATH+photo.name).encode('utf8')
     name = settings.STATIC_ROOT + url
     if os.path.exists(name):
         photo = 'NULL'
@@ -156,47 +259,13 @@ def manage_picupload(photo,width,height):
         file, ext = os.path.splitext(photo.name)
         file='%s'%str(uuid.uuid1())
         photo.name = file+'.jpg'
-        url = ('/manage/pictest/'+photo.name).encode('utf8')
+        url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
         name = settings.STATIC_ROOT+url
         img.save(name,'jpeg',quality=75)
         monitor = tmppic_monitor(fname=name)
         monitor.save()
-    json = '{"url":"'+'/static'+url+'","width":"'+str(w)+'","height":"'+str(h)+'"}'
-    return json
-
-def pic_preupload(request,pic_dir,max_height,max_width): 
-    try:
-        img= Image.open(settings.ROOT + request.POST['source'])
-    except:
-        return 'type error'
-    x1 = string.atoi(request.POST['x1'])
-    y1 = string.atoi(request.POST['y1'])
-    x2 = string.atoi(request.POST['x2'])
-    y2 = string.atoi(request.POST['y2'])
-    if img.mode != 'RGB':
-        img = img.convert('RGB')
-    cropimg = img.crop((x1,y1,x2,y2))
-    if cropimg.mode != 'RGB':
-        cropimg.convert('RGB')
-    if (x2 - x1) > max_width:
-        cropimg.thumbnail( (max_width,max_height) )
-    #file_name = '%s'%str(uuid.uuid1()) + '.png'
-    file_name = request.POST['source'].split('/')[-1]
-    file_path_name = pic_dir + file_name
-    url = ('/manage/pictest/'+file_name).encode('utf8')
-    name = settings.STATIC_ROOT + url
-    cropimg.save(name)
-    cropimg.close()
-    
-    up = UpYun('chongwug-pic','chongwug','weet6321')
-    with open(name, 'rb') as f:
-        res = up.put(file_path_name, f, checksum=False)
-    #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 
-    #删除服务器本地缓存的图片
-    os.remove(name)
-    #writeFile方法不会返回图片地址，所以得自己写
-    img_url = settings.PIC_ROOT + file_path_name
-    return img_url
+    data = {'url':'/static'+url,"width":str(w),"height":str(h)}
+    return __errorcode__(0,data)
     
 def manage_pet_farm_picpreupload(request):
     if 'source' in request.POST:
@@ -216,32 +285,6 @@ def manage_pet_farm_picpreupload(request):
                                 img_usefor = request.POST['usefor'])
         pet_farm_sql.save()
     return 'true'
-
-def manage_nestofpet_picpreupload(request):
-    if 'source' in request.POST:
-        max_height = 180
-        max_width = 275
-        if request.POST['usefor'] == 'narmol':
-            max_width = 600
-            max_height = 400
-        elif request.POST['usefor'] == 'buy_main':
-            max_width = 275
-            max_height = 180
-        img_url = pic_preupload(request,settings.PET_PIC_ROOT,max_height,max_width)
-        if img_url == 'type error':
-            return 'type error'
-        #把url存入数据库
-        pet_sql = nestofpet_img( nestofpet_id = get_object_or_404(nestofpet,pk=string.atoi(request.POST['pet_id'])),
-                                img_url = img_url,
-                                img_with = string.atoi(request.POST['x2']) - string.atoi(request.POST['x1']),
-                                img_height = string.atoi(request.POST['y2']) - string.atoi(request.POST['y1']),
-                                #img_type:jpg/png/...
-                                img_type = 'png',
-                                #图片用途
-                                img_usefor = request.POST['usefor'])
-        pet_sql.save()
-        return 'true'
-    return 'false'
 
 def manage_get_pets(request):
     curuser = user.objects.get(auth_user=auth.get_user(request),dele = False)
@@ -297,7 +340,7 @@ def manage_get_del_petpics(request):
         curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
         if request.method == 'POST':
             pics_str = request.REQUEST.getlist('petpics')
-            curpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=True,sale_out=False)
+            curpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
             petpics = nestofpet_img.objects.filter(nestofpet_id=curpet,dele=False)
             for tmp_pic in pics_str:
                 try:
