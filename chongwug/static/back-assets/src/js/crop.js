@@ -192,7 +192,7 @@
             buttonText: '浏览并上传',
             buttonClass: 'btn-info',
             swf: '/static/back-assets/dist/uploadify/uploadify.swf',
-            uploader: '/petfarm/petfarm/picadd/upload/',
+            uploader: options.uploader,
             fileTypeExts: '*.jpg;*.jpeg;*.gif;*.png;*.bmp;',
             fileSizeLimit: '4MB',
             multi: 'false',
