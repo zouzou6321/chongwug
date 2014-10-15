@@ -3861,6 +3861,14 @@ button.close {
 .icon-aixin:before {
   content: "\3443"; }
 
+.icon {
+  display: inline-block; }
+
+.icon-checked {
+  width: 10px;
+  height: 10px;
+  background: url(../imgs/checked.png); }
+
 /**
  * Objects and abstractions
 */
@@ -4003,6 +4011,13 @@ button.close {
     box-shadow: none;
     border-color: #ff3500;
     color: #ff3500; }
+    .btn-check.active .icon-checked, .btn-check:active .icon-checked {
+      display: inline-block; }
+  .btn-check .icon-checked {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    display: none; }
 
 .shade {
   position: relative; }
@@ -4076,6 +4091,31 @@ button.close {
 
 .tips-xs .tips-icon {
   position: static; }
+
+.cascade-box {
+  font-size: 12px;
+  font-family: Arial, \5B8B\4F53;
+  border: 1px solid #ccc;
+  background: #fff; }
+  .cascade-box .nav-tabs {
+    margin-right: -1px; }
+    .cascade-box .nav-tabs li {
+      background: #f0f0f0; }
+      .cascade-box .nav-tabs li a {
+        border-radius: 0;
+        padding: 10px 25px;
+        color: #4d4d4d;
+        margin-right: 0;
+        border-top: 0;
+        border-left: 0;
+        border-color: #ccc; }
+    .cascade-box .nav-tabs .active a, .cascade-box .nav-tabs .active a:hover, .cascade-box .nav-tabs .active a:active {
+      color: #ff3500;
+      border-top: 0;
+      border-left: 0;
+      border-bottom-color: transparent; }
+  .cascade-box .tab-content {
+    padding: 20px; }
 
 /**
  * gui
@@ -5160,15 +5200,18 @@ img.mfp-img {
   padding-right: 10px; }
 
 .margin-none {
-  margin-left: 0;
-  margin-right: 0; }
+  margin: 0; }
 
 .padding-none {
-  padding-left: 0;
-  padding-right: 0; }
+  padding: 0; }
 
 .text-muted {
   color: #999; }
 
 .has-position {
   position: relative; }
+
+.radius-none {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0; }

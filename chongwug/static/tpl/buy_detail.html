@@ -112,7 +112,7 @@
                     </div>
                     <div class="info-row clearfix">
                         <div class="info-td-right">
-                            <a href="" class="btn btn-primary btn-order" data-toggle="modal" data-target="#cwg-order-modal">预约看狗</a>
+                            <a href="" class="btn btn-primary btn-order" data-toggle="modal" data-target="#js-order-modal">预约看狗</a>
                             <a href="" class="btn btn-info btn-consult">在线咨询</a>
                             <a href="" class="cwg-clause"><i class="glyphicon glyphicon-question-sign"></i>购犬须知</a>
                         </div>
@@ -177,7 +177,7 @@
                                     </td>
                                     <td>&yen; {{ pet.price }}</td>
 {#                                    <td>立即购买</td>#}
-{#                                    <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#cwg-order-modal" data-id="{{ pet.id }}">预约看狗</button></td>#}
+{#                                    <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#js-order-modal" data-id="{{ pet.id }}">预约看狗</button></td>#}
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -241,7 +241,7 @@
                                             <p>价格：<span class="price price-light price-sm">{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元</span></span></p>
                                             <p>
                                                 <a class="btn btn-primary" href="/buy/detail/?petid={{ pet_img.pet.id }}">详细信息</a>
-                                                <button class="btn btn-primary btn-trans" data-id="{{ pet_img.pet.id }}" data-toggle="modal" data-target="#cwg-order-modal">预约看狗</button>
+                                                <button class="btn btn-primary btn-trans" data-id="{{ pet_img.pet.id }}" data-toggle="modal" data-target="#js-order-modal">预约看狗</button>
                                             </p>
                                         </div>
                                     </div>
@@ -317,13 +317,13 @@
   </div>
 </div>
 
-<div class="modal fade" id="cwg-order-modal" data-backdrop="static">
+<div class="modal fade" id="js-order-modal" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">我要预约看狗</h4>
-        <p class="text-uppercase">appointment form</p>
+        <p class="text-uppercase margin-none">appointment form</p>
       </div>
       <div class="modal-body">
         <div class="tab-content">
@@ -333,25 +333,40 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label text-muted">您的名字：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="name" autofocus>
+                        <input type="text" class="form-control radius-none" id="name" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="phone" class="col-sm-4 control-label text-muted">您的手机：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="phone">
+                        <input type="text" class="form-control radius-none" id="phone">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="location" class="col-sm-4 control-label text-muted">所在区域：</label>
+                    <label class="col-sm-4 control-label text-muted">所在区域：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="location">
+                        <button class="btn">中国大陆</button>
+                        <input type="text" class="form-control radius-none">
+                        <div class="cascade-box">
+                            <ul class="nav nav-tabs">
+                              <li class="active"><a href="#province" role="tab" data-toggle="tab">省份</a></li>
+                              <li><a href="#city" role="tab" data-toggle="tab">城市</a></li>
+                              <li><a href="#county" role="tab" data-toggle="tab">县区</a></li>
+                              <li><a href="#street" role="tab" data-toggle="tab">街道</a></li>
+                            </ul>
+                            <div class="tab-content">
+                              <div class="tab-pane active" id="province">四川</div>
+                              <div class="tab-pane" id="city">成都市</div>
+                              <div class="tab-pane" id="county">高新区</div>
+                              <div class="tab-pane" id="street">天府大道一段</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="time" class="col-sm-4 control-label text-muted">预约看狗时间：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="time">
+                        <input type="text" class="form-control radius-none" id="time">
                     </div>
                 </div>
                 <div class="form-group">
@@ -359,9 +374,11 @@
                     <div class="col-sm-7 btn-group" data-toggle="buttons">
                         <label class="btn btn-check">
                             <input type="radio" name="transportation" value="drive"/>自驾
+                            <i class="icon icon-checked"></i>
                         </label>
-                        <label class="btn btn-check pull-right">
-                            <input type="radio" name="transportation" value="lift"/>接送
+                        <label class="btn btn-check pull-right active">
+                            <input type="radio" name="transportation" value="lift" checked/>接送
+                            <i class="icon icon-checked"></i>
                         </label>
                     </div>
                 </div>
@@ -524,7 +541,7 @@
 //        });
 
         //order
-        var $orderModal = $('#cwg-order-modal'),
+        var $orderModal = $('#js-order-modal'),
             $infoModal = $('#cwg-info-modal');
 
         $orderModal.find('.btn-primary').on('click', function(){

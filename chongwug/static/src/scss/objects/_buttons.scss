@@ -17,5 +17,17 @@
 
     border-color: $primary-color;
     color: $primary-color;
+
+    .icon-checked{
+      display: inline-block;
+    }
+  }
+
+  .icon-checked{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+
+    display: none;
   }
 }

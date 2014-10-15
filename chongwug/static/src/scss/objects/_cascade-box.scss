@@ -1,0 +1,42 @@
+.cascade-box{
+  $color: #4d4d4d;
+  $border-color: #ccc;
+
+  font-size: 12px;
+  font-family: Arial, \5B8B\4F53;
+  border: 1px solid $border-color;
+  background: #fff;
+
+  .nav-tabs{
+    margin-right: -1px;
+
+    li{
+      background: #f0f0f0;
+
+      a{
+        border-radius: 0;
+        padding: 10px 25px;
+        color: $color;
+        margin-right: 0;
+
+        border-top: 0;
+        border-left: 0;
+        border-color: $border-color;
+      }
+    }
+
+    .active{
+      a, a:hover, a:active{
+        color: $primary-color;
+
+        border-top: 0;
+        border-left: 0;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  .tab-content{
+    padding: 20px;
+  }
+}
