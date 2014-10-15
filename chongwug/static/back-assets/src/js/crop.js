@@ -23,6 +23,7 @@
         /*store current image's position data*/
             $currPositionInput = null,
             $currTypeInput = null,
+            $imgCountInput = $('#js-img-count');
 
         /*point to current image's actual size*/
             actualSize = null,
@@ -215,6 +216,7 @@
                 $cropModal.modal('show').addClass('loading');
                 loadImage(data.url, function(){
                     index++;
+                    $imgCountInput.val(index);
                     afterUploadSuccess(data);
                 });
             }

@@ -27,7 +27,7 @@
 <h1 class="page-header">添加一窝宠物信息</h1>
 <p>加*为必填项</p>
 
-<form method="post" action="./" class="form-horizontal" id="js-form">
+<form class="form-horizontal" id="js-form">
     {% csrf_token %}
     <input name="count" type="hidden" id="pet-count" value="0"/>
     <div class="form-group">
@@ -55,6 +55,7 @@
         </div>
     </div>
     <div class="form-group">
+        <input type="hidden" name="img-count" id="js-img-count" value="0"/>
         <label class="col-sm-3 control-label">本窝图片（至少一张）<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <div id="js-uploadify"></div>
@@ -114,7 +115,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-4">
-          <button type="submit" class="btn btn-primary form-control">提交</button>
+          <button type="submit" class="btn btn-primary form-control" data-loading-text="提交中..." id="js-btn-submit">提交</button>
         </div>
     </div>
 </form>
@@ -248,19 +249,38 @@ $.crop();
 (function($){
 
     //form submit
-    var $form = $('#js-form');
+    var $form = $('#js-form'),
+        $submit = $form.find('#js-btn-submit');
 
     $form.on('submit', function(){
-        console.log($form.serializeArray())
-        var data = {
-            "img-count": index
-        };
+        $submit.button('loading');
+
+        var data = {};
 
         $.each($form.serializeArray(), function(i, e){
             data[e.name] = e.value;
         });
 
-        console.log(data)
+        console.log(data);
+
+        $.ajax({
+            url: '',
+            data: data,
+            dataType: 'json',
+            success: function(data){
+                if(data != "False"){
+                    alert('提交成功！');
+                    window.location.reload();
+                }else{
+                    alert('提交失败，请重试！');
+                    $submit.button('reset');
+                }
+            },
+            error: function(){
+                $submit.button('reset');
+            }
+        });
+
         return false;
     });
 
