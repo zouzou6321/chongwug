@@ -95,14 +95,6 @@ def manage_nestofpet_add(request):
         return False
     return True
 
-def manage_nestofpet_picadd(request):
-    farms = pet_farm.objects.filter(dele=False)
-    use_fors = []
-    use_fors.append('buy_main')
-    use_fors.append('narmol')
-    farm_pets = nestofpet.objects.filter(farm=farms[0],dele=False,sale_out=False)
-    return {'farms':farms,'use_fors':use_fors,'farm_pets':farm_pets}
-
 def manage_pet_farm_picadd(request):
     farms = pet_farm.objects.filter(dele=False)
     use_fors = []

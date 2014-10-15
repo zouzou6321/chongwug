@@ -44,14 +44,6 @@ def manage_pet_farm_picadd_view(request):
     page_data['manager'] = data['manager']
     return render_to_response('petfarm/tpl/manage_pet_farm_picadd.html',page_data,context_instance=RequestContext(request))
 
-def manage_nestofpet_picadd_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(PETFARM_ROOT)
-    page_data = adapters.manage_nestofpet_picadd(request)
-    data = adapters.manage_home_data_get(request)
-    page_data['manager'] = data['manager']
-    return render_to_response('petfarm/tpl/manage_pet_picadd.html',page_data,context_instance=RequestContext(request))
-
 @csrf_exempt
 def manage_nestofpet_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
@@ -67,11 +59,6 @@ def manage_pet_farm_picpre_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponse('false')
     return HttpResponse(adapters.manage_pet_farm_picpreupload(request))
-
-def manage_nestofpet_picpre_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponse('false')
-    return HttpResponse(adapters.manage_nestofpet_picpreupload(request))
 
 def manage_pet_farm_picdel_view(request):
     if adapters.manage_authentication(request) == False:
@@ -114,8 +101,7 @@ def manage_nestofpet_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(PETFARM_ROOT)
     if request.method == 'POST':
-        if adapters.manage_nestofpet_add(request) == False:
-            return HttpResponse("data error occur!!!")
+        return HttpResponse(adapters.manage_nestofpet_add(request))
     data = adapters.manage_home_data_get(request)
     data['types'] = adapters.get_petpic_types()['types']
     return render_to_response('petfarm/tpl/manage_pet_add.html',data,context_instance=RequestContext(request))
