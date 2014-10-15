@@ -5,5 +5,10 @@ Created on 2014年10月15日
 @author: hhy
 '''
 from chongwug.config import __errorcode
-def __errorcode__(errornum):
-    return '{"status":"%d","message":"%s"}' % (__errorcode[errornum][0], __errorcode[errornum][2])
+import json
+def __errorcode__(errornum,otherdata = None):
+    if otherdata != None:
+        otherdata['status'] = __errorcode[errornum][0]
+        otherdata['message'] = __errorcode[errornum][2]
+        return json.dumps(otherdata,ensure_ascii = False)
+    return json.dumps({"status":__errorcode[errornum][0],"message":__errorcode[errornum][2]},ensure_ascii = False)

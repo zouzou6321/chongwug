@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 import adapters
+from chongwug.commom import __errorcode__
 #auth:huhuaiyong
 #date:2014/8/16
 #discription:导航页面展示
@@ -38,7 +39,7 @@ def buy_detail_view(request):
         request.session['visitor'] = 1
     data = adapters.buy_detail_adapter(request)
     if data == False:
-        return HttpResponse("DATA ERROR")
+        return HttpResponse(__errorcode__(2))
     
     if 'pets_imgs' not in data:
         return render_to_response('tpl/buy_detail.html',data)

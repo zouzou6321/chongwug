@@ -264,8 +264,8 @@ def manage_picupload(photo,width,height):
         img.save(name,'jpeg',quality=75)
         monitor = tmppic_monitor(fname=name)
         monitor.save()
-    json = '{"url":"'+'/static'+url+'","width":"'+str(w)+'","height":"'+str(h)+'"}'
-    return json
+    data = {'url':'/static'+url,"width":str(w),"height":str(h)}
+    return __errorcode__(0,data)
     
 def manage_pet_farm_picpreupload(request):
     if 'source' in request.POST:
