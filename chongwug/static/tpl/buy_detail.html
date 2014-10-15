@@ -345,20 +345,35 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label text-muted">所在区域：</label>
                     <div class="col-sm-7">
-                        <button class="btn">中国大陆</button>
-                        <input type="text" class="form-control radius-none">
-                        <div class="cascade-box">
-                            <ul class="nav nav-tabs">
-                              <li class="active"><a href="#province" role="tab" data-toggle="tab">省份</a></li>
-                              <li><a href="#city" role="tab" data-toggle="tab">城市</a></li>
-                              <li><a href="#county" role="tab" data-toggle="tab">县区</a></li>
-                              <li><a href="#street" role="tab" data-toggle="tab">街道</a></li>
-                            </ul>
-                            <div class="tab-content">
-                              <div class="tab-pane active" id="province">四川</div>
-                              <div class="tab-pane" id="city">成都市</div>
-                              <div class="tab-pane" id="county">高新区</div>
-                              <div class="tab-pane" id="street">天府大道一段</div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <button class="btn">中国大陆</button>
+                            </div>
+                            <div class="col-sm-8">
+                                <button class="btn btn-select radius-none" type="button">选择城市
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="cascade-box">
+                                    <ul class="nav nav-tabs">
+                                      <li class="active"><a href="#province" role="tab" data-toggle="tab">省份</a></li>
+                                      <li><a href="#city" role="tab" data-toggle="tab">城市</a></li>
+                                      <li><a href="#county" role="tab" data-toggle="tab">县区</a></li>
+                                      <li><a href="#street" role="tab" data-toggle="tab">街道</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                      <div class="tab-pane active" id="province">
+                                          <dl>
+                                              <dt>L-S</dt>
+                                              <dd>
+                                                  <a href="javascript:">四川</a>
+                                              </dd>
+                                          </dl>
+                                      </div>
+                                      <div class="tab-pane" id="city">成都市</div>
+                                      <div class="tab-pane" id="county">高新区</div>
+                                      <div class="tab-pane" id="street">天府大道一段</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

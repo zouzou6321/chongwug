@@ -4019,6 +4019,15 @@ button.close {
     bottom: 0px;
     display: none; }
 
+.btn-select {
+  background: none;
+  border-color: #a4a39a;
+  text-align: left;
+  width: 100%; }
+  .btn-select .caret {
+    float: right;
+    margin-top: 9px; }
+
 .shade {
   position: relative; }
 
@@ -4095,12 +4104,20 @@ button.close {
 .cascade-box {
   font-size: 12px;
   font-family: Arial, \5B8B\4F53;
-  border: 1px solid #ccc;
-  background: #fff; }
+  background: #fff;
+  position: absolute;
+  top: 33px;
+  left: 0;
+  z-index: 6; }
   .cascade-box .nav-tabs {
-    margin-right: -1px; }
+    width: 301px;
+    overflow: hidden;
+    border-bottom: 0;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc; }
     .cascade-box .nav-tabs li {
-      background: #f0f0f0; }
+      background: #f0f0f0;
+      margin-bottom: 0; }
       .cascade-box .nav-tabs li a {
         border-radius: 0;
         padding: 10px 25px;
@@ -4115,7 +4132,9 @@ button.close {
       border-left: 0;
       border-bottom-color: transparent; }
   .cascade-box .tab-content {
-    padding: 20px; }
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: 0; }
 
 /**
  * gui

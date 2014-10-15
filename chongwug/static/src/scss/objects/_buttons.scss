@@ -31,3 +31,16 @@
     display: none;
   }
 }
+
+.btn-select{
+  background: none;
+  border-color: #a4a39a;
+  text-align: left;
+
+  width: 100%;
+
+  .caret{
+    float: right;
+    margin-top: 9px;
+  }
+}
