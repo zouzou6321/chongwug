@@ -3994,6 +3994,16 @@ button.close {
 .btn-trans, .btn-trans:hover {
   background-color: transparent; }
 
+.btn-check {
+  border-color: #a4a39a;
+  border-radius: 0;
+  width: 48%; }
+  .btn-check.active, .btn-check:active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: #ff3500;
+    color: #ff3500; }
+
 .shade {
   position: relative; }
 

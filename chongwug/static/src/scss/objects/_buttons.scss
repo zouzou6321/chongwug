@@ -6,3 +6,16 @@
 .btn-trans, .btn-trans:hover{
   background-color: transparent;
 }
+
+.btn-check{
+  border-color: #a4a39a;
+  border-radius: 0;
+  width: 48%;
+
+  &.active, &:active{
+    @include box-shadow(none);
+
+    border-color: $primary-color;
+    color: $primary-color;
+  }
+}

@@ -2,7 +2,7 @@
     "ie10-viewport-bug-workaround": true,
     "affix" : true,
     "alert" : false,
-    "button" : false,
+    "button" : true,
     "carousel" : true,
     "collapse" : true,
     "dropdown" : false,
