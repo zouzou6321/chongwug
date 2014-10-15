@@ -340,7 +340,7 @@ def manage_get_del_petpics(request):
         curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
         if request.method == 'POST':
             pics_str = request.REQUEST.getlist('petpics')
-            curpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=True,sale_out=False)
+            curpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
             petpics = nestofpet_img.objects.filter(nestofpet_id=curpet,dele=False)
             for tmp_pic in pics_str:
                 try:
