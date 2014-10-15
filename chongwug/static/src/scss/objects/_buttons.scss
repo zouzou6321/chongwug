@@ -33,6 +33,7 @@
 }
 
 .btn-select{
+  position: relative;
   background: none;
   border-color: #a4a39a;
   text-align: left;
@@ -40,7 +41,16 @@
   width: 100%;
 
   .caret{
-    float: right;
-    margin-top: 9px;
+    position: absolute;
+    right: 12px;
+    top: 15px;
+  }
+
+  .select-title{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    max-width: 90%;
+    overflow: hidden;
   }
 }

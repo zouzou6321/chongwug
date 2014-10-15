@@ -345,35 +345,22 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label text-muted">所在区域：</label>
                     <div class="col-sm-7">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <button class="btn">中国大陆</button>
-                            </div>
-                            <div class="col-sm-8">
-                                <button class="btn btn-select radius-none" type="button">选择城市
-                                    <span class="caret"></span>
-                                </button>
-                                <div class="cascade-box">
-                                    <ul class="nav nav-tabs">
-                                      <li class="active"><a href="#province" role="tab" data-toggle="tab">省份</a></li>
-                                      <li><a href="#city" role="tab" data-toggle="tab">城市</a></li>
-                                      <li><a href="#county" role="tab" data-toggle="tab">县区</a></li>
-                                      <li><a href="#street" role="tab" data-toggle="tab">街道</a></li>
-                                    </ul>
-                                    <div class="tab-content">
-                                      <div class="tab-pane active" id="province">
-                                          <dl>
-                                              <dt>L-S</dt>
-                                              <dd>
-                                                  <a href="javascript:">四川</a>
-                                              </dd>
-                                          </dl>
-                                      </div>
-                                      <div class="tab-pane" id="city">成都市</div>
-                                      <div class="tab-pane" id="county">高新区</div>
-                                      <div class="tab-pane" id="street">天府大道一段</div>
-                                    </div>
-                                </div>
+                        <button class="btn btn-select radius-none" type="button" id="js-btn-location">
+                            <span class="select-title" id="js-location">选择城市</span>
+                            <span class="caret"></span>
+                        </button>
+                        <div class="cascade-box" id="js-location-box">
+                            <ul class="tab clearfix">
+                              <li class="active"><a href="#province" id="js-to-province" role="tab" data-toggle="tab">省份</a></li>
+                              <li><a href="#city" id="js-to-city" role="tab" data-toggle="tab">城市</a></li>
+                              <li><a href="#county" id="js-to-county" role="tab" data-toggle="tab">县区</a></li>
+                              <li><a href="#street" id="js-to-street" role="tab" data-toggle="tab">街道</a></li>
+                            </ul>
+                            <div class="tab-content">
+                              <div class="tab-pane active province-select" id="province"></div>
+                              <div class="tab-pane" id="city"></div>
+                              <div class="tab-pane" id="county"></div>
+                              <div class="tab-pane" id="street"></div>
                             </div>
                         </div>
                     </div>
@@ -488,6 +475,20 @@
   </div>
 </div>
 
+<script type="text/html" id="location-select-tpl">
+{% templatetag openvariable %}each list as items{% templatetag closevariable %}
+<dl class="clearfix">
+  {% templatetag openvariable %}if province{% templatetag closevariable %}
+  <dt>{% templatetag openvariable %}province.title{% templatetag closevariable %}</dt>
+  {% templatetag openvariable %}/if{% templatetag closevariable %}
+  <dd>
+      {% templatetag openvariable %}each items as item{% templatetag closevariable %}
+      <a href="javascript:">{% templatetag openvariable %}item.name{% templatetag closevariable %}</a>
+      {% templatetag openvariable %}/each{% templatetag closevariable %}
+  </dd>
+</dl>
+{% templatetag openvariable %}/each{% templatetag closevariable %}
+</script>
 {% endblock %}
 
 {% block scripts %}
@@ -601,6 +602,121 @@
         });
         //scroll spy
         $('body').scrollspy({ target: '#js-affix-scrollspy' });
+
+
+        //location select
+        var $locationBox = $('#js-location-box'),
+            $btnLocation = $('#js-btn-location');
+
+
+        $btnLocation.on('click', function(){
+            $locationBox.is(':visible') ? $locationBox.hide() : $locationBox.show();
+        });
+
+        var province = {
+           list: [[{
+               name: '四川'
+           }]],
+           province: {
+               title: 'L-S'
+           }
+        };
+
+        var city = {
+            list: [[{
+                name: '成都'
+            }]]
+        };
+
+        var county = {
+            list: [[{
+                name: '高新区'
+            },{
+                name: '武侯区'
+            },{
+                name: '金牛区'
+            },{
+                name: '锦江区'
+            },{
+                name: '新都区'
+            },{
+                name: '双流县'
+            }]]
+        };
+
+        var street = {
+            list: [[{
+                name: '天府一街'
+            },{
+                name: '软件园D区'
+            },{
+                name: '天河一路'
+            },{
+                name: '世纪城'
+            }]]
+        };
+
+        var $province = $('#province'),
+            $city = $('#city'),
+            $county = $('#county'),
+            $street = $('#street'),
+            location = {};
+
+        var render = template('location-select-tpl');
+
+        $province.html(render(province));
+
+        $province.on('click', 'a', function(){
+            var $this = $(this);
+
+            $this.addClass('active').siblings().removeClass('active');
+
+            location[0] = $this.text();
+
+            $city.html(render(city));
+            $county.html('');
+            $('#js-to-city').tab('show');
+        });
+
+        $city.on('click', 'a', function(){
+            var $this = $(this);
+            $this.addClass('active').siblings().removeClass('active');
+
+            location[1] = $this.text();
+
+            $county.html(render(county));
+            $street.html('');
+            $('#js-to-county').tab('show');
+        });
+
+        $county.on('click', 'a', function(){
+            var $this = $(this);
+            $this.addClass('active').siblings().removeClass('active');
+            location[2] = $this.text();
+
+            $street.html(render(street));
+            $('#js-to-street').tab('show');
+        });
+
+        $street.on('click', 'a', function(){
+            var $this = $(this);
+            $this.addClass('active').siblings().removeClass('active');
+            location[3] = $this.text();
+
+           $('#js-location').text(convertToArray(location).join('-'));
+            $locationBox.hide();
+        });
+
+        function convertToArray(o){
+            var arr = [];
+
+            for(var i in o){
+                arr[i] = o[i];
+            }
+
+            return arr;
+        }
+
     }(jQuery));
 
 </script>

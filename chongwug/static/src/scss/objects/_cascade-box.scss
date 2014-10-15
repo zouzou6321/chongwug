@@ -3,56 +3,103 @@
   $border-color: #ccc;
 
   font-size: 12px;
-  font-family: Arial, \5B8B\4F53;
   background: #fff;
 
   position: absolute;
   top: 33px;
-  left: 0;
+  left: 15px;
   z-index: 6;
 
-  .nav-tabs{
+  display: none;
+
+  .tab{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
     width: 301px;
-    overflow: hidden;
-    border-bottom: 0;
+    border-right: 1px solid $border-color;
     border-top: 1px solid $border-color;
-    border-left: 1px solid $border-color;
 
-    li{
+    a{
+      outline: 0;
+      display: block;
+
+      color: $color;
       background: #f0f0f0;
-      margin-bottom: 0;
 
-      a{
-        border-radius: 0;
-        padding: 10px 25px;
-        color: $color;
-        margin-right: 0;
+      padding: 10px 25px;
 
-        border-top: 0;
-        border-left: 0;
-        border-color: $border-color;
+      border-left: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
+
+      &:hover{
+        text-decoration: none;
       }
     }
 
-    .active{
-      a, a:hover, a:active{
-        color: $primary-color;
+    li{
+      float: left;
+    }
 
-        border-top: 0;
-        border-left: 0;
+    .active{
+      a{
+        color: $primary-color;
+        background: #fff;
+
         border-bottom-color: transparent;
+
+        cursor: default;
       }
     }
   }
 
   .tab-content{
-    padding: 20px;
+    padding: 10px 14px;
 
     border: 1px solid $border-color;
     border-top: 0;
 
     a{
-      
+      padding: 0 10px;
+      float: left;
+
+      color: $color;
+
+      border-radius: 2px;
+
+      &:hover{
+        text-decoration: none;
+        color: $primary-color;
+        background: #fff8f3;
+      }
+
+      &.active{
+        color: #fff;
+        background: $primary-color;
+      }
+    }
+
+    dt, dd{
+      float: left;
+      line-height: 2;
+    }
+
+    dl{
+      margin: 0;
+      padding: 3px 0;
+    }
+
+    dt{
+      padding-right: 10px;
+    }
+
+    dd{
+      width: 270px;
+    }
+
+    .province-select dd{
+      width: 233px;
     }
   }
 }
