@@ -8,8 +8,9 @@ from customer.models import attention_user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
-from chongwug.config import __petpictypes
+from chongwug.config import __petpictypes,__pettypes,__prices,__ages,__epidemics,__directs
 import datetime,string,re
+from chongwug.commom import __errorcode__
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
@@ -79,11 +80,11 @@ def buy_main_adapter(re):
     url = cur_url
     price = None
     #筛选条件
-    types = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加',u'博美',u'巴哥',u'雪纳瑞',u'约克夏',u'德牧',u'古牧',u'比格',u'喜乐蒂',u'斗牛犬',u'杜宾',u'罗威纳',u'吉娃娃']
-    princes = [{'a':'1','b':600,'c':1000},{'a':'2','b':1000,'c':1500},{'a':'3','b':1500,'c':2000},{'a':'4','b':2000,'c':2500},{'a':'5','b':2500,'c':1000000}]
-    directs = [u'东',u'西',u'南',u'北',u'中']
-    epidemics = [u'已种疫苗',u'可种疫苗',u'未种疫苗']
-    ages = [{'a':'1','b':0,'c':3},{'a':'2','b':3,'c':5},{'a':'3','b':5,'c':12},{'a':'4','b':12,'c':100000}]
+    types = __pettypes
+    princes = __prices
+    directs = __directs
+    epidemics = __epidemics
+    ages = __ages
     
     #筛选条件所对应的数据表列名称，从enums中获取
     typekey = None
@@ -271,6 +272,7 @@ def buy_detail_adapter(re):
 
 def buy_attention_adapter(req):
     data = {"status": "error", "message": "error"}
+    print req.GET
     if 'petid' not in req.GET or 'name' not in req.GET or 'tel' not in req.GET:
         data['message'] = "信息不完整，可能系统有虫子，请联系我们，谢谢~！"
         return simplejson.dumps(data,ensure_ascii = False)
@@ -280,29 +282,24 @@ def buy_attention_adapter(req):
     try:
         nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
-        data['message'] = "实在抱歉，您想预定的宠物售罄了！"
-        return simplejson.dumps(data,ensure_ascii = False)
+        return __errorcode__(7)
     p = re.compile(r'1\d{10}')
     if not p.match(tel):
         p = re.compile(r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})')
         if not p.match(tel):
-            data['message'] = "您这电话号码不对哦，任谁都通过它联系不到您呢~！"
-            return simplejson.dumps(data,ensure_ascii = False)
+            return __errorcode__(8)
     p = re.compile(ur'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$')
     if not p.match(name):
-        data['message'] = "您的名字~！"
-        return simplejson.dumps(data,ensure_ascii = False)
+        return __errorcode__(9)
     try:
         user =  attention_user(name=name,tel=tel)
         user.save()
         attention = nestofpet_attention(nestofpet_id=get_object_or_404(nestofpet,pk=petid),user=user)
         attention.save()
     except:
-        data['message'] = "服务器内部错误，请反馈给我们，多谢亲！"
-        return simplejson.dumps(data,ensure_ascii = False)
+        return __errorcode__(10)
     sendTemplateSMS(tel,["chongwug","test1"])
-    data = {"status": "success"}
-    return simplejson.dumps(data,ensure_ascii = False)
+    return __errorcode__(0)
 
 from yuntongxun.CCPRestSDK import REST
 
