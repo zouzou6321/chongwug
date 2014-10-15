@@ -242,7 +242,7 @@ def manage_picupload(photo,width,height):
     try:
         img = Image.open(photo)
     except:
-        return 'type error'
+        return __errorcode__(2)
     if img.mode != 'RGB':
         img = img.convert('RGB')
     w,h = img.size
@@ -250,7 +250,7 @@ def manage_picupload(photo,width,height):
         img.thumbnail((1170,3000))
         w,h = img.size
     if (w < width) or (h < height):
-        return 'size error'
+        return __errorcode__(6)
     url=(settings.PIC_TMP_PATH+photo.name).encode('utf8')
     name = settings.STATIC_ROOT + url
     if os.path.exists(name):

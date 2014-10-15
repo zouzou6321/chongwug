@@ -9,6 +9,7 @@ __errorcode = [
                [3,u'primission delay',u'出现越权操作'],
                [4,u'picture not found',u'找不到图片'],
                [5,u'database access error',u'数据库访问错误'],
+               [6,u'picture too small',u'图片太小'],
                [404,u'page not found',u'页面不存在'],
                [500,u'internal fault',u'服务器内部错误']
               ]
