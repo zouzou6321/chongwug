@@ -211,14 +211,19 @@
                 }
 
                 data = $.parseJSON(data);
-                actualSize = [data.width, data.height];
 
-                $cropModal.modal('show').addClass('loading');
-                loadImage(data.url, function(){
-                    index++;
-                    $imgCountInput.val(index);
-                    afterUploadSuccess(data);
-                });
+                if(data.status == 0){
+                     actualSize = [data.width, data.height];
+
+                    $cropModal.modal('show').addClass('loading');
+                    loadImage(data.url, function(){
+                        index++;
+                        $imgCountInput.val(index);
+                        afterUploadSuccess(data);
+                    });
+                }else{
+                    alert('图片上传失败：' + data.message + '，请重试。');
+                }
             }
         });
     };

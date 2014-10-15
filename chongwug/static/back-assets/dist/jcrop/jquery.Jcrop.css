@@ -12,6 +12,12 @@
   direction: ltr;
   text-align: left;
 }
+.jcrop-keymgr{
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    z-index: -1;
+}
 /* Selection Border */
 .jcrop-vline,
 .jcrop-hline {
