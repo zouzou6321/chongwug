@@ -11,6 +11,18 @@ __prices = [{'a':'1','b':600,'c':1000},{'a':'2','b':1000,'c':1500},{'a':'3','b':
 __ages = [{'a':'1','b':0,'c':3},{'a':'2','b':3,'c':5},{'a':'3','b':5,'c':12},{'a':'4','b':12,'c':100000}]
 __epidemics = [u'已种疫苗',u'可种疫苗',u'未种疫苗']
 __directs = [u'东',u'西',u'南',u'北']
+
+#账号密码
+__upyun_picpath = 'chongwug-pic'
+__upyun_name = 'chongwug'
+__upyun_pwd = 'weet6321'
+
+#系统使用的正则表达式
+__regular_expression_telnum = r'1\d{10}'
+__regular_expression_chinatelnum = r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})'
+__regular_expression_username = r'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
+__regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
+#系统错误码
 __errorcode = [
                [0,u'success',u'成功'],
                [1,u'false',u'失败'],

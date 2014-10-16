@@ -4,47 +4,12 @@ from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
-from chongwug.config import __petpictypes
+from chongwug.config import __petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd
 from chongwug.commom import __errorcode__
 from upyun import UpYun
 from django.contrib import auth
 
 import os,uuid,string,re,datetime,json
-
-
-def pic_preupload(request,pic_dir,max_height,max_width): 
-    try:
-        img= Image.open(settings.ROOT + request.POST['source'])
-    except:
-        return 'type error'
-    x1 = string.atoi(request.POST['x1'])
-    y1 = string.atoi(request.POST['y1'])
-    x2 = string.atoi(request.POST['x2'])
-    y2 = string.atoi(request.POST['y2'])
-    if img.mode != 'RGB':
-        img = img.convert('RGB')
-    cropimg = img.crop((x1,y1,x2,y2))
-    if cropimg.mode != 'RGB':
-        cropimg.convert('RGB')
-    if (x2 - x1) > max_width:
-        cropimg.thumbnail( (max_width,max_height) )
-    #file_name = '%s'%str(uuid.uuid1()) + '.png'
-    file_name = request.POST['source'].split('/')[-1]
-    file_path_name = pic_dir + file_name
-    url = ('/manage/pictest/'+file_name).encode('utf8')
-    name = settings.STATIC_ROOT + url
-    cropimg.save(name)
-    cropimg.close()
-    
-    up = UpYun('chongwug-pic','chongwug','weet6321')
-    with open(name, 'rb') as f:
-        res = up.put(file_path_name, f, checksum=False)
-    #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 
-    #删除服务器本地缓存的图片
-    os.remove(name)
-    #writeFile方法不会返回图片地址，所以得自己写
-    img_url = settings.PIC_ROOT + file_path_name
-    return img_url
 
 def pic_crop_save(pic_args,pic_dir,max_height,max_width): 
     try:
@@ -70,7 +35,7 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
     name = settings.STATIC_ROOT + url
     cropimg.save(name)
     cropimg.close()
-    up = UpYun('chongwug-pic','chongwug','weet6321')
+    up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
     with open(name, 'rb') as f:
         res = up.put(file_path_name, f, checksum=False)
     #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 
@@ -271,7 +236,7 @@ def manage_pet_farm_picpreupload(request):
     if 'source' in request.POST:
         max_height = 178
         max_width = 250
-        img_url = pic_preupload(request,settings.PET_FARM_PIC_ROOT,max_height,max_width)
+        img_url = pic_crop_save(request,settings.PET_FARM_PIC_ROOT,max_height,max_width)
         if img_url == 'type error':
             return 'type error'
         #把url存入数据库

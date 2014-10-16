@@ -8,7 +8,7 @@ from customer.models import attention_user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
-from chongwug.config import __petpictypes,__pettypes,__prices,__ages,__epidemics,__directs
+from chongwug.config import __petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re
 from chongwug.commom import __errorcode__
 '''
@@ -266,23 +266,21 @@ def buy_detail_adapter(re):
         return False
 
 def buy_attention_adapter(req):
-    data = {"status": "error", "message": "error"}
     if 'petid' not in req.GET or 'name' not in req.GET or 'tel' not in req.GET:
-        data['message'] = "信息不完整，可能系统有虫子，请联系我们，谢谢~！"
-        return simplejson.dumps(data,ensure_ascii = False)
+        return __errorcode__(7)
     petid = string.atoi(req.REQUEST.get('petid'))
     name = req.REQUEST.get('name')
     tel = req.REQUEST.get('tel')
     try:
         nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
-        return __errorcode__(7)
-    p = re.compile(r'1\d{10}')
+        return __errorcode__(2)
+    p = re.compile(__regular_expression_telnum)
     if not p.match(tel):
-        p = re.compile(r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})')
+        p = re.compile(__regular_expression_chinatelnum)
         if not p.match(tel):
             return __errorcode__(8)
-    p = re.compile(ur'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$')
+    p = re.compile(__regular_expression_username)
     if not p.match(name):
         return __errorcode__(9)
     try:
