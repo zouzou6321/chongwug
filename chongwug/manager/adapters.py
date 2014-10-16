@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 import string,re
 import os,uuid,datetime
 import config
+from chongwug.config import __directs
 '''
 管理员鉴权
 '''
@@ -37,7 +38,7 @@ def manage_login_check(request):
 
 def manage_home_data_get(request):
     manager = manage.objects.get(id=request.session['manage_id'])
-    return {'manager':manager}
+    return {'manager':manager,'directs':__directs}
 
 def manage_pet_farm_add(request):
     try:
