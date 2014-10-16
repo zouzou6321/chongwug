@@ -51,3 +51,6 @@ def buy_attention_view(request):
         request.session['visitor'] = 1
     data = adapters.buy_attention_adapter(request)
     return HttpResponse(data)
+
+def knowledge_buy_view(request):
+    return render_to_response('tpl/knowledge_buy.html')

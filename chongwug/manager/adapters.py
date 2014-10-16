@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 import string,re
 import os,uuid,datetime
 import config
+from chongwug.config import __directs,__regular_expression_telnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
 '''
 管理员鉴权
 '''
@@ -37,7 +38,7 @@ def manage_login_check(request):
 
 def manage_home_data_get(request):
     manager = manage.objects.get(id=request.session['manage_id'])
-    return {'manager':manager}
+    return {'manager':manager,'directs':__directs}
 
 def manage_pet_farm_add(request):
     try:
@@ -53,10 +54,10 @@ def manage_pet_farm_add(request):
             manage_score = 1.0
         else:
             manage_score = string.atof(request.POST['manage_score'])
-        if not re.match(r'1\d{10}',request.POST['tel']):
-            if not re.match(r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})',request.POST['tel']):
+        if not re.match(__regular_expression_telnum,request.POST['tel']):
+            if not re.match(__regular_expression_chinatelnum,request.POST['tel']):
                 return False
-        if not re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", request.POST['email']):
+        if not re.match(__regular_expression_email, request.POST['email']):
             return False
         auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
         auth_user.save()
@@ -103,7 +104,7 @@ def manage_picupload(photo,width,height):
         w,h = img.size
     if (w < width) or (h < height):
         return 'size error'
-    url=('/manage/pictest/'+photo.name).encode('utf8')
+    url=(settings.PIC_TMP_PATH+photo.name).encode('utf8')
     name = settings.STATIC_ROOT + url
     if os.path.exists(name):
         photo = 'NULL'
@@ -111,7 +112,7 @@ def manage_picupload(photo,width,height):
         file, ext = os.path.splitext(photo.name)
         file='%s'%str(uuid.uuid1())
         photo.name = file+'.jpg'
-        url = ('/manage/pictest/'+photo.name).encode('utf8')
+        url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
         name = settings.STATIC_ROOT+url
         img.save(name,'jpeg',quality=75)
         monitor = tmppic_monitor(fname=name)
@@ -138,12 +139,12 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     #file_name = '%s'%str(uuid.uuid1()) + '.png'
     file_name = request.POST['source'].split('/')[-1]
     file_path_name = pic_dir + file_name
-    url = ('/manage/pictest/'+file_name).encode('utf8')
+    url = (settings.PIC_TMP_PATH+file_name).encode('utf8')
     name = settings.STATIC_ROOT + url
     cropimg.save(name)
     cropimg.close()
     
-    up = UpYun('chongwug-pic','chongwug','weet6321')
+    up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
     with open(name, 'rb') as f:
         res = up.put(file_path_name, f, checksum=False)
     #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 

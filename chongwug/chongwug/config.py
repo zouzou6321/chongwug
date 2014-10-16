@@ -1,7 +1,10 @@
 # -*- coding: UTF-8 -*-
+#所有图片的图片用途,目前暂时包括广告图片、宠物图片、养殖场图片
 __adtypes = [[0,'nav_m','首页主广告']]
 __petpictypes = [[0,u'buy_main',u'主图',275,180],[1,u'normal',u'辅图',600,400]]
 __farmpictypes = [[0,u'buy_home',u'首页展示图',275,180],[1,u'normal',u'养殖场介绍图',600,400]]
+
+#系统支持的犬种
 __pettypes = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加', u'博美',u'巴哥',
               u'雪纳瑞',u'约克夏',u'德牧',u'古牧',u'比格',u'喜乐蒂',u'斗牛犬',u'杜宾',u'罗威纳',u'吉娃娃']
 
@@ -10,7 +13,20 @@ __prices = [{'a':'1','b':600,'c':1000},{'a':'2','b':1000,'c':1500},{'a':'3','b':
             {'a':'4','b':2000,'c':2500},{'a':'5','b':2500,'c':1000000}]
 __ages = [{'a':'1','b':0,'c':3},{'a':'2','b':3,'c':5},{'a':'3','b':5,'c':12},{'a':'4','b':12,'c':100000}]
 __epidemics = [u'已种疫苗',u'可种疫苗',u'未种疫苗']
-__directs = [u'东',u'西',u'南',u'北',u'中']
+__directs = [u'东',u'西',u'南',u'北']
+
+#账号密码
+__upyun_picpath = 'chongwug-pic'
+__upyun_name = 'chongwug'
+__upyun_pwd = 'weet6321'
+
+#系统使用的正则表达式
+__regular_expression_telnum = r'1\d{10}'
+__regular_expression_chinatelnum = r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})'
+__regular_expression_username = r'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
+__regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
+
+#系统错误码
 __errorcode = [
                [0,u'success',u'成功'],
                [1,u'false',u'失败'],

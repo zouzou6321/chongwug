@@ -75,7 +75,7 @@
                             编<span class="middle-space"></span>号：
                         </div>
                         <div class="info-td-right">
-                            89757
+                            {{ nestpet.num }}
                         </div>
                     </div>
                     <div class="info-row clearfix">
@@ -92,14 +92,6 @@
                         </div>
                         <div class="info-td-right">
                             {{ nestpet.age }}个月
-                        </div>
-                    </div>
-                    <div class="info-row clearfix">
-                        <div class="info-td-left">
-                             疫<span class="middle-space"></span>苗：
-                        </div>
-                        <div class="info-td-right">
-                            已种疫苗
                         </div>
                     </div>
                     <div class="info-row clearfix" style="border-bottom: 0">
@@ -159,7 +151,7 @@
                             <tbody>
                             	{% for pet in allpets %}
                                 <tr>
-                                    <td>A</td>
+                                    <td>{{ pet.index }}</td>
                                     <td>
                                         <i class="pet-icon"></i>
                                     </td>

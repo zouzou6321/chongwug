@@ -8,7 +8,7 @@ from customer.models import attention_user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
-from chongwug.config import __petpictypes,__pettypes,__prices,__ages,__epidemics,__directs
+from chongwug.config import __petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re
 from chongwug.commom import __errorcode__
 '''
@@ -21,8 +21,8 @@ def buy_home_adapter(request):
     contry = "china"
     province = "四川"
     city = "成都"
-    enum_farms = []
-    
+    directs = __directs
+    direct_farms = []
     #获取首页需要展示的广告信息
     ads = ad.objects.filter(Q(type__exact = 'nav_m'),Q(dele__exact = False),Q(start_time__lte = datetime.datetime.now),Q(end_time__gte = datetime.datetime.now)).order_by('-prince')
     
@@ -48,13 +48,8 @@ def buy_home_adapter(request):
             city_farm.save()
         except:
             None
-    enum_farms.append({'direct':'东','name':'east_farm','picname':'east_farm_img'})
-    enum_farms.append({'direct':'西','name':'west_farm','picname':'west_farm_img'})
-    enum_farms.append({'direct':'南','name':'south_farm','picname':'south_farm_img'})
-    enum_farms.append({'direct':'北','name':'north_farm','picname':'north_farm_img'})
-    enum_farms.append({'direct':'中','name':'center_farm','picname':'center_farm_img'})
-    for farm in enum_farms:
-        tmp_farm = city_farms.filter(direct=farm['direct'],dele=False).order_by('manage_score')
+    for direct in directs:
+        tmp_farm = city_farms.filter(direct=direct,dele=False).order_by('manage_score')
         if tmp_farm.count() > 0:
             tmp_farm = tmp_farm[0]
             tmp_farm_img = pet_farm_img.objects.filter(pet_farm_id=tmp_farm,img_usefor='buy_home',dele=False)
@@ -65,8 +60,8 @@ def buy_home_adapter(request):
         else:
             tmp_farm = None
             tmp_farm_img = None
-        data[farm['name']] = tmp_farm
-        data[farm['picname']] = tmp_farm_img
+        direct_farms.append({'direct':direct,'farm':tmp_farm,'pic':tmp_farm_img})
+    data['direct_farms'] = direct_farms
     data['page'] = 'home'
     return data
 
@@ -271,24 +266,21 @@ def buy_detail_adapter(re):
         return False
 
 def buy_attention_adapter(req):
-    data = {"status": "error", "message": "error"}
-    print req.GET
     if 'petid' not in req.GET or 'name' not in req.GET or 'tel' not in req.GET:
-        data['message'] = "信息不完整，可能系统有虫子，请联系我们，谢谢~！"
-        return simplejson.dumps(data,ensure_ascii = False)
+        return __errorcode__(7)
     petid = string.atoi(req.REQUEST.get('petid'))
     name = req.REQUEST.get('name')
     tel = req.REQUEST.get('tel')
     try:
         nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
-        return __errorcode__(7)
-    p = re.compile(r'1\d{10}')
+        return __errorcode__(2)
+    p = re.compile(__regular_expression_telnum)
     if not p.match(tel):
-        p = re.compile(r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})')
+        p = re.compile(__regular_expression_chinatelnum)
         if not p.match(tel):
             return __errorcode__(8)
-    p = re.compile(ur'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$')
+    p = re.compile(__regular_expression_username)
     if not p.match(name):
         return __errorcode__(9)
     try:

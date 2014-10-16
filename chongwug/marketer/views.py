@@ -2,7 +2,6 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
-from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 import adapters
 MARKET_ROOT='/market/'
@@ -30,7 +29,7 @@ def market_usr_attention_info_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MARKET_ROOT)
     if request.session['score'] < 20:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
     return render_to_response('market/tpl/market_attentions.html',data)
 
@@ -39,7 +38,7 @@ def market_usr_attention_mod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MARKET_ROOT)
     if request.session['score'] < 20:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     data = adapters.market_attention_mod(request)
     return HttpResponse(data)
 
@@ -47,7 +46,7 @@ def market_nestofpet_info_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MARKET_ROOT)
     if request.session['score'] < 20:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     if 'id' and 'sale' in request.GET:
         return HttpResponse(adapters.market_nestofpet_sale_set(request))
     data = adapters.manage_home_data_get(request)

@@ -53,11 +53,9 @@
 	<div class="form-group">
 	    <label for="pet-color" class="col-sm-2 control-label">所处方位<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-		    <input type="radio" name="direct" value="东" checked> 城东 </input> 
-			<input type="radio" name="direct" value="南"> 城南 </input>
-			<input type="radio" name="direct" value="西"> 城西 </input>
-			<input type="radio" name="direct" value="北"> 城北  </input>
-			<input type="radio" name="direct" value="中"> 城中 </input><br>
+	    	{% for direct in directs %}
+		    <input type="radio" name="direct" value="{{ direct }}"> 城{{ direct }} </input> 
+		    {% endfor %}
 	    </div>
 	</div>
 	<div class="form-group">
