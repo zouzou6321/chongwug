@@ -25,61 +25,19 @@
     <div class="row">
         <div class="col-md-11 col-md-offset-0_5">
             <div class="row cwg-area-row">
+            	{% for direct_farm in direct_farms %}
                 <div class="col-xs-6 col-sm-2_4 cwg-area">
-                    <h2><a href="/buy/?direct=东" >城东犬舍</a></h2>
+                    <h2><a href="/buy/?direct=东" >城{{ direct_farm.direct }}犬舍</a></h2>
                     <div>
-                    	{% if east_farm_img %}
-                        <a href="/buy/?direct=东"><img src="{{ east_farm_img.img_url }}" class="img-responsive"></a>
+                    	{% if direct_farm.pic %}
+                        <a href="/buy/?direct={{ direct_farm.direct }}"><img src="{{ direct_farm.pic.img_url }}" class="img-responsive"></a>
                         {% else %}
-                        <a href="/buy/?direct=东"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
+                        <a href="/buy/?direct={{ direct_farm.direct }}"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
                      	{% endif %}
-                        <p><span class="price price-lg">{{ east_farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>
+                        <p><span class="price price-lg">{{ direct_farm.farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-2_4 cwg-area">
-                    <h2><a href="/buy/?direct=南" >城南犬舍</a></h2>
-                    <div>
-                        {% if south_farm_img %}
-                        <a href="/buy/?direct=南"><img src="{{ south_farm_img.img_url }}" class="img-responsive"></a>
-                        {% else %}
-                        <a href="/buy/?direct=南"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
-                     	{% endif %}
-                        <p><span class="price price-lg">{{ south_farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-2_4 cwg-area">
-                    <h2><a href="/buy/?direct=西" >城西犬舍</a></h2>
-                    <div>
-                        {% if west_farm_img %}
-                        <a href="/buy/?direct=西"><img src="{{ west_farm_img.img_url }}" class="img-responsive"></a>
-                        {% else %}
-                        <a href="/buy/?direct=西"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
-                     	{% endif %}
-                        <p><span class="price price-lg">{{ west_farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-2_4 cwg-area">
-                    <h2><a href="/buy/?direct=北" >城北犬舍</a></h2>
-                    <div>
-                        {% if north_farm_img %}
-                        <a href="/buy/?direct=北"><img src="{{ north_farm_img.img_url }}" class="img-responsive"></a>
-                        {% else %}
-                        <a href="/buy/?direct=北"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
-                     	{% endif %}
-                        <p><span class="price price-lg">{{ north_farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-2_4 cwg-area">
-                    <h2><a href="/buy/?direct=中" >城中犬舍</a></h2>
-                    <div>
-                        {% if center_farm_img %}
-                        <a href="/buy/?direct=中"><img src="{{ center_farm_img.img_url }}" class="img-responsive"></a>
-                        {% else %}
-                        <a href="/buy/?direct=中"><img src="{{ 'imgs/test.jpg'|assets }}" class="img-responsive"></a>
-                     	{% endif %}
-                        <p><span class="price price-lg">{{ center_farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

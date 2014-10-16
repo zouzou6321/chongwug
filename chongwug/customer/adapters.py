@@ -21,8 +21,8 @@ def buy_home_adapter(request):
     contry = "china"
     province = "四川"
     city = "成都"
-    enum_farms = []
-    
+    directs = __directs
+    direct_farms = []
     #获取首页需要展示的广告信息
     ads = ad.objects.filter(Q(type__exact = 'nav_m'),Q(dele__exact = False),Q(start_time__lte = datetime.datetime.now),Q(end_time__gte = datetime.datetime.now)).order_by('-prince')
     
@@ -48,13 +48,8 @@ def buy_home_adapter(request):
             city_farm.save()
         except:
             None
-    enum_farms.append({'direct':'东','name':'east_farm','picname':'east_farm_img'})
-    enum_farms.append({'direct':'西','name':'west_farm','picname':'west_farm_img'})
-    enum_farms.append({'direct':'南','name':'south_farm','picname':'south_farm_img'})
-    enum_farms.append({'direct':'北','name':'north_farm','picname':'north_farm_img'})
-    enum_farms.append({'direct':'中','name':'center_farm','picname':'center_farm_img'})
-    for farm in enum_farms:
-        tmp_farm = city_farms.filter(direct=farm['direct'],dele=False).order_by('manage_score')
+    for direct in directs:
+        tmp_farm = city_farms.filter(direct=direct,dele=False).order_by('manage_score')
         if tmp_farm.count() > 0:
             tmp_farm = tmp_farm[0]
             tmp_farm_img = pet_farm_img.objects.filter(pet_farm_id=tmp_farm,img_usefor='buy_home',dele=False)
@@ -65,8 +60,8 @@ def buy_home_adapter(request):
         else:
             tmp_farm = None
             tmp_farm_img = None
-        data[farm['name']] = tmp_farm
-        data[farm['picname']] = tmp_farm_img
+        direct_farms.append({'direct':direct,'farm':tmp_farm,'pic':tmp_farm_img})
+    data['direct_farms'] = direct_farms
     data['page'] = 'home'
     return data
 
@@ -272,7 +267,6 @@ def buy_detail_adapter(re):
 
 def buy_attention_adapter(req):
     data = {"status": "error", "message": "error"}
-    print req.GET
     if 'petid' not in req.GET or 'name' not in req.GET or 'tel' not in req.GET:
         data['message'] = "信息不完整，可能系统有虫子，请联系我们，谢谢~！"
         return simplejson.dumps(data,ensure_ascii = False)
