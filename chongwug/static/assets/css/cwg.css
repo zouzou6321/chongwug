@@ -3997,7 +3997,7 @@ button.close {
   background-color: transparent; }
 
 .btn-check {
-  border-color: #a4a39a;
+  border-color: #ccc;
   border-radius: 0;
   width: 48%; }
   .btn-check.active, .btn-check:active {
@@ -4016,13 +4016,14 @@ button.close {
 .btn-select {
   position: relative;
   background: none;
-  border-color: #a4a39a;
+  border-color: #ccc;
+  color: #555;
   text-align: left;
   width: 100%; }
   .btn-select:active {
     -webkit-box-shadow: none;
     box-shadow: none; }
-  .btn-select .caret {
+  .btn-select .select-icon {
     position: absolute;
     right: 12px;
     top: 15px; }
@@ -4106,7 +4107,7 @@ button.close {
 .tips-xs .tips-icon {
   position: static; }
 
-.cascade-box {
+.select-box {
   font-size: 12px;
   background: #fff;
   position: absolute;
@@ -4114,14 +4115,14 @@ button.close {
   left: 15px;
   z-index: 6;
   display: none; }
-  .cascade-box .tab {
+  .select-box .tab {
     list-style: none;
     margin: 0;
     padding: 0;
     width: 301px;
     border-right: 1px solid #ccc;
     border-top: 1px solid #ccc; }
-    .cascade-box .tab a {
+    .select-box .tab a {
       outline: 0;
       display: block;
       color: #4d4d4d;
@@ -4129,42 +4130,42 @@ button.close {
       padding: 10px 25px;
       border-left: 1px solid #ccc;
       border-bottom: 1px solid #ccc; }
-      .cascade-box .tab a:hover {
+      .select-box .tab a:hover {
         text-decoration: none; }
-    .cascade-box .tab li {
+    .select-box .tab li {
       float: left; }
-    .cascade-box .tab .active a {
+    .select-box .tab .active a {
       color: #ff3500;
       background: #fff;
       border-bottom-color: transparent;
       cursor: default; }
-  .cascade-box .tab-content {
+  .select-box .tab-content {
     padding: 10px 14px;
     border: 1px solid #ccc;
     border-top: 0; }
-    .cascade-box .tab-content a {
+    .select-box .tab-content a {
       padding: 0 10px;
       float: left;
       color: #4d4d4d;
       border-radius: 2px; }
-      .cascade-box .tab-content a:hover {
+      .select-box .tab-content a:hover {
         text-decoration: none;
         color: #ff3500;
         background: #fff8f3; }
-      .cascade-box .tab-content a.active {
+      .select-box .tab-content a.active {
         color: #fff;
         background: #ff3500; }
-    .cascade-box .tab-content dt, .cascade-box .tab-content dd {
+    .select-box .tab-content dt, .select-box .tab-content dd {
       float: left;
       line-height: 2; }
-    .cascade-box .tab-content dl {
+    .select-box .tab-content dl {
       margin: 0;
       padding: 3px 0; }
-    .cascade-box .tab-content dt {
+    .select-box .tab-content dt {
       padding-right: 10px; }
-    .cascade-box .tab-content dd {
+    .select-box .tab-content dd {
       width: 270px; }
-    .cascade-box .tab-content .province-select dd {
+    .select-box .tab-content .province-select dd {
       width: 233px; }
 
 /**
