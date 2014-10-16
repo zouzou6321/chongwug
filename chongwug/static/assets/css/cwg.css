@@ -798,9 +798,7 @@ a {
     color: #2a6596;
     text-decoration: underline; }
   a:focus {
-    outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px; }
+    outline: 0; }
 
 figure {
   margin: 0; }
@@ -1771,9 +1769,7 @@ select[multiple], select[size] {
   height: auto; }
 
 input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px; }
+  outline: 0; }
 
 output {
   display: block;
@@ -2076,9 +2072,7 @@ textarea.input-lg, .form-horizontal .form-group-lg textarea.form-control, .input
   -ms-user-select: none;
   user-select: none; }
   .btn:focus, .btn:active:focus, .btn.active:focus {
-    outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px; }
+    outline: 0; }
   .btn:hover, .btn:focus {
     color: #333;
     text-decoration: none; }
@@ -4025,6 +4019,9 @@ button.close {
   border-color: #a4a39a;
   text-align: left;
   width: 100%; }
+  .btn-select:active {
+    -webkit-box-shadow: none;
+    box-shadow: none; }
   .btn-select .caret {
     position: absolute;
     right: 12px;

@@ -40,6 +40,10 @@
 
   width: 100%;
 
+  &:active{
+    @include box-shadow(none);
+  }
+
   .caret{
     position: absolute;
     right: 12px;
