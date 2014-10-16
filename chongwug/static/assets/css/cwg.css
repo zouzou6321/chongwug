@@ -4023,10 +4023,12 @@ button.close {
   .btn-select:active {
     -webkit-box-shadow: none;
     box-shadow: none; }
-  .btn-select .select-icon {
+  .btn-select .vertical-center {
     position: absolute;
     right: 12px;
-    top: 15px; }
+    top: 0; }
+  .btn-select .select-icon {
+    vertical-align: middle; }
   .btn-select .select-title {
     display: inline-block;
     vertical-align: middle;
@@ -4167,6 +4169,23 @@ button.close {
       width: 270px; }
     .select-box .tab-content .province-select dd {
       width: 233px; }
+  .select-box .table {
+    margin-bottom: 0;
+    width: 500px; }
+    .select-box .table > thead > tr > th {
+      border-bottom: 0;
+      vertical-align: middle;
+      text-align: center;
+      font-weight: normal; }
+    .select-box .table > tbody > tr > th {
+      text-align: center;
+      font-weight: normal; }
+    .select-box .table td {
+      cursor: pointer;
+      color: #7abd54; }
+      .select-box .table td:hover, .select-box .table td.active {
+        background: #7abd54;
+        color: #fff; }
 
 /**
  * gui
@@ -5266,3 +5285,11 @@ img.mfp-img {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0; }
+
+.vertical-center {
+  height: 100%; }
+  .vertical-center:before {
+    height: 100%;
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle; }

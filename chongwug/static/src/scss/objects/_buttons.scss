@@ -45,10 +45,14 @@
     @include box-shadow(none);
   }
 
-  .select-icon{
+  .vertical-center{
     position: absolute;
     right: 12px;
-    top: 15px;
+    top: 0;
+  }
+
+  .select-icon{
+    vertical-align: middle;
   }
 
   .select-title{

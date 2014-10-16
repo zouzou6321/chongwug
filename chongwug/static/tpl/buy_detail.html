@@ -328,7 +328,7 @@
       <div class="modal-body">
         <div class="tab-content">
           <div class="tab-pane active" id="order-form">
-              <form class="form-horizontal">
+              <form class="form-horizontal" id="js-order-form">
                 <p class="text-muted">请如实填写信息，我们将尽快与您联系：</p>
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label text-muted">您的名字：</label>
@@ -345,9 +345,12 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label text-muted">所在区域：</label>
                     <div class="col-sm-7">
+                        <input name="location" type="hidden" id="js-location-input"/>
                         <button class="btn btn-select radius-none" type="button" id="js-btn-location">
                             <span class="select-title" id="js-location">选择城市</span>
-                            <span class="caret select-icon"></span>
+                            <div class="vertical-center">
+                                <span class="caret select-icon"></span>
+                            </div>
                         </button>
                         <div class="select-box" id="js-location-box">
                             <ul class="tab clearfix">
@@ -368,18 +371,75 @@
                 <div class="form-group">
                     <label for="time" class="col-sm-4 control-label text-muted">预约看狗时间：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control radius-none" id="time">
+                        <input name="time" type="hidden" id="js-time-input"/>
+                        <button class="btn btn-select radius-none" type="button" id="js-btn-time">
+                            <span class="select-title" id="js-time">选择时间</span>
+                            <div class="vertical-center">
+                                <i class="glyphicon glyphicon-calendar select-icon"></i>
+                            </div>
+                        </button>
+                        <div class="select-box" id="js-time-box">
+                            <table class="table table-bordered table-center">
+                                <colgroup>
+                                    <col width="100px"/>
+                                    <col width="50px"/>
+                                    <col width="50px"/>
+                                    <col width="50px"/>
+                                    <col width="50px"/>
+                                    <col width="50px"/>
+                                    <col width="50px"/>
+                                    <col width="50px"/>
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>时间段</th>
+                                        <th>10-13 <br/> 今天</th>
+                                        <th>10-13 <br/> 今天</th>
+                                        <th>10-13 <br/> 今天</th>
+                                        <th>10-13 <br/> 今天</th>
+                                        <th>10-13 <br/> 今天</th>
+                                        <th>10-13 <br/> 今天</th>
+                                        <th>10-13 <br/> 今天</th>
+                                        <th>10-13 <br/> 今天</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>9:00-15:00</th>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                    </tr>
+                                    <tr>
+                                        <th>9:00-15:00</th>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                        <td data-date="10-13" data-day="今天">可选</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label text-muted">交通方式：</label>
                     <div class="col-sm-7 btn-group" data-toggle="buttons">
                         <label class="btn btn-check">
-                            <input type="radio" name="transportation" value="drive"/>自驾
+                            <input type="radio" name="transportation" value="drive" class="js-trans-input"/>自驾
                             <i class="icon icon-checked"></i>
                         </label>
                         <label class="btn btn-check pull-right active">
-                            <input type="radio" name="transportation" value="lift" checked/>接送
+                            <input type="radio" name="transportation" value="lift" checked class="js-trans-input"/>接送
                             <i class="icon icon-checked"></i>
                         </label>
                     </div>
@@ -560,37 +620,100 @@
         var $orderModal = $('#js-order-modal'),
             $infoModal = $('#cwg-info-modal');
 
-        $orderModal.find('.btn-primary').on('click', function(){
-            $.ajax({
-                url: '/buy/detail/attention/',
-                type: 'get',
-                data: {name: $('#name').val(), tel: $('#tel').val(), petid: $.args('petid')},
-                dataType: 'json',
-                success: function(data){
-                    if(data.status == 'success'){
-                        $orderModal.modal('hide');
-                        $infoModal.modal('show');
-                    }else{
-                        alert(data.message);
-                    }
-                }
-            });
-        });
+{#        $orderModal.find('.btn-primary').on('click', function(){#}
+{#            $.ajax({#}
+{#                url: '/buy/detail/attention/',#}
+{#                type: 'get',#}
+{#                data: {name: $('#name').val(), tel: $('#tel').val(), petid: $.args('petid')},#}
+{#                dataType: 'json',#}
+{#                success: function(data){#}
+{#                    if(data.status == 'success'){#}
+{#                        $orderModal.modal('hide');#}
+{#                        $infoModal.modal('show');#}
+{#                    }else{#}
+{#                        alert(data.message);#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        });#}
 
+        var steps = {
+          '1': '#order-form',
+          '2': '#order-lift',
+          '3': '#order-confirm'
+        };
+
+
+        var stepsFunction = (function(){
+            var steps = {
+              '1': '#order-form',
+              '2': '#order-lift',
+              '3': '#order-confirm'
+            },
+            path = [1],
+            curr = 1,
+            $input = $('.js-trans-input'),
+            $prev = null;
+
+            function changeTab($a, curr){
+                $a.attr('href', steps[curr]).tab('show');
+            }
+
+            return {
+              next: function($a){
+                  if(curr == 1){
+                     $input.filter(':checked').val() == 'lift' ? (curr++) : (curr += 2);
+                     ($prev ? $prev : $a.prev('.prev-step')).text('上一步');
+                  }else{
+                      curr++;
+                  }
+
+                  if(curr <= 3){
+                     changeTab($a, curr);
+                     path.push(curr);
+
+                     if(curr == 3){
+                         $a.text(path.length == 3 ? '确认付款': '确认预约');
+                     }
+                  }else{
+                      curr = 3;
+                  }
+              },
+              prev: function($a){
+                  if(curr > 1){
+                      path.pop();
+                      curr = path[path.length - 1];
+                      changeTab($a, curr);
+
+                      if(curr == 1){
+                          $a.text('取消');
+                      }
+                  }
+              }
+            };
+        }());
 
         //order steps
-        $orderModal.find('.modal-footer').on('click', '.btn', function(e){
-            e.preventDefault();
-            var $this = $(this),
-                href = $.trim($this.attr('href'));
+        $orderModal.on('show.bs.modal', function(){
+            $('#js-order-form')[0].reset();
+            $('#js-location').text('选择城市');
+            $('#js-time').text('选择时间');
 
-            if(href){
-                $this.tab('show');
-            }else{
-               if($this.hasClass('prev-step')){
-                    $orderModal.modal('hide');
-               }
-            }
+            $orderModal.data('step', 1);
+        });
+
+        $orderModal.on('click', '.prev-step', function(e){
+            e.preventDefault();
+            var $this = $(this);
+
+            stepsFunction.prev($this);
+        });
+
+        $orderModal.on('click', '.next-step', function(e){
+            e.preventDefault();
+            var $this = $(this);
+
+            stepsFunction.next($this);
         });
 
         //detail nav affix
@@ -704,7 +827,9 @@
             $this.addClass('active').siblings().removeClass('active');
             location[3] = $this.text();
 
-           $('#js-location').text(convertToArray(location).join('-'));
+            var text = convertToArray(location).join('-');
+            $('#js-location').text(text);
+            $('#js-location-input').val(text);
             $locationBox.hide();
         });
 
@@ -717,6 +842,42 @@
 
             return arr;
         }
+
+        //time select
+        var $btnTime = $('#js-btn-time'),
+            $timeBox = $('#js-time-box'),
+            $time = $('#js-time');
+
+        $btnTime.on('click', function(){
+            $timeBox.is(':visible') ? $timeBox.hide() : $timeBox.show();
+
+        });
+
+        $timeBox.on('click', 'td', function(){
+            var $this = $(this),
+                time = $this.closest('tr').find('th').text(),
+                data = $this.data();
+
+            $timeBox.find('td').not($this.addClass('active')).removeClass('active');
+
+            var text = '2014-' + data.date + '（'+ data.day +'）' + time;
+            $time.text(text);
+            $('#js-time-input').val(text);
+            $timeBox.hide();
+        });
+
+{#        $(document).on('click', function(e){#}
+{#            var $target = $(e.target);#}
+{##}
+{#            if(!$target.is($timeBox) && !$target.is($btnTime)){#}
+{#                $timeBox.hide();#}
+{#            }#}
+{##}
+{#            if(!$target.is($locationBox) && !$target.is($btnLocation)){#}
+{#                $locationBox.hide();#}
+{#            }#}
+{#        });#}
+
 
     }(jQuery));
 
