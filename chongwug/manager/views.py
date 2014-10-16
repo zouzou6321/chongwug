@@ -5,6 +5,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 import adapters,config
+from chongwug.commom import __errorcode__
 MANAGE_ROOT='/manage/'
 
 def manage_login(request):
@@ -30,10 +31,10 @@ def manage_pet_farm_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     if request.method == 'POST':
         if adapters.manage_pet_farm_add(request) == False:
-            return HttpResponse("data error occur!!!")
+            return HttpResponse(__errorcode__(2))
     data = adapters.manage_home_data_get(request)
     return render_to_response('manager/tpl/manage_pet_farm_add.html',data,context_instance=RequestContext(request))
 
@@ -41,7 +42,7 @@ def manage_ad_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
     ad_types = adapters.manage_get_adtypes()
     data['ad_types'] = ad_types
@@ -50,9 +51,9 @@ def manage_ad_add_view(request):
 @csrf_exempt
 def manage_ad_pic_upload_view(request):
     if adapters.manage_authentication(request) == False:
-        return HttpResponse('Page Not Find')
+        return HttpResponse(__errorcode__(404))
     if request.session['score'] < 50:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     photo = request.FILES.get('Filedata',None)
     return HttpResponse(adapters.manage_picupload(photo,1170,323))
 
@@ -60,18 +61,18 @@ def manage_ad_picpre_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     return HttpResponse(adapters.manage_ad_picpreupload(request))
 
 def manage_ad_del_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
     data['adinfo'] = adapters.manage_ad_del(request) 
     if data['adinfo'] == 'False':
-        return HttpResponse("删除数据没有成功")
+        return HttpResponse(__errorcode__(1))
     else:
         return render_to_response('manager/tpl/manage_ad_del.html',data,context_instance=RequestContext(request))
 
@@ -79,5 +80,5 @@ def manage_ad_select_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
-        return HttpResponse("Page Not Find!!!")
+        return render_to_response('404.html')
     return HttpResponse(adapters.manage_ad_select(request))

@@ -107,7 +107,7 @@ def manage_nestofpet_picpreupload(request,_nestofpet):
         
         #判断图片类型是否有异常
         if imgw == 0 or imgh == 0:
-            return False
+            return __errorcode__(1)
         imginfo_json = json.loads(request.POST['img-%d-position' % itr])
         #整理 数据，以便截图保存模块使用
         pic_args = {'source':request.POST['img-%d' % itr].split('/')[-1],'x1':imginfo_json['x'],
@@ -249,7 +249,7 @@ def manage_pet_farm_picpreupload(request):
                                 #图片用途
                                 img_usefor = request.POST['usefor'])
         pet_farm_sql.save()
-    return 'true'
+    return __errorcode__()
 
 def manage_get_pets(request):
     curuser = user.objects.get(auth_user=auth.get_user(request),dele = False)
@@ -267,8 +267,8 @@ def manage_del_pet(request):
         new_nestofpet.dele = True
         new_nestofpet.save()
     except:
-        return 'False'
-    return 'True'
+        return __errorcode__(1)
+    return __errorcode__(0)
         
 def manage_nestofpet_mod(request):
     try:
