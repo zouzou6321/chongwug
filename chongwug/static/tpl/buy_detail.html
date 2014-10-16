@@ -325,21 +325,22 @@
         <h4 class="modal-title">我要预约看狗</h4>
         <p class="text-uppercase margin-none">appointment form</p>
       </div>
-      <div class="modal-body">
-        <div class="tab-content">
-          <div class="tab-pane active" id="order-form">
+      <div class="tab-content">
+          <div class="tab-pane active" id="js-order-info">
+            <div class="modal-body">
               <form class="form-horizontal" id="js-order-form">
+                {% csrf_token %}
                 <p class="text-muted">请如实填写信息，我们将尽快与您联系：</p>
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label text-muted">您的名字：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control radius-none" id="name" autofocus>
+                        <input type="text" class="form-control radius-none" id="name" name="name" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="phone" class="col-sm-4 control-label text-muted">您的手机：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control radius-none" id="phone">
+                        <input type="text" class="form-control radius-none" id="phone" name="phone">
                     </div>
                 </div>
                 <div class="form-group">
@@ -445,92 +446,104 @@
                     </div>
                 </div>
               </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default prev-step" data-dismiss="modal">取消</a>
+                <button class="btn btn-primary next-step" href="#js-order-confirm" data-loading-text="正在提交...">下一步</button>
+            </div>
           </div>
-          <div class="tab-pane" id="order-lift">
-              <div class="form-horizontal">
-                  <div class="form-group">
-                      <label class="col-sm-4 text-right text-muted">犬舍位置：</label>
-                      <div class="col-sm-6">
-                          成都市武侯区锦华路12号
+          <div class="tab-pane" id="js-order-confirm">
+              <div class="modal-body">
+                  <div class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-sm-4 text-right text-muted">本窝犬已预约用户：</label>
+                          <div class="col-sm-6">
+                              10人
+                          </div>
                       </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-4 text-right text-muted">等待接送地点：</label>
-                      <div class="col-sm-6">
-                          成都市武侯区桐梓林地铁站
+                      <div class="form-group">
+                          <label class="col-sm-4 text-right text-muted">已预约用户看犬时间：</label>
+                          <div class="col-sm-6">
+                              2014-10-14 (周二) 9:00-12:00
+                          </div>
                       </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-4 text-right text-muted">等待接送时间：</label>
-                      <div class="col-sm-6">
-                          2014-10-13 （周二） 10:30
+                      <div class="form-group">
+                          <label class="col-sm-4 text-right text-muted">您的排队号：</label>
+                          <div class="col-sm-6">
+                              XL10
+                          </div>
                       </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-4 text-right text-muted">交通费：</label>
-                      <div class="col-sm-6">
-                          20元
+                      <div class="form-group">
+                          <label class="col-sm-4 text-right text-muted">用户编号：</label>
+                          <div class="col-sm-6">
+                              XL15448823150S5
+                          </div>
                       </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="tips col-sm-10 col-sm-offset-1">
-                          <i class="glyphicon glyphicon-info-sign tips-icon"></i>
-                          <p class="tips-content text-muted">
-                              提示：您需要在等待接送时间之前赶到等待接送地点，我们的工作人员会在此等候您，并接送或带领您去预约犬舍挑选、购买狗狗！我们会准时发车，请您务必在指定接送时间前到达指定接送地点集合！购犬成功后，将返还交通费给您！
-                          </p>
+                      <div class="form-group">
+                          <div class="col-sm-6 col-sm-offset-4">
+                              <label class="checkbox-inline">
+                                  <input type="checkbox" checked> 同意<a href="" target="_blank">《用户够犬协议》</a>
+                              </label>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="tips col-sm-10 col-sm-offset-1">
+                              <i class="glyphicon glyphicon-info-sign tips-icon"></i>
+                              <p class="tips-content text-muted">
+                                  提示：若看犬过程中多位用户同时看中某一只狗狗，则以用户编号顺序决定优先挑选权及购买权
+                              </p>
+                          </div>
                       </div>
                   </div>
               </div>
+              <div class="modal-footer">
+                <a class="btn btn-default prev-step" href="#js-order-info" data-toggle="tab">上一步</a>
+                <a class="btn btn-primary next-step" href="#js-order-pay" data-toggle="tab">确认预约</a>
+              </div>
           </div>
-          <div class="tab-pane" id="order-confirm">
-              <div class="form-horizontal">
-                  <div class="form-group">
-                      <label class="col-sm-4 text-right text-muted">本窝犬已预约用户：</label>
-                      <div class="col-sm-6">
-                          10人
+          <div class="tab-pane" id="js-order-pay">
+              <div class="modal-body">
+                  <div class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-sm-4 text-right text-muted">犬舍位置：</label>
+                          <div class="col-sm-6">
+                              成都市武侯区锦华路12号
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-4 text-right text-muted">等待接送地点：</label>
+                          <div class="col-sm-6">
+                              成都市武侯区桐梓林地铁站
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-4 text-right text-muted">等待接送时间：</label>
+                          <div class="col-sm-6">
+                              2014-10-13 （周二） 10:30
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-4 text-right text-muted">交通费：</label>
+                          <div class="col-sm-6">
+                              20元
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="tips col-sm-10 col-sm-offset-1">
+                              <i class="glyphicon glyphicon-info-sign tips-icon"></i>
+                              <p class="tips-content text-muted">
+                                  提示：您需要在等待接送时间之前赶到等待接送地点，我们的工作人员会在此等候您，并接送或带领您去预约犬舍挑选、购买狗狗！我们会准时发车，请您务必在指定接送时间前到达指定接送地点集合！购犬成功后，将返还交通费给您！
+                              </p>
+                          </div>
                       </div>
                   </div>
-                  <div class="form-group">
-                      <label class="col-sm-4 text-right text-muted">已预约用户看犬时间：</label>
-                      <div class="col-sm-6">
-                          2014-10-14 (周二) 9:00-12:00
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-4 text-right text-muted">您的排队号：</label>
-                      <div class="col-sm-6">
-                          XL10
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-4 text-right text-muted">用户编号：</label>
-                      <div class="col-sm-6">
-                          XL15448823150S5
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="col-sm-6 col-sm-offset-4">
-                          <label class="checkbox-inline">
-                              <input type="checkbox" checked> 同意<a href="" target="_blank">《用户够犬协议》</a>
-                          </label>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="tips col-sm-10 col-sm-offset-1">
-                          <i class="glyphicon glyphicon-info-sign tips-icon"></i>
-                          <p class="tips-content text-muted">
-                              提示：若看犬过程中多位用户同时看中某一只狗狗，则以用户编号顺序决定优先挑选权及购买权
-                          </p>
-                      </div>
-                  </div>
+              </div>
+              <div class="modal-footer">
+                <a class="btn btn-default prev-step" href="#js-order-confirm" data-toggle="tab">上一步</a>
+                <a class="btn btn-primary next-step">确认付款</a>
               </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <a class="btn btn-default prev-step">取消</a>
-        <a class="btn btn-primary next-step">下一步</a>
-      </div>
     </div>
   </div>
 </div>
@@ -549,63 +562,65 @@
 </dl>
 {% templatetag openvariable %}/each{% templatetag closevariable %}
 </script>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
-    (function($){
-        //lightbox
-        var $thumb = $('.cwg-thumb'),
-            $img = $thumb.find('img'),
-            $thumbnail = $('.cwg-thumbnail'),
-            $li = $thumbnail.find('li'),
-            items = [];
 
-        $.each($li, function(i, e){
-            items.push({
-                src: $(e).data('src')
-            });
+(function($){
+    //image light-box
+    var $thumb = $('.cwg-thumb'),
+        $img = $thumb.find('img'),
+        $thumbnail = $('.cwg-thumbnail'),
+        $li = $thumbnail.find('li'),
+        items = [];
+
+    $.each($li, function(i, e){
+        items.push({
+            src: $(e).data('src')
         });
+    });
 
-        $thumb.on('click', function(){
-            $.magnificPopup.open({
-                items: items,
-                type: 'image',
-                gallery: {
-                    enabled: true
-                }
-            }, $li.filter('.active').index());
-        });
-
-        //carousel
-        $('.thumbnail-wrap').simpleCarousel({
-            itemWidth: 66,
-            prev: '.prev-thumb',
-            next: '.next-thumb',
-            callback: function($curr){
-                $img.attr('src', $curr.data('src'));
+    $thumb.on('click', function(){
+        $.magnificPopup.open({
+            items: items,
+            type: 'image',
+            gallery: {
+                enabled: true
             }
+        }, $li.filter('.active').index());
+    });
+
+    //carousel
+    $('.thumbnail-wrap').simpleCarousel({
+        itemWidth: 66,
+        prev: '.prev-thumb',
+        next: '.next-thumb',
+        callback: function($curr){
+            $img.attr('src', $curr.data('src'));
+        }
+    });
+
+    //type
+    var $farmModal = $('#cwg-farm-modal'),
+        $farmBody = $farmModal.find('.modal-body');
+
+    $('.cwg-detail-pills').on('click', 'a', function(){
+        var $this = $(this),
+            type = $this.data('type'),
+            id = $this.data('id');
+
+        $.ajax('/buy/detail', {
+            data: {farmid: id, type: type}
+        }).done(function(data){
+            $farmBody.html(data);
+            $farmModal.modal('show');
         });
 
-        //type
-        var $farmModal = $('#cwg-farm-modal'),
-            $farmBody = $farmModal.find('.modal-body');
+    });
 
-        $('.cwg-detail-pills').on('click', 'a', function(){
-            var $this = $(this),
-                type = $this.data('type'),
-                id = $this.data('id');
-
-            $.ajax('/buy/detail', {
-                data: {farmid: id, type: type}
-            }).done(function(data){
-                $farmBody.html(data);
-                $farmModal.modal('show');
-            });
-
-        });
-
-        //scroll fixed nav
+    //scroll fixed nav
 //        var $detailNav = $('.cwg-detail-nav');
 //        $(window).on('scroll', function(){
 //            var $this = $(this);
@@ -616,9 +631,9 @@
 //            }
 //        });
 
-        //order
-        var $orderModal = $('#js-order-modal'),
-            $infoModal = $('#cwg-info-modal');
+    //order
+    var $orderModal = $('#js-order-modal'),
+        $infoModal = $('#cwg-info-modal');
 
 {#        $orderModal.find('.btn-primary').on('click', function(){#}
 {#            $.ajax({#}
@@ -637,234 +652,205 @@
 {#            });#}
 {#        });#}
 
-        var steps = {
-          '1': '#order-form',
-          '2': '#order-lift',
-          '3': '#order-confirm'
-        };
+    $('#js-order-info').on('click', '.next-step', function(){
+        var $this = $(this),
+            arr = $('#js-order-form').serializeArray(),
+            data = {};
 
-
-        var stepsFunction = (function(){
-            var steps = {
-              '1': '#order-form',
-              '2': '#order-lift',
-              '3': '#order-confirm'
-            },
-            path = [1],
-            curr = 1,
-            $input = $('.js-trans-input'),
-            $prev = null;
-
-            function changeTab($a, curr){
-                $a.attr('href', steps[curr]).tab('show');
-            }
-
-            return {
-              next: function($a){
-                  if(curr == 1){
-                     $input.filter(':checked').val() == 'lift' ? (curr++) : (curr += 2);
-                     ($prev ? $prev : $a.prev('.prev-step')).text('上一步');
-                  }else{
-                      curr++;
-                  }
-
-                  if(curr <= 3){
-                     changeTab($a, curr);
-                     path.push(curr);
-
-                     if(curr == 3){
-                         $a.text(path.length == 3 ? '确认付款': '确认预约');
-                     }
-                  }else{
-                      curr = 3;
-                  }
-              },
-              prev: function($a){
-                  if(curr > 1){
-                      path.pop();
-                      curr = path[path.length - 1];
-                      changeTab($a, curr);
-
-                      if(curr == 1){
-                          $a.text('取消');
-                      }
-                  }
-              }
-            };
-        }());
-
-        //order steps
-        $orderModal.on('show.bs.modal', function(){
-            $('#js-order-form')[0].reset();
-            $('#js-location').text('选择城市');
-            $('#js-time').text('选择时间');
-
-            $orderModal.data('step', 1);
-        });
-
-        $orderModal.on('click', '.prev-step', function(e){
-            e.preventDefault();
-            var $this = $(this);
-
-            stepsFunction.prev($this);
-        });
-
-        $orderModal.on('click', '.next-step', function(e){
-            e.preventDefault();
-            var $this = $(this);
-
-            stepsFunction.next($this);
-        });
-
-        //detail nav affix
-        var $affixScrollspy = $('#js-affix-scrollspy');
-        $affixScrollspy.affix({
-            offset: {
-                top: 600
-            }
-        });
-        //scroll spy
-        $('body').scrollspy({ target: '#js-affix-scrollspy' });
-
-
-        //location select
-        var $locationBox = $('#js-location-box'),
-            $btnLocation = $('#js-btn-location');
-
-
-        $btnLocation.on('click', function(){
-            $locationBox.is(':visible') ? $locationBox.hide() : $locationBox.show();
-        });
-
-        var province = {
-           list: [[{
-               name: '四川'
-           }]],
-           province: {
-               title: 'L-S'
-           }
-        };
-
-        var city = {
-            list: [[{
-                name: '成都'
-            }]]
-        };
-
-        var county = {
-            list: [[{
-                name: '高新区'
-            },{
-                name: '武侯区'
-            },{
-                name: '金牛区'
-            },{
-                name: '锦江区'
-            },{
-                name: '新都区'
-            },{
-                name: '双流县'
-            }]]
-        };
-
-        var street = {
-            list: [[{
-                name: '天府一街'
-            },{
-                name: '软件园D区'
-            },{
-                name: '天河一路'
-            },{
-                name: '世纪城'
-            }]]
-        };
-
-        var $province = $('#province'),
-            $city = $('#city'),
-            $county = $('#county'),
-            $street = $('#street'),
-            location = {};
-
-        var render = template('location-select-tpl');
-
-        $province.html(render(province));
-
-        $province.on('click', 'a', function(){
-            var $this = $(this);
-
-            $this.addClass('active').siblings().removeClass('active');
-
-            location[0] = $this.text();
-
-            $city.html(render(city));
-            $county.html('');
-            $street.html('');
-            $('#js-to-city').tab('show');
-        });
-
-        $city.on('click', 'a', function(){
-            var $this = $(this);
-            $this.addClass('active').siblings().removeClass('active');
-
-            location[1] = $this.text();
-
-            $county.html(render(county));
-            $street.html('');
-            $('#js-to-county').tab('show');
-        });
-
-        $county.on('click', 'a', function(){
-            var $this = $(this);
-            $this.addClass('active').siblings().removeClass('active');
-            location[2] = $this.text();
-
-            $street.html(render(street));
-            $('#js-to-street').tab('show');
-        });
-
-        $street.on('click', 'a', function(){
-            var $this = $(this);
-            $this.addClass('active').siblings().removeClass('active');
-            location[3] = $this.text();
-
-            var text = convertToArray(location).join('-');
-            $('#js-location').text(text);
-            $('#js-location-input').val(text);
-            $locationBox.hide();
-        });
-
-        function convertToArray(o){
-            var arr = [];
-
-            for(var i in o){
-                arr[i] = o[i];
-            }
-
-            return arr;
+        for(var i = 0, len = arr.length; i < len; i++){
+            var curr = arr[i];
+            data[curr.name] = curr.value;
         }
 
-        //time select
-        var $btnTime = $('#js-btn-time'),
-            $timeBox = $('#js-time-box'),
-            $time = $('#js-time');
-
-        $btnTime.on('click', function(){
-            $timeBox.is(':visible') ? $timeBox.hide() : $timeBox.show();
-
+        $.ajax({
+            url: '/buy/detail/attention/',
+            type: 'post',
+            data: data,
+            dataType: 'json',
+            ajaxStart: function(){
+                $this.button('loading');
+            },
+            success: function(data){
+                if(data.status == 0){
+                    $this.tab('show');
+                }
+            },
+            complete: function(){
+                $this.button('reset');
+            }
         });
+    });
 
-        $timeBox.on('click', 'td', function(){
-            var $this = $(this),
-                time = $this.closest('tr').find('th').text(),
-                data = $this.data();
+    //order steps
+    $orderModal.on('show.bs.modal', function(){
+        $('#js-order-form')[0].reset();
+        $('#js-location').text('选择城市');
+        $('#js-time').text('选择时间');
 
-            $timeBox.find('td').not($this.addClass('active')).removeClass('active');
+        $orderModal.data('step', 1);
+    });
 
-            var text = '2014-' + data.date + '（'+ data.day +'）' + time;
-            $time.text(text);
-            $('#js-time-input').val(text);
-            $timeBox.hide();
-        });
+    $orderModal.on('click', '.prev-step', function(e){
+        e.preventDefault();
+        var $this = $(this);
+
+    });
+
+    $orderModal.on('click', '.next-step', function(e){
+        e.preventDefault();
+        var $this = $(this);
+
+    });
+
+    //detail nav affix
+    var $affixScrollspy = $('#js-affix-scrollspy');
+    $affixScrollspy.affix({
+        offset: {
+            top: 600
+        }
+    });
+    //scroll spy
+    $('body').scrollspy({ target: '#js-affix-scrollspy' });
+
+
+    //location select
+    var $locationBox = $('#js-location-box'),
+        $btnLocation = $('#js-btn-location');
+
+
+    $btnLocation.on('click', function(){
+        $locationBox.is(':visible') ? $locationBox.hide() : $locationBox.show();
+    });
+
+    var province = {
+       list: [[{
+           name: '四川'
+       }]],
+       province: {
+           title: 'L-S'
+       }
+    };
+
+    var city = {
+        list: [[{
+            name: '成都'
+        }]]
+    };
+
+    var county = {
+        list: [[{
+            name: '高新区'
+        },{
+            name: '武侯区'
+        },{
+            name: '金牛区'
+        },{
+            name: '锦江区'
+        },{
+            name: '新都区'
+        },{
+            name: '双流县'
+        }]]
+    };
+
+    var street = {
+        list: [[{
+            name: '天府一街'
+        },{
+            name: '软件园D区'
+        },{
+            name: '天河一路'
+        },{
+            name: '世纪城'
+        }]]
+    };
+
+    var $province = $('#province'),
+        $city = $('#city'),
+        $county = $('#county'),
+        $street = $('#street'),
+        location = {};
+
+    var render = template('location-select-tpl');
+
+    $province.html(render(province));
+
+    $province.on('click', 'a', function(){
+        var $this = $(this);
+
+        $this.addClass('active').siblings().removeClass('active');
+
+        location[0] = $this.text();
+
+        $city.html(render(city));
+        $county.html('');
+        $street.html('');
+        $('#js-to-city').tab('show');
+    });
+
+    $city.on('click', 'a', function(){
+        var $this = $(this);
+        $this.addClass('active').siblings().removeClass('active');
+
+        location[1] = $this.text();
+
+        $county.html(render(county));
+        $street.html('');
+        $('#js-to-county').tab('show');
+    });
+
+    $county.on('click', 'a', function(){
+        var $this = $(this);
+        $this.addClass('active').siblings().removeClass('active');
+        location[2] = $this.text();
+
+        $street.html(render(street));
+        $('#js-to-street').tab('show');
+    });
+
+    $street.on('click', 'a', function(){
+        var $this = $(this);
+        $this.addClass('active').siblings().removeClass('active');
+        location[3] = $this.text();
+
+        var text = convertToArray(location).join('-');
+        $('#js-location').text(text);
+        $('#js-location-input').val(text);
+        $locationBox.hide();
+    });
+
+    function convertToArray(o){
+        var arr = [];
+
+        for(var i in o){
+            arr[i] = o[i];
+        }
+
+        return arr;
+    }
+
+    //time select
+    var $btnTime = $('#js-btn-time'),
+        $timeBox = $('#js-time-box'),
+        $time = $('#js-time');
+
+    $btnTime.on('click', function(){
+        $timeBox.is(':visible') ? $timeBox.hide() : $timeBox.show();
+
+    });
+
+    $timeBox.on('click', 'td', function(){
+        var $this = $(this),
+            time = $this.closest('tr').find('th').text(),
+            data = $this.data();
+
+        $timeBox.find('td').not($this.addClass('active')).removeClass('active');
+
+        var text = '2014-' + data.date + '（'+ data.day +'）' + time;
+        $time.text(text);
+        $('#js-time-input').val(text);
+        $timeBox.hide();
+    });
 
 {#        $(document).on('click', function(e){#}
 {#            var $target = $(e.target);#}
@@ -879,7 +865,7 @@
 {#        });#}
 
 
-    }(jQuery));
+}(jQuery));
 
 </script>
 {% endblock %}
