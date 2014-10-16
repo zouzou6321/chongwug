@@ -1,0 +1,174 @@
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}购买{% endblock %}
+
+{% block content %}
+
+<div class="cwg-container">
+	<div class="img-container">
+		<img src="/static/src/imgs/knowmain.jpg" alt="养一只与你 性格相似             并适合你 生活环境 的爱犬" class="img-head">
+	</div>
+    <div class="container content-container">
+    	<h3>[ 品种挑选 ] CHOICE</h3>
+    	<div  class="img-divid img-head marginfiften"></div>
+        <div class="row dog-select-row">
+        	<div class="col-sm-1 dog-select-title input-in">类型：</div>
+            <div class="col-sm-6 col-md-6">
+            	<form action="/buy/" method="get">
+                    <div class="input-group cwg-search-wrap">
+                    	<input type="text" class="form-control" placeholder="可根据名字搜索犬种" name="key" {% if searchkey != None %}value="{{ searchkey }}"{% endif %}>
+                        <span class="input-group-btn">
+                            <button class="btn btn-search" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 dog-select-title">体型：</div>
+            <div class="col-xs-12 col-sm-11">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="{{ urls.type_all_url }}">大型犬</a></li>
+                    <li><a href="{{ urls.type_all_url }}">中型犬</a></li>
+                    <li><a href="{{ urls.type_all_url }}">小型犬</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 dog-select-title">友善：</div>
+            <div class="col-xs-12 col-sm-11">
+                <ul class="nav nav-pills">
+                	<li class="active"><a href="{{ urls.type_all_url }}">很友善</a></li>
+                    <li><a href="{{ urls.type_all_url }}">不友善</a></li>
+                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 dog-select-title">打理：</div>
+            <div class="col-xs-12 col-sm-11">
+                <ul class="nav nav-pills">
+                	<li class="active"><a href="{{ urls.type_all_url }}">难打理</a></li>
+                    <li><a href="{{ urls.type_all_url }}">易打理</a></li>
+                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 dog-select-title">训练：</div>
+            <div class="col-xs-12 col-sm-11">
+                <ul class="nav nav-pills">
+                	<li class="active"><a href="{{ urls.type_all_url }}">好训练</a></li>
+                    <li><a href="{{ urls.type_all_url }}">难训练</a></li>
+                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 dog-select-title">掉毛：</div>
+            <div class="col-xs-12 col-sm-11">
+                <ul class="nav nav-pills">
+                	<li class="active"><a href="{{ urls.type_all_url }}">不掉毛</a></li>
+                    <li><a href="{{ urls.type_all_url }}">易掉毛</a></li>
+                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 dog-select-title">吠叫：</div>
+            <div class="col-xs-12 col-sm-11">
+                <ul class="nav nav-pills">
+                	<li class="active"><a href="{{ urls.type_all_url }}">喜欢</a></li>
+                    <li><a href="{{ urls.type_all_url }}">不喜欢</a></li>
+                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-sm-1 dog-select-title">运动：</div>
+            <div class="col-xs-12 col-sm-11">
+                <ul class="nav nav-pills">
+                	<li class="active"><a href="{{ urls.type_all_url }}">量大</a></li>
+                    <li><a href="{{ urls.type_all_url }}">量少</a></li>
+                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
+                </ul>
+            </div>
+        </div>
+        <div  class="img-divid img-head marginfiften margintop15"></div>
+        <div class="dog-separate row"></div>
+        <div class="row dog-select-row">
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 img-border img-margin">
+                    <a href="detail/?petid={{pet_img.pet.id}}" class="img-padding"><img src="/static/src/imgs/pet.jpg" class="img-full img-small"/></a>
+                    <div class="dog-desc dog-name">
+                        阿富汗
+                    </div>
+                </div>
+                
+        </div>
+    </div>
+</div>
+
+{% endblock %}

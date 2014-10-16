@@ -1,16 +1,11 @@
 from django.conf.urls import patterns, include, url
-from customer.views import nav_page_view,buy_home_view,buy_main_view,buy_detail_view,buy_attention_view
 import settings
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^$',nav_page_view),
-                       url(r'^home/$',buy_home_view),
-                       url(r'^buy/$',buy_main_view),
-                       url(r'^buy/detail/$',buy_detail_view),
-                       url(r'^buy/detail/attention/$',buy_attention_view),
+                       url(r'', include('customer.urls')),
                        url(r'^back_manage/', include('back_manager.urls')),
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),
