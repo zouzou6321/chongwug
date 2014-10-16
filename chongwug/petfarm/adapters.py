@@ -150,6 +150,7 @@ def manage_nestofpet_add(request):
             petnum += 1
             try:
                 new_pet = pet(  nestofpet = new_nestofpet,
+                                index = chr(ord('A') + (petnum - 1)),
                                 color = request.POST['color%d' % petnum],
                                 epidemic_period = request.POST['epidemic%d' % petnum],
                                 price = request.POST['price%d' % petnum],
