@@ -1,0 +1,21 @@
+.pet-box{
+  border: 1px solid #ccc;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  &.active{
+    border-color: #f01616;
+  }
+
+  .pet-name{
+    margin-bottom: 0;
+    padding-top: 6px;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .pet-img{
+    border: 1px solid #ccc;
+  }
+}

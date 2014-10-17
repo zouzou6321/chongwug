@@ -9,3 +9,7 @@
 .col-md-offset-0_5{
   @include  make-md-column-offset(0.5);
 }
+
+.col-md-1_5{
+  @include make-md-column(1.5, 20px);
+}

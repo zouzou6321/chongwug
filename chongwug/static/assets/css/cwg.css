@@ -3828,6 +3828,16 @@ button.close {
   .col-md-offset-0_5 {
     margin-left: 4.16666667%; } }
 
+.col-md-1_5 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 10px;
+  padding-right: 10px; }
+  @media (min-width: 992px) {
+    .col-md-1_5 {
+      float: left;
+      width: 12.5%; } }
+
 @font-face {
   font-family: "iconfont";
   src: url('../fonts/iconfont.eot');
@@ -4441,6 +4451,21 @@ button.close {
     .buy-main .dog-desc h4 a {
       color: #333;
       font-weight: bold; }
+
+.pet-box {
+  border: 1px solid #ccc;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+  cursor: pointer; }
+  .pet-box.active {
+    border-color: #f01616; }
+  .pet-box .pet-name {
+    margin-bottom: 0;
+    padding-top: 6px;
+    text-align: center;
+    font-size: 12px; }
+  .pet-box .pet-img {
+    border: 1px solid #ccc; }
 
 .detail-main {
   padding: 20px 0 50px 0; }
