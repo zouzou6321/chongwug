@@ -144,8 +144,6 @@
                                     <th>颜色</th>
                                     <th>疫苗</th>
                                     <th>价格</th>
-{#                                    <th>出售情况</th>#}
-{#                                    <th>&nbsp;</th>#}
                                 </tr>
                             </thead>
                             <tbody>
@@ -168,8 +166,6 @@
                                         {% endif %}
                                     </td>
                                     <td>&yen; {{ pet.price }}</td>
-{#                                    <td>立即购买</td>#}
-{#                                    <td><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#js-order-modal" data-id="{{ pet.id }}">预约看狗</button></td>#}
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -353,37 +349,9 @@
         }
     });
 
-    //scroll fixed nav
-//        var $detailNav = $('.cwg-detail-nav');
-//        $(window).on('scroll', function(){
-//            var $this = $(this);
-//            if($this.scrollTop() - $detailNav.offset().top > 0){
-//                $detailNav.addClass('cwg-detail-nav-fixed');
-//            }else{
-//                $detailNav.removeClass('cwg-detail-nav-fixed');
-//            }
-//        });
-
     //order
     var $orderModal = $('#js-order-modal'),
         $infoModal = $('#cwg-info-modal');
-
-{#        $orderModal.find('.btn-primary').on('click', function(){#}
-{#            $.ajax({#}
-{#                url: '/buy/detail/attention/',#}
-{#                type: 'get',#}
-{#                data: {name: $('#name').val(), tel: $('#tel').val(), petid: $.args('petid')},#}
-{#                dataType: 'json',#}
-{#                success: function(data){#}
-{#                    if(data.status == 'success'){#}
-{#                        $orderModal.modal('hide');#}
-{#                        $infoModal.modal('show');#}
-{#                    }else{#}
-{#                        alert(data.message);#}
-{#                    }#}
-{#                }#}
-{#            });#}
-{#        });#}
 
     $('.js-btn-order').on('click', function(){
         $orderModal.data('id', $(this).data('id')).modal('show');
@@ -590,19 +558,6 @@
         $('#js-time-input').val(text);
         $timeBox.hide();
     });
-
-{#        $(document).on('click', function(e){#}
-{#            var $target = $(e.target);#}
-{##}
-{#            if(!$target.is($timeBox) && !$target.is($btnTime)){#}
-{#                $timeBox.hide();#}
-{#            }#}
-{##}
-{#            if(!$target.is($locationBox) && !$target.is($btnLocation)){#}
-{#                $locationBox.hide();#}
-{#            }#}
-{#        });#}
-
 
 }(jQuery));
 
