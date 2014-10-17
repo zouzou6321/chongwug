@@ -296,18 +296,13 @@
 {% include 'tpl/gui/order-modal.html' %}
 
 <script type="text/html" id="location-select-tpl">
-{% templatetag openvariable %}each list as items{% templatetag closevariable %}
 <dl class="clearfix">
-  {% templatetag openvariable %}if province{% templatetag closevariable %}
-  <dt>{% templatetag openvariable %}province.title{% templatetag closevariable %}</dt>
-  {% templatetag openvariable %}/if{% templatetag closevariable %}
   <dd>
-      {% templatetag openvariable %}each items as item{% templatetag closevariable %}
-      <a href="javascript:">{% templatetag openvariable %}item.name{% templatetag closevariable %}</a>
+      {% templatetag openvariable %}each locations as location{% templatetag closevariable %}
+      <a href="javascript:" data-id="{% templatetag openvariable %}location.id{% templatetag closevariable %}">{% templatetag openvariable %}location.name{% templatetag closevariable %}</a>
       {% templatetag openvariable %}/each{% templatetag closevariable %}
   </dd>
 </dl>
-{% templatetag openvariable %}/each{% templatetag closevariable %}
 </script>
 
 {% endblock %}
@@ -468,8 +463,9 @@
 var $locationBox = $('#js-location-box'),
     $province = $locationBox.find('#province'),
     $city = $locationBox.find('#city'),
-    $county = $locationBox.find('#county'),
+    $district = $locationBox.find('#district'),
     $street = $locationBox.find('#street'),
+    render = template('location-select-tpl'),
     param = {},
     location = [];
 
@@ -480,7 +476,7 @@ var $locationBox = $('#js-location-box'),
             dataType: 'json',
             success: function(data){
                 if(data.status == 0){
-                    $parent.html(data.html);
+                    $parent.html(render(data));
                     cb();
                 }else{
                     alert(data.message);
@@ -501,7 +497,7 @@ var $locationBox = $('#js-location-box'),
         delete param.city;
         delete param.country;
 
-        $county.html('');
+        $district.html('');
         $street.html('');
 
         renderData(param, $city, function(){
@@ -520,12 +516,12 @@ var $locationBox = $('#js-location-box'),
 
         $street.html('');
 
-        renderData(param, $county, function(){
-            $('#js-to-county').tab('show');
+        renderData(param, $district, function(){
+            $('#js-to-district').tab('show');
         });
     });
 
-    $county.on('click', 'a', function(){
+    $district.on('click', 'a', function(){
         var $this = $(this);
         $this.addClass('active').siblings().removeClass('active');
         location[2] = $this.text();
@@ -544,7 +540,7 @@ var $locationBox = $('#js-location-box'),
 
         var text = location.join('-');
         $('#js-location').text(text);
-        $('#js-location-input').val($.param(param));
+        $('#js-location-input').val(JSON.stringify(param));
         $locationBox.hide();
     });
 
