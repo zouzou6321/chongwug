@@ -7,12 +7,11 @@ from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from django.utils import simplejson
-from chongwug.config import __petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
+from chongwug.config import __addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re
 from chongwug.commom import __errorcode__
 from django.contrib.auth.models import User
-import traceback
+#import traceback
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
@@ -242,7 +241,7 @@ def buy_detail_adapter(re):
             max_price = othor_pets.order_by('price')[0].price
             recommendpets_img.append({'pet':recommendpet,'img':img,'min_price':min_price,'max_price':max_price})
             
-        return {'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
+        return {'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
         '''
     elif 'farmid' in re.GET:

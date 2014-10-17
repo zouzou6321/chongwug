@@ -26,6 +26,59 @@ __regular_expression_chinatelnum = r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})'
 __regular_expression_username = r'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
 __regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
 
+#预约时间信息
+
+#地址信息
+__addresses = [
+               {'range':'L-S','index':0,'provincelist':[
+                   {'province':u'四川','index':0,'citylist':[
+                        {'city':u'成都','index':0,'districtlist':[
+                            {'district':u'高新区','index':0,'streetlist':[
+                                {'street':u'天府一街','index':0},
+                                {'street':u'软件园','index':1},
+                                {'street':u'天河一路','index':2},
+                                {'street':u'世纪城'}
+                                ]
+                            },
+                            {'district':u'武侯区','index':1,'streetlist':[
+                                {'street':u'青羊宫','index':0}
+                                ]
+                            },
+                            {'district':u'金牛区','index':2,'streetlist':[
+                                {'street':u'金牛万达','index':0},
+                                {'street':u'荷花池','index':1},
+                                {'street':u'火车北站','index':2}
+                                ]
+                            },
+                            {'district':u'锦江区','index':3,'streetlist':[
+                                {'street':u'天府一街','index':0},
+                                {'street':u'软件园','index':1},
+                                {'street':u'天河一路','index':2},
+                                {'street':u'世纪城','index':3}
+                                ]
+                            },
+                            {'district':u'新堵区','index':4,'streetlist':[
+                                {'street':u'天府一街','index':0},
+                                {'street':u'软件园','index':1},
+                                {'street':u'天河一路','index':2},
+                                {'street':u'世纪城','index':3}
+                                ]
+                            },
+                            {'district':u'双流县','index':5,'streetlist':[
+                                {'street':u'天府一街','index':0},
+                                {'street':u'软件园','index':1},
+                                {'street':u'天河一路','index':2},
+                                {'street':u'世纪城','index':3}
+                                ]
+                            }
+                            ]
+                        }
+                        ]
+                   }
+                   ]
+                }
+            ]
+
 #系统错误码
 __errorcode = [
                [0,u'success',u'成功'],
