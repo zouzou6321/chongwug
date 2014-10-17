@@ -44,7 +44,7 @@ def buy_detail_view(request):
     
     if 'pets_imgs' in data:
         return render_to_response('tpl/buy_detail_ajax.html',data)
-    elif 'html' in data:
+    elif 'locations' in data:
         return HttpResponse(__errorcode__(0,data))
     else:
         return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))

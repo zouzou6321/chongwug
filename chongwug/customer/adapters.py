@@ -251,10 +251,10 @@ def buy_detail_adapter(re):
             addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
         if 'district' in re.GET:
             addresses = addresses['sublist'][string.atoi(re.REQUEST.get('district'))]
-        htmlstr = ''
+        arr = []
         for address in addresses['sublist']:
-            htmlstr += '<dl class="clearfix"><dd><a href="javascript:" data-id="%d">%s</a></dd></dl>' % (address['index'], address['name'])
-        return {'html':htmlstr}
+            arr.append({'id': address['index'], 'name': address['name']})
+        return {'locations': arr}
     else:
         return False
 
