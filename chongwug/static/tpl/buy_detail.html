@@ -380,6 +380,8 @@
             success: function(data){
                 if(data.status == 0){
                     $this.tab('show');
+                }else{
+                    alert(data.message);
                 }
             },
             complete: function(){
