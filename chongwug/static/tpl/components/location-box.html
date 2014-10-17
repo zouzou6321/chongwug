@@ -8,12 +8,16 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane active province-select" id="province">
+      	  {% for address in addresses %}
           <dl class="clearfix">
-              <dt>L-S</dt>
+              <dt data-id="{{ address.index }}">{{ address.range }}</dt>
               <dd>
-                  <a href="javascript:">四川</a>
+              	  {% for province in address.provincelist %}
+                  <a href="javascript:" data-id="{{ province.index }}">{{ province.province }}</a>
+                  {% endfor %}
               </dd>
           </dl>
+          {% endfor %}
       </div>
       <div class="tab-pane" id="city"></div>
       <div class="tab-pane" id="county"></div>
