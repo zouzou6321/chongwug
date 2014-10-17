@@ -13,39 +13,32 @@
         </colgroup>
         <thead>
             <tr>
-                <th>时间段</th>
-                <th>10-13 <br/> 今天</th>
-                <th>10-13 <br/> 今天</th>
-                <th>10-13 <br/> 今天</th>
-                <th>10-13 <br/> 今天</th>
-                <th>10-13 <br/> 今天</th>
-                <th>10-13 <br/> 今天</th>
-                <th>10-13 <br/> 今天</th>
-                <th>10-13 <br/> 今天</th>
+                <th>时间</th>
+                {% for appointday in appointdays %}
+                <th data-year="{{ appointday.year }}">{{ appointday.mouth }}-{{ appointday.day }} <br/> {{ appointday.week }}</th>
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th>9:00</th>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
+                <th>{{ appointtime.time1 }}</th>
+                {% for appointday in appointdays %}
+                {% if appointday.selectable.time1 %}
+                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}">可选</td>
+                {% else %}
+                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}">不可选</td>
+                {% endif %}
+                {% endfor %}
             </tr>
             <tr>
-                <th>9:00</th>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
-                <td data-date="10-13" data-day="今天">可选</td>
+                <th>{{ appointtime.time2 }}</th>
+                {% for appointday in appointdays %}
+                {% if appointday.selectable.time1 %}
+                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}">可选</td>
+                {% else %}
+                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}">不可选</td>
+                {% endif %}
+                {% endfor %}
             </tr>
         </tbody>
     </table>
