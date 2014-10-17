@@ -11,6 +11,7 @@ from chongwug.config import __appointtime,__appointdays,__addresses,__petpictype
 import datetime,string,re
 from chongwug.commom import __errorcode__
 from django.contrib.auth.models import User
+from django.contrib import auth
 #import traceback
 '''
 函数功能：首页数据适配器
@@ -279,6 +280,7 @@ def buy_attention_adapter(req):
         p = re.compile(__regular_expression_chinatelnum)
         if not p.match(tel):
             return __errorcode__(9)
+    attentions = nestofpet_attention.objects.filter(dele=False,nestofpet_id=cupet)
     try:
         appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
         auth_user = User.objects.create_user(username=tel,email='',password='')
@@ -286,6 +288,7 @@ def buy_attention_adapter(req):
         curuser.save()
         attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
         attention.save()
+        auth.login(req, user)
     except Exception, e:
         #print e
         #print traceback.format_exc()
@@ -294,9 +297,8 @@ def buy_attention_adapter(req):
         if user:
             user.delete()
         return __errorcode__(2)
-    nestofpet_attention.objects.filter(dele=False)
     sendTemplateSMS(tel,["chongwug","test1"])
-    return __errorcode__(0)
+    return __errorcode__(0,{'count':attentions.count(),'ordernum':'XL%d' % attentions.count()})
 
 from yuntongxun.CCPRestSDK import REST
 
