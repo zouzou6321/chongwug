@@ -4188,6 +4188,7 @@ button.close {
       text-align: center;
       font-weight: normal; }
     .select-box .table > tbody > tr > th {
+      vertical-align: middle;
       text-align: center;
       font-weight: normal; }
     .select-box .table td {

@@ -544,7 +544,7 @@ var $locationBox = $('#js-location-box'),
 
         var text = location.join('-');
         $('#js-location').text(text);
-        $('#js-location-input').val($.param(param));
+        $('#js-location-input').val(JSON.stringify(param));
         $locationBox.hide();
     });
 
