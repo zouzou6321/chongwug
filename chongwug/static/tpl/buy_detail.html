@@ -104,7 +104,7 @@
                     </div>
                     <div class="info-row clearfix">
                         <div class="info-td-right">
-                            <a href="" class="btn btn-primary btn-order" data-toggle="modal" data-target="#js-order-modal">预约看狗</a>
+                            <button class="btn btn-primary btn-order js-btn-order" data-id="" type="button">预约看狗</button>
                             <a href="" class="btn btn-info btn-consult">在线咨询</a>
                             <a href="" class="cwg-clause"><i class="glyphicon glyphicon-question-sign"></i>购犬须知</a>
                         </div>
@@ -233,7 +233,7 @@
                                             <p>价格：<span class="price price-light price-sm">{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元</span></span></p>
                                             <p>
                                                 <a class="btn btn-primary" href="/buy/detail/?petid={{ pet_img.pet.id }}">详细信息</a>
-                                                <button class="btn btn-primary btn-trans" data-id="{{ pet_img.pet.id }}" data-toggle="modal" data-target="#js-order-modal">预约看狗</button>
+                                                <button class="btn btn-primary btn-trans js-btn-order" data-id="{{ pet_img.pet.id }}" type="button">预约看狗</button>
                                             </p>
                                         </div>
                                     </div>
@@ -644,10 +644,16 @@
 {#            });#}
 {#        });#}
 
+    $('.js-btn-order').on('click', function(){
+        $orderModal.data('id', $(this).data('id')).modal('show');
+    });
+
     $('#js-order-info').on('click', '.next-step', function(){
         var $this = $(this),
             arr = $('#js-order-form').serializeArray(),
             data = {};
+
+        data.id = $orderModal.data('id');
 
         for(var i = 0, len = arr.length; i < len; i++){
             var curr = arr[i];
