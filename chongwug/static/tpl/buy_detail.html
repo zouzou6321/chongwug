@@ -463,7 +463,7 @@
 var $locationBox = $('#js-location-box'),
     $province = $locationBox.find('#province'),
     $city = $locationBox.find('#city'),
-    $county = $locationBox.find('#county'),
+    $district = $locationBox.find('#district'),
     $street = $locationBox.find('#street'),
     render = template('location-select-tpl'),
     param = {},
@@ -497,7 +497,7 @@ var $locationBox = $('#js-location-box'),
         delete param.city;
         delete param.country;
 
-        $county.html('');
+        $district.html('');
         $street.html('');
 
         renderData(param, $city, function(){
@@ -516,12 +516,12 @@ var $locationBox = $('#js-location-box'),
 
         $street.html('');
 
-        renderData(param, $county, function(){
-            $('#js-to-county').tab('show');
+        renderData(param, $district, function(){
+            $('#js-to-district').tab('show');
         });
     });
 
-    $county.on('click', 'a', function(){
+    $district.on('click', 'a', function(){
         var $this = $(this);
         $this.addClass('active').siblings().removeClass('active');
         location[2] = $this.text();
