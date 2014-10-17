@@ -462,9 +462,13 @@
 
 var $locationBox = $('#js-location-box'),
     $province = $locationBox.find('#province'),
+    $toProvince = $locationBox.find('#js-to-province'),
     $city = $locationBox.find('#city'),
+    $toCity = $locationBox.find('#js-to-city'),
     $district = $locationBox.find('#district'),
+    $toDistrict = $locationBox.find('#js-to-district'),
     $street = $locationBox.find('#street'),
+    $toStreet = $locationBox.find('#js-to-street'),
     render = template('location-select-tpl'),
     param = {},
     location = [];
@@ -485,10 +489,18 @@ var $locationBox = $('#js-location-box'),
         });
     }
 
+    function changeActive($parent, $this){
+        if(!$this.hasClass('active')){
+            var $active = $parent.find('.active');
+            $active.removeClass('active');
+            $this.addClass('active');
+        }
+    }
+
     $province.on('click', 'a', function(){
         var $this = $(this);
 
-        $this.addClass('active').siblings().removeClass('active');
+        changeActive($province, $this);
 
         location[0] = $this.text();
 
@@ -501,13 +513,14 @@ var $locationBox = $('#js-location-box'),
         $street.html('');
 
         renderData(param, $city, function(){
-            $('#js-to-city').tab('show');
+           $toCity.tab('show');
         });
     });
 
     $city.on('click', 'a', function(){
         var $this = $(this);
-        $this.addClass('active').siblings().removeClass('active');
+
+        changeActive($city, $this);
 
         location[1] = $this.text();
 
@@ -517,25 +530,29 @@ var $locationBox = $('#js-location-box'),
         $street.html('');
 
         renderData(param, $district, function(){
-            $('#js-to-district').tab('show');
+            $toDistrict.tab('show');
         });
     });
 
     $district.on('click', 'a', function(){
         var $this = $(this);
-        $this.addClass('active').siblings().removeClass('active');
+
+        changeActive($district, $this);
+
         location[2] = $this.text();
 
         param.district = $this.data('id');
 
         renderData(param, $street, function(){
-           $('#js-to-street').tab('show');
+           $toStreet.tab('show');
         });
     });
 
     $street.on('click', 'a', function(){
         var $this = $(this);
-        $this.addClass('active').siblings().removeClass('active');
+
+        changeActive($street, $this);
+
         location[3] = $this.text();
 
         var text = location.join('-');
