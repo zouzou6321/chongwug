@@ -56,4 +56,4 @@ def buy_attention_view(request):
     return HttpResponse(data)
 
 def knowledge_buy_view(request):
-    return render_to_response('tpl/knowledge_buy.html')
+    return render_to_response('tpl/knowledge_buy.html',{'page':'knowbuy'})
