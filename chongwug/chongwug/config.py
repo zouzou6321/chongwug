@@ -26,6 +26,10 @@ __regular_expression_chinatelnum = r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})'
 __regular_expression_username = u'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
 __regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
 
+#服务费与交通费
+__servpay = 15
+__transpay = 5
+
 #预约时间信息
 __appointtime = {'time1':'9:30','time2':'15:00'}
 __appointdays = [
@@ -43,38 +47,38 @@ __addresses = [
                {'name':'L-S','index':0,'sublist':[
                    {'name':u'四川','index':0,'sublist':[
                         {'name':u'成都','index':0,'sublist':[
-                            {'name':u'高新区','index':0,'sublist':[
+                            {'name':u'高新区','index':0,'waitpoint':'成都市世纪城地铁站C出口','sublist':[
                                 {'name':u'天府一街','index':0},
                                 {'name':u'软件园','index':1},
                                 {'name':u'天河一路','index':2},
                                 {'name':u'世纪城','index':3}
                                 ]
                             },
-                            {'name':u'武侯区','index':1,'sublist':[
+                            {'name':u'武侯区','index':1,'waitpoint':'四川大学望江小区西门','sublist':[
                                 {'name':u'青羊宫','index':0}
                                 ]
                             },
-                            {'name':u'金牛区','index':2,'sublist':[
+                            {'name':u'金牛区','index':2,'waitpoint':'成都市金牛万达广场','sublist':[
                                 {'name':u'金牛万达','index':0},
                                 {'name':u'荷花池','index':1},
                                 {'name':u'火车北站','index':2}
                                 ]
                             },
-                            {'name':u'锦江区','index':3,'sublist':[
+                            {'name':u'锦江区','index':3,'waitpoint':'成都市天府广场','sublist':[
                                 {'name':u'天府一街','index':0},
                                 {'name':u'软件园','index':1},
                                 {'name':u'天河一路','index':2},
                                 {'name':u'世纪城','index':3}
                                 ]
                             },
-                            {'name':u'新堵区','index':4,'sublist':[
+                            {'name':u'新堵区','index':4,'waitpoint':'不晓得哪个地名可以用','sublist':[
                                 {'name':u'天府一街','index':0},
                                 {'name':u'软件园','index':1},
                                 {'name':u'天河一路','index':2},
                                 {'name':u'世纪城','index':3}
                                 ]
                             },
-                            {'name':u'双流县','index':5,'sublist':[
+                            {'name':u'双流县','index':5,'waitpoint':'成都市双流县双流客运站入口处','sublist':[
                                 {'name':u'天府一街','index':0},
                                 {'name':u'软件园','index':1},
                                 {'name':u'天河一路','index':2},
