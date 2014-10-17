@@ -60,7 +60,6 @@ def manage_pet_farm_add(request):
         if not re.match(__regular_expression_email, request.POST['email']):
             return False
         auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
-        auth_user.save()
         new_user = user(nickname = request.POST['name'],
                         tel = request.POST['tel'],
                         email = request.POST['email'],

@@ -4,13 +4,15 @@
 '''
 from manager.models import ad
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
-from customer.models import attention_user,nestofpet_attention
+from customer.models import user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
 from chongwug.config import __petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re
 from chongwug.commom import __errorcode__
+from django.contrib.auth.models import User
+import traceback
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
@@ -266,11 +268,15 @@ def buy_detail_adapter(re):
         return False
 
 def buy_attention_adapter(req):
-    if 'petid' not in req.GET or 'name' not in req.GET or 'tel' not in req.GET:
+
+    if ('id' or 'name' or 'phone' or 'location' or 'time' or 'transportation') not in req.POST:
         return __errorcode__(7)
-    petid = string.atoi(req.REQUEST.get('petid'))
-    name = req.REQUEST.get('name')
-    tel = req.REQUEST.get('tel')
+    petid = string.atoi(req.POST['id'])
+    name = req.POST['name']
+    tel = req.POST['phone']
+    location = req.POST['location']
+    transport = req.POST['transportation']
+    appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
     try:
         nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
@@ -280,15 +286,19 @@ def buy_attention_adapter(req):
         p = re.compile(__regular_expression_chinatelnum)
         if not p.match(tel):
             return __errorcode__(8)
-    p = re.compile(__regular_expression_username)
-    if not p.match(name):
-        return __errorcode__(9)
     try:
-        user =  attention_user(name=name,tel=tel)
-        user.save()
-        attention = nestofpet_attention(nestofpet_id=get_object_or_404(nestofpet,pk=petid),user=user)
+        auth_user = User.objects.create_user(username=tel,email='',password='')
+        curuser =  user(nickname=name,tel=tel,location=location,auth_user=auth_user,type=0)
+        curuser.save()
+        attention = nestofpet_attention(nestofpet_id=get_object_or_404(nestofpet,pk=petid),user=curuser,appoint_time=appoint_time,trans=transport)
         attention.save()
-    except:
+    except Exception, e:
+        #print e
+        #print traceback.format_exc()
+        if auth_user:
+            auth_user.delete()
+        if user:
+            user.delete()
         return __errorcode__(10)
     sendTemplateSMS(tel,["chongwug","test1"])
     return __errorcode__(0)

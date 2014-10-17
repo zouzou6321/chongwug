@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 import adapters
 from chongwug.commom import __errorcode__
+from django.template import RequestContext
 #auth:huhuaiyong
 #date:2014/8/16
 #discription:导航页面展示
@@ -42,7 +43,7 @@ def buy_detail_view(request):
         return HttpResponse(__errorcode__(2))
     
     if 'pets_imgs' not in data:
-        return render_to_response('tpl/buy_detail.html',data)
+        return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
     else:
         return render_to_response('tpl/buy_detail_ajax.html',data)
 
