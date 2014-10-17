@@ -7,12 +7,12 @@ from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from chongwug.config import __appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
-import datetime,string,re
+from chongwug.config import __transpay,__servpay,__appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
+import datetime,string,re,json
 from chongwug.commom import __errorcode__
 from django.contrib.auth.models import User
 from django.contrib import auth
-#import traceback
+import traceback
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
@@ -259,15 +259,14 @@ def buy_detail_adapter(re):
         return False
 
 def buy_attention_adapter(req):
-
     if ('id' or 'name' or 'phone' or 'location' or 'time' or 'transportation') not in req.POST:
         return __errorcode__(7)
     petid = string.atoi(req.POST['id'])
     name = req.POST['name']
     tel = req.POST['phone']
-    location = req.POST['location']
+    location = json.dumps(req.POST['location'])
     transport = req.POST['transportation']
-
+    
     try:
         cupet = nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
@@ -280,25 +279,34 @@ def buy_attention_adapter(req):
         p = re.compile(__regular_expression_chinatelnum)
         if not p.match(tel):
             return __errorcode__(9)
+    province = __addresses[location['range']]['sublist'][location['province']]
+    city = province['sublist'][location['city']]
+    district = city['sublist'][location['district']]
+    street = district['sublist'][location['street']]
+    waitpoint = district['waitpoint']
+    if transport == 'lift':
+        totalpay = __transpay + __servpay
+    else:
+        totalpay = __transpay
     attentions = nestofpet_attention.objects.filter(dele=False,nestofpet_id=cupet)
     try:
         appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
         auth_user = User.objects.create_user(username=tel,email='',password='')
-        curuser =  user(nickname=name,tel=tel,location=location,auth_user=auth_user,type=0)
+        curuser =  user(nickname=name,tel=tel,location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
         curuser.save()
         attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
         attention.save()
-        auth.login(req, user)
+        authuser = auth.authenticate(username=tel, password='')
+        if authuser is not None and authuser.is_active:
+            # Correct password, and the user is marked "active"
+            auth.login(req, authuser)
     except Exception, e:
-        #print e
-        #print traceback.format_exc()
         if auth_user:
             auth_user.delete()
-        if user:
-            user.delete()
         return __errorcode__(2)
     sendTemplateSMS(tel,["chongwug","test1"])
-    return __errorcode__(0,{'count':attentions.count(),'ordernum':'XL%d' % attentions.count()})
+    return __errorcode__(0,{'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
+                            'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
 
 from yuntongxun.CCPRestSDK import REST
 
