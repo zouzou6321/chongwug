@@ -30,45 +30,45 @@ __regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[
 
 #地址信息
 __addresses = [
-               {'range':'L-S','index':0,'provincelist':[
-                   {'province':u'四川','index':0,'citylist':[
-                        {'city':u'成都','index':0,'districtlist':[
-                            {'district':u'高新区','index':0,'streetlist':[
-                                {'street':u'天府一街','index':0},
-                                {'street':u'软件园','index':1},
-                                {'street':u'天河一路','index':2},
-                                {'street':u'世纪城'}
+               {'name':'L-S','index':0,'sublist':[
+                   {'name':u'四川','index':0,'sublist':[
+                        {'name':u'成都','index':0,'sublist':[
+                            {'name':u'高新区','index':0,'sublist':[
+                                {'name':u'天府一街','index':0},
+                                {'name':u'软件园','index':1},
+                                {'name':u'天河一路','index':2},
+                                {'name':u'世纪城','index':3}
                                 ]
                             },
-                            {'district':u'武侯区','index':1,'streetlist':[
-                                {'street':u'青羊宫','index':0}
+                            {'name':u'武侯区','index':1,'sublist':[
+                                {'name':u'青羊宫','index':0}
                                 ]
                             },
-                            {'district':u'金牛区','index':2,'streetlist':[
-                                {'street':u'金牛万达','index':0},
-                                {'street':u'荷花池','index':1},
-                                {'street':u'火车北站','index':2}
+                            {'name':u'金牛区','index':2,'sublist':[
+                                {'name':u'金牛万达','index':0},
+                                {'name':u'荷花池','index':1},
+                                {'name':u'火车北站','index':2}
                                 ]
                             },
-                            {'district':u'锦江区','index':3,'streetlist':[
-                                {'street':u'天府一街','index':0},
-                                {'street':u'软件园','index':1},
-                                {'street':u'天河一路','index':2},
-                                {'street':u'世纪城','index':3}
+                            {'name':u'锦江区','index':3,'sublist':[
+                                {'name':u'天府一街','index':0},
+                                {'name':u'软件园','index':1},
+                                {'name':u'天河一路','index':2},
+                                {'name':u'世纪城','index':3}
                                 ]
                             },
-                            {'district':u'新堵区','index':4,'streetlist':[
-                                {'street':u'天府一街','index':0},
-                                {'street':u'软件园','index':1},
-                                {'street':u'天河一路','index':2},
-                                {'street':u'世纪城','index':3}
+                            {'name':u'新堵区','index':4,'sublist':[
+                                {'name':u'天府一街','index':0},
+                                {'name':u'软件园','index':1},
+                                {'name':u'天河一路','index':2},
+                                {'name':u'世纪城','index':3}
                                 ]
                             },
-                            {'district':u'双流县','index':5,'streetlist':[
-                                {'street':u'天府一街','index':0},
-                                {'street':u'软件园','index':1},
-                                {'street':u'天河一路','index':2},
-                                {'street':u'世纪城','index':3}
+                            {'name':u'双流县','index':5,'sublist':[
+                                {'name':u'天府一街','index':0},
+                                {'name':u'软件园','index':1},
+                                {'name':u'天河一路','index':2},
+                                {'name':u'世纪城','index':3}
                                 ]
                             }
                             ]

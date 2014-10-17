@@ -243,26 +243,21 @@ def buy_detail_adapter(re):
             
         return {'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
-        '''
-    elif 'farmid' in re.GET:
-        farmid = string.atoi(re.REQUEST.get('farmid'))
-        try:
-            if 'type' in re.GET:
-                curtype = re.REQUEST.get('type')
-                nestpets = nestofpet.objects.filter(farm=get_object_or_404(pet_farm,pk=farmid),type=curtype,dele=False,sale_out=False)
-            else:
-                nestpets = nestofpet.objects.filter(farm=get_object_or_404(pet_farm,pk=farmid),dele=False,sale_out=False)
-            pets_imgs = []
-            for nestpet in nestpets:
-                try:
-                    img = nestofpet_img.objects.filter(nestofpet_id=nestpet,dele=False)[0]
-                    pets_imgs.append({'pet':nestpet,'img':img})
-                except:
-                    None
-            return {'pets_imgs':pets_imgs}
-        except:
-            return False
-        '''
+
+    elif 'range' in re.GET:
+        addresses = __addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
+        if 'city' in re.GET:
+            addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
+        if 'district' in re.GET:
+            addresses = addresses['sublist'][string.atoi(re.REQUEST.get('district'))]
+        htmlstr = ''
+        for address in addresses['sublist']:
+            htmlstr += '''<dl class="clearfix">
+                              <dd>
+                                  <a href="javascript:" data-id="%d">%s</a>
+                              </dd>
+                          </dl>''' % (address['index'], address['name'])
+        return {'html':htmlstr}
     else:
         return False
 
