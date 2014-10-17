@@ -4196,6 +4196,10 @@ button.close {
       .select-box .table td:hover, .select-box .table td.active {
         background: #7abd54;
         color: #fff; }
+    .select-box .table .disabled {
+      cursor: default; }
+      .select-box .table .disabled:hover {
+        background: none; }
 
 /**
  * gui

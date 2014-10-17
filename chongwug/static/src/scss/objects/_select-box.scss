@@ -130,5 +130,13 @@
         color: #fff;
       }
     }
+
+    .disabled{
+      cursor: default;
+
+      &:hover{
+        background: none;
+      }
+    }
   }
 }

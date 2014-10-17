@@ -29,14 +29,14 @@ __regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[
 #预约时间信息
 __appointtime = {'time1':'9:30','time2':'15:00'}
 __appointdays = [
-                    {'day':20,'year':2014,'mouth':10,'week':'星期一','selectable':{'time1':True,'time2':True}},
-                    {'day':23,'year':2014,'mouth':10,'week':'星期四','selectable':{'time1':True,'time2':True}},
-                    {'day':26,'year':2014,'mouth':10,'week':'星期日','selectable':{'time1':False,'time2':True}},
-                    {'day':29,'year':2014,'mouth':10,'week':'星期三','selectable':{'time1':True,'time2':True}},
-                    {'day':1,'year':2014,'mouth':11,'week':'星期六','selectable':{'time1':False,'time2':True}},
-                    {'day':4,'year':2014,'mouth':11,'week':'星期二','selectable':{'time1':True,'time2':True}},
-                    {'day':7,'year':2014,'mouth':11,'week':'星期五','selectable':{'time1':True,'time2':True}},
-                    {'day':10,'year':2014,'mouth':11,'week':'星期一','selectable':{'time1':True,'time2':True}}
+                    {'day':20,'year':2014,'mouth':10,'week':'周一','selectable':{'time1':True,'time2':True}},
+                    {'day':23,'year':2014,'mouth':10,'week':'周四','selectable':{'time1':True,'time2':True}},
+                    {'day':26,'year':2014,'mouth':10,'week':'周日','selectable':{'time1':False,'time2':True}},
+                    {'day':29,'year':2014,'mouth':10,'week':'周三','selectable':{'time1':True,'time2':True}},
+                    {'day':1,'year':2014,'mouth':11,'week':'周六','selectable':{'time1':False,'time2':True}},
+                    {'day':4,'year':2014,'mouth':11,'week':'周二','selectable':{'time1':True,'time2':True}},
+                    {'day':7,'year':2014,'mouth':11,'week':'周五','selectable':{'time1':True,'time2':True}},
+                    {'day':10,'year':2014,'mouth':11,'week':'周一','selectable':{'time1':True,'time2':True}}
                 ]
 #地址信息
 __addresses = [
