@@ -10,10 +10,10 @@
       <div class="tab-pane active province-select" id="province">
       	  {% for address in addresses %}
           <dl class="clearfix">
-              <dt data-id="{{ address.index }}">{{ address.range }}</dt>
+              <dt data-id="{{ address.index }}">{{ address.name }}</dt>
               <dd>
-              	  {% for province in address.provincelist %}
-                  <a href="javascript:" data-id="{{ province.index }}">{{ province.province }}</a>
+              	  {% for province in address.sublist %}
+                  <a href="javascript:" data-id="{{ province.index }}">{{ province.name }}</a>
                   {% endfor %}
               </dd>
           </dl>

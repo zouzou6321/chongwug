@@ -42,10 +42,12 @@ def buy_detail_view(request):
     if data == False:
         return HttpResponse(__errorcode__(2))
     
-    if 'pets_imgs' not in data:
-        return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
-    else:
+    if 'pets_imgs' in data:
         return render_to_response('tpl/buy_detail_ajax.html',data)
+    elif 'html' in data:
+        return HttpResponse(__errorcode__(1))
+    else:
+        return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
 
 def buy_attention_view(request):
     if 'visitor' not in request.session:
