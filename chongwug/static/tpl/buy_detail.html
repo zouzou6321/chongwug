@@ -431,112 +431,7 @@
         $locationBox.is(':visible') ? $locationBox.hide() : $locationBox.show();
     });
 
-    var province = {
-       list: [[{
-           name: '四川'
-       }]],
-       province: {
-           title: 'L-S'
-       }
-    };
 
-    var city = {
-        list: [[{
-            name: '成都'
-        }]]
-    };
-
-    var county = {
-        list: [[{
-            name: '高新区'
-        },{
-            name: '武侯区'
-        },{
-            name: '金牛区'
-        },{
-            name: '锦江区'
-        },{
-            name: '新都区'
-        },{
-            name: '双流县'
-        }]]
-    };
-
-    var street = {
-        list: [[{
-            name: '天府一街'
-        },{
-            name: '软件园D区'
-        },{
-            name: '天河一路'
-        },{
-            name: '世纪城'
-        }]]
-    };
-
-    var $province = $('#province'),
-        $city = $('#city'),
-        $county = $('#county'),
-        $street = $('#street'),
-        location = {};
-
-    var render = template('location-select-tpl');
-
-    //$province.html(render(province));
-
-    $province.on('click', 'a', function(){
-        var $this = $(this);
-
-        $this.addClass('active').siblings().removeClass('active');
-
-        location[0] = $this.text();
-
-        $city.html(render(city));
-        $county.html('');
-        $street.html('');
-        $('#js-to-city').tab('show');
-    });
-
-    $city.on('click', 'a', function(){
-        var $this = $(this);
-        $this.addClass('active').siblings().removeClass('active');
-
-        location[1] = $this.text();
-
-        $county.html(render(county));
-        $street.html('');
-        $('#js-to-county').tab('show');
-    });
-
-    $county.on('click', 'a', function(){
-        var $this = $(this);
-        $this.addClass('active').siblings().removeClass('active');
-        location[2] = $this.text();
-
-        $street.html(render(street));
-        $('#js-to-street').tab('show');
-    });
-
-    $street.on('click', 'a', function(){
-        var $this = $(this);
-        $this.addClass('active').siblings().removeClass('active');
-        location[3] = $this.text();
-
-        var text = convertToArray(location).join('-');
-        $('#js-location').text(text);
-        $('#js-location-input').val(text);
-        $locationBox.hide();
-    });
-
-    function convertToArray(o){
-        var arr = [];
-
-        for(var i in o){
-            arr[i] = o[i];
-        }
-
-        return arr;
-    }
 
     //time select
     var $btnTime = $('#js-btn-time'),
@@ -559,6 +454,94 @@
         $time.text(text);
         $('#js-time-input').val('2014-' + data.date + ' ' + time);
         $timeBox.hide();
+    });
+
+}(jQuery));
+
+//地址选择
+(function($){
+
+var $locationBox = $('#js-location-box'),
+    $province = $locationBox.find('#province'),
+    $city = $locationBox.find('#city'),
+    $county = $locationBox.find('#county'),
+    $street = $locationBox.find('#street'),
+    param = {},
+    location = [];
+
+    function renderData(param, $parent, cb){
+        $.ajax({
+            url: './',
+            data: param,
+            dataType: 'json',
+            success: function(data){
+                if(data.status == 0){
+                    $parent.html(data.html);
+                    cb();
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+    }
+
+    $province.on('click', 'a', function(){
+        var $this = $(this);
+
+        $this.addClass('active').siblings().removeClass('active');
+
+        location[0] = $this.text();
+
+        param.province = $this.data('id');
+        param.range = $this.closest('dl').find('dt').data('id');
+        delete param.city;
+        delete param.country;
+
+        $county.html('');
+        $street.html('');
+
+        renderData(param, $city, function(){
+            $('#js-to-city').tab('show');
+        });
+    });
+
+    $city.on('click', 'a', function(){
+        var $this = $(this);
+        $this.addClass('active').siblings().removeClass('active');
+
+        location[1] = $this.text();
+
+        param.city = $this.data('id');
+        delete param.country;
+
+        $street.html('');
+
+        renderData(param, $county, function(){
+            $('#js-to-county').tab('show');
+        });
+    });
+
+    $county.on('click', 'a', function(){
+        var $this = $(this);
+        $this.addClass('active').siblings().removeClass('active');
+        location[2] = $this.text();
+
+        param.country = $this.data('id');
+
+        renderData(param, function(){
+           $('#js-to-street').tab('show');
+        });
+    });
+
+    $street.on('click', 'a', function(){
+        var $this = $(this);
+        $this.addClass('active').siblings().removeClass('active');
+        location[3] = $this.text();
+
+        var text = location.join('-');
+        $('#js-location').text(text);
+        $('#js-location-input').val($.param(param));
+        $locationBox.hide();
     });
 
 }(jQuery));
