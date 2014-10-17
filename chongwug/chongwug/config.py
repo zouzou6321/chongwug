@@ -23,7 +23,7 @@ __upyun_pwd = 'weet6321'
 #系统使用的正则表达式
 __regular_expression_telnum = r'1\d{10}'
 __regular_expression_chinatelnum = r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})'
-__regular_expression_username = r'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
+__regular_expression_username = u'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
 __regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
 
 #预约时间信息

@@ -266,21 +266,25 @@ def buy_attention_adapter(req):
     tel = req.POST['phone']
     location = req.POST['location']
     transport = req.POST['transportation']
-    appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
+
     try:
-        nestofpet.objects.get(id=petid,dele=False,sale_out=False)
+        cupet = nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
-        return __errorcode__(2)
+        return __errorcode__(8)
+    p = re.compile(__regular_expression_username)
+    if not p.match(name):
+        return __errorcode__(10)
     p = re.compile(__regular_expression_telnum)
     if not p.match(tel):
         p = re.compile(__regular_expression_chinatelnum)
         if not p.match(tel):
-            return __errorcode__(8)
+            return __errorcode__(9)
     try:
+        appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
         auth_user = User.objects.create_user(username=tel,email='',password='')
         curuser =  user(nickname=name,tel=tel,location=location,auth_user=auth_user,type=0)
         curuser.save()
-        attention = nestofpet_attention(nestofpet_id=get_object_or_404(nestofpet,pk=petid),user=curuser,appoint_time=appoint_time,trans=transport)
+        attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
         attention.save()
     except Exception, e:
         #print e
@@ -289,7 +293,8 @@ def buy_attention_adapter(req):
             auth_user.delete()
         if user:
             user.delete()
-        return __errorcode__(10)
+        return __errorcode__(2)
+    nestofpet_attention.objects.filter(dele=False)
     sendTemplateSMS(tel,["chongwug","test1"])
     return __errorcode__(0)
 
