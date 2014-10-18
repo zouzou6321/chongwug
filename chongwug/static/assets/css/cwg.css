@@ -4202,6 +4202,19 @@ button.close {
       .select-box .table .disabled:hover {
         background: none; }
 
+.rate {
+  display: inline-block; }
+  .rate .rate-content {
+    display: block; }
+
+.rate-dog {
+  width: 80px;
+  height: 18px;
+  background: url(../imgs/rate-dog-bg.gif); }
+  .rate-dog .rate-content {
+    height: 18px;
+    background: url(../imgs/rate-dog.gif); }
+
 /**
  * gui
 */
@@ -4390,7 +4403,7 @@ button.close {
   left: 20px; }
 
 .cwg-container {
-  background-color: #e5e5e5;
+  background-color: #ffd401;
   padding-top: 1px; }
   @media (min-width: 768px) {
     .cwg-container {
@@ -4457,20 +4470,64 @@ button.close {
       color: #333;
       font-weight: bold; }
 
-.pet-box {
+.knowledge-buy .pet-box {
   border: 1px solid #ccc;
   padding: 7px 10px;
   margin-bottom: 10px;
   cursor: pointer; }
-  .pet-box.active {
+  .knowledge-buy .pet-box.active {
     border-color: #f01616; }
-  .pet-box .pet-name {
+  .knowledge-buy .pet-box .pet-name {
     margin-bottom: 0;
     padding-top: 6px;
     text-align: center;
     font-size: 12px; }
-  .pet-box .pet-img {
+  .knowledge-buy .pet-box .pet-img {
     border: 1px solid #ccc; }
+.knowledge-buy .nav-pills a {
+  width: 55px;
+  display: inline-block;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0; }
+.knowledge-buy .table-pet-rate > tbody > tr > td {
+  border-top: 0;
+  border-bottom: 1px dashed #ddd;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  vertical-align: middle; }
+.knowledge-buy .table-pet-rate label {
+  display: inline-block;
+  width: 75px;
+  height: 18px;
+  margin-bottom: 0; }
+.knowledge-buy .table-pet-detail > tbody > tr > td {
+  border-top: 0;
+  height: 50px;
+  padding-top: 0; }
+@media (min-width: 768px) {
+  .knowledge-buy .modal-dialog {
+    width: 690px; } }
+.knowledge-buy .modal-dialog .media img {
+  height: 120px; }
+.knowledge-buy .modal-dialog .media .pull-left {
+  margin-right: 20px; }
+.knowledge-buy .pet-rate-wrap {
+  margin-top: -35px; }
+.knowledge-buy .desc-main {
+  padding-bottom: 1px; }
+  .knowledge-buy .desc-main ol {
+    margin-left: -20px; }
+  .knowledge-buy .desc-main li {
+    line-height: 24px;
+    margin-bottom: 20px; }
+    .knowledge-buy .desc-main li p {
+      margin-bottom: 0; }
+  .knowledge-buy .desc-main strong {
+    font-size: 15px; }
+.knowledge-buy .knowledge-content {
+  padding-bottom: 60px;
+  padding-right: 40px; }
 
 .detail-main {
   padding: 20px 0 50px 0; }

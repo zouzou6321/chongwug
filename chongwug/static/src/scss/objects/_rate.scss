@@ -1,0 +1,18 @@
+.rate{
+  display: inline-block;
+
+  .rate-content{
+    display: block;
+  }
+}
+
+.rate-dog{
+  width: 80px;
+  height: 18px;
+  background: url(../imgs/rate-dog-bg.gif);
+
+  .rate-content{
+    height: 18px;
+    background: url(../imgs/rate-dog.gif);
+  }
+}
