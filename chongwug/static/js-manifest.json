@@ -1,7 +1,8 @@
 {
   "lib/jquery.fullPage.js": "lib/jquery.fullPage-c1c2c26c.js",
   "lib/jquery.js": "lib/jquery-6f82f722.js",
+  "lib/require.js": "lib/require-2a098160.js",
   "lib/respond.js": "lib/respond-7107f531.js",
   "lib/sea.js": "lib/sea-af7124ab.js",
-  "lib/plugins.js": "lib/plugins-15adc9eb.js"
+  "lib/plugins.js": "lib/plugins-582e55f0.js"
 }
