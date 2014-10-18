@@ -104,7 +104,7 @@
         	{% for knowledge in knowledges %}
             <div class="col-md-1_5">
                 <div class="pet-box" data-id="{{ knowledge.id }}">
-                    <img src="{{ knowledge.imgurl }}" class="img-full pet-img"/>
+                    <img data-original="{{ knowledge.imgurl }}" class="img-full pet-img js-lazy" src="{{'imgs/loading.gif'|assets}}"/>
                     <p class="pet-name">{{ knowledge.name }}</p>
                 </div>
             </div>
