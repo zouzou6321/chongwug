@@ -346,11 +346,21 @@
 
     //order
     var $orderModal = $('#js-order-modal'),
-        $infoModal = $('#cwg-info-modal');
+        $orderForm = $orderModal.find('#js-order-form'),
+        $needReset = $orderModal.find('#js-need-reset');
 
+    //pass the pet id
     $('.js-btn-order').on('click', function(){
         $orderModal.data('id', $(this).data('id')).modal('show');
     });
+
+    function resetOrderInfo($needReset, $form){
+        $form[0].reset();
+
+        $needReset.text(function(){
+            return $(this).data('text');
+        });
+    }
 
     $('#js-order-info').on('click', '.next-step', function(){
         var $this = $(this),
@@ -387,23 +397,7 @@
 
     //order steps
     $orderModal.on('show.bs.modal', function(){
-        $('#js-order-form')[0].reset();
-        $('#js-location').text('选择城市');
-        $('#js-time').text('选择时间');
-
-        $orderModal.data('step', 1);
-    });
-
-    $orderModal.on('click', '.prev-step', function(e){
-        e.preventDefault();
-        var $this = $(this);
-
-    });
-
-    $orderModal.on('click', '.next-step', function(e){
-        e.preventDefault();
-        var $this = $(this);
-
+        resetOrderInfo($needReset, $orderForm);
     });
 
     //detail nav affix
@@ -462,7 +456,6 @@
 
 var $locationBox = $('#js-location-box'),
     $province = $locationBox.find('#province'),
-    $toProvince = $locationBox.find('#js-to-province'),
     $city = $locationBox.find('#city'),
     $toCity = $locationBox.find('#js-to-city'),
     $district = $locationBox.find('#district'),
