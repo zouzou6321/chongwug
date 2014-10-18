@@ -329,7 +329,19 @@ def buy_attention_adapter(req):
         #traceback.print_exc()
 
 def get_knowledge_buy(request):
-    return dog123.objects.all()
+    if 'id' in request.GET:
+        try:
+            knowledge = dog123.objects.get(id=string.atoi(request.REQUEST.get('id')))
+            return {'name':knowledge.name,'ename':knowledge.name,'where':knowledge.where,'age': knowledge.age,'nickname':knowledge.nickname,
+                    'maleheight':knowledge.maleheight,'fmaleheight':knowledge.fmaleheight,'score':knowledge.score,'nianren':knowledge.nianren,
+                    'xijiao':knowledge.xijiao,'diaomao':knowledge.diaomao,'tiwei':knowledge.tiwei,'meirong_hz':knowledge.meirong_hz,
+                    'kidfred':knowledge.kidfred,'otherfred':knowledge.otherfred,'animfred':knowledge.animfred,'yundong':knowledge.yundong,
+                    'xulian':knowledge.xulian,'koushui':knowledge.xulian,'naihan':knowledge.naihan,'naire':knowledge.naire,
+                    'cityfred':knowledge.cityfred,'imgurl':knowledge.imgurl}
+        except:
+            traceback.print_exc()
+    else:
+        return dog123.objects.all()
 
 from yuntongxun.CCPRestSDK import REST
 

@@ -2,7 +2,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
-import adapters
+import adapters,traceback
 from chongwug.commom import __errorcode__
 from django.template import RequestContext
 #auth:huhuaiyong
@@ -56,7 +56,13 @@ def buy_attention_view(request):
     return HttpResponse(data)
 
 def knowledge_buy_view(request):
-    return render_to_response('tpl/knowledge_buy.html',{'page':'knowbuy','knowledges':adapters.get_knowledge_buy(request)})
+    try:
+        data = adapters.get_knowledge_buy(request)
+        if 'name' in data:
+            return HttpResponse(__errorcode__(0,data))
+        return render_to_response('tpl/knowledge_buy.html',{'page':'knowbuy','knowledges':adapters.get_knowledge_buy(request)})
+    except:
+        traceback.print_exc()
 
 def contactus_view(request):
     return render_to_response('tpl/contactus.html')
