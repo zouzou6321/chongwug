@@ -555,6 +555,8 @@ var $locationBox = $('#js-location-box'),
 
         location[3] = $this.text();
 
+        param.street = $this.data('id');
+
         var text = location.join('-');
         $('#js-location').text(text);
         $('#js-location-input').val(JSON.stringify(param));
