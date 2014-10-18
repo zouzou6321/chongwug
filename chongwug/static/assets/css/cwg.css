@@ -4481,7 +4481,9 @@ button.close {
     margin-bottom: 0;
     padding-top: 6px;
     text-align: center;
-    font-size: 12px; }
+    font-size: 12px;
+    height: 23px;
+    overflow: hidden; }
   .knowledge-buy .pet-box .pet-img {
     border: 1px solid #ccc; }
 .knowledge-buy .nav-pills a {

@@ -430,6 +430,12 @@
 
         $petBox.not($this.addClass('active')).removeClass('active');
 
+        $.ajax('./', {
+            data: {id: $this.data('id')},
+            dataType: 'json'
+        }).done(function(data){
+            console.log(data)
+        });
 
         $modal.modal('show');
 
