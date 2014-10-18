@@ -347,7 +347,16 @@
     //order
     var $orderModal = $('#js-order-modal'),
         $orderForm = $orderModal.find('#js-order-form'),
-        $needReset = $orderModal.find('#js-need-reset');
+        $needReset = $orderModal.find('.js-need-reset'),
+        $otherOrder = $orderModal.find('#js-other-order'),
+        $queueNum = $orderModal.find('#js-queue-num'),
+        $kennelLocation = $orderModal.find('#js-kennel-location'),
+        $waitLocation = $orderModal.find('#js-wait-location'),
+        $waitTime = $orderModal.find('#js-wait-time'),
+        $serviceCharge = $orderModal.find('#js-service-charge'),
+        $chargeType = $orderModal.find('#js-charge-type'),
+        $toFirst = $orderModal.find('#js-to-first'),
+        $liftInput = $orderModal.find('#js-lift-btn');
 
     //pass the pet id
     $('.js-btn-order').on('click', function(){
@@ -356,10 +365,26 @@
 
     function resetOrderInfo($needReset, $form){
         $form[0].reset();
+        $liftInput.trigger('click');
 
         $needReset.text(function(){
             return $(this).data('text');
         });
+
+        $toFirst.tab('show');
+    }
+
+    function fillOrderInfo(data){
+        $otherOrder.text(data.count);
+        $queueNum.text(data.ordernum);
+        $kennelLocation.text(data.farm);
+        $waitLocation.text(data.waitpoint);
+        $waitTime.text(data.waittime);
+        $serviceCharge.text(data.pay);
+
+        if($orderModal.data('transportation') != 'lift'){
+            $chargeType.text('服务费');
+        }
     }
 
     $('#js-order-info').on('click', '.next-step', function(){
@@ -374,16 +399,19 @@
             data[curr.name] = curr.value;
         }
 
+        $orderModal.data('transportation', data.transportation);
+
         $.ajax({
             url: '/buy/detail/attention/',
             type: 'post',
             data: data,
             dataType: 'json',
-            ajaxStart: function(){
+            beforeSend: function(){
                 $this.button('loading');
             },
             success: function(data){
                 if(data.status == 0){
+                    fillOrderInfo(data);
                     $this.tab('show');
                 }else{
                     alert(data.message);
