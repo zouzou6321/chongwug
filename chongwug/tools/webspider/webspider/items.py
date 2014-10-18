@@ -32,3 +32,5 @@ class WebspiderItem(Item):
     naihan = Field()
     naire = Field()
     cityfred = Field()
+    image_urls = Field()
+    image_paths = Field()

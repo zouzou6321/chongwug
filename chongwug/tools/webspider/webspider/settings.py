@@ -12,9 +12,10 @@ BOT_NAME = 'webspider'
 
 SPIDER_MODULES = ['webspider.spiders']
 NEWSPIDER_MODULE = 'webspider.spiders'
-
-ITEM_PIPELINES = {  
-    'webspider.pipelines.WebspiderPipeline':300  
+IMAGES_STORE = 'D:\\petimg'
+ITEM_PIPELINES = {
+    'webspider.pipelines.MyImagesPipeline': 1,
+    'webspider.pipelines.WebspiderPipeline':30
 }
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'webspider (+http://www.yourdomain.com)'

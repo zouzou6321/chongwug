@@ -49,3 +49,4 @@ class dog123(models.Model):
     naihan = models.TextField()
     naire = models.TextField()
     cityfred = models.TextField()
+    imgurl = models.TextField()

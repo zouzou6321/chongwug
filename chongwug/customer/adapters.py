@@ -2,7 +2,7 @@
 '''
 文件功能：针对购宠用户涉及的页面，根据展示的数据需要，整理出格式化的数据返回
 '''
-from manager.models import ad
+from manager.models import ad,dog123
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention
 from django.db.models import Q
@@ -327,6 +327,9 @@ def buy_attention_adapter(req):
                             'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
     #except Exception, e:
         #traceback.print_exc()
+
+def get_knowledge_buy(request):
+    return dog123.objects.all()
 
 from yuntongxun.CCPRestSDK import REST
 

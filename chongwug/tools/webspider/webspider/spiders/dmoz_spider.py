@@ -86,17 +86,20 @@ class webspiderSpider(Spider):
             item['naire'] = tmp[0].encode('utf8').split(':')[1].split('%')[0]
             tmp = sel.xpath('//div[@class="pet-feature-dea"]/li[14]/span[2]/em/@style').extract()
             item['cityfred'] = tmp[0].encode('utf8').split(':')[1].split('%')[0]
+            tmp = sel.xpath('//div[@class="Details_img"]/img/@src').extract()
+            item['image_urls'] = sel.xpath('//div[@class="Details_img"]/img/@src').extract()
+            imgpath = u'http://chongwug-pic.b0.upaiyun.com/pettypepic/%s' % (item['image_urls'][0].split('/')[-1]).decode('utf8')
             cur = conn.cursor()
             sql = u"INSERT INTO `manager_dog123`(`url`, `name`, `ename`, `where`, `age`, `nickname`, `maleheight`, `fmaleheight`, `score`,\
             `nianren`, `xijiao`, `diaomao`, `tiwei`, `meirong_hz`, `kidfred`, `otherfred`, `animfred`, `yundong`,`xulian`, `koushui`,\
-            `naihan`, `naire`, `cityfred`) VALUES ('" + item['url'].decode('utf8') + u"','" + item['name'].decode('utf8') + u"','" + \
+            `naihan`, `naire`, `cityfred`, `imgurl`) VALUES ('" + item['url'].decode('utf8') + u"','" + item['name'].decode('utf8') + u"','" + \
             item['ename'].decode('utf8') + u"','" + item['where'].decode('utf8') + u"','" + item['age'].decode('utf8') + u"','" + \
             item['nickname'].decode('utf8') + u"','" + item['maleheight'].decode('utf8') + u"','" + item['fmaleheight'].decode('utf8')\
             + u"','" + item['score'].decode('utf8') + u"','" + item['nianren'].decode('utf8') + u"','" + item['xijiao'].decode('utf8') + \
             u"','" + item['diaomao'].decode('utf8') + u"','" + item['tiwei'].decode('utf8') + u"','" + item['meirong_hz'].decode('utf8') + \
             u"','" + item['kidfred'].decode('utf8') + u"','" + item['otherfred'].decode('utf8') + u"','" + item['animfred'].decode('utf8') + \
             u"','" + item['yundong'].decode('utf8') + u"','" + item['xulian'].decode('utf8') + u"','" + item['koushui'].decode('utf8') + \
-            u"','" + item['naihan'].decode('utf8') + u"','" + item['naire'].decode('utf8') + u"','" + item['cityfred'].decode('utf8') + u"')"
+            u"','" + item['naihan'].decode('utf8') + u"','" + item['naire'].decode('utf8') + u"','" + item['cityfred'].decode('utf8') + u"','" + imgpath + u"')"
             cur.execute(sql)
             conn.commit()
             #conn.close()

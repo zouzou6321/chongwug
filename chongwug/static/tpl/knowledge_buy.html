@@ -1,7 +1,7 @@
 {% extends 'tpl/base/base.html' %}
 {% load assets %}
 
-{% block title %}购买{% endblock %}
+{% block title %}购犬须知{% endblock %}
 
 {% block content %}
 <div class="cwg-container knowledge-buy">
@@ -101,66 +101,14 @@
         </div>
         <div class="dog-separate row"></div>
         <div class="row" id="js-pet-list">
+        	{% for knowledge in knowledges %}
             <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
+                <div class="pet-box" data-id="{{ knowledge.id }}">
+                    <img src="{{ knowledge.imgurl }}" class="img-full pet-img"/>
+                    <p class="pet-name">{{ knowledge.name }}</p>
                 </div>
             </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
-            <div class="col-md-1_5">
-                <div class="pet-box">
-                    <img src="{{ 'imgs/pet.jpg'|assets }}" class="img-full pet-img"/>
-                    <p class="pet-name">阿富汗</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div class="container content-container knowledge-content">
