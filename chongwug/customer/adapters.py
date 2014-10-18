@@ -259,6 +259,7 @@ def buy_detail_adapter(re):
         return False
 
 def buy_attention_adapter(req):
+    #try:
     if ('id' or 'name' or 'phone' or 'location' or 'time' or 'transportation') not in req.POST:
         return __errorcode__(7)
     petid = string.atoi(req.POST['id'])
@@ -266,7 +267,7 @@ def buy_attention_adapter(req):
     tel = req.POST['phone']
     location = json.loads(req.POST['location'])
     transport = req.POST['transportation']
-    auth_user = None
+    
     try:
         cupet = nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
@@ -290,25 +291,42 @@ def buy_attention_adapter(req):
     else:
         totalpay = __transpay
     attentions = nestofpet_attention.objects.filter(dele=False,nestofpet_id=cupet)
-    try:
-        appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
-        auth_user = User.objects.create_user(username=tel,email='',password='')
-        curuser =  user(nickname=name,tel=tel,location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
-        curuser.save()
-        attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
-        attention.save()
-        authuser = auth.authenticate(username=tel, password='')
+    appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
+    if not req.user.is_authenticated():
+        auth_user = None
+        try:
+            auth_user = User.objects.create_user(username=tel,email='',password='123456')
+            curuser =  user(nickname=name,tel=tel,location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
+            curuser.save()
+        except:
+            if auth_user:
+                auth_user.delete()
+        '''后续注册登录功能完成后，必须修改此处,目前只需要电话号码，不需要密码即可登录'''
+        authuser = auth.authenticate(username=tel, password='123456')
         if authuser is not None and authuser.is_active:
             # Correct password, and the user is marked "active"
             auth.login(req, authuser)
-    except Exception, e:
-        if auth_user:
-            auth_user.delete()
-        return __errorcode__(2)
-    sendTemplateSMS(tel,["chongwug","test1"])
+        else:
+            return __errorcode__(1)
+    
+    curuser = user.objects.get(auth_user=auth.get_user(req),dele=False)
+    curuser.location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name']))
+    curuser.save()
+    
+    curattentions = nestofpet_attention.objects.filter(nestofpet_id=cupet,user=curuser,attention_type=1,dele=False)
+    if curattentions.count() == 0:
+        attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
+        attention.save()
+    else:
+        curattentions[0].appoint_time = appoint_time
+        curattentions[0].trans = transport
+        curattentions[0].save()
+    
+    #sendTemplateSMS(tel,["chongwug","test1"])
     return __errorcode__(0,{'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
-    #traceback.print_exc()
+    #except Exception, e:
+        #traceback.print_exc()
 
 from yuntongxun.CCPRestSDK import REST
 

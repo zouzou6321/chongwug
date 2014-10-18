@@ -1,1 +1,18 @@
-ERROR 500 服务器出现了内部错误，我们会马上解决处理，多谢支持！
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}500-页面错误|宠物购 只为给你一只健康可爱的狗狗{% endblock %}
+
+{% block content %}
+<style>
+.pg-container:before{
+    height: 23%;
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style>
+<div class="container pg-container" style="height:300px;text-align:center;font-size:30px;width:100%;background-color:#e5e5e5">
+<span><p>500 Error</p><p>本页面出了点状况，我们工程师已经收到消息，立即就会处理~~</p><p><a href="/home/">返回首页继续访问</a></p></span>
+</div>
+{% endblock %}
