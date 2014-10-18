@@ -57,3 +57,12 @@ def buy_attention_view(request):
 
 def knowledge_buy_view(request):
     return render_to_response('tpl/knowledge_buy.html',{'page':'knowbuy'})
+
+def contactus_view(request):
+    return render_to_response('tpl/contactus.html')
+
+def workchance_view(request):
+    return render_to_response('tpl/workchance.html')
+
+def aboutus_view(request):
+    return render_to_response('tpl/aboutus.html')

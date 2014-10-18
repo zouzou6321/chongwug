@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.conf.urls import patterns, url
-from customer.views import nav_page_view,buy_home_view,buy_main_view,buy_detail_view,buy_attention_view,knowledge_buy_view
+from customer.views import aboutus_view,workchance_view,contactus_view,nav_page_view,buy_home_view,buy_main_view,buy_detail_view,buy_attention_view,knowledge_buy_view
 urlpatterns = patterns(
                        '',
                        url(r'^$',nav_page_view),
@@ -9,4 +9,7 @@ urlpatterns = patterns(
                        url(r'^buy/detail/$',buy_detail_view),
                        url(r'^buy/detail/attention/$',buy_attention_view),
                        url(r'^knowledge/buy/$',knowledge_buy_view),
+                       url(r'^aboutus/$',aboutus_view),
+                       url(r'^workchance/$',workchance_view),
+                       url(r'^contactus/$',contactus_view),
                        )
