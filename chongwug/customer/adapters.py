@@ -264,9 +264,9 @@ def buy_attention_adapter(req):
     petid = string.atoi(req.POST['id'])
     name = req.POST['name']
     tel = req.POST['phone']
-    location = json.dumps(req.POST['location'])
+    location = json.loads(req.POST['location'])
     transport = req.POST['transportation']
-    
+    auth_user = None
     try:
         cupet = nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
@@ -279,6 +279,7 @@ def buy_attention_adapter(req):
         p = re.compile(__regular_expression_chinatelnum)
         if not p.match(tel):
             return __errorcode__(9)
+
     province = __addresses[location['range']]['sublist'][location['province']]
     city = province['sublist'][location['city']]
     district = city['sublist'][location['district']]
@@ -307,6 +308,7 @@ def buy_attention_adapter(req):
     sendTemplateSMS(tel,["chongwug","test1"])
     return __errorcode__(0,{'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
+    #traceback.print_exc()
 
 from yuntongxun.CCPRestSDK import REST
 
