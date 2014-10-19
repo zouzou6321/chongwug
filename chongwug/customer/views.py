@@ -64,6 +64,12 @@ def knowledge_buy_view(request):
     except:
         traceback.print_exc()
 
+def knowledge_bringup_view(request):
+    return render_to_response('tpl/knowledge_bringup.html',{'page':'knowbringup'})
+
+def supplie_view(request):
+    return render_to_response('tpl/supplie.html',{'page':'supplie'})
+
 def contactus_view(request):
     return render_to_response('tpl/contactus.html')
 
