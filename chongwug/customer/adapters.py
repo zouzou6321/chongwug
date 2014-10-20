@@ -218,7 +218,7 @@ def buy_detail_adapter(re):
                 img = farm_pet.nestofpet_img_set.filter(dele=False,img_usefor=__petpictypes[0][1])[0]
             except:
                 img = None
-            othor_pets = nest_pet.pet_set.filter(dele=False)
+            othor_pets = farm_pet.pet_set.filter(dele=False)
             min_price = othor_pets.order_by('-price')[0].price
             max_price = othor_pets.order_by('price')[0].price
             count = othor_pets.count()
