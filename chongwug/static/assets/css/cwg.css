@@ -3250,7 +3250,7 @@ button.close {
   }
 }
 */
-[class^="icon-"]:before, [class*=" icon-"]:before {
+.icon:before {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;

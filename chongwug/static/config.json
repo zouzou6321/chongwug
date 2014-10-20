@@ -16,7 +16,7 @@
         "prod": "prod/assets/imgs"
     },
     "fonts": {
-        "src": ["src/fonts/*", "!*.json", "!*.html"],
+        "src": ["src/fonts/*", "!src/fonts/*.json", "!src/fonts/*.html"],
         "dev": "assets/fonts",
         "prod": "prod/assets/fonts"
     }
