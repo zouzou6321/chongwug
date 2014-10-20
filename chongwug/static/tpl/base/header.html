@@ -1,5 +1,6 @@
 {% load assets %}
 <div class="header">
+    {% if page == 'home' %}
     <div class="header-top">
         <div class="container">
             <div class="row cwg-global-search">
@@ -7,28 +8,17 @@
                     <a href="/home" class="logo"><img src="{{ 'imgs/logo.jpg'|assets }}"></a>
                     <span class="cwg-city">成都</span>
                 </div>
-                <div class="col-sm-5 col-md-offset-0_5">
-                    <form action="/home">
-                        <div class="input-group cwg-search-wrap">
-                          <input type="text" class="form-control" placeholder="宠物品种，宠物食物，宠物玩具">
-                          <span class="input-group-btn">
-                              <button class="btn btn-search" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                              </button>
-                          </span>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-sm-3 col-md-2 pull-right">
-                    <div class="cwg-tel">
+                <div class="col-sm-3 col-md-3 pull-right">
+                    <div class="cwg-tel pull-right">
                         <p class="cwg-tel-main"><i class="glyphicon glyphicon-earphone"></i><span>028-85230309</span></p>
-                        <p class="cwg-tel-detail">客服热线：9:30-21:30</p>
+                        <p class="cwg-tel-detail"><span>客服热线：</span>9:30-21:30</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="navbar cwg-navbar">
+    {% endif %}
+    <div class="navbar cwg-navbar{% if page != 'home' %} cwg-navbar-sub{% endif %}">
         <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
@@ -36,7 +26,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand visible-xs-block" href="/home">宠物购</a>
+                <a href="/home" class="logo-simple"><img src="{{ 'imgs/logo-simple.png'|assets }}"/></a>
+                <a class="navbar-brand visible-xs-block" href="/home">宠物购</a>
             </div>
             <div class="collapse navbar-collapse" id="js-navbar-collapse">
                 <ul class="nav navbar-nav">

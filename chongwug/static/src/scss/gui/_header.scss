@@ -30,24 +30,22 @@
 
 .cwg-tel{
   @media (min-width: $screen-sm){
-    padding-top: 32px;
-    padding-left: 15px;
-  }
-
-  @media (min-width: $screen-md) {
-    position: absolute;
-    right: 0;
-    bottom: -85px;
+    padding-top: 10px;
   }
 }
 
 .cwg-tel-detail{
   margin-bottom: 0;
-  font-size: 12px;
+
+  span{
+    padding-left: 7px;
+    padding-right: 3px;
+  }
 }
 
 .cwg-tel-main{
   margin-bottom: 0;
+  font-size: 20px;
 
   .glyphicon{
     margin-right: 5px;
