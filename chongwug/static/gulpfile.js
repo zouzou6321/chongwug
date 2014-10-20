@@ -119,3 +119,9 @@ gulp.task('watch', function(){
 //        gulp.start('css');
 //    });
 });
+
+gulp.task('react', function(){
+    gulp.src('./src/js/components/*.js')
+        .pipe(plugins.react())
+        .pipe(gulp.dest('./assets/js/components'));
+});
