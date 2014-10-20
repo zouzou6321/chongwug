@@ -1,44 +1,56 @@
 {% extends 'petfarm/tpl/base/base.html' %}
 {% block title %}内容编辑{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/back-assets/dist/uploadify/uploadify.css"/>
+<link rel="stylesheet" href="/static/back-assets/dist/jcrop/jquery.Jcrop.css"/>
+{% endblock %}
+
 {% block main %}
 
 <h1 class="page-header">修改养殖场信息</h1>
 <p>加*为必填项</p>
-<form class="form-horizontal" method="post" action="./">
+<form class="form-horizontal" id="js-form">
 {% csrf_token %}
     <div class="form-group">
-        <label for="farm-name" class="col-sm-2 control-label">养殖场名字<span class="warn">*</span>：</label>
+        <label for="farm-name" class="col-sm-3 control-label">养殖场名字<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <input type="text" name="name" value="{{ manager.petfarm.name }}" class="form-control" id="farm-name">
         </div>
     </div>
     <div class="form-group">
-        <label for="farm-desc" class="col-sm-2 control-label">养殖场介绍<span class="warn">*</span>：</label>
+        <label for="farm-desc" class="col-sm-3 control-label">养殖场介绍<span class="warn">*</span>：</label>
         <div class="col-sm-8">
             <textarea name="desc" class="form-control" rows="3" id="farm-desc">{{ manager.petfarm.desc }}</textarea>
         </div>
     </div>
     <div class="form-group">
-        <label for="farm-province" class="col-sm-2 control-label">省会（默认四川）：</label>
+        <input type="hidden" name="img-count" id="js-img-count" value="0"/>
+        <label class="col-sm-3 control-label">本窝图片（至少一张）<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <div id="js-uploadify"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-province" class="col-sm-3 control-label">省会（默认四川）：</label>
         <div class="col-sm-4">
             <input type="text" name="province" value="{{ manager.petfarm.province }}" id="farm-province" class="form-control">
         </div>
     </div>
     <div class="form-group">
-        <label for="farm-city" class="col-sm-2 control-label">城市（默认成都）：</label>
+        <label for="farm-city" class="col-sm-3 control-label">城市（默认成都）：</label>
         <div class="col-sm-4">
             <input type="text" name="city" value="{{ manager.petfarm.city }}" id="farm-city" class="form-control">
         </div>
     </div>
     <div class="form-group">
-        <label for="farm-district" class="col-sm-2 control-label">片区（eg：高新）<span class="warn">*</span>：</label>
+        <label for="farm-district" class="col-sm-3 control-label">片区（eg：高新）<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <input type="text" name="city" value="{{ manager.petfarm.district }}" id="farm-district" class="form-control">
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">所处方位<span class="warn">*</span>：</label>
+        <label class="col-sm-3 control-label">所处方位<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <label class="radio-inline">
                 <input type="radio" name="direct" value="东" {% if manager.petfarm.direct == '东' %}checked{% endif %}> 城东
@@ -58,23 +70,65 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="farm-address" class="col-sm-2 control-label">详细地址<span class="warn">*</span>：</label>
+        <label for="farm-address" class="col-sm-3 control-label">详细地址<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <input type="text" name="detail_address" value="{{ manager.petfarm.detail_address }}" id="farm-address" class="form-control">
         </div>
     </div>
     <div class="form-group">
-        <label for="farm-min-prince" class="col-sm-2 control-label">宠物最低价格<span class="warn">*</span>：</label>
+        <label for="farm-min-prince" class="col-sm-3 control-label">宠物最低价格<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <input type="text" name="min_prince" value="{{ manager.petfarm.min_prince }}" id="farm-min-prince" class="form-control">
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
-          <button type="submit" class="btn btn-primary form-control">提交</button>
+          <button type="button" class="btn btn-primary form-control" data-loading-text="提交中..." id="js-btn-submit">提交</button>
         </div>
     </div>
 </form>
+
+<div class="modal fade modal-auto-width" id="js-crop-modal" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">裁剪图片</h4>
+        <div class="form-horizontal img-type-group">
+            <label class="col-sm-6 control-label">图片用途：</label>
+            <div class="col-sm-6">
+                <select class="form-control" id="js-img-type">
+                	{% for type in types %}
+                    <option value="{{ type.type }}" data-size="[{{ type.width }}, {{ type.height }}]">{{ type.desc }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+    <div class="modal-loading"></div>
+  </div>
+</div>
+
+<script type="text/html" id="preview-item-tpl">
+<li>
+    <div class="img-box">
+        <img src="{src}"/>
+        <input type="hidden" name="img-{index}-position" class="img-position-input"/>
+        <input type="hidden" name="img-{index}-type" class="img-type-input"/>
+        <input type="hidden" name="img-{index}" value="{src}" class="img-index-input"/>
+    </div>
+    <p class="img-tit"></p>
+    <div class="img-edit">
+        <i class="glyphicon glyphicon-pencil img-crop"></i>
+        <i class="glyphicon glyphicon-remove img-del"></i>
+    </div>
+</li>
+</script>
 
 {% endblock %}
 
@@ -83,6 +137,56 @@
 <script>
 
 CKEDITOR.replace('farm-desc');
+
+</script>
+<script src="/static/back-assets/dist/uploadify/jquery.uploadify.min.js"></script>
+<script src="/static/back-assets/dist/jcrop/jquery.Jcrop.min.js"></script>
+<script src="/static/back-assets/dist/js/crop.js"></script>
+<script>
+//调用截图
+$.crop({
+	uploader: '/petfarm/petfarm/picadd/upload/'
+});
+
+(function($){
+
+    //form submit
+    var $form = $('#js-form'),
+        $submit = $form.find('#js-btn-submit');
+
+    $form.on('submit', function(){
+        $submit.button('loading');
+
+        var data = {};
+
+        $.each($form.serializeArray(), function(i, e){
+            data[e.name] = e.value;
+        });
+
+        $.ajax({
+            url: './',
+            data: data,
+            type:'POST',
+            dataType: 'json',
+            success: function(data){
+                if(data.status == 0){
+                    alert('提交成功！');
+                    window.location.reload();
+                }else{
+                    alert('提交失败：'+ data.message +'，请重试！');
+                    $submit.button('reset');
+                }
+            },
+            error: function(){
+                $submit.button('reset');
+            }
+        });
+
+        return false;
+    });
+
+
+})(jQuery);
 
 </script>
 {% endblock %}
