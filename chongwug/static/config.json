@@ -11,7 +11,7 @@
         "prod": "prod/assets/js"
     },
     "imgs": {
-        "src": "src/imgs/**/*.+(jpg|png|gif)",
+        "src": ["src/imgs/**/*.+(jpg|png|gif)", "!src/imgs/sprites/*"],
         "dev": "assets/imgs",
         "prod": "prod/assets/imgs"
     },
@@ -19,5 +19,10 @@
         "src": ["src/fonts/*", "!src/fonts/*.json", "!src/fonts/*.html"],
         "dev": "assets/fonts",
         "prod": "prod/assets/fonts"
+    },
+    "sprites": {
+        "src": ["src/imgs/sprites/*"],
+        "imgDev": "src/imgs",
+        "cssDev": "src/scss/base"
     }
 }

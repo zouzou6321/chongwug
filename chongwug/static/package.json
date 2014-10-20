@@ -33,9 +33,11 @@
     "gulp-useref": "^0.6.0",
     "gulp-util": "^3.0.0",
     "gulp-watch": "^0.6.9",
+    "gulp.spritesmith": "^1.4.0",
     "map-stream": "^0.1.0",
     "merge-stream": "^0.1.5",
     "minimist": "^0.2.0",
+    "phantomjssmith": "^0.5.0",
     "require-dir": "^0.1.0",
     "through2": "^0.6.1"
   }

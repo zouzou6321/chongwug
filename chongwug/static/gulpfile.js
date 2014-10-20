@@ -3,11 +3,37 @@ var gulp = require('gulp'),
     fs = require('fs'),
     argv = require('minimist')(process.argv.slice(2)),
     merge = require('merge-stream'),
-    plugins = require('gulp-load-plugins')();
+    plugins = require('gulp-load-plugins')(),
+    spritesmith = require('gulp.spritesmith');
 
 var config = require('./config.json'),
     prod = argv.prod === true ? true : false,
     dep = prod ? ['imgs'] : [];
+
+
+
+gulp.task('sprites', function(){
+     var spriteData = gulp.src(config.sprites.src).pipe(spritesmith({
+        imgName: 'sprites.png',
+        imgPath: '../imgs/sprites.png',
+        cssName: '_sprites.css',
+        //cssFormat: 'scss',
+        engine: 'phantomjs',
+        algorithm: 'binary-tree',
+        cssVarMap: function (sprite) {
+          sprite.name = 'sprite-' + sprite.name;
+        },
+        cssOpts: {
+          cssClass: function (item) {
+            return '.sprite-' + item.name;
+          }
+        }
+      }));
+
+    spriteData.img.pipe(gulp.dest(config.sprites.imgDev));
+    spriteData.css.pipe(gulp.dest(config.sprites.cssDev));
+});
+
 
 gulp.task('css', dep, function(){
     var map = JSON.parse(fs.readFileSync('./imgs-manifest.json')),
