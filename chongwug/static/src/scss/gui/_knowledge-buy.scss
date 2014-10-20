@@ -1,13 +1,8 @@
 .knowledge-buy{
   .pet-box{
-    border: 1px solid #ccc;
     padding: 7px 10px;
     margin-bottom: 10px;
     cursor: pointer;
-
-    &.active{
-      border-color: #f01616;
-    }
 
     .pet-name{
       margin-bottom: 0;
@@ -17,11 +12,10 @@
 
       height: 23px;
       overflow: hidden;
-      //text-overflow: ;
     }
 
     .pet-img{
-      border: 1px solid #ccc;
+      border: 1px solid $primary-bg-color;
     }
   }
 

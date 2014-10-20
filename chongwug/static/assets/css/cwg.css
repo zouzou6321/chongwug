@@ -4403,7 +4403,7 @@ button.close {
   left: 20px; }
 
 .cwg-container {
-  background-color: #ffd401;
+  background-color: #e5e5e5;
   padding-top: 1px; }
   @media (min-width: 768px) {
     .cwg-container {
@@ -4471,12 +4471,9 @@ button.close {
       font-weight: bold; }
 
 .knowledge-buy .pet-box {
-  border: 1px solid #ccc;
   padding: 7px 10px;
   margin-bottom: 10px;
   cursor: pointer; }
-  .knowledge-buy .pet-box.active {
-    border-color: #f01616; }
   .knowledge-buy .pet-box .pet-name {
     margin-bottom: 0;
     padding-top: 6px;
@@ -4485,7 +4482,7 @@ button.close {
     height: 23px;
     overflow: hidden; }
   .knowledge-buy .pet-box .pet-img {
-    border: 1px solid #ccc; }
+    border: 1px solid #ffd401; }
 .knowledge-buy .nav-pills a {
   width: 55px;
   display: inline-block;

@@ -428,8 +428,6 @@
 
         var $this = $(this);
 
-        $petBox.not($this.addClass('active')).removeClass('active');
-
         $.ajax('./', {
             data: {id: $this.data('id')},
             dataType: 'json'
