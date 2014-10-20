@@ -5363,6 +5363,29 @@ img.mfp-img {
       padding-right: 20px;
       border-right: 2px solid #333; }
 
+.container-error {
+  padding: 50px 0; }
+  .container-error .error-content, .container-error .error-wrap {
+    display: inline-block; }
+  .container-error .error-wrap {
+    padding-top: 40px; }
+  .container-error .error-text {
+    text-align: left;
+    color: #887c69;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 1; }
+    .container-error .error-text .text-uppercase {
+      font-size: 30px;
+      letter-spacing: 10px;
+      margin-bottom: 5px; }
+  .container-error .btn-error {
+    border-radius: 0;
+    border-width: 5px;
+    color: #ffd401;
+    font-weight: bold;
+    font-size: 18px; }
+
 /**
  * Style trumps; helper and brand classes
 */

@@ -4,14 +4,20 @@
 {% block title %}404-页面不存在|宠物购 只为给你一只健康可爱的狗狗{% endblock %}
 
 {% block content %}
-<style>
-.pg-container:before{
-    height: 23%;
-    display: inline-block;
-    vertical-align: middle;
-  }
-</style>
-<div class="container pg-container" style="height:300px;text-align:center;font-size:30px;width:100%;background-color:#e5e5e5">
-<span><p>404 Error</p><p>您想要访问的页面我们翻箱倒柜都找不到了~~</p><p><a href="/home/">返回首页继续访问</a></p></span>
+
+<div class="container container-error text-center">
+    <div class="error-content">
+        <img src="{{ 'imgs/404.png'|assets }}" class="img-responsive img-error"/>
+        <div class="clearfix error-wrap">
+            <div class="pull-left error-text">
+                <p class="text-uppercase">error</p>
+                <p>出错啦！您输入的网址无效。</p>
+            </div>
+            <div class="pull-left">
+                <a class="btn btn-info btn-trans btn-error" href="/home">返回首页 <i class="glyphicon glyphicon-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

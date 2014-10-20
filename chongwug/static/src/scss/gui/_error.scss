@@ -1,0 +1,33 @@
+.container-error{
+  padding: 50px 0;
+
+  .error-content, .error-wrap{
+    display: inline-block;
+  }
+
+  .error-wrap{
+    padding-top: 40px;
+  }
+
+  .error-text{
+    text-align: left;
+    color: #887c69;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 1;
+
+    .text-uppercase{
+      font-size: 30px;
+      letter-spacing: 10px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .btn-error{
+    border-radius: 0;
+    border-width: 5px;
+    color: $primary-bg-color;
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
