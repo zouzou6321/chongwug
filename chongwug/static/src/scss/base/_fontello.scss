@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'fontello';
-  src: url(#{$fontello} + '.eot?36564404');
-  src: url(#{$fontello} + '.eot?36564404#iefix') format('embedded-opentype'),
-       url(#{$fontello} + '.woff?36564404') format('woff'),
-       url(#{$fontello} + '.ttf?36564404') format('truetype'),
-       url(#{$fontello} + '.svg?36564404#fontello') format('svg');
+  src: url('#{$cwg-font-path}#{$cwg-font-name}.eot?#{$cwg-font-timestamp}');
+  src: url('#{$cwg-font-path}#{$cwg-font-name}.eot?#{$cwg-font-timestamp}#iefix') format('embedded-opentype'),
+       url('#{$cwg-font-path}#{$cwg-font-name}.woff?#{$cwg-font-timestamp}') format('woff'),
+       url('#{$cwg-font-path}#{$cwg-font-name}.ttf?#{$cwg-font-timestamp}') format('truetype'),
+       url('#{$cwg-font-path}#{$cwg-font-name}.svg?#{$cwg-font-timestamp}#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,49 +14,40 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url(#{$fontello} + '.svg?36564404#fontello') format('svg');
+    src: url('#{$cwg-font-path}#{$cwg-font-name}.svg?#{$cwg-font-timestamp}#fontello') format('svg');
   }
 }
 */
- 
+
  [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
   speak: none;
- 
+
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
-  margin-right: .2em;
+  /* margin-right: .2em; */
   text-align: center;
   /* opacity: .8; */
- 
+
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
-     
+
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
- 
+
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  margin-left: .2em;
- 
+  /* margin-left: .2em; */
+
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
- 
+
   /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
 }
- 
-.icon-help-circled:before { content: '\e804'; } /* '' */
-.icon-ok-circled:before { content: '\e805'; } /* '' */
-.icon-search:before { content: '\e808'; } /* '' */
-.icon-wechat:before { content: '\e809'; } /* '' */
-.icon-weibo:before { content: '\e80a'; } /* '' */
-.icon-phone:before { content: '\e80b'; } /* '' */
-.icon-calendar:before { content: '\e80c'; } /* '' */
-.icon-attention-circled:before { content: '\e80d'; } /* '' */
-.icon-left-dir:before { content: '\e80e'; } /* '' */
-.icon-right-dir:before { content: '\e80f'; } /* '' */
+
+@import "fontello-codes";
