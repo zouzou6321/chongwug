@@ -4598,7 +4598,7 @@ img.mfp-img {
   .cwg-search-wrap .btn-search {
     background-color: #dba903;
     border-color: #dba903; }
-  .cwg-search-wrap .glyphicon-search {
+  .cwg-search-wrap .icon-search {
     color: #fff; }
 
 .navbar {
@@ -4630,7 +4630,7 @@ img.mfp-img {
     background: #b38900; }
   .cwg-navbar .cwg-social {
     margin-top: 3px; }
-    .cwg-navbar .cwg-social .iconfont {
+    .cwg-navbar .cwg-social .icon {
       display: block;
       width: 24px;
       height: 24px;
@@ -4698,9 +4698,9 @@ img.mfp-img {
 .cwg-tel-main {
   margin-bottom: 0;
   font-size: 20px; }
-  .cwg-tel-main .glyphicon {
+  .cwg-tel-main .icon {
     margin-right: 5px; }
-  .cwg-tel-main .glyphicon, .cwg-tel-main span {
+  .cwg-tel-main .icon, .cwg-tel-main span {
     vertical-align: middle; }
 
 .header-top {
