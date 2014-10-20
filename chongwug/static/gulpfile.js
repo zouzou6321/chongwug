@@ -16,8 +16,8 @@ gulp.task('sprites', function(){
      var spriteData = gulp.src(config.sprites.src).pipe(spritesmith({
         imgName: 'sprites.png',
         imgPath: '../imgs/sprites.png',
-        cssName: '_sprites.css',
-        //cssFormat: 'scss',
+        cssName: '_sprites.scss',
+        cssFormat: 'scss',
         engine: 'phantomjs',
         algorithm: 'binary-tree',
         cssVarMap: function (sprite) {

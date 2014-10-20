@@ -23,6 +23,6 @@
     "sprites": {
         "src": ["src/imgs/sprites/*"],
         "imgDev": "src/imgs",
-        "cssDev": "src/scss/base"
+        "cssDev": "src/scss/generic"
     }
 }

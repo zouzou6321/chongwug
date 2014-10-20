@@ -3188,6 +3188,27 @@ button.close {
 /**
  * Generic utility styles etc.
  */
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
 /**
  * Base styles; unclassed HTML elements etc.
  */
@@ -3226,12 +3247,13 @@ button.close {
       width: 12.5%; } }
 
 .sprite {
-  display: inline-block; }
+  display: inline-block;
+  background-image: url(../imgs/sprites.png); }
 
 .sprite-checked {
+  background-position: -121px -36px;
   width: 10px;
-  height: 10px;
-  background: url(../imgs/checked.png); }
+  height: 10px; }
 
 @font-face {
   font-family: 'fontello';
@@ -3456,9 +3478,9 @@ button.close {
     box-shadow: none;
     border-color: #ff3500;
     color: #ff3500; }
-    .btn-check.active .icon-checked, .btn-check:active .icon-checked {
+    .btn-check.active .sprite-checked, .btn-check:active .sprite-checked {
       display: inline-block; }
-  .btn-check .icon-checked {
+  .btn-check .sprite-checked {
     position: absolute;
     right: 0px;
     bottom: 0px;

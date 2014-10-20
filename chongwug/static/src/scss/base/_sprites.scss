@@ -1,8 +1,8 @@
 .sprite{
   display: inline-block;
+  @include sprite-image($sprite-car);
 }
+
 .sprite-checked{
-  width: 10px;
-  height: 10px;
-  background: url(../imgs/checked.png);
+  @include sprite($sprite-checked);
 }
