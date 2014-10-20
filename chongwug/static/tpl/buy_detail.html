@@ -23,7 +23,7 @@
                     <img src="{{ petimg_a.img_url }}" class="img-full"/>
                 </a>
                 <div class="cwg-dog-imgs">
-                    <a class="prev-thumb" href="javascript:"><i class="icon icon-angle-left"></i></a>
+                    <a class="prev-thumb" href="javascript:"><i class="icon icon-left-dir"></i></a>
                     <div class="thumbnail-wrap">
                         <ul class="cwg-thumbnail clearfix">
                         <li class="active" data-src="{{ petimg_a.img_url }}"><img src="{{ petimg_a.img_url }}!small"/></li>
@@ -32,7 +32,7 @@
                         {% endfor %}
                         </ul>
                     </div>
-                    <a class="next-thumb" href="javascript:"><i class="icon icon-angle-right"></i></a>
+                    <a class="next-thumb" href="javascript:"><i class="icon icon-right-dir"></i></a>
                 </div>
 {#                <!-- JiaThis Button BEGIN -->#}
 {#                <div class="jiathis_style">#}
@@ -106,7 +106,7 @@
                         <div class="info-td-right">
                             <button class="btn btn-primary btn-order js-btn-order" data-id="{{ nestpet.id }}" type="button">预约看狗</button>
                             <a href="http://wpa.qq.com/msgrd?v=3&uin=399632600&site=qq&menu=yes" target="_blank" class="btn btn-info btn-consult">在线咨询</a>
-                            <a href="" class="cwg-clause"><i class="glyphicon glyphicon-question-sign"></i>购犬须知</a>
+                            <a href="" class="cwg-clause"><i class="icon icon-help-circled"></i>购犬须知</a>
                         </div>
                     </div>
                 </div>
@@ -158,9 +158,9 @@
                                     <td>{{ pet.color }}</td>
                                     <td>
                                     	{% if pet.epidemic_period == '已种疫苗' %}
-                                        <i class="glyphicon glyphicon-ok-sign text-primary"></i>
+                                        <i class="icon icon-ok-circled text-primary"></i>
                                         {% elif pet.epidemic_period == '未种疫苗' %}
-                                        <i class="glyphicon glyphicon-ok-sign text-muted"></i>
+                                        <i class="icon icon-ok-circled text-muted"></i>
                                         {% else %}
                                         {{ pet.epidemic_period }}
                                         {% endif %}
