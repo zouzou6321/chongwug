@@ -21,8 +21,6 @@ def nav_page_view(request):
 #date:2014/8/16
 #discription:购宠首页展示
 def buy_home_view(request):
-    if 'visitor' not in request.session:
-        request.session['visitor'] = 1
     data = adapters.buy_home_adapter(request)
     return render_to_response('tpl/buy_index.html',data)
 
@@ -30,15 +28,11 @@ def buy_home_view(request):
 #date:2014/9/8
 #discription:购宠购买展示页
 def buy_main_view(request):
-    if 'visitor' not in request.session:
-        request.session['visitor'] = 1
     data = adapters.buy_main_adapter(request)
     return render_to_response('tpl/buy_main.html',data)
 
 
 def buy_detail_view(request):
-    if 'visitor' not in request.session:
-        request.session['visitor'] = 1
     data = adapters.buy_detail_adapter(request)
     if data == False:
         return HttpResponse(__errorcode__(2))
@@ -51,8 +45,6 @@ def buy_detail_view(request):
         return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
 
 def buy_attention_view(request):
-    if 'visitor' not in request.session:
-        request.session['visitor'] = 1
     data = adapters.buy_attention_adapter(request)
     return HttpResponse(data)
 

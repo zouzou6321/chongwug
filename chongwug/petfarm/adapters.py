@@ -227,10 +227,7 @@ def manage_pet_farm_mod(request):
         curuser.save()
     except NameError:
         return __errorcode__(2)
-    try:
-        return manage_picpreupload(request,'farm')
-    except:
-        trance
+    return manage_picpreupload(request,'farm')
 
 def manage_picupload(photo,width,height):
     if photo == None:
