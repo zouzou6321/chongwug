@@ -379,6 +379,7 @@
 
     //validate
     var validator = $orderForm.validate({
+        onsubmit: false,
         errorElement: 'p',
         errorClass: 'help-block',
         ignore: '',
@@ -491,13 +492,13 @@
         var text = '2014-' + data.date + '（'+ data.day +'）' + time;
         $time.text(text);
         $('#js-time-input').val('2014-' + data.date + ' ' + time);
+        validator.element('#js-time-input');
         $timeBox.hide();
     });
 
-}(jQuery));
 
 //地址选择
-(function($){
+
 
 var $locationBox = $('#js-location-box'),
     $province = $locationBox.find('#province'),
@@ -598,6 +599,7 @@ var $locationBox = $('#js-location-box'),
         var text = location.join('-');
         $('#js-location').text(text);
         $('#js-location-input').val(JSON.stringify(param));
+        validator.element('#js-location-input');
         $locationBox.hide();
     });
 
