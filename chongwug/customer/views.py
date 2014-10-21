@@ -8,7 +8,20 @@ from django.template import RequestContext
 #auth:huhuaiyong
 #date:2014/8/16
 #discription:导航页面展示
+from django.core.mail  import  send_mail
 def nav_page_view(request):
+    title='This is mail title.'
+    message='Hello! This is a message!'
+    sender='fccsl6321@163.com'
+    mail_list=['692673390@qq.com',]
+    send_mail(
+                subject=title,  
+                message=message,  
+                from_email=sender,
+                recipient_list=mail_list,  
+                fail_silently=False,  
+                connection=None  
+            ) 
     return render_to_response("tpl/delay.html")
     if 'visitor' not in request.session:
         request.session['visitor'] = 1
