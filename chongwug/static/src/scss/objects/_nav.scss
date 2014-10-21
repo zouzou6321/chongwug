@@ -44,6 +44,7 @@
 
   .cwg-social{
     margin-top: 3px;
+    
     .icon{
       display: block;
 
@@ -68,6 +69,10 @@
     a{
       display: inline-block;
     }
+  }
+
+  .cwg-tel{
+    display: none;
   }
 }
 
@@ -99,5 +104,24 @@
     display: inline-block;
     margin-top: 10px;
     margin-right: 20px;
+  }
+
+  .cwg-tel{
+    display: block;
+    line-height: 20px;
+    padding-top: 15px;
+  }
+
+  .cwg-tel-main{
+    font-size: 16px;
+    color: #fff;
+
+    span{
+      font-weight: bold;
+    }
+  }
+
+  .cwg-social{
+    display: none;
   }
 }

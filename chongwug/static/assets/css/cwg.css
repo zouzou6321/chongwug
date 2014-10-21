@@ -4691,6 +4691,8 @@ img.mfp-img {
       padding: 0 0 0 6px; }
     .cwg-navbar .cwg-social a {
       display: inline-block; }
+  .cwg-navbar .cwg-tel {
+    display: none; }
 
 .cwg-navbar-sub {
   background: #ffd401; }
@@ -4711,6 +4713,17 @@ img.mfp-img {
     display: inline-block;
     margin-top: 10px;
     margin-right: 20px; }
+  .cwg-navbar-sub .cwg-tel {
+    display: block;
+    line-height: 20px;
+    padding-top: 15px; }
+  .cwg-navbar-sub .cwg-tel-main {
+    font-size: 16px;
+    color: #fff; }
+    .cwg-navbar-sub .cwg-tel-main span {
+      font-weight: bold; }
+  .cwg-navbar-sub .cwg-social {
+    display: none; }
 
 .cwg-global-search {
   position: relative;
