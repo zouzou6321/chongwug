@@ -129,18 +129,19 @@ def buy_main_adapter(re):
             else:
                 epidemickey = re.REQUEST.get(enum[0])
                 
-            if enum[0] != 'prince' and enum[0] != 'age':
+            if enum[0] != 'prince' and enum[0] != 'age' and enum[0] != 'epidemic':
                 kwargs[enum[1]] = re.REQUEST.get(enum[0])
                 prince_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
                 age_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+                epidemic_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
+            elif enum[0] == 'epidemic':
+                epidemickey = re.REQUEST.get(enum[0])
             elif enum[0] == 'prince':
                 price = string.atoi(re.REQUEST.get(enum[0]))
                 if price > len(princes):
                     price = len(princes)
                 elif price < 1:
                     price = 1
-                #kwargs[enum[1] + '__gte'] = princes[price - 1]['b']
-                #kwargs[enum[1] + '__lte'] = princes[price - 1]['c']
                 princekey = price.__str__()
                 age_all_url += '%s=%d&' % (enum[0], price)
             elif enum[0] == 'age':
@@ -169,6 +170,8 @@ def buy_main_adapter(re):
     if searchkey:
         pets = pets.filter(Q(farm__name__contains=searchkey)|Q(farm__detail_address__contains=searchkey))
     for pet_one in pets:
+        if epidemickey and pet_one.pet_set.filter(epidemic_period=epidemickey).count() <= 0:
+            continue;
         try:
             petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor=__petpictypes[0][1])[0]
         except:

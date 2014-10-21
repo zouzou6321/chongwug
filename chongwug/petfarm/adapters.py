@@ -177,14 +177,12 @@ def manage_nestofpet_add(request):
         new_nestofpet.save()
     except NameError:
         return __errorcode__(2)
-    print '4444'
     try:
         new_petscount = string.atoi(request.POST['count'])
         petnum = 0
         while petnum < new_petscount:
             petnum += 1
             try:
-                print '55555'
                 new_pet = pet(  nestofpet = new_nestofpet,
                                 index = chr(ord('A') + (petnum - 1)),
                                 color = request.POST['color%d' % petnum],
@@ -193,18 +191,14 @@ def manage_nestofpet_add(request):
                                 sex = request.POST['sex%d' % petnum],
                                 sale_out = ((request.POST['sale%d' % petnum] == '1') and 1) or 0)
                 new_pet.save()
-                print '66666'
             except:
-                print '3333'
                 if petnum > 1:
                     pass
                 else:
                     raise NameError,("first pet can't create","in adapters.py")
     except:
-        print '2222'
         new_nestofpet.delete()
         return __errorcode__(2)
-    print '11111'
     return manage_picpreupload(request,'pet',new_nestofpet)
 
 def pet_farm_all():
