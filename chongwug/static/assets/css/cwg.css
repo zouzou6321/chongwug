@@ -3998,7 +3998,7 @@ The provided mixins are intended to be used with the array-like variables
   padding-right: 40px; }
 
 .detail-main {
-  padding: 20px 0 50px 0; }
+  padding: 20px 0 50px 15px; }
 
 .thumbnail-wrap {
   width: 330px;
@@ -4117,7 +4117,8 @@ label {
   background-color: #fffcf0; }
   .detail-navbar.affix {
     top: 0;
-    width: 100%;
+    left: 0;
+    right: 0;
     margin-top: 0;
     z-index: 21;
     -webkit-box-shadow: 0 2px 4px rgba(221, 221, 221, 0.6);
