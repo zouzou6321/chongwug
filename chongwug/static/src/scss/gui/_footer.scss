@@ -14,7 +14,12 @@
     width: 395px;
     height: 116px;
     position: relative;
-    background: url(../imgs/flow.png) center no-repeat;
+
+    .sprite-flow{
+      position: absolute;
+      left: 0;
+      top: 40px;
+    }
 
     p{
       margin-bottom: 0;

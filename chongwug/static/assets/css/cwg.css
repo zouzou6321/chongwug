@@ -3265,6 +3265,11 @@ The provided mixins are intended to be used with the array-like variables
   width: 31px;
   height: 13px; }
 
+.sprite-flow {
+  background-position: 0px 0px;
+  width: 395px;
+  height: 36px; }
+
 @font-face {
   font-family: 'fontello';
   src: url('../fonts/fontello.eot?36564404');
@@ -4748,8 +4753,11 @@ img.mfp-img {
   color: #fff;
   width: 395px;
   height: 116px;
-  position: relative;
-  background: url(../imgs/flow.png) center no-repeat; }
+  position: relative; }
+  .footer .cwg-flow-chart .sprite-flow {
+    position: absolute;
+    left: 0;
+    top: 40px; }
   .footer .cwg-flow-chart p {
     margin-bottom: 0;
     line-height: 1; }

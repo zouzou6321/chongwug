@@ -14,3 +14,7 @@
 .sprite-car{
   @include sprite($sprite-car);
 }
+
+.sprite-flow{
+  @include sprite($sprite-flow);
+}
