@@ -32,7 +32,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['.chongwug.com','.chongwug.com.']
     
-    STATIC_PATH_URL = ''
+    STATIC_PATH_URL = None
 else:
     DEBUG = False
     TEMPLATE_DEBUG = False
@@ -57,7 +57,7 @@ else:
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['localhost']
-    
+
     STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
 
 MANAGERS = ADMINS
