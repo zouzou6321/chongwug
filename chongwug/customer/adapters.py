@@ -222,7 +222,6 @@ def buy_detail_adapter(re):
             except:
                 img = None
             othor_pets = farm_pet.pet_set.filter(dele=False)
-            print othor_pets.count()
             min_price = othor_pets.order_by('-price')[0].price
             max_price = othor_pets.order_by('price')[0].price
             count = othor_pets.count()
@@ -245,8 +244,10 @@ def buy_detail_adapter(re):
             min_price = othor_pets.order_by('-price')[0].price
             max_price = othor_pets.order_by('price')[0].price
             recommendpets_img.append({'pet':recommendpet,'img':img,'min_price':min_price,'max_price':max_price})
-            
-        return {'appointtime':__appointtime,'appointdays':__appointdays,'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
+        cuser = None
+        if re.user.is_authenticated():
+            cuser = user.objects.get(auth_user=auth.get_user(re),dele = False)
+        return {'cuser':cuser,'appointtime':__appointtime,'appointdays':__appointdays,'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
 
     elif 'range' in re.GET:
@@ -278,13 +279,9 @@ def buy_attention_adapter(req):
     p = re.compile(__regular_expression_username)
     if not p.match(name):
         return __errorcode__(10)
-    print tel
     p = re.compile(__regular_expression_chinatelnum)
     if not p.match(tel):
         return __errorcode__(9)
-    print req.POST['location']
-    print req.POST['time']
-    print req.POST['phone']
     try:
         location = json.loads(req.POST['location'])
         province = __addresses[location['range']]['sublist'][location['province']]
@@ -298,7 +295,7 @@ def buy_attention_adapter(req):
         appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
     except:
         return __errorcode__(12)
-    print '111111111'
+    
     if transport == 'lift':
         totalpay = __transpay + __servpay
     else:
