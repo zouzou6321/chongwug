@@ -93,6 +93,9 @@ gulp.task('js', function(){
     merge(gulp.src(arr).pipe(plugins.concat('lib/plugins.js')), gulp.src(config.js.src))
         .pipe(gulp.dest(config.js.dev))
         .pipe(plugins.if(prod, plugins.uglify()))
+        .on('error', function(e){
+            console.log(e.toString());
+        })
         .pipe(plugins.if(prod, plugins.rev()))
         .pipe(plugins.if(prod, gulp.dest(config.js.prod)))
         .pipe(plugins.if(prod, plugins.rev.manifest()))

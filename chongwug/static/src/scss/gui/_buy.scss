@@ -52,6 +52,10 @@
   }
 
   background-color: #fff;
+
+  .cwg-container > &{
+    @include box-shadow(2px 2px 4px rgba(127, 127, 127, .3));
+  }
 }
 
 .buy-main{

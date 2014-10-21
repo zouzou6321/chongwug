@@ -3929,6 +3929,9 @@ The provided mixins are intended to be used with the array-like variables
   @media (min-width: 1200px) {
     .content-container {
       width: 1000px; } }
+  .cwg-container > .content-container {
+    -webkit-box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3);
+    box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3); }
 
 @media (min-width: 768px) {
   .buy-main .cwg-search-wrap {

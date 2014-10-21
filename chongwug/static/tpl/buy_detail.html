@@ -353,6 +353,8 @@
 
     function resetOrderInfo($needReset, $form){
         $form[0].reset();
+        validator.resetForm();
+        $form.find('.has-error').removeClass('has-error');
         $liftInput.trigger('click');
 
         $needReset.text(function(){
@@ -375,6 +377,28 @@
         }
     }
 
+    //validate
+    var validator = $orderForm.validate({
+        onsubmit: false,
+        errorElement: 'p',
+        errorClass: 'help-block',
+        ignore: '',
+        rules: {
+            "phone": {
+                minlength: 11,
+                maxlength: 11,
+                digits: true
+            }
+        },
+        highlight: function (el) {
+            $(el).closest('.form-group').addClass('has-error');
+        },
+        success: function (el) {
+            $(el).closest('.form-group').removeClass('has-error');
+            $(el).remove();
+        }
+    });
+
     $('#js-order-info').on('click', '.next-step', function(){
         var $this = $(this),
             arr = $('#js-order-form').serializeArray(),
@@ -388,6 +412,12 @@
         }
 
         $orderModal.data('transportation', data.transportation);
+
+        validator.form();
+
+        if(validator.numberOfInvalids()){
+            return;
+        }
 
         $.ajax({
             url: '/buy/detail/attention/',
@@ -462,13 +492,13 @@
         var text = '2014-' + data.date + '（'+ data.day +'）' + time;
         $time.text(text);
         $('#js-time-input').val('2014-' + data.date + ' ' + time);
+        validator.element('#js-time-input');
         $timeBox.hide();
     });
 
-}(jQuery));
 
 //地址选择
-(function($){
+
 
 var $locationBox = $('#js-location-box'),
     $province = $locationBox.find('#province'),
@@ -569,6 +599,7 @@ var $locationBox = $('#js-location-box'),
         var text = location.join('-');
         $('#js-location').text(text);
         $('#js-location-input').val(JSON.stringify(param));
+        validator.element('#js-location-input');
         $locationBox.hide();
     });
 
