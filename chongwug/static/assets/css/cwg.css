@@ -3251,17 +3251,17 @@ The provided mixins are intended to be used with the array-like variables
   background-image: url(../imgs/sprites.png); }
 
 .sprite-checked {
-  background-position: -121px -36px;
+  background-position: -215px -36px;
   width: 10px;
   height: 10px; }
 
 .sprite-pet {
-  background-position: -60px -36px;
+  background-position: -154px -36px;
   width: 30px;
   height: 24px; }
 
 .sprite-car {
-  background-position: -90px -36px;
+  background-position: -184px -36px;
   width: 31px;
   height: 13px; }
 
@@ -3269,6 +3269,11 @@ The provided mixins are intended to be used with the array-like variables
   background-position: 0px 0px;
   width: 395px;
   height: 36px; }
+
+.sprite-logo-simple {
+  background-position: -60px -36px;
+  width: 94px;
+  height: 30px; }
 
 @font-face {
   font-family: 'fontello';

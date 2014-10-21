@@ -18,3 +18,7 @@
 .sprite-flow{
   @include sprite($sprite-flow);
 }
+
+.sprite-logo-simple{
+  @include sprite($sprite-logo-simple);
+}
