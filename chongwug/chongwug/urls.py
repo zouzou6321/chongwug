@@ -10,7 +10,6 @@ urlpatterns = patterns('',
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),
                        url(r'^market/', include('marketer.urls')),
-                       settings.STATIC_PATH_URL,
     # Examples:
     # url(r'^$', 'chongwug.views.home', name='home'),
     # url(r'^chongwug/', include('chongwug.foo.urls')),
@@ -21,3 +20,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
 )
+
+if settings.STATIC_PATH_URL:
+    urlpatterns.append(settings.STATIC_PATH_URL)
