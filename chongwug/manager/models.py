@@ -50,3 +50,4 @@ class dog123(models.Model):
     naire = models.TextField()
     cityfred = models.TextField()
     imgurl = models.TextField()
+    tixing = models.TextField()

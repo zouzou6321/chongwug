@@ -2,7 +2,7 @@
 from scrapy.spider import Spider  
 from scrapy.http import Request  
 from scrapy.selector import Selector
-import MySQLdb,os,datetime  
+import MySQLdb,os,datetime,string
 from webspider.items import WebspiderItem  
 
 if 'SERVER_SOFTWARE' in os.environ:
@@ -50,6 +50,13 @@ class webspiderSpider(Spider):
             item['nickname'] = tmp[0].encode('utf8').split('：')[1]
             tmp = sel.xpath('//div[@class="Details_main"]/ul/li[6]/text()').extract() 
             item['maleheight'] = tmp[0].encode('utf8').split('：')[1]
+            size = string.atof(item['maleheight'].split('c')[0].split('—')[-1].split('-')[-1].split('>')[-1].split('~')[-1].split('～')[-1].split('－')[-1])
+            if size <= 35:
+                item['tixing'] = u'小型犬'
+            elif size > 35 and size < 60:
+                item['tixing'] = u'中型犬'
+            else:
+                item['tixing'] = u'大型犬'
             tmp = sel.xpath('//div[@class="Details_main"]/ul/li[7]/text()').extract() 
             item['fmaleheight'] = tmp[0].encode('utf8').split('：')[1]
             tmp = sel.xpath('//div[@class="Details_main"]/ul/li[8]/span[2]/em/@style').extract() 
@@ -92,14 +99,14 @@ class webspiderSpider(Spider):
             cur = conn.cursor()
             sql = u"INSERT INTO `manager_dog123`(`url`, `name`, `ename`, `where`, `age`, `nickname`, `maleheight`, `fmaleheight`, `score`,\
             `nianren`, `xijiao`, `diaomao`, `tiwei`, `meirong_hz`, `kidfred`, `otherfred`, `animfred`, `yundong`,`xulian`, `koushui`,\
-            `naihan`, `naire`, `cityfred`, `imgurl`) VALUES ('" + item['url'].decode('utf8') + u"','" + item['name'].decode('utf8') + u"','" + \
+            `naihan`, `naire`, `cityfred`, `imgurl`, `tixing`) VALUES ('" + item['url'].decode('utf8') + u"','" + item['name'].decode('utf8') + u"','" + \
             item['ename'].decode('utf8') + u"','" + item['where'].decode('utf8') + u"','" + item['age'].decode('utf8') + u"','" + \
             item['nickname'].decode('utf8') + u"','" + item['maleheight'].decode('utf8') + u"','" + item['fmaleheight'].decode('utf8')\
             + u"','" + item['score'].decode('utf8') + u"','" + item['nianren'].decode('utf8') + u"','" + item['xijiao'].decode('utf8') + \
             u"','" + item['diaomao'].decode('utf8') + u"','" + item['tiwei'].decode('utf8') + u"','" + item['meirong_hz'].decode('utf8') + \
             u"','" + item['kidfred'].decode('utf8') + u"','" + item['otherfred'].decode('utf8') + u"','" + item['animfred'].decode('utf8') + \
             u"','" + item['yundong'].decode('utf8') + u"','" + item['xulian'].decode('utf8') + u"','" + item['koushui'].decode('utf8') + \
-            u"','" + item['naihan'].decode('utf8') + u"','" + item['naire'].decode('utf8') + u"','" + item['cityfred'].decode('utf8') + u"','" + imgpath + u"')"
+            u"','" + item['naihan'].decode('utf8') + u"','" + item['naire'].decode('utf8') + u"','" + item['cityfred'].decode('utf8') + u"','" + imgpath + u"','" + item['tixing'] + u"')"
             cur.execute(sql)
             conn.commit()
             #conn.close()

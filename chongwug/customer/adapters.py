@@ -340,16 +340,30 @@ def buy_attention_adapter(req):
 
 def get_knowledge_buy(request):
     if 'id' in request.GET:
-        try:
-            knowledge = dog123.objects.get(id=string.atoi(request.REQUEST.get('id')))
-            return {'name':knowledge.name,'ename':knowledge.name,'where':knowledge.where,'age': knowledge.age,'nickname':knowledge.nickname,
-                    'maleheight':knowledge.maleheight,'fmaleheight':knowledge.fmaleheight,'score':knowledge.score,'nianren':knowledge.nianren,
-                    'xijiao':knowledge.xijiao,'diaomao':knowledge.diaomao,'tiwei':knowledge.tiwei,'meirong_hz':knowledge.meirong_hz,
-                    'kidfred':knowledge.kidfred,'otherfred':knowledge.otherfred,'animfred':knowledge.animfred,'yundong':knowledge.yundong,
-                    'xulian':knowledge.xulian,'koushui':knowledge.xulian,'naihan':knowledge.naihan,'naire':knowledge.naire,
-                    'cityfred':knowledge.cityfred,'imgurl':knowledge.imgurl}
-        except:
-            traceback.print_exc()
+
+        knowledge = dog123.objects.get(id=string.atoi(request.REQUEST.get('id')))
+        dogs = dog123.objects.all()
+        return {'name':knowledge.name,'ename':knowledge.name,'where':knowledge.where,'age': knowledge.age,'nickname':knowledge.nickname,
+                'maleheight':knowledge.maleheight,'fmaleheight':knowledge.fmaleheight,'score':knowledge.score,'nianren':knowledge.nianren,
+                'xijiao':knowledge.xijiao,'diaomao':knowledge.diaomao,'tiwei':knowledge.tiwei,'meirong_hz':knowledge.meirong_hz,
+                'kidfred':knowledge.kidfred,'otherfred':knowledge.otherfred,'animfred':knowledge.animfred,'yundong':knowledge.yundong,
+                'xulian':knowledge.xulian,'koushui':knowledge.xulian,'naihan':knowledge.naihan,'naire':knowledge.naire,
+                'cityfred':knowledge.cityfred,'imgurl':knowledge.imgurl}
+
+    elif 'key' in request.GET:
+        small = 35
+        big = 60
+        idlist = []
+        kwargs = {}
+        enums = [['key','name'],['key','nickname'],['key','ename'],['youshan','kidfred'],['tixing','tixing'],['meirong_hz','meirong_hz'],['xulian','xulian'],
+                 ['diaomao','diaomao'],['xijiao','xijiao'],['yundong','yundong'],['koushui','koushui']]
+        for enum in enums:
+            if enum[0] in request.GET:
+                kwargs[enum[1]] = request.REQUEST.get(enum[0])
+        dogsinfo = dog123.objects.filter(**kwargs)
+        for doginfo in dogsinfo:
+            idlist.append(doginfo.id)
+        return {'idlist':idlist}
     else:
         return dog123.objects.all()
 

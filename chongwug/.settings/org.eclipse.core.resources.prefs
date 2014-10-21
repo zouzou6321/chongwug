@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//tests/test_upyun.py=utf-8
+encoding//tools/webspider/webspider/items.py=utf-8
 encoding//tools/webspider/webspider/pipelines.py=utf-8
+encoding//tools/webspider/webspider/spiders/dmoz_spider.py=utf-8
 encoding//upyun/upyun.py=utf-8

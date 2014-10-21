@@ -34,3 +34,4 @@ class WebspiderItem(Item):
     cityfred = Field()
     image_urls = Field()
     image_paths = Field()
+    tixing = Field()

@@ -51,11 +51,12 @@ def buy_attention_view(request):
 def knowledge_buy_view(request):
     try:
         data = adapters.get_knowledge_buy(request)
-        if 'name' in data:
+        if 'name' in data or 'idlist' in data:
             return HttpResponse(__errorcode__(0,data))
         return render_to_response('tpl/knowledge_buy.html',{'page':'knowbuy','knowledges':adapters.get_knowledge_buy(request)})
     except:
         traceback.print_exc()
+        HttpResponse('aa')
 
 def knowledge_bringup_view(request):
     return render_to_response('tpl/knowledge_bringup.html',{'page':'knowbringup'})
