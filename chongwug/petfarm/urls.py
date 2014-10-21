@@ -10,7 +10,6 @@ urlpatterns = patterns(
                        url(r'^nestofpet/picdel/$',manage_nestofpet_picdel_view),
                        url(r'^nestofpet/picadd/upload/$',manage_nestofpet_pic_upload_view),
                        url(r'^petfarm/mod/$',manage_pet_farm_mod_view),
-                       url(r'^petfarm/picadd/$',manage_pet_farm_picadd_view),
                        url(r'^petfarm/picdel/$',manage_pet_farm_picdel_view),
                        url(r'^petfarm/picadd/upload/$',manage_pet_farm_pic_upload_view),
                        url(r'^petfarm/picadd/preupload/$',manage_pet_farm_picpre_view),
