@@ -3897,10 +3897,6 @@ The provided mixins are intended to be used with the array-like variables
     color: #e4bd3f;
     border: 1px solid #e4bd3f; }
 
-.dog-separate {
-  border-top: 1px solid #e5e5e5;
-  padding-bottom: 40px; }
-
 .content-container {
   background-color: #fff; }
   @media (min-width: 1200px) {
@@ -4887,3 +4883,7 @@ img.mfp-img {
     content: ' ';
     display: inline-block;
     vertical-align: middle; }
+
+.row-separate {
+  border-top: 1px solid #e5e5e5;
+  padding-bottom: 20px; }
