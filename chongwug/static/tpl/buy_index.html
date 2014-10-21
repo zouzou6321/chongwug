@@ -8,7 +8,7 @@
 <div class="carousel slide cwg-carousel" data-ride="carousel">
   <div class="carousel-inner">
     {% for ad in ads %}
-    <div class="item{% if forloop.first %} active{% endif %}">
+    <div class="item loading{% if forloop.first %} active{% endif %}">
         <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}"></a>
     </div>
     {% endfor %}

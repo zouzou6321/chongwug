@@ -8,6 +8,10 @@ $indicator-color: #4c4c4c;
 
   padding-bottom: $carousel-padding-bottom;
 
+  .item{
+    min-height: 300px;
+  }
+
   img{
     width: 100%;
   }

@@ -3364,6 +3364,8 @@ The provided mixins are intended to be used with the array-like variables
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 40px; }
+  .cwg-carousel .item {
+    min-height: 300px; }
   .cwg-carousel img {
     width: 100%; }
   .cwg-carousel .carousel-lace {
@@ -4913,3 +4915,6 @@ img.mfp-img {
 .row-separate {
   border-top: 1px solid #e5e5e5;
   padding-bottom: 20px; }
+
+.loading {
+  background: url(../imgs/loading.gif) center no-repeat; }
