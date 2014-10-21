@@ -4,7 +4,7 @@ from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
-from chongwug.config import __petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd
+from chongwug.config import __petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes
 from chongwug.commom import __errorcode__
 from upyun import UpYun
 from django.contrib import auth
@@ -79,6 +79,13 @@ def get_petpic_types():
         types.append({'type':petpictype[1],'desc':petpictype[2],'width':petpictype[3],'height':petpictype[4]})
     return {'types':types}
 
+
+def get_farmpic_types():
+    types = []
+    for farmpictype in __farmpictypes:
+        types.append({'type':farmpictype[1],'desc':farmpictype[2],'width':farmpictype[3],'height':farmpictype[4]})
+    return {'types':types}
+
 def petpic_upload_pre(request):
     imgw,imgh = 0,0
     for petpictype in __petpictypes:
@@ -86,6 +93,15 @@ def petpic_upload_pre(request):
             imgw = petpictype[3]
         if imgh < petpictype[4]:
             imgh = petpictype[4]
+    return imgw,imgh
+
+def farmpic_upload_pre(request):
+    imgw,imgh = 0,0
+    for farmpictype in __farmpictypes:
+        if imgw < farmpictype[3]:
+            imgw = farmpictype[3]
+        if imgh < farmpictype[4]:
+            imgh = farmpictype[4]
     return imgw,imgh
 
 def manage_nestofpet_picpreupload(request,_nestofpet):
@@ -212,6 +228,7 @@ def manage_picupload(photo,width,height):
     if img.mode != 'RGB':
         img = img.convert('RGB')
     w,h = img.size
+    
     if w > 1170:
         img.thumbnail((1170,3000))
         w,h = img.size

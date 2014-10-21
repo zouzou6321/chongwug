@@ -35,6 +35,7 @@ def manage_pet_farm_mod_view(request):
         if adapters.manage_pet_farm_mod(request) == False:
             return HttpResponse(__errorcode__(2))
     data = adapters.manage_home_data_get(request)
+    data['types'] = adapters.get_farmpic_types()['types']
     return render_to_response('petfarm/tpl/manage_pet_farm_mod.html',data,context_instance=RequestContext(request))
 
 def manage_pet_farm_picadd_view(request):
@@ -54,7 +55,8 @@ def manage_nestofpet_pic_upload_view(request):
 @csrf_exempt
 def manage_pet_farm_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
-    return HttpResponse(adapters.manage_picupload(photo,250,178))
+    imgw,imgh = adapters.farmpic_upload_pre(request)
+    return HttpResponse(adapters.manage_picupload(photo,imgw,imgh))
 
 def manage_pet_farm_picpre_view(request):
     if adapters.manage_authentication(request) == False:
