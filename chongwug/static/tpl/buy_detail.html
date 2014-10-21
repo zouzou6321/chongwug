@@ -219,7 +219,7 @@
                                             <p>月龄：{{ pet_img.pet.age }}个月</p>
                                             <p>价格：<span class="price price-light price-sm">{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元</span></span></p>
                                             <p>
-                                                <a class="btn btn-primary" href="/buy/detail/?petid={{ pet_img.pet.id }}">详细信息</a>
+                                                <a class="btn btn-primary btn-trans" href="/buy/detail/?petid={{ pet_img.pet.id }}" target="_blank">详细信息</a>
                                                 <button class="btn btn-primary btn-trans js-btn-order" data-id="{{ pet_img.pet.id }}" type="button">预约看狗</button>
                                             </p>
                                         </div>

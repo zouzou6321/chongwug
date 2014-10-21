@@ -3466,7 +3466,7 @@ The provided mixins are intended to be used with the array-like variables
   background-color: #b2b2b2;
   border-color: #b2b2b2; }
 
-.btn-trans, .btn-trans:hover {
+.btn-trans {
   background-color: transparent; }
 
 .btn-check {
@@ -4243,8 +4243,11 @@ label {
   text-align: left;
   vertical-align: middle; }
 .pet-showcase .btn-trans {
-  color: #ff3500;
-  margin-left: 10px; }
+  margin-left: 10px;
+  color: #ff3500; }
+  .pet-showcase .btn-trans:hover {
+    color: #fff;
+    background-color: #ff3500; }
 
 /* Magnific Popup CSS */
 .mfp-bg {

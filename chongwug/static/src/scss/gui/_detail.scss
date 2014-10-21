@@ -355,8 +355,13 @@ label{
   }
 
   .btn-trans{
-    color: $primary-color;
     margin-left: 10px;
+    color: $primary-color;
+
+    &:hover{
+      color: #fff;
+      background-color: $primary-color;
+    }
   }
 }
 
