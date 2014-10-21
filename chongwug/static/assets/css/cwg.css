@@ -3909,14 +3909,24 @@ The provided mixins are intended to be used with the array-like variables
     padding-bottom: 30px; } }
 .buy-main .no-result {
   margin-bottom: 40px; }
-@media (min-width: 992px) {
-  .buy-main .dog-list {
-    margin-left: -25px;
-    margin-right: -25px; } }
-@media (min-width: 992px) {
-  .buy-main .col-md-4 {
-    padding-left: 10px;
-    padding-right: 10px; } }
+.buy-main .dog-list {
+  margin-top: -5px;
+  padding: 0 10px 20px 10px; }
+  @media (min-width: 992px) { }
+.buy-main .dog-list-item {
+  border: 1px solid transparent; }
+  @media (min-width: 992px) {
+    .buy-main .dog-list-item {
+      padding: 10px 10px 0 10px; } }
+  .buy-main .dog-list-item:hover {
+    border-color: #f6f5f5;
+    -webkit-transition: box-shadow 0.3s ease-in;
+    -o-transition: box-shadow 0.3s ease-in;
+    transition: box-shadow 0.3s ease-in;
+    -webkit-box-shadow: 0px 0px 4px 2px rgba(127, 127, 127, 0.2);
+    box-shadow: 0px 0px 4px 2px rgba(127, 127, 127, 0.2); }
+    :root .buy-main .dog-list-item:hover {
+      border-color: transparent; }
 .buy-main .dog-desc {
   padding: 15px; }
   .buy-main .dog-desc h4 {
