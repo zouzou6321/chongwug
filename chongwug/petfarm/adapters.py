@@ -104,8 +104,14 @@ def farmpic_upload_pre(request):
             imgh = farmpictype[4]
     return imgw,imgh
 
-def manage_nestofpet_picpreupload(request,_nestofpet):
+def manage_picpreupload(request,_from,_nestofpet=None):
     img_count = string.atoi(request.POST['img-count'])
+    if _from == 'farm':
+        pictypes = __farmpictypes
+        pic_root = settings.PET_FARM_PIC_ROOT
+    elif _from == 'pet':
+        pictypes = __petpictypes
+        pic_root = settings.PET_PIC_ROOT
     #挨个处理上传的图片数据
     itr = 0
     while itr < img_count:
@@ -113,14 +119,13 @@ def manage_nestofpet_picpreupload(request,_nestofpet):
         #挨个获取图片并且判断图片是否存在
         try:
             imgw,imgh = 0,0
-            for petpictype in __petpictypes:
-                if request.POST['img-%d-type' % itr] == petpictype[1]:
-                    imgw = petpictype[3]
-                    imgh = petpictype[4]
+            for pictype in pictypes:
+                if request.POST['img-%d-type' % itr] == pictype[1]:
+                    imgw = pictype[3]
+                    imgh = pictype[4]
                     break
         except:
             continue
-        
         #判断图片类型是否有异常
         if imgw == 0 or imgh == 0:
             return __errorcode__(1)
@@ -129,13 +134,25 @@ def manage_nestofpet_picpreupload(request,_nestofpet):
         pic_args = {'source':request.POST['img-%d' % itr].split('/')[-1],'x1':imginfo_json['x'],
                     'x2':imginfo_json['x2'],'y1':imginfo_json['y'],'y2':imginfo_json['y2']}
 
-        img_url = pic_crop_save(pic_args,settings.PET_PIC_ROOT,imgh,imgw)
+        img_url = pic_crop_save(pic_args,pic_root,imgh,imgw)
         if img_url == 'type error':
-            _nestofpet.delete()
+            if _nestofpet:
+                _nestofpet.delete()
             return __errorcode__(4)
         
-        #把图片信息存入数据库
-        pet_sql = nestofpet_img( nestofpet_id = _nestofpet,
+        #把url存入数据库
+        if _from == 'farm':
+            pet_farm_sql = pet_farm_img( pet_farm_id = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm,
+                                    img_url = img_url,
+                                    img_with = int(pic_args['x2'] - pic_args['x1']),
+                                    img_height = int(pic_args['y2'] - pic_args['y1']),
+                                    #img_type:jpg/png/...
+                                    img_type = 'jpg',
+                                    #图片用途
+                                    img_usefor = request.POST['img-%d-type' % itr])
+            pet_farm_sql.save()
+        elif _from == 'pet':
+            pet_sql = nestofpet_img( nestofpet_id = _nestofpet,
                                 img_url = img_url,
                                 img_with = int(pic_args['x2'] - pic_args['x1']),
                                 img_height = int(pic_args['y2'] - pic_args['y1']),
@@ -143,8 +160,9 @@ def manage_nestofpet_picpreupload(request,_nestofpet):
                                 img_type = 'jpg',
                                 #图片用途
                                 img_usefor = request.POST['img-%d-type' % itr])
-        pet_sql.save()
+            pet_sql.save()
     return __errorcode__(0)
+
 def manage_nestofpet_add(request):
     try:
         farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm
@@ -159,12 +177,14 @@ def manage_nestofpet_add(request):
         new_nestofpet.save()
     except NameError:
         return __errorcode__(2)
+    print '4444'
     try:
         new_petscount = string.atoi(request.POST['count'])
         petnum = 0
         while petnum < new_petscount:
             petnum += 1
             try:
+                print '55555'
                 new_pet = pet(  nestofpet = new_nestofpet,
                                 index = chr(ord('A') + (petnum - 1)),
                                 color = request.POST['color%d' % petnum],
@@ -173,22 +193,19 @@ def manage_nestofpet_add(request):
                                 sex = request.POST['sex%d' % petnum],
                                 sale_out = ((request.POST['sale%d' % petnum] == '1') and 1) or 0)
                 new_pet.save()
+                print '66666'
             except:
+                print '3333'
                 if petnum > 1:
                     pass
                 else:
                     raise NameError,("first pet can't create","in adapters.py")
     except:
+        print '2222'
         new_nestofpet.delete()
         return __errorcode__(2)
-    
-    return manage_nestofpet_picpreupload(request,new_nestofpet)
-
-def manage_pet_farm_picadd(request):
-    use_fors = []
-    use_fors.append('buy_home')
-    use_fors.append('narmol')
-    return {'use_fors':use_fors}
+    print '11111'
+    return manage_picpreupload(request,'pet',new_nestofpet)
 
 def pet_farm_all():
     farms = pet_farm.objects.filter(dele=False)
@@ -215,8 +232,11 @@ def manage_pet_farm_mod(request):
         curuser.petfarm.min_prince = request.POST['min_prince']
         curuser.save()
     except NameError:
-        return False
-    return True
+        return __errorcode__(2)
+    try:
+        return manage_picpreupload(request,'farm')
+    except:
+        trance
 
 def manage_picupload(photo,width,height):
     if photo == None:
@@ -249,25 +269,6 @@ def manage_picupload(photo,width,height):
         monitor.save()
     data = {'url':'/static'+url,"width":str(w),"height":str(h)}
     return __errorcode__(0,data)
-    
-def manage_pet_farm_picpreupload(request):
-    if 'source' in request.POST:
-        max_height = 178
-        max_width = 250
-        img_url = pic_crop_save(request,settings.PET_FARM_PIC_ROOT,max_height,max_width)
-        if img_url == 'type error':
-            return 'type error'
-        #把url存入数据库
-        pet_farm_sql = pet_farm_img( pet_farm_id = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm,
-                                img_url = img_url,
-                                img_with = string.atoi(request.POST['x2']) - string.atoi(request.POST['x1']),
-                                img_height = string.atoi(request.POST['y2']) - string.atoi(request.POST['y1']),
-                                #img_type:jpg/png/...
-                                img_type = 'png',
-                                #图片用途
-                                img_usefor = request.POST['usefor'])
-        pet_farm_sql.save()
-    return __errorcode__()
 
 def manage_get_pets(request):
     curuser = user.objects.get(auth_user=auth.get_user(request),dele = False)

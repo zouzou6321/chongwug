@@ -32,19 +32,10 @@ def manage_pet_farm_mod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(PETFARM_ROOT)
     if request.method == 'POST':
-        if adapters.manage_pet_farm_mod(request) == False:
-            return HttpResponse(__errorcode__(2))
+        return HttpResponse(adapters.manage_pet_farm_mod(request))
     data = adapters.manage_home_data_get(request)
     data['types'] = adapters.get_farmpic_types()['types']
     return render_to_response('petfarm/tpl/manage_pet_farm_mod.html',data,context_instance=RequestContext(request))
-
-def manage_pet_farm_picadd_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(PETFARM_ROOT)
-    page_data = adapters.manage_pet_farm_picadd(request)
-    data = adapters.manage_home_data_get(request)
-    page_data['manager'] = data['manager']
-    return render_to_response('petfarm/tpl/manage_pet_farm_picadd.html',page_data,context_instance=RequestContext(request))
 
 @csrf_exempt
 def manage_nestofpet_pic_upload_view(request):
@@ -57,11 +48,6 @@ def manage_pet_farm_pic_upload_view(request):
     photo = request.FILES.get('Filedata',None)
     imgw,imgh = adapters.farmpic_upload_pre(request)
     return HttpResponse(adapters.manage_picupload(photo,imgw,imgh))
-
-def manage_pet_farm_picpre_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponse(__errorcode__(1))
-    return HttpResponse(adapters.manage_pet_farm_picpreupload(request))
 
 def manage_pet_farm_picdel_view(request):
     if adapters.manage_authentication(request) == False:
