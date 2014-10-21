@@ -15,5 +15,6 @@
     "jquery.magnific-popup": true,
     "custom-plugins": true,
     "jquery.lazyload": true,
-    "template": true
+    "template": true,
+    "jquery.validate": true
 }

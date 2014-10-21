@@ -353,6 +353,8 @@
 
     function resetOrderInfo($needReset, $form){
         $form[0].reset();
+        validator.resetForm();
+        $form.find('.has-error').removeClass('has-error');
         $liftInput.trigger('click');
 
         $needReset.text(function(){
@@ -375,6 +377,20 @@
         }
     }
 
+    //validate
+    var validator = $orderForm.validate({
+        errorElement: 'p',
+        errorClass: 'help-block',
+        ignore: '',
+        highlight: function (el) {
+            $(el).closest('.form-group').addClass('has-error');
+        },
+        success: function (el) {
+            $(el).closest('.form-group').removeClass('has-error');
+            $(el).remove();
+        }
+    });
+
     $('#js-order-info').on('click', '.next-step', function(){
         var $this = $(this),
             arr = $('#js-order-form').serializeArray(),
@@ -388,6 +404,12 @@
         }
 
         $orderModal.data('transportation', data.transportation);
+
+        validator.form();
+
+        if(validator.numberOfInvalids()){
+            return;
+        }
 
         $.ajax({
             url: '/buy/detail/attention/',
