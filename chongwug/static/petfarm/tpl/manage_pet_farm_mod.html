@@ -159,7 +159,7 @@ $.crop({
     var $form = $('#js-form'),
         $submit = $form.find('#js-btn-submit');
 
-    $form.on('submit', function(){
+    $submit.on('click', function(){
         $submit.button('loading');
 
         var data = {};
