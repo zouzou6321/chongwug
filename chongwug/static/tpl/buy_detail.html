@@ -382,6 +382,13 @@
         errorElement: 'p',
         errorClass: 'help-block',
         ignore: '',
+        rules: {
+            "phone": {
+                minlength: 11,
+                maxlength: 11,
+                digits: true
+            }
+        },
         highlight: function (el) {
             $(el).closest('.form-group').addClass('has-error');
         },

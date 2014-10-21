@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label for="phone" class="col-sm-4 control-label text-muted">您的手机：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control radius-none required" id="phone" name="phone" value="{% if cuser%}{{ cuser.tel }}{% endif %}">
+                        <input type="text" maxlength="11" class="form-control radius-none required phone" id="phone" name="phone" value="{% if cuser%}{{ cuser.tel }}{% endif %}">
                     </div>
                 </div>
                 <div class="form-group">
