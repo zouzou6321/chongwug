@@ -3316,6 +3316,12 @@ The provided mixins are intended to be used with the array-like variables
   /* Uncomment for 3D effect */
   text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); }
 
+.icon-sm {
+  font-size: 14px; }
+
+.icon-md {
+  font-size: 16px; }
+
 .icon-help-circled:before {
   content: '\e804'; }
 
@@ -4019,7 +4025,8 @@ The provided mixins are intended to be used with the array-like variables
   padding-right: 40px; }
 
 .detail-main {
-  padding: 20px 0 50px 15px; }
+  padding-top: 20px;
+  padding-bottom: 20px; }
 
 .thumbnail-wrap {
   width: 330px;
@@ -4215,7 +4222,7 @@ label {
   font-weight: bold; }
 
 .most-popular {
-  padding: 0 35px; }
+  padding-top: 47px; }
   .most-popular .dog-desc {
     padding: 10px 0; }
     .most-popular .dog-desc h4 {

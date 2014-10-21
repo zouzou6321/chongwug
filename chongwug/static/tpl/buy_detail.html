@@ -106,7 +106,7 @@
                         <div class="info-td-right">
                             <button class="btn btn-primary btn-order js-btn-order" data-id="{{ nestpet.id }}" type="button">预约看狗</button>
                             <a href="http://wpa.qq.com/msgrd?v=3&uin=399632600&site=qq&menu=yes" target="_blank" class="btn btn-info btn-consult">在线咨询</a>
-                            <a href="" class="cwg-clause"><i class="icon icon-help-circled"></i>购犬须知</a>
+                            <a href="" class="cwg-clause"><i class="icon icon-help-circled icon-sm"></i>购犬须知</a>
                         </div>
                     </div>
                 </div>
@@ -154,9 +154,9 @@
                                     <td>{{ pet.color }}</td>
                                     <td>
                                     	{% if pet.epidemic_period == '已种疫苗' %}
-                                        <i class="icon icon-ok-circled text-primary"></i>
+                                        <i class="icon icon-ok-circled text-primary icon-md"></i>
                                         {% elif pet.epidemic_period == '未种疫苗' %}
-                                        <i class="icon icon-ok-circled text-muted"></i>
+                                        <i class="icon icon-ok-circled text-muted icon-md"></i>
                                         {% else %}
                                         {{ pet.epidemic_period }}
                                         {% endif %}
@@ -188,7 +188,7 @@
                             {% endfor %}
                         </div>
                         <table class="table table-primary table-pet-kennel">
-                            <caption>犬舍信息</caption>
+{#                            <caption>犬舍信息</caption>#}
                             <colgroup>
                                 <col width="160px"/>
                             </colgroup>
@@ -247,6 +247,7 @@
                 </div>
             </div>
             <div class="col-md-3 most-popular">
+            <h5><strong>热门犬种</strong></h5>
             {% for recommendpet_img in recommendpets_img %}
                 <div>
                     <a href="?petid={{ recommendpet_img.pet.id }}">
