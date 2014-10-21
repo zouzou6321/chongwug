@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #所有图片的图片用途,目前暂时包括广告图片、宠物图片、养殖场图片
 __adtypes = [[0,'nav_m','首页主广告']]
-__petpictypes = [[0,u'buy_main',u'主图',275,180],[1,u'normal',u'辅图',600,400]]
+__petpictypes = [[0,u'buy_main',u'主图',320,209],[1,u'normal',u'辅图',600,400]]
 __farmpictypes = [[0,u'buy_home',u'首页展示图',275,180],[1,u'normal',u'养殖场介绍图',600,400]]
 
 #系统支持的犬种
@@ -22,7 +22,7 @@ __upyun_pwd = 'weet6321'
 
 #系统使用的正则表达式
 __regular_expression_telnum = r'1\d{10}'
-__regular_expression_chinatelnum = r'(\d{4}-|\d{3}-)?(\d{8}|\d{7})'
+__regular_expression_chinatelnum = r'^\(?0\d{2,3}\)?[- ]?\d{7,8}|^0\d{2,3}[- ]?\d{7,8}|^1\d{10}|\(?\+?\d{2,3}\)?[- ]?0\d{2,3}[- ]?\d{7,8}|^\d{7,8}'
 __regular_expression_username = u'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
 __regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
 
@@ -106,6 +106,8 @@ __errorcode = [
                [8,u'the pet sale out',u'实在抱歉，您想预定的宠物售罄了！'],
                [9,u'telephone num error',u'您这电话号码不对哦，任谁都通过它联系不到您呢~！'],
                [10,u'name error',u'您的名字~！'],
+               [11,u'address error',u'您选择的地址不对呢！'],
+               [12,u'time error',u'您选择的时间不对呢！'],
                [404,u'page not found',u'页面不存在'],
                [500,u'internal fault',u'服务器内部错误']
               ]

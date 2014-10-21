@@ -265,7 +265,6 @@ def buy_attention_adapter(req):
     petid = string.atoi(req.POST['id'])
     name = req.POST['name']
     tel = req.POST['phone']
-    location = json.loads(req.POST['location'])
     transport = req.POST['transportation']
     
     try:
@@ -275,23 +274,33 @@ def buy_attention_adapter(req):
     p = re.compile(__regular_expression_username)
     if not p.match(name):
         return __errorcode__(10)
-    p = re.compile(__regular_expression_telnum)
+    print tel
+    p = re.compile(__regular_expression_chinatelnum)
     if not p.match(tel):
-        p = re.compile(__regular_expression_chinatelnum)
-        if not p.match(tel):
-            return __errorcode__(9)
-
-    province = __addresses[location['range']]['sublist'][location['province']]
-    city = province['sublist'][location['city']]
-    district = city['sublist'][location['district']]
-    street = district['sublist'][location['street']]
-    waitpoint = district['waitpoint']
+        return __errorcode__(9)
+    print req.POST['location']
+    print req.POST['time']
+    print req.POST['phone']
+    try:
+        location = json.loads(req.POST['location'])
+        province = __addresses[location['range']]['sublist'][location['province']]
+        city = province['sublist'][location['city']]
+        district = city['sublist'][location['district']]
+        street = district['sublist'][location['street']]
+        waitpoint = district['waitpoint']
+    except:
+        return __errorcode__(11)
+    try:
+        appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
+    except:
+        return __errorcode__(12)
+    print '111111111'
     if transport == 'lift':
         totalpay = __transpay + __servpay
     else:
         totalpay = __transpay
     attentions = nestofpet_attention.objects.filter(dele=False,nestofpet_id=cupet)
-    appoint_time = datetime.datetime.strptime(req.POST['time'], u"%Y-%m-%d %H:%M")
+    
     if not req.user.is_authenticated():
         auth_user = None
         try:
