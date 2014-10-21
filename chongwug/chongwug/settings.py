@@ -12,9 +12,15 @@ if 'SERVER_SOFTWARE' in os.environ:
     DEBUG = False
     TEMPLATE_DEBUG = False
     
-    ADMINS = (
-              (u'赱赱', '692673390@qq.com'),
-             )
+    ADMINS = [
+              '692673390@qq.com',
+             ]
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = False
+    EMAIL_HOST = 'smtp.163.com'
+    EMAIL_PORT = 25
+    EMAIL_HOST_USER = 'fccsl6321@163.com'
+    EMAIL_HOST_PASSWORD = '8792833'
     
     MYSQL_HOST = 'chongwug.mysql.rds.aliyuncs.com'
     MYSQL_PORT = '3306'
@@ -28,17 +34,18 @@ if 'SERVER_SOFTWARE' in os.environ:
     
     STATIC_PATH_URL = ''
 else:
-    DEBUG = True
-    TEMPLATE_DEBUG = True
+    DEBUG = False
+    TEMPLATE_DEBUG = False
     
-    ADMINS = (
-              (u'赱赱', '692673390@qq.com'),
-             )
-    #EMAIL_USE_TLS = True
-    #EMAIL_HOST = 'smtp.exmail.qq.com'
-    #EMAIL_PORT = 465
-    #EMAIL_HOST_USER = 'zouzou@chongwug.com'
-    #EMAIL_HOST_PASSWORD = 'weet6321'
+    ADMINS = [
+              '692673390@qq.com',
+             ]
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = False
+    EMAIL_HOST = 'smtp.163.com'
+    EMAIL_PORT = 25
+    EMAIL_HOST_USER = 'fccsl6321@163.com'
+    EMAIL_HOST_PASSWORD = '8792833'
     
    # Make `python manage.py syncdb` works happy!
     MYSQL_HOST = 'localhost'
@@ -200,7 +207,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+            'class': 'chongwug.commom.myAdminEmailHandler'
         }
     },
     'loggers': {
