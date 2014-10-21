@@ -22,28 +22,24 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-11 col-md-offset-0_5">
-            <div class="row cwg-area-row">
-            	{% for direct_farm in direct_farms %}
-                <div class="col-xs-6 col-sm-3 cwg-area">
-                    <h2><a href="/buy/?direct=东" >城{{ direct_farm.direct }}犬舍</a></h2>
-                    <div>
-                    	{% if direct_farm.pic %}
-                        <a href="/buy/?direct={{ direct_farm.direct }}">
-                            <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy">
-                        </a>
-                        {% else %}
-                        <a href="/buy/?direct={{ direct_farm.direct }}">
-                            <img  src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ 'imgs/test.jpg'|assets }}" class="img-full js-lazy">
-                        </a>
-                     	{% endif %}
-                        <p><span class="price price-lg">{{ direct_farm.farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>
-                    </div>
-                </div>
-                {% endfor %}
+    <div class="row cwg-area-row">
+        {% for direct_farm in direct_farms %}
+        <div class="col-xs-6 col-sm-3 cwg-area">
+            <h2><a href="/buy/?direct=东" >城{{ direct_farm.direct }}犬舍</a></h2>
+            <div>
+                {% if direct_farm.pic %}
+                <a href="/buy/?direct={{ direct_farm.direct }}">
+                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy">
+                </a>
+                {% else %}
+                <a href="/buy/?direct={{ direct_farm.direct }}">
+                    <img  src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ 'imgs/test.jpg'|assets }}" class="img-full js-lazy">
+                </a>
+                {% endif %}
+                <p><span class="price price-lg">{{ direct_farm.farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 
