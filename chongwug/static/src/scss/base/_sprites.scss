@@ -6,3 +6,11 @@
 .sprite-checked{
   @include sprite($sprite-checked);
 }
+
+.sprite-pet{
+  @include sprite($sprite-pet);
+}
+
+.sprite-car{
+  @include sprite($sprite-car);
+}

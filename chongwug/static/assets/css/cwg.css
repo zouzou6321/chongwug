@@ -3255,6 +3255,16 @@ The provided mixins are intended to be used with the array-like variables
   width: 10px;
   height: 10px; }
 
+.sprite-pet {
+  background-position: -60px -36px;
+  width: 30px;
+  height: 24px; }
+
+.sprite-car {
+  background-position: -90px -36px;
+  width: 31px;
+  height: 13px; }
+
 @font-face {
   font-family: 'fontello';
   src: url('../fonts/fontello.eot?36564404');
@@ -3543,9 +3553,10 @@ The provided mixins are intended to be used with the array-like variables
   top: 0;
   left: 10px;
   z-index: 11;
+  background-image: url(../imgs/sprites.png);
+  background-position: 0px -36px;
   width: 60px;
   height: 34px;
-  background: url(../imgs/tag.png);
   color: #fff;
   text-align: center;
   padding-top: 5px; }
@@ -4177,18 +4188,6 @@ label {
 
 .table-pet-kennel > tbody > tr > td {
   padding: 12px; }
-
-.pet-icon {
-  display: inline-block;
-  width: 30px;
-  height: 24px;
-  background: url(../imgs/pet.png); }
-
-.icon-car {
-  display: inline-block;
-  width: 31px;
-  height: 13px;
-  background: url(../imgs/car.png); }
 
 .pet-tip {
   padding-left: 12px;
