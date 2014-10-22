@@ -4722,7 +4722,9 @@ img.mfp-img {
     display: none; }
 
 .cwg-navbar-sub {
-  background: #ffd401; }
+  background: #ffd401;
+  -webkit-box-shadow: 0 1px 2px rgba(127, 127, 127, 0.3);
+  box-shadow: 0 1px 2px rgba(127, 127, 127, 0.3); }
   .cwg-navbar-sub .nav a {
     line-height: 20px;
     font-size: 16px;
