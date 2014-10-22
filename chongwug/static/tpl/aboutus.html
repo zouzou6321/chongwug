@@ -4,17 +4,54 @@
 {% block title %}关于宠物购|宠物购 只为给你一只健康可爱的狗狗{% endblock %}
 
 {% block content %}
-<div class="cwg-container">
-<div class="container" style="height:300px;font-size:30px;background-color:#fff">
-	<div class="row">
-        <div class="col-md-11 col-md-offset-0_5">
-            <div class="row cwg-area-row">
-        		<div class="col-xs-6 col-sm-12">
-				“宠物购”是国内首家O2O的宠物犬交易平台，用户可以通过平台找到购买自己喜欢的狗狗的养殖场，跨过狗市及宠物店，直接去养殖场购买爱犬。刚获得北京著名天使投资人的种子轮投资，产品目前还处于研发阶段，团队目前正在逐渐壮大！
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<div class="cwg-container aboutus">
+    <div class="container breadcrumb-container">
+        <ol class="breadcrumb">
+          <li><a href="/home">首页</a></li>
+          <li class="active">关于宠物购</li>
+        </ol>
+    </div>
+    <div class="container content-container">
+        <div class="about-title">
+            <h1 class="text-uppercase">about us</h1>
+            <h2>关于我们</h2>
+            <p>————</p>
+        </div>
+        <h3 class="about-for">“宠物购”是定位于活体宠物犬交易的平台</h3>
+        <div class="about-item">
+            <h4>我们的宗旨</h4>
+            <p>让爱犬人士方便快捷的找到适合并需要你的爱犬</p>
+        </div>
+        <div class="about-item">
+            <h4>我们的目标</h4>
+            <p>成为国内最大的活体宠物交易平台</p>
+        </div>
+        <div class="about-item">
+            <h4>我们的初衷</h4>
+            <p>
+                让爱犬并想养狗狗的人士不再被“星期狗”所困扰， <br/>
+                我们将让您与犬舍、养殖场或被宠物购实际考察认定的宠物店直接对接，<br/>
+                让广大购犬人士不再买到“星期狗”，<br/>
+                在“宠物购”你将买到健康、好品相的纯种及血统狗狗。<br/>
+                目前，我们的覆盖范围仅限于成都，未来，我们将覆盖更多的城市乃至全国。
+            </p>
+        </div>
+        <h1 class="about-action">你还在犹豫什么呢？放心购（狗）吧！</h1>
+        <div class="row">
+            <div class="xs-col-12 clearfix workspace-wrap">
+                <img src="{{ 'imgs/workspace.jpg'|assets }}" class="pull-left"/>
+                <div class="pull-left text-left text-uppercase workspace-desc vertical-center">
+                    <p>
+                        good <br/>
+                        working <br/>
+                        conditions
+                    </p>
+                </div>
+                <div class="pull-left vertical-center">
+                    <img src="{{ 'imgs/logo-original.png'|assets }}" class="logo-original"/>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

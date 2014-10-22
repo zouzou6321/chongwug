@@ -4179,7 +4179,8 @@ label {
     box-shadow: 0 2px 4px rgba(221, 221, 221, 0.6); }
   .detail-navbar .container {
     background-color: #fffcf0;
-    padding-left: 0; }
+    padding-left: 0;
+    padding-top: 0; }
   .detail-navbar .placard {
     font-weight: normal;
     border-radius: 0;
@@ -4916,6 +4917,44 @@ img.mfp-img {
     color: #ffd401;
     font-weight: bold;
     font-size: 18px; }
+
+.aboutus .content-container {
+  text-align: center;
+  padding-bottom: 130px;
+  padding-top: 20px;
+  color: #787878; }
+.aboutus .about-title {
+  color: #000; }
+.aboutus .about-for {
+  font-size: 25px;
+  margin-bottom: 50px; }
+.aboutus .about-action {
+  font-size: 30px;
+  margin: 50px 0; }
+.aboutus .about-item {
+  margin-bottom: 25px; }
+  .aboutus .about-item h4 {
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold; }
+  .aboutus .about-item p {
+    font-size: 16px; }
+.aboutus .workspace-wrap {
+  height: 200px;
+  background: #ffd401; }
+.aboutus .workspace-desc {
+  color: #fff;
+  background: #c4c4c4;
+  font-size: 30px;
+  line-height: 35px;
+  padding: 0 10px 0 5px; }
+  .aboutus .workspace-desc p {
+    vertical-align: middle;
+    display: inline-block; }
+.aboutus .logo-original {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 120px; }
 
 /**
  * Style trumps; helper and brand classes

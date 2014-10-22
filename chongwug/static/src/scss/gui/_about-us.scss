@@ -1,0 +1,60 @@
+.aboutus{
+  .content-container {
+    text-align: center;
+    padding-bottom: 130px;
+    padding-top: 20px;
+    color: #787878;
+  }
+
+  .about-title{
+    color: #000;
+  }
+
+  .about-for{
+    font-size: 25px;
+    margin-bottom: 50px;
+  }
+
+  .about-action{
+    font-size: 30px;
+    margin: 50px 0;
+  }
+
+  .about-item{
+    h4{
+      margin-bottom: 5px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    p{
+      font-size: 16px;
+    }
+
+    margin-bottom: 25px;
+  }
+
+  .workspace-wrap{
+    height: 200px;
+    background: $primary-bg-color;
+  }
+
+  .workspace-desc{
+    color: #fff;
+    background: #c4c4c4;
+    font-size: 30px;
+    line-height: 35px;
+    padding: 0 10px 0 5px;
+
+    p{
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+
+  .logo-original{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 120px;
+  }
+}
