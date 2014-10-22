@@ -4331,6 +4331,8 @@ label {
       padding-bottom: 2px; }
 
 /*其他犬种*/
+.pet-showcase .pet-showcase-wrap {
+  padding-bottom: 20px; }
 .pet-showcase .pet-showcase-item {
   padding-top: 2px; }
   .pet-showcase .pet-showcase-item:hover .shade-content {
