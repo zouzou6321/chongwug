@@ -4,20 +4,44 @@
 {% block title %}联系我们|宠物购 只为给你一只健康可爱的狗狗{% endblock %}
 
 {% block content %}
-<div class="cwg-container">
-<div class="container" style="height:300px;font-size:30px;background-color:#fff">
-	<div class="row">
-        <div class="col-md-11 col-md-offset-0_5">
-            <div class="row cwg-area-row">
-        		<div class="col-xs-6 col-sm-12">
-				<p>商务合作：xxxxxxx</p>
-				<p>联系电话：XXXXXXX</p>
-				<p>邮箱：XXXXXXX</p>
-				<p>地址：成都市高新区天府软件园D区创业场</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<div class="cwg-container aboutus">
+    <div class="container breadcrumb-container">
+        <ol class="breadcrumb">
+          <li><a href="/home">首页</a></li>
+          <li class="active">联系我们</li>
+        </ol>
+    </div>
+    <div class="container content-container padding-sm">
+        <div class="about-top">
+            <img src="{{ 'imgs/map.jpg'|assets }}" class="img-full"/>
+            <div class="about-desc text-center">
+                <h1 class="text-uppercase">contactus</h1>
+                <h2>我们随时欢迎您的咨询</h2>
+                <p>Wellcome your inquiry anytime...</p>
+            </div>
+        </div>
+        <div class="row text-left margin-sm row-contact">
+            <div class="col-sm-4 col-md-offset-0_5">
+                <div class="contact-tel">
+                    <h1><i>028-85230309</i></h1>
+                    <p class="text-muted">If you hace any questions please call us...</p>
+                </div>
+                <div class="contact-addr">
+                    <p class="contact-sub-tit">地址 &bull; Address</p>
+                    <p class="text-muted">成都高新区天府软件园 D5 创业场</p>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-offset-0_5">
+                <p class="contact-sub-tit">其他 &bull; Other</p>
+                <p class="contact-sub-content">邮箱：xxx@yyy.com</p>
+                <p class="contact-sub-content">微博：<a href="http://weibo.com/chongwug" target="_blank">宠物购</a></p>
+                <p class="contact-sub-content">网址：<a href="http://www.chongwug.com">http://www.chongwug.com</a></p>
+            </div>
+            <div class="col-sm-3 col-md-offset-0_5">
+                <p>微信公众平台二维码</p>
+                <img src="{{ 'imgs/weixin.png'|assets }}" />
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -1,0 +1,62 @@
+.aboutus{
+ .content-container{
+   padding-top: 10px;
+ }
+
+  .about-top{
+    position: relative;
+    padding-bottom: 65px;
+  }
+
+  .about-desc{
+    position: absolute;
+    width: 450px;
+    height: 130px;
+    bottom: 0;
+
+    margin-left: -225px;
+    left: 50%;
+
+    background: $primary-bg-color;
+    color: #fff;
+
+    h1{
+      font-size: 30px;
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+
+    h2{
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .contact-sub-tit{
+    color: #303030;
+  }
+
+  .contact-sub-content{
+    margin-bottom: 2px;
+  }
+
+  .row-contact{
+    padding-top: 55px;
+  }
+
+  .contact-tel{
+    h1{
+      font-size: 26px;
+      color: $primary-bg-color;
+      font-weight: bold;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    margin-bottom: 30px;
+  }
+
+
+
+}

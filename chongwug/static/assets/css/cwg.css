@@ -4956,6 +4956,43 @@ img.mfp-img {
   vertical-align: middle;
   padding-left: 120px; }
 
+.aboutus .content-container {
+  padding-top: 10px; }
+.aboutus .about-top {
+  position: relative;
+  padding-bottom: 65px; }
+.aboutus .about-desc {
+  position: absolute;
+  width: 450px;
+  height: 130px;
+  bottom: 0;
+  margin-left: -225px;
+  left: 50%;
+  background: #ffd401;
+  color: #fff; }
+  .aboutus .about-desc h1 {
+    font-size: 30px;
+    margin-top: 15px;
+    margin-bottom: 20px; }
+  .aboutus .about-desc h2 {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 0; }
+.aboutus .contact-sub-tit {
+  color: #303030; }
+.aboutus .contact-sub-content {
+  margin-bottom: 2px; }
+.aboutus .row-contact {
+  padding-top: 55px; }
+.aboutus .contact-tel {
+  margin-bottom: 30px; }
+  .aboutus .contact-tel h1 {
+    font-size: 26px;
+    color: #ffd401;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 0; }
+
 /**
  * Style trumps; helper and brand classes
 */
