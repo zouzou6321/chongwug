@@ -3,11 +3,7 @@
   padding-top: 1px;
 
   @media (min-width: $screen-sm) {
-      padding: 20px 0;
-  }
-
-  .container{
-    background-color: #fff;
+      padding-bottom: 20px;
   }
 }
 
@@ -55,6 +51,28 @@
 
   .cwg-container > &{
     @include box-shadow(2px 2px 4px rgba(127, 127, 127, .3));
+  }
+
+  .detail &{
+    padding-top: 20px;
+  }
+}
+
+.breadcrumb-container{
+  font-size: 12px;
+  padding-left: 0;
+
+  @media (min-width: $screen-lg) {
+    width: $content-width;
+  }
+
+  line-height: 30px;
+  .breadcrumb{
+    padding: 10px 0;
+  }
+
+  a{
+    color: #666;
   }
 }
 

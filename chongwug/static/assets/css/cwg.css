@@ -3897,9 +3897,7 @@ The provided mixins are intended to be used with the array-like variables
   padding-top: 1px; }
   @media (min-width: 768px) {
     .cwg-container {
-      padding: 20px 0; } }
-  .cwg-container .container {
-    background-color: #fff; }
+      padding-bottom: 20px; } }
 
 .dog-select-title {
   padding-right: 0;
@@ -3932,6 +3930,20 @@ The provided mixins are intended to be used with the array-like variables
   .cwg-container > .content-container {
     -webkit-box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3);
     box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3); }
+  .detail .content-container {
+    padding-top: 20px; }
+
+.breadcrumb-container {
+  font-size: 12px;
+  padding-left: 0;
+  line-height: 30px; }
+  @media (min-width: 1200px) {
+    .breadcrumb-container {
+      width: 1000px; } }
+  .breadcrumb-container .breadcrumb {
+    padding: 10px 0; }
+  .breadcrumb-container a {
+    color: #666; }
 
 .pet-tag {
   display: inline-block;
