@@ -454,6 +454,16 @@
     //scroll spy
     $('body').scrollspy({ target: '#js-affix-scrollspy' });
 
+    var animateIn = 'slideInDown',
+        animateOut = 'slideInUp';
+
+    $affixScrollspy.on('affix.bs.affix', function(){
+        $affixScrollspy.addClass(animateIn + ' animated').removeClass(animateOut);
+    });
+
+    $affixScrollspy.on('affix-top.bs.affix', function(){
+        $affixScrollspy.addClass(animateOut).removeClass(animateIn);
+    });
 
     //location select
     var $locationBox = $('#js-location-box'),
