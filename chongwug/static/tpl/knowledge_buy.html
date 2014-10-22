@@ -11,101 +11,102 @@
     <div class="container content-container">
     	<h3>[ 品种挑选 ] CHOICE</h3>
         <div class="row-separate row"></div>
-        <div class="row dog-select-row">
-        	<div class="col-sm-1 dog-select-title form-horizontal"><label class="control-label">犬种：</label></div>
-            <div class="col-sm-6 col-md-6">
-            	<form action="/buy/" method="get">
+        <div id="js-pet-filter">
+            <div class="row dog-select-row">
+                <div class="col-sm-1 dog-select-title form-horizontal"><label class="control-label">犬种：</label></div>
+                <div class="col-sm-6 col-md-6">
                     <div class="input-group cwg-search-wrap padding-none">
-                    	<input type="text" class="form-control" placeholder="可根据名字搜索犬种" name="key" {% if searchkey != None %}value="{{ searchkey }}"{% endif %}>
+                        <input type="text" class="form-control" placeholder="可根据名字搜索犬种" name="key" id="js-key-input">
                         <span class="input-group-btn">
-                            <button class="btn btn-search" type="submit">
+                            <button class="btn btn-search" type="button">
                                 <i class="icon icon-search"></i>
                             </button>
                         </span>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-        <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">体型：</div>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills" data-name="tixing">
-                    <li class="active"><a href="{{ urls.type_all_url }}">大型犬</a></li>
-                    <li><a href="{{ urls.type_all_url }}">中型犬</a></li>
-                    <li><a href="{{ urls.type_all_url }}">小型犬</a></li>
-                </ul>
+            <div class="row dog-select-row">
+                <div class="col-sm-1 dog-select-title">体型：</div>
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills" data-name="tixing">
+                        <li data-value="大型犬"><a href="javascript:">大型犬</a></li>
+                        <li data-value="中型犬"><a href="javascript:">中型犬</a></li>
+                        <li data-value="小型犬"><a href="javascript:">小型犬</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-1 dog-select-title">友善：</div>
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills"  data-name="youshan">
+                        <li data-value="3"><a href="javascript:">很友善</a></li>
+                        <li data-value="1"><a href="javascript:">不友善</a></li>
+                        <li data-value="2"><a href="javascript:">一般</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-1 dog-select-title">美容频率：</div>
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills" data-name="meirong_hz">
+                        <li data-value="3"><a href="javascript:">高</a></li>
+                        <li data-value="1"><a href="javascript:">低</a></li>
+                        <li data-value="2"><a href="javascript:">一般</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-sm-1 dog-select-title">友善：</div>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills"  data-name="tixing">
-                	<li class="active"><a href="{{ urls.type_all_url }}">很友善</a></li>
-                    <li><a href="{{ urls.type_all_url }}">不友善</a></li>
-                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
-                </ul>
+            <div class="row dog-select-row">
+                <div class="col-sm-1 dog-select-title">训练：</div>
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills" data-name="xulian">
+                        <li data-value="3"><a href="javascript:">好训练</a></li>
+                        <li data-value="1"><a href="javascript:">难训练</a></li>
+                        <li data-value="2"><a href="javascript:">一般</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-1 dog-select-title">掉毛：</div>
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills" data-name="diaomao">
+                        <li data-value="3"><a href="javascript:">不掉毛</a></li>
+                        <li data-value="1"><a href="javascript:">易掉毛</a></li>
+                        <li data-value="2"><a href="javascript:">一般</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-1 dog-select-title">吠叫：</div>
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills" data-name="xijiao">
+                        <li data-value="3"><a href="javascript:">喜欢</a></li>
+                        <li data-value="1"><a href="javascript:">不喜欢</a></li>
+                        <li data-value="2"><a href="javascript:">一般</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-sm-1 dog-select-title">美容频率：</div>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills" data-name="meirong_hz">
-                	<li class="active"><a href="{{ urls.type_all_url }}">高</a></li>
-                    <li><a href="{{ urls.type_all_url }}">低</a></li>
-                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">训练：</div>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills" data-name="xulian">
-                	<li class="active"><a href="{{ urls.type_all_url }}">好训练</a></li>
-                    <li><a href="{{ urls.type_all_url }}">难训练</a></li>
-                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-1 dog-select-title">掉毛：</div>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills" data-name="diaomao">
-                	<li class="active"><a href="{{ urls.type_all_url }}">不掉毛</a></li>
-                    <li><a href="{{ urls.type_all_url }}">易掉毛</a></li>
-                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-1 dog-select-title">吠叫：</div>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills" data-name="xijiao">
-                	<li class="active"><a href="{{ urls.type_all_url }}">喜欢</a></li>
-                    <li><a href="{{ urls.type_all_url }}">不喜欢</a></li>
-                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">运动：</div>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills" data-name="yundong">
-                	<li class="active"><a href="{{ urls.type_all_url }}">量大</a></li>
-                    <li><a href="{{ urls.type_all_url }}">量少</a></li>
-                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-1 dog-select-title">口水：</div>
-            <div class="col-xs-3">
-                <ul class="nav nav-pills" data-name="koushui">
-                	<li class="active"><a href="{{ urls.type_all_url }}">量大</a></li>
-                    <li><a href="{{ urls.type_all_url }}">量少</a></li>
-                    <li><a href="{{ urls.type_all_url }}">一般</a></li>
-                </ul>
+            <div class="row dog-select-row">
+                <div class="col-sm-1 dog-select-title">运动：</div>
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills" data-name="yundong">
+                        <li data-value="3"><a href="javascript:">量大</a></li>
+                        <li data-value="1"><a href="javascript:">量少</a></li>
+                        <li data-value="2"><a href="javascript:">一般</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-1 dog-select-title">口水：</div>
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills" data-name="koushui">
+                        <li data-value="3"><a href="javascript:">量大</a></li>
+                        <li data-value="1"><a href="javascript:">量少</a></li>
+                        <li data-value="2"><a href="javascript:">一般</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row-separate row"></div>
         <div class="row" id="js-pet-list">
         	{% for knowledge in knowledges %}
-            <div class="col-md-1_5">
-                <div class="pet-box" data-id="{{ knowledge.id }}">
+            <div class="col-md-1_5 pet-wap" data-id="{{ knowledge.id }}">
+                <div class="pet-box">
                     <img data-original="{{ knowledge.imgurl }}" class="img-full pet-img js-lazy" src="{{'imgs/loading.gif'|assets}}"/>
                     <p class="pet-name">{{ knowledge.name }}</p>
                 </div>
             </div>
             {% endfor %}
+            <p class="no-result text-center hide">没有找到符合条件的犬种</p>
         </div>
     </div>
     <div class="container content-container knowledge-content">
@@ -419,9 +420,9 @@
 (function($){
     var $modal = $('#js-knowledge-buy-modal'),
         $petList = $('#js-pet-list'),
-        $petBox = $petList.find('.pet-box');
+        $petWrap = $petList.find('.pet-wap');
 
-    $petList.on('click', '.pet-box', function(){
+    $petList.on('click', '.pet-wap', function(){
 
         var $this = $(this);
 
@@ -435,6 +436,106 @@
         $modal.modal('show');
 
     });
+
+    //filter
+    var $petFilter = $('#js-pet-filter'),
+        $keyInput = $('#js-key-input'),
+        $noResult = $petList.find('.no-result');
+        param = {
+            filter: true,
+            key: '',
+            tixing: '',
+            youshan: '',
+            meirong_hz: '',
+            xulian: '',
+            diaomao: '',
+            xijiao: '',
+            yundong: '',
+            koushui: ''
+        };
+
+    var petIdMap = (function(){
+        var arr = [];
+
+        $.each($petWrap, function(idx, el){
+            var $this = $(el);
+            arr[$this.data('id')] = $this;
+        });
+
+        return arr;
+    }());
+
+    function showById(arr){
+        var temp = [];
+
+        $.each(arr, function(idx, el){
+            temp.push(petIdMap[el]);
+        });
+
+        $petWrap.addClass('hide');
+
+        temp.length === 0 ? $noResult.removeClass('hide') : $noResult.addClass('hide');
+
+        $.each(temp, function(idx, el){
+            el.removeClass('hide');
+        });
+    }
+
+    function fillActive(){
+        var $active = $petFilter.find('.active');
+
+        $.each($active, function(idx, el){
+            var $this = $(el);
+            param[$this.closest('ul').data('name')] = $this.data('value');
+        });
+    }
+
+    function cancelActive($el){
+        param[$el.closest('ul').data('name')] = '';
+    }
+
+    $keyInput.on('change', function(){
+        param.key = this.value;
+    });
+
+    $petFilter.on('click', '.btn-search, li', function(){
+        var $this = $(this);
+
+        if($this.is('.btn-search')){
+            var val = $keyInput.val();
+
+            if($.trim(val) === ''){
+                alert('请输入关键字');
+                return;
+            }
+
+            param.key = val;
+
+        }else if($this.is('li')){
+            if($this.hasClass('active')){
+               $this.removeClass('active');
+               cancelActive($this);
+            }else{
+                $this.addClass('active').siblings('li').removeClass('active');
+            }
+
+            fillActive();
+        }
+
+        $.ajax({
+            url: './',
+            data: param,
+            dataType: 'json',
+            success: function(data){
+                if(data.status == 0){
+                    showById(data.idlist);
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+    });
+
 
 }(jQuery));
 
