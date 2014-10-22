@@ -58,6 +58,18 @@
   }
 }
 
+.pet-tag{
+  display: inline-block;
+  width: 60px;
+  border: 1px solid $primary-bg-color;
+  color: $primary-bg-color;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 18px;
+  margin-right: 5px;
+}
+
 .buy-main{
 
   .cwg-search-wrap{

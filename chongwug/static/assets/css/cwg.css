@@ -3933,6 +3933,17 @@ The provided mixins are intended to be used with the array-like variables
     -webkit-box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3);
     box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3); }
 
+.pet-tag {
+  display: inline-block;
+  width: 60px;
+  border: 1px solid #ffd401;
+  color: #ffd401;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 18px;
+  margin-right: 5px; }
+
 @media (min-width: 768px) {
   .buy-main .cwg-search-wrap {
     padding-top: 30px;
