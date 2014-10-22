@@ -249,7 +249,7 @@
             {% for recommendpet_img in recommendpets_img %}
                 <div>
                     <a href="?petid={{ recommendpet_img.pet.id }}">
-                        <img data-original="{{ recommendpet_img.img.img_url }}" class="img-full js-lazy" src="{{'imgs/loading.gif'|assets}}" >
+                        <img class="img-full" src="{{ recommendpet_img.img.img_url }}" >
                     </a>
                     <div class="dog-desc">
                         <h4><a href="?petid={{ recommendpet_img.pet.id }}">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
