@@ -1,0 +1,129 @@
+.workchance{
+
+  .chance-top{
+    height: 340px;
+    background: $primary-bg-color;
+    position: relative;
+    color: #fff;
+    padding-top: 50px;
+
+    text-align: center;
+
+    h1{
+      font-size: 30px;
+    }
+    h2{
+      margin-top: 5px;
+      font-size: 24px;
+    }
+
+    .chance-am{
+      display: inline-block;
+      width: 110px;
+      height: 118px;
+      background: url(../imgs/am.png);
+
+      position: absolute;
+      bottom: 10px;
+      left: 255px;
+    }
+
+    .chance-pm{
+      display: inline-block;
+      width: 108px;
+      height: 101px;
+      background: url(../imgs/pm.png);
+
+      position: absolute;
+      bottom: 10px;
+      right: 220px;
+    }
+
+    .chance-clock{
+      position: absolute;
+      left: 50%;
+      bottom: -66px;
+      margin-left: -100px;
+
+      color: #808080;
+      font-size: 24px;
+
+      font-family: '\9ed1\4f53';
+
+      p{
+        line-height: 1;
+        margin-bottom: 5px;
+      }
+    }
+
+    .chance-clock i{
+      display: inline-block;
+      width: 200px;
+      height: 100px;
+      background: url(../imgs/clock.png);
+    }
+  }
+
+  .chance-main{
+    font-family: '\9ed1\4f53';
+    padding-top: 130px;
+    color: #808080;
+
+    h3{
+      margin: 10px 0 20px 0;
+      font-size: 36px;
+    }
+  }
+
+  .chance-treatment{
+    display: inline-block;
+    width: 465px;
+    height: 45px;
+    background: url(../imgs/treatment.png);
+  }
+
+  .chance-join-us{
+    display: inline-block;
+
+    width: 290px;
+    height: 50px;
+    background: url(../imgs/join-us.png);
+  }
+
+  .chance-desc{
+    font-size: 20px;
+    line-height: 40px;
+    margin-bottom: 40px;
+  }
+
+  .chance-welcome{
+    display: inline-block;
+
+    width: 590px;
+    height: 80px;
+    background: url(../imgs/welcome.png);
+  }
+
+  .chance-job{
+    font-size: 30px;
+    margin-top: 30px;
+  }
+
+  .job-detail{
+    .job-num{
+      font-size: 60px;
+      padding-right: 5px;
+    }
+
+    a{
+      color: #808080;
+      font-size: 24px;
+    }
+  }
+
+  .chance-mail{
+    font-size: 20px;
+    padding: 90px 0;
+    font-family: '\9ed1\4f53';
+  }
+}

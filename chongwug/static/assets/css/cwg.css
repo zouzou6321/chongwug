@@ -4995,6 +4995,90 @@ img.mfp-img {
     margin-bottom: 0;
     margin-top: 0; }
 
+.workchance .chance-top {
+  height: 340px;
+  background: #ffd401;
+  position: relative;
+  color: #fff;
+  padding-top: 50px;
+  text-align: center; }
+  .workchance .chance-top h1 {
+    font-size: 30px; }
+  .workchance .chance-top h2 {
+    margin-top: 5px;
+    font-size: 24px; }
+  .workchance .chance-top .chance-am {
+    display: inline-block;
+    width: 110px;
+    height: 118px;
+    background: url(../imgs/am.png);
+    position: absolute;
+    bottom: 10px;
+    left: 255px; }
+  .workchance .chance-top .chance-pm {
+    display: inline-block;
+    width: 108px;
+    height: 101px;
+    background: url(../imgs/pm.png);
+    position: absolute;
+    bottom: 10px;
+    right: 220px; }
+  .workchance .chance-top .chance-clock {
+    position: absolute;
+    left: 50%;
+    bottom: -66px;
+    margin-left: -100px;
+    color: #808080;
+    font-size: 24px;
+    font-family: '\9ed1\4f53'; }
+    .workchance .chance-top .chance-clock p {
+      line-height: 1;
+      margin-bottom: 5px; }
+  .workchance .chance-top .chance-clock i {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    background: url(../imgs/clock.png); }
+.workchance .chance-main {
+  font-family: '\9ed1\4f53';
+  padding-top: 130px;
+  color: #808080; }
+  .workchance .chance-main h3 {
+    margin: 10px 0 20px 0;
+    font-size: 36px; }
+.workchance .chance-treatment {
+  display: inline-block;
+  width: 465px;
+  height: 45px;
+  background: url(../imgs/treatment.png); }
+.workchance .chance-join-us {
+  display: inline-block;
+  width: 290px;
+  height: 50px;
+  background: url(../imgs/join-us.png); }
+.workchance .chance-desc {
+  font-size: 20px;
+  line-height: 40px;
+  margin-bottom: 40px; }
+.workchance .chance-welcome {
+  display: inline-block;
+  width: 590px;
+  height: 80px;
+  background: url(../imgs/welcome.png); }
+.workchance .chance-job {
+  font-size: 30px;
+  margin-top: 30px; }
+.workchance .job-detail .job-num {
+  font-size: 60px;
+  padding-right: 5px; }
+.workchance .job-detail a {
+  color: #808080;
+  font-size: 24px; }
+.workchance .chance-mail {
+  font-size: 20px;
+  padding: 90px 0;
+  font-family: '\9ed1\4f53'; }
+
 /**
  * Style trumps; helper and brand classes
 */
