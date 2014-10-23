@@ -4052,6 +4052,9 @@ Copyright (c) 2014 Daniel Eden
       color: #333;
       font-weight: bold; }
 
+.knowledge-buy .pet-wap {
+  height: 110px;
+  overflow: hidden; }
 .knowledge-buy .pet-box {
   padding: 7px 10px;
   margin-bottom: 10px;
