@@ -98,6 +98,7 @@
             // 
             // webBrowser1
             // 
+            this.webBrowser1.AllowWebBrowserDrop = false;
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
             this.webBrowser1.Location = new System.Drawing.Point(0, 25);
@@ -106,6 +107,7 @@
             this.webBrowser1.Size = new System.Drawing.Size(984, 537);
             this.webBrowser1.TabIndex = 1;
             this.webBrowser1.Url = new System.Uri("http://www.chongwuyimiao.com/petmicro/login/", System.UriKind.Absolute);
+            this.webBrowser1.WebBrowserShortcutsEnabled = false;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // form1

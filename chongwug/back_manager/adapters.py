@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
-from models import manage
+from models import manage,supermanager
 from manager.models import ad,tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img
 from customer.models import user
@@ -11,13 +11,13 @@ from chongwug import settings
 from upyun import UpYun
 from django.shortcuts import get_object_or_404
 import config
+from django.contrib.auth.hashers import make_password, check_password
 '''
 管理员鉴权
 '''
 def manage_authentication(request):
     try:
-        if (request.session['manage_id'] == ''):
-            return False
+        supermanager.objects.get(name=request.session['name'],passwd=request.session['passwd'])
     except:
         return False
     return True
@@ -25,17 +25,22 @@ def manage_authentication(request):
 def manage_login_check(request):
     name = request.REQUEST.get('username')
     passwd = request.REQUEST.get('userpassd')
-    request.session['manage_id'] = ''
+    if supermanager.objects.all().count() == 0:
+        passwdhash = make_password(passwd,None)
+        num_one = supermanager(name=name,passwd=passwdhash)
+        num_one.save()
     try:
-        manage_id = manage.objects.get(name=name,passwd=passwd).id
+        superm = supermanager.objects.get(name=name)
+        if check_password(passwd,superm.passwd):
+            request.session['name'] = name
+            request.session['passwd'] = superm.passwd
     except ObjectDoesNotExist:
         print('ObjectDoesNotExist')
         return False
-    request.session['manage_id'] = manage_id
     return True
 
 def manage_home_data_get(request):
-    manager = manage.objects.get(id=request.session['manage_id'])
+    manager = {'name':'超级管理员'}
     return {'manager':manager}
 
 def manage_pet_farm_add(request):
