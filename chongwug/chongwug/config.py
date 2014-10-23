@@ -26,6 +26,9 @@ __regular_expression_chinatelnum = r'^\(?0\d{2,3}\)?[- ]?\d{7,8}|^0\d{2,3}[- ]?\
 __regular_expression_username = u'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
 __regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
 
+#评分档次
+__petfeaturescore = [45,70,100]
+
 #服务费与交通费
 __servpay = 15
 __transpay = 5

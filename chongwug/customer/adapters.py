@@ -7,7 +7,7 @@ from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from chongwug.config import __farmpictypes,__transpay,__servpay,__appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
+from chongwug.config import __petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re,json
 from chongwug.commom import __errorcode__
 from django.contrib.auth.models import User
@@ -354,17 +354,25 @@ def get_knowledge_buy(request):
                 'xulian':knowledge.xulian,'koushui':knowledge.xulian,'naihan':knowledge.naihan,'naire':knowledge.naire,
                 'cityfred':knowledge.cityfred,'imgurl':knowledge.imgurl}
 
-    elif 'key' in request.GET:
-        small = 35
-        big = 60
+    elif 'filter' in request.GET:
         idlist = []
         kwargs = {}
+        args = ()
         enums = [['key','name'],['key','nickname'],['key','ename'],['youshan','kidfred'],['tixing','tixing'],['meirong_hz','meirong_hz'],['xulian','xulian'],
                  ['diaomao','diaomao'],['xijiao','xijiao'],['yundong','yundong'],['koushui','koushui']]
         for enum in enums:
-            if enum[0] in request.GET:
-                kwargs[enum[1]] = request.REQUEST.get(enum[0])
-        dogsinfo = dog123.objects.filter(**kwargs)
+            if enum[0] in request.GET and request.REQUEST.get(enum[0]) != '':
+                if 'tixing' == enum[0]:
+                    kwargs[enum[1]] = request.REQUEST.get(enum[0])
+                elif 'key' == enum[0]:
+                    key = request.REQUEST.get(enum[0])
+                    args = Q( name__icontains = key )|Q( nickname__icontains = key )|Q( ename__icontains = key )
+                else:
+                    kwargs[enum[1] + '__lte'] = __petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 1]
+                    if string.atoi(request.REQUEST.get(enum[0])) >= 2:
+                        kwargs[enum[1] + '__gt'] = __petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 2]
+                    
+        dogsinfo = dog123.objects.filter(args,**kwargs)
         for doginfo in dogsinfo:
             idlist.append(doginfo.id)
         return {'idlist':idlist}
