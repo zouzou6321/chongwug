@@ -72,9 +72,7 @@ gulp.task('css', dep, function(){
         //save to prod dir
         .pipe(plugins.if(prod, gulp.dest(config.css.prod)))
         //generate manifest
-        .pipe(plugins.if(prod, plugins.rev.manifest()))
-        //rename
-        .pipe(plugins.rename({basename: 'css-manifest'}))
+        .pipe(plugins.if(prod, plugins.rev.manifest({path: 'css-manifest.json'})))
         //save manifest to prod dir
         .pipe(plugins.if(prod, gulp.dest('./')));
 });
@@ -99,8 +97,7 @@ gulp.task('js', function(){
         })
         .pipe(plugins.if(prod, plugins.rev()))
         .pipe(plugins.if(prod, gulp.dest(config.js.prod)))
-        .pipe(plugins.if(prod, plugins.rev.manifest()))
-        .pipe(plugins.rename({basename: 'js-manifest'}))
+        .pipe(plugins.if(prod, plugins.rev.manifest({path: 'js-manifest.json'})))
         .pipe(plugins.if(prod, gulp.dest('./')));
 });
 
@@ -111,8 +108,7 @@ gulp.task('imgs', function(){
         .pipe(plugins.if(prod, plugins.rev()))
         .pipe(plugins.if(prod, gulp.dest(config.imgs.prod)))
         .on('error', function(e){ console.log(e); })
-        .pipe(plugins.if(prod, plugins.rev.manifest()))
-        .pipe(plugins.rename({basename: 'imgs-manifest'}))
+        .pipe(plugins.if(prod, plugins.rev.manifest({path: 'imgs-manifest'})))
         .pipe(plugins.if(prod, gulp.dest('./')));
 });
 

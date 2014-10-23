@@ -21,7 +21,6 @@
     "gulp-mustache": "^0.4.0",
     "gulp-newer": "^0.3.0",
     "gulp-react": "^1.0.2",
-    "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.4.0",
     "gulp-rev": "^1.0.0",
     "gulp-rev-collector": "^0.1.0",
