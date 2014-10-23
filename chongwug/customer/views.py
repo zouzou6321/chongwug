@@ -56,7 +56,7 @@ def knowledge_buy_view(request):
         return render_to_response('tpl/knowledge_buy.html',{'page':'knowbuy','knowledges':adapters.get_knowledge_buy(request)})
     except:
         traceback.print_exc()
-        HttpResponse('aa')
+        return HttpResponse('aa')
 
 def knowledge_bringup_view(request):
     return render_to_response('tpl/knowledge_bringup.html',{'page':'knowbringup'})
