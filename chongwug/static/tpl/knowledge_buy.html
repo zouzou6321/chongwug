@@ -267,7 +267,7 @@
           <div class="modal-body">
             <div class="media">
               <div class="pull-left">
-                <img class="media-object" src="{{ 'imgs/pet.jpg'|assets }}">
+                <img class="media-object" src="{{ 'imgs/loading.gif'|assets }}" id="js-looks">
               </div>
               <div class="media-body">
                 <table class="table table-pet-detail">
@@ -277,19 +277,19 @@
                         <col width="40%"/>
                     </colgroup>
                     <tr>
-                        <td>全名：</td>
-                        <td>价格：</td>
-                        <td>类型：</td>
+                        <td>全名：<span id="js-name"></span></td>
+                        <td>价格：<span id="js-price"></span></td>
+                        <td>类型：<span id="js-type"></span></td>
                     </tr>
                     <tr>
-                        <td>体重：</td>
-                        <td>肩高：</td>
-                        <td>智商：</td>
+                        <td>体重：<span id="js-weight"></span></td>
+                        <td>肩高：<span id="js-height"></span></td>
+                        <td>智商：<span id="js-iq"></span></td>
                     </tr>
                     <tr>
-                        <td>颜色：</td>
-                        <td>饲养：</td>
-                        <td>功能：</td>
+                        <td>颜色：<span id="js-color"></span></td>
+                        <td>饲养：<span id="js-feeding"></span></td>
+                        <td>功能：<span id="js-function"></span></td>
                     </tr>
                 </table>
               </div>
@@ -305,19 +305,19 @@
                         <td>
                             <label>粘人程度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-sweet-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>喜叫程度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-bark-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>对小孩友善</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-child-friendly-rate"></span>
                             </span>
                         </td>
                     </tr>
@@ -325,19 +325,19 @@
                         <td>
                             <label>对生人友善</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-stranger-friendly-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>对动物友善</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-animal-friendly-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>运动量大小</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-sport-rate"></span>
                             </span>
                         </td>
                     </tr>
@@ -345,19 +345,19 @@
                         <td>
                             <label>可训练性</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-train-rate"></span>
                             </span>
                         </td>
                         <td>
                            <label>耐寒程度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-cold-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>耐热程度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-hot-rate"></span>
                             </span>
                         </td>
                     </tr>
@@ -365,19 +365,19 @@
                         <td>
                             <label>城市适应度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-city-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>掉毛程度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-hair-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>体味程度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-odour-rate"></span>
                             </span>
                         </td>
                     </tr>
@@ -385,19 +385,19 @@
                         <td>
                             <label>美容频度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-beauty-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>口水程度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-saliva-rate"></span>
                             </span>
                         </td>
                         <td>
                             <label>活泼程度</label>
                             <span class="rate rate-dog">
-                                <span class="rate-content"></span>
+                                <span class="rate-content" id="js-lively-rate"></span>
                             </span>
                         </td>
                     </tr>
@@ -426,7 +426,27 @@
 (function($){
     var $modal = $('#js-knowledge-buy-modal'),
         $petList = $('#js-pet-list'),
-        $petWrap = $petList.find('.pet-wap');
+        $petWrap = $petList.find('.pet-wap'),
+        keyMap = {
+            diaomao: $modal.find('#js-hair-rate'),
+            animfred: $modal.find('#js-animal-friendly-rate'),
+            cityfred: $modal.find('#js-city-rate'),
+            name: $modal.find('#js-name'),
+            maleheight: $modal.find('#js-height'),
+            kidfred: $modal.find('#js-child-friendly-rate'),
+            meirong_hz: $modal.find('#js-beauty-rate'),
+            naire: $modal.find('#js-hot-rate'),
+            nianren: $modal.find('#js-sweet-rate'),
+            nickname: $modal.find('#js-type-rate'),
+            koushui: $modal.find('#js-saliva-rate'),
+            otherfred: $modal.find('#js-stranger-friendly-rate'),
+            xijiao: $modal.find('#js-bark-rate'),
+            xulian: $modal.find('#js-train-rate'),
+            yundong: $modal.find('#js-sport-rate'),
+            naihan: $modal.find('#js-cold-rate'),
+            tiwei: $modal.find('#js-odour-rate'),
+            imgurl: $modal.find('#js-looks')
+        };
 
     $petList.on('click', '.pet-wap', function(){
 
@@ -436,10 +456,27 @@
             data: {id: $this.data('id')},
             dataType: 'json'
         }).done(function(data){
-            console.log(data)
-        });
+            if(data.status == 0){
+                for(var i in keyMap){
+                    if(keyMap.hasOwnProperty(i)){
+                        var currD = data[i],
+                            currE = keyMap[i];
 
-        $modal.modal('show');
+                        if(i == 'imgurl'){
+                            currE.attr('src', currD);
+                        }else if(!isNaN(currD)){
+                            currE.width(currD + '%');
+                        }else{
+                            currE.text(currD);
+                        }
+                    }
+                }
+
+                $modal.modal('show');
+            }else{
+                alert(data.message);
+            }
+        });
 
     });
 
