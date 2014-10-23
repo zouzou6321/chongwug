@@ -3,6 +3,18 @@
   padding-bottom: 20px;
 }
 
+.detail{
+  background-color: #fff;
+
+  .content-container{
+    @include box-shadow(none);
+  }
+  
+  .breadcrumb-container{
+    padding-left: 15px;
+  }
+}
+
 .thumbnail-wrap{
   width: 330px;
   height: 46px;
@@ -179,8 +191,6 @@ label{
 
   .container{
     background-color: #fffcf0;
-    padding-left: 0;
-    padding-top: 0;
   }
 
   .placard{

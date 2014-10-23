@@ -3990,8 +3990,6 @@ Copyright (c) 2014 Daniel Eden
   .cwg-container > .content-container {
     -webkit-box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3);
     box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3); }
-  .detail .content-container {
-    padding-top: 20px; }
 
 .breadcrumb-container {
   font-size: 12px;
@@ -4117,6 +4115,14 @@ Copyright (c) 2014 Daniel Eden
   padding-top: 20px;
   padding-bottom: 20px; }
 
+.detail {
+  background-color: #fff; }
+  .detail .content-container {
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+  .detail .breadcrumb-container {
+    padding-left: 15px; }
+
 .thumbnail-wrap {
   width: 330px;
   height: 46px;
@@ -4241,9 +4247,7 @@ label {
     -webkit-box-shadow: 0 2px 4px rgba(221, 221, 221, 0.6);
     box-shadow: 0 2px 4px rgba(221, 221, 221, 0.6); }
   .detail-navbar .container {
-    background-color: #fffcf0;
-    padding-left: 0;
-    padding-top: 0; }
+    background-color: #fffcf0; }
   .detail-navbar .placard {
     font-weight: normal;
     border-radius: 0;
