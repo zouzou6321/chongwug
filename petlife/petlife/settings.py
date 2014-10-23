@@ -26,8 +26,8 @@ if 'SERVER_SOFTWARE' in os.environ:
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['.chongwuyimiao.com','.chongwuyimiao.com.']
 else:
-    DEBUG = True
-    TEMPLATE_DEBUG = True
+    DEBUG = False
+    TEMPLATE_DEBUG = False
     
     ADMINS = [
               '692673390@qq.com',
