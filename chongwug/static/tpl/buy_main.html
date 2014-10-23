@@ -167,9 +167,9 @@
                     <div class="dog-desc">
                         <h4><a href="detail/?petid={{pet_img.pet.id}}">[城{{ pet_img.pet.farm.direct }}-{{ pet_img.pet.farm.district }}]{{ pet_img.pet.farm.name }} {{ pet_img.pet.color }}{{ pet_img.pet.type }}{{ pet_img.pet.short_desc }}</a></h4>
                         <div>
-                            <label class="pet-tag">2个月</label>
-                            <label class="pet-tag">6只</label>
-                            <label class="pet-tag">已种疫苗</label>
+                            <label class="pet-tag">{{ pet_img.pet.age }}个月</label>
+                            <label class="pet-tag">{{ pet_img.count }}只</label>
+                            <label class="pet-tag">{{ pet_img.epidemic }}</label>
                         </div>
                         <p>
                             <span class="price price-primary">{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元/只</span></span>
