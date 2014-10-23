@@ -20,7 +20,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     MYSQL_PORT = '3306'
     MYSQL_USER = 'chongwug'
     MYSQL_PASS = 'weet6321'
-    MYSQL_DB   = 'chongwug'
+    MYSQL_DB   = 'petlife'
     
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
