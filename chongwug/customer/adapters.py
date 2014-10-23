@@ -355,23 +355,24 @@ def get_knowledge_buy(request):
                 'cityfred':knowledge.cityfred,'imgurl':knowledge.imgurl}
 
     elif 'filter' in request.GET:
-        small = 35
-        big = 60
         idlist = []
         kwargs = {}
+        args = ()
         enums = [['key','name'],['key','nickname'],['key','ename'],['youshan','kidfred'],['tixing','tixing'],['meirong_hz','meirong_hz'],['xulian','xulian'],
                  ['diaomao','diaomao'],['xijiao','xijiao'],['yundong','yundong'],['koushui','koushui']]
         for enum in enums:
             if enum[0] in request.GET and request.REQUEST.get(enum[0]) != '':
-                if 'key' == enum[1] or 'tixing' == enum[1]:
+                if 'tixing' == enum[0]:
                     kwargs[enum[1]] = request.REQUEST.get(enum[0])
+                elif 'key' == enum[0]:
+                    key = request.REQUEST.get(enum[0])
+                    args = Q( name__icontains = key )|Q( nickname__icontains = key )|Q( ename__icontains = key )
                 else:
-                    print '%s=%s' % (enum[1],__petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 1])
                     kwargs[enum[1] + '__lte'] = __petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 1]
                     if string.atoi(request.REQUEST.get(enum[0])) >= 2:
                         kwargs[enum[1] + '__gt'] = __petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 2]
                     
-        dogsinfo = dog123.objects.filter(**kwargs)
+        dogsinfo = dog123.objects.filter(args,**kwargs)
         for doginfo in dogsinfo:
             idlist.append(doginfo.id)
         return {'idlist':idlist}
