@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    {% include 'petmicro/tpl/base/meta.html' %}
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/base.css"/>
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="/static/css/main.css"/>
+    <!--[if lt IE 9]>
+    <script src="/static/back-assets/dist/js/respond.js"></script>
+    <![endif]-->
+</head>
+<body style="margin-top:0px;">
+{% block container %}
+<div class="container-fluid" style="margin-top:-40px;">
+    <div class="row">
+        {% block sidebar %}
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="">ttt</a></li>
+            </ul>
+        </div>
+        {% endblock %}
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {% block main %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<script src="/static/back-assets/dist/js/jquery.js"></script>
+<script src="/static/back-assets/dist/js/bootstrap.js"></script>
+<script src="/static/back-assets/dist/js/validate/jquery.validate.js"></script>
+{% block scripts %}{% endblock %}
+
+</body>
+</html>
