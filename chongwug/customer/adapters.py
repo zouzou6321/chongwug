@@ -182,7 +182,11 @@ def buy_main_adapter(re):
         if price != None:
             if (max_price < princes[price - 1]['b'] or min_price > princes[price - 1]['c']):
                 continue
-        pets_imgs.append({'pet':pet_one,'img':petimg,'min_price':min_price,'max_price':max_price})
+        for epidemic in __epidemics:
+            if othor_pets.filter(epidemic_period = epidemic).count() > 0:
+                epidemic_period = epidemic
+                break
+        pets_imgs.append({'pet':pet_one,'img':petimg,'min_price':min_price,'max_price':max_price,'count':othor_pets.count(),'epidemic':epidemic_period})
     return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
             'princekey':princekey,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,
             'epidemickey':epidemickey,'ages':ages,'agekey':agekey,'page':'buy'}
