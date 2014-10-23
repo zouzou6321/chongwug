@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    del = require('del'),
     glob = require('glob'),
     fs = require('fs'),
     argv = require('minimist')(process.argv.slice(2)),
@@ -123,8 +124,7 @@ gulp.task('fonts', function(){
 });
 
 gulp.task('clean', function(){
-    gulp.src('assets/*', {read: false})
-        .pipe(plugins.clean());
+    del('assets/**');
 });
 
 gulp.task('default', ['clean'], function(){
