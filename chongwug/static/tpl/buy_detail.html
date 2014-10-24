@@ -475,7 +475,7 @@
 
 
     $btnLocation.on('click', function(){
-        $locationBox.is(':visible') ? $locationBox.hide() : $locationBox.show();
+        $locationBox.is(':visible') ? $locationBox.trigger('focusout') : $locationBox.show().trigger('focus');
     });
 
 
@@ -486,7 +486,7 @@
         $time = $('#js-time');
 
     $btnTime.on('click', function(){
-        $timeBox.is(':visible') ? $timeBox.hide() : $timeBox.show();
+        $timeBox.is(':visible') ? $timeBox.trigger('focusout') : $timeBox.show().trigger('focus');
 
     });
 
@@ -523,6 +523,10 @@ var $locationBox = $('#js-location-box'),
     render = template('location-select-tpl'),
     param = {},
     location = [];
+
+    $('.select-box').on('focusout', function(){
+        $(this).hide();
+    });
 
     function renderData(param, $parent, cb){
         $.ajax({
