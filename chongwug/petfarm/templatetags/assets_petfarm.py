@@ -42,4 +42,4 @@ def assets_petfarm(value):
     if flag or prod or cdn:
         return path
     else:
-        return root + curr + folder + 'dev/' + value + version
+        return root + curr + 'assets/dev/' + value + version
