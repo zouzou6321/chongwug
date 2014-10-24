@@ -58,3 +58,10 @@ class dog123(models.Model):
     cityfred = models.IntegerField()
     imgurl = models.TextField()
     tixing = models.TextField()
+
+class pclady(models.Model):
+    url = models.TextField()
+    name = models.TextField()
+    imgurl = models.TextField()
+    title = models.TextField()
+    content = models.TextField()
