@@ -1,10 +1,10 @@
 {% extends 'petfarm/tpl/base/base.html' %}
-
+{% load assets_petfarm %}
 {% block title %}内容编辑{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/back-assets/dist/uploadify/uploadify.css"/>
-<link rel="stylesheet" href="/static/back-assets/dist/jcrop/jquery.Jcrop.css"/>
+<link rel="stylesheet" href="{{ 'vendor/uploadify/uploadify.css'|assets_petfarm }}"/>
+<link rel="stylesheet" href="{{ 'vendor/jcrop/jquery.Jcrop.css'|assets_petfarm }}"/>
 {% endblock %}
 
 {% block main %}
@@ -239,13 +239,14 @@
 })(jQuery);
 
 </script>
-<script src="/static/back-assets/dist/uploadify/jquery.uploadify.min.js"></script>
-<script src="/static/back-assets/dist/jcrop/jquery.Jcrop.min.js"></script>
-<script src="/static/back-assets/dist/js/crop.js"></script>
+<script src="{{ 'vendor/uploadify/jquery.uploadify.min.js'|assets_petfarm }}"></script>
+<script src="{{ 'vendor/jcrop/jquery.Jcrop.min.js'|assets_petfarm }}"></script>
+<script src="{{ 'js/crop.js'|assets_petfarm }}"></script>
 <script>
 //调用截图
 $.crop({
-	uploader: '/petfarm/nestofpet/picadd/upload/'
+	uploader: '/petfarm/nestofpet/picadd/upload/',
+    swf: '{{ 'vendor/uploadify/uploadify.swf'|assets_petfarm }}'
 });
 
 (function($){

@@ -1,6 +1,8 @@
 {% extends 'petfarm/tpl/base/base.html' %}
 {% block title %}内容编辑{% endblock %}
 
+{% load assets_petfarm %}
+
 {% block main %}
 
 <h1 class="page-header">修改宠物信息</h1>
@@ -10,7 +12,7 @@
     <div class="form-group">
 	    <label for="pet_id" class="col-sm-2 control-label">需要修改信息的宠物：</label>
 	    <div class="col-sm-4">
-	        <select id="pet_id" name="pet_id" class="form-control" onchange="petChange();">
+	        <select id="pet_id" name="pet_id" class="form-control">
 	            {% for pet in pets %}
 	            <option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.short_desc }}</option>
 	            {% endfor %}
@@ -58,21 +60,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/static/back-assets/dist/ckeditor/ckeditor.js"></script>
+<script src="{{ 'vendor/ckeditor/ckeditor.js'|assets_petfarm }}"></script>
 <script>
 
-CKEDITOR.replace('pet-desc');
-function petChange(){
-	$.get("?id=" + $("#pet_id").val(),function(recive){
-		if (recive != "False"){
-			$("#form_main").html(recive);
-			CKEDITOR.replace('pet-desc');
-		}
-		else{
-			alert('data error!');
-		}
-	});
-}
 
 function deletepet(){
 	$.get("?id=" + $("#pet_id").val() + "&del=1",function(recive){
