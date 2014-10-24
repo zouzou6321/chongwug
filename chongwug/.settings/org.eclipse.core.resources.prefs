@@ -1,6 +1,13 @@
 eclipse.preferences.version=1
 encoding//tests/test_upyun.py=utf-8
-encoding//tools/webspider/webspider/items.py=utf-8
-encoding//tools/webspider/webspider/pipelines.py=utf-8
-encoding//tools/webspider/webspider/spiders/dmoz_spider.py=utf-8
+encoding//tools/bringupspider/webspider/items.py=utf-8
+encoding//tools/bringupspider/webspider/pipelines.py=utf-8
+encoding//tools/bringupspider/webspider/settings.py=utf-8
+encoding//tools/bringupspider/webspider/spiders/__init__.py=utf-8
+encoding//tools/bringupspider/webspider/spiders/dmoz_spider.py=utf-8
+encoding//tools/buyspider/webspider/items.py=utf-8
+encoding//tools/buyspider/webspider/pipelines.py=utf-8
+encoding//tools/buyspider/webspider/settings.py=utf-8
+encoding//tools/buyspider/webspider/spiders/__init__.py=utf-8
+encoding//tools/buyspider/webspider/spiders/dmoz_spider.py=utf-8
 encoding//upyun/upyun.py=utf-8

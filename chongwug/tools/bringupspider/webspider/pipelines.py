@@ -13,11 +13,11 @@ class MyImagesPipeline(ImagesPipeline):
 
     def file_path(self, request, response=None, info=None):
         image_guid = request.url.split('/')[-1]
-        return 'full/%s' % (image_guid)
+        return 'brinup/%s' % (image_guid)
 
     def get_media_requests(self, item, info):
         for image_url in item['image_urls']:
-            yield scrapy.Request('http://www.dog126.com/%s' % image_url)
+            yield scrapy.Request(image_url)
 
     def item_completed(self, results, item, info):
         image_paths = [x['path'] for ok, x in results if ok]
@@ -28,7 +28,7 @@ class MyImagesPipeline(ImagesPipeline):
 
 class WebspiderPipeline(object):  
     def __init__(self):  
-        self.file = codecs.open('dog126.json', 'wb', encoding='utf-8')  
+        self.file = codecs.open('pclady.json', 'wb', encoding='utf-8')  
   
     def process_item(self, item, spider):  
         line = json.dumps(dict(item)) + '\n'  

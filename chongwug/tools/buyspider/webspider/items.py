@@ -11,6 +11,7 @@ from scrapy.item import Item, Field
 class WebspiderItem(Item):
     url = Field()
     name = Field()
+    content = Field()
     ename = Field()
     where = Field()
     age = Field()
