@@ -6,6 +6,7 @@
 {% block main %}
 
 <h1 class="page-header">修改宠物信息</h1>
+{% if pet_one %}
 <p>加*为必填项</p>
 <form method="post" action="./" class="form-horizontal">
     {% csrf_token %}
@@ -56,7 +57,9 @@
         </div>
     </div>
 </form>
-
+{% else %}
+暂时还没有数据，请先录入数据
+{% endif %}
 {% endblock %}
 
 {% block scripts %}

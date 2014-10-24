@@ -54,10 +54,11 @@ def manage_pet_farm_add(request):
             manage_score = 1.0
         else:
             manage_score = string.atof(request.POST['manage_score'])
-        if not re.match(__regular_expression_telnum,request.POST['tel']):
-            if not re.match(__regular_expression_chinatelnum,request.POST['tel']):
-                return False
-        if not re.match(__regular_expression_email, request.POST['email']):
+        p = re.compile(__regular_expression_chinatelnum)
+        if not p.match(request.POST['tel']):
+            return False
+        p = re.compile(__regular_expression_email)
+        if not p.match(request.POST['email']):
             return False
         auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
         new_user = user(nickname = request.POST['name'],

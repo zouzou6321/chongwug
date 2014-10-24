@@ -62,10 +62,13 @@ def manage_nestofpet_picdel_view(request):
     data = adapters.manage_home_data_get(request)
     
     page_data = adapters.manage_get_del_petpics(request)
-    if 'pets' not in page_data:
+    if 'pets' not in page_data and page_data != 'False':
         return render_to_response('petfarm/tpl/manage_nestofpet_picdel_ajax.html',page_data)
-    page_data['manager'] = data['manager']
-    return render_to_response('petfarm/tpl/manage_nestofpet_picdel.html',page_data,context_instance=RequestContext(request))
+    if page_data != 'False':
+        page_data['manager'] = data['manager']
+        return render_to_response('petfarm/tpl/manage_nestofpet_picdel.html',page_data,context_instance=RequestContext(request))
+    else:
+        return render_to_response('petfarm/tpl/manage_nestofpet_picdel.html',data,context_instance=RequestContext(request))
 
 def manage_nestofpet_mod_view(request):
     if adapters.manage_authentication(request) == False:
@@ -83,7 +86,8 @@ def manage_nestofpet_mod_view(request):
             return render_to_response('petfarm/tpl/manage_nestofpet_mod_ajax.html',data)
     pets = adapters.manage_get_pets(request)
     data['pets'] = pets
-    data['pet_one'] = pets[0]
+    if pets.count() > 0:
+        data['pet_one'] = pets[0]
     return render_to_response('petfarm/tpl/manage_nestofpet_mod.html',data,context_instance=RequestContext(request))
 
 def manage_nestofpet_add_view(request):
