@@ -558,7 +558,8 @@ var $locationBox = $('#js-location-box'),
         param.province = $this.data('id');
         param.range = $this.closest('dl').find('dt').data('id');
         delete param.city;
-        delete param.country;
+        delete param.district;
+        delete param.street;
 
         $district.html('');
         $street.html('');
@@ -576,7 +577,8 @@ var $locationBox = $('#js-location-box'),
         location[1] = $this.text();
 
         param.city = $this.data('id');
-        delete param.country;
+        delete param.district;
+        delete param.street;
 
         $street.html('');
 
@@ -593,6 +595,7 @@ var $locationBox = $('#js-location-box'),
         location[2] = $this.text();
 
         param.district = $this.data('id');
+        delete param.street;
 
         renderData(param, $street, function(){
            $toStreet.tab('show');
