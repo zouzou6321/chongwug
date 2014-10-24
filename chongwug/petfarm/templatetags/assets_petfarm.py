@@ -19,7 +19,7 @@ def assets_petfarm(value):
     flag = 'SERVER_SOFTWARE' in os.environ
     cdn = False
     prod = False
-    folder = '/static/petfarm/assets/dist/' if prod else 'assets/'
+    folder = '/static/petfarm/assets/dist/' if prod else ''
     cdn_url = '//chongwug-cdn.b0.upaiyun.com' if flag or cdn else ''
     js_version = '?v1'
     css_version = '?v1'
@@ -27,17 +27,17 @@ def assets_petfarm(value):
     version = ''
     path = ''
 
-    if prod:
-        path = folder + value + version
-    else:
-        path = cdn_url + '/' + curr + folder + value + version
-
     if value.endswith('.css'):
         version = css_version
     elif value.endswith('.js'):
         version = js_version
     else:
         version = img_version
+
+    if prod:
+        path = folder + value + version
+    else:
+        path = cdn_url + '/' + curr + folder + value + version
 
     if flag or prod or cdn:
         return path
