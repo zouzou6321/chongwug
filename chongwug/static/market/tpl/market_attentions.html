@@ -1,9 +1,9 @@
 {% extends 'market/tpl/base/base.html' %}
-
+{% load assets_market %}
 {% block title %}内容编辑{% endblock %}
 {% block css %}
-<link rel="stylesheet" href="/static/market/css/jquery.dataTables.min.css"/>
-<link rel="stylesheet" href="/static/market/css/dataTables.editor.min.css"/>
+<link rel="stylesheet" href="{{ 'css/jquery.dataTables.css'|assets_market }}"/>
+<link rel="stylesheet" href="{{ 'css/dataTables.editor.css'|assets_market }}"/>
 {% endblock %}
 {% block main %}
 <h1 class="page-header">欢迎使用！</h1>
@@ -23,9 +23,9 @@
 </table>
 {% endblock %}
 {% block scripts %}
-<script src="/static/market/js/jquery.dataTables.js"></script>
-<script src="/static/market/js/dataTables.tableTools.js"></script>
-<script src="/static/market/js/dataTables.editor.js"></script>
+<script src="{{ 'vendor/jquery.dataTables.js'|assets_market }}"></script>
+<script src="{{ 'vendor/dataTables.tableTools.js'|assets_market }}"></script>
+<script src="{{ 'vendor/dataTables.editor.js'|assets_market }}"></script>
 <script type="text/javascript">
 var editor; // use a global for the submit and return data rendering in the examples
 

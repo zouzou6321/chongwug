@@ -34,8 +34,8 @@ if 'SERVER_SOFTWARE' in os.environ:
     
     STATIC_PATH_URL = None
 else:
-    DEBUG = False
-    TEMPLATE_DEBUG = False
+    DEBUG = True
+    TEMPLATE_DEBUG = True
     
     ADMINS = [
               '692673390@qq.com',

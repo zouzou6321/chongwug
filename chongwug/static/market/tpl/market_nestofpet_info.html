@@ -1,13 +1,13 @@
 {% extends 'market/tpl/base/base.html' %}
-
+{% load assets_market %}
 {% block title %}内容编辑{% endblock %}
 {% block css %}
-<link rel="stylesheet" href="/static/market/css/jquery.dataTables.min.css"/>
-<link rel="stylesheet" href="/static/market/css/dataTables.editor.min.css"/>
+<link rel="stylesheet" href="{{ 'css/jquery.dataTables.css'|assets_market }}"/>
+<link rel="stylesheet" href="{{ 'css/dataTables.editor.css'|assets_market }}"/>
 {% endblock %}
 {% block main %}
 <h1 class="page-header">欢迎使用！</h1>
-<p><input type="text" id="search"></input><button onclick="numsearch();">按照编号搜索</button></p>
+<p><input type="text" id="search"><button onclick="numsearch();">按照编号搜索</button></p>
 
 <table style="BORDER-COLLAPSE: collapse" borderColor=#000000 cellPadding=1 width=800 border=1>
         <thead>
