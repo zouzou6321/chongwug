@@ -21,7 +21,7 @@ def assets_manager(value):
     prod = False
     folder = '/static/manager/assets/dist/' if prod else ''
     cdn_url = '//chongwug-cdn.b0.upaiyun.com' if flag or cdn else ''
-    js_version = '?v1'
+    js_version = '?v2'
     css_version = '?v1'
     img_version = '?v1'
     version = ''
