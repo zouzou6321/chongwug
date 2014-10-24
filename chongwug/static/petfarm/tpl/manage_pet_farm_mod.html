@@ -1,9 +1,10 @@
 {% extends 'petfarm/tpl/base/base.html' %}
 {% block title %}内容编辑{% endblock %}
+{% load assets_petfarm %}
 
 {% block css %}
-<link rel="stylesheet" href="/static/back-assets/dist/uploadify/uploadify.css"/>
-<link rel="stylesheet" href="/static/back-assets/dist/jcrop/jquery.Jcrop.css"/>
+<link rel="stylesheet" href="{{ 'vendor/uploadify/uploadify.css'|assets_petfarm }}"/>
+<link rel="stylesheet" href="{{ 'vendor/jcrop/jquery.Jcrop.css'|assets_petfarm }}"/>
 {% endblock %}
 
 {% block main %}
@@ -138,19 +139,20 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/static/back-assets/dist/ckeditor/ckeditor.js"></script>
+<script src="{{ 'vendor/ckeditor/ckeditor.js'|assets_petfarm }}"></script>
 <script>
 
 CKEDITOR.replace('farm-desc');
 
 </script>
-<script src="/static/back-assets/dist/uploadify/jquery.uploadify.min.js"></script>
-<script src="/static/back-assets/dist/jcrop/jquery.Jcrop.min.js"></script>
-<script src="/static/back-assets/dist/js/crop.js"></script>
+<script src="{{ 'vendor/uploadify/jquery.uploadify.min.js'|assets_petfarm }}"></script>
+<script src="{{ 'vendor/jcrop/jquery.Jcrop.min.js'|assets_petfarm }}"></script>
+<script src="{{ 'js/crop.js'|assets_petfarm }}"></script>
 <script>
 //调用截图
 $.crop({
-	uploader: '/petfarm/petfarm/picadd/upload/'
+	uploader: '/petfarm/petfarm/picadd/upload/',
+    swf: '{{ 'vendor/uploadify/uploadify.swf'|assets_petfarm }}'
 });
 
 (function($){
