@@ -1,13 +1,14 @@
+{% load assets_manager %}
 <!DOCTYPE html>
 <html>
 <head lang="zh-CN">
     {% include 'petfarm/tpl/base/meta.html' %}
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/back-assets/dist/css/base.css"/>
+    <link rel="stylesheet" href="{{ 'css/base.css'|assets_manager }}"/>
     {% block css %}{% endblock %}
-    <link rel="stylesheet" href="/static/back-assets/dist/css/main.css"/>
+    <link rel="stylesheet" href="{{ 'css/main.css'|assets_manager }}"/>
     <!--[if lt IE 9]>
-    <script src="/static/back-assets/dist/js/respond.js"></script>
+    <script src="{{ 'vendor/respond.js'|assets_manager }}"></script>
     <![endif]-->
 </head>
 <body>
@@ -54,9 +55,9 @@
 {% endblock %}
 
 
-<script src="/static/back-assets/dist/js/jquery.js"></script>
-<script src="/static/back-assets/dist/js/bootstrap.js"></script>
-<script src="/static/back-assets/dist/js/validate/jquery.validate.js"></script>
+<script src="{{ 'vendor/jquery.js'|assets_manager }}"></script>
+<script src="{{ 'vendor/bootstrap.js'|assets_manager }}"></script>
+<script src="{{ 'vendor/validate/jquery.validate.js'|assets_manager }}"></script>
 {% block scripts %}{% endblock %}
 
 </body>

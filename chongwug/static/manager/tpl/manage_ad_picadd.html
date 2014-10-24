@@ -1,7 +1,8 @@
 {% extends 'manager/tpl/base/base.html' %}
 {% block title %}内容编辑{% endblock %}
+{% load assets_manager %}
 {% block css %}
-<link rel="stylesheet" href="/static/back-assets/dist/imgcut/css/imgareaselect-default.css"/>
+<link rel="stylesheet" href="{{ 'vendor/imgcut/css/imgareaselect-default.css'|assets_manager }}"/>
 {% endblock %}
 
 {% block main %}
@@ -69,13 +70,12 @@
 {% endblock %}
 
 {% block scripts %}
-		<script type="text/javascript" src="/static/manage/jquery-1.4.2.js"></script>
-		<script type="text/javascript" src="/static/manage/ajax_post.js"></script>
-		<script type="text/javascript" src="/static/manage/jquery.form.js"></script>
-		<link rel="stylesheet" href="/static/manage/imgcut/css/imgareaselect-default.css" />
-		<script type="text/javascript" src='/static/manage/imgcut/scripts/jquery.imgareaselect.min.js' ></script>
-		<script type="text/javascript" src='/static/manage/jquery.uploadify.v2.1.4.min.js' ></script>
-		<script type="text/javascript" src='/static/manage/swfobject.js' ></script>
+		<script type="text/javascript" src="{{ 'vendor/jquery.js'|assets_manager }}"></script>
+		<script type="text/javascript" src="{{ 'vendor/ajax_post.js'|assets_manager }}"></script>
+		<script type="text/javascript" src="{{ 'vendor/jquery.form.js'|assets_manager }}"></script>
+		<script type="text/javascript" src='{{ 'vendor/imgcut/scripts/jquery.imgareaselect.min.js'|assets_manager }}' ></script>
+		<script type="text/javascript" src='{{ 'vendor/jquery.uploadify.v2.1.4.min.js'|assets_manager }}' ></script>
+		<script type="text/javascript" src='{{ 'vendor/swfobject.js'|assets_manager }}' ></script>
 		<script type="text/javascript">
 		var selected = 0;
 var imgw = 0;

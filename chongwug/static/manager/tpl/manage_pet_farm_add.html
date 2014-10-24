@@ -98,7 +98,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/static/back-assets/dist/ckeditor/ckeditor.js"></script>
+
+{% load assets_petfarm %}
+<script src="{{ 'vendor/ckeditor/ckeditor.js'|assets_petfarm }}"></script>
 <script>
 
 CKEDITOR.replace('pet-desc');
