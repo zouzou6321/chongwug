@@ -24,7 +24,7 @@ __upyun_pwd = 'weet6321'
 __regular_expression_telnum = r'1\d{10}'
 __regular_expression_chinatelnum = r'^\(?0\d{2,3}\)?[- ]?\d{7,8}|^0\d{2,3}[- ]?\d{7,8}|^1\d{10}|\(?\+?\d{2,3}\)?[- ]?0\d{2,3}[- ]?\d{7,8}|^\d{7,8}'
 __regular_expression_username = u'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
-__regular_expression_email = r"^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
+__regular_expression_email = r"^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$"
 
 #评分档次
 __petfeaturescore = [45,70,100]

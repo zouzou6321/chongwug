@@ -28,6 +28,7 @@ def manage_home_view(request):
     return render_to_response('manager/tpl/manage_home.html',data)
 
 def manage_pet_farm_add_view(request):
+    print 'aaaa'
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
