@@ -10,6 +10,7 @@ urlpatterns = patterns('',
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),
                        url(r'^market/', include('marketer.urls')),
+                       (r'^crossdomain.xml$','direct_to_template',{'template': 'crossdomain.xml', 'mimetype': 'text/xml'}),
     # Examples:
     # url(r'^$', 'chongwug.views.home', name='home'),
     # url(r'^chongwug/', include('chongwug.foo.urls')),
