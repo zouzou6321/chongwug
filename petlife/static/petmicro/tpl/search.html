@@ -1,8 +1,100 @@
 {% extends 'petmicro/tpl/base/base.html' %}
 
 
-{% block header %}{% endblock %}
+{% block header %}
+    {% include 'petmicro/tpl/base/custom-header.html' %}
+{% endblock %}
+
+{% block bodyhook %}class="custom"{% endblock %}
 
 {% block content %}
-
+<div class="container">
+    <div class="row row-custom">
+        <div class="col-xs-6 col-xs-offset-1">
+            {% if error %}
+            <div class="alert alert-danger">
+                没有查找到匹配的信息
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+            <form action="./" class="form-horizontal" method="post">
+                <div class="custom-title">
+                    <h1 class="text-center">信息填写</h1>
+                    <p class="text-center">Fill in the information</p>
+                </div>
+                <div class="form-group">
+                    <label for="pet-id-num" class="control-label col-xs-4">芯片号：</label>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control" name="petidnum" id="pet-id-num" placeholder="请输入完整的芯片号"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="master-id-num" class="control-label col-xs-4">主人身份证号：</label>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control" name="masteridnum" id="master-id-num" placeholder="请输入完整的身份证号码"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-8 col-xs-offset-4">
+                        <button class="btn pull-right btn-custom">查&nbsp;询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="pull-left custom-img">
+            <p>输入完整的信息 <br/>
+               就能够查询到我哟！
+            </p>
+        </div>
+    </div>
+    <div class="custom-result">
+        <h1 class="text-center">身份识别标志（芯片编号）:XXXXXXXXXXXXXX</h1>
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="4">主人信息</td>
+            </tr>
+            <tr>
+                <td>姓名</td>
+                <td>xxx</td>
+                <td>身份证号码</td>
+                <td>xxxxxxxxxxxxxxxxxx</td>
+            </tr>
+            <tr>
+                <td>联系方式</td>
+                <td colspan="3">11111111111</td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="4">犬只信息</td>
+            </tr>
+            <tr>
+               <td>犬种</td>
+               <td>彭布罗克威尔士柯基</td>
+               <td>英文名</td>
+               <td>Welsh Corgi Pembroke</td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td>公</td>
+                <td>颜色</td>
+                <td>棕色</td>
+            </tr>
+            <tr>
+                <td>出生日期</td>
+                <td>2014-10-10</td>
+                <td>繁殖人</td>
+                <td>王某某</td>
+            </tr>
+            <tr>
+                <td>父亲身份识别号</td>
+                <td>xxxx</td>
+                <td>母亲身份识别号</td>
+                <td>yyyy</td>
+            </tr>
+        </table>
+    </div>
+</div>
 {% endblock %}
