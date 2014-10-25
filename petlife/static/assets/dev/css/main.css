@@ -4578,3 +4578,42 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+
+.form-control {
+  border-radius: 0; }
+
+.btn-custom {
+  background-color: #42da9f;
+  color: #fff;
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.custom .header {
+  height: 100px;
+  background-color: #42da9f; }
+.custom .custom-img {
+  width: 300px;
+  height: 307px;
+  background: url(../imgs/custom.png);
+  position: relative; }
+  .custom .custom-img p {
+    position: absolute;
+    font-size: 12px;
+    top: 27px;
+    left: 48px; }
+.custom .row-custom {
+  padding-top: 95px; }
+.custom .custom-title {
+  padding-bottom: 25px; }
+  .custom .custom-title h1 {
+    font-size: 28px;
+    margin-bottom: 0;
+    font-weight: bold; }
+  .custom .custom-title p {
+    font-size: 16px; }
+.custom .custom-result {
+  width: 650px;
+  margin: 0 auto; }
+  .custom .custom-result h1 {
+    font-size: 20px;
+    font-weight: bold; }
