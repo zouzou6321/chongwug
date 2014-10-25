@@ -1,17 +1,18 @@
 from django.conf.urls import patterns, include, url
 import settings
-from django.views.generic import TemplateView
+#from django.views.generic.simple import direct_to_template
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
-
 urlpatterns = patterns('',
                        url(r'', include('customer.urls')),
                        url(r'^back_manage/', include('back_manager.urls')),
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),
                        url(r'^market/', include('marketer.urls')),
-                       url(r'^crossdomain.xml$',TemplateView.as_view(template_name='crossdomain.xml')),
+                       url(r'^manage/static/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.STATIC_ROOT + '/manager/assets/src/vendor/uploadify/'}),
+                       url(r'^petfarm/static/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.STATIC_ROOT + '/petfarm/assets/src/vendor/uploadify/'}),
+                       #url(r'^crossdomain.xml$',direct_to_template,{'template':'crossdomain.xml','mimetype':'text/xml'}),
     # Examples:
     # url(r'^$', 'chongwug.views.home', name='home'),
     # url(r'^chongwug/', include('chongwug.foo.urls')),
