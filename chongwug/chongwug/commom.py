@@ -11,6 +11,12 @@ from django.core.mail  import  send_mail
 from chongwug import settings
 from django.views.debug import get_exception_reporter_filter
 def __errorcode__(errornum,otherdata = None):
+    index = 0
+    for errorcode in __errorcode:
+        if errornum == __errorcode[index][0]:
+            errornum = index
+            break
+        index += 1
     if otherdata != None:
         otherdata['status'] = __errorcode[errornum][0]
         otherdata['message'] = __errorcode[errornum][2]
