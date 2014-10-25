@@ -1,126 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head lang="zh-CN">
-    {% include 'petmicro/tpl/base/meta.html' %}
-    <meta name="renderer" content="webkit">
-    <title>宠物信息录入查询系统</title>
-    <style type="text/css">
-	*{margin:0;padding:0;}
-	ul,li{
-	list-style:none;
-	}
-	#content{
-	width:600px;margin:0 auto;border:1px solid #f00;
-	}
-	ul li.item{width:400px;text-align:center;margin:20px 100px;background:#00f;color:#fff;font-size:14px;font-weight:bold;height:100px;line-height:100px;}
-	#float_banner{position:fixed;top:0;width:100%;height:30px;line-height:40px;background:#000;color:#fff;font-size:14px;font-weight:bold;z-index:1000;}
-	#inputdiv{
-		width:950px;
-		margin-top:40px;
-		margin-left:auto;
-		margin-right:auto;
-		display:none;
-	}
-	#getinfo{
-		width:950px;
-		margin-top:40px;
-		margin-left:auto;
-		margin-right:auto;
-	}
-	.form-width{
-	width:930px;
-	margin:10px 10px;
-	}
-	input{width:100px;}
-	.input-height{height:20px;padding:0px 12px;}
-	.form-margin{margin-top:-6px;margin-left:10px;}
-	</style>
-</head>
-<body>
-<div id="float_banner">
-	<form action="./" class="form-inline form-margin" method="POST" id="js-main-form">
-		<div class="input-group">
-			<input class="form-control input-height" name="petidnum" type="text" placeholder="输入宠物编号"/>
-		</div>
-		<div class="input-group">
-			<input class="form-control input-height" name="masteridnum" type="text" placeholder="宠物主人身份证号"/>
-		</div>
-		<div class="input-group">
-			<button type="submit" class="btn input-sm btn-default input-height" id="putinfo"/>查询</button>
-		</div>
-	</form>
-</div>
-<div id="getinfo">
-	<form class="form-horizontal" id="js-order-table">
-		<div class="input-group form-width">
-			<label class="col-sm-2 control-label" for="petidnumlabel">宠物编号:</label>
-			<div class="col-sm-8">
-				<input class="form-control" id="petidnumlabel" name="petidnumlabel" readonly type="text" value="{{ pet.id_num }}"/>
-			</div>
-		</div>
-		<br />
-		<div class="input-group form-width">
-			<label class="col-sm-2 control-label" for="mastername">宠物主人姓名:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="mastername" name="mastername" readonly type="text" value="{{ pet.petmaster.name }}"/>
-			</div>
-			<label class="col-sm-2 control-label" for="breedername">繁殖者名字:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="breedername" name="breedername" readonly type="text" value="{{ pet.petbreeder.name }}"/>
-			</div>
-		</div>
-		<div class="input-group form-width">
-			<label class="col-sm-2 control-label" for="masteridnum">宠物主人身份证号:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="masteridnum" name="masteridnum" readonly type="text" value="{{ pet.petmaster.id_num }}"/>
-			</div>
-			<label class="col-sm-2 control-label" for="breederidnum">繁殖者身份证号:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="breederidnum" name="breederidnum" readonly type="text" value="{{ pet.petbreeder.id_num }}"/>
-			</div>
-		</div>
-		<div class="input-group form-width">
-			<label class="col-sm-2 control-label" for="mastercontact">宠物主人联系方式:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="mastercontact" name="mastercontact" readonly type="text" value="{{ pet.petmaster.contact }}"/>
-			</div>
-			<label class="col-sm-2 control-label" for="breedercontact">繁殖者联系方式:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="breedercontact" name="breedercontact" readonly type="text" value="{{ pet.petbreeder.contact }}"/>
-			</div>
-		</div>
-		<br />
-		<div class="input-group form-width">
-			<label class="col-sm-2 control-label" for="pettype">犬种:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="pettype" name="pettype" readonly type="text" value="{{ pet.type }}"/>
-			</div>
-			<label class="col-sm-2 control-label" for="petsex">性别:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="petsex" name="petsex" readonly type="text" value="{{ pet.sex }}"/>
-			</div>
-		</div>
-		<div class="input-group form-width">
-			<label class="col-sm-2 control-label" for="petcolor">颜色:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="petcolor" name="petcolor" readonly type="text" value="{{ pet.color }}"/>
-			</div>
-			<label class="col-sm-2 control-label" for="petbirthdate">出生日期:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="petbirthdate" name="petbirthdate" readonly type="text" value="{{ pet.birthdate }}"/>
-			</div>
-		</div>
-		<div class="input-group form-width">
-			<label class="col-sm-2 control-label" for="petmather">母亲身份识别号码:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="petmather" name="petmather" readonly type="text" value="{{ pet.mather }}"/>
-			</div>
-			<label class="col-sm-2 control-label" for="petfather">父亲身份识别号码:</label>
-			<div class="col-sm-4">
-				<input class="form-control" id="petfather" name="petfather" readonly type="text" value="{{ pet.father }}"/>
-			</div>
-		</div>
-	</form>
-</div>
-</body>
-</html>
+{% extends 'petmicro/tpl/base/base.html' %}
+
+
+{% block header %}
+    {% include 'petmicro/tpl/base/custom-header.html' %}
+{% endblock %}
+
+{% block bodyhook %}class="custom"{% endblock %}
+
+{% block content %}
+
+    <div class="custom-result">
+        <h1 class="text-center">身份识别标志（芯片编号）:XXXXXXXXXXXXXX</h1>
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="4">主人信息</td>
+            </tr>
+            <tr>
+                <td>姓名</td>
+                <td>{{ pet.petmaster.name }}</td>
+                <td>身份证号码</td>
+                <td>{{ pet.petmaster.id_num }}</td>
+            </tr>
+            <tr>
+                <td>联系方式</td>
+                <td colspan="3">{{ pet.petmaster.contact }}</td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="4">犬只信息</td>
+            </tr>
+            <tr>
+               <td>犬种</td>
+               <td>{{ pet.type }}</td>
+               <td>英文名</td>
+               <td>无</td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td>{{ pet.sex }}</td>
+                <td>颜色</td>
+                <td>{{ pet.color }}</td>
+            </tr>
+            <tr>
+                <td>出生日期</td>
+                <td>{{ pet.birthdate }}</td>
+                <td>繁殖人</td>
+                <td>{{ pet.petbreeder.name }}</td>
+            </tr>
+            <tr>
+                <td>父亲身份识别号</td>
+                <td>{{ pet.father }}</td>
+                <td>母亲身份识别号</td>
+                <td>{{ pet.mather }}</td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock %}
