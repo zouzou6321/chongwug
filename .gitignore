@@ -1,3 +1,5 @@
 node_modules
 .idea
 *.pyc
+pictest
+!pictest/README.ME

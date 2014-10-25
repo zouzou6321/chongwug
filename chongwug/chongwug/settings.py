@@ -32,7 +32,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['.chongwug.com','.chongwug.com.']
     
-    STATIC_PATH_URL = None
+    STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
 else:
     DEBUG = True
     TEMPLATE_DEBUG = True
@@ -126,7 +126,7 @@ STATIC_URL = 'http://www.chongwug.com/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-                    os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static/src').replace('\\','/'),
+                    #os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static/src').replace('\\','/'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
