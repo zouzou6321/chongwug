@@ -1,0 +1,33 @@
+{% load assets %}
+<!DOCTYPE html>
+<html lang="zh-CN" {% block htmlhook %}{% endblock %}>
+<head>
+    {% include 'petmicro/tpl/base/meta.html' %}
+	<title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ 'css/main.css'|assets }}"/>
+    <!--[if lt IE 9]>
+    <script src="{{ 'vendor/respond.js'|assets }}"></script>
+    <![endif]-->
+</head>
+<body {% block bodyhook %}{% endblock %}>
+
+{% block header %}{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block jquery %}
+<script src="{{'vendor/jquery.js'|assets}}"></script>
+{% endblock %}
+
+{% block plugins %}
+<script src="{{'vendor/bootstrap.js'|assets}}"></script>
+<script src="{{'vendor/validate/jquery.validate.js'|assets}}"></script>
+{% endblock %}
+
+{% block scripts %}{% endblock %}
+
+{% block footer %}{% endblock %}
+
+
+</body>
+</html>

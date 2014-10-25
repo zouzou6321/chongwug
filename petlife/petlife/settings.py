@@ -26,8 +26,8 @@ if 'SERVER_SOFTWARE' in os.environ:
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['.chongwuyimiao.com','.chongwuyimiao.com.']
 else:
-    DEBUG = False
-    TEMPLATE_DEBUG = False
+    DEBUG = True
+    TEMPLATE_DEBUG = True
     
     ADMINS = [
               '692673390@qq.com',
@@ -106,7 +106,7 @@ STATIC_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = 'http://media.lawrence.com/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
