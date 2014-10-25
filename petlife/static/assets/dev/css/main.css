@@ -4588,6 +4588,14 @@ button.close {
   padding-left: 30px;
   padding-right: 30px; }
 
+.btn-business {
+  background-color: #c7b891;
+  color: #fff;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 18px;
+  font-weight: bold; }
+
 .custom .header {
   height: 100px;
   background-color: #42da9f; }
@@ -4617,3 +4625,25 @@ button.close {
   .custom .custom-result h1 {
     font-size: 20px;
     font-weight: bold; }
+
+.business-title {
+  padding-bottom: 20px; }
+  .business-title h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0; }
+  .business-title p {
+    font-size: 18px; }
+
+.business-login {
+  color: #4c4c4c;
+  background: #fefdf8 url(../imgs/b-login.png) center top no-repeat; }
+  .business-login .business-login-form {
+    width: 360px;
+    margin: 0 auto;
+    padding-top: 120px; }
+  .business-login .checkbox-inline {
+    font-size: 12px;
+    line-height: 20px; }
+  .business-login .control-label {
+    font-size: 18px; }

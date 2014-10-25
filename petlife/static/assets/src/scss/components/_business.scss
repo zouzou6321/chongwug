@@ -1,0 +1,33 @@
+.business-title{
+  padding-bottom: 20px;
+
+  h1{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  p{
+    font-size: 18px;
+  }
+}
+
+.business-login{
+  color: #4c4c4c;
+  background: $business-bg url(../imgs/b-login.png) center top no-repeat;
+
+  .business-login-form{
+    width: 360px;
+    margin: 0 auto;
+    padding-top: 120px;
+  }
+
+  .checkbox-inline{
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .control-label{
+    font-size: 18px;
+  }
+}
