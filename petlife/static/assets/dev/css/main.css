@@ -4582,19 +4582,19 @@ button.close {
 input.form-control {
   border-radius: 0; }
 
-.btn-custom {
+.btn-custom, .btn-business {
   background-color: #42da9f;
-  color: #fff;
-  padding-left: 30px;
-  padding-right: 30px; }
-
-.btn-business {
-  background-color: #c7b891;
   color: #fff;
   padding-left: 30px;
   padding-right: 30px;
   font-size: 18px;
-  font-weight: bold; }
+  font-weight: bold;
+  line-height: 1; }
+  .btn-custom:hover, .btn-custom:focus, .btn-business:hover, .btn-business:focus {
+    color: #fff; }
+
+.btn-business {
+  background-color: #c7b891; }
 
 .custom .header {
   height: 100px;
@@ -4647,3 +4647,36 @@ input.form-control {
     line-height: 20px; }
   .business-login .control-label {
     font-size: 18px; }
+
+.business-data {
+  background: #fefdf8;
+  color: #787878; }
+  .business-data .business-wrap {
+    position: relative;
+    width: 715px;
+    margin: 0 auto; }
+    .business-data .business-wrap div.col-sm-3 {
+      padding: 0;
+      position: relative; }
+    .business-data .business-wrap label.col-sm-3, .business-data .business-wrap div.col {
+      padding-left: 0; }
+    .business-data .business-wrap .disabled {
+      color: #000; }
+    .business-data .business-wrap input.has-error {
+      border-color: #a94442; }
+  .business-data .business-data-form .warn {
+    color: #d80000;
+    position: absolute;
+    top: 0;
+    right: -10px;
+    font-size: 20px;
+    font-weight: bold; }
+  .business-data .business-data-form .form-group {
+    margin-bottom: 10px; }
+  .business-data .business-bg {
+    background: url(../imgs/business.png) no-repeat;
+    width: 159px;
+    height: 155px;
+    position: absolute;
+    bottom: 0;
+    right: -130px; }

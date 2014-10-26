@@ -1,128 +1,125 @@
 {% extends 'petmicro/tpl/base/base.html' %}
 
 {% block title %}宠物信息录入查询系统{% endblock %}
+{% block bodyhook %}class="business-data"{% endblock %}
 
 {% block content %}
-    <style type="text/css">
-	*{margin:0;padding:0;}
-	ul,li{
-	list-style:none;
-	}
-	#content{
-	width:600px;margin:0 auto;border:1px solid #f00;
-	}
-	ul li.item{width:400px;text-align:center;margin:20px 100px;background:#00f;color:#fff;font-size:14px;font-weight:bold;height:100px;line-height:100px;}
-	#float_banner{position:fixed;top:0;width:100%;height:30px;line-height:40px;background:#000;color:#fff;font-size:14px;font-weight:bold;z-index:1000;}
-	#inputdiv{
-		width:950px;
-		margin-top:40px;
-		margin-left:auto;
-		margin-right:auto;
-		display:none;
-	}
-	#getinfo{
-		width:950px;
-		margin-top:40px;
-		margin-left:auto;
-		margin-right:auto;
-	}
-	.form-width{
-	width:930px;
-	margin:10px 10px;
-	}
-	input{width:100px;}
-	.input-height{height:20px;padding:0px 12px;}
-	.form-margin{margin-top:-6px;margin-left:10px;}
-	</style>
-
-<div id="float_banner">
-	<form class="form-inline form-margin" id="js-main-form">
-		<div class="form-group">
-			<input class="form-control input-height" id="setnum" type="text" value="输入宠物编号"/>
-		</div>
-		<div class="form-group">
-			<button type="button" class="btn input-sm btn-default input-height" id="putinfo"/>查询/录入</button>
-		</div>
-	</form>
-</div>
-<div class="container">
+{#<div id="float_banner">#}
+{#	<form class="form-inline form-margin" id="js-main-form">#}
+{#		<div class="form-group">#}
+{#			<input class="form-control input-height" id="setnum" type="text" value="输入宠物编号"/>#}
+{#		</div>#}
+{#		<div class="form-group">#}
+{#			<button type="button" class="btn input-sm btn-default input-height" id="putinfo"/>查询/录入</button>#}
+{#		</div>#}
+{#	</form>#}
+{#</div>#}
+<div class="business-wrap">
     <div class="business-title text-center">
         <h1>信息录入/查询</h1>
         <p>Information input and query</p>
     </div>
-    <div class="form-group form-width">
-        <label class="col-sm-2 control-label" for="petidnum">宠物编号:</label>
-        <div class="col-sm-8">
-            <input class="form-control" id="petidnum" name="petidnum" type="text"/>
+    <div class="business-bg hide"></div>
+    <form class="form-horizontal business-num-form">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="setnum">宠物编号:</label>
+            <div class="col-sm-7" style="padding-left: 0;">
+                <input class="form-control required" id="setnum" name="setnum" type="text" placeholder="请输入完整的芯片号码"/>
+            </div>
+            <div class="col-sm-2" style="padding: 0;">
+                <button id="putinfo" type="button" class="btn btn-business form-control" style="padding: 0;" data-loading-text="请稍等...">查询/录入</button>
+            </div>
         </div>
-    </div>
-	<form class="form-horizontal" id="js-order-form">
-		<div class="form-group form-width">
-			<label class="col-sm-2 control-label" for="mastername">宠物主人姓名:</label>
+    </form>
+	<form class="form-horizontal business-data-form hide" id="js-data-form">
+        <input name="petidnum" id="petidnum" type="hidden"/>
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="mastername">宠物主人姓名:</label>
 			<div class="col-sm-3">
-				<input class="form-control" id="mastername" name="mastername" type="text"/>
+				<input class="form-control required" id="mastername" name="mastername" type="text"/>
+                <span class="warn">*</span>
 			</div>
-			<label class="col-sm-2 control-label" for="breedername">繁殖者名字:</label>
+			<label class="col-sm-3 control-label" for="breedername">繁殖者名字:</label>
 			<div class="col-sm-3">
-				<input class="form-control" id="breedername" name="breedername" type="text"/>
-			</div>
-		</div>
-		<div class="form-group form-width">
-			<label class="col-sm-2 control-label" for="masteridnum">宠物主人身份证号:</label>
-			<div class="col-sm-3">
-				<input class="form-control" id="masteridnum" name="masteridnum" type="text"/>
-			</div>
-			<label class="col-sm-2 control-label" for="breederidnum">繁殖者身份证号:</label>
-			<div class="col-sm-3">
-				<input class="form-control" id="breederidnum" name="breederidnum" type="text"/>
+				<input class="form-control required" id="breedername" name="breedername" type="text"/>
+                <span class="warn">*</span>
 			</div>
 		</div>
-		<div class="form-group form-width">
-			<label class="col-sm-2 control-label" for="mastercontact">宠物主人联系方式:</label>
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="masteridnum">宠物主人身份证号:</label>
 			<div class="col-sm-3">
-				<input class="form-control" id="mastercontact" name="mastercontact" type="text"/>
+				<input class="form-control required" id="masteridnum" name="masteridnum" type="text"/>
+                <span class="warn">*</span>
 			</div>
-			<label class="col-sm-2 control-label" for="breedercontact">繁殖者联系方式:</label>
+			<label class="col-sm-3 control-label" for="breederidnum">繁殖者身份证号:</label>
 			<div class="col-sm-3">
-				<input class="form-control" id="breedercontact" name="breedercontact" type="text"/>
+				<input class="form-control required" id="breederidnum" name="breederidnum" type="text"/>
+                <span class="warn">*</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="mastercontact">宠物主人联系方式:</label>
+			<div class="col-sm-3">
+				<input class="form-control required" id="mastercontact" name="mastercontact" type="text"/>
+                <span class="warn">*</span>
+			</div>
+			<label class="col-sm-3 control-label" for="breedercontact">繁殖者联系方式:</label>
+			<div class="col-sm-3">
+				<input class="form-control required" id="breedercontact" name="breedercontact" type="text"/>
+                <span class="warn">*</span>
 			</div>
 		</div>
 		<br />
-		<div class="form-group form-width">
-			<label class="col-sm-2 control-label" for="pettype">犬种:</label>
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="pettype">犬种:</label>
 			<div class="col-sm-3">
-				<input class="form-control" id="pettype" name="pettype" type="text"/>
+				<input class="form-control required" id="pettype" name="pettype" type="text"/>
+                <span class="warn">*</span>
 			</div>
-			<label class="col-sm-2 control-label" for="petsex">性别:</label>
+            <label class="col-sm-3 control-label" for="petenglish">英文名:</label>
 			<div class="col-sm-3">
-				<input class="form-control" id="petsex" name="petsex" type="text"/>
-			</div>
-		</div>
-		<div class="form-group form-width">
-			<label class="col-sm-2 control-label" for="petcolor">颜色:</label>
-			<div class="col-sm-3">
-				<input class="form-control" id="petcolor" name="petcolor" type="text"/>
-			</div>
-			<label class="col-sm-2 control-label" for="petbirthdate">出生日期:</label>
-			<div class="col-sm-3">
-				<input class="form-control" id="petbirthdate" name="petbirthdate" type="text"/>
+				<input class="form-control" id="petenglish" name="petenglish" type="text"/>
 			</div>
 		</div>
-		<div class="form-group form-width">
-			<label class="col-sm-2 control-label" for="petmather">母亲身份识别号码:</label>
+		<div class="form-group">
+            <label class="col-sm-3 control-label" for="petsex">性别:</label>
 			<div class="col-sm-3">
-				<input class="form-control" id="petmather" name="petmather" type="text"/>
+				<input class="form-control required" id="petsex" name="petsex" type="text"/>
+                <span class="warn">*</span>
 			</div>
-			<label class="col-sm-2 control-label" for="petfather">父亲身份识别号码:</label>
+			<label class="col-sm-3 control-label" for="petcolor">颜色:</label>
 			<div class="col-sm-3">
-				<input class="form-control" id="petfather" name="petfather" type="text"/>
+				<input class="form-control required" id="petcolor" name="petcolor" type="text"/>
+                <span class="warn">*</span>
 			</div>
 		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label" for="petbirthdate">出生日期:</label>
+			<div class="col-sm-3">
+				<input class="form-control required" id="petbirthdate" name="petbirthdate" type="text"/>
+                <span class="warn">*</span>
+			</div>
+			<label class="col-sm-3 control-label" for="petmather">母亲身份识别号码:</label>
+			<div class="col-sm-3">
+				<input class="form-control required" id="petmather" name="petmather" type="text"/>
+                <span class="warn">*</span>
+			</div>
+		</div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="petfather">父亲身份识别号码:</label>
+			<div class="col-sm-3">
+				<input class="form-control required" id="petfather" name="petfather" type="text"/>
+                <span class="warn">*</span>
+			</div>
+        </div>
         <br/>
-		<div class="form-group form-width">
-			<div class="col-sm-3 col-sm-offset-2">
-                <button type="button" class="btn btn-custom form-control" id="petsubmit">保 存</button>
+		<div class="form-group">
+			<div class="col-sm-3 col-sm-offset-3">
+                <button type="button" class="btn btn-custom form-control" id="petsubmit" data-loading-text="请稍等...">保 存</button>
 			</div>
+            <div class="col-sm-4">
+                <span style="color: #d80000;line-height: 34px;"><i class="glyphicon glyphicon-exclamation-sign" style="margin-right: 5px;"></i>提示：带*的内容必须填写!</span>
+            </div>
 		</div>
 	</form>
 </div>
@@ -131,79 +128,120 @@
 
 {% block scripts %}
 <script>
+    var config = {
+        onsubmit: false,
+        errorClass: 'hide',
+        highlight: function (el) {
+            $(el).addClass('has-error');
+        },
+        success: function (el) {
+            $(el).siblings('.has-error').removeClass('has-error');
+            $(el).remove();
+        }
+    };
+
+    var validator1 = $('.business-num-form').validate(config),
+        validator2 = $('.business-data-form').validate(config);
+
+    $('.business-num-form').on('submit', function(){
+        $('#putinfo').click();
+        return false;
+    });
+
     var g_idnum = 0;
 
-    function get_info(idnum){
+    function get_info(idnum, $btn){
         var data = {'idnum':idnum};
         $.ajax({
                 url: './',
                 type: 'post',
                 data: data,
                 dataType: 'json',
+                beforeSend: function(){
+                    $btn.button('loading');
+                },
                 success: function(data){
-                    try{
-                        $("#getinfo").remove();
-                    }catch(e){}
+                    $btn.button('reset');
+                    $("#getinfo").remove();
+
                     if (data.status == 0)
                     {
-                        $("#inputdiv").hide();
-                        $('#js-order-form')[0].reset();
-                        $("body").append($(data.html));
-
+                        $(".business-data-form").addClass('hide');
+                        $(".business-data-form")[0].reset();
+                        $(".business-wrap").append($(data.html));
                     }
                     else
                     {
                         $("#petidnum").val($("#setnum").val());
-                        $("#inputdiv").show();
+                        $(".business-data-form").removeClass('hide');
                     }
+
+                    $('.business-bg').removeClass('hide');
                 }
-            });
+        });
     }
 
     $("#putinfo").click(function(){
-        get_info($("#setnum").val());
+        validator1.form();
+        if(validator1.numberOfInvalids()){
+            return;
+        }
+
+        get_info($("#setnum").val(), $(this));
     });
 
     $("#petsubmit").click(function(){
+        validator2.form();
+        if(validator2.numberOfInvalids()){
+            return;
+        }
+
         var $this = $(this),
-            arr = $('#js-order-form').serializeArray(),
+            arr = $('#js-data-form').serializeArray(),
             data = {};
 
         for(var i = 0, len = arr.length; i < len; i++){
             var curr = arr[i];
             data[curr.name] = curr.value;
         }
-        try{
-            $("#getinfo").remove();
-        }catch(e){}
+
+        $("#getinfo").remove();
+
         $.ajax({
                 url: './',
                 type: 'post',
                 data: data,
                 dataType: 'json',
+                beforeSend: function(){
+                    $this.button('loading');
+                },
+                complete: function(){
+                    $this.button('reset');
+                },
                 success: function(data){
-                    alert(data.message);
                     if (data.status == 0)
                     {
-                        $("#inputdiv").hide();
-                        $('#js-order-form')[0].reset();
+                        $(".business-data-form").hide();
+                        $('#js-data-form')[0].reset();
                         $("body").append($(data.html));
+                    }else{
+                        alert(data.message);
                     }
                 }
             });
     });
 
-    $("#setnum").focus(function(){
-        if ($("#setnum").val() == "输入宠物编号"){
-            $("#setnum").val("");
-        }
-    });
-
-    $("#setnum").blur(function(){
-        if ($("#setnum").val() == ""){
-            $("#setnum").val("输入宠物编号");
-        }
-    });
+{#    $("#setnum").focus(function(){#}
+{#        if ($("#setnum").val() == "输入宠物编号"){#}
+{#            $("#setnum").val("");#}
+{#        }#}
+{#    });#}
+{##}
+{#    $("#setnum").blur(function(){#}
+{#        if ($("#setnum").val() == ""){#}
+{#            $("#setnum").val("输入宠物编号");#}
+{#        }#}
+{#    });#}
 
     function set_idnum(idnum) {
         g_idnum = idnum;

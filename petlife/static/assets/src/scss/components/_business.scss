@@ -31,3 +31,56 @@
     font-size: 18px;
   }
 }
+
+.business-data{
+  background: $business-bg;
+  color: #787878;
+
+  .business-wrap{
+    position: relative;
+    width: 715px;
+    margin: 0 auto;
+
+    div.col-sm-3{
+      padding: 0;
+      position: relative;
+    }
+
+    label.col-sm-3, div.col{
+      padding-left: 0;
+    }
+
+    .disabled{
+      color: #000;
+    }
+
+    input.has-error{
+      border-color: #a94442;
+    }
+  }
+
+  .business-data-form{
+    .warn{
+      color: #d80000;
+      position: absolute;
+      top: 0;
+      right: -10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .form-group{
+      margin-bottom: 10px;
+    }
+  }
+
+  .business-bg{
+    background: url(../imgs/business.png) no-repeat;
+    width: 159px;
+    height: 155px;
+
+    position: absolute;
+    bottom: 0;
+    right: -130px;
+  }
+}
