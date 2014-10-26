@@ -17,7 +17,7 @@ def home(req):
             if data == False:
                 return render_to_response('%s/tpl/search.html' % CURRENT_NAME,{'error':True})
             else:
-                return render_to_response('%s/tpl/home_unlogin.html' % CURRENT_NAME,{'error':False})
+                return render_to_response('%s/tpl/home_unlogin.html' % CURRENT_NAME,{'error':False,'pet':data})
         return render_to_response('%s/tpl/search.html' % CURRENT_NAME,{'error':False})
         
 def login(req):
