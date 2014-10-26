@@ -120,6 +120,9 @@ PET_AD_PIC_ROOT = "/gfile/"
 PET_PIC_ROOT = "/petpic/"
 CDN_ROOT = "//chongwug-cdn.b0.upaiyun.com"
 PIC_TMP_PATH = "/manage/pictest/"
+
+SESSION_COOKIE_AGE = 60 * 30#session 30min 
+
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = 'http://www.chongwug.com/static/'
