@@ -20,7 +20,7 @@ def login(req):
 def home_unlogin(req):
     #查询
     try:
-        pet = models.petinfo.objects.get(id_num=req.POST['idnum'])
+        pet = models.petinfo.objects.get(id_num=req.POST['petidnum'])
         return pet
     except:
         return False
@@ -57,6 +57,7 @@ def home(req):
             breeder.save()
         new_pet = models.petinfo(id_num = req.POST['petidnum'],
                                 type = req.POST['pettype'],
+                                englishname = req.POST['petsex'],
                                 sex = req.POST['petsex'],
                                 color = req.POST['petcolor'],
                                 birthdate = datetime.datetime.strptime(req.POST['petbirthdate'], "%Y-%m-%d"),
