@@ -158,10 +158,10 @@
                 data: data,
                 dataType: 'json',
                 beforeSend: function(){
-                    $btn.button('loading');
+                    $btn && $btn.button('loading');
                 },
                 success: function(data){
-                    $btn.button('reset');
+                    $btn && $btn.button('reset');
                     $("#getinfo").remove();
 
                     if (data.status == 0)
