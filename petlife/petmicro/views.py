@@ -27,4 +27,9 @@ def login(req):
             return HttpResponseRedirect("/%s/" % CURRENT_NAME)
         else:
             return render_to_response('%s/tpl/login.html' % CURRENT_NAME,{'error':True})
+    if adapters.authcheck(req):
+        if 'logout' in req.GET and req.REQUEST.get('logout') == '1':
+            del req.session['user_id']
+            return render_to_response('%s/tpl/login.html' % CURRENT_NAME,{'error':False})
+        return HttpResponseRedirect("/%s/" % CURRENT_NAME)
     return render_to_response('%s/tpl/login.html' % CURRENT_NAME,{'error':False})

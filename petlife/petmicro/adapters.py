@@ -14,6 +14,10 @@ def login(req):
     try:
         now_user = models.user.objects.get(name=req.POST['username'],passwd=req.POST['userpassd'])
         req.session['user_id'] = now_user.id
+        if 'remember' in req.POST and req.POST['remember'] == 'true':
+            req.session.set_expiry(60 * 60 * 24 * 14)
+        else:
+            req.session.set_expiry(0)
         return True
     except:
         return False
@@ -27,7 +31,6 @@ def home_unlogin(req):
         return False
 
 def home(req):
-    print req.POST
     if 'pettype' in req.POST:
         #录入
         pet = models.petinfo.objects.filter(id_num=req.POST['petidnum'])
