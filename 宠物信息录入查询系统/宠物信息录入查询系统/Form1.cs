@@ -55,7 +55,7 @@ namespace 宠物信息录入查询系统
             if (count >= 1000)
             {
                 MessageBox.Show("未检测到对端设备,点击确定退出程序");
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
 
             InitializeComponent();
