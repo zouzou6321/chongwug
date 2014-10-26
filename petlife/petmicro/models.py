@@ -18,6 +18,7 @@ class personinfo(models.Model):
 class petinfo(models.Model):
     id_num = models.TextField()
     type = models.TextField()
+    englishname = models.TextField()
     sex = models.TextField()
     color = models.TextField()
     birthdate = models.TimeField()
