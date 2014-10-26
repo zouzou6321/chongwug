@@ -221,9 +221,9 @@
                 success: function(data){
                     if (data.status == 0)
                     {
-                        $(".business-data-form").hide();
+                        $(".business-data-form").addClass('hide');
                         $('#js-data-form')[0].reset();
-                        $("body").append($(data.html));
+                        $(".business-wrap").append($(data.html));
                     }else{
                         alert(data.message);
                     }
