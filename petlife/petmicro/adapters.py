@@ -26,39 +26,43 @@ def login(req):
         return False
 
 def pwdback(req):
-    if 'newpwd' in req.POST:
-        try:
-            user = models.user.objects.get(email=req.POST['email'])
-        except:
-            return __errorcode__(2)
-        if (datetime.datetime.now() - user.verifydatetime).seconds > 60 * 60 * 24:
-            return __errorcode__(3)
-        if user.verifytimes >= 3:
-            return __errorcode__(4)
-        if user.verifycode == req.POST['verifycode']:
-            user.verifytimes = 0
-            user.passwd = req.POST['newpwd']
-            user.verifydatetime = datetime.datetime(1980,7,1)
-            user.save()
-            return __errorcode__(0)
-        else:
-            user.verifytimes = user.verifytimes + 1
-            user.save()
-            return __errorcode__(5)
     try:
         user = models.user.objects.get(email=req.POST['email'])
     except:
         return __errorcode__(2)
+    dt = user.verifydatetime
+    dt = dt.replace(tzinfo=None)
+    if 'newpwd' in req.POST:
+        try:
+            if (datetime.datetime.now() - dt).seconds > 60 * 60 * 24:
+                return __errorcode__(3)
+            if user.verifytimes >= 3:
+                return __errorcode__(4)
+            if user.verifycode == req.POST['verifycode']:
+                user.verifytimes = 0
+                user.passwd = req.POST['newpwd']
+                user.verifydatetime = datetime.datetime(1980,7,1)
+                user.save()
+                return __errorcode__(0)
+            else:
+                user.verifytimes = user.verifytimes + 1
+                user.save()
+                return __errorcode__(5)
+        except:
+            return __errorcode__(3)
     try:
+        if (datetime.datetime.now() - dt).seconds < 60 * 60 * 24 and (datetime.datetime.now() - dt).seconds > 0:
+            return __errorcode__(7)
+        if user.verifytimes >= 3:
+            return __errorcode__(4)
         verifycode = random.randint(1000, 9999)
         subject=u'忘记密码，获取验证码'
         html_content = u'您好，%s,您的验证码是%d，请在忘记密码页面输入此验证码重新设置您的密码!' % (user.name, verifycode)
         thread.start_new_thread(sendemailbythread, (user.email,html_content,subject))
-        user.verifycode = verifycode.__str__
+        user.verifycode = verifycode
         user.verifydatetime = datetime.datetime.now()
         user.save()
     except:
-        traceback.print_exc()
         return __errorcode__(6)
     return __errorcode__(0)
 
