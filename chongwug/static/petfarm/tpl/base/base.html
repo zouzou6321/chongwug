@@ -4,11 +4,11 @@
 <head lang="zh-CN">
     {% include 'petfarm/tpl/base/meta.html' %}
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ 'css/base.css'|assets_petfarm }}"/>
+    <link rel="stylesheet" href="{{ 'lib/bootstrap/bootstrap.css'|assets_petfarm }}"/>
     {% block css %}{% endblock %}
     <link rel="stylesheet" href="{{ 'css/main.css'|assets_petfarm }}"/>
     <!--[if lt IE 9]>
-    <script src="{{ 'vendor/respond.js'|assets_petfarm }}"></script>
+    <script src="{{ 'lib/respond.js'|assets_petfarm }}"></script>
     <![endif]-->
 </head>
 <body>
@@ -56,9 +56,9 @@
 {% endblock %}
 
 
-<script src="{{ 'vendor/jquery.js'|assets_petfarm }}"></script>
-<script src="{{ 'vendor/bootstrap.js'|assets_petfarm }}"></script>
-<script src="{{ 'vendor/validate/jquery.validate.js'|assets_petfarm }}"></script>
+<script src="{{ 'lib/jquery.js'|assets_petfarm }}"></script>
+<script src="{{ 'lib/bootstrap/bootstrap.js'|assets_petfarm }}"></script>
+<script src="{{ 'lib/validate/jquery.validate.js'|assets_petfarm }}"></script>
 {% block scripts %}{% endblock %}
 
 </body>

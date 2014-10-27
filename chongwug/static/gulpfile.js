@@ -108,7 +108,7 @@ gulp.task('imgs', function(){
         .pipe(plugins.if(prod, plugins.rev()))
         .pipe(plugins.if(prod, gulp.dest(config.imgs.prod)))
         .on('error', function(e){ console.log(e); })
-        .pipe(plugins.if(prod, plugins.rev.manifest({path: 'imgs-manifest'})))
+        .pipe(plugins.if(prod, plugins.rev.manifest({path: 'imgs-manifest.json'})))
         .pipe(plugins.if(prod, gulp.dest('./')));
 });
 
