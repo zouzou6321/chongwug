@@ -8,12 +8,17 @@
 {% block bodyhook %}class="custom"{% endblock %}
 
 {% block content %}
+    <style>
+        th{
+            background-color: #ddd;
+        }
+    </style>
 
     <div class="custom-result">
         <h1 class="text-center">身份识别标志（芯片编号）:XXXXXXXXXXXXXX</h1>
         <table class="table table-bordered">
             <tr>
-                <td colspan="4">主人信息</td>
+                <th colspan="4">主人信息</th>
             </tr>
             <tr>
                 <td>姓名</td>
@@ -28,7 +33,7 @@
         </table>
         <table class="table table-bordered">
             <tr>
-                <td colspan="4">犬只信息</td>
+                <th colspan="4">犬只信息</th>
             </tr>
             <tr>
                <td>犬种</td>
