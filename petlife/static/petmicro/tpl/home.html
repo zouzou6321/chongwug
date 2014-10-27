@@ -1,8 +1,10 @@
 {% extends 'petmicro/tpl/base/base.html' %}
-
+{% load assets %}
 {% block title %}宠物信息录入查询系统{% endblock %}
 {% block bodyhook %}class="business-data"{% endblock %}
-
+{% block css %}
+    <link rel="stylesheet" href="{{ 'vendor/datepicker3.css'|assets }}"/>
+{% endblock %}
 {% block content %}
 {#<div id="float_banner">#}
 {#	<form class="form-inline form-margin" id="js-main-form">#}
@@ -98,7 +100,7 @@
 		<div class="form-group">
 			<label class="col-sm-3 control-label" for="petbirthdate">出生日期:</label>
 			<div class="col-sm-3">
-				<input class="form-control required" id="petbirthdate" name="petbirthdate" type="text"/>
+				<input class="form-control required" id="petbirthdate" name="petbirthdate" type="text" readonly/>
                 <span class="warn">*</span>
 			</div>
 			<label class="col-sm-3 control-label" for="petmather">母亲身份识别号码:</label>
@@ -129,7 +131,15 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ 'vendor/bootstrap-datepicker.js'|assets }}"></script>
 <script>
+    $('#petbirthdate').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd',
+        orientation: "bottom right",
+        language: "zh-CN"
+    });
+
     var config = {
         onsubmit: false,
         errorClass: 'hide',

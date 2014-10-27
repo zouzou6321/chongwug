@@ -5,6 +5,7 @@
     {% include 'petmicro/tpl/base/meta.html' %}
 	<title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ 'css/main.css'|assets }}"/>
+    {% block css %}{% endblock %}
     <!--[if lt IE 9]>
     <script src="{{ 'vendor/respond.js'|assets }}"></script>
     <![endif]-->
