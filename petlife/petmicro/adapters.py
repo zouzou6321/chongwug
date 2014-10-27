@@ -1,9 +1,9 @@
 # -*- coding: UTF-8 -*-
-from petlife.commom import __errorcode__
+from petlife.commom import __errorcode__,sendemailbythread
 import models,datetime
 from django.template import Context, Template 
 from petlife.settings import STATIC_ROOT
-import traceback
+import traceback,random,thread
 
 def authcheck(req):
     if 'user_id' in req.session:
@@ -13,6 +13,9 @@ def authcheck(req):
 def login(req):
     try:
         now_user = models.user.objects.get(name=req.POST['username'],passwd=req.POST['userpassd'])
+        now_user.verifytimes = 0
+        now_user.verifydatetime = datetime.datetime(1980,7,1)
+        now_user.save()
         req.session['user_id'] = now_user.id
         if 'remember' in req.POST and req.POST['remember'] == 'true':
             req.session.set_expiry(60 * 60 * 24 * 14)
@@ -21,6 +24,43 @@ def login(req):
         return True
     except:
         return False
+
+def pwdback(req):
+    if 'newpwd' in req.POST:
+        try:
+            user = models.user.objects.get(email=req.POST['email'])
+        except:
+            return __errorcode__(2)
+        if (datetime.datetime.now() - user.verifydatetime).seconds > 60 * 60 * 24:
+            return __errorcode__(3)
+        if user.verifytimes >= 3:
+            return __errorcode__(4)
+        if user.verifycode == req.POST['verifycode']:
+            user.verifytimes = 0
+            user.passwd = req.POST['newpwd']
+            user.verifydatetime = datetime.datetime(1980,7,1)
+            user.save()
+            return __errorcode__(0)
+        else:
+            user.verifytimes = user.verifytimes + 1
+            user.save()
+            return __errorcode__(5)
+    try:
+        user = models.user.objects.get(email=req.POST['email'])
+    except:
+        return __errorcode__(2)
+    try:
+        verifycode = random.randint(1000, 9999)
+        subject='忘记密码，获取验证码'
+        html_content = '<h3>您好，%s：</h3>您的验证码是%d，请在忘记密码页面输入此验证码重新设置您的密码!' % (user.name, verifycode)
+        thread.start_new_thread(sendemailbythread, (user.email,html_content,subject))
+        user.verifycode = verifycode.__str__
+        user.verifydatetime = datetime.datetime.now()
+        user.save()
+    except:
+        traceback.print_exc()
+        return __errorcode__(6)
+    return __errorcode__(0)
 
 def home_unlogin(req):
     #查询

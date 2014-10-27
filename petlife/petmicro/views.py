@@ -33,3 +33,8 @@ def login(req):
             return render_to_response('%s/tpl/login.html' % CURRENT_NAME,{'error':False})
         return HttpResponseRedirect("/%s/" % CURRENT_NAME)
     return render_to_response('%s/tpl/login.html' % CURRENT_NAME,{'error':False})
+
+def pwdback(req):
+    if req.method == 'POST':
+        return HttpResponse(adapters.pwdback(req))
+    return render_to_response('%s/tpl/pwdback.html' % CURRENT_NAME,{'error':False})

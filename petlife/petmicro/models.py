@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
-
+import datetime
 # Create your models here.
 
 
@@ -9,6 +9,10 @@ class user(models.Model):
     passwd = models.TextField()
     id_num = models.TextField(blank=True, null=True)
     contact = models.TextField(blank=True, null=True)
+    email = models.TextField(blank=True, null=True)
+    verifycode = models.TextField(blank=True, null=True)
+    verifydatetime = models.DateTimeField(default = datetime.datetime(1980,7,1))
+    verifytimes = models.IntegerField(default = 0)
 
 class personinfo(models.Model):
     name = models.TextField()
