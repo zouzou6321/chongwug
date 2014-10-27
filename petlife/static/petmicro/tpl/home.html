@@ -258,6 +258,7 @@
     function set_idnum(idnum) {
         g_idnum = idnum;
         if (g_idnum != 0){
+            $('#setnum').val(idnum);
             get_info(g_idnum,$("#putinfo"));
         }
     }
