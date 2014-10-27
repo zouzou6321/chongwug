@@ -1,0 +1,9 @@
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\obj\Release\ResolveAssemblyReference.cache
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\obj\Release\PTDemo.Properties.Resources.resources
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\obj\Release\宠物录入查询系统.csproj.GenerateResource.Cache
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\obj\Release\PTDemo.exe
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\obj\Release\PTDemo.pdb
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\bin\Release\PTDemo.exe
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\bin\Release\PTDemo.pdb
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\bin\Release\DeviceSDK2.dll
+C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\obj\Release\BTDemo.form1.resources

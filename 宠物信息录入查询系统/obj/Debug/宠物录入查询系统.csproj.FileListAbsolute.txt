@@ -1,0 +1,11 @@
+G:\chongwug\RTFDemo\bin\Debug\PTDemo.exe
+G:\chongwug\RTFDemo\bin\Debug\PTDemo.pdb
+G:\chongwug\RTFDemo\bin\Debug\DeviceSDK2.dll
+G:\chongwug\RTFDemo\obj\Debug\ResolveAssemblyReference.cache
+G:\chongwug\RTFDemo\obj\Debug\BTDemo.form1.resources
+G:\chongwug\RTFDemo\obj\Debug\PTDemo.Properties.Resources.resources
+G:\chongwug\RTFDemo\obj\Debug\宠物录入查询系统.csproj.GenerateResource.Cache
+G:\chongwug\RTFDemo\obj\Debug\PTDemo.exe
+G:\chongwug\RTFDemo\obj\Debug\PTDemo.pdb
+G:\chongwug\宠物信息录入查询系统\obj\Debug\PTDemo.exe
+G:\chongwug\宠物信息录入查询系统\obj\Debug\PTDemo.pdb
