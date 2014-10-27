@@ -1,0 +1,5 @@
+SCC = This is a Source Code Control file
+
+[RTFDemo.csproj]
+SCC_Aux_Path = "\\server\vss"
+SCC_Project_Name = "$/DeviceSDK2/Sample/C#-PTDevice/RTFDemo", WKGCAAAA
