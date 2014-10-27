@@ -12,11 +12,11 @@
   }
 }
 
-.business-login{
+.business-login, .business-password{
   color: #4c4c4c;
   background: $business-bg url(../imgs/b-login.png) center top no-repeat;
 
-  .business-login-form{
+  .business-account-form{
     width: 360px;
     margin: 0 auto;
     padding-top: 120px;
@@ -29,6 +29,10 @@
 
   .control-label{
     font-size: 18px;
+  }
+
+  .has-error{
+    border-color: #d80000;
   }
 }
 

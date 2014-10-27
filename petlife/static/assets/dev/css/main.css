@@ -4635,18 +4635,20 @@ input.form-control {
   .business-title p {
     font-size: 18px; }
 
-.business-login {
+.business-login, .business-password {
   color: #4c4c4c;
   background: #fefdf8 url(../imgs/b-login.png) center top no-repeat; }
-  .business-login .business-login-form {
+  .business-login .business-account-form, .business-password .business-account-form {
     width: 360px;
     margin: 0 auto;
     padding-top: 120px; }
-  .business-login .checkbox-inline {
+  .business-login .checkbox-inline, .business-password .checkbox-inline {
     font-size: 12px;
     line-height: 20px; }
-  .business-login .control-label {
+  .business-login .control-label, .business-password .control-label {
     font-size: 18px; }
+  .business-login .has-error, .business-password .has-error {
+    border-color: #d80000; }
 
 .business-data {
   background: #fefdf8;
