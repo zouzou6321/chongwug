@@ -225,15 +225,12 @@
 
     $form.on('click', '.btn-add', function(){
         num++;
+        $('#pet-count').val(num);
         $(this).closest('.form-group').before(petTpl.replace(/\{num\}/g, num));
     });
 
     $form.on('click', '.btn-del', function(){
         $(this).closest('.pet').remove();
-    });
-
-    $form.on('submit', function(){
-        $('#pet-count').val(num);
     });
 
 })(jQuery);
