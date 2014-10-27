@@ -51,8 +51,8 @@ def pwdback(req):
         return __errorcode__(2)
     try:
         verifycode = random.randint(1000, 9999)
-        subject='忘记密码，获取验证码'
-        html_content = '<h3>您好，%s：</h3>您的验证码是%d，请在忘记密码页面输入此验证码重新设置您的密码!' % (user.name, verifycode)
+        subject=u'忘记密码，获取验证码'
+        html_content = u'您好，%s,您的验证码是%d，请在忘记密码页面输入此验证码重新设置您的密码!' % (user.name, verifycode)
         thread.start_new_thread(sendemailbythread, (user.email,html_content,subject))
         user.verifycode = verifycode.__str__
         user.verifydatetime = datetime.datetime.now()
