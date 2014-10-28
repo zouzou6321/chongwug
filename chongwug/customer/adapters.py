@@ -177,8 +177,8 @@ def buy_main_adapter(re):
         except:
             petimg = None
         othor_pets = pet_one.pet_set.filter(dele=False)
-        min_price = string.atoi(othor_pets.order_by('price')[0].price)
-        max_price = string.atoi(othor_pets.order_by('-price')[0].price)
+        min_price = othor_pets.order_by('price')[0].price
+        max_price = othor_pets.order_by('-price')[0].price
         if price != None:
             if (max_price < princes[price - 1]['b'] or min_price > princes[price - 1]['c']):
                 continue

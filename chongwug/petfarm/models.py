@@ -62,7 +62,7 @@ class pet(models.Model):
     index = models.TextField()
     color = models.TextField()
     epidemic_period = models.TextField()
-    price = models.TextField()
+    price = models.IntegerField()
     sex = models.TextField()
     sale_out = models.BooleanField(default=False)
     dele = models.BooleanField(default=False)

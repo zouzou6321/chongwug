@@ -223,7 +223,7 @@ def manage_nestofpet_add(request):
                                 index = chr(ord('A') + (petnum - 1)),
                                 color = request.POST['color%d' % petnum],
                                 epidemic_period = request.POST['epidemic%d' % petnum],
-                                price = request.POST['price%d' % petnum],
+                                price = string.atoi(request.POST['price%d' % petnum]),
                                 sex = request.POST['sex%d' % petnum],
                                 sale_out = ((request.POST['sale%d' % petnum] == '1') and 1) or 0)
                 new_pet.save()
