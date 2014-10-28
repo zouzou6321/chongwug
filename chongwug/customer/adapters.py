@@ -45,13 +45,13 @@ def buy_home_adapter(request):
     city_farms = pet_farm.objects.filter(contry=contry,province=province,city=city)
     for city_farm in city_farms:
         try:
-            pet = nestofpet.objects.filter(farm=city_farm,dele=False,sale_out=False).order_by('-min_price')[0]
+            pet = nestofpet.objects.filter(farm=city_farm,dele=False,sale_out=False).order_by('min_price')[0]
             city_farm.min_prince = pet.min_price
             city_farm.save()
         except:
             None
     for direct in directs:
-        tmp_farm = city_farms.filter(direct=direct,dele=False).order_by('manage_score')
+        tmp_farm = city_farms.filter(direct=direct,dele=False).order_by('-manage_score')
         if tmp_farm.count() > 0:
             tmp_farm = tmp_farm[0]
             tmp_farm_img = pet_farm_img.objects.filter(pet_farm_id=tmp_farm,img_usefor='buy_home',dele=False)
