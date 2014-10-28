@@ -121,6 +121,7 @@ __errorcode = [
                [18,u'direct error',u'方位选择不正确'],
                [19,u'manage score error',u'评分数据不正确'],
                [20,u'short desc error',u'简介不可以为空'],
+               [21,u'pwd can not be null',u'密码不能为空'],
                [404,u'page not found',u'页面不存在'],
                [500,u'internal fault',u'服务器内部错误']
               ]

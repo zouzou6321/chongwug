@@ -43,6 +43,9 @@ def manage_home_data_get(request):
 
 def manage_pet_farm_add(request):
     try:
+        if 'pwd' not in request.POST or request.POST['pwd'] == '':
+            return __errorcode__(21)
+        
         if 'province' not in request.POST or request.POST['province'] == '':
             province = '四川'
         else:
