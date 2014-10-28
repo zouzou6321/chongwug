@@ -183,23 +183,24 @@ def manage_nestofpet_add(request):
     if img_count <= 0:
         return __errorcode__(4)
     petnum = 0
-    while petnum < img_count:
+    while petnum <= img_count:
+        petnum += 1
         if ('img-%d-type' % petnum) in request.POST:
             break;
-        petnum += 1
-    if petnum >= img_count:
+    if petnum > img_count:
         return __errorcode__(4)
     
     if request.POST['nest-desc'] == '':
-        return __errorcode__(2)
+        return __errorcode__(20)
     new_petscount = string.atoi(request.POST['count'])
     petnum = 0
     while petnum < new_petscount:
+        petnum += 1
         try:
             if ('price%d' % petnum) in request.POST and string.atoi(request.POST['price%d' % petnum]) <= 0:
-                return __errorcode__(2)
+                return __errorcode__(15)
         except:
-            return __errorcode__(2)
+            return __errorcode__(15)
     try:
         farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm
         new_nestofpet = nestofpet(farm = farm,
