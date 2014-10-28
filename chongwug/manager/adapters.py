@@ -141,9 +141,6 @@ def manage_picupload(photo,width,height):
     if img.mode != 'RGB':
         img = img.convert('RGB')
     w,h = img.size
-    if w > 1170:
-        img.thumbnail((1170,3000))
-        w,h = img.size
     if (w < width) or (h < height):
         return 'size error'
     url=(settings.PIC_TMP_PATH+photo.name).encode('utf8')
