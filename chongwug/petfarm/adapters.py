@@ -4,7 +4,7 @@ from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
-from chongwug.config import __petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petcolors,__petages
+from chongwug.config import __regular_expression_idnum,__regular_expression_email,__regular_expression_chinatelnum,__directs,__addresses,__petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petcolors,__petages
 from chongwug.commom import __errorcode__
 from upyun import UpYun
 from django.contrib import auth
@@ -23,7 +23,7 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
     x2 = int(pic_args['x2'])
     y2 = int(pic_args['y2'])
     if (x2 - x1) + 3 < max_width or (y2 - y1) + 3 < max_height:
-        return 'type error'
+        return 'crop size error'
     if img.mode != 'RGB':
         img = img.convert('RGB')
     cropimg = img.crop((x1,y1,x2,y2))
@@ -150,6 +150,10 @@ def manage_picpreupload(request,_from,_nestofpet=None):
             if _nestofpet:
                 _nestofpet.delete()
             return __errorcode__(4)
+        if img_url == 'crop size error':
+            if _nestofpet:
+                _nestofpet.delete()
+            return __errorcode__(13)
         
         #把url存入数据库
         if _from == 'farm':
@@ -179,23 +183,24 @@ def manage_nestofpet_add(request):
     if img_count <= 0:
         return __errorcode__(4)
     petnum = 0
-    while petnum < img_count:
+    while petnum <= img_count:
+        petnum += 1
         if ('img-%d-type' % petnum) in request.POST:
             break;
-        petnum += 1
-    if petnum >= img_count:
+    if petnum > img_count:
         return __errorcode__(4)
     
     if request.POST['nest-desc'] == '':
-        return __errorcode__(2)
+        return __errorcode__(20)
     new_petscount = string.atoi(request.POST['count'])
     petnum = 0
     while petnum < new_petscount:
+        petnum += 1
         try:
             if ('price%d' % petnum) in request.POST and string.atoi(request.POST['price%d' % petnum]) <= 0:
-                return __errorcode__(2)
+                return __errorcode__(15)
         except:
-            return __errorcode__(2)
+            return __errorcode__(15)
     try:
         farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm
         new_nestofpet = nestofpet(farm = farm,
@@ -238,15 +243,55 @@ def pet_farm_all():
 
 def manage_pet_farm_mod(request):
     try:
-        if request.POST['province'] == '':
+        if 'province' not in request.POST or request.POST['province'] == '':
             province = '四川'
         else:
             province = request.POST['province']
-        if request.POST['city'] == '':
+        if 'city' not in request.POST or request.POST['city'] == '':
             city = '成都'
         else:
             city = request.POST['city']
+        
+        error = True
+        for _addresse in __addresses:
+            for _province in _addresse['sublist']:
+                if _province['name'] == province:
+                    for _city in _province['sublist']:
+                        if _city['name'] == city:
+                            for _district in _city['sublist']:
+                                if _district['name'] == request.POST['district']:
+                                    error = False
+                                    break
+                            break
+                    break
+        if error:
+            return __errorcode__(11)
+        
+        error = True
+        for _direct in __directs:
+            if _direct == request.POST['direct']:
+                error = False
+                break
+        if error:
+            return __errorcode__(18)
+        
+        try:
+            if string.atoi(request.POST['min_prince']) <= 0:
+                return __errorcode__(15)
+        except:
+            return __errorcode__(15)
+        
+        p = re.compile(__regular_expression_chinatelnum)
+        if not p.match(request.POST['tel']):
+            return __errorcode__(9)
+        p = re.compile(__regular_expression_email)
+        if not p.match(request.POST['email']):
+            return __errorcode__(16)
         curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        curuser.tel = request.POST['tel']
+        curuser.email = request.POST['email']
+        if request.POST['pwd'] != '':
+            curuser.pwd = request.POST['pwd']
         curuser.petfarm.name = request.POST['name']
         curuser.petfarm.desc = request.POST['desc']
         curuser.petfarm.detail_address = request.POST['detail_address']
@@ -286,7 +331,7 @@ def manage_picupload(photo,width,height):
         photo.name = file+'.jpg'
         url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
         name = settings.STATIC_ROOT+url
-        img.save(name,'jpeg',quality=75)
+        img.save(name,'jpeg',quality=85)
         monitor = tmppic_monitor(fname=name)
         monitor.save()
     data = {'url':'/static'+url,"width":str(w),"height":str(h)}

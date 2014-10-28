@@ -33,8 +33,7 @@ def manage_pet_farm_add_view(request):
     if request.session['score'] < 50:
         return render_to_response('404.html')
     if request.method == 'POST':
-        if adapters.manage_pet_farm_add(request) == False:
-            return HttpResponse(__errorcode__(2))
+        return HttpResponse(adapters.manage_pet_farm_add(request))
     data = adapters.manage_home_data_get(request)
     return render_to_response('manager/tpl/manage_pet_farm_add.html',data,context_instance=RequestContext(request))
 

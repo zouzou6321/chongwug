@@ -20,6 +20,24 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="farm-email" class="col-sm-3 control-label">邮箱<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="email" value="{{ manager.email }}" class="form-control" id="farm-email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-tel" class="col-sm-3 control-label">联系电话<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="tel" value="{{ manager.tel }}" class="form-control" id="farm-tel">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-pwd" class="col-sm-3 control-label">登陆密码<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="password" name="pwd" class="form-control" id="farm-pwd">
+        </div>
+    </div>
+    <div class="form-group">
         <label for="farm-desc" class="col-sm-3 control-label">养殖场介绍<span class="warn">*</span>：</label>
         <div class="col-sm-8">
             <textarea name="desc" class="form-control" rows="3" id="farm-desc">{{ manager.petfarm.desc }}</textarea>
@@ -84,7 +102,7 @@
     <div class="form-group">
         <label for="farm-min-prince" class="col-sm-3 control-label">宠物最低价格<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-            <input type="text" name="min_prince" value="{{ manager.petfarm.min_prince }}" id="farm-min-prince" class="form-control">
+            <input type="text" name="min_prince" value="{{ manager.petfarm.min_prince|floatformat }}" id="farm-min-prince" class="form-control">
         </div>
     </div>
     <div class="form-group">

@@ -12,7 +12,7 @@ import string,re
 import os,uuid,datetime
 import config
 from chongwug.commom import __errorcode__
-from chongwug.config import __directs,__regular_expression_telnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
+from chongwug.config import __directs,__addresses,__regular_expression_idnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
 '''
 管理员鉴权
 '''
@@ -43,26 +43,65 @@ def manage_home_data_get(request):
 
 def manage_pet_farm_add(request):
     try:
-        if request.POST['province'] == '':
+        if 'pwd' not in request.POST or request.POST['pwd'] == '':
+            return __errorcode__(21)
+        
+        if 'province' not in request.POST or request.POST['province'] == '':
             province = '四川'
         else:
             province = request.POST['province']
-        if request.POST['city'] == '':
+        if 'city' not in request.POST or request.POST['city'] == '':
             city = '成都'
         else:
             city = request.POST['city']
-        if request.POST['manage_score'] == '':
-            manage_score = 1.0
-        else:
-            manage_score = string.atof(request.POST['manage_score'])
+        
+        error = True
+        for _addresse in __addresses:
+            for _province in _addresse['sublist']:
+                if _province['name'] == province:
+                    for _city in _province['sublist']:
+                        if _city['name'] == city:
+                            for _district in _city['sublist']:
+                                if _district['name'] == request.POST['district']:
+                                    error = False
+                                    break
+                            break
+                    break
+        if error:
+            return __errorcode__(11)
+        
+        error = True
+        for _direct in __directs:
+            if _direct == request.POST['direct']:
+                error = False
+                break
+        if error:
+            return __errorcode__(18)
+        
+        try:
+            if request.POST['manage_score'] == '':
+                manage_score = 1.0
+            else:
+                manage_score = string.atof(request.POST['manage_score'])
+        except:
+            return __errorcode__(19)
+        
+        try:
+            if string.atoi(request.POST['min_prince']) <= 0:
+                return __errorcode__(15)
+        except:
+            return __errorcode__(15)
+        
         p = re.compile(__regular_expression_chinatelnum)
         if not p.match(request.POST['tel']):
-            return False
+            return __errorcode__(9)
         p = re.compile(__regular_expression_email)
         if not p.match(request.POST['email']):
-            return False
-        if string.atoi(request.POST['min_prince']) <= 0:
-            return False
+            return __errorcode__(16)
+        p = re.compile(__regular_expression_idnum)
+        if not p.match(request.POST['idnum']):
+            return __errorcode__(17)
+        
         auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
         new_user = user(nickname = request.POST['name'],
                         tel = request.POST['tel'],
@@ -84,9 +123,9 @@ def manage_pet_farm_add(request):
         new_pet_farm.save()
         new_user.petfarm = new_pet_farm
         new_user.save()
-    except NameError:
-        return False
-    return True
+        return __errorcode__(0)
+    except:
+        return __errorcode__(2) 
 
 def pet_farm_all():
     farms = pet_farm.objects.filter(dele=False)

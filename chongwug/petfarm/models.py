@@ -15,7 +15,7 @@ class pet_farm(models.Model):
     detail_address = models.TextField()
     sale_count = models.IntegerField(default=0)
     sale_score = models.FloatField(default=0)
-    min_prince = models.FloatField()
+    min_prince = models.IntegerField()
     #添加时间
     start_time = models.DateTimeField(default=datetime.datetime.now)
     #删除时间

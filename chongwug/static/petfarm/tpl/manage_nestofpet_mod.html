@@ -79,13 +79,13 @@ function select()
 }
 
 function deletepet(){
-	$.get("?id=" + $("#pet_id").val() + "&del=1",function(recive){
-		if (recive == "True"){
+	$.getJSON("?id=" + $("#pet_id").val() + "&del=1",function(recive){
+		if (recive.status == 0){
+			alert(recive.message);
 			window.location.href = window.location.href;
 		}
 		else{
-			alert("data error!");
-			window.location.href = window.location.href;
+			alert(recive.message);
 		}
 	});
 }
