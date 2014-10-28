@@ -47,10 +47,12 @@ def manage_ad_add_view(request):
     data = adapters.manage_home_data_get(request)
     ad_types = adapters.manage_get_adtypes()
     data['ad_types'] = ad_types
+    data['sessionid'] = request.COOKIES['sessionid']
     return render_to_response('manager/tpl/manage_ad_picadd.html',data,context_instance=RequestContext(request))
 
 @csrf_exempt
 def manage_ad_pic_upload_view(request):
+    print request.POST
     if adapters.manage_authentication(request) == False:
         return HttpResponse(__errorcode__(404))
     if request.session['score'] < 50:

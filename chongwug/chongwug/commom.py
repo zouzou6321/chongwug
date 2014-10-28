@@ -8,7 +8,7 @@ from chongwug.config import __errorcode
 import json,traceback
 from django.utils.log import AdminEmailHandler
 from django.core.mail  import  send_mail
-from chongwug import settings
+from chongwug.settings import EMAIL_HOST_USER,ADMINS
 from django.views.debug import get_exception_reporter_filter
 def __errorcode__(errornum,otherdata = None):
     index = 0
@@ -42,8 +42,8 @@ class myAdminEmailHandler(AdminEmailHandler):
             request = None
             request_repr = "Request repr() unavailable."
         message = "%s\n\n%s" % (stack_trace, request_repr)
-        sender=settings.EMAIL_HOST_USER
-        mail_list= settings.ADMINS
+        sender=EMAIL_HOST_USER
+        mail_list= ADMINS
         send_mail(
                     subject=subject,  
                     message=message,  

@@ -160,6 +160,7 @@ function Imagess(url,imgid,callback){
 		x2 = selection.x2;  
 		y2 = selection.y2;
 	}
+	
 	$(document).ready(
 		function () {
 			x1 = 0;  
@@ -170,6 +171,7 @@ function Imagess(url,imgid,callback){
                 'uploader': '/static/manage/uploadify/uploadify.swf',
                 'script': '/manage/ad/picadd/upload/',
                 'cancelImg': '{{ 'vendor/uploadify/cancel.png'|assets_manager }}',
+                'scriptData': {'sessionid':'{{ sessionid }}'},
                 'fileDesc': '图片文件',
                 'buttonText': '选择上传',
                 'fileExt': '*.jpg;*.jpeg;*.gif;*.png;*.bmp;',
