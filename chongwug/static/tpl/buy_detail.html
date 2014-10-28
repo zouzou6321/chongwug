@@ -65,8 +65,7 @@
 {#                <!-- JiaThis Button END -->#}
             </div>
             <div class="col-md-7">
-                <h1 class="cwg-detail-title">[城{{ nestpet.farm.direct }}-{{ nestpet.farm.district }}]{{ nestpet.farm.name }} {{ nestpet.color }}{{ nestpet.type }}</h1>
-                <p class="detail-title-desc">{{ nestpet.short_desc }}</p>
+                <h1 class="cwg-detail-title">[{{ nestpet.farm.name }}] {{ nestpet.short_desc }}</h1>
                 <div class="cwg-detail-info">
                     <div class="info-row clearfix">
                         <div class="info-td-left">
@@ -256,7 +255,7 @@
                         <img class="img-full" src="{{ recommendpet_img.img.img_url }}" >
                     </a>
                     <div class="dog-desc">
-                        <h4><a href="?petid={{ recommendpet_img.pet.id }}">[城{{ recommendpet_img.pet.farm.direct }}-{{ recommendpet_img.pet.farm.district }}]{{ recommendpet_img.pet.farm.name }} {{ recommendpet_img.pet.color }}{{ recommendpet_img.pet.type }}</a></h4>
+                        <h4><a href="?petid={{ recommendpet_img.pet.id }}">[{{ recommendpet_img.pet.farm.name }}] {{ recommendpet_img.pet.short_desc }}</a></h4>
                         <p>
                             <span class="price price-primary price-xs">{{ recommendpet_img.min_price }}-{{ recommendpet_img.max_price }}<span class="price-desc">元/只</span></span>
                         </p>

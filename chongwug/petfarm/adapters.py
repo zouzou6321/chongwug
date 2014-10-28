@@ -300,6 +300,7 @@ def manage_pet_farm_mod(request):
         curuser.petfarm.district = request.POST['district']
         curuser.petfarm.direct = request.POST['direct']
         curuser.petfarm.min_prince = request.POST['min_prince']
+        curuser.petfarm.save()
         curuser.save()
     except NameError:
         return __errorcode__(2)
