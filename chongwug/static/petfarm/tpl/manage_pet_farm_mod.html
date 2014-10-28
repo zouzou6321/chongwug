@@ -161,7 +161,9 @@
 <script>
 
 CKEDITOR.replace('farm-desc');
-
+CKEDITOR.instances['farm-desc'].on('change', function() {
+    CKEDITOR.instances['farm-desc'].updateElement();
+});
 </script>
 <script src="{{ 'lib/uploadify/jquery.uploadify.js'|assets_petfarm }}"></script>
 <script src="{{ 'lib/jcrop/jquery.Jcrop.js'|assets_petfarm }}"></script>

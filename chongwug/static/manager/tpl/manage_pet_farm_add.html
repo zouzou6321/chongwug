@@ -104,6 +104,9 @@
 <script>
 
 CKEDITOR.replace('pet-desc');
+CKEDITOR.instances['pet-desc'].on('change', function() {
+    CKEDITOR.instances['pet-desc'].updateElement();
+});
 
 var validator = $('form').validate(commonvalidateConfig);
 (function($){
