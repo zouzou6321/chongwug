@@ -1,0 +1,44 @@
+.outline{
+
+  &:hover{
+    .outline-title{
+      color: $primary-bg-color;
+    }
+    .outline-content{
+      color: $primary-bg-color;
+    }
+  }
+
+  .outline-title{
+    font-size: 16px;
+    font-weight: bold;
+    color: #5e5e5e;
+    position: relative;
+    margin-bottom: 15px;
+    cursor: pointer;
+  }
+
+  .title-limit{
+    display: block;
+    max-width: 80%;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .outline-date{
+    position: absolute;
+    right: 0;
+    font-size: 14px;
+    font-weight: normal;
+    top: 0;
+  }
+
+  .outline-content{
+    font-size: 12px;
+    color: #5e5e5e;
+    margin-bottom: 15px;
+    cursor: pointer;
+  }
+}

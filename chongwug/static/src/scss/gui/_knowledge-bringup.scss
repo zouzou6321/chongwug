@@ -1,0 +1,44 @@
+.knowledge-bringup{
+
+  .desc-tit{
+    font-weight: bold;
+  }
+
+  .desc-main{
+    padding-bottom: 1px;
+
+    ol{
+      margin-left: -20px;
+    }
+
+    li{
+      line-height: 24px;
+      margin-bottom: 20px;
+
+      p{
+        margin-bottom: 0;
+      }
+    }
+
+    strong{
+      font-size: 15px;
+    }
+  }
+
+  .bringup-outline{
+    .desc-main{
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+}
+
+.article-modal{
+  .modal-body{
+    padding-left: 50px;
+    padding-right: 50px;
+
+    height: 450px;
+    overflow-y: auto;
+  }
+}
