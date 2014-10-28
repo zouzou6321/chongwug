@@ -59,7 +59,7 @@
 	
 	<div style="width: 1170px; height: auto;float: left;">
 		<div style="width: 1170px; height: auto;float: left;border:3px solid #8FADB3; background-color: #fff;">
-			<img  border="0" alt="本地图片" id="personhead" style="display: block;max-width: 1170px; height: auto;"  src="" />
+			<img  border="0" alt="本地图片" id="personhead" style="display: block;max-width: 1170px; height: auto;" />
 		</div>
 		<div style="width: 1170px; height: 323px; overflow: hidden;border:2px solid #FFB5A1;">  
 			<img  border="0"  id="personheadpre" src="" alt="截图预览"/> 
@@ -90,20 +90,25 @@ Browser.Moz=/gecko/.test(Browser.userAgent);
 //判断是否加载完成 
 function Imagess(url,imgid,callback){    
     var val=url; 
-    var img=new Image(); 
-    if(Browser.ie){ 
-        img.onreadystatechange =function(){  
-            if(img.readyState=="complete"||img.readyState=="loaded"){ 
-                callback(img,imgid); 
-            } 
-        }        
-    }else if(Browser.Moz){ 
-        img.onload=function(){ 
-            if(img.complete==true){ 
-                callback(img,imgid); 
-            } 
-        }        
-    }
+    var img=new Image();
+
+    $(img).on('load', function(){
+        callback(img,imgid);
+    });
+
+{#    if(Browser.ie){ #}
+{#        img.onreadystatechange =function(){  #}
+{#            if(img.readyState=="complete"||img.readyState=="loaded"){ #}
+{#                callback(img,imgid); #}
+{#            } #}
+{#        }        #}
+{#    }else if(Browser.Moz){ #}
+{#        img.onload=function(){ #}
+{#            if(img.complete==true){ #}
+{#                callback(img,imgid); #}
+{#            } #}
+{#        }        #}
+{#    }#}
 
     img.src=val;
 } 
@@ -207,22 +212,18 @@ function Imagess(url,imgid,callback){
 			            //alert(result); 
 			            loadedover = false;
 			            //document.getElementById('personhead').src = "/resources/"+result;
-			            Imagess(result,"personhead",checkimg);
-			            Imagess(result,"personheadpre",checkimg);
 			            source = result;
 			            selected = 0;
 			            imgw = html.width;
 			            imgh = html.height;
 			            document.getElementById('uploadimg').style.display = 'none';
-			            (function(){
-			            	if (selected < 10)
-			            	{
-				            	$('#personhead').imgAreaSelect({imageHeight:imgh,imageWidth:imgw,x1:0,y1:0,x2:minimgw,y2:minimgh,aspectRatio: '3.62:1', handles: true, fadeSpeed: 200, minHeight:minimgh,minWidth:minimgw,onSelectChange: preview });
-				            	prepreview(imgw,imgh);
-				            	setTimeout(arguments.callee, 100);
-				            	selected = selected + 1;
-				            }
-					    })();
+
+                        Imagess(result,"personhead", function(img, id){
+                            checkimg(img, id);
+                            $('#personhead').imgAreaSelect({imageHeight:imgh,imageWidth:imgw,x1:0,y1:0,x2:minimgw,y2:minimgh,aspectRatio: '3.62:1', handles: true, fadeSpeed: 200, minHeight:minimgh,minWidth:minimgw,onSelectChange: preview });
+                            prepreview(imgw,imgh);
+                        });
+                        Imagess(result,"personheadpre",checkimg);
 				    }
                 }
             });
