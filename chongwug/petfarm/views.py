@@ -99,4 +99,7 @@ def manage_nestofpet_add_view(request):
     
     data = adapters.manage_home_data_get(request)
     data['types'] = adapters.get_petpic_types()['types']
+    data['pettypes'] = adapters.get_pet_types()['pettypes']
+    data['petcolors'] = adapters.get_pet_colors()['petcolors']
+    data['petages'] = adapters.get_pet_ages()['petages']
     return render_to_response('petfarm/tpl/manage_pet_add.html',data,context_instance=RequestContext(request))

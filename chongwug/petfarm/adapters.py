@@ -4,7 +4,7 @@ from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
-from chongwug.config import __petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes
+from chongwug.config import __petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petcolors,__petages
 from chongwug.commom import __errorcode__
 from upyun import UpYun
 from django.contrib import auth
@@ -74,6 +74,15 @@ def manage_login_check(request):
 def manage_home_data_get(request):
     manager = user.objects.get(auth_user=auth.get_user(request),dele = False)
     return {'manager':manager}
+
+def get_pet_types():
+    return {'pettypes':__pettypes}
+
+def get_pet_colors():
+    return {'petcolors':__petcolors}
+
+def get_pet_ages():
+    return {'petages':__petages}
 
 def get_petpic_types():
     types = []
