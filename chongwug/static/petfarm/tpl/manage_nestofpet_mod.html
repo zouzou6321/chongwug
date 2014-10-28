@@ -13,7 +13,7 @@
     <div class="form-group">
 	    <label for="pet_id" class="col-sm-2 control-label">需要修改信息的宠物：</label>
 	    <div class="col-sm-4">
-	        <select id="pet_id" name="pet_id" class="form-control">
+	        <select id="pet_id" name="pet_id" class="form-control" onChange="select();">
 	            {% for pet in pets %}
 	            <option value="{{ pet.id }}">{{ pet.color }}{{ pet.type }},{{ pet.short_desc }}</option>
 	            {% endfor %}
@@ -65,6 +65,18 @@
 {% block scripts %}
 <script>
 
+function select()
+{
+	$.get("./?id=" + $("#pet_id").val(), function(recive){
+		if(recive != 'False'){
+			$("#form_main").empty();
+			$("#form_main").append(recive);
+		}
+		else{
+			alert('数据异常');
+		}
+	});
+}
 
 function deletepet(){
 	$.get("?id=" + $("#pet_id").val() + "&del=1",function(recive){

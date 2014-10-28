@@ -30,8 +30,7 @@
 		</div>
 		<script>
 		function adtypeselected(){
-			data = {'adtype':$("#adtype").val()};
-			$.get("/manage/ad/del/adtypeselect/", data, function(recive){
+			$.get("/manage/ad/del/adtypeselect/?adtype=" + $("#adtype").val(), function(recive){
 				if(recive != 'False'){
 					$("#adinfo").empty();
 					$("#adinfo").append(recive);
