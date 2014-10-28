@@ -2,7 +2,7 @@
 {% block title %}内容编辑{% endblock %}
 {% load assets_manager %}
 {% block css %}
-<link rel="stylesheet" href="{{ 'vendor/imgcut/css/imgareaselect-default.css'|assets_manager }}"/>
+<link rel="stylesheet" href="{{ 'lib/imgcut/css/imgareaselect.css'|assets_manager }}"/>
 {% endblock %}
 
 {% block main %}
@@ -70,12 +70,11 @@
 {% endblock %}
 
 {% block scripts %}
-		<script type="text/javascript" src="{{ 'vendor/jquery.js'|assets_manager }}"></script>
-		<script type="text/javascript" src="{{ 'vendor/ajax_post.js'|assets_manager }}"></script>
-		<script type="text/javascript" src="{{ 'vendor/jquery.form.js'|assets_manager }}"></script>
-		<script type="text/javascript" src='{{ 'vendor/imgcut/scripts/jquery.imgareaselect1.min.js'|assets_manager }}' ></script>
-		<script type="text/javascript" src='{{ 'vendor/jquery.uploadify.v2.1.4.min.js'|assets_manager }}' ></script>
-		<script type="text/javascript" src='{{ 'vendor/swfobject.js'|assets_manager }}' ></script>
+		<script type="text/javascript" src="{{ 'lib/ajax_post.js'|assets_manager }}"></script>
+		<script type="text/javascript" src="{{ 'lib/jquery.form.js'|assets_manager }}"></script>
+		<script type="text/javascript" src='{{ 'lib/imgcut/scripts/jquery.imgareaselect.js'|assets_manager }}' ></script>
+		<script type="text/javascript" src='{{ 'vendor/uploadify/jquery.uploadify.v2.1.4.min.js'|assets_manager }}' ></script>
+		<script type="text/javascript" src='{{ 'lib/swfobject.js'|assets_manager }}' ></script>
 		<script type="text/javascript">
 		var selected = 0;
 var imgw = 0;
@@ -168,7 +167,7 @@ function Imagess(url,imgid,callback){
 			x2 = 160;
 			y2 = 99;
 			$("#photo").uploadify({
-                'uploader': '/static/manage/uploadify/uploadify.swf',
+                'uploader': '/static/manager/dist/vendor/uploadify/uploadify.swf',
                 'script': '/manage/ad/picadd/upload/',
                 'cancelImg': '{{ 'vendor/uploadify/cancel.png'|assets_manager }}',
                 'scriptData': {'sessionid':'{{ sessionid }}'},
