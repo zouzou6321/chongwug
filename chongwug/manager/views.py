@@ -28,7 +28,6 @@ def manage_home_view(request):
     return render_to_response('manager/tpl/manage_home.html',data)
 
 def manage_pet_farm_add_view(request):
-    print 'aaaa'
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
@@ -52,7 +51,6 @@ def manage_ad_add_view(request):
 
 @csrf_exempt
 def manage_ad_pic_upload_view(request):
-    print request.POST
     if adapters.manage_authentication(request) == False:
         return HttpResponse(__errorcode__(404))
     if request.session['score'] < 50:

@@ -8,6 +8,7 @@
 {% block main %}
 <h1 class="page-header">添加广告</h1>
 <div class="form-horizontal">
+	{% csrf_token %}
     <div class="form-group">
         <label for="pet_id" class="col-sm-2 control-label">广告类型：</label>
         <div class="col-sm-4">
