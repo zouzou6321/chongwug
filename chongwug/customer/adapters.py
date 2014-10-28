@@ -177,8 +177,8 @@ def buy_main_adapter(re):
         except:
             petimg = None
         othor_pets = pet_one.pet_set.filter(dele=False)
-        min_price = string.atoi(othor_pets.order_by('-price')[0].price)
-        max_price = string.atoi(othor_pets.order_by('price')[0].price)
+        min_price = string.atoi(othor_pets.order_by('price')[0].price)
+        max_price = string.atoi(othor_pets.order_by('-price')[0].price)
         if price != None:
             if (max_price < princes[price - 1]['b'] or min_price > princes[price - 1]['c']):
                 continue
@@ -211,9 +211,9 @@ def buy_detail_adapter(re):
         else:
             petimg_first = petimgs[0]
         allpets = nest_pet.pet_set.filter(dele=False).order_by('-price')
-        price = {'min_prince':allpets.order_by('-price')[0].price,'max_prince':allpets.order_by('price')[0].price}
-        price['min_price'] = allpets.order_by('-price')[0].price
-        price['max_price'] = allpets.order_by('price')[0].price
+        price = {'min_prince':allpets.order_by('price')[0].price,'max_prince':allpets.order_by('-price')[0].price}
+        price['min_price'] = allpets.order_by('price')[0].price
+        price['max_price'] = allpets.order_by('-price')[0].price
         
         '''获取本养殖场的所有宠物信息'''
         farm_imgs = nest_pet.farm.pet_farm_img_set.filter(dele=False,img_usefor=__farmpictypes[1][1])[0:4]
@@ -226,8 +226,8 @@ def buy_detail_adapter(re):
             except:
                 img = None
             othor_pets = farm_pet.pet_set.filter(dele=False)
-            min_price = othor_pets.order_by('-price')[0].price
-            max_price = othor_pets.order_by('price')[0].price
+            min_price = othor_pets.order_by('price')[0].price
+            max_price = othor_pets.order_by('-price')[0].price
             count = othor_pets.count()
             if farm_pet.type not in farm_pet_types:
                 farm_pet_types.append(farm_pet.type)
@@ -245,8 +245,8 @@ def buy_detail_adapter(re):
             except:
                 img = None
             othor_pets = recommendpet.pet_set.filter(dele=False)
-            min_price = othor_pets.order_by('-price')[0].price
-            max_price = othor_pets.order_by('price')[0].price
+            min_price = othor_pets.order_by('price')[0].price
+            max_price = othor_pets.order_by('-price')[0].price
             recommendpets_img.append({'pet':recommendpet,'img':img,'min_price':min_price,'max_price':max_price})
         cuser = None
         if re.user.is_authenticated():
