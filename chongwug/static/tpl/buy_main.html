@@ -177,6 +177,7 @@
                         </p>
                     </div>
                 </div>
+                {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
                 {% endfor %}
             {% else %}
                 <div class="col-xs-12">

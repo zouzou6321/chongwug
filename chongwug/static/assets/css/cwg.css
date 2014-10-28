@@ -3767,6 +3767,38 @@ Copyright (c) 2014 Daniel Eden
     height: 18px;
     background: url(../imgs/rate-dog.gif); }
 
+.outline:hover .outline-title {
+  color: #ffd401; }
+.outline:hover .outline-content {
+  color: #ffd401; }
+.outline .outline-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #5e5e5e;
+  position: relative;
+  margin-bottom: 15px;
+  cursor: pointer; }
+.outline .title-limit {
+  display: block;
+  max-width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+.outline .outline-date {
+  position: absolute;
+  right: 0;
+  font-size: 14px;
+  font-weight: normal;
+  top: 0; }
+.outline .outline-content {
+  font-size: 12px;
+  color: #5e5e5e;
+  margin-bottom: 15px;
+  cursor: pointer; }
+
+.modal.loading .modal-content {
+  display: none; }
+
 /**
  * gui
 */
@@ -4045,7 +4077,7 @@ Copyright (c) 2014 Daniel Eden
   .buy-main .dog-desc h4 {
     line-height: 21px;
     font-size: 16px;
-    max-height: 42px;
+    height: 42px;
     overflow: hidden;
     margin-top: 0; }
     .buy-main .dog-desc h4 a {
@@ -4109,9 +4141,33 @@ Copyright (c) 2014 Daniel Eden
       margin-bottom: 0; }
   .knowledge-buy .desc-main strong {
     font-size: 15px; }
-.knowledge-buy .knowledge-content {
+
+.knowledge-content {
   padding-bottom: 60px;
   padding-right: 40px; }
+
+.knowledge-bringup .desc-tit {
+  font-weight: bold; }
+.knowledge-bringup .desc-main {
+  padding-bottom: 1px; }
+  .knowledge-bringup .desc-main ol {
+    margin-left: -20px; }
+  .knowledge-bringup .desc-main li {
+    line-height: 24px;
+    margin-bottom: 20px; }
+    .knowledge-bringup .desc-main li p {
+      margin-bottom: 0; }
+  .knowledge-bringup .desc-main strong {
+    font-size: 15px; }
+.knowledge-bringup .bringup-outline .desc-main {
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.article-modal .modal-body {
+  padding-left: 50px;
+  padding-right: 50px;
+  height: 450px;
+  overflow-y: auto; }
 
 .detail-main {
   padding-top: 20px;
@@ -5195,3 +5251,9 @@ img.mfp-img {
 
 .loading {
   background: url(../imgs/loading.gif) center no-repeat; }
+
+.dashed-right {
+  border-right: 1px dashed #cdcdcd; }
+
+.dashed-bottom {
+  border-bottom: 1px dashed #cdcdcd; }

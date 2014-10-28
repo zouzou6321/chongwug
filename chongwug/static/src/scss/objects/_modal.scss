@@ -1,0 +1,6 @@
+//作为 modal-content 的同级元素放置
+.modal.loading{
+  .modal-content{
+    display: none;
+  }
+}
