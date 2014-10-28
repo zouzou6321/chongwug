@@ -142,7 +142,6 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     url = (settings.PIC_TMP_PATH+file_name).encode('utf8')
     name = settings.STATIC_ROOT + url
     cropimg.save(name)
-    cropimg.close()
     
     up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
     with open(name, 'rb') as f:
