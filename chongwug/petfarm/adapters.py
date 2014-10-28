@@ -8,14 +8,14 @@ from chongwug.config import __petpictypes,__upyun_picpath,__upyun_name,__upyun_p
 from chongwug.commom import __errorcode__
 from upyun import UpYun
 from django.contrib import auth
-
+import traceback
 import os,uuid,string,re,datetime,json
 
 def pic_crop_save(pic_args,pic_dir,max_height,max_width): 
     try:
         img= Image.open(settings.STATIC_ROOT + settings.PIC_TMP_PATH + pic_args['source'])
-        os.remove(settings.STATIC_ROOT + settings.PIC_TMP_PATH + pic_args['source'])
     except:
+        traceback.print_exc()
         return 'type error'
     
     x1 = int(pic_args['x1'])

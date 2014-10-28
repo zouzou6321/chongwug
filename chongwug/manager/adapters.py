@@ -129,6 +129,8 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     y1 = string.atoi(request.POST['y1'])
     x2 = string.atoi(request.POST['x2'])
     y2 = string.atoi(request.POST['y2'])
+    if (x2 - x1) + 3 < max_width or (y2 - y1) + 3 < max_height:
+        return 'type error'
     if img.mode != 'RGB':
         img = img.convert('RGB')
     cropimg = img.crop((x1,y1,x2,y2))
