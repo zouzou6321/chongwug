@@ -23,7 +23,7 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
     x2 = int(pic_args['x2'])
     y2 = int(pic_args['y2'])
     if (x2 - x1) + 3 < max_width or (y2 - y1) + 3 < max_height:
-        return 'type error'
+        return 'crop size error'
     if img.mode != 'RGB':
         img = img.convert('RGB')
     cropimg = img.crop((x1,y1,x2,y2))
@@ -150,6 +150,10 @@ def manage_picpreupload(request,_from,_nestofpet=None):
             if _nestofpet:
                 _nestofpet.delete()
             return __errorcode__(4)
+        if img_url == 'crop size error':
+            if _nestofpet:
+                _nestofpet.delete()
+            return __errorcode__(13)
         
         #把url存入数据库
         if _from == 'farm':
@@ -286,7 +290,7 @@ def manage_picupload(photo,width,height):
         photo.name = file+'.jpg'
         url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
         name = settings.STATIC_ROOT+url
-        img.save(name,'jpeg',quality=75)
+        img.save(name,'jpeg',quality=85)
         monitor = tmppic_monitor(fname=name)
         monitor.save()
     data = {'url':'/static'+url,"width":str(w),"height":str(h)}
