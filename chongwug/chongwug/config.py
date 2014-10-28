@@ -103,7 +103,7 @@ __errorcode = [
                [1,u'false',u'失败'],
                [2,u'data error',u'提交的数据异常'],
                [3,u'primission delay',u'出现越权操作'],
-               [4,u'picture not found',u'找不到图片'],
+               [4,u'picture not found',u'找不到图片,请重新上传'],
                [5,u'database access error',u'数据库访问错误'],
                [6,u'picture too small',u'图片太小'],
                [7,u'imperfect information',u'信息不完整，可能系统有虫子，请联系我们，谢谢~！'],
@@ -112,6 +112,9 @@ __errorcode = [
                [10,u'name error',u'您的名字~！'],
                [11,u'address error',u'您选择的地址不对呢！'],
                [12,u'time error',u'您选择的时间不对呢！'],
+               [13,u'crop size error',u'截取图片的长宽不匹配，请尝试重新截取'],
+               [14,u'time format error',u'时间格式不正确，示例：2014-10-22 14:22:35'],
+               [15,u'prince error',u'价格输入错误，请输入正整数'],
                [404,u'page not found',u'页面不存在'],
                [500,u'internal fault',u'服务器内部错误']
               ]

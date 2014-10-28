@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 import string,re
 import os,uuid,datetime
 import config
+from chongwug.commom import __errorcode__
 from chongwug.config import __directs,__regular_expression_telnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
 '''
 管理员鉴权
@@ -59,6 +60,8 @@ def manage_pet_farm_add(request):
             return False
         p = re.compile(__regular_expression_email)
         if not p.match(request.POST['email']):
+            return False
+        if string.atoi(request.POST['min_prince']) <= 0:
             return False
         auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
         new_user = user(nickname = request.POST['name'],
@@ -130,7 +133,7 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     x2 = string.atoi(request.POST['x2'])
     y2 = string.atoi(request.POST['y2'])
     if (x2 - x1) + 3 < max_width or (y2 - y1) + 3 < max_height:
-        return 'type error'
+        return 'crop size error'
     if img.mode != 'RGB':
         img = img.convert('RGB')
     cropimg = img.crop((x1,y1,x2,y2))
@@ -157,27 +160,40 @@ def pic_preupload(request,pic_dir,max_height,max_width):
 
 def manage_ad_picpreupload(request):
     if 'source' in request.POST:
-        max_height = 323
-        max_width = 1170
-        img_url = pic_preupload(request,settings.PET_AD_PIC_ROOT,max_height,max_width)
-        if img_url == 'type error':
-            return 'type error'
         ad_type = None
         for adtype in config.__adtypes:
             if adtype[1] == request.POST['type']:
                 ad_type = adtype[1]
                 break
         if not ad_type:
-            return 'error'
+            return __errorcode__(16)
+        try:
+            start_time = datetime.datetime.strptime(request.POST['start_time'], "%Y-%m-%d %H:%M:%S")
+            end_time = datetime.datetime.strptime(request.POST['end_time'], "%Y-%m-%d %H:%M:%S")
+        except:
+            return __errorcode__(14)
+        try:
+            prince = string.atoi(request.POST['prince'])
+            if prince <= 0:
+                return __errorcode__(15)
+        except:
+            return __errorcode__(15)
+        max_height = 323
+        max_width = 1170
+        img_url = pic_preupload(request,settings.PET_AD_PIC_ROOT,max_height,max_width)
+        if img_url == 'type error':
+            return __errorcode__(4)
+        if img_url == 'crop size error':
+            return __errorcode__(13)
         #把url存入数据库
         ad_sql = ad( type = ad_type,
                      tar_url = request.POST['tar_url'],
-                     prince = string.atoi(request.POST['prince']),
-                     start_time = datetime.datetime.strptime(request.POST['start_time'], "%Y-%m-%d %H:%M:%S"),
-                     end_time = datetime.datetime.strptime(request.POST['end_time'], "%Y-%m-%d %H:%M:%S"),
+                     prince = prince,
+                     start_time = start_time,
+                     end_time = end_time,
                      img_url = img_url)
         ad_sql.save()
-    return 'true'
+    return __errorcode__(0)
 
 def manage_get_adtypes():
     ad_types = []

@@ -161,8 +161,8 @@ function Imagess(url,imgid,callback){
 		 });
 		x1 = 0;  
 		y1 = 0;  
-		x2 = 160;  
-		y2 = 99;
+		x2 = minimgw;  
+		y2 = minimgh;
 	}
 	function checkimg(obj,imgid){ 
 		document.getElementById(imgid).src=obj.src;
@@ -199,8 +199,8 @@ function Imagess(url,imgid,callback){
 		function () {
 			x1 = 0;  
 			y1 = 0;  
-			x2 = 160;
-			y2 = 99;
+			x2 = minimgw;
+			y2 = minimgh;
 			$("#photo").uploadify({
                 'uploader': '/static/manager/dist/vendor/uploadify/uploadify.swf',
                 'script': '/manage/ad/picadd/upload/',
@@ -280,18 +280,16 @@ function Imagess(url,imgid,callback){
 			'source':timg
 		};
 		$.post("/manage/ad/picadd/preupload/", data, function(recive){
-			if(recive == 'true'){
+			if(recive.status == 0){
 				if(alert('保存成功,启动时间到达后会自动筛选启动')){
 					window.location.href="/back_manage/ad/picadd/";
 				}
 			}
-			else if(recive == 'type error'){
-				alert('保存头像失败：错误的图片格式，请上传另外的图片！')
-			}
 			else{
-				alert('保存头像失败');
+				alert(recive.message);
 			}
-		});
+		},
+		'json');
 	}
 		</script>
 {% endblock %}
