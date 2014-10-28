@@ -175,6 +175,27 @@ def manage_picpreupload(request,_from,_nestofpet=None):
     return __errorcode__(0)
 
 def manage_nestofpet_add(request):
+    img_count = string.atoi(request.POST['img-count'])
+    if img_count <= 0:
+        return __errorcode__(4)
+    petnum = 0
+    while petnum < img_count:
+        if ('img-%d-type' % petnum) in request.POST:
+            break;
+        petnum += 1
+    if petnum >= img_count:
+        return __errorcode__(4)
+    
+    if request.POST['nest-desc'] == '':
+        return __errorcode__(2)
+    new_petscount = string.atoi(request.POST['count'])
+    petnum = 0
+    while petnum < new_petscount:
+        try:
+            if ('price%d' % petnum) in request.POST and string.atoi(request.POST['price%d' % petnum]) <= 0:
+                return __errorcode__(2)
+        except:
+            return __errorcode__(2)
     try:
         farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm
         new_nestofpet = nestofpet(farm = farm,
@@ -189,7 +210,6 @@ def manage_nestofpet_add(request):
     except NameError:
         return __errorcode__(2)
     try:
-        new_petscount = string.atoi(request.POST['count'])
         petnum = 0
         while petnum < new_petscount:
             petnum += 1
