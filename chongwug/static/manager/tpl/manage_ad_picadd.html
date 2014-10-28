@@ -3,6 +3,7 @@
 {% load assets_manager %}
 {% block css %}
 <link rel="stylesheet" href="{{ 'lib/imgcut/css/imgareaselect.css'|assets_manager }}"/>
+<link rel="stylesheet" href="{{ 'lib/bootstrap/bootstrap-datetimepicker.css'|assets_manager }}"/>
 {% endblock %}
 
 {% block main %}
@@ -34,13 +35,13 @@
     <div class="form-group">
         <label for="pet-color" class="col-sm-2 control-label">开始展示的时间<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required" id="start_time" name="start_time">
+          <input type="text" class="form-control required" id="start_time" name="start_time" data-date-format="YYYY-MM-DD hh:mm:ss">
         </div>
     </div>
     <div class="form-group">
         <label for="pet-color" class="col-sm-2 control-label">结束展示的时间<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required" id="end_time" name="end_time">
+          <input type="text" class="form-control required" id="end_time" name="end_time" data-date-format="YYYY-MM-DD hh:mm:ss">
         </div>
     </div>
 </div>
@@ -71,13 +72,41 @@
 {% endblock %}
 
 {% block scripts %}
-		<script type="text/javascript" src="{{ 'lib/ajax_post.js'|assets_manager }}"></script>
-		<script type="text/javascript" src="{{ 'lib/jquery.form.js'|assets_manager }}"></script>
-		<script type="text/javascript" src='{{ 'lib/imgcut/scripts/jquery.imgareaselect.js'|assets_manager }}' ></script>
-		<script type="text/javascript" src='{{ 'vendor/uploadify/jquery.uploadify.v2.1.4.min.js'|assets_manager }}' ></script>
-		<script type="text/javascript" src='{{ 'lib/swfobject.js'|assets_manager }}' ></script>
-		<script type="text/javascript">
-		var selected = 0;
+<script type="text/javascript" src="{{ 'lib/moment.js'|assets_manager }}"></script>
+<script type="text/javascript" src="{{ 'lib/bootstrap/bootstrap-datetimepicker.js'|assets_manager }}"></script>
+<script type="text/javascript" src="{{ 'lib/ajax_post.js'|assets_manager }}"></script>
+<script type="text/javascript" src="{{ 'lib/jquery.form.js'|assets_manager }}"></script>
+<script type="text/javascript" src='{{ 'lib/imgcut/scripts/jquery.imgareaselect.js'|assets_manager }}' ></script>
+<script type="text/javascript" src='{{ 'vendor/uploadify/jquery.uploadify.v2.1.4.min.js'|assets_manager }}' ></script>
+<script type="text/javascript" src='{{ 'lib/swfobject.js'|assets_manager }}' ></script>
+<script type="text/javascript">
+/*时间选择*/
+(function($){
+    var $start = $('#start_time'),
+        $startTime = $start.datetimepicker({
+        useSeconds: true,
+        language: 'zh-cn'
+    }).data("DateTimePicker"),
+    $end = $('#end_time'),
+    $endTime = $end.datetimepicker({
+        useSeconds: true,
+        language: 'zh-cn'
+    }).data("DateTimePicker");
+
+    $end.on('change', function(){
+        var $this = $(this);
+        $startTime.setMaxDate($this.val());
+    });
+
+    $start.on('change', function(){
+        var $this = $(this);
+        $endTime.setMinDate($this.val());
+    });
+
+}(jQuery));;
+/*时间选择 end*/
+
+var selected = 0;
 var imgw = 0;
 var imgh = 0;
 var minimgw = 1170;
