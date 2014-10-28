@@ -4821,7 +4821,6 @@ img.mfp-img {
     .cwg-navbar .nav a:hover, .cwg-navbar .nav a:focus {
       background-color: #f5f5f5; }
   .cwg-navbar .active a {
-    cursor: default;
     color: #b38900;
     background-color: #ffd401; }
     .cwg-navbar .active a:hover, .cwg-navbar .active a:focus {
