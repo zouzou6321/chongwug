@@ -1,7 +1,7 @@
 {% extends 'manager/tpl/base/base.html' %}
 
 {% block title %}内容编辑{% endblock %}
-
+{% load assets_manager %}
 {% block main %}
 
 <h1 class="page-header">新增养殖场</h1>
@@ -100,7 +100,7 @@
 {% block scripts %}
 
 {% load assets_petfarm %}
-<script src="{{ 'vendor/ckeditor/ckeditor.js'|assets_petfarm }}"></script>
+<script src="{{ 'lib/ckeditor/ckeditor.js'|assets_manager }}"></script>
 <script>
 
 CKEDITOR.replace('pet-desc');

@@ -1,0 +1,27 @@
+@import "bootstrap/_variables";
+
+@import "components/_login";
+@import "components/_sidebar";
+@import "components/_main";
+@import "components/_modal";
+@import "components/_preview";
+
+body {
+  padding-top: 50px;
+}
+
+.navbar-fixed-top {
+  border: 0;
+}
+
+.warn{
+  color: #ff0000;
+}
+
+.help-block{
+  margin-bottom: 0;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a{
+  color: #fff;
+}
