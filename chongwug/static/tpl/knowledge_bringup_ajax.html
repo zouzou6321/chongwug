@@ -1,0 +1,11 @@
+{% for knowledge in knowledges %}
+<div class="col-xs-6 outline dashed-right dashed-bottom" data-img="{{ knowledge.imgurl }}" data-time="{{ knowledge.time|date:'Y-m-d' }} {{ knowledge.time|time:'H:i' }}" data-from="{{ knowledge.contentfrom }}" >
+    <h4 class="outline-title">
+        <span class="title-limit">{{ knowledge.title }}</span>
+        <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
+    </h4>
+    <div class="outline-content">
+        {{ knowledge.content|safe }}……查看更多>>
+    </div>
+</div>
+{% endfor %}
