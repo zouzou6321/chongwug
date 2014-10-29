@@ -59,6 +59,8 @@ def knowledge_buy_view(request):
 
 def knowledge_bringup_view(request):
     data = adapters.get_knowledge_bringup(request)
+    if 'page' in request.GET:
+        return render_to_response('tpl/knowledge_bringup_ajax.html',{'knowledges':data})
     return render_to_response('tpl/knowledge_bringup.html',{'page':'knowbringup','knowledges':data})
 
 def supplie_view(request):
