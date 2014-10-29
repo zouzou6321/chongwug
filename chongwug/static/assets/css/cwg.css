@@ -4174,6 +4174,9 @@ Copyright (c) 2014 Daniel Eden
 .knowledge-bringup .bringup-outline .desc-main {
   padding-left: 30px;
   padding-right: 30px; }
+.knowledge-bringup .infinite-loading {
+  background: url(../imgs/loading.gif) 50% 250px no-repeat;
+  padding-bottom: 100px; }
 
 .article-modal .modal-body {
   padding-left: 50px;
