@@ -16,5 +16,6 @@
     "custom-plugins": true,
     "jquery.lazyload": true,
     "template": true,
-    "jquery.validate": true
+    "jquery.validate": true,
+    "waypoints": true
 }
