@@ -1,10 +1,7 @@
 .outline{
 
   &:hover{
-    .outline-title{
-      color: $primary-bg-color;
-    }
-    .outline-content{
+    .outline-title, .outline-content, .outline-more{
       color: $primary-bg-color;
     }
   }
@@ -37,8 +34,26 @@
 
   .outline-content{
     font-size: 12px;
+    line-height: 18px;
+    height: 54px;
+    overflow: hidden;
     color: #5e5e5e;
     margin-bottom: 15px;
+    cursor: pointer;
+
+    p{
+      margin-bottom: 0;
+    }
+  }
+
+  padding-bottom: 15px;
+
+  .outline-more{
+    position: absolute;
+    font-size: 12px;
+    color: #FF4136;
+    right: 15px;
+    bottom: 5px;
     cursor: pointer;
   }
 }

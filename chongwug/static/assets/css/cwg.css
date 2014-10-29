@@ -3767,34 +3767,46 @@ Copyright (c) 2014 Daniel Eden
     height: 18px;
     background: url(../imgs/rate-dog.gif); }
 
-.outline:hover .outline-title {
-  color: #ffd401; }
-.outline:hover .outline-content {
-  color: #ffd401; }
-.outline .outline-title {
-  font-size: 16px;
-  font-weight: bold;
-  color: #5e5e5e;
-  position: relative;
-  margin-bottom: 15px;
-  cursor: pointer; }
-.outline .title-limit {
-  display: block;
-  max-width: 80%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis; }
-.outline .outline-date {
-  position: absolute;
-  right: 0;
-  font-size: 14px;
-  font-weight: normal;
-  top: 0; }
-.outline .outline-content {
-  font-size: 12px;
-  color: #5e5e5e;
-  margin-bottom: 15px;
-  cursor: pointer; }
+.outline {
+  padding-bottom: 15px; }
+  .outline:hover .outline-title, .outline:hover .outline-content, .outline:hover .outline-more {
+    color: #ffd401; }
+  .outline .outline-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #5e5e5e;
+    position: relative;
+    margin-bottom: 15px;
+    cursor: pointer; }
+  .outline .title-limit {
+    display: block;
+    max-width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+  .outline .outline-date {
+    position: absolute;
+    right: 0;
+    font-size: 14px;
+    font-weight: normal;
+    top: 0; }
+  .outline .outline-content {
+    font-size: 12px;
+    line-height: 18px;
+    height: 54px;
+    overflow: hidden;
+    color: #5e5e5e;
+    margin-bottom: 15px;
+    cursor: pointer; }
+    .outline .outline-content p {
+      margin-bottom: 0; }
+  .outline .outline-more {
+    position: absolute;
+    font-size: 12px;
+    color: #FF4136;
+    right: 15px;
+    bottom: 5px;
+    cursor: pointer; }
 
 .modal.loading .modal-content {
   display: none; }
