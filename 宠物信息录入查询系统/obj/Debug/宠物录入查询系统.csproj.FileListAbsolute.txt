@@ -9,3 +9,10 @@ G:\chongwug\RTFDemo\obj\Debug\PTDemo.exe
 G:\chongwug\RTFDemo\obj\Debug\PTDemo.pdb
 G:\chongwug\宠物信息录入查询系统\obj\Debug\PTDemo.exe
 G:\chongwug\宠物信息录入查询系统\obj\Debug\PTDemo.pdb
+G:\chongwug\宠物信息录入查询系统\bin\Debug\PTDemo.exe
+G:\chongwug\宠物信息录入查询系统\bin\Debug\PTDemo.pdb
+G:\chongwug\宠物信息录入查询系统\bin\Debug\DeviceSDK2.dll
+G:\chongwug\宠物信息录入查询系统\obj\Debug\ResolveAssemblyReference.cache
+G:\chongwug\宠物信息录入查询系统\obj\Debug\BTDemo.form1.resources
+G:\chongwug\宠物信息录入查询系统\obj\Debug\PTDemo.Properties.Resources.resources
+G:\chongwug\宠物信息录入查询系统\obj\Debug\宠物录入查询系统.csproj.GenerateResource.Cache

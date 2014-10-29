@@ -38,10 +38,10 @@
             // webBrowser1
             // 
             this.webBrowser1.AllowWebBrowserDrop = false;
-            this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
             this.webBrowser1.Location = new System.Drawing.Point(-1, 30);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScrollBarsEnabled = false;
             this.webBrowser1.Size = new System.Drawing.Size(994, 644);
             this.webBrowser1.TabIndex = 1;
             this.webBrowser1.Url = new System.Uri("http://localhost:8000/petmicro/login/", System.UriKind.Absolute);

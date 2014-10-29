@@ -13,6 +13,8 @@ namespace BTDemo {
     public partial class form1 : Form {
 
         PTDevice _oDevice;
+        Thread SecondThread;
+        private delegate void Comitjs(String idnum);
         private bool USBConnect(string sport)
         {
             if (_oDevice != null)
@@ -26,7 +28,6 @@ namespace BTDemo {
                 PTDevice oDevice = new PTDevice("USB", null);
                 if (!oDevice.Open())
                 {
-                    MessageBox.Show("Open Port Failed!");
                     return false;
                 }
 
@@ -59,7 +60,7 @@ namespace BTDemo {
                 if (count == myPortNames.Length)
                 {
                     MessageBox.Show("未检测到对端设备,点击确定退出程序");
-                    Environment.Exit(0);
+                    //Environment.Exit(0);
                 }
             }
             webBrowser1.ScriptErrorsSuppressed = true;
@@ -78,36 +79,74 @@ namespace BTDemo {
             return record.GetId();
         }
 
-        private void startDataPro()
-        {
-            int nCount = _oDevice.GetRecordCount();
-            String idnum = "";
-            for (int i = 0; i < nCount; i++)
-            {
-                idnum = getIdNum(i);
-                commitWithJs(idnum);
-                Thread.Sleep(1000);
-            }
-        }
         private void commitWithJs(String idnum) 
         {
-            Object[] objArray = new Object[1];
-            objArray[0] = (Object)idnum;
-            if ((webBrowser1.Document != null) && (!idnum.Equals("")))
+            if (webBrowser1.Document != null)
             {
-                if ((int)webBrowser1.Document.InvokeScript("get_idnum") == 0)
+                if (webBrowser1.Document.GetElementById("brogetnum").InnerText == "0")
                 {
-                    webBrowser1.Document.InvokeScript("set_idnum", objArray);
+                    webBrowser1.Document.GetElementById("brosetnum").InnerText = idnum;
                 }
             }
         }
+        int status = 0;
+        private void startDataPro()
+        {
+            int nCount = 0;
+            String idnum = "";
+            int i = 0;
+            while (true)
+            {
+                if (_oDevice.IsValid)
+                {
+                    nCount = _oDevice.GetRecordCount();
+                    idnum = "";
+                    for (i = 0; i < nCount; i++)
+                    {
+                        idnum = getIdNum(i);
+                    
+                        status = 1;
+                        while (status != 0)
+                        {
+                            if (!this.IsDisposed)
+                            {
+                                this.Invoke((EventHandler)delegate
+                                {
+                                    if (webBrowser1.Document != null)
+                                    {
+                                        if (webBrowser1.Document.GetElementById("brogetnum").InnerText == "0")
+                                        {
+                                            webBrowser1.Document.GetElementById("brosetnum").InnerText = idnum;
+                                            status = 0;
+                                        }
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                Environment.Exit(0);
+                                return;
+                            }
+                            Thread.Sleep(1000);
+                        }
+                    }
+                    _oDevice.ClearAllRecords(); 
+                }
+                Thread.Sleep(2000);
+            }
+        }
+
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (e.Url.LocalPath == "/petmicro/")
             {
-                startDataPro();
+                if (SecondThread == null)
+                {
+                    SecondThread = new Thread(new ThreadStart(startDataPro));
+                    SecondThread.Start();
+                }
+                
             }
         }
-
     }
 }

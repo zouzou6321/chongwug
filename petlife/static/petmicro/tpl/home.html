@@ -6,16 +6,6 @@
     <link rel="stylesheet" href="{{ 'vendor/datepicker3.css'|assets }}"/>
 {% endblock %}
 {% block content %}
-{#<div id="float_banner">#}
-{#	<form class="form-inline form-margin" id="js-main-form">#}
-{#		<div class="form-group">#}
-{#			<input class="form-control input-height" id="setnum" type="text" value="输入宠物编号"/>#}
-{#		</div>#}
-{#		<div class="form-group">#}
-{#			<button type="button" class="btn input-sm btn-default input-height" id="putinfo"/>查询/录入</button>#}
-{#		</div>#}
-{#	</form>#}
-{#</div>#}
 <div class="business-wrap">
     <div class="business-title text-center">
         <h1>信息录入/查询
@@ -126,6 +116,8 @@
             </div>
 		</div>
 	</form>
+	<textarea type="text" style="display:none" id="brogetnum">0</textarea>
+	<textarea type="text" style="display:none" id="brosetnum">0</textarea>
 </div>
 
 {% endblock %}
@@ -242,28 +234,24 @@
                 }
             });
     });
-
-{#    $("#setnum").focus(function(){#}
-{#        if ($("#setnum").val() == "输入宠物编号"){#}
-{#            $("#setnum").val("");#}
-{#        }#}
-{#    });#}
-{##}
-{#    $("#setnum").blur(function(){#}
-{#        if ($("#setnum").val() == ""){#}
-{#            $("#setnum").val("输入宠物编号");#}
-{#        }#}
-{#    });#}
-
+	function reset_idnum(){
+		$("#brogetnum").text("0");
+	}
     function set_idnum(idnum) {
         g_idnum = idnum;
-        if (g_idnum != 0){
+        if (g_idnum != '0'){
+       		$("#brogetnum").text(idnum);
+        	$("#brosetnum").text("0");
             $('#setnum').val(idnum);
             get_info(g_idnum,$("#putinfo"));
         }
     }
-    function get_idnum() {
-        return g_idnum;
+    function setnumchange(){
+    	set_idnum($("#brosetnum").text());
+    	
+    	setTimeout(setnumchange, 1000);
     }
+    
+    setTimeout(setnumchange, 1000);
 </script>
 {% endblock %}
