@@ -5280,3 +5280,6 @@ img.mfp-img {
 
 .dashed-bottom {
   border-bottom: 1px dashed #cdcdcd; }
+
+.font-xs {
+  font-size: 12px; }
