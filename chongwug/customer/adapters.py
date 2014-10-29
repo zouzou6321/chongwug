@@ -2,7 +2,7 @@
 '''
 文件功能：针对购宠用户涉及的页面，根据展示的数据需要，整理出格式化的数据返回
 '''
-from manager.models import ad,dog123
+from manager.models import ad,dog123,pclady
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention
 from django.db.models import Q
@@ -342,6 +342,11 @@ def buy_attention_adapter(req):
     #except Exception, e:
         #traceback.print_exc()
 
+def get_knowledge_bringup(request):
+    page = 0
+    if 'page' in request.GET:
+        page = string.atoi(request.REQUEST.get('page'))
+    return pclady.objects.all().order_by('id')[(page*6):(page*6 + 6)]
 def get_knowledge_buy(request):
     if 'id' in request.GET:
 

@@ -92,36 +92,17 @@
             </h2>
             <div class="desc-main">
                 <div class="row">
-                    <div class="col-xs-6 outline dashed-right dashed-bottom" data-id="1">
+                	{% for knowledge in knowledges %}
+                    <div class="col-xs-6 outline dashed-right dashed-bottom" data-img="{{ knowledge.imgurl }}" data-time="{{ knowledge.time }}" data-from="{{ knowledge.contentfrom }}" >
                         <h4 class="outline-title">
-                            <span class="title-limit">宠物狗多大适合做绝育手术</span>
+                            <span class="title-limit">{{ knowledge.title }}</span>
                             <span class="outline-date">2014-10-12</span>
                         </h4>
                         <div class="outline-content">
-                            想要为家中宠物做绝育的主人们首先会考虑的问题就是宠物多大做绝育手术是最合适的，
-                            科学研究表明，在宠物第一次发情前做绝育手术可以更好的预防……查看更多>>
+                            {{ knowledge.content|safe }}……查看更多>>
                         </div>
                     </div>
-                    <div class="col-xs-6 outline dashed-bottom">
-                        <h4 class="outline-title">
-                            <span class="title-limit">宠物狗多大适合做绝育手术</span>
-                            <span class="outline-date">2014-10-12</span>
-                        </h4>
-                        <div class="outline-content">
-                            想要为家中宠物做绝育的主人们首先会考虑的问题就是宠物多大做绝育手术是最合适的，
-                            科学研究表明，在宠物第一次发情前做绝育手术可以更好的预防……查看更多>>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 outline dashed-right">
-                        <h4 class="outline-title">
-                            <span class="title-limit">宠物狗多大适合做绝育手术</span>
-                            <span class="outline-date">2014-10-12</span>
-                        </h4>
-                        <div class="outline-content">
-                            想要为家中宠物做绝育的主人们首先会考虑的问题就是宠物多大做绝育手术是最合适的，
-                            科学研究表明，在宠物第一次发情前做绝育手术可以更好的预防……查看更多>>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
