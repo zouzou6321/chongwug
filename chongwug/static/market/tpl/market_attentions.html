@@ -65,7 +65,7 @@ $(document).ready(function() {
  
     $('#example').DataTable( {
         dom: "Tfrtip",
-        ajax: "{% url order_list_json %}",
+        ajax: "/market/attention/data/",
         columns: [
         { data: null, defaultContent: '', orderable: false },
             { data: 0 },
