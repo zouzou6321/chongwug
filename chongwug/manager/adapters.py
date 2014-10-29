@@ -194,7 +194,7 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     img_url = settings.PIC_ROOT + file_path_name
     return img_url
 
-def manage_ad_picpreupload(request):
+def manage_ad_picpreupload(request,max_width,max_height):
     if 'source' in request.POST:
         ad_type = None
         for adtype in config.__adtypes:
@@ -214,8 +214,6 @@ def manage_ad_picpreupload(request):
                 return __errorcode__(15)
         except:
             return __errorcode__(15)
-        max_height = 323
-        max_width = 1170
         img_url = pic_preupload(request,settings.PET_AD_PIC_ROOT,max_height,max_width)
         if img_url == 'type error':
             return __errorcode__(4)
