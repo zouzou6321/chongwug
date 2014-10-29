@@ -1,8 +1,8 @@
-# -*- coding:utf-8 -*-
+# -*- coding: UTF-8 -*-
 from scrapy.spider import Spider  
 from scrapy.http import Request  
 from scrapy.selector import Selector
-import MySQLdb,os,datetime,string
+import MySQLdb,os,datetime,string,time
 from webspider.items import WebspiderItem  
 import codecs
 if 'SERVER_SOFTWARE' in os.environ:
@@ -48,16 +48,26 @@ class webspiderSpider(Spider):
                 item['title'] = tmp[0].encode('utf8')
             else:
                 item['title'] = ''
-            pcontens = sel.xpath('//div[@class="artText"]//table//tr//td//p//text()').extract()
+            pcontens = sel.xpath('//div[@class="artText"]//table//tr//td//p').extract()
             print pcontens.__len__()
             item['content'] = ''
+            count = 0
             for pconten in pcontens:
-                item['content'] += pconten.encode('utf8')
+                count += 1
+                if count > 3:
+                    contentsel = Selector(text=pconten)
+                    localcontens = contentsel.xpath("string(//p)").extract()
+                    item['content'] += u'<p>'.encode('utf8')
+                    
+                    for localconten in localcontens:
+                        print localconten
+                        item['content'] += localconten.encode('utf8')
+                    item['content'] += u'</p>'.encode('utf8')
             item['image_urls'] = sel.xpath('//div[@class="artText"]//table//tr//td//p[2]//a//img//@src').extract()
 
             imgpath = u'http://chongwug-pic.b0.upaiyun.com/petbringpic/%s' % (item['image_urls'][0].split('/')[-1]).decode('utf8')
             cur = conn.cursor()
-            sql = u"INSERT INTO `manager_pclady`(`url`, `name`,`imgurl`, `title`, `content`) VALUES ('" + item['url'].decode('utf8') + u"','" + item['name'].decode('utf8') + u"','" + imgpath + u"','" + item['title'].decode('utf8') + u"','" + item['content'].decode('utf8') + u"')"
+            sql = u"INSERT INTO `manager_pclady`(`url`, `name`,`imgurl`, `title`, `content`, `contentfrom`, `time`) VALUES ('" + item['url'].decode('utf8') + u"','" + item['name'].decode('utf8') + u"','" + imgpath + u"','" + item['title'].decode('utf8') + u"','" + item['content'].decode('utf8') +  u"','" + u'chongwug.com'.decode('utf8') + u"','" + time.strftime("%Y-%m-%d %H:%M:%S") + u"')"
             cur.execute(sql)
             conn.commit()
             #conn.close()

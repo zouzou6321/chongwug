@@ -52,13 +52,14 @@ def knowledge_buy_view(request):
         data = adapters.get_knowledge_buy(request)
         if 'name' in data or 'idlist' in data:
             return HttpResponse(__errorcode__(0,data))
-        return render_to_response('tpl/knowledge_buy.html',{'page':'knowbuy','knowledges':adapters.get_knowledge_buy(request)})
+        return render_to_response('tpl/knowledge_buy.html',{'page':'knowbuy','knowledges':data})
     except:
         traceback.print_exc()
         return HttpResponse('aa')
 
 def knowledge_bringup_view(request):
-    return render_to_response('tpl/knowledge_bringup.html',{'page':'knowbringup'})
+    data = adapters.get_knowledge_bringup(request)
+    return render_to_response('tpl/knowledge_bringup.html',{'page':'knowbringup','knowledges':data})
 
 def supplie_view(request):
     return render_to_response('tpl/supplie.html',{'page':'supplie'})
