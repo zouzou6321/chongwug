@@ -5263,6 +5263,9 @@ img.mfp-img {
 .loading {
   background: url(../imgs/loading.gif) center no-repeat; }
 
+.dashed-top {
+  border-top: 1px dashed #cdcdcd; }
+
 .dashed-right {
   border-right: 1px dashed #cdcdcd; }
 

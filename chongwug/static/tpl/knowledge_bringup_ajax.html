@@ -1,11 +1,19 @@
-{% for knowledge in knowledges %}
-<div class="col-xs-6 outline dashed-right dashed-bottom" data-img="{{ knowledge.imgurl }}" data-time="{{ knowledge.time|date:'Y-m-d' }} {{ knowledge.time|time:'H:i' }}" data-from="{{ knowledge.contentfrom }}" >
-    <h4 class="outline-title">
-        <span class="title-limit">{{ knowledge.title }}</span>
-        <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
-    </h4>
-    <div class="outline-content">
-        {{ knowledge.content|safe }}……查看更多>>
+<div>
+    {% for knowledge in knowledges %}
+    <div class="col-xs-6 outline dashed-top{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}"
+         data-title="{{ knowledge.title }}"
+         data-img="{{ knowledge.imgurl }}"
+         data-date="{{ knowledge.time|date:'Y-m-d' }}"
+         data-from="{{ knowledge.contentfrom }}" >
+        <h4 class="outline-title">
+            <span class="title-limit">{{ knowledge.title }}</span>
+            <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
+        </h4>
+        <div class="outline-content">
+            {{ knowledge.content|safe }}
+        </div>
+        <span class="outline-more">查看更多>></span>
     </div>
+    {% endfor %}
+    <a href="./?page=2" class="infinite-more-link hide"></a>
 </div>
-{% endfor %}

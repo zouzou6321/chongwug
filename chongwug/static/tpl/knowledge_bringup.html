@@ -91,9 +91,13 @@
                 <span class="placard">三</span> 狗狗日常饲养必备常识
             </h2>
             <div class="desc-main">
-                <div class="row">
+                <div class="row" id="js-outline-container">
                 	{% for knowledge in knowledges %}
-                    <div class="col-xs-6 outline dashed-right dashed-bottom" data-img="{{ knowledge.imgurl }}" data-time="{{ knowledge.time|date:'Y-m-d' }} {{ knowledge.time|time:'H:i' }}" data-from="{{ knowledge.contentfrom }}" >
+                    <div class="col-xs-6 outline{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}{% if forloop.counter > 2 %} dashed-top{% endif %}"
+                         data-title="{{ knowledge.title }}"
+                         data-img="{{ knowledge.imgurl }}"
+                         data-date="{{ knowledge.time|date:'Y-m-d' }}"
+                         data-from="{{ knowledge.contentfrom }}" >
                         <h4 class="outline-title">
                             <span class="title-limit">{{ knowledge.title }}</span>
                             <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
@@ -104,6 +108,7 @@
                         <span class="outline-more">查看更多>></span>
                     </div>
                     {% endfor %}
+                    <a href="./?page=1" class="infinite-more-link hide"></a>
                 </div>
             </div>
         </div>
@@ -115,30 +120,21 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                <h4 class="article-title text-center">article-title</h4>
+                <h4 class="article-title text-center"></h4>
                 <div>
-                    <span class="article-date">2014-04-02 11:10</span>
-                    <span class="article-source">来源：其他</span>
-                    <span class="article-author">作者：佚名</span>
+                    <span class="article-date"></span>
+                    <span>来源：<span class="article-from"></span></span>
                     <span class="article-share">分享</span>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="article-figure">
-                    <img src="{{ 'imgs/test.jpg'|assets }}" class="img-full"/>
-                    <p class="article-figcaption text-center">贵宾</p>
+                    <img class="img-full article-img"/>
+                    <p class="article-figcaption text-center"></p>
                 </div>
-                <div class="article-content">
-                    <p>sss</p>
-                    <p>sss</p>
-                    <p>sss</p>
-                    <p>sss</p>
-                    <p>sss</p>
-                    <p>sss</p>
-                </div>
+                <div class="article-content"></div>
             </div>
         </div>
-        <div class="modal-loading"></div>
     </div>
 </div>
 
@@ -147,15 +143,46 @@
 <script>
 
 (function($){
-    var $modal = $('#js-article-modal');
+    var $modal = $('#js-article-modal'),
+        $container = $('#js-outline-container'),
+        loadMap = {};
 
-    $('.bringup-outline').on('click', '.outline', function(){
-        var $this = $(this);
+    $container.on('click', '.outline', function(){
+        var $this = $(this),
+            data = $this.data(),
+            imgUrl = data.img;
+
+        data.content || (data.content = $.trim($this.find('.outline-content').html()));
+
         $modal.addClass('loading').modal('show');
 
-        setTimeout(function(){
-            $modal.removeClass('loading')
-        }, 2000)
+        if(!loadMap[imgUrl]){
+            $('<img>').on('load', function(){
+                loadMap[imgUrl] = true;
+                updateImg(imgUrl);
+            }).attr('src', imgUrl);
+        }else{
+            updateImg(imgUrl);
+        }
+
+        updateModalArticle(data);
+    });
+
+    function updateImg(imgUrl){
+        $modal.find('.article-img').attr('src', imgUrl);
+        $modal.removeClass('loading');
+    }
+
+    function updateModalArticle(data){
+        for(var i in data){
+            if(data.hasOwnProperty(i) && i != 'img'){
+                $modal.find('.article-' + i).html(data[i]);
+            }
+        }
+    }
+
+    $container.waypoint('infinite', {
+        items: '.outline'
     });
 
 })(jQuery);

@@ -17,5 +17,6 @@
     "jquery.lazyload": true,
     "template": true,
     "jquery.validate": true,
-    "waypoints": true
+    "waypoints": true,
+    "waypoints-infinite": true
 }
