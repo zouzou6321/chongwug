@@ -56,6 +56,18 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="farm-location" class="col-sm-3 control-label">地址：</label>
+        <div class="col-sm-4">
+            <button class="btn btn-select radius-none" type="button" id="js-btn-location">
+                <span class="select-title" id="js-location" data-text="选择城市">选择城市</span>
+                <div class="vertical-center">
+                    <span class="caret select-icon"></span>
+                </div>
+            </button>
+            {% include 'petfarm/tpl/components/location-box.html' %}
+        </div>
+    </div>
+    <div class="form-group">
         <label for="farm-province" class="col-sm-3 control-label">省会（默认四川）：</label>
         <div class="col-sm-4">
             <input type="text" name="province" value="{{ manager.petfarm.province }}" id="farm-province" class="form-control">
@@ -166,6 +178,7 @@ CKEDITOR.instances['farm-desc'].on('change', function() {
 });
 </script>
 <script src="{{ 'lib/uploadify/jquery.uploadify.js'|assets_petfarm }}"></script>
+<script src="{{ 'lib/template.js'|assets_petfarm }}"></script>
 <script src="{{ 'lib/jcrop/jquery.Jcrop.js'|assets_petfarm }}"></script>
 <script src="{{ 'js/crop.js'|assets_petfarm }}"></script>
 <script>
@@ -174,6 +187,109 @@ $.crop({
 	uploader: '/petfarm/petfarm/picadd/upload/',
     swf: '/static/lib/dist/uploadify/uploadify.swf'
 });
+
+
+//地址选择
+
+(function($){
+
+var $locationBox = $('#js-location-box'),
+    $province = $locationBox.find('#province'),
+    $city = $locationBox.find('#city'),
+    $toCity = $locationBox.find('#js-to-city'),
+    $district = $locationBox.find('#district'),
+    $toDistrict = $locationBox.find('#js-to-district'),
+    render = template('location-select-tpl'),
+    param = {},
+    location = [],
+    $btnLocation = $('#js-btn-location');
+
+    $btnLocation.on('click', function(){
+        $locationBox.is(':visible') ? $locationBox.trigger('focusout') : $locationBox.show().trigger('focus');
+    });
+
+
+    $locationBox.on('focusout', function(){
+        $(this).hide();
+    });
+
+    function renderData(param, $parent, cb){
+        $.ajax({
+            url: './',
+            data: param,
+            dataType: 'json',
+            success: function(data){
+                if(data.status == 0){
+                    $parent.html(render(data));
+                    cb();
+                }else{
+                    alert(data.message);
+                }
+            }
+        });
+    }
+
+    function changeActive($parent, $this){
+        if(!$this.hasClass('active')){
+            var $active = $parent.find('.active');
+            $active.removeClass('active');
+            $this.addClass('active');
+        }
+    }
+
+    $province.on('click', 'a', function(){
+        var $this = $(this);
+
+        changeActive($province, $this);
+
+        location[0] = $this.text();
+
+        param.province = $this.data('id');
+        param.range = $this.closest('dl').find('dt').data('id');
+        delete param.city;
+        delete param.district;
+
+        $district.html('');
+
+        renderData(param, $city, function(){
+           $toCity.tab('show');
+        });
+    });
+
+    $city.on('click', 'a', function(){
+        var $this = $(this);
+
+        changeActive($city, $this);
+
+        location[1] = $this.text();
+
+        param.city = $this.data('id');
+        delete param.district;
+
+
+        renderData(param, $district, function(){
+            $toDistrict.tab('show');
+        });
+    });
+
+    $district.on('click', 'a', function(){
+        var $this = $(this);
+
+        changeActive($district, $this);
+
+        location[2] = $this.text();
+
+        param.district = $this.data('id');
+
+
+        var text = location.join('-');
+        $('#js-location').text(text);
+        $('#js-location-input').val(JSON.stringify(param));
+        validator.element('#js-location-input');
+        $locationBox.hide();
+    });
+})(jQuery);
+
 
 (function($){
 

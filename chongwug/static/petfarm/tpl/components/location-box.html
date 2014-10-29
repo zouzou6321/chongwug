@@ -1,0 +1,33 @@
+<input name="location" type="hidden" id="js-location-input" class="required"/>
+<div class="select-box" id="js-location-box" tabindex="0">
+    <ul class="tab clearfix">
+      <li class="active"><a href="#province" id="js-to-province" role="tab" data-toggle="tab">省份</a></li>
+      <li><a href="#city" id="js-to-city" role="tab" data-toggle="tab">城市</a></li>
+      <li><a href="#district" id="js-to-district" role="tab" data-toggle="tab">县区</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active province-select" id="province">
+      	  {% for address in addresses %}
+          <dl class="clearfix">
+              <dt data-id="{{ address.index }}">{{ address.name }}</dt>
+              <dd>
+              	  {% for province in address.sublist %}
+                  <a href="javascript:" data-id="{{ province.index }}">{{ province.name }}</a>
+                  {% endfor %}
+              </dd>
+          </dl>
+          {% endfor %}
+      </div>
+      <div class="tab-pane" id="city"></div>
+      <div class="tab-pane" id="district"></div>
+    </div>
+</div>
+<script type="text/html" id="location-select-tpl">
+<dl class="clearfix">
+  <dd>
+      {% templatetag openvariable %}each locations as location{% templatetag closevariable %}
+      <a href="javascript:" data-id="{% templatetag openvariable %}location.id{% templatetag closevariable %}">{% templatetag openvariable %}location.name{% templatetag closevariable %}</a>
+      {% templatetag openvariable %}/each{% templatetag closevariable %}
+  </dd>
+</dl>
+</script>
