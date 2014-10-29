@@ -60,14 +60,14 @@ def market_nestofpet_sale_set(request):
 
 def market_attention_mod(request):
     attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['data[0]']),dele=False)
-    attention.user.name = request.POST['data[1]']
+    attention.user.nickname = request.POST['data[1]']
     attention.user.tel = request.POST['data[2]']
     attention.attention_type = request.POST['data[4]']
     if request.POST['data[6]'] == 'true':
         attention.dele = True
     attention.save()
     data = u'''{"row": {"0":"%s","1":"%s","2":"%s","3":"%s","4":"%s","5":"%s","6":"%s"}}'''\
-     % (attention.id, attention.user.name, attention.user.tel, attention.nestofpet_id.farm.name + \
+     % (attention.id, attention.user.nickname, attention.user.tel, attention.nestofpet_id.farm.name + \
         attention.nestofpet_id.type, attention.attention_type, attention.time, request.POST['data[6]'])
     
     return data
@@ -92,7 +92,7 @@ class OrderListJson(BaseDatatableView):
                 if column == 'nestofpet_id':
                     return '%s %s' % (row.nestofpet_id.farm.name, row.nestofpet_id.type)
                 elif column == 'name':
-                    return row.user.name
+                    return row.user.nickname
                 elif column == 'tel':
                     return row.user.tel
                 else:
