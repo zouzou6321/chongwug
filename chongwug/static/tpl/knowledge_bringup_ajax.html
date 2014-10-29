@@ -15,5 +15,7 @@
         <span class="outline-more">查看更多>></span>
     </div>
     {% endfor %}
-    <a href="./?page=2" class="infinite-more-link hide"></a>
+    {% if pageid %}
+    <a href="./?page={{ pageid }}" class="infinite-more-link hide"></a>
+    {% endif %}
 </div>

@@ -2,7 +2,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
-import adapters,traceback
+import adapters,traceback,string
 from chongwug.commom import __errorcode__
 from django.template import RequestContext
 #auth:huhuaiyong
@@ -60,7 +60,11 @@ def knowledge_buy_view(request):
 def knowledge_bringup_view(request):
     data = adapters.get_knowledge_bringup(request)
     if 'page' in request.GET:
-        return render_to_response('tpl/knowledge_bringup_ajax.html',{'knowledges':data})
+        if data.count() > 0:
+            pageid = string.atoi(request.REQUEST.get('page')) + 1
+        else:
+            pageid = False
+        return render_to_response('tpl/knowledge_bringup_ajax.html',{'knowledges':data,'pageid':pageid})
     return render_to_response('tpl/knowledge_bringup.html',{'page':'knowbringup','knowledges':data})
 
 def supplie_view(request):
