@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 import adapters,config
 from chongwug.commom import __errorcode__
+from chongwug.config import __adtypes
 MANAGE_ROOT='/manage/'
 
 def manage_login(request):
@@ -45,6 +46,8 @@ def manage_ad_add_view(request):
     data = adapters.manage_home_data_get(request)
     ad_types = adapters.manage_get_adtypes()
     data['ad_types'] = ad_types
+    data['width'] = __adtypes[0][3]
+    data['height'] = __adtypes[0][4]
     data['sessionid'] = request.COOKIES['sessionid']
     return render_to_response('manager/tpl/manage_ad_picadd.html',data,context_instance=RequestContext(request))
 
@@ -55,14 +58,14 @@ def manage_ad_pic_upload_view(request):
     if request.session['score'] < 50:
         return render_to_response('404.html')
     photo = request.FILES.get('Filedata',None)
-    return HttpResponse(adapters.manage_picupload(photo,1170,323))
+    return HttpResponse(adapters.manage_picupload(photo,__adtypes[0][3],__adtypes[0][4]))
 
 def manage_ad_picpre_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
         return render_to_response('404.html')
-    return HttpResponse(adapters.manage_ad_picpreupload(request))
+    return HttpResponse(adapters.manage_ad_picpreupload(request,__adtypes[0][3],__adtypes[0][4]))
 
 def manage_ad_del_view(request):
     if adapters.manage_authentication(request) == False:

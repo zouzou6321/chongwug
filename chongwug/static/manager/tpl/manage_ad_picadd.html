@@ -63,7 +63,7 @@
 		<div style="width: 1170px; height: auto;float: left;border:3px solid #8FADB3; background-color: #fff;">
 			<img  border="0" alt="本地图片" id="personhead" style="display: block;max-width: 1170px; height: auto;" />
 		</div>
-		<div style="width: 1170px; height: 323px; overflow: hidden;border:2px solid #FFB5A1;">  
+		<div style="width: {{ width }}px; height: {{ height }}px; overflow: hidden;border:2px solid #FFB5A1;">  
 			<img  border="0"  id="personheadpre" alt="截图预览"/>
 		</div>
 	</div>
@@ -109,8 +109,8 @@
 var selected = 0;
 var imgw = 0;
 var imgh = 0;
-var minimgw = 1170;
-var minimgh = 323;
+var minimgw = {{ width }};
+var minimgh = {{ height }};
 var loadedover = true;
 var Browser=new Object(); 
 Browser.userAgent=window.navigator.userAgent.toLowerCase(); 
@@ -149,7 +149,7 @@ function Imagess(url,imgid,callback){
  		var scaleY = 1;  
  		var width = w;
  		var height = h;
- 		if(imgw > 800){
+ 		if(imgw > {{ width }}){
  			width = imgw;
  			height = imgh;
  		}
