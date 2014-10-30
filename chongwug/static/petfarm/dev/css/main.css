@@ -96,17 +96,6 @@
       padding-right: 40px;
       padding-left: 40px; } }
 
-.modal-loading {
-  position: absolute;
-  display: none;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #fff url(../imgs/loading.gif) center no-repeat; }
-  .loading .modal-loading {
-    display: block; }
-
 .modal-auto-width {
   text-align: center; }
   .modal-auto-width .modal-title {
@@ -124,6 +113,9 @@
     margin-left: -150px; }
   .modal-auto-width .modal-header {
     padding-bottom: 22px; }
+
+.modal.loading .modal-dialog {
+  display: none; }
 
 .preview-img {
   list-style: none;

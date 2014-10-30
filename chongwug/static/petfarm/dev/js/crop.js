@@ -1,3 +1,11 @@
+/**
+ * author: ren wei
+ * mail: 371151833@qq.com
+ * TODO:
+ * 1.img-type-input 这个字段已经弃用，需删除相关操作
+ * 2.根据 select 选项动态变化截图区大小的功能已经弃用，需删除相关代码
+ */
+
 (function($){
     $.crop = function(options){
             /*modal*/
@@ -36,6 +44,11 @@
 
             minSize = getSizeInfo().minSize,
             typeObject = generateTypeObject();
+
+        //是否有被设为主图的图片
+        function hasChecked(){
+            return !!$previewImg.find('.img-main-input').filter(':checked').length;
+        }
 
         function getSizeInfo(){
             var $selected = $imgTypeOption.filter(':selected');
@@ -127,6 +140,9 @@
 
             if(!data.img){
                 $currPreview.data({width: data.width, height: data.height});
+                if(!hasChecked()){
+                    $currPreview.closest('li').find('.img-main-input').prop('checked', true);
+                }
             }
 
             $currPositionInput = data.positionInput || $currPreview.closest('li').find('.img-position-input');
@@ -144,7 +160,7 @@
             $currTypeInput.val(type);
             syncPreview(jcrop.tellSelect());
 
-            $currTypeInput.closest('li').find('.img-tit').text(typeObject[type].text);
+            //$currTypeInput.closest('li').find('.img-tit').text(typeObject[type].text);
 
             jcrop && jcrop.destroy();
             $cropModalBody.html('');
@@ -186,6 +202,13 @@
         //删除图片
         $previewImg.on('click', '.img-del', function(){
             $(this).closest('li').remove();
+
+            if(!hasChecked()){
+                var $first = $previewImg.find('.img-main-input').first();
+                if($first.length){
+                    $first.prop('checked', true);
+                }
+            }
         });
 
         $('#js-uploadify').uploadify({
