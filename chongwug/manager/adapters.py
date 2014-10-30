@@ -46,10 +46,18 @@ def addressHandle(re):
         addresses = __addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
         if 'city' in re.GET:
             addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
-        arr = []
-        for address in addresses['sublist']:
-            arr.append({'id': address['index'], 'name': address['name']})
-        return {'locations': arr}
+            arr = []
+            for address in addresses['sublist']:
+                arr.append({'id': address['index'], 'name': address['name']})
+            return {'districts': arr}
+        else:
+            citys = []
+            districts = []
+            for _city in addresses['sublist']:
+                citys.append({'id': _city['index'], 'name': _city['name']})
+            for _district in addresses['sublist'][0]['sublist']:
+                districts.append({'id': _district['index'], 'name': _district['name']})
+            return {'citys':citys, 'districts':districts}
     provinces = []
     citys = []
     districts = []
