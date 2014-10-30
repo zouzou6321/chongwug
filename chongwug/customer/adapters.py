@@ -205,7 +205,7 @@ def buy_detail_adapter(re):
             curtype = nest_pet.type
         except:
             return False
-        petimgs = nest_pet.nestofpet_img_set.filter(dele=False,img_usefor=__petpictypes[1][1])
+        petimgs = nest_pet.nestofpet_img_set.filter(dele=False)
         if petimgs.count() == 0:
             petimg_first = None
         else:
