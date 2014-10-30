@@ -30,7 +30,7 @@ def manage_home_view(request):
 
 def address_handle_view(request):
     data = adapters.addressHandle(request);
-    return data.__str__()
+    return HttpResponse(data.__str__())
 
 def manage_pet_farm_mod_view(request):
     if adapters.manage_authentication(request) == False:
