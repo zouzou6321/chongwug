@@ -151,6 +151,7 @@
 
 (function($){
     var $modal = $('#js-article-modal'),
+        $modalBody = $modal.find('.modal-body'),
         $container = $('#js-outline-container'),
         loadMap = {};
 
@@ -178,6 +179,7 @@
     function updateImg(imgUrl){
         $modal.find('.article-img').attr('src', imgUrl);
         $modal.removeClass('loading');
+        $modalBody.scrollTop(0);
     }
 
     function updateModalArticle(data){
