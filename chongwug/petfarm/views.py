@@ -93,6 +93,7 @@ def manage_nestofpet_mod_view(request):
     data['pets'] = pets
     if pets.count() > 0:
         data['pet_one'] = pets[0]
+        data['pet_set'] = pets[0].pet_set.all()
     return render_to_response('petfarm/tpl/manage_nestofpet_mod.html',data,context_instance=RequestContext(request))
 
 def manage_nestofpet_add_view(request):

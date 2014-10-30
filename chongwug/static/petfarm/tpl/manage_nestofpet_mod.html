@@ -56,6 +56,38 @@
           <button type="button" class="btn btn-primary form-control" onclick="deletepet();">删除</button>
         </div>
     </div>
+    {% for pet in pet_set %}
+	    <div class="form-group">
+	        <label for="pet-color" class="col-sm-2 control-label">宠物颜色<span class="warn">*</span>：</label>
+	        <div class="col-sm-4">
+	          <input type="text" class="form-control required" id="pet-color" name="color" value="{{ pet.color }}">
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="pet-age" class="col-sm-2 control-label">疫苗情况<span class="warn">*</span>：</label>
+	        <div class="col-sm-4">
+	          <input type="text" class="form-control required number" id="pet-age" name="age" value="{{ pet.epidemic_period }}">
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="pet-type" class="col-sm-2 control-label">宠物价格<span class="warn">*</span>：</label>
+	        <div class="col-sm-4">
+	          <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet.price }}">
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="pet-type" class="col-sm-2 control-label">宠物性别<span class="warn">*</span>：</label>
+	        <div class="col-sm-4">
+	          <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet.sex }}">
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="pet-type" class="col-sm-2 control-label">宠物销售情况<span class="warn">*</span>：</label>
+	        <div class="col-sm-4">
+	          <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet.sale_out }}">
+	        </div>
+	    </div>
+    {% endfor %}
 </form>
 {% else %}
 暂时还没有数据，请先录入数据
