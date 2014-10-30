@@ -4,7 +4,14 @@
 {% load assets_petfarm %}
 
 {% block main %}
-
+<style>
+    .pet{
+        border: 1px solid #ccc;
+        padding-top: 15px;
+        margin-bottom: 15px;
+        position: relative;
+    }
+</style>
 <h1 class="page-header">修改宠物信息</h1>
 {% if pet_one %}
 <p>加*为必填项</p>
@@ -24,19 +31,25 @@
     <div class="form-group">
         <label for="pet-color" class="col-sm-2 control-label">宠物主要颜色<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required" id="pet-color" name="color" value="{{ pet_one.color }}">
+            <select name="color" id="pet-color" class="form-control required">
+                <option value="{{ pet_one.color }}">{{ pet_one.color }}</option>
+            </select>
         </div>
     </div>
     <div class="form-group">
         <label for="pet-age" class="col-sm-2 control-label">宠物月龄<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required number" id="pet-age" name="age" value="{{ pet_one.age }}">
+          <select class="form-control required" id="pet-age" name="age">
+              <option value="{{ pet_one.age }}">{{ pet_one.age }}</option>
+          </select>
         </div>
     </div>
     <div class="form-group">
         <label for="pet-type" class="col-sm-2 control-label">宠物品种<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet_one.type }}">
+          <select class="form-control required" id="pet-type" name="type">
+              <option value="{{ pet_one.type }}">{{ pet_one.type }}</option>
+          </select>
         </div>
     </div>
     <div class="form-group">
@@ -47,6 +60,21 @@
     </div>
   </div>
     <div class="form-group">
+        <label class="col-sm-2 control-label">本窝图片：</label>
+        <div class="col-sm-8">
+            <ul class="preview-img">
+                <li>
+                    <p class="img-tit"><a href="javascript:">删除</a></p>
+                    <img src="" />
+                </li>
+                <li>
+                    <p class="img-tit"><a href="javascript:">删除</a></p>
+                    <img src="" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
           <button type="submit" class="btn btn-primary form-control">提交</button>
         </div>
@@ -56,38 +84,51 @@
           <button type="button" class="btn btn-primary form-control" onclick="deletepet();">删除</button>
         </div>
     </div>
-    {% for pet in pet_set %}
-	    <div class="form-group">
-	        <label for="pet-color" class="col-sm-2 control-label">宠物颜色<span class="warn">*</span>：</label>
-	        <div class="col-sm-4">
-	          <input type="text" class="form-control required" id="pet-color" name="color" value="{{ pet.color }}">
-	        </div>
-	    </div>
-	    <div class="form-group">
-	        <label for="pet-age" class="col-sm-2 control-label">疫苗情况<span class="warn">*</span>：</label>
-	        <div class="col-sm-4">
-	          <input type="text" class="form-control required number" id="pet-age" name="age" value="{{ pet.epidemic_period }}">
-	        </div>
-	    </div>
-	    <div class="form-group">
-	        <label for="pet-type" class="col-sm-2 control-label">宠物价格<span class="warn">*</span>：</label>
-	        <div class="col-sm-4">
-	          <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet.price }}">
-	        </div>
-	    </div>
-	    <div class="form-group">
-	        <label for="pet-type" class="col-sm-2 control-label">宠物性别<span class="warn">*</span>：</label>
-	        <div class="col-sm-4">
-	          <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet.sex }}">
-	        </div>
-	    </div>
-	    <div class="form-group">
-	        <label for="pet-type" class="col-sm-2 control-label">宠物销售情况<span class="warn">*</span>：</label>
-	        <div class="col-sm-4">
-	          <input type="text" class="form-control required" id="pet-type" name="type" value="{{ pet.sale_out }}">
-	        </div>
-	    </div>
-    {% endfor %}
+    <div class="row">
+        {% for pet in pet_set %}
+        <div class="pet col-xs-4">
+            <p>宠物{{ pet.id }}</p>
+            <div class="form-group">
+                <label for="pet-color{{pet.id}}" class="col-sm-4 control-label">宠物颜色<span class="warn">*</span>：</label>
+                <div class="col-sm-8">
+                  <select class="form-control required" id="pet-color{{pet.id}}" name="color{{pet.id}}">
+                      <option value="{{ pet.color }}">{{ pet.color }}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pet-age{{pet.id}}" class="col-sm-4 control-label">疫苗情况<span class="warn">*</span>：</label>
+                <div class="col-sm-8">
+                  <select class="form-control required number" id="pet-age{{pet.id}}" name="age{{pet.id}}">
+                      <option value="{{ pet.epidemic_period }}">{{ pet.epidemic_period }}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pet-type{{pet.id}}" class="col-sm-4 control-label">宠物价格<span class="warn">*</span>：</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control required" id="pet-type{{pet.id}}" name="type{{pet.id}}" value="{{ pet.price }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pet-sex{{pet.id}}" class="col-sm-4 control-label">宠物性别<span class="warn">*</span>：</label>
+                <div class="col-sm-8">
+                  <select class="form-control required" id="pet-sex{{pet.id}}" name="type{{pet.id}}">
+                      <option value="{{ pet.sex }}">{{ pet.sex }}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pet-sale{{pet.id}}" class="col-sm-4 control-label">宠物销售情况<span class="warn">*</span>：</label>
+                <div class="col-sm-8">
+                  <select class="form-control required" id="pet-sale{{pet.id}}" name="type{{pet.id}}">
+                      <option value="{{ pet.sale_out }}">{{ pet.sale_out }}</option>
+                  </select>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </form>
 {% else %}
 暂时还没有数据，请先录入数据
