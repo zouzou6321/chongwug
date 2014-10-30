@@ -124,17 +124,17 @@ def manage_picpreupload(request,_from,_nestofpet=None):
         pictypes = __petpictypes
         pic_root = settings.PET_PIC_ROOT
     #挨个处理上传的图片数据
+    imgusefor = pictypes[1][1]
     itr = 0
     while itr < img_count:
         itr += 1
         #挨个获取图片并且判断图片是否存在
         try:
-            imgw,imgh = 0,0
-            for pictype in pictypes:
-                if request.POST['img-%d-type' % itr] == pictype[1]:
-                    imgw = pictype[3]
-                    imgh = pictype[4]
-                    break
+            imgw,imgh = pictypes[1][3],pictypes[1][4]
+            if request.POST['img-main'] == request.POST['img-%d' % itr]:
+                imgw = pictypes[0][3]
+                imgh = pictypes[0][4]
+                imgusefor = pictypes[0][1]
         except:
             continue
         #判断图片类型是否有异常
@@ -164,7 +164,7 @@ def manage_picpreupload(request,_from,_nestofpet=None):
                                     #img_type:jpg/png/...
                                     img_type = 'jpg',
                                     #图片用途
-                                    img_usefor = request.POST['img-%d-type' % itr])
+                                    img_usefor = imgusefor)
             pet_farm_sql.save()
         elif _from == 'pet':
             pet_sql = nestofpet_img( nestofpet_id = _nestofpet,
@@ -174,7 +174,7 @@ def manage_picpreupload(request,_from,_nestofpet=None):
                                 #img_type:jpg/png/...
                                 img_type = 'jpg',
                                 #图片用途
-                                img_usefor = request.POST['img-%d-type' % itr])
+                                img_usefor = imgusefor)
             pet_sql.save()
     return __errorcode__(0)
 
@@ -185,7 +185,7 @@ def manage_nestofpet_add(request):
     petnum = 0
     while petnum <= img_count:
         petnum += 1
-        if ('img-%d-type' % petnum) in request.POST:
+        if 'img-main' in request.POST:
             break;
     if petnum > img_count:
         return __errorcode__(4)
