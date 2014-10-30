@@ -41,6 +41,29 @@ def manage_home_data_get(request):
     manager = manage.objects.get(id=request.session['manage_id'])
     return {'manager':manager,'directs':__directs}
 
+def addressHandle(re):
+    if 'province' in re.GET:
+        addresses = __addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
+        if 'city' in re.GET:
+            addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
+        arr = []
+        for address in addresses['sublist']:
+            arr.append({'id': address['index'], 'name': address['name']})
+        return {'locations': arr}
+    provinces = []
+    citys = []
+    districts = []
+    for _addresse in __addresses:
+        rangeid = _addresse['index']
+        _provinces = _addresse['sublist']
+        for _province in _provinces:
+            provinces.append({'rangeid':rangeid,'id':_province['index'], 'name':_province['name']})
+    for _city in __addresses[0]['sublist'][0]['sublist']:
+        citys.append({'id': _city['index'], 'name': _city['name']})
+    for _district in __addresses[0]['sublist'][0]['sublist'][0]['sublist']:
+        districts.append({'id': _district['index'], 'name': _district['name']})
+    return {'provinces':provinces, 'citys':citys, 'districts':districts}
+
 def manage_pet_farm_add(request):
     try:
         if 'pwd' not in request.POST or request.POST['pwd'] == '':

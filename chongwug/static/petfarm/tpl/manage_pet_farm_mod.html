@@ -59,7 +59,9 @@
         <label for="farm-province" class="col-sm-3 control-label">省会（默认四川）：</label>
         <div class="col-sm-4">
             <select name="province" id="farm-province" class="form-control">
-                <option value="{{ manager.petfarm.province }}">{{ manager.petfarm.province }}</option>
+            	{% for province in provinces %}
+                <option data-range="{{ province.rangeid }}" value="{{ province.id }}">{{ province.name }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>
@@ -67,7 +69,9 @@
         <label for="farm-city" class="col-sm-3 control-label">城市（默认成都）：</label>
         <div class="col-sm-4">
             <select name="city" id="farm-city" class="form-control">
-                <option value="{{ manager.petfarm.city }}">{{ manager.petfarm.city }}</option>
+                {% for city in citys %}
+                <option value="{{ city.id }}">{{ city.name }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>
@@ -75,7 +79,9 @@
         <label for="farm-district" class="col-sm-3 control-label">片区（eg：高新）<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <select name="district" id="farm-district" class="form-control">
-                <option value="{{ manager.petfarm.district }}">{{ manager.petfarm.district }}</option>
+            	{% for district in districts %}
+                <option value="{{ district.id }}">{{ district.name }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>

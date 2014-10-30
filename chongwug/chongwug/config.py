@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 #所有图片的图片用途,目前暂时包括广告图片、宠物图片、养殖场图片
 __adtypes = [[0,'nav_m','首页主广告',1920,530]]
-__petpictypes = [[0,u'buy_main',u'主图',320,209],[1,u'normal',u'辅图',600,400]]
-__farmpictypes = [[0,u'buy_home',u'首页展示图',235,167],[1,u'normal',u'养殖场介绍图',356,250]]
+__petpictypes = [[0,u'buy_main',u'主图',750,500],[1,u'normal',u'辅图',750,500]]
+__farmpictypes = [[0,u'buy_home',u'首页展示图',427,300],[1,u'normal',u'养殖场介绍图',427,300]]
 
 #系统支持的犬种
 __pettypes = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加', u'博美',u'巴哥',
