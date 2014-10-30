@@ -15,7 +15,7 @@
 <h1 class="page-header">修改宠物信息</h1>
 {% if pet_one %}
 <p>加*为必填项</p>
-<form method="post" action="./" class="form-horizontal">
+<form method="post" class="form-horizontal">
     {% csrf_token %}
     <div class="form-group">
 	    <label for="pet_id" class="col-sm-2 control-label">需要修改信息的宠物：</label>
@@ -58,25 +58,20 @@
           <input type="text" class="form-control required number" id="pet-short_desc" name="short_desc" value="{{ pet_one.short_desc }}">
         </div>
     </div>
-  </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">本窝图片：</label>
         <div class="col-sm-8">
             <ul class="preview-img">
                 <li>
-                    <p class="img-tit"><a href="javascript:">删除</a></p>
-                    <img src="" />
-                </li>
-                <li>
-                    <p class="img-tit"><a href="javascript:">删除</a></p>
-                    <img src="" />
+                    <p class="img-tit"><a href="javascript:" data-id="xxx" class="del-img">删除</a></p>
+                    <img src="" style="width: 100%;"/>
                 </li>
             </ul>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
-          <button type="submit" class="btn btn-primary form-control">提交</button>
+          <button type="button" class="btn btn-primary form-control btn-submit" data-loading-text="提交中...">提交</button>
         </div>
     </div>
     <div class="form-group">
@@ -107,13 +102,13 @@
             <div class="form-group">
                 <label for="pet-type{{pet.id}}" class="col-sm-4 control-label">宠物价格<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control required" id="pet-type{{pet.id}}" name="type{{pet.id}}" value="{{ pet.price }}">
+                  <input type="text" class="form-control required" id="pet-type{{pet.id}}" name="price{{pet.id}}" value="{{ pet.price }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="pet-sex{{pet.id}}" class="col-sm-4 control-label">宠物性别<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
-                  <select class="form-control required" id="pet-sex{{pet.id}}" name="type{{pet.id}}">
+                  <select class="form-control required" id="pet-sex{{pet.id}}" name="sex{{pet.id}}">
                       <option value="{{ pet.sex }}">{{ pet.sex }}</option>
                   </select>
                 </div>
@@ -128,6 +123,7 @@
             </div>
         </div>
         {% endfor %}
+    </div>
     </div>
 </form>
 {% else %}
@@ -162,5 +158,47 @@ function deletepet(){
 		}
 	});
 }
+
+var $form = $('form'),
+    delArr = [];
+
+$form.on('submit', function(e){
+    e.preventDefault();
+});
+
+$form.on('click', '.del-img', function(){
+    var $this = $(this);
+    delArr.push($this.data('id'));
+    $this.closest('li').remove();
+});
+
+$form.on('click', '.btn-submit', function(){
+    var data = {}, $this = $(this);
+
+    $.each($form.serializeArray(), function(i, e){
+        data[e.name] = e.value;
+    });
+
+    data.del = delArr;
+
+    $this.button('loading');
+
+    $.ajax({
+        url: './',
+        type: 'post',
+        dataType: 'json',
+        data: data,
+        success: function(data){
+            if(data.status == 0){
+                alert('提交成功！');
+                window.location.reload();
+            }else{
+                alert('提交失败：'+ data.message +'，请重试！');
+                $this.button('reset');
+            }
+        }
+    });
+});
+
 </script>
 {% endblock %}
