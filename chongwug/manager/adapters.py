@@ -117,12 +117,6 @@ def manage_pet_farm_add(request):
         except:
             return __errorcode__(19)
         
-        try:
-            if string.atoi(request.POST['min_prince']) <= 0:
-                return __errorcode__(15)
-        except:
-            return __errorcode__(15)
-        
         p = re.compile(__regular_expression_chinatelnum)
         if not p.match(request.POST['tel']):
             return __errorcode__(9)
@@ -149,7 +143,7 @@ def manage_pet_farm_add(request):
                                 city = city,
                                 district = request.POST['district'],
                                 direct = request.POST['direct'],
-                                min_prince = request.POST['min_prince'],
+                                min_prince = 10000,
                                 manage_score = manage_score)
         new_pet_farm.save()
         new_user.petfarm = new_pet_farm

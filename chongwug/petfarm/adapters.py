@@ -306,12 +306,6 @@ def manage_pet_farm_mod(request):
         if error:
             return __errorcode__(18)
         
-        try:
-            if string.atoi(request.POST['min_prince']) <= 0:
-                return __errorcode__(15)
-        except:
-            return __errorcode__(15)
-        
         p = re.compile(__regular_expression_chinatelnum)
         if not p.match(request.POST['tel']):
             return __errorcode__(9)
@@ -330,7 +324,6 @@ def manage_pet_farm_mod(request):
         curuser.petfarm.city = city
         curuser.petfarm.district = request.POST['district']
         curuser.petfarm.direct = request.POST['direct']
-        curuser.petfarm.min_prince = request.POST['min_prince']
         curuser.petfarm.save()
         curuser.save()
     except NameError:
