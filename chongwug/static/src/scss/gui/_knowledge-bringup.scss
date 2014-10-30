@@ -54,4 +54,10 @@
     height: 450px;
     overflow-y: auto;
   }
+
+  .modal-dialog{
+    @media (min-width: $screen-sm) {
+      width: 700px;
+    }
+  }
 }

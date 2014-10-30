@@ -4189,6 +4189,9 @@ Copyright (c) 2014 Daniel Eden
   padding-right: 50px;
   height: 450px;
   overflow-y: auto; }
+@media (min-width: 768px) {
+  .article-modal .modal-dialog {
+    width: 700px; } }
 
 .detail-main {
   padding-top: 20px;
