@@ -2,9 +2,6 @@
 {% load assets %}
 {% block title %}宠物信息录入查询系统{% endblock %}
 {% block bodyhook %}class="business-data"{% endblock %}
-{% block css %}
-    <link rel="stylesheet" href="{{ 'vendor/datepicker3.css'|assets }}"/>
-{% endblock %}
 {% block content %}
 <div class="business-wrap">
     <div class="business-title text-center">
@@ -123,7 +120,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ 'vendor/bootstrap-datepicker.js'|assets }}"></script>
+<script src="{{ 'js/vendor/bootstrap-datepicker.js'|assets }}"></script>
 <script>
     $('#petbirthdate').datepicker({
         autoclose: true,

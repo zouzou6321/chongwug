@@ -63,6 +63,10 @@ DATABASES = {
     }
 }
 
+PROD_TEST = False
+CDN_TEST = False
+CDN_ROOT = "//chongwuyimiao-cdn.b0.upaiyun.com"
+
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 14
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts

@@ -1,0 +1,22 @@
+{
+    "css": {
+        "src": ["src/scss/**/*.scss"],
+        "dev": "dev/css",
+        "prod": "dist/css"
+    },
+    "js": {
+        "src": ["src/js/**/*.js"],
+        "dev": "dev/js",
+        "prod": "dist/js"
+    },
+    "imgs": {
+        "src": ["src/imgs/**/*.+(jpg|png|gif)"],
+        "dev": "dev/imgs",
+        "prod": "dist/imgs"
+    },
+    "fonts": {
+        "src": ["src/fonts/**"],
+        "dev": "dev/fonts",
+        "prod": "dist/fonts"
+    }
+}

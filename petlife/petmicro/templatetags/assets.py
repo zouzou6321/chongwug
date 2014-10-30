@@ -1,5 +1,6 @@
-import os, json, string
+import os,json,string
 from django import template
+from petlife.settings import STATIC_ROOT, PROD_TEST, CDN_TEST, CDN_ROOT
 
 register = template.Library()
 
@@ -13,33 +14,37 @@ def process_json_file(json_file):
 
 @register.filter
 def assets(value):
-    # config
-    root = '/static/'
-    curr = ''
     flag = 'SERVER_SOFTWARE' in os.environ
-    cdn = False
-    prod = False
-    folder = '/static/assets/dist/' if prod else ''
-    cdn_url = '//chongwuyimiao-cdn.b0.upaiyun.com' if flag or cdn else ''
-    js_version = '?v1'
-    css_version = '?v1'
-    img_version = '?v1'
-    version = ''
-    path = ''
+    cdn = True if (flag or CDN_TEST) else False
+    cdnUrl = CDN_ROOT if cdn else '/static'
+    dist = 'dist/' if PROD_TEST else ''
+    folder = ''
 
-    if value.endswith('.css'):
-        version = css_version
-    elif value.endswith('.js'):
-        version = js_version
-    else:
-        version = img_version
+    arr = value.strip().split('/')
+    prefix = arr[0]
+    del arr[0]
+    basename = '/'.join(arr)
 
-    if prod:
-        path = folder + value + version
-    else:
-        path = cdn_url + '/' + curr + folder + value + version
+    if cdn or PROD_TEST:
+        if prefix == 'lib':
+            path = 'lib/' + dist + basename
+        else:
+            try:
+                manifest = process_json_file(STATIC_ROOT + '/' + folder + prefix + '-manifest.json')
 
-    if flag or prod or cdn:
-        return path
+                try:
+                    path = folder + dist + prefix + '/' + manifest[basename]
+                except:
+                    path = folder + dist + value
+            except:
+                #patch for temp vendor folder
+                path = folder + dist + value
+
+        return cdnUrl + '/' + path
     else:
-        return root + curr + 'assets/dev/' + value + version
+        if prefix == 'lib':
+            path = 'lib/dist/' + basename
+        else:
+            path = folder + 'dev/' + value
+
+        return '/static/' + path

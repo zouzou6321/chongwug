@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ 'css/main.css'|assets }}"/>
     {% block css %}{% endblock %}
     <!--[if lt IE 9]>
-    <script src="{{ 'vendor/respond.js'|assets }}"></script>
+    <script src="{{ 'js/vendor/respond.js'|assets }}"></script>
     <![endif]-->
 </head>
 <body {% block bodyhook %}{% endblock %}>
@@ -17,12 +17,12 @@
 {% block content %}{% endblock %}
 
 {% block jquery %}
-<script src="{{'vendor/jquery.js'|assets}}"></script>
+<script src="{{'js/vendor/jquery.js'|assets}}"></script>
 {% endblock %}
 
 {% block plugins %}
-<script src="{{'vendor/bootstrap.js'|assets}}"></script>
-<script src="{{'vendor/validate/jquery.validate.js'|assets}}"></script>
+<script src="{{'js/vendor/bootstrap.js'|assets}}"></script>
+<script src="{{'js/vendor/validate/jquery.validate.js'|assets}}"></script>
 {% endblock %}
 
 {% block scripts %}{% endblock %}
