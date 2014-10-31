@@ -69,13 +69,8 @@
     <div class="form-group">
         <input type="hidden" name="img-count" id="js-img-count" value="0"/>
         <label class="col-sm-3 control-label">本窝图片（至少一张）<span class="warn">*</span>：</label>
-        <div class="col-sm-4">
+        <div class="col-sm-4 uploadAndCrop" data-size="[{{ types.0.width }}, {{ types.0.height }}]">
             <div id="js-uploadify"></div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-1 col-sm-10">
-            <ul class="preview-img" id="js-preview-img"></ul>
         </div>
     </div>
     <div class="pet">
@@ -136,33 +131,7 @@
     </div>
 </form>
 
-<div class="modal fade modal-auto-width" id="js-crop-modal" data-backdrop="static">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><strong>裁剪图片</strong></h4>
-        <div class="form-horizontal img-type-group hide">
-            <label class="col-sm-6 control-label">图片用途：</label>
-            <div class="col-sm-6">
-                <select class="form-control" id="js-img-type">
-                	{% for type in types %}
-                    <option value="{{ type.type }}" data-size="[{{ type.width }}, {{ type.height }}]">{{ type.desc }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script type="text/html" id="pet-tpl">
-
 <div class="pet">
     <div class="form-group">
         <label class="col-sm-3 control-label">宠物颜色<span class="warn">*</span>：</label>
@@ -210,26 +179,9 @@
     </div>
     <button class="btn-del btn btn-danger" type="button">删除</button>
 </div>
-
 </script>
 
-<script type="text/html" id="preview-item-tpl">
-<li>
-    <div class="img-box">
-        <img src="{src}"/>
-        <input type="hidden" name="img-{index}-position" class="img-position-input"/>
-        <input type="hidden" name="img-{index}-type" class="img-type-input"/>
-        <input type="hidden" name="img-{index}" value="{src}" class="img-index-input"/>
-    </div>
-    <p class="img-tit">
-        <label><input type="radio" value="{src}" name="img-main" class="img-main-input"> 设为主图</label>
-    </p>
-    <div class="img-edit">
-        <i class="glyphicon glyphicon-pencil img-crop"></i>
-        <i class="glyphicon glyphicon-remove img-del"></i>
-    </div>
-</li>
-</script>
+{% include 'petfarm/tpl/components/uploadAndCrop.html' %}
 
 {% endblock %}
 
@@ -262,8 +214,8 @@
 <script src="{{ 'js/crop.js'|assets_petfarm }}"></script>
 <script>
 //调用截图
-$.crop({
-	uploader: '/petfarm/nestofpet/picadd/upload/',
+$('.uploadAndCrop').uploadAndCrop({
+    uploader: '/petfarm/nestofpet/picadd/upload/',
     swf: '/static/lib/dist/uploadify/uploadify.swf'
 });
 

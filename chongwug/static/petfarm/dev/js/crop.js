@@ -7,247 +7,204 @@
  */
 
 (function($){
-    $.crop = function(options){
-            /*modal*/
-        var $cropModal = $('#js-crop-modal'),
-            $cropModalBody = $cropModal.find('.modal-body'),
-
-        /*image type, min-size, radio*/
-            $imgType = $('#js-img-type'),
-            $imgTypeOption = $imgType.find('option'),
-
-        /*jcrop api*/
-            jcrop = null,
-
-        /*preview wrapper*/
-            $previewImg = $('#js-preview-img'),
-
-        /*preview item template for insert*/
-            $previewItemTpl = $('#preview-item-tpl').html(),
-
-        /*current preview item, for update preview*/
-            $currPreview = null,
-            $currCropImg = null,
-        /*store current image's position data*/
-            $currPositionInput = null,
-            $currTypeInput = null,
-            $imgCountInput = $('#js-img-count');
-
-        /*point to current image's actual size*/
-            actualSize = null,
-
-        /*point to current image's preview size*/
-            previewSize = [120, 80],
-
-        /*point to current index of the upload image, start from 1*/
-            index = 0,
-
-            minSize = getSizeInfo().minSize,
-            typeObject = generateTypeObject();
-
-        //是否有被设为主图的图片
-        function hasChecked(){
-            return !!$previewImg.find('.img-main-input').filter(':checked').length;
-        }
-
-        function getSizeInfo(){
-            var $selected = $imgTypeOption.filter(':selected');
-
-            return {
-                minSize: $selected.data('size'),
-                type: $selected.attr('value')
-            };
-        }
-
-        function generateTypeObject(){
-            var o = {};
-
-            $.each($imgTypeOption, function(i, e){
-                var $e = $(e);
-
-                o[$e.attr('value')] = {
-                  minSize: $e.data('size'),
-                  text: $e.text()
-                };
-            });
-
-            return o;
-        }
-
-        //预加载图片
-        function loadImage(url, callback){
-            var $img = $('<img>');
-
-            $img.on('load', function(){
-                callback();
-            });
-
-            $img.attr('src', url);
-        }
-
-        //开始截图
-        function startCrop($img, minSize, select){
-            var radio = minSize[0] / minSize[1];
-
-            $img.Jcrop({
-                aspectRatio: radio,
-                minSize: minSize,
-                setSelect: [0, 0, minSize[0], minSize[1]]
-            }, function(){
-                jcrop = this;
-            });
-
-            if($.isArray(select)){
-                jcrop.setSelect(select);
-            }
-        }
-
-        //同步截图数据到 input hidden
-        function updateCoords(coords){
-            $currPositionInput.val(JSON.stringify(coords));
-        }
-
-        //同步更新缩略图
-        function syncPreview(coords){
-            var rx = previewSize[0] / coords.w;
-            var ry = previewSize[1] / coords.h;
-
-            $currPreview.css({
-                width: Math.round(rx * actualSize[0]) + 'px',
-                height: Math.round(ry * actualSize[1]) + 'px',
-                marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-                marginTop: '-' + Math.round(ry * coords.y) + 'px'
-            });
-
-            updateCoords(coords);
-        }
-
-        function compileTpl(data){
-            var tpl = $previewItemTpl;
-
-            for(var i in data){
-                tpl = tpl.replace(new RegExp('{'+ i +'}', 'gm'), data[i]);
-            }
-
-            return tpl;
-        }
-
-        //上传图片成功后准备开始截图
-        function afterUploadSuccess(data){
-            $currCropImg = $cropModalBody.html('<img src="'+ data.url +'">').find('img');
-
-            $currPreview = data.img || $(compileTpl({src: data.url, index: index})).appendTo($previewImg).find('img');
-
-            if(!data.img){
-                $currPreview.data({width: data.width, height: data.height});
-                if(!hasChecked()){
-                    $currPreview.closest('li').find('.img-main-input').prop('checked', true);
-                }
-            }
-
-            $currPositionInput = data.positionInput || $currPreview.closest('li').find('.img-position-input');
-            $currTypeInput = data.typeInput || $currPreview.closest('li').find('.img-type-input');
-
-            $cropModal.removeClass('loading');
-            startCrop($currCropImg, data.minSize || minSize, data.select);
-        }
-
-        //关闭截图弹窗后
-        $cropModal.on('hidden.bs.modal', function(){
-            //store type info
-            var type = getSizeInfo().type;
-
-            $currTypeInput.val(type);
-            syncPreview(jcrop.tellSelect());
-
-            //$currTypeInput.closest('li').find('.img-tit').text(typeObject[type].text);
-
-            jcrop && jcrop.destroy();
-            $cropModalBody.html('');
-            $imgType[0].selectedIndex = 0;
-        });
-
-        //重新截取图片
-        $previewImg.on('click', '.img-crop', function(){
-            $cropModal.modal('show').addClass('loading');
-
-            var $currLi = $(this).closest('li'),
-                $positionInput = $currLi.find('.img-position-input'),
-                $typeInput = $currLi.find('.img-type-input'),
-                $img = $currLi.find('img'),
-                select = $.parseJSON($positionInput.val());
-
-            actualSize = [$img.data('width'), $img.data('height')];
-
-            afterUploadSuccess({
-                url: $img.attr('src'),
-                positionInput: $positionInput,
-                typeInput: $typeInput,
-                img: $img,
-                select: [select.x, select.y, select.x2, select.y2],
-                minSize: typeObject[$typeInput.val()].minSize
-            });
-        });
-
-        //update crop area when image type select change
-        $imgType.on('change', function(){
-            var $this = $(this),
-                minSize = typeObject[$this.val()].minSize,
-                select = [0, 0].concat(minSize);
-
-            jcrop && jcrop.destroy();
-            startCrop($currCropImg, minSize, select);
-        });
-
-        //删除图片
-        $previewImg.on('click', '.img-del', function(){
-            $(this).closest('li').remove();
-
-            if(!hasChecked()){
-                var $first = $previewImg.find('.img-main-input').first();
-                if($first.length){
-                    $first.prop('checked', true);
-                }
-            }
-        });
-
-        $('#js-uploadify').uploadify({
+    $.fn.uploadAndCrop = function(options){
+        var defaultOptions = {
+            //custom options
+            previewItemTpl: '#preview-item-tpl',
+            uploadBtn: '#js-uploadify',
+            cropModal: '#js-crop-modal',
+            imgCount: '#js-img-count',
+            previewSize: [120, 80],
+            
+            //uploadify options
             buttonText: '浏览并上传',
             buttonClass: 'btn-info',
-            swf: options.swf,
-            uploader: options.uploader,
             fileTypeExts: '*.jpg;*.jpeg;*.gif;*.png;*.bmp;',
             fileSizeLimit: '4MB',
             multi: false,
-            formData: {},
-            onUploadError: function(file, errorCode, errorMsg, errorString){
-                if(errorMsg == "500"){
-                    errorString = '服务器内部错误';
-                }
+            formData: {}
+        };
 
-                alert('"' + file.name + '" 上传失败：' + errorString + '，请重试！');
-            },
-            onUploadSuccess: function(file, data, response){
-                if (!response) {
-                    alert('请求超时，请稍后重试！');
-                    return;
-                }
+        options = $.extend(defaultOptions, options);
 
-                data = $.parseJSON(data);
+        return this.each(function(){
+            var $container = $(this),
+                
+                //if the preview ul is present, just use it, or append it to cintainer
+                $previewUl = $container.find('.preview-img'),
+                $previewUl = $previewUl.length ? $previewUl : $('<ul>').addClass('preview-img').appendTo($container),
+                
+                previewItemTpl = $(options.previewItemTpl).html(),
+                $uploadBtn = $container.find(options.uploadBtn),
+                $cropModal = $(options.cropModal),
+                $imgCount= $(options.imgCount),
+                previewSize = options.previewSize,
+                
+                $currCropImg = $('<img>').appendTo($cropModal.find('.modal-body')),
+                $currPreviewImg = null,
+                $currPreviewLi = null,
+                jCrop = null,
 
-                if(data.status == 0){
-                     actualSize = [data.width, data.height];
+                cropSize = $container.data('size'),//[width, height]
+                radio = cropSize[0] / cropSize[1],
+                currActualSize = [],
+                index = 0;
 
-                    $cropModal.modal('show').addClass('loading');
-                    loadImage(data.url, function(){
-                        index++;
-                        $imgCountInput.val(index);
-                        afterUploadSuccess(data);
-                    });
+            /**
+             * data: {width: '', height: '', url: ''}
+             */
+            $container.on('uploadAndCrop.uploadSuccess', function(event, data){
+                currActualSize = [data.width, data.height];
+                $cropModal.addClass('loading').modal('show');
+                $container.trigger('uploadAndCrop.preloadImg', data);
+            });
+
+            $container.on('uploadAndCrop.preloadImg', function(event, data){
+                var $img = $('<img>');
+
+                $img.on('load', function(){
+                    index++;
+                    $imgCount.val(index);
+                    $container.trigger('uploadAndCrop.initCrop', data);
+                }).attr('src', data.url);
+            });
+
+            $container.on('uploadAndCrop.initCrop', function(event, data){
+                $currCropImg.attr('src', data.url).removeAttr('style');
+
+                if(data.img){
+                    $currPreviewImg = data.img;
                 }else{
-                    alert('图片上传失败：' + data.message + '，请重试。');
+                    $currPreviewLi = $(compileTpl({src: data.url, index: index})).appendTo($previewUl);
+                    $currPreviewImg = $currPreviewLi.find('img').data({width: data.width, height: data.height});
+
+                    if(!hasChecked()){
+                        $currPreviewLi.find('.img-main-input').prop('checked', true);
+                    }
                 }
+
+                $container.trigger('uploadAndCrop.startCrop', {select: data.select});
+            });
+
+            $container.on('uploadAndCrop.startCrop', function(event, data){
+                $cropModal.removeClass('loading');
+
+                $currCropImg.Jcrop({
+                    aspectRatio: radio,
+                    minSize: cropSize,
+                    setSelect: [0, 0, cropSize[0], cropSize[1]]
+                }, function(){
+                    jCrop = this;
+                });
+
+                if($.isArray(data.select)){
+                    jCrop.setSelect(data.select);
+                }
+            });
+
+            function compileTpl(data){
+                var tpl = previewItemTpl;
+
+                for(var i in data){
+                    tpl = tpl.replace(new RegExp('{'+ i +'}', 'gm'), data[i]);
+                }
+
+                return tpl;
             }
+
+            function hasChecked(){
+                return !!$previewUl.find('.img-main-input').filter(':checked').length;
+            }
+
+            $cropModal.on('hidden.bs.modal', function(){
+                syncPreview(jCrop.tellSelect());
+                jCrop.destroy();
+            });
+
+            //sync crop area to preview, fill the crop coords to hidden input
+            function syncPreview(coords){
+                var rx = previewSize[0] / coords.w;
+                var ry = previewSize[1] / coords.h;
+
+                $currPreviewImg.css({
+                    width: Math.round(rx * currActualSize[0]) + 'px',
+                    height: Math.round(ry * currActualSize[1]) + 'px',
+                    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                });
+
+                $currPreviewLi.find('.img-position-input').val(JSON.stringify(coords));
+            }
+
+
+            $previewUl.on('click', '.img-crop', function(){
+                $cropModal.addClass('loading').modal('show');
+
+                $currPreviewLi = $(this).closest('li');
+
+                var $positionInput = $currPreviewLi.find('.img-position-input'),
+                    $img = $currPreviewLi.find('img'),
+                    data = $img.data(),
+                    select = $.parseJSON($positionInput.val());
+
+                currActualSize = [data.width, data.height];
+
+                $container.trigger('uploadAndCrop.initCrop', {
+                    url: $img.attr('src'),
+                    img: $img,
+                    width: data.width,
+                    height: data.height,
+                    select: [select.x, select.y, select.x2, select.y2]
+                });
+            });
+
+            $previewUl.on('click', '.img-del', function(){
+                var $li = $(this).closest('li');
+
+                options.beforeDel && options.beforeDel($li.data('id'));
+
+                $li.remove();
+
+                if(!hasChecked()){
+                    var $first = $previewUl.find('.img-main-input').first();
+                    if($first.length){
+                        $first.prop('checked', true);
+                    }
+                }
+            });
+
+            //init upload button
+            $uploadBtn.uploadify({
+                buttonText: options.buttonText,
+                buttonClass: options.buttonClass,
+                swf: options.swf,
+                uploader: options.uploader,
+                fileTypeExts: options.fileTypeExts,
+                fileSizeLimit: options.fileSizeLimit,
+                multi: options.multi,
+                formData: options.formData,
+                onUploadError: function(file, errorCode, errorMsg, errorString){
+                    if(errorMsg == "500"){
+                        errorString = '服务器内部错误';
+                    }
+
+                    alert('"' + file.name + '" 上传失败：' + errorString + '，请重试！');
+                },
+                onUploadSuccess: function(file, data, response){
+                    if (!response) {
+                        alert('请求超时，请稍后重试！');
+                        return;
+                    }
+
+                    data = $.parseJSON(data);
+
+                    if(data.status == 0){
+                        $container.trigger('uploadAndCrop.uploadSuccess', data);
+                    }else{
+                        alert('图片上传失败：' + data.message + '，请重试。');
+                    }
+                }
+            });
         });
     };
 })(jQuery);
