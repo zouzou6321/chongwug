@@ -60,7 +60,7 @@
         <div class="form-group">
 			<label class="col-sm-3 control-label">出生日期:</label>
 			<div class="col-sm-3">
-				<input class="form-control" name="petbirthdate" readonly type="text" value="{{ pet.birthdate }}"/>
+				<input class="form-control" name="petbirthdate" readonly type="text" value="{{ pet.birthdate|date:'Y-m-d' }}"/>
 			</div>
 			<label class="col-sm-3 control-label">母亲身份识别号码:</label>
 			<div class="col-sm-3">

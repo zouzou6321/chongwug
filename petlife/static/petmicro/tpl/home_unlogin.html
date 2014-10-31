@@ -49,7 +49,7 @@
             </tr>
             <tr>
                 <td>出生日期</td>
-                <td>{{ pet.birthdate }}</td>
+                <td>{{ pet.birthdate|date:'Y-m-d' }}</td>
                 <td>繁殖人</td>
                 <td>{{ pet.petbreeder.name }}</td>
             </tr>
