@@ -446,27 +446,3 @@ def manage_get_del_farmpics(request):
         return pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
     except:
         return 'False'
-
-def manage_get_del_petpics(request):
-    try:
-        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
-        if request.method == 'POST':
-            pics_str = request.REQUEST.getlist('petpics')
-            curpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
-            petpics = curpet.nestofpet_img_set.filter(dele=False)
-            for tmp_pic in pics_str:
-                try:
-                    petpics.get(id=string.atoi(tmp_pic)).update(dele=True)
-                except:
-                    return 'False'
-        if 'id' not in request.GET:
-            pets = manage_get_pets(request)
-            petpics = pets[0].nestofpet_img_set.filter(dele=False)
-            return {'pets':pets,'petpics':petpics}
-        else:
-            pet_one = manage_get_pets(request)
-            petpics = pet_one.nestofpet_img_set.filter(dele=False)
-            return {'petpics':petpics}
-    except:
-        return 'False'
-    return 'False'

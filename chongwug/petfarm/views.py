@@ -61,20 +61,6 @@ def manage_pet_farm_picdel_view(request):
     data['farmpics'] = adapters.manage_get_del_farmpics(request)
     return render_to_response('petfarm/tpl/manage_pet_farm_picdel.html',data,context_instance=RequestContext(request))
 
-def manage_nestofpet_picdel_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(PETFARM_ROOT)
-    data = adapters.manage_home_data_get(request)
-    
-    page_data = adapters.manage_get_del_petpics(request)
-    if 'pets' not in page_data and page_data != 'False':
-        return render_to_response('petfarm/tpl/manage_nestofpet_picdel_ajax.html',page_data)
-    if page_data != 'False':
-        page_data['manager'] = data['manager']
-        return render_to_response('petfarm/tpl/manage_nestofpet_picdel.html',page_data,context_instance=RequestContext(request))
-    else:
-        return render_to_response('petfarm/tpl/manage_nestofpet_picdel.html',data,context_instance=RequestContext(request))
-
 def manage_nestofpet_mod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(PETFARM_ROOT)
