@@ -32,7 +32,9 @@
         <label for="pet-color" class="col-sm-2 control-label">宠物主要颜色<span class="warn">*</span>：</label>
         <div class="col-sm-4">
             <select name="color" id="pet-color" class="form-control required">
-                <option value="{{ pet_one.color }}">{{ pet_one.color }}</option>
+            	{% for pet_color in pet_colors %}
+                <option value="{{ pet_color }}" {% if pet_color == pet_one.color %}selected{% endif %}>{{ pet_color }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>
@@ -40,7 +42,9 @@
         <label for="pet-age" class="col-sm-2 control-label">宠物月龄<span class="warn">*</span>：</label>
         <div class="col-sm-4">
           <select class="form-control required" id="pet-age" name="age">
-              <option value="{{ pet_one.age }}">{{ pet_one.age }}</option>
+          	  {% for pet_age in pet_ages %}
+              <option value="{{ pet_age }}" {% if pet_age == pet_one.age %}selected{% endif %}>{{ pet_age }}</option>
+              {% endfor %}
           </select>
         </div>
     </div>
@@ -48,7 +52,9 @@
         <label for="pet-type" class="col-sm-2 control-label">宠物品种<span class="warn">*</span>：</label>
         <div class="col-sm-4">
           <select class="form-control required" id="pet-type" name="type">
-              <option value="{{ pet_one.type }}">{{ pet_one.type }}</option>
+          	  {% for pet_type in pet_types %}
+              <option value="{{ pet_type }}" {% if pet_type == pet_one.type %}selected{% endif %}>{{ pet_type }}</option>
+              {% endfor %}
           </select>
         </div>
     </div>
@@ -62,10 +68,12 @@
         <label class="col-sm-2 control-label">本窝图片：</label>
         <div class="col-sm-8">
             <ul class="preview-img">
+            	{% for petimg in petimgs %}
                 <li>
-                    <p class="img-tit"><a href="javascript:" data-id="xxx" class="del-img">删除</a></p>
-                    <img src="" style="width: 100%;"/>
+                    <p class="img-tit"><a href="javascript:" data-id="petimg.id" class="del-img">删除</a></p>
+                    <img src="{{ petimg.img_url }}" style="width: 100%;"/>
                 </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
@@ -87,7 +95,9 @@
                 <label for="pet-color{{pet.id}}" class="col-sm-4 control-label">宠物颜色<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
                   <select class="form-control required" id="pet-color{{pet.id}}" name="color{{pet.id}}">
-                      <option value="{{ pet.color }}">{{ pet.color }}</option>
+                  	  {% for pet_color in pet_colors %}
+	                  <option value="{{ pet_color }}" {% if pet_color == pet.color %}selected{% endif %}>{{ pet_color }}</option>
+	                  {% endfor %}
                   </select>
                 </div>
             </div>
@@ -95,7 +105,9 @@
                 <label for="pet-age{{pet.id}}" class="col-sm-4 control-label">疫苗情况<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
                   <select class="form-control required number" id="pet-age{{pet.id}}" name="age{{pet.id}}">
-                      <option value="{{ pet.epidemic_period }}">{{ pet.epidemic_period }}</option>
+                  	  {% for epidemic in epidemics %}
+	                  <option value="{{ epidemic }}" {% if epidemic == pet.epidemic_period %}selected{% endif %}>{{ epidemic }}</option>
+	                  {% endfor %}
                   </select>
                 </div>
             </div>
@@ -109,7 +121,8 @@
                 <label for="pet-sex{{pet.id}}" class="col-sm-4 control-label">宠物性别<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
                   <select class="form-control required" id="pet-sex{{pet.id}}" name="sex{{pet.id}}">
-                      <option value="{{ pet.sex }}">{{ pet.sex }}</option>
+                      <option value="公" {% if '公' == pet.sex %}selected{% endif %}>公</option>
+                      <option value="母" {% if '母' == pet.sex %}selected{% endif %}>母</option>
                   </select>
                 </div>
             </div>
@@ -117,7 +130,8 @@
                 <label for="pet-sale{{pet.id}}" class="col-sm-4 control-label">宠物销售情况<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
                   <select class="form-control required" id="pet-sale{{pet.id}}" name="type{{pet.id}}">
-                      <option value="{{ pet.sale_out }}">{{ pet.sale_out }}</option>
+                  	  <option value="True" {% if pet.sale_out %}selected{% endif %}>售罄</option>
+                      <option value="False" {% if not pet.sale_out %}selected{% endif %}>在售</option>
                   </select>
                 </div>
             </div>

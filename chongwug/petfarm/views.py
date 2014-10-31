@@ -87,14 +87,11 @@ def manage_nestofpet_mod_view(request):
         if "id" in request.GET:
             if 'del' in request.GET:
                 return HttpResponse(adapters.manage_del_pet(request))
-            data['pet_one'] = adapters.manage_get_pets(request)
+            data = adapters.manage_nestofpet_mod_info(request)
             return render_to_response('petfarm/tpl/manage_nestofpet_mod_ajax.html',data)
-    pets = adapters.manage_get_pets(request)
-    data['pets'] = pets
-    if pets.count() > 0:
-        data['pet_one'] = pets[0]
-        data['pet_set'] = pets[0].pet_set.all()
-    return render_to_response('petfarm/tpl/manage_nestofpet_mod.html',data,context_instance=RequestContext(request))
+    pagedata = adapters.manage_nestofpet_mod_info(request)
+    pagedata['manager'] = data['manager']
+    return render_to_response('petfarm/tpl/manage_nestofpet_mod.html',pagedata,context_instance=RequestContext(request))
 
 def manage_nestofpet_add_view(request):
     if adapters.manage_authentication(request) == False:

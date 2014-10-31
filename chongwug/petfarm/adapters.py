@@ -4,7 +4,7 @@ from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
-from chongwug.config import __regular_expression_idnum,__regular_expression_email,__regular_expression_chinatelnum,__directs,__addresses,__petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petcolors,__petages
+from chongwug.config import __epidemics,__regular_expression_email,__regular_expression_chinatelnum,__directs,__addresses,__petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petcolors,__petages
 from chongwug.commom import __errorcode__
 from upyun import UpYun
 from django.contrib import auth
@@ -380,7 +380,28 @@ def manage_del_pet(request):
     except:
         return __errorcode__(1)
     return __errorcode__(0)
-        
+
+def manage_nestofpet_mod_info(request):
+    data = {}
+    pets = manage_get_pets(request)
+    data['pets'] = pets
+    if not isinstance(pets, nestofpet) and pets.count() > 0:
+        data['pet_one'] = pets[0]
+        data['pet_set'] = pets[0].pet_set.filter(dele=False)
+        data['pet_types'] = __pettypes
+        data['pet_colors'] = __petcolors
+        data['pet_ages'] = __petages
+        data['epidemics'] = __epidemics
+        data['petimgs'] = pets[0].nestofpet_img_set.filter(dele=False)
+    else:
+        data['pet_one'] = pets
+        data['pet_set'] = pets.pet_set.filter(dele=False)
+        data['pet_types'] = __pettypes
+        data['pet_colors'] = __petcolors
+        data['pet_ages'] = __petages
+        data['epidemics'] = __epidemics
+        data['petimgs'] = pets.nestofpet_img_set.filter(dele=False)
+    return data
 def manage_nestofpet_mod(request):
     try:
         curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
