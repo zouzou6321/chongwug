@@ -374,9 +374,12 @@ def manage_get_pets(request):
 def manage_del_pet(request):
     try:
         curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
-        new_nestofpet = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,sale_out=False)
-        new_nestofpet.dele = True
-        new_nestofpet.save()
+        cur_nestofpet = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,sale_out=False)
+        cur_nestofpet.dele = True
+        cur_nestofpet.save()
+        for cur_pet in cur_nestofpet.pet_set.all():
+            cur_pet.dele = True
+            cur_pet.save()
     except:
         return __errorcode__(1)
     return __errorcode__(0)
@@ -405,15 +408,27 @@ def manage_nestofpet_mod_info(request):
 def manage_nestofpet_mod(request):
     try:
         curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
-        new_nestofpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
-        new_nestofpet.color = request.POST['color']
-        new_nestofpet.age = string.atoi(request.POST['age'])
-        new_nestofpet.type = request.POST['type']
-        new_nestofpet.short_desc = request.POST['short_desc']
-        new_nestofpet.save()
+        curnestofpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
+        curnestofpet.color = request.POST['color']
+        curnestofpet.age = string.atoi(request.POST['age'])
+        curnestofpet.type = request.POST['type']
+        curnestofpet.short_desc = request.POST['short_desc']
+        curnestofpet.save()
+        petids = request.POST.getlist('pets[]')
+        for petid in petids:
+            curpet = curnestofpet.pet_set.get(id=string.atoi(petid))
+            curpet.color = request.POST['color%s' % petid]
+            curpet.epidemic_period = request.POST['epidemic%s' % petid]
+            curpet.price = request.POST['price%s' % petid]
+            curpet.sex = request.POST['sex%s' % petid]
+            if request.POST['sale%s' % petid] == 'True':
+                curpet.sale_out = 1
+            else:
+                curpet.sale_out = 0
+            curpet.save()
     except NameError:
-        return False
-    return True
+        return __errorcode__(2)
+    return __errorcode__(0)
 
 def manage_get_del_farmpics(request):
     try:

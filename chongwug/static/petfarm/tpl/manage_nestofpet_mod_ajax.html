@@ -73,7 +73,7 @@
             </div>
             <div class="form-group">
                 <label for="pet-age{{pet.id}}" class="col-sm-4 control-label">疫苗情况<span class="warn">*</span>：</label>
-                <div class="col-sm-8">epidemics
+                <div class="col-sm-8">
                   <select class="form-control required number" id="pet-age{{pet.id}}" name="age{{pet.id}}">
                   	  {% for epidemic in epidemics %}
 	                  <option value="{{ epidemic }}" {% if epidemic == pet.epidemic_period %}selected{% endif %}>{{ epidemic }}</option>

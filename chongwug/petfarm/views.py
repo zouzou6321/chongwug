@@ -81,8 +81,7 @@ def manage_nestofpet_mod_view(request):
     
     data = adapters.manage_home_data_get(request)
     if request.method == 'POST':
-        if adapters.manage_nestofpet_mod(request) == False:
-            return HttpResponse(__errorcode__(2))
+        return HttpResponse(adapters.manage_nestofpet_mod(request))
     else:
         if "id" in request.GET:
             if 'del' in request.GET:
