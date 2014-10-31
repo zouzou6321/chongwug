@@ -70,27 +70,17 @@
             <ul class="preview-img">
             	{% for petimg in petimgs %}
                 <li>
-                    <p class="img-tit"><a href="javascript:" data-id="petimg.id" class="del-img">删除</a></p>
+                    <p class="img-tit"><a href="javascript:" data-id="{{ petimg.id }}" class="del-img">删除</a></p>
                     <img src="{{ petimg.img_url }}" style="width: 100%;"/>
                 </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-4">
-          <button type="button" class="btn btn-primary form-control btn-submit" data-loading-text="提交中...">提交</button>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-4">
-          <button type="button" class="btn btn-primary form-control" onclick="deletepet();">删除</button>
-        </div>
-    </div>
     <div class="row">
         {% for pet in pet_set %}
         <div class="pet col-xs-4">
-            <p>宠物{{ pet.id }}</p>
+            <p>宠物{{ forloop.counter }}</p>
             <div class="form-group">
                 <label for="pet-color{{pet.id}}" class="col-sm-4 control-label">宠物颜色<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
@@ -129,7 +119,7 @@
             <div class="form-group">
                 <label for="pet-sale{{pet.id}}" class="col-sm-4 control-label">宠物销售情况<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
-                  <select class="form-control required" id="pet-sale{{pet.id}}" name="type{{pet.id}}">
+                  <select class="form-control required" id="pet-sale{{pet.id}}" name="sale{{pet.id}}">
                   	  <option value="True" {% if pet.sale_out %}selected{% endif %}>售罄</option>
                       <option value="False" {% if not pet.sale_out %}selected{% endif %}>在售</option>
                   </select>
@@ -138,6 +128,14 @@
         </div>
         {% endfor %}
     </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-primary form-control btn-submit" data-loading-text="提交中...">确认修改</button>
+        </div>
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-primary form-control" onclick="deletepet();">删除本窝</button>
+        </div>
     </div>
 </form>
 {% else %}
