@@ -6,7 +6,7 @@
  * 2.根据 select 选项动态变化截图区大小的功能已经弃用，需删除相关代码
  */
 
-(function($){
+;(function($){
     $.fn.uploadAndCrop = function(options){
         var settings =  $.extend({
             //custom options
