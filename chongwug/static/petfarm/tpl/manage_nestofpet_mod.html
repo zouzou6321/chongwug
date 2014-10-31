@@ -3,6 +3,11 @@
 
 {% load assets_petfarm %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ 'lib/uploadify/uploadify.css'|assets_petfarm }}"/>
+<link rel="stylesheet" href="{{ 'lib/jcrop/jquery.Jcrop.css'|assets_petfarm }}"/>
+{% endblock %}
+
 {% block main %}
 <style>
     .pet{
@@ -66,17 +71,25 @@
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">本窝图片：</label>
-        <div class="col-sm-8">
-            <p class="warn">注：主图不能删除</p>
+{#    TODO:// fill in size#}
+        <div class="col-sm-8 uploadAndCrop" data-size="[750, 500]">
+            <div id="js-uploadify"></div>
+            <p class="warn">（移动鼠标到图片上可进行删除，请至少保留一张图片！）</p>
             <ul class="preview-img">
             	{% for petimg in petimgs %}
-                <li>
-                    {% if petimg.img_usefor == 'buy_main' %}
-                	<p class="img-tit">主图</p>
-                	{% else %}
-                    <p class="img-tit"><a href="javascript:" data-id="{{ petimg.id }}" class="del-img">删除</a></p>
-                    {% endif %}
-                    <img src="{{ petimg.img_url }}" style="width: 100%;"/>
+                <li data-id="{{ petimg.id }}">
+                    <div class="img-box">
+                        <img src="{{ petimg.img_url }}" style="width: 100%;"/>
+                    </div>
+                    <p class="img-tit">
+                        <label>
+                            <input type="radio" value="{{ petimg.img_url }}" name="img-main" class="img-main-input"
+                                    {% if petimg.img_usefor == 'buy_main' %}checked{% endif %}> 设为主图
+                        </label>
+                    </p>
+                    <div class="img-edit">
+                        <i class="glyphicon glyphicon-remove img-del" style="width: 100%;"></i>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
@@ -144,26 +157,19 @@
     </div>
   </div>
 </form>
+
+{% include 'petfarm/tpl/components/uploadAndCrop.html' %}
+
 {% else %}
 暂时还没有数据，请先录入数据
 {% endif %}
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ 'lib/uploadify/jquery.uploadify.js'|assets_petfarm }}"></script>
+<script src="{{ 'lib/jcrop/jquery.Jcrop.js'|assets_petfarm }}"></script>
+<script src="{{ 'js/crop.js'|assets_petfarm }}"></script>
 <script>
-
-function select()
-{
-	$.get("./?id=" + $("#pet_id").val(), function(recive){
-		if(recive != 'False'){
-			$("#form_main").empty();
-			$("#form_main").append(recive);
-		}
-		else{
-			alert('数据异常');
-		}
-	});
-}
 
 function deletepet(){
 	$.getJSON("?id=" + $("#pet_id").val() + "&del=1",function(recive){
@@ -184,11 +190,33 @@ $form.on('submit', function(e){
     e.preventDefault();
 });
 
-$form.on('click', '.del-img', function(){
-    var $this = $(this);
-    delArr.push($this.data('id'));
-    $this.closest('li').remove();
-});
+function select()
+{
+	$.get("./?id=" + $("#pet_id").val(), function(recive){
+		if(recive != 'False'){
+			$("#form_main").html(recive);
+            delArr = [];
+            initCrop();
+		}
+		else{
+			alert('数据异常');
+		}
+	});
+}
+
+//调用截图
+function initCrop(){
+    $('.uploadAndCrop').uploadAndCrop({
+        uploader: '/petfarm/nestofpet/picadd/upload/',
+        swf: '/static/lib/dist/uploadify/uploadify.swf',
+        beforeDel: function(id){
+            id && delArr.push(id);
+        }
+    });
+}
+
+initCrop();
+
 
 function getIdArr(){
     var arr = [];
