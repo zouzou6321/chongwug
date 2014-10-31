@@ -71,7 +71,11 @@
             <ul class="preview-img">
             	{% for petimg in petimgs %}
                 <li>
+                    {% if petimg.img_usefor == 'buy_main' %}
+                	<p class="img-tit">主图</p>
+                	{% else %}
                     <p class="img-tit"><a href="javascript:" data-id="{{ petimg.id }}" class="del-img">删除</a></p>
+                    {% endif %}
                     <img src="{{ petimg.img_url }}" style="width: 100%;"/>
                 </li>
                 {% endfor %}
