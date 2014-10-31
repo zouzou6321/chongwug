@@ -81,6 +81,7 @@
         {% for pet in pet_set %}
         <div class="pet col-xs-4">
             <p>宠物{{ forloop.counter }}</p>
+            <input type="hidden" value="{{ pet.id }}" class="pet-ids"/>
             <div class="form-group">
                 <label for="pet-color{{pet.id}}" class="col-sm-4 control-label">宠物颜色<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
@@ -94,7 +95,7 @@
             <div class="form-group">
                 <label for="pet-age{{pet.id}}" class="col-sm-4 control-label">疫苗情况<span class="warn">*</span>：</label>
                 <div class="col-sm-8">
-                  <select class="form-control required number" id="pet-age{{pet.id}}" name="age{{pet.id}}">
+                  <select class="form-control required number" id="pet-age{{pet.id}}" name="epidemic{{pet.id}}">
                   	  {% for epidemic in epidemics %}
 	                  <option value="{{ epidemic }}" {% if epidemic == pet.epidemic_period %}selected{% endif %}>{{ epidemic }}</option>
 	                  {% endfor %}
@@ -172,7 +173,8 @@ function deletepet(){
 }
 
 var $form = $('form'),
-    delArr = [];
+    delArr = [],
+    $ids = $form.find('.pet-ids');
 
 $form.on('submit', function(e){
     e.preventDefault();
@@ -184,6 +186,15 @@ $form.on('click', '.del-img', function(){
     $this.closest('li').remove();
 });
 
+function getIdArr(){
+    var arr = [];
+    $.each($ids, function(){
+        arr.push($(this).val());
+    });
+
+    return arr;
+}
+
 $form.on('click', '.btn-submit', function(){
     var data = {}, $this = $(this);
 
@@ -192,6 +203,7 @@ $form.on('click', '.btn-submit', function(){
     });
 
     data.del = delArr;
+    data.pets = getIdArr();
 
     $this.button('loading');
 
