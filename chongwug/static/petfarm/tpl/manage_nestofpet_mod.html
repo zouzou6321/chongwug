@@ -174,8 +174,7 @@ function deletepet(){
 }
 
 var $form = $('form'),
-    delArr = [],
-    $ids = $form.find('.pet-ids');
+    delArr = [];
 
 $form.on('submit', function(e){
     e.preventDefault();
@@ -189,7 +188,7 @@ $form.on('click', '.del-img', function(){
 
 function getIdArr(){
     var arr = [];
-    $.each($ids, function(){
+    $.each($form.find('.pet-ids'), function(){
         arr.push($(this).val());
     });
 
