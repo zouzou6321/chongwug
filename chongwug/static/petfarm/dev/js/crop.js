@@ -8,14 +8,14 @@
 
 (function($){
     $.fn.uploadAndCrop = function(options){
-        var defaultOptions = {
+        var settings =  $.extend({
             //custom options
             previewItemTpl: '#preview-item-tpl',
             uploadBtn: '#js-uploadify',
             cropModal: '#js-crop-modal',
             imgCount: '#js-img-count',
             previewSize: [120, 80],
-            
+
             //uploadify options
             buttonText: '浏览并上传',
             buttonClass: 'btn-info',
@@ -23,23 +23,21 @@
             fileSizeLimit: '4MB',
             multi: false,
             formData: {}
-        };
-
-        options = $.extend(defaultOptions, options);
+        }, options);
 
         return this.each(function(){
             var $container = $(this),
-                
+
                 //if the preview ul is present, just use it, or append it to cintainer
                 $previewUl = $container.find('.preview-img'),
                 $previewUl = $previewUl.length ? $previewUl : $('<ul>').addClass('preview-img').appendTo($container),
-                
-                previewItemTpl = $(options.previewItemTpl).html(),
-                $uploadBtn = $container.find(options.uploadBtn),
-                $cropModal = $(options.cropModal),
-                $imgCount= $(options.imgCount),
-                previewSize = options.previewSize,
-                
+
+                previewItemTpl = $(settings.previewItemTpl).html(),
+                $uploadBtn = $container.find(settings.uploadBtn),
+                $cropModal = $(settings.cropModal),
+                $imgCount= $(settings.imgCount),
+                previewSize = settings.previewSize,
+
                 $currCropImg = $('<img>').appendTo($cropModal.find('.modal-body')),
                 $currPreviewImg = null,
                 $currPreviewLi = null,
@@ -161,7 +159,7 @@
             $previewUl.on('click', '.img-del', function(){
                 var $li = $(this).closest('li');
 
-                options.beforeDel && options.beforeDel($li.data('id'));
+                settings.beforeDel && settings.beforeDel($li.data('id'));
 
                 $li.remove();
 
@@ -175,14 +173,14 @@
 
             //init upload button
             $uploadBtn.uploadify({
-                buttonText: options.buttonText,
-                buttonClass: options.buttonClass,
-                swf: options.swf,
-                uploader: options.uploader,
-                fileTypeExts: options.fileTypeExts,
-                fileSizeLimit: options.fileSizeLimit,
-                multi: options.multi,
-                formData: options.formData,
+                buttonText: settings.buttonText,
+                buttonClass: settings.buttonClass,
+                swf: settings.swf,
+                uploader: settings.uploader,
+                fileTypeExts: settings.fileTypeExts,
+                fileSizeLimit: settings.fileSizeLimit,
+                multi: settings.multi,
+                formData: settings.formData,
                 onUploadError: function(file, errorCode, errorMsg, errorString){
                     if(errorMsg == "500"){
                         errorString = '服务器内部错误';
