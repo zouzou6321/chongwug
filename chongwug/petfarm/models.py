@@ -59,6 +59,7 @@ class nestofpet(models.Model):
 
 class pet(models.Model):
     nestofpet = models.ForeignKey(nestofpet)
+    #详情页展示的序号:A/B/C/D...
     index = models.TextField()
     color = models.TextField()
     epidemic_period = models.TextField()
