@@ -25,7 +25,7 @@ class petinfo(models.Model):
     englishname = models.TextField()
     sex = models.TextField()
     color = models.TextField()
-    birthdate = models.TimeField()
+    birthdate = models.DateField()
     #宠物主人
     petmaster = models.ForeignKey(personinfo,blank=True, null=True,related_name='petmaster')
     #宠物繁殖者
