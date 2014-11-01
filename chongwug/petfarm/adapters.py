@@ -368,7 +368,7 @@ def manage_picupload(photo,width,height):
         photo.name = file+'.jpg'
         url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
         name = settings.STATIC_ROOT+url
-        img.save(name,'jpeg',quality=85)
+        img.save(name,'jpeg',quality=75)
         monitor = tmppic_monitor(fname=name)
         monitor.save()
     data = {'url':'/static'+url,"width":str(w),"height":str(h)}
