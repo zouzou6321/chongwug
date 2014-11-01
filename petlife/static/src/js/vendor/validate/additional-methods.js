@@ -612,7 +612,7 @@ $.validator.addMethod("pattern", function(value, element, param) {
 		param = new RegExp(param);
 	}
 	return param.test(value);
-}, "Invalid format.");
+}, "格式不正确");
 
 /**
  * Dutch phone numbers have 10 digits (or 11 and start with +31).

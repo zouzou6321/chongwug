@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="setnum">宠物编号:</label>
             <div class="col-sm-7" style="padding-left: 0;">
-                <input class="form-control required" id="setnum" name="setnum" type="text" placeholder="请输入完整的芯片号码"/>
+                <input class="form-control required setnum" id="setnum" name="setnum" type="text" placeholder="请输入完整的芯片号码"/>
             </div>
             <div class="col-sm-2" style="padding: 0;">
                 <button id="putinfo" type="button" class="btn btn-business form-control" style="padding: 0;" data-loading-text="请稍等...">查询/录入</button>
@@ -64,7 +64,9 @@
 		<div class="form-group">
 			<label class="col-sm-3 control-label" for="pettype">犬种:</label>
 			<div class="col-sm-3">
-				<input class="form-control required" id="pettype" name="pettype" type="text"/>
+				<select class="form-control required" id="pettype" name="pettype" >
+                    <option value="111">111</option>
+                </select>
                 <span class="warn">*</span>
 			</div>
             <label class="col-sm-3 control-label" for="petenglish">英文名:</label>
@@ -75,12 +77,17 @@
 		<div class="form-group">
             <label class="col-sm-3 control-label" for="petsex">性别:</label>
 			<div class="col-sm-3">
-				<input class="form-control required" id="petsex" name="petsex" type="text"/>
+				<select class="form-control required" id="petsex" name="petsex">
+                    <option value="公">公</option>
+                    <option value="母">母</option>
+                </select>
                 <span class="warn">*</span>
 			</div>
 			<label class="col-sm-3 control-label" for="petcolor">颜色:</label>
 			<div class="col-sm-3">
-				<input class="form-control required" id="petcolor" name="petcolor" type="text"/>
+				<select class="form-control required" id="petcolor" name="petcolor" >
+                    <option value="111">111</option>
+                </select>
                 <span class="warn">*</span>
 			</div>
 		</div>
@@ -92,15 +99,13 @@
 			</div>
 			<label class="col-sm-3 control-label" for="petmather">母亲身份识别号码:</label>
 			<div class="col-sm-3">
-				<input class="form-control required" id="petmather" name="petmather" type="text"/>
-                <span class="warn">*</span>
+				<input class="form-control" id="petmather" name="petmather" type="text"/>
 			</div>
 		</div>
         <div class="form-group">
             <label class="col-sm-3 control-label" for="petfather">父亲身份识别号码:</label>
 			<div class="col-sm-3">
-				<input class="form-control required" id="petfather" name="petfather" type="text"/>
-                <span class="warn">*</span>
+				<input class="form-control" id="petfather" name="petfather" type="text"/>
 			</div>
         </div>
         <br/>
@@ -138,10 +143,18 @@
         success: function (el) {
             $(el).siblings('.has-error').removeClass('has-error');
             $(el).remove();
+        },
+        rules: {
+            "setnum": {
+                pattern: "^9800141",
+                minlength: 15,
+                maxlength: 15,
+                digits: true
+            }
         }
     };
 
-    var validator1 = $('.business-num-form').validate(config),
+    var validator1 = $('.business-num-form').validate($.extend({}, config, {errorClass: 'error'})),
         validator2 = $('.business-data-form').validate(config);
 
     $('.business-num-form').on('submit', function(){

@@ -27,13 +27,13 @@
                 <div class="form-group">
                     <label for="pet-id-num" class="control-label col-xs-4">芯片号：</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="petidnum" id="pet-id-num" placeholder="请输入完整的芯片号"/>
+                        <input type="text" class="form-control required" name="petidnum" id="pet-id-num" placeholder="请输入完整的芯片号"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="master-id-num" class="control-label col-xs-4">主人身份证号：</label>
                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="masteridnum" id="master-id-num" placeholder="请输入完整的身份证号码"/>
+                        <input type="text" class="form-control required" name="masteridnum" id="master-id-num" placeholder="请输入完整的身份证号码"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,4 +50,26 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function($){
+    var config = {
+        errorClass: 'hide',
+        highlight: function (el) {
+            $(el).addClass('has-error');
+        },
+        success: function (el) {
+            $(el).siblings('.has-error').removeClass('has-error');
+            $(el).remove();
+        }
+    };
+
+    var $form = $('form');
+
+    $form.validate(config);
+
+})(jQuery);
+</script>
 {% endblock %}
