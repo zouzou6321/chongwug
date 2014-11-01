@@ -116,6 +116,8 @@ def farmpic_upload_pre(request):
     return imgw,imgh
 
 def manage_picpreupload(request,_from,_nestofpet=None):
+    if 'img-count' not in request.POST:
+        return __errorcode__(4)
     img_count = string.atoi(request.POST['img-count'])
     if _from == 'farm':
         pictypes = __farmpictypes
@@ -210,7 +212,8 @@ def manage_nestofpet_add(request):
                                 short_desc = request.POST['nest-desc'])
         new_nestofpet.save()
         cur_datetime = datetime.datetime.now()
-        new_nestofpet.update(num = "%d%d%d%d%d" % (farm.id,cur_datetime.year,cur_datetime.month,cur_datetime.day,new_nestofpet.id))
+        new_nestofpet.num = "%d%d%d%d%d" % (farm.id,cur_datetime.year,cur_datetime.month,cur_datetime.day,new_nestofpet.id)
+        new_nestofpet.save()
     except NameError:
         return __errorcode__(2)
     try:
@@ -374,10 +377,11 @@ def manage_del_pet(request):
     try:
         curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
         cur_nestofpet = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,sale_out=False)
-        cur_nestofpet.update(dele=True)
-        for cur_pet in cur_nestofpet.pet_set.all():
-            cur_pet.update(dele=True)
+        cur_nestofpet.dele=True
+        cur_nestofpet.save()
+        cur_nestofpet.pet_set.filter(dele=False).update(dele=True)
     except:
+        traceback.print_exc()
         return __errorcode__(1)
     return __errorcode__(0)
 
@@ -423,14 +427,18 @@ def manage_nestofpet_mod(request):
             else:
                 curpet.sale_out = 0
             curpet.save()
-        print request.POST
+        if 'img-main' not in request.POST:
+            return __errorcode__(22)
+        else:
+            curnestofpet.nestofpet_img_set.filter(img_usefor=__petpictypes[0][1],dele=False).update(img_usefor=__petpictypes[1][1])
+            curnestofpet.nestofpet_img_set.filter(img_url=request.POST['img-main'],dele=False).update(img_usefor=__petpictypes[0][1])
         if 'del[]' in request.POST:
             imgids = request.POST.getlist('del[]')
             for imgid in imgids:
                 curnestofpet.nestofpet_img_set.filter(id=string.atoi(imgid),img_usefor=__petpictypes[1][1]).update(dele=True)
     except NameError:
         return __errorcode__(2)
-    return __errorcode__(0)
+    return manage_picpreupload(request,'pet')
 
 def manage_get_del_farmpics(request):
     try:
@@ -440,7 +448,7 @@ def manage_get_del_farmpics(request):
             farmpics = pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
             for tmp_pic in pics_str:
                 try:
-                    farmpics.get(id=string.atoi(tmp_pic)).update(dele=True)
+                    farmpics.filter(id=string.atoi(tmp_pic)).update(dele=True)
                 except:
                     return 'False'
         return pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
