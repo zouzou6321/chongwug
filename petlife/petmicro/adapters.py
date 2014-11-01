@@ -3,7 +3,8 @@ from petlife.commom import __errorcode__,sendemailbythread
 import models,datetime
 from django.template import Context, Template 
 from petlife.settings import STATIC_ROOT
-import traceback,random,thread
+import traceback,random,thread,re
+from petlife.config import __regular_expression_username,__regular_expression_idnum
 
 def authcheck(req):
     if 'user_id' in req.session:
@@ -76,6 +77,19 @@ def home_unlogin(req):
 
 def home(req):
     if 'pettype' in req.POST:
+        p = re.compile(__regular_expression_username)
+        if not p.match(req.POST['mastername']):
+            return __errorcode__(10)
+        p = re.compile(__regular_expression_username)
+        if not p.match(req.POST['breedername']):
+            return __errorcode__(10)
+        
+        p = re.compile(__regular_expression_idnum)
+        if not p.match(req.POST['masteridnum']):
+            return __errorcode__(17)
+        p = re.compile(__regular_expression_idnum)
+        if not p.match(req.POST['breederidnum']):
+            return __errorcode__(17)
         #录入
         pet = models.petinfo.objects.filter(id_num=req.POST['petidnum'])
         if pet.count() > 0:
