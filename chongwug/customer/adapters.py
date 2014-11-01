@@ -267,6 +267,12 @@ def buy_detail_adapter(re):
     else:
         return False
 
+def buy_attention_sure(req):
+    if 'id' not in req.GET:
+        return __errorcode__(7)
+    nestofpet_attention.objects.filter(id=req.REQUEST.get('id'),attention_type=0,dele=False).update(attention_type=1)
+    return __errorcode__(0)
+    
 def buy_attention_adapter(req):
     #try:
     if ('id' or 'name' or 'phone' or 'location' or 'time' or 'transportation') not in req.POST:
@@ -327,17 +333,19 @@ def buy_attention_adapter(req):
     curuser.location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name']))
     curuser.save()
     
-    curattentions = nestofpet_attention.objects.filter(nestofpet_id=cupet,user=curuser,attention_type=1,dele=False)
+    curattentions = nestofpet_attention.objects.filter(nestofpet_id=cupet,user=curuser,attention_type=0,dele=False)
     if curattentions.count() == 0:
         attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
         attention.save()
+        id = attention.id
     else:
         curattentions[0].appoint_time = appoint_time
         curattentions[0].trans = transport
         curattentions[0].save()
+        id = curattentions[0].id
     
     #sendTemplateSMS(tel,["chongwug","test1"])
-    return __errorcode__(0,{'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
+    return __errorcode__(0,{'id':id,'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
     #except Exception, e:
         #traceback.print_exc()

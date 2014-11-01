@@ -44,7 +44,10 @@ def buy_detail_view(request):
         return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
 
 def buy_attention_view(request):
-    data = adapters.buy_attention_adapter(request)
+    if request.method == 'POST':
+        data = adapters.buy_attention_adapter(request)
+    else:
+        data = adapters.buy_attention_sure(request)
     return HttpResponse(data)
 
 def knowledge_buy_view(request):

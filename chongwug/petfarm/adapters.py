@@ -122,7 +122,7 @@ def manage_picpreupload(request,_from,_nestofpet=None):
     if _from == 'farm':
         pictypes = __farmpictypes
         pic_root = settings.PET_FARM_PIC_ROOT
-    elif _from == 'pet':
+    elif _from == 'pet' or _from == 'petmod':
         pictypes = __petpictypes
         pic_root = settings.PET_PIC_ROOT
     #挨个处理上传的图片数据
@@ -149,11 +149,11 @@ def manage_picpreupload(request,_from,_nestofpet=None):
 
         img_url = pic_crop_save(pic_args,pic_root,imgh,imgw)
         if img_url == 'type error':
-            if _nestofpet:
+            if _from == 'pet':
                 _nestofpet.delete()
             return __errorcode__(4)
         if img_url == 'crop size error':
-            if _nestofpet:
+            if _from == 'pet':
                 _nestofpet.delete()
             return __errorcode__(13)
         
@@ -169,6 +169,16 @@ def manage_picpreupload(request,_from,_nestofpet=None):
                                     img_usefor = imgusefor)
             pet_farm_sql.save()
         elif _from == 'pet':
+            pet_sql = nestofpet_img( nestofpet_id = _nestofpet,
+                                img_url = img_url,
+                                img_with = int(pic_args['x2'] - pic_args['x1']),
+                                img_height = int(pic_args['y2'] - pic_args['y1']),
+                                #img_type:jpg/png/...
+                                img_type = 'jpg',
+                                #图片用途
+                                img_usefor = imgusefor)
+            pet_sql.save()
+        elif _from == 'petmod':
             pet_sql = nestofpet_img( nestofpet_id = _nestofpet,
                                 img_url = img_url,
                                 img_with = int(pic_args['x2'] - pic_args['x1']),
@@ -438,7 +448,7 @@ def manage_nestofpet_mod(request):
                 curnestofpet.nestofpet_img_set.filter(id=string.atoi(imgid),img_usefor=__petpictypes[1][1]).update(dele=True)
     except NameError:
         return __errorcode__(2)
-    return manage_picpreupload(request,'pet')
+    return manage_picpreupload(request,'petmod',curnestofpet)
 
 def manage_get_del_farmpics(request):
     try:
