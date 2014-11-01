@@ -431,6 +431,32 @@
             success: function(data){
                 if(data.status == 0){
                     fillOrderInfo(data);
+                    $orderModal.data('appointmentId', data.id);
+                    $this.tab('show');
+                }else{
+                    alert(data.message);
+                }
+            },
+            complete: function(){
+                $this.button('reset');
+            }
+        });
+    });
+
+    $('#js-order-confirm').on('click', '.next-step', function(e){
+        e.preventDefault();
+
+        var $this = $(this);
+
+        $.ajax({
+            url: '/buy/detail/attention/',
+            data: {id: $orderModal.data('appointmentId')},
+            dataType: 'json',
+            beforeSend: function(){
+                $this.button('loading');
+            },
+            success: function(data){
+                if(data.status == 0){
                     $this.tab('show');
                 }else{
                     alert(data.message);

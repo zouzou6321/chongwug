@@ -1,4 +1,4 @@
-<div class="modal fade" id="js-order-modal" data-backdrop="static">
+<div class="modal fade" id="js-order-modal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -106,7 +106,7 @@
                           <div class="tips col-sm-10 col-sm-offset-1">
                               <i class="icon icon-attention-circled tips-icon"></i>
                               <p class="tips-content text-muted">
-                                  提示：若看犬过程中多位用户同时看中某一只狗狗，则以用户编号顺序决定优先挑选权及购买权
+                                  提示：若看犬过程中多位用户同时看中某一只狗狗，则以用户编号顺序决定优先挑选权及购买权。
                               </p>
                           </div>
                       </div>
@@ -114,7 +114,7 @@
               </div>
               <div class="modal-footer">
                 <a class="btn btn-default prev-step" href="#js-order-info" data-toggle="tab" id="js-to-first">上一步</a>
-                <a class="btn btn-primary next-step" href="#js-order-pay" data-toggle="tab">确认预约</a>
+                <a class="btn btn-primary next-step" href="#js-order-pay" {# data-toggle="tab" #} data-loading-text="正在提交...">确认预约</a>
               </div>
           </div>
           <div class="tab-pane" id="js-order-pay">
@@ -138,25 +138,26 @@
                               <span id="js-wait-time" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
-                      <div class="form-group">
-                          <label class="col-sm-4 text-right text-muted"><span id="js-charge-type" class="js-need-reset" data-text="交通费">交通费</span>：</label>
-                          <div class="col-sm-6">
-                              <span id="js-service-charge" class="js-need-reset" data-text=""></span>
-                          </div>
-                      </div>
+{#                      <div class="form-group">#}
+{#                          <label class="col-sm-4 text-right text-muted"><span id="js-charge-type" class="js-need-reset" data-text="交通费">交通费</span>：</label>#}
+{#                          <div class="col-sm-6">#}
+{#                              <span id="js-service-charge" class="js-need-reset" data-text=""></span>#}
+{#                          </div>#}
+{#                      </div>#}
                       <div class="form-group">
                           <div class="tips col-sm-10 col-sm-offset-1">
                               <i class="icon icon-attention-circled tips-icon"></i>
                               <p class="tips-content text-muted">
-                                  提示：您需要在等待接送时间之前赶到等待接送地点，我们的工作人员会在此等候您，并接送或带领您去预约犬舍挑选、购买狗狗！我们会准时发车，请您务必在指定接送时间前到达指定接送地点集合！购犬成功后，将返还交通费给您！
+                                  提示：您需要在等待接送时间之前赶到等待接送地点，我们的工作人员会在此等候您，并接送或带领您去预约犬舍挑选、购买狗狗！我们会准时发车，请您务必在指定接送时间前到达指定接送地点集合！
+{#                                  购犬成功后，将返还交通费给您！#}
                               </p>
                           </div>
                       </div>
                   </div>
               </div>
               <div class="modal-footer">
-                <a class="btn btn-default prev-step" href="#js-order-confirm" data-toggle="tab">上一步</a>
-                <a class="btn btn-primary next-step">确认付款</a>
+{#                <a class="btn btn-default prev-step" href="#js-order-confirm" data-toggle="tab">上一步</a>#}
+                <a class="btn btn-primary next-step" data-dismiss="modal">确定</a>
               </div>
           </div>
         </div>
