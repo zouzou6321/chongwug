@@ -5,13 +5,19 @@ var gulp = require('gulp'),
     argv = require('minimist')(process.argv.slice(2)),
     merge = require('merge-stream'),
     plugins = require('gulp-load-plugins')(),
+    browserSync = require('browser-sync'),
+    reload = browserSync.reload,
     spritesmith = require('gulp.spritesmith');
 
 var config = require('./config.json'),
     prod = argv.prod === true ? true : false,
     dep = prod ? ['imgs'] : [];
 
-
+gulp.task('sync', function(){
+    browserSync({
+        proxy: 'localhost:8000'
+    });
+});
 
 gulp.task('sprites', function(){
      var spriteData = gulp.src(config.sprites.src).pipe(spritesmith({
@@ -62,6 +68,7 @@ gulp.task('css', dep, function(){
 //            html: ['http://localhost:8000', 'http://localhost:8000/home']
 //        }))
         .pipe(gulp.dest(config.css.dev))
+        .pipe(reload({stream: true}))
         //filter *.map
         .pipe(plugins.if(prod, plugins.filter('**/*.css')))
         .pipe(plugins.if(prod, plugins.replace(reg, function(e){ return map[e]; })))
@@ -128,7 +135,7 @@ gulp.task('default', ['clean'], function(){
 });
 
 
-gulp.task('watch', function(){
+gulp.task('watch', ['sync'], function(){
     plugins.watch({
                     glob: config.imgs.src,
                 emitOnGlob: false,

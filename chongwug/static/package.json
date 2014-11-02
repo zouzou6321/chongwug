@@ -2,6 +2,7 @@
   "name": "chongwug_project",
   "version": "0.0.1",
   "devDependencies": {
+    "browser-sync": "^1.6.2",
     "del": "^0.1.3",
     "findit": "^2.0.0",
     "glob": "^4.0.6",
