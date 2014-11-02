@@ -150,6 +150,14 @@
                 minlength: 15,
                 maxlength: 15,
                 digits: true
+            },
+            "masteridnum": {
+                pattern: /^\d{15}$|^\d{18}$|^\d{17}(\d|X|x)$/,
+                maxlength: 18
+            },
+            "breederidnum": {
+               pattern: /^\d{15}$|^\d{18}$|^\d{17}(\d|X|x)$/,
+               maxlength: 18
             }
         }
     };
