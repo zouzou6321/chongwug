@@ -85,6 +85,7 @@
                 }
             }, {
                 targets: 8,
+                className: 'col-accept',
                 render: function(data, type, full, meta){
                     return type == 'display' ? acceptMap[data] : data;
                 }
@@ -135,6 +136,12 @@
             .title( '修改' )
             .buttons( { "label": "确定", "fn": function () { orderInfoEditor.submit() } } )
             .edit( $(this).closest('tr') );
+    });
+
+    $orderInfoTable.on('click', '.col-accept', function(){
+        orderInfoEditor.inline(this, {
+            buttons: { label: '确定', fn: function () { this.submit(); } }
+        });
     });
 
 }(jQuery));
