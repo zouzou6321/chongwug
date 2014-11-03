@@ -30,7 +30,7 @@ def market_attention_data_view(request):
         return HttpResponseRedirect(MARKET_ROOT)
     if request.session['score'] < 20:
         return render_to_response('404.html')
-    return adapters.OrderListJson.as_view()(request)
+    return HttpResponse(adapters.attention_data(request))
 
 def market_usr_attention_info_view(request):
     if adapters.manage_authentication(request) == False:
