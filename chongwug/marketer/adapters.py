@@ -91,7 +91,7 @@ def attention_data(request):
         data['id'] = attention.id
         data['name'] = attention.user.nickname
         data['tel'] = attention.user.tel
-        data['petfarm'] = attention.user.petfarm.name
+        data['petfarm'] = attention.nestofpet_id.farm.name
         data['pettype'] = attention.nestofpet_id.type
         data['appointtime'] = attention.appoint_time
         data['location'] = attention.user.location
@@ -100,5 +100,4 @@ def attention_data(request):
         data['time'] = attention.time
         datas.append(data)
     pagedata = {'data':datas,'draw':string.atoi(request.REQUEST.get('draw')),'recordsTotal':count}
-    print pagedata
     return json.dumps(pagedata)
