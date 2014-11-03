@@ -115,7 +115,7 @@
         <br/>
 		<div class="form-group">
 			<div class="col-sm-3 col-sm-offset-3">
-                <button type="button" class="btn btn-custom form-control" tabindex="0" id="petsubmit" data-loading-text="请稍等...">保 存</button>
+                <button type="button" class="btn btn-custom form-control" id="petsubmit" data-loading-text="请稍等...">保 存</button>
 			</div>
             <div class="col-sm-4">
                 <span style="color: #d80000;line-height: 34px;"><i class="glyphicon glyphicon-exclamation-sign" style="margin-right: 5px;"></i>提示：带*的内容必须填写!</span>
@@ -142,6 +142,8 @@
         onsubmit: false,
         //errorClass: 'hide',
         onkeyup: false,
+        onfocusout: false,
+        focusCleanup: true,
         highlight: function (el) {
             $(el).parent().addClass('has-error');
         },
@@ -182,9 +184,13 @@
     var validator1 = $('.business-num-form').validate($.extend({}, config, {errorClass: 'error'})),
         validator2 = $('.business-data-form').validate(config);
 
-    $('.business-num-form').on('submit', function(){
+    $('.business-num-form').on('submit', function(e){
         $('#putinfo').click();
-        return false;
+        e.preventDefault();
+    });
+
+    $(".business-data-form").on('submit', function(e){
+        e.preventDefault();
     });
 
     var g_idnum = 0;
@@ -233,18 +239,19 @@
         content: '请检查数据填写是否正确！',
         animation: false,
         placement: 'right',
-        trigger: 'manual focus',
+        trigger: 'manual',
         template: '<div class="popover"><div class="arrow"></div><div class="popover-content popover-error"></div></div>'
     });
 
     $("#petsubmit").click(function(){
+        console.log('submit')
+        $("#petsubmit").popover('hide');
+
         validator2.form();
         if(validator2.numberOfInvalids()){
             $("#petsubmit").popover('show');
-            return;
+            return false;
         }
-
-        $("#petsubmit").popover('hide');
 
         var $this = $(this),
             arr = $('#js-data-form').serializeArray(),
