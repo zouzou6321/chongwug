@@ -39,11 +39,11 @@
             <ul class="nav nav-sidebar">
                 {% if manager.permission_score < 20 %}
 				{% else %}
-				<li><a href="/market/attention/">预约订单</a></li>
-                <li><a href="/market/processed/">已受理订单</a></li>
-                <li><a href="/market/untreated/">未受理订单</a></li>
-                <li><a href="/market/fail/">预约失败订单</a></li>
-				<li><a href="/market/nestofpet/">宠物数据信息</a></li>
+				<li {% if page == 'attention' %}class="active"{% endif %}><a href="/market/attention/">预约订单</a></li>
+                <li {% if page == 'processed' %}class="active"{% endif %}><a href="/market/processed/">已受理订单</a></li>
+                <li {% if page == 'untreated' %}class="active"{% endif %}><a href="/market/untreated/">未受理订单</a></li>
+                <li {% if page == 'fail' %}class="active"{% endif %}><a href="/market/fail/">预约失败订单</a></li>
+				<li {% if page == 'nestofpet' %}class="active"{% endif %}><a href="/market/nestofpet/">宠物数据信息</a></li>
 				{% endif %}
             </ul>
         </div>

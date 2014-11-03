@@ -38,6 +38,7 @@ def market_usr_attention_info_view(request):
     if request.session['score'] < 20:
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
+    data['page'] = 'attention'
     return render_to_response('market/tpl/market_attentions.html',data)
 
 def market_usr_processed_info_view(request):
@@ -46,6 +47,7 @@ def market_usr_processed_info_view(request):
     if request.session['score'] < 20:
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
+    data['page'] = 'processed'
     return render_to_response('market/tpl/market_processed.html',data)
 
 def market_usr_untreated_info_view(request):
@@ -54,6 +56,7 @@ def market_usr_untreated_info_view(request):
     if request.session['score'] < 20:
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
+    data['page'] = 'untreated'
     return render_to_response('market/tpl/market_untreated.html',data)
 
 def market_usr_fail_info_view(request):
@@ -62,6 +65,7 @@ def market_usr_fail_info_view(request):
     if request.session['score'] < 20:
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
+    data['page'] = 'fail'
     return render_to_response('market/tpl/market_fail.html',data)
 
 @csrf_exempt
@@ -82,4 +86,5 @@ def market_nestofpet_info_view(request):
         return HttpResponse(adapters.market_nestofpet_sale_set(request))
     data = adapters.manage_home_data_get(request)
     data['infos'] = adapters.market_nestofpet_info_get(request)
+    data['page'] = 'nestofpet'
     return render_to_response('market/tpl/market_nestofpet_info.html',data)
