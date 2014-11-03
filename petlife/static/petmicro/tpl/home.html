@@ -65,7 +65,9 @@
 			<label class="col-sm-3 control-label" for="pettype">犬种:</label>
 			<div class="col-sm-3">
 				<select class="form-control required" id="pettype" name="pettype" >
-                    <option value="111">111</option>
+					{% for type in types %}
+                    <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
                 </select>
                 <span class="warn">*</span>
 			</div>
@@ -86,7 +88,9 @@
 			<label class="col-sm-3 control-label" for="petcolor">颜色:</label>
 			<div class="col-sm-3">
 				<select class="form-control required" id="petcolor" name="petcolor" >
-                    <option value="111">111</option>
+					{% for color in colors %}
+                    <option value="{{ color }}">{{ color }}</option>
+                    {% endfor %}
                 </select>
                 <span class="warn">*</span>
 			</div>
