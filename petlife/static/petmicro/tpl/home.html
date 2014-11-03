@@ -265,6 +265,9 @@
                     }else{
                         alert(data.message);
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert(errorThrown);
                 }
             });
     });
