@@ -52,6 +52,16 @@
 ;(function($){
     var $orderInfoTable = $('#js-order-info-table'),
         filter = 'all',
+        acceptMap = {
+            '1': '已预约',
+            '2': '已受理',
+            '3': '未受理',
+            '4': '预约失败'
+        },
+        transMap = {
+            'lift': '接送',
+            'drive': '自驾'
+        },
         orderInfoTable = $orderInfoTable.DataTable({
             serverSide: true,
             processing: true,
@@ -62,32 +72,61 @@
                 }
             },
             ordering: false,
+            searching: false,
+            lengthChange: false,
             bAutoWidth: false,
             language: {
                 url: "{{ 'lib/datatables/zh-CN.json'|assets_market }}"
             }
-{#            ,columns: [#}
-{#                {data: ''},#}
-{#                {data: ''},#}
-{#                {data: ''},#}
-{#                {data: ''},#}
-{#                {data: ''},#}
-{#                {data: ''},#}
-{#                {data: ''},#}
-{#                {data: ''},#}
-{#                {data: ''},#}
-{#                {#}
-{#                    data: null,#}
-{#                    defaultContent: '<a href="javascript:" class="btn-edit"><i class="glyphicon glyphicon-pencil"></i></a>'#}
-{#                }#}
-{#            ]#}
+            ,columnDefs: [{
+                targets: 7,
+                render: function(data, type, full, meta){
+                    return type == 'display' ? transMap[data] : data;
+                }
+            }, {
+                targets: 8,
+                render: function(data, type, full, meta){
+                    return type == 'display' ? acceptMap[data] : data;
+                }
+            }]
+            ,columns: [
+                {data: 'id'},
+                {data: 'name'},
+                {data: 'tel'},
+                {data: 'petfarm'},
+                {data: 'pettype'},
+                {data: 'appointtime'},
+                {data: 'location'},
+                {data: 'trans'},
+                {data: 'accept'},
+                {data: 'time'},
+                {
+                    data: null,
+                    defaultContent: '<a href="javascript:" class="btn-edit"><i class="glyphicon glyphicon-pencil"></i></a>'
+                }
+            ]
         });
 
     var orderInfoEditor = new $.fn.dataTable.Editor({
-        ajax: '',
+        ajax: '/market/attention/mod/',
         table: "#js-order-info-table",
         fields: [{
-            name: ''
+            name: 'accept',
+            label: '是否受理',
+            type: 'select',
+            ipOpts: [{
+                label: acceptMap[1],
+                value: '1'
+            },{
+                label: acceptMap[2],
+                value: '2'
+            },{
+                label: acceptMap[3],
+                value: '3'
+            },{
+                label: acceptMap[4],
+                value: '4'
+            }]
         }]
     });
 
