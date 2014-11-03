@@ -23,10 +23,12 @@ def __errorcode__(errornum,otherdata = None):
         return json.dumps(otherdata)
     return json.dumps({"status":__errorcode[errornum][0],"message":__errorcode[errornum][2]})
 
-def sendSMS(request):
-    content_stream = urllib2.urlopen('http://api.cnsms.cn/?ac=send&uid=用户账号&pwd=MD5位32密码&mobile=号码&content=内容&encode=utf8') 
+def sendSMS(telnum,SMScontent):
+    content_stream = urllib.urlopen('http://api.cnsms.cn/?ac=send&uid=106869&pwd=4da6bfc8811f85d9d10b59690e31f6fc&mobile=%s&content=%s&encode=utf8' % (telnum, SMScontent)) 
     content = content_stream.read()
+    print content
     if content != '100':
+        print content
         return content
     return True
 

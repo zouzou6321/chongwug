@@ -58,8 +58,32 @@ def market_nestofpet_sale_set(request):
     return "DATA ERROR"
 
 def market_attention_mod(request):
-    attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['id']),dele=False)
-    attention.attention_type = request.POST['data[accept]']
+    filter = request.REQUEST.get('filter')
+    attention = False
+    if filter == 'appoint':
+        attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['id']), dele=False,attention_type=1)
+        if request.POST['data[accept]'] == '2':
+            attention.attention_type = 2
+        elif request.POST['data[accept]'] == '3':
+            attention.attention_type = 3
+    elif filter == 'processed':
+        attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['id']), dele=False,attention_type=2)
+        if request.POST['data[accept]'] == '5':
+            attention.attention_type = 5
+        elif request.POST['data[accept]'] == '3':
+            attention.attention_type = 3
+        elif request.POST['data[name]'] == '4':
+            attention.attention_type = 4
+    elif filter == 'untreated':
+        attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['id']), dele=False,attention_type=3)
+        if request.POST['data[accept]'] == '4':
+            attention.attention_type = 4
+        elif request.POST['data[accept]'] == '2':
+            attention.attention_type = 2
+            
+    if not attention:
+        fieldErrors = [{'name':'filter','status':'can not find this'}]
+        return json.dumps({'fieldErrors': fieldErrors})
     attention.save()
     data = {}
     data['id'] = attention.id
@@ -81,7 +105,7 @@ def attention_data(request):
     start = request.REQUEST.get('start')
     length = request.REQUEST.get('length')
     datas = []
-    if filter == 'all':
+    if filter == 'appoint':
         attentions = nestofpet_attention.objects.filter(dele=False,attention_type=1).order_by('id')
     elif filter == 'processed':
         attentions = nestofpet_attention.objects.filter(dele=False,attention_type=2).order_by('id')
@@ -89,6 +113,8 @@ def attention_data(request):
         attentions = nestofpet_attention.objects.filter(dele=False,attention_type=3).order_by('id')
     elif filter == 'fail':
         attentions = nestofpet_attention.objects.filter(dele=False,attention_type=4).order_by('id')
+    elif filter == 'success':
+        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=5).order_by('id')
     count = attentions.count()
     attentions = attentions[start:length]
     for attention in attentions:

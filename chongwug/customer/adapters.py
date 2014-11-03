@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from chongwug.config import __petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re,json
-from chongwug.commom import __errorcode__
+from chongwug.commom import __errorcode__,sendSMS
 from django.contrib.auth.models import User
 from django.contrib import auth
 import traceback
@@ -343,8 +343,10 @@ def buy_attention_adapter(req):
         curattentions[0].trans = transport
         curattentions[0].save()
         id = curattentions[0].id
-    
-    #sendTemplateSMS(tel,["chongwug","test1"])
+    try:
+        sendSMS(tel,"test1")
+    except:
+        traceback.print_exc()
     return __errorcode__(0,{'id':id,'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
     #except Exception, e:
