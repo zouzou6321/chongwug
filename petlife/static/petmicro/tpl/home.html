@@ -115,7 +115,7 @@
         <br/>
 		<div class="form-group">
 			<div class="col-sm-3 col-sm-offset-3">
-                <button type="button" class="btn btn-custom form-control" id="petsubmit" data-loading-text="请稍等...">保 存</button>
+                <button type="button" class="btn btn-custom form-control" tabindex="0" id="petsubmit" data-loading-text="请稍等...">保 存</button>
 			</div>
             <div class="col-sm-4">
                 <span style="color: #d80000;line-height: 34px;"><i class="glyphicon glyphicon-exclamation-sign" style="margin-right: 5px;"></i>提示：带*的内容必须填写!</span>
@@ -141,11 +141,12 @@
     var config = {
         onsubmit: false,
         //errorClass: 'hide',
+        onkeyup: false,
         highlight: function (el) {
-            $(el).addClass('has-error');
+            $(el).parent().addClass('has-error');
         },
         success: function (el) {
-            $(el).siblings('.has-error').removeClass('has-error');
+            $(el).parent().removeClass('has-error');
             $(el).remove();
         },
         rules: {
@@ -228,11 +229,21 @@
         get_info($("#setnum").val(), $(this));
     });
 
+    $("#petsubmit").popover({
+        content: '请检查数据填写是否正确！',
+        placement: 'right',
+        trigger: 'manual focus',
+        template: '<div class="popover"><div class="arrow"></div><div class="popover-content popover-error"></div></div>'
+    });
+
     $("#petsubmit").click(function(){
         validator2.form();
         if(validator2.numberOfInvalids()){
+            $("#petsubmit").popover('show');
             return;
         }
+
+        $("#petsubmit").popover('hide');
 
         var $this = $(this),
             arr = $('#js-data-form').serializeArray(),

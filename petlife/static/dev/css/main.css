@@ -4981,8 +4981,11 @@ input.form-control {
       padding-left: 0; }
     .business-data .business-wrap .disabled {
       color: #000; }
-    .business-data .business-wrap input.has-error {
-      border-color: #a94442; }
+    .business-data .business-wrap .has-error .error {
+      font-size: 12px;
+      color: #a94442;
+      margin-bottom: 0;
+      font-weight: normal; }
   .business-data .business-data-form .warn {
     color: #d80000;
     position: absolute;
@@ -4998,3 +5001,12 @@ input.form-control {
     position: absolute;
     bottom: 0;
     right: -130px; }
+
+.popover-error {
+  color: #a94442; }
+
+.popover-content {
+  white-space: nowrap; }
+
+body {
+  font-family: 'Microsoft Yahei'; }
