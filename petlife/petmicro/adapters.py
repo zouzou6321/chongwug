@@ -52,7 +52,8 @@ def pwdback(req):
         except:
             return __errorcode__(3)
     try:
-        if (datetime.datetime.now() - dt).seconds < 60 * 60 * 24 and (datetime.datetime.now() - dt).seconds > 0:
+        print (datetime.datetime.now() - dt).days
+        if (datetime.datetime.now() - dt).days < 1:
             return __errorcode__(7)
         if user.verifytimes >= 3:
             return __errorcode__(4)
