@@ -63,6 +63,7 @@ def market_attention_mod(request):
     attention.save()
     data = {}
     data['id'] = attention.id
+    data['DT_RowId'] = attention.id
     data['name'] = attention.user.nickname
     data['tel'] = attention.user.tel
     data['petfarm'] = attention.nestofpet_id.farm.name
@@ -73,7 +74,7 @@ def market_attention_mod(request):
     data['accept'] = attention.attention_type
     data['time'] = attention.time.strftime('%Y-%m-%d %H:%M:%S')
     
-    return data
+    return json.dumps({'row': data})
 
 def attention_data(request):
     filter = request.REQUEST.get('filter')

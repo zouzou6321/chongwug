@@ -40,6 +40,30 @@ def market_usr_attention_info_view(request):
     data = adapters.manage_home_data_get(request)
     return render_to_response('market/tpl/market_attentions.html',data)
 
+def market_usr_processed_info_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MARKET_ROOT)
+    if request.session['score'] < 20:
+        return render_to_response('404.html')
+    data = adapters.manage_home_data_get(request)
+    return render_to_response('market/tpl/market_processed.html',data)
+
+def market_usr_untreated_info_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MARKET_ROOT)
+    if request.session['score'] < 20:
+        return render_to_response('404.html')
+    data = adapters.manage_home_data_get(request)
+    return render_to_response('market/tpl/market_untreated.html',data)
+
+def market_usr_fail_info_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MARKET_ROOT)
+    if request.session['score'] < 20:
+        return render_to_response('404.html')
+    data = adapters.manage_home_data_get(request)
+    return render_to_response('market/tpl/market_fail.html',data)
+
 @csrf_exempt
 def market_usr_attention_mod_view(request):
     if adapters.manage_authentication(request) == False:
