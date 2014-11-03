@@ -93,11 +93,11 @@ def attention_data(request):
         data['tel'] = attention.user.tel
         data['petfarm'] = attention.nestofpet_id.farm.name
         data['pettype'] = attention.nestofpet_id.type
-        data['appointtime'] = attention.appoint_time
+        data['appointtime'] = attention.appoint_time.strftime('%Y-%m-%d %H:%M:%S')
         data['location'] = attention.user.location
         data['trans'] = attention.trans
         data['accept'] = attention.attention_type
-        data['time'] = attention.time
+        data['time'] = attention.time.strftime('%Y-%m-%d %H:%M:%S')
         datas.append(data)
     pagedata = {'data':datas,'draw':string.atoi(request.REQUEST.get('draw')),'recordsTotal':count}
     return json.dumps(pagedata)

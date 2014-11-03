@@ -5,7 +5,7 @@ Created on 2014年10月15日
 @author: hhy
 '''
 from chongwug.config import __errorcode
-import json,traceback
+import json,traceback,urllib,urllib2
 from django.utils.log import AdminEmailHandler
 from django.core.mail  import  send_mail
 from chongwug.settings import EMAIL_HOST_USER,ADMINS
@@ -22,6 +22,13 @@ def __errorcode__(errornum,otherdata = None):
         otherdata['message'] = __errorcode[errornum][2]
         return json.dumps(otherdata)
     return json.dumps({"status":__errorcode[errornum][0],"message":__errorcode[errornum][2]})
+
+def sendSMS(request):
+    content_stream = urllib2.urlopen('http://api.cnsms.cn/?ac=send&uid=用户账号&pwd=MD5位32密码&mobile=号码&content=内容&encode=utf8') 
+    content = content_stream.read()
+    if content != '100':
+        return content
+    return True
 
 class myAdminEmailHandler(AdminEmailHandler):
     def emit(self, record):
