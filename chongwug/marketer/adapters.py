@@ -58,16 +58,20 @@ def market_nestofpet_sale_set(request):
     return "DATA ERROR"
 
 def market_attention_mod(request):
-    attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['data[0]']),dele=False)
-    attention.user.nickname = request.POST['data[1]']
-    attention.user.tel = request.POST['data[2]']
-    attention.attention_type = request.POST['data[4]']
-    if request.POST['data[6]'] == 'true':
-        attention.dele = True
+    attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['id']),dele=False)
+    attention.attention_type = request.POST['data[accept]']
     attention.save()
-    data = u'''{"row": {"0":"%s","1":"%s","2":"%s","3":"%s","4":"%s","5":"%s","6":"%s"}}'''\
-     % (attention.id, attention.user.nickname, attention.user.tel, attention.nestofpet_id.farm.name + \
-        attention.nestofpet_id.type, attention.attention_type, attention.time, request.POST['data[6]'])
+    data = {}
+    data['id'] = attention.id
+    data['name'] = attention.user.nickname
+    data['tel'] = attention.user.tel
+    data['petfarm'] = attention.nestofpet_id.farm.name
+    data['pettype'] = attention.nestofpet_id.type
+    data['appointtime'] = attention.appoint_time.strftime('%Y-%m-%d %H:%M:%S')
+    data['location'] = attention.user.location
+    data['trans'] = attention.trans
+    data['accept'] = attention.attention_type
+    data['time'] = attention.time.strftime('%Y-%m-%d %H:%M:%S')
     
     return data
 
