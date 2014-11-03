@@ -21,24 +21,8 @@
             <th>交通方式</th>
             <th>是否受理</th>
             <th>订单提交时间</th>
-            <th>操作</th>
         </tr>
     </thead>
-    <tfoot>
-        <tr>
-            <th>编号</th>
-            <th>姓名</th>
-            <th>电话</th>
-            <th>犬舍</th>
-            <th>犬种</th>
-            <th>预约时间</th>
-            <th>预约地点</th>
-            <th>交通方式</th>
-            <th>是否受理</th>
-            <th>订单提交时间</th>
-            <th>操作</th>
-        </tr>
-    </tfoot>
     <tbody></tbody>
 </table>
 
@@ -56,7 +40,8 @@
             '1': '已预约',
             '2': '已受理',
             '3': '未受理',
-            '4': '预约失败'
+            '4': '预约失败',
+            '5': '已完成'
         },
         transMap = {
             'lift': '接送',
@@ -100,49 +85,9 @@
                 {data: 'location'},
                 {data: 'trans'},
                 {data: 'accept'},
-                {data: 'time'},
-                {
-                    data: null,
-                    defaultContent: '<a href="javascript:" class="btn-edit"><i class="glyphicon glyphicon-pencil"></i></a>'
-                }
+                {data: 'time'}
             ]
         });
-
-    var orderInfoEditor = new $.fn.dataTable.Editor({
-        ajax: '/market/attention/mod/',
-        table: "#js-order-info-table",
-        fields: [{
-            name: 'accept',
-            label: '是否受理',
-            type: 'select',
-            ipOpts: [{
-                label: acceptMap[1],
-                value: '1'
-            },{
-                label: acceptMap[2],
-                value: '2'
-            },{
-                label: acceptMap[3],
-                value: '3'
-            },{
-                label: acceptMap[4],
-                value: '4'
-            }]
-        }]
-    });
-
-    $orderInfoTable.on('click', '.btn-edit', function(){
-        orderInfoEditor
-            .title( '修改' )
-            .buttons( { "label": "确定", "fn": function () { orderInfoEditor.submit() } } )
-            .edit( $(this).closest('tr') );
-    });
-
-    $orderInfoTable.on('click', '.col-accept', function(){
-        orderInfoEditor.inline(this, {
-            buttons: { label: '确定', fn: function () { this.submit(); } }
-        });
-    });
 
 }(jQuery));
 

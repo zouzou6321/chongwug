@@ -56,7 +56,8 @@
             '1': '已预约',
             '2': '已受理',
             '3': '未受理',
-            '4': '预约失败'
+            '4': '预约失败',
+            '5': '已完成'
         },
         transMap = {
             'lift': '接送',
@@ -116,14 +117,8 @@
             label: '是否受理',
             type: 'select',
             ipOpts: [{
-                label: acceptMap[1],
-                value: '1'
-            },{
                 label: acceptMap[2],
                 value: '2'
-            },{
-                label: acceptMap[3],
-                value: '3'
             },{
                 label: acceptMap[4],
                 value: '4'
@@ -134,13 +129,17 @@
     $orderInfoTable.on('click', '.btn-edit', function(){
         orderInfoEditor
             .title( '修改' )
-            .buttons( { "label": "确定", "fn": function () { orderInfoEditor.submit() } } )
+            .buttons( { "label": "确定", "fn": function () { orderInfoEditor.submit(null, null, function(data){
+                    data.filter = filter;
+                }) } } )
             .edit( $(this).closest('tr') );
     });
 
     $orderInfoTable.on('click', '.col-accept', function(){
         orderInfoEditor.inline(this, {
-            buttons: { label: '确定', fn: function () { this.submit(); } }
+            buttons: { label: '确定', fn: function () { this.submit(null, null, function(data){
+                data.filter = filter;
+            }); } }
         });
     });
 
