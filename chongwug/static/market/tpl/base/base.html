@@ -16,7 +16,7 @@
 {% block navbar %}
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/market/">市场管理系统</a>
+      <a class="navbar-brand" href="/market/"><span>宠物购</span>市场管理系统</a>
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -39,7 +39,10 @@
             <ul class="nav nav-sidebar">
                 {% if manager.permission_score < 20 %}
 				{% else %}
-				<li><a href="/market/attention/">客户预约信息</a></li>
+				<li><a href="/market/attention/">预约订单</a></li>
+                <li><a href="/market/attention/">已受理订单</a></li>
+                <li><a href="/market/attention/">未受理订单</a></li>
+                <li><a href="/market/attention/">预约失败订单</a></li>
 				<li><a href="/market/nestofpet/">宠物数据信息</a></li>
 				{% endif %}
             </ul>

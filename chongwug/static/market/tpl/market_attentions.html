@@ -6,14 +6,7 @@
 <link rel="stylesheet" href="{{ 'css/dataTables.editor.css'|assets_market }}"/>
 {% endblock %}
 {% block main %}
-<h1 class="page-header">欢迎使用！</h1>
-
-<div class="btn-group filter-group" style="margin-bottom: 30px;">
-    <button type="button" class="btn btn-default active" data-value="all">预约订单</button>
-    <button type="button" class="btn btn-default" data-value="processed">已受理订单</button>
-    <button type="button" class="btn btn-default" data-value="untreated">未受理订单</button>
-    <button type="button" class="btn btn-default" data-value="fail">预约失败订单</button>
-</div>
+<h1 class="page-header">预约订单</h1>
 
 <table class="table table-striped" id="js-order-info-table">
     <thead>
@@ -46,59 +39,10 @@
             <th>操作</th>
         </tr>
     </tfoot>
-    <tbody>
-        <tr>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td><a href="javascript:" class="btn-edit"><i class="glyphicon glyphicon-pencil"></i></a></td>
-        </tr>
-        <tr>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td>111</td>
-            <td><a href="javascript:" class="btn-edit"><i class="glyphicon glyphicon-pencil"></i></a></td>
-        </tr>
-    </tbody>
+    <tbody></tbody>
 </table>
 
 
-
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-        <thead>
-          <tr>
-          <th></th>
-          <th>用户编号</th>
-          <th>用户名</th>
-          <th>联系电话</th>
-          <th>宠物信息</th>
-          <th>关注类型（0为预定）</th>
-          <th>关注时间</th>
-          <th>是否删除</th>
-          </tr>
-        </thead>
-</table>
 {% endblock %}
 {% block scripts %}
 <script src="{{ 'lib/datatables/jquery.datatables.js'|assets_market }}"></script>
@@ -107,8 +51,6 @@
 <script>
 ;(function($){
     var $orderInfoTable = $('#js-order-info-table'),
-        $filterGroup = $('.filter-group'),
-        $filterBtns = $filterGroup.find('.btn'),
         filter = 'all',
         orderInfoTable = $orderInfoTable.DataTable({
             serverSide: true,
@@ -141,16 +83,6 @@
 {#            ]#}
         });
 
-    $filterGroup.on('click', 'button', function(){
-        var $this = $(this);
-
-        if(!$this.hasClass('active')){
-            $filterBtns.not($this.addClass('active')).removeClass('active');
-            filter = $this.data('value');
-            orderInfoTable.ajax.reload();
-        }
-    });
-
     var orderInfoEditor = new $.fn.dataTable.Editor({
         ajax: '',
         table: "#js-order-info-table",
@@ -168,78 +100,5 @@
 
 }(jQuery));
 
-
-</script>
-
-
-
-
-<script type="text/javascript">
-var editor; // use a global for the submit and return data rendering in the examples
-
-$(document).ready(function() {
-    editor = new $.fn.dataTable.Editor( {
-        ajax: "/market/attention/mod/",
-        table: "#example",
-        fields: [ {
-                label: "id:",
-                name: 0
-            },{
-                label: "user:",
-                name: 1
-            }, {
-                label: "tel:",
-                name: 2
-            },{
-                label: "nestofpet_id:",
-                name: 3
-            }, {
-                label: "attention_type:",
-                name: 4
-            }, {
-                label: "time:",
-                name: 5
-            }, {
-                label: "dele:",
-                name: 6
-            }
-        ]
-    } );
- 
-    // Activate an inline edit on click of a table cell
-    $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        editor.inline( this );
-    } );
- 
-    $('#example').DataTable( {
-        dom: "Tfrtip",
-        ajax: "/market/attention/data/",
-        columns: [
-        { data: null, defaultContent: '', orderable: false },
-            { data: 0 },
-            { data: 1 },
-            { data: 2 },
-            { data: 3 },
-            { data: 4 },
-            { data: 5 },
-            { data: 6 }
-        ],
-        order: [ 1, 'asc' ],
-        tableTools: {
-            sRowSelect: "os",
-            sRowSelector: 'td:first-child',
-            aButtons: [
-                { sExtends: "editor_edit",   editor: editor }
-            ]
-        }
-    } );
-    
-    $("#example tbody").dblclick(function(e){
-		var aa = 0;
-		var e = jQuery.Event("keydown");//模拟一个键盘事件 
-		e.keyCode = 13;//keyCode=13是回车 
-		$(".DTE_Inline").parent().parent().trigger(e);//模拟页码框按下回车 
- 	});
-} );
 </script>
 {% endblock %}

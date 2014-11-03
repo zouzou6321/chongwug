@@ -1,0 +1,11 @@
+.navbar-inverse{
+  background-color: $main-bg;
+}
+
+.navbar-brand{
+  font-weight: bold;
+
+  span{
+    color: $font-highlight;
+  }
+}

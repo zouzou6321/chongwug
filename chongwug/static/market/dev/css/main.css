@@ -1,3 +1,14 @@
+body {
+  font-family: '\9ed1\4f53', 'Microsoft Yahei'; }
+
+.navbar-inverse {
+  background-color: #282c37; }
+
+.navbar-brand {
+  font-weight: bold; }
+  .navbar-brand span {
+    color: #f4cb20; }
+
 /*login*/
 .login-form {
   max-width: 300px;
@@ -14,19 +25,30 @@
       z-index: 1000;
       display: block;
       padding: 20px;
+      padding-top: 0;
       overflow-x: hidden;
       overflow-y: auto;
-      background-color: #f5f5f5;
+      background-color: #282c37;
       border-right: 1px solid #eee; } }
 
 .nav-sidebar {
   margin-right: -20px;
   margin-bottom: 20px;
-  margin-left: -20px; }
+  margin-left: -20px;
+  text-align: center; }
+  .nav-sidebar li > a {
+    color: #ccc;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px; }
+    .nav-sidebar li > a:hover {
+      color: #000;
+      background-color: #f9e181; }
 
 .nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
   color: #fff;
-  background-color: #428bca; }
+  background-color: #f4cb20; }
 
 .main {
   padding: 20px; }
