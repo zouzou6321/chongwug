@@ -46,7 +46,7 @@
     <div class="form-group">
         <input type="hidden" name="img-count" id="js-img-count" value="0"/>
         <label class="col-sm-3 control-label">本窝图片（至少一张）<span class="warn">*</span>：</label>
-        <div class="col-sm-4 uploadAndCrop" data-size="[{{ types.0.width }}, {{ types.0.height }}]">
+        <div class="col-sm-9 uploadAndCrop" data-size="[{{ types.0.width }}, {{ types.0.height }}]">
             <div id="js-uploadify"></div>
             <ul class="preview-img">
             	{% for farmimg in farmimgs %}
@@ -154,10 +154,15 @@ CKEDITOR.instances['farm-desc'].on('change', function() {
 <script src="{{ 'lib/jcrop/jquery.Jcrop.js'|assets_petfarm }}"></script>
 <script src="{{ 'js/crop.js'|assets_petfarm }}"></script>
 <script>
+
+var delArr = [];
 //调用截图
 $('.uploadAndCrop').uploadAndCrop({
 	uploader: '/petfarm/petfarm/picadd/upload/',
-    swf: '/static/lib/dist/uploadify/uploadify.swf'
+    swf: '/static/lib/dist/uploadify/uploadify.swf',
+    beforeDel: function(id){
+        id && delArr.push(id);
+    }
 });
 
 
@@ -239,6 +244,8 @@ $('.uploadAndCrop').uploadAndCrop({
         $.each($form.serializeArray(), function(i, e){
             data[e.name] = e.value;
         });
+
+        data.del = delArr;
 
         $.ajax({
             url: './',
