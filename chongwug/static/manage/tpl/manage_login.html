@@ -5,7 +5,8 @@
 		<title>内容编辑</title>
 	</head>
 	<body>
-		<form name="adminlogoin" method="get" action="./?editor=true">
+		<form name="adminlogoin" method="post" action="./?editor=true">
+            {% csrf_token %}
 			<p>用户名: <input type="text" name="username" /></p>
  			<p>密  码: <input type="password" name="userpassd" /></p>
  			<input type="hidden" name="editor" value="true" /></p>
