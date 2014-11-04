@@ -393,24 +393,3 @@ def get_knowledge_buy(request):
         return {'idlist':idlist}
     else:
         return dog123.objects.all()
-
-from yuntongxun.CCPRestSDK import REST
-
-accountSid= '8a48b55148fe48600149087c6c3105ae';
-
-accountToken= '4ac0351d9f384db99983e8d4683f24af';
-
-appId='aaf98f8948fe3e9c0149087cae01056e';
-
-serverIP='sandboxapp.cloopen.com';
-
-serverPort='8883';
-
-softVersion='2013-12-26';
-
-def sendTemplateSMS(to,datas,tempId=1):
-    rest = REST(serverIP,serverPort,softVersion)
-    rest.setAccount(accountSid,accountToken)
-    rest.setAppId(appId)
-    
-    rest.sendTemplateSMS(to,datas,tempId)
