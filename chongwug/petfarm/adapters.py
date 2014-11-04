@@ -419,7 +419,7 @@ def manage_nestofpet_mod_info(request):
         data['pet_ages'] = __petages
         data['epidemics'] = __epidemics
         data['petimgs'] = pets[0].nestofpet_img_set.filter(dele=False)
-    else:
+    elif isinstance(pets, nestofpet):
         data['pet_one'] = pets
         data['pet_set'] = pets.pet_set.filter(dele=False)
         data['pet_types'] = __pettypes
@@ -461,18 +461,3 @@ def manage_nestofpet_mod(request):
     except NameError:
         return __errorcode__(2)
     return manage_picpreupload(request,'petmod',curnestofpet)
-
-def manage_get_del_farmpics(request):
-    try:
-        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
-        if request.method == 'POST':
-            pics_str = request.REQUEST.getlist('farmpics')
-            farmpics = pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
-            for tmp_pic in pics_str:
-                try:
-                    farmpics.filter(id=string.atoi(tmp_pic)).update(dele=True)
-                except:
-                    return 'False'
-        return pet_farm_img.objects.filter(pet_farm_id=curuser.petfarm,dele=False)
-    except:
-        return 'False'
