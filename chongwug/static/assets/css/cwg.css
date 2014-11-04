@@ -5231,6 +5231,82 @@ img.mfp-img {
   padding: 90px 0;
   font-family: '\9ed1\4f53'; }
 
+.supplies .supplies-banner {
+  height: 571px;
+  background: #ffdf5e url(../imgs/supplies-banner.png) top center no-repeat; }
+.supplies .supplies-title {
+  width: 301px;
+  height: 61px;
+  margin: 0 auto 45px auto; }
+.supplies .supplies-necessary {
+  background-color: #ffdf5e; }
+  .supplies .supplies-necessary .supplies-title {
+    background: url(../imgs/necessary.png); }
+.supplies .supplies-daily {
+  background-color: #f24646; }
+  .supplies .supplies-daily .supplies-title {
+    background: url(../imgs/daily.png); }
+.supplies .supplies-medical {
+  background-color: #f24646; }
+  .supplies .supplies-medical .supplies-title {
+    background: url(../imgs/medical.png); }
+.supplies .supplies-clean {
+  background-color: #f24646; }
+  .supplies .supplies-clean .supplies-title {
+    background: url(../imgs/clean.png); }
+.supplies .supplies-container {
+  width: 1102px;
+  padding-top: 45px;
+  padding-bottom: 70px;
+  margin-left: auto;
+  margin-right: auto; }
+.supplies .supplies-item {
+  padding: 20px 8px;
+  margin-left: 25px;
+  margin-right: 25px;
+  float: left;
+  width: 238px;
+  overflow: hidden;
+  background: #fff; }
+  .supplies .supplies-item img {
+    height: 222px;
+    width: 222px; }
+  .supplies .supplies-item .media-left {
+    width: 130px;
+    float: left; }
+  .supplies .supplies-item .btn-buy {
+    display: block;
+    width: 75px;
+    height: 68px;
+    background: url(../imgs/feet.png);
+    color: #fff;
+    margin-top: 10px;
+    position: relative; }
+    .supplies .supplies-item .btn-buy:hover {
+      text-decoration: none; }
+  .supplies .supplies-item .btn-text {
+    position: absolute;
+    left: 18px;
+    bottom: 3px; }
+  .supplies .supplies-item .media {
+    margin-top: 10px; }
+  .supplies .supplies-item .media-body {
+    float: right; }
+  .supplies .supplies-item .goods-title {
+    color: #994e0d;
+    display: inline-block;
+    height: 40px;
+    overflow: hidden; }
+  .supplies .supplies-item .price-title {
+    color: #994e0d;
+    font-weight: bolder; }
+  .supplies .supplies-item .price-content {
+    color: #fe2a26;
+    font-size: 20px; }
+  .supplies .supplies-item .price-symbol {
+    font-size: 18px;
+    padding: 0 2px 0 5px; }
+
 /**
  * Style trumps; helper and brand classes
 */
@@ -5244,6 +5320,14 @@ img.mfp-img {
 .padding-sm {
   padding-left: 10px;
   padding-right: 10px; }
+
+.margin-lg {
+  margin-left: -25px;
+  margin-right: -25px; }
+
+.padding-lg {
+  padding-left: 25px;
+  padding-right: 25px; }
 
 .margin-none {
   margin: 0; }

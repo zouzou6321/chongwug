@@ -1,0 +1,130 @@
+.supplies{
+  $bg1: #ffdf5e;
+  $bg2: #f24646;
+  $font-color: #994e0d;
+
+  .supplies-banner{
+    height: 571px;
+    background: $bg1 url(../imgs/supplies-banner.png) top center no-repeat;
+  }
+
+  .supplies-title{
+    width: 301px;
+    height: 61px;
+    margin: 0 auto 45px auto;
+  }
+
+  .supplies-necessary{
+    background-color: $bg1;
+
+    .supplies-title{
+      background: url(../imgs/necessary.png);
+    }
+  }
+
+  .supplies-daily{
+    background-color: $bg2;
+
+    .supplies-title{
+      background: url(../imgs/daily.png);
+    }
+  }
+
+  .supplies-medical{
+    background-color: $bg2;
+
+    .supplies-title{
+      background: url(../imgs/medical.png);
+    }
+  }
+
+  .supplies-clean{
+    background-color: $bg2;
+
+    .supplies-title{
+      background: url(../imgs/clean.png);
+    }
+  }
+
+  .supplies-container{
+    width: 1102px;
+    padding-top: 45px;
+    padding-bottom: 70px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .supplies-item{
+    padding: 20px 8px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+    float: left;
+
+    width: 238px;
+    overflow: hidden;
+    background: #fff;
+
+    img{
+      height: 222px;
+      width: 222px;
+    }
+
+    .media-left{
+      width: 130px;
+      float: left;
+    }
+
+    .btn-buy{
+      display: block;
+      width: 75px;
+      height: 68px;
+      background: url(../imgs/feet.png);
+      color: #fff;
+
+      margin-top: 10px;
+
+      &:hover{
+        text-decoration: none;
+      }
+
+      position: relative;
+    }
+
+    .btn-text{
+      position: absolute;
+      left: 18px;
+      bottom: 3px;
+    }
+
+    .media{
+      margin-top: 10px;
+    }
+
+    .media-body{
+      float: right;
+    }
+
+    .goods-title{
+      color: $font-color;
+      display: inline-block;
+      height: 40px;
+      overflow: hidden;
+    }
+
+    .price-title{
+      color: $font-color;
+      font-weight: bolder;
+    }
+
+    .price-content{
+      color: #fe2a26;
+      font-size: 20px;
+    }
+
+    .price-symbol{
+      font-size: 18px;
+      padding: 0 2px 0 5px;
+    }
+  }
+}
