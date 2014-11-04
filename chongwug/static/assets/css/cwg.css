@@ -4094,8 +4094,7 @@ Copyright (c) 2014 Daniel Eden
     overflow: hidden;
     margin-top: 0; }
     .buy-main .dog-desc h4 a {
-      color: #333;
-      font-weight: bold; }
+      color: #333; }
 
 .knowledge-buy .pet-wap {
   height: 110px;
@@ -4835,14 +4834,15 @@ img.mfp-img {
       padding-right: 0; } }
 
 .cwg-navbar {
-  min-height: 30px; }
+  min-height: 40px; }
   .cwg-navbar .logo-simple {
     display: none; }
   .cwg-navbar .nav a {
+    font-size: 16px;
     color: #d9a300;
     line-height: 1;
-    padding-top: 8px;
-    padding-bottom: 8px; }
+    padding-top: 12px;
+    padding-bottom: 12px; }
     .cwg-navbar .nav a:hover, .cwg-navbar .nav a:focus {
       background-color: #f5f5f5; }
   .cwg-navbar .active a {
@@ -4853,17 +4853,17 @@ img.mfp-img {
   .cwg-navbar .navbar-toggle .icon-bar {
     background: #b38900; }
   .cwg-navbar .cwg-social {
-    margin-top: 3px; }
+    margin-top: 5px; }
     .cwg-navbar .cwg-social .icon {
       display: block;
-      width: 24px;
-      height: 24px;
+      width: 30px;
+      height: 30px;
       background-color: #ffd401;
       color: #fff;
       border-radius: 50%;
       border: 0;
-      font-size: 16px;
-      line-height: 24px;
+      font-size: 20px;
+      line-height: 30px;
       text-align: center; }
     .cwg-navbar .cwg-social li {
       padding: 0 0 0 6px; }
@@ -4878,7 +4878,6 @@ img.mfp-img {
   box-shadow: 0 1px 2px rgba(127, 127, 127, 0.3); }
   .cwg-navbar-sub .nav a {
     line-height: 20px;
-    font-size: 16px;
     padding-top: 15px;
     padding-bottom: 15px;
     color: #fff; }
