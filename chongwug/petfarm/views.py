@@ -40,6 +40,7 @@ def manage_pet_farm_mod_view(request):
     data = adapters.addressHandle(request)
     data['manager'] = adapters.manage_home_data_get(request)['manager']
     data['types'] = adapters.get_farmpic_types()['types']
+    data['farmimgs'] = adapters.get_farmpics(data['manager'])
     return render_to_response('petfarm/tpl/manage_pet_farm_mod.html',data,context_instance=RequestContext(request))
 
 @csrf_exempt

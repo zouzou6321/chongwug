@@ -90,6 +90,8 @@ def get_petpic_types():
         types.append({'type':petpictype[1],'desc':petpictype[2],'width':petpictype[3],'height':petpictype[4]})
     return {'types':types}
 
+def get_farmpics(manager):
+    return manager.petfarm.pet_farm_img_set.filter(dele=False)
 
 def get_farmpic_types():
     types = []
@@ -338,6 +340,16 @@ def manage_pet_farm_mod(request):
         curuser.petfarm.direct = request.POST['direct']
         curuser.petfarm.save()
         curuser.save()
+        if 'img-main' not in request.POST:
+            return __errorcode__(22)
+        else:
+            curuser.petfarm.pet_farm_img_set.filter(img_usefor=__farmpictypes[0][1],dele=False).update(img_usefor=__farmpictypes[1][1])
+            curuser.petfarm.pet_farm_img_set.filter(img_url=request.POST['img-main'],dele=False).update(img_usefor=__farmpictypes[0][1])
+        print request.POST
+        if 'del[]' in request.POST:
+            imgids = request.POST.getlist('del[]')
+            for imgid in imgids:
+                curuser.petfarm.pet_farm_img_set.filter(id=string.atoi(imgid),img_usefor=__petpictypes[1][1]).update(dele=True)
     except NameError:
         return __errorcode__(2)
     return manage_picpreupload(request,'farm')
