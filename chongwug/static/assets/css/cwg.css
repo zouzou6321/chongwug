@@ -5023,7 +5023,7 @@ img.mfp-img {
     outline: 0;
     text-decoration: none; }
   .cwg-social p {
-    margin-bottom: 20px; }
+    margin-bottom: 10px; }
   .cwg-social li {
     float: left;
     padding: 0 20px; }
@@ -5031,20 +5031,22 @@ img.mfp-img {
     display: block;
     color: #fff;
     border-radius: 50%;
-    width: 54px;
-    height: 54px;
-    line-height: 50px;
+    width: 74px;
+    height: 74px;
+    line-height: 70px;
     margin: 0 auto;
     border: 2px solid #daa904;
-    font-size: 34px;
+    font-size: 54px;
     background-color: #ec5342; }
   .cwg-social .cwg-weixin {
-    width: 57px;
+    width: 90px;
     border: 2px solid #daa904; }
+  .cwg-social .weibo-wrap p {
+    margin-bottom: 18px; }
   .cwg-social .footer-logo {
-    padding: 30px 20px 0 0; }
+    padding: 40px 20px 0 0; }
     .cwg-social .footer-logo img {
-      padding-right: 20px;
+      padding-right: 40px;
       border-right: 2px solid #333; }
 
 .container-error {

@@ -110,7 +110,7 @@
   }
 
   p{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   li{
@@ -122,25 +122,29 @@
     display: block;
     color: #fff;
     border-radius: 50%;
-    width: 54px;
-    height: 54px;
-    line-height: 50px;
+    width: 74px;
+    height: 74px;
+    line-height: 70px;
     margin: 0 auto;
     border: 2px solid $copyright-bg-color;
-    font-size: 34px;
+    font-size: 54px;
     background-color: $weibo-bg-color;
   }
 
   .cwg-weixin{
-    width: 57px;
+    width: 90px;
     border: 2px solid $copyright-bg-color;
   }
 
+  .weibo-wrap p{
+    margin-bottom: 18px;
+  }
+
   .footer-logo{
-    padding: 30px 20px 0 0;
+    padding: 40px 20px 0 0;
 
     img{
-      padding-right: 20px;
+      padding-right: 40px;
       border-right: 2px solid #333;
     }
   }
