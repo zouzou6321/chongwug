@@ -23,8 +23,8 @@ def manage_authentication(request):
     return True
 
 def manage_login_check(request):
-    name = request.REQUEST.get('username')
-    passwd = request.REQUEST.get('userpassd')
+    name = request.POST['username']
+    passwd = request.POST['userpassd']
     if supermanager.objects.all().count() == 0:
         passwdhash = make_password(passwd,None)
         num_one = supermanager(name=name,passwd=passwdhash)

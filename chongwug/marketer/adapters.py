@@ -23,8 +23,8 @@ def manage_authentication(request):
     return True
 
 def manage_login_check(request):
-    name = request.REQUEST.get('username')
-    passwd = request.REQUEST.get('userpassd')
+    name = request.POST['username']
+    passwd = request.POST['userpassd']
     request.session['manage_id'] = ''
     try:
         _manage = manage.objects.get(name=name,passwd=passwd)

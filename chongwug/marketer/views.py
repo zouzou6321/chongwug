@@ -2,18 +2,19 @@
 # Create your views here.
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
+from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 import adapters
 MARKET_ROOT='/market/'
 
 def manage_login(request):
-    return render_to_response('market/tpl/manage_login.html')
+    return render_to_response('market/tpl/manage_login.html',{},context_instance=RequestContext(request))
 
 #auth:huhuaiyong
 #date:2014/8/23
 #discription:管理员首页展示
 def manage_home_view(request):
-    if request.method == 'GET' and 'username' in request.GET and 'userpassd'  in request.GET:
+    if request.method == 'POST' and 'username' in request.POST and 'userpassd'  in request.POST:
         if adapters.manage_login_check(request) == True:
             return HttpResponseRedirect(MARKET_ROOT)
     if request.method == 'GET' and 'logout' in request.GET:

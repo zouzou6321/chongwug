@@ -59,8 +59,8 @@ def manage_authentication(request):
     return True
 
 def manage_login_check(request):
-    name = request.REQUEST.get('username')
-    passwd = request.REQUEST.get('userpassd')
+    name = request.POST['username']
+    passwd = request.POST['userpassd']
     user = auth.authenticate(username=name, password=passwd)
     if user is not None and user.is_active:
         # Correct password, and the user is marked "active"
