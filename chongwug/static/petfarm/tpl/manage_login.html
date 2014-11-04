@@ -7,7 +7,8 @@
 {% block container %}
 
 <div class="container">
-    <form action="./?editor=true" name="adminlogoin" method="get" class="login-form">
+    <form action="./?editor=true" name="adminlogoin" method="post" class="login-form">
+        {% csrf_token %}
         <h2 class="form-signin-heading">请登录</h2>
         <div class="form-group">
             <input type="text" name="username" class="form-control required" placeholder="用户名" autofocus autocomplete="off">
