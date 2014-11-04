@@ -452,6 +452,8 @@
 
         var $this = $(this);
 
+        $modal.addClass('loading').modal('show');
+
         $.ajax('./', {
             data: {id: $this.data('id')},
             dataType: 'json'
@@ -472,8 +474,9 @@
                     }
                 }
 
-                $modal.modal('show');
+                $modal.removeClass('loading');
             }else{
+                $modal.modal('hide');
                 alert(data.message);
             }
         });
