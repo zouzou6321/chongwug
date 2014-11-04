@@ -2,6 +2,11 @@
   $bg1: #ffdf5e;
   $bg2: #f24646;
   $font-color: #994e0d;
+  $price-color: #fe2a26;
+  $gutter: 50px;
+  $img: 222px;
+  $padding: 8px;
+  $container: 3 * $gutter + ($img + $padding * 2) * 4;
 
   .supplies-banner{
     height: 571px;
@@ -47,7 +52,7 @@
   }
 
   .supplies-container{
-    width: 1102px;
+    width: $container;
     padding-top: 45px;
     padding-bottom: 70px;
     margin-left: auto;
@@ -56,18 +61,18 @@
 
   .supplies-item{
     padding: 20px 8px;
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-left: $gutter / 2;
+    margin-right: $gutter / 2;
 
     float: left;
 
-    width: 238px;
+    width: $img + $padding * 2;
     overflow: hidden;
     background: #fff;
 
     img{
-      height: 222px;
-      width: 222px;
+      height: $img;
+      width: $img;
     }
 
     .media-left{
@@ -118,7 +123,7 @@
     }
 
     .price-content{
-      color: #fe2a26;
+      color: $price-color;
       font-size: 20px;
     }
 
