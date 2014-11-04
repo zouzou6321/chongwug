@@ -55,13 +55,6 @@ def manage_pet_farm_pic_upload_view(request):
     imgw,imgh = adapters.farmpic_upload_pre(request)
     return HttpResponse(adapters.manage_picupload(photo,imgw,imgh))
 
-def manage_pet_farm_picdel_view(request):
-    if adapters.manage_authentication(request) == False:
-        return HttpResponseRedirect(PETFARM_ROOT)
-    data = adapters.manage_home_data_get(request)
-    data['farmpics'] = adapters.manage_get_del_farmpics(request)
-    return render_to_response('petfarm/tpl/manage_pet_farm_picdel.html',data,context_instance=RequestContext(request))
-
 def manage_nestofpet_mod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(PETFARM_ROOT)
