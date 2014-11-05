@@ -27,7 +27,7 @@
     <tbody></tbody>
 </table>
 
-<div class="modal fade" data-backdrop="static" id="js-modal">
+<div class="modal fade" id="js-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,6 +36,9 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" onsubmit="return false;">
+                    <input name="filter" type="hidden" value="untreated"/>
+                    <input name="action" type="hidden" value="edit"/>
+                    <input name="id" type="hidden" id="id"/>
                     <div class="form-group">
                         <label for="petfarm" class="control-label col-sm-3">犬舍：</label>
                         <div class="col-sm-4">
@@ -55,7 +58,13 @@
                     <div class="form-group">
                         <label for="appointtime" class="control-label col-sm-3">预约时间：</label>
                         <div class="col-sm-6">
-                            <input type="text" name="appointtime" id="appointtime" class="form-control" data-date-format="YYYY-MM-DD HH:mm:ss"/>
+                            <button class="btn btn-select radius-none" type="button" id="js-btn-time">
+                                <span class="select-title" id="js-time" data-text="选择时间">选择时间</span>
+                                <div class="vertical-center">
+                                    <i class="glyphicon glyphicon-calendar select-icon"></i>
+                                </div>
+                            </button>
+                            {% include 'market/tpl/components/time-box.html' %}
                         </div>
                     </div>
                     <div class="form-group">
@@ -63,17 +72,17 @@
                         <div class="col-sm-9 row">
                             <input name="location" type="hidden" id="location"/>
                             <div class="col-sm-4">
-                                <select name="province" class="form-control">
+                                <select name="province" class="form-control" id="farm-province">
                                     <option value="111">111</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
-                                <select name="city" class="form-control">
+                                <select name="city" class="form-control" id="farm-city">
                                     <option value="222">222</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
-                                <select name="district" class="form-control">
+                                <select name="district" class="form-control" id="farm-district">
                                     <option value="333">333</option>
                                 </select>
                             </div>
@@ -83,10 +92,10 @@
                         <label class="control-label col-sm-3">交通方式：</label>
                         <div class="col-sm-4">
                             <label class="radio-inline">
-                              <input type="radio" name="trans" value="drive"> 自驾
+                              <input type="radio" name="trans" value="drive" id="drive"> 自驾
                             </label>
                             <label class="radio-inline">
-                              <input type="radio" name="trans" value="lift"> 接送
+                              <input type="radio" name="trans" value="lift" id="lift"> 接送
                             </label>
                         </div>
                     </div>
@@ -103,7 +112,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-primary btn-submit">确定</button>
             </div>
         </div>
     </div>
@@ -174,35 +183,122 @@
             ]
         });
 
-    var orderInfoEditor = new $.fn.dataTable.Editor({
-        ajax: '/market/attention/mod/',
-        table: "#js-order-info-table",
-        fields: [{
-            name: 'accept',
-            label: '是否受理',
-            type: 'select',
-            ipOpts: [{
-                label: acceptMap[2],
-                value: '2'
-            },{
-                label: acceptMap[4],
-                value: '4'
-            }]
-        }]
+    //时间选择
+    var $btnTime = $('#js-btn-time'),
+        $timeBox = $('#js-time-box'),
+        $time = $('#js-time'),
+        $timeInput = $('#js-time-input');
+
+    $btnTime.on('click', function(){
+        $timeBox.is(':visible') ? $timeBox.trigger('focusout') : $timeBox.show().trigger('focus');
+
     });
 
+    $timeBox.on('click', 'td', function(){
+        var $this = $(this),
+            time = $this.closest('tr').find('th').text(),
+            data = $this.data();
+
+        if($this.hasClass('disabled')){
+            return;
+        }
+
+        $timeBox.find('td').not($this.addClass('active')).removeClass('active');
+
+        var text = '2014-' + data.date + '（'+ data.day +'）' + time;
+        $time.text(text);
+        $timeInput.val('2014-' + data.date + ' ' + time);
+        $timeBox.hide();
+    }).on('focusout', function(){
+        $timeBox.hide();
+    });
+
+    //修改弹窗
     var $modal = $('#js-modal'),
-        $appointTime = $modal.find('#appointtime');
+        $form = $modal.find('form'),
+        $id = $form.find('#id'),
+        $location = $form.find('#location'),
+        trans = {
+            'drive': $form.find('#drive'),
+            'lift': $form.find('#lift')
+        };
 
     $orderInfoTable.on('click', '.btn-edit', function(){
        $modal.modal('show');
-{#        orderInfoEditor#}
-{#            .title( '修改' )#}
-{#            .buttons( { "label": "确定", "fn": function () { orderInfoEditor.submit(null, null, function(data){#}
-{#                    data.filter = filter;#}
-{#                }) } } )#}
-{#            .edit( $(this).closest('tr') );#}
+
+       var data = orderInfoTable.row($(this).closest('tr')).data();
+       initData(data);
+        console.log(data)
+
     });
+
+    function initData(data){
+        $id.val(data.DT_RowId);
+        $time.text(data.appointtime);
+        $timeInput.val(data.appointtime);
+        $location.val(data.location);
+        trans[data.trans].prop('checked', true);
+    }
+
+    $modal.on('click', '.btn-submit', function(){
+        var data = {};
+
+        $.each($form.serializeArray(), function(i, e){
+            data[e.name] = e.value;
+        });
+
+        console.log(data);
+    });
+
+    //地址联动
+    var $province = $form.find('#farm-province'),
+        $city = $form.find('#farm-city'),
+        $district = $form.find('#farm-district'),
+        param = {},
+        map = {
+            'districts': $district,
+            'citys': $city
+        };
+
+    $province.on('change', function(){
+        var data = getSelectedId($province);
+        param.province = data.id;
+        param.range = data.range;
+        delete param.city;
+
+        renderData();
+    });
+
+    $city.on('change', function(){
+        var data = getSelectedId($province);
+        param.city = data.id;
+
+        renderData();
+    });
+
+    function getSelectedId($select){
+        return $select.find('option').filter(':selected').data();
+    }
+
+    function renderData(){
+        $.ajax({
+            url: '/market/attention/select/',
+            data: param,
+            dataType: 'json',
+            success: function(data){
+                console.log(data)
+                for(var i in data){
+                    var options = '';
+
+                    $.each(data[i], function(idx, el){
+                        options += '<option data-id="'+ el.id +'" value="'+ el.name +'">' + el.name + '</option>';
+                    });
+
+                    options && map[i].html(options);
+                }
+            }
+        });
+    }
 
 }(jQuery));
 
