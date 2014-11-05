@@ -1,11 +1,11 @@
 # -*- coding: UTF-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
-from customer.models import nestofpet_attention
+from customer.models import user,nestofpet_attention
 from petfarm.models import pet_farm,nestofpet
 from chongwug.config import __addresses,__appointtime,__appointdays
 from chongwug.commom import __errorcode__
-import string,json
+import string,json,datetime
 '''
 管理员鉴权
 '''
@@ -53,8 +53,9 @@ def market_nestofpet_sale_set(request):
     return "DATA ERROR"
 
 def market_attention_mod(request):
-    filter = request.REQUEST.get('filter')
+    filter = request.POST('filter')
     attention = False
+    print request.GET
     if filter == 'appoint':
         attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['id']), dele=False,attention_type=1)
         if request.POST['data[accept]'] == '2':
@@ -70,12 +71,39 @@ def market_attention_mod(request):
         elif request.POST['data[name]'] == '4':
             attention.attention_type = 4
     elif filter == 'untreated':
+        transport = request.POST['transportation']
+        try:
+            location = json.loads(request.POST['location'])
+            province = __addresses[location['range']]['sublist'][location['province']]
+            city = province['sublist'][location['city']]
+            district = city['sublist'][location['district']]
+            street = district['sublist'][location['street']]
+        except:
+            return __errorcode__(11)
+        try:
+            appoint_time = datetime.datetime.strptime(request.POST['time'], u"%Y-%m-%d %H:%M")
+        except:
+            return __errorcode__(12)
+        petfarm = pet_farm.objects.get(id=string.atoi(request.POST['petfarm']),dele=False)
+        nestpets = petfarm.nestofpet_set.filter(type=request.POST['pettype'],dele=False)
+        if nestpets.count() > 0:
+            nestpet = nestpets[0]
+        else:
+            return __errorcode__(2)
         attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['id']), dele=False,attention_type=3)
+        
+        if nestpet != attention.nestofpet_id:
+            attention.nestofpet_id = nestpet
+            
         if request.POST['data[accept]'] == '4':
             attention.attention_type = 4
         elif request.POST['data[accept]'] == '2':
             attention.attention_type = 2
-            
+        attention.user.location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name']))
+        attention.user.save()
+        
+        attention.appoint_time = appoint_time
+        attention.trans = transport
     if not attention:
         fieldErrors = [{'name':'filter','status':'can not find this'}]
         return json.dumps({'fieldErrors': fieldErrors})
