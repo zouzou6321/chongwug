@@ -52,9 +52,7 @@
                     <div class="form-group">
                         <label for="pettype" class="control-label col-sm-3">犬种：</label>
                         <div class="col-sm-4">
-                            <select name="pettype" id="pettype" class="form-control">
-                                <option value="111">111</option>
-                            </select>
+                            <select name="pettype" id="pettype" class="form-control"></select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -71,23 +69,14 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3">预约地点：</label>
-                        <div class="col-sm-9 row">
-                            <input name="location" type="hidden" id="location"/>
-                            <div class="col-sm-4">
-                                <select name="province" class="form-control" id="farm-province">
-                                    <option value="111">111</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <select name="city" class="form-control" id="farm-city">
-                                    <option value="222">222</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <select name="district" class="form-control" id="farm-district">
-                                    <option value="333">333</option>
-                                </select>
-                            </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-select radius-none" type="button" id="js-btn-location">
+                                <span class="select-title" id="js-location" data-text="选择城市">选择城市</span>
+                                <div class="vertical-center">
+                                    <span class="caret select-icon"></span>
+                                </div>
+                            </button>
+                            {% include 'market/tpl/components/location-box.html' %}
                         </div>
                     </div>
                     <div class="form-group">
@@ -120,12 +109,24 @@
     </div>
 </div>
 
+<script type="text/html" id="location-select-tpl">
+<dl class="clearfix">
+  <dd>
+      {% templatetag openvariable %}each locations as location{% templatetag closevariable %}
+      <a href="javascript:" data-id="{% templatetag openvariable %}location.id{% templatetag closevariable %}">{% templatetag openvariable %}location.name{% templatetag closevariable %}</a>
+      {% templatetag openvariable %}/each{% templatetag closevariable %}
+  </dd>
+</dl>
+</script>
+
 {% endblock %}
 {% block scripts %}
 <script src="{{ 'lib/datatables/jquery.datatables.js'|assets_market }}"></script>
 <script src="{{ 'lib/datatables/datatables.editor.js'|assets_market }}"></script>
+<script src="{{ 'lib/template.js'|assets_market }}"></script>
 <script>
 ;(function($){
+    //render table
     var $orderInfoTable = $('#js-order-info-table'),
         filter = 'untreated',
         acceptMap = {
@@ -185,6 +186,11 @@
             ]
         });
 
+    //select box focus out
+    $('.select-box').on('focusout', function(){
+        $(this).hide();
+    });
+
     //时间选择
     var $btnTime = $('#js-btn-time'),
         $timeBox = $('#js-time-box'),
@@ -193,12 +199,11 @@
 
     $btnTime.on('click', function(){
         $timeBox.is(':visible') ? $timeBox.trigger('focusout') : $timeBox.show().trigger('focus');
-
     });
 
     $timeBox.on('click', 'td', function(){
         var $this = $(this),
-            time = $this.closest('tr').find('th').text(),
+            time = $.trim($this.closest('tr').find('th').text()),
             data = $this.data();
 
         if($this.hasClass('disabled')){
@@ -207,38 +212,179 @@
 
         $timeBox.find('td').not($this.addClass('active')).removeClass('active');
 
-        var text = '2014-' + data.date + '（'+ data.day +'）' + time;
+        var text = data.year + '-' + data.date + '（'+ data.day +'）' + time;
         $time.text(text);
-        $timeInput.val('2014-' + data.date + ' ' + time);
+        $timeInput.val(data.year + '-' + data.date + ' ' + time);
         $timeBox.hide();
-    }).on('focusout', function(){
-        $timeBox.hide();
+    });
+
+    //地址选择
+    var $btnLocation = $('#js-btn-location'),
+        $locationBox = $('#js-location-box'),
+        $location = $('#js-location'),
+        $locationInput = $('#js-location-input'),
+        $province = $locationBox.find('#province'),
+        $city = $locationBox.find('#city'),
+        $toCity = $locationBox.find('#js-to-city'),
+        $district = $locationBox.find('#district'),
+        $toDistrict = $locationBox.find('#js-to-district'),
+        $street = $locationBox.find('#street'),
+        $toStreet = $locationBox.find('#js-to-street'),
+        render = template('location-select-tpl'),
+        param = {},
+        location = [];
+
+    $btnLocation.on('click', function(){
+        $locationBox.is(':visible') ? $locationBox.trigger('focusout') : $locationBox.show().trigger('focus');
+    });
+
+    function renderData(param, $parent, cb){
+        $.ajax({
+            url: '/market/attention/mod/select/',
+            data: param,
+            dataType: 'json',
+            success: function(data){
+{#                if(data.status == 0){#}
+                    $parent.html(render(data));
+                    cb();
+{#                }else{#}
+{#                    alert(data.message);#}
+{#                }#}
+            }
+        });
+    }
+
+    function changeActive($parent, $this){
+        if(!$this.hasClass('active')){
+            var $active = $parent.find('.active');
+            $active.removeClass('active');
+            $this.addClass('active');
+        }
+    }
+
+    $province.on('click', 'a', function(){
+        var $this = $(this);
+
+        changeActive($province, $this);
+
+        location[0] = $this.text();
+
+        param.province = $this.data('id');
+        param.range = $this.closest('dl').find('dt').data('id');
+        delete param.city;
+        delete param.district;
+        delete param.street;
+
+        $district.html('');
+        $street.html('');
+
+        renderData(param, $city, function(){
+           $toCity.tab('show');
+        });
+    });
+
+    $city.on('click', 'a', function(){
+        var $this = $(this);
+
+        changeActive($city, $this);
+
+        location[1] = $this.text();
+
+        param.city = $this.data('id');
+        delete param.district;
+        delete param.street;
+
+        $street.html('');
+
+        renderData(param, $district, function(){
+            $toDistrict.tab('show');
+        });
+    });
+
+    $district.on('click', 'a', function(){
+        var $this = $(this);
+
+        changeActive($district, $this);
+
+        location[2] = $this.text();
+
+        param.district = $this.data('id');
+        delete param.street;
+
+        renderData(param, $street, function(){
+           $toStreet.tab('show');
+        });
+    });
+
+    $street.on('click', 'a', function(){
+        var $this = $(this);
+
+        changeActive($street, $this);
+
+        location[3] = $this.text();
+
+        param.street = $this.data('id');
+
+        var text = location.join('-');
+        $location.text(text);
+        $locationInput.val(JSON.stringify(param));
+        $locationBox.hide();
     });
 
     //修改弹窗
     var $modal = $('#js-modal'),
         $form = $modal.find('form'),
         $id = $form.find('#id'),
-        $location = $form.find('#location'),
+        $petFarm = $form.find('#petfarm'),
+        $petType = $form.find('#pettype'),
         trans = {
             'drive': $form.find('#drive'),
             'lift': $form.find('#lift')
         };
 
+    function initOptions(id, cb){
+        $.ajax({
+            url: '/market/attention/mod/select/',
+            dataType: 'json',
+            data: {petfarm: id},
+            success: function(data){
+                cb(data);
+            }
+        });
+    }
+
+    $petFarm.on('change', function(){
+        var val = $petFarm.val();
+
+        initOptions(val, function(data){
+            console.log(data);
+            var options = '';
+
+            $.each(data, function(idx, el){
+                options += '<option value="'+ el +'">' + el + '</option>'
+            });
+
+            $petType.html(options);
+            $modal.removeClass('loading');
+        });
+    });
+
+
     $orderInfoTable.on('click', '.btn-edit', function(){
-       $modal.modal('show');
+       $modal.addClass('loading').modal('show');
 
        var data = orderInfoTable.row($(this).closest('tr')).data();
        initData(data);
-        console.log(data)
-
     });
 
     function initData(data){
+        $petFarm.find('option').filter(':contains("'+ data.petfarm +'")').prop('selected', true);
+        $petFarm.trigger('change');
+
         $id.val(data.DT_RowId);
         $time.text(data.appointtime);
-        $timeInput.val(data.appointtime);
-        $location.val(data.location);
+        $location.text(data.location);
+
         trans[data.trans].prop('checked', true);
     }
 
@@ -252,55 +398,6 @@
         console.log(data);
     });
 
-    //地址联动
-    var $province = $form.find('#farm-province'),
-        $city = $form.find('#farm-city'),
-        $district = $form.find('#farm-district'),
-        param = {},
-        map = {
-            'districts': $district,
-            'citys': $city
-        };
-
-    $province.on('change', function(){
-        var data = getSelectedId($province);
-        param.province = data.id;
-        param.range = data.range;
-        delete param.city;
-
-        renderData();
-    });
-
-    $city.on('change', function(){
-        var data = getSelectedId($province);
-        param.city = data.id;
-
-        renderData();
-    });
-
-    function getSelectedId($select){
-        return $select.find('option').filter(':selected').data();
-    }
-
-    function renderData(){
-        $.ajax({
-            url: '/market/attention/select/',
-            data: param,
-            dataType: 'json',
-            success: function(data){
-                console.log(data)
-                for(var i in data){
-                    var options = '';
-
-                    $.each(data[i], function(idx, el){
-                        options += '<option data-id="'+ el.id +'" value="'+ el.name +'">' + el.name + '</option>';
-                    });
-
-                    options && map[i].html(options);
-                }
-            }
-        });
-    }
 
 }(jQuery));
 
