@@ -358,6 +358,13 @@
 
         initOptions(val, function(data){
             console.log(data);
+            var options = '';
+
+            $.each(data, function(idx, el){
+                options += '<option value="'+ el +'">' + el + '</option>'
+            });
+
+            $petType.html(options);
             $modal.removeClass('loading');
         });
     });
