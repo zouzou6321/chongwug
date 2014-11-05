@@ -526,9 +526,9 @@
 
         $timeBox.find('td').not($this.addClass('active')).removeClass('active');
 
-        var text = '2014-' + data.date + '（'+ data.day +'）' + time;
+        var text = data.year + '-' + data.date + '（'+ data.day +'）' + time;
         $time.text(text);
-        $('#js-time-input').val('2014-' + data.date + ' ' + time);
+        $('#js-time-input').val( data.year + '-' + data.date + ' ' + time);
         validator.element('#js-time-input');
         $timeBox.hide();
     });
