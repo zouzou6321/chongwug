@@ -148,5 +148,5 @@ def select_change(request):
         arr = []
         for address in addresses['sublist']:
             arr.append({'id': address['index'], 'name': address['name']})
-        return {'locations': arr}
+        return json.dumps({'locations': arr})
     return __errorcode__(1)

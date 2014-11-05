@@ -15,7 +15,7 @@
             <tr>
                 <th>时间</th>
                 {% for appointday in appointdays %}
-                <th data-year="{{ appointday.year }}">{{ appointday.mouth }}-{{ appointday.day }} <br/> {{ appointday.week }}</th>
+                <th>{{ appointday.mouth }}-{{ appointday.day }} <br/> {{ appointday.week }}</th>
                 {% endfor %}
             </tr>
         </thead>
@@ -24,7 +24,7 @@
                 <th>{{ appointtime.time1 }}</th>
                 {% for appointday in appointdays %}
                 {% if appointday.selectable.time1 %}
-                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}">可选</td>
+                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}" data-year="{{ appointday.year }}">可选</td>
                 {% else %}
                 <td class="disabled">&nbsp;</td>
                 {% endif %}
@@ -34,7 +34,7 @@
                 <th>{{ appointtime.time2 }}</th>
                 {% for appointday in appointdays %}
                 {% if appointday.selectable.time1 %}
-                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}">可选</td>
+                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}" data-year="{{ appointday.year }}">可选</td>
                 {% else %}
                 <td class="disabled">&nbsp;</td>
                 {% endif %}
