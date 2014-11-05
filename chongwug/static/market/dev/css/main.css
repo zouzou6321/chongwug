@@ -62,16 +62,11 @@ body {
       padding-right: 40px;
       padding-left: 40px; } }
 
-.modal-loading {
-  position: absolute;
-  display: none;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #fff url(../imgs/loading.gif) center no-repeat; }
-  .loading .modal-loading {
-    display: block; }
+.loading {
+  background: url(../imgs/ajax-loader.gif) center no-repeat; }
+
+.modal.loading .modal-content {
+  display: none; }
 
 .modal-auto-width {
   text-align: center; }
