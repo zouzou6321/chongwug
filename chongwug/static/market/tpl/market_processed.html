@@ -24,24 +24,10 @@
             <th>操作</th>
         </tr>
     </thead>
-    <tfoot>
-        <tr>
-            <th>编号</th>
-            <th>姓名</th>
-            <th>电话</th>
-            <th>犬舍</th>
-            <th>犬种</th>
-            <th>预约时间</th>
-            <th>预约地点</th>
-            <th>交通方式</th>
-            <th>是否受理</th>
-            <th>订单提交时间</th>
-            <th>操作</th>
-        </tr>
-    </tfoot>
     <tbody></tbody>
 </table>
 
+{% csrf_token %}
 
 {% endblock %}
 {% block scripts %}
@@ -129,11 +115,14 @@
         }]
     });
 
+    var csr = $('input[name="csrfmiddlewaretoken"]').val();
+
     $orderInfoTable.on('click', '.btn-edit', function(){
         orderInfoEditor
             .title( '修改' )
             .buttons( { "label": "确定", "fn": function () { orderInfoEditor.submit(null, null, function(data){
                     data.filter = filter;
+                    data.csrfmiddlewaretoken = csr;
                 }) } } )
             .edit( $(this).closest('tr') );
     });
