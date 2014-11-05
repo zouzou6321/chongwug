@@ -47,17 +47,29 @@
 }
 
 .article-modal{
+
+  .modal-open &{
+    overflow-y: hidden;
+  }
+
   .modal-body{
     padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 30px;
 
-    height: 450px;
     overflow-y: auto;
   }
 
   .modal-dialog{
     @media (min-width: $screen-sm) {
-      width: 700px;
+      width: 1020px;
     }
+
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .modal-content{
+    border-radius: 0;
   }
 }

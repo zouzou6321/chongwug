@@ -4184,14 +4184,21 @@ Copyright (c) 2014 Daniel Eden
     left: 0;
     bottom: 0; }
 
+.modal-open .article-modal {
+  overflow-y: hidden; }
 .article-modal .modal-body {
   padding-left: 50px;
   padding-right: 50px;
-  height: 450px;
+  padding-bottom: 30px;
   overflow-y: auto; }
-@media (min-width: 768px) {
-  .article-modal .modal-dialog {
-    width: 700px; } }
+.article-modal .modal-dialog {
+  margin-top: 0;
+  margin-bottom: 0; }
+  @media (min-width: 768px) {
+    .article-modal .modal-dialog {
+      width: 1020px; } }
+.article-modal .modal-content {
+  border-radius: 0; }
 
 .detail-main {
   padding-top: 20px;

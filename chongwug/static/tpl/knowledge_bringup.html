@@ -116,7 +116,7 @@
     </div>
 </div>
 
-<div class="modal fade article-modal" id="js-article-modal">
+<div class="modal article-modal" id="js-article-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -135,8 +135,8 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div class="article-figure">
-                    <img class="img-full article-img"/>
+                <div class="article-figure text-center">
+                    <img class="article-img"/>
                     <p class="article-figcaption text-center"></p>
                 </div>
                 <div class="article-content"></div>
@@ -151,9 +151,14 @@
 
 (function($){
     var $modal = $('#js-article-modal'),
+        $modalDialog = $modal.find('.modal-dialog'),
         $modalBody = $modal.find('.modal-body'),
         $container = $('#js-outline-container'),
+        winHeight = $(window).height(),
         loadMap = {};
+
+    $modalDialog.height(winHeight);
+    $modalBody.height(winHeight - 87 - 45);
 
     $container.on('click', '.outline', function(){
         var $this = $(this),
