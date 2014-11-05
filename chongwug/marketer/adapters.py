@@ -137,8 +137,7 @@ def select_change(request):
     if 'petfarm' in request.GET:
         petfarm = pet_farm.objects.get(id=request.REQUEST.get('petfarm'),dele=False)
         pettypes = petfarm.nestofpet_set.filter(dele=False).values('type').distinct()
-        print pettypes
-        return pettypes
+        return json.dumps([ i['type'] for i in pettypes ])
     elif 'range' in request.GET:
         addresses = __addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]
         if 'city' in request.GET:
