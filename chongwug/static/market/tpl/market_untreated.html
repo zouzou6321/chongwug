@@ -103,7 +103,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary btn-submit">确定</button>
+                <button type="button" class="btn btn-primary btn-submit" data-loading-text="提交中...">确定</button>
             </div>
         </div>
     </div>
@@ -353,18 +353,32 @@
         });
     }
 
-    $petFarm.on('change', function(){
+    var prevPetFarm = '';
+
+    $petFarm.on('change', function(event, obj){
         var val = $petFarm.val();
+        $modal.addClass('loading');
 
         initOptions(val, function(data){
-            console.log(data);
             var options = '';
 
             $.each(data, function(idx, el){
                 options += '<option value="'+ el +'">' + el + '</option>'
             });
 
-            $petType.html(options);
+            if(options){
+                prevPetFarm = val;
+                $petType.html(options);
+
+                if(obj && obj.pettype){
+                    $petType.find('option').filter(':contains("'+ obj.pettype +'")').prop('selected', true);
+                }
+
+            }else{
+                $petFarm.val(prevPetFarm);
+                alert('此养殖场没有可选的犬种，请选择其他养殖场。');
+            }
+
             $modal.removeClass('loading');
         });
     });
@@ -379,7 +393,7 @@
 
     function initData(data){
         $petFarm.find('option').filter(':contains("'+ data.petfarm +'")').prop('selected', true);
-        $petFarm.trigger('change');
+        $petFarm.trigger('change', {pettype: data.pettype});
 
         $id.val(data.DT_RowId);
         $time.text(data.appointtime);
@@ -388,14 +402,32 @@
         trans[data.trans].prop('checked', true);
     }
 
+    var present = {'id':'', 'filter':'', 'action':''};
+
     $modal.on('click', '.btn-submit', function(){
-        var data = {};
+        var data = {},
+            $btn = $(this);
 
         $.each($form.serializeArray(), function(i, e){
-            data[e.name] = e.value;
+            var name = e.name in present ? e.name : 'data['+ e.name +']';
+            data[name] = e.value;
         });
 
         console.log(data);
+
+        $btn.button('loading');
+
+        $.ajax({
+            url: '',
+            dataType: 'json',
+            data: data,
+            success: function(data){
+                orderInfoTable.ajax.reload();
+            },
+            complete: function(){
+                $btn.button('reset');
+            }
+        });
     });
 
 
