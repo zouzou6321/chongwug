@@ -56,7 +56,8 @@ def market_usr_untreated_info_view(request):
         return HttpResponseRedirect(MARKET_ROOT)
     if request.session['score'] < 20:
         return render_to_response('404.html')
-    data = adapters.manage_home_data_get(request)
+    data = adapters.market_untreated_info(request)
+    data['manager'] = adapters.manage_home_data_get(request)['manager']
     data['page'] = 'untreated'
     return render_to_response('market/tpl/market_untreated.html',data)
 

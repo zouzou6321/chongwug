@@ -3,7 +3,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
 from customer.models import nestofpet_attention
 from petfarm.models import pet_farm,nestofpet
-from chongwug.config import __addresses
+from chongwug.config import __addresses,__appointtime,__appointdays
+from chongwug.commom import __errorcode__
 import string,json
 '''
 管理员鉴权
@@ -128,11 +129,15 @@ def attention_data(request):
     pagedata = {'data':datas,'draw':string.atoi(request.REQUEST.get('draw')),'recordsTotal':count, 'recordsFiltered': count}
     return json.dumps(pagedata)
 
+def market_untreated_info(request):
+    petfarms = pet_farm.objects.filter(dele=False)
+    return {'petfarms':petfarms,'appointtime':__appointtime,'appointdays':__appointdays,'addresses':__addresses}
+
 def select_change(request):
     if 'petfarm' in request.GET:
         petfarm = pet_farm.objects.get(id=request.REQUEST.get('petfarm'),dele=False)
         pettypes = petfarm.nestofpet_set.filter(dele=False).values('name').distinct()
-        print 
+        print pettypes
         return pettypes
     elif 'range' in request.GET:
         addresses = __addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]
@@ -144,4 +149,4 @@ def select_change(request):
         for address in addresses['sublist']:
             arr.append({'id': address['index'], 'name': address['name']})
         return {'locations': arr}
-    return 
+    return __errorcode__(1)

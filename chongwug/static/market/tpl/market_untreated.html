@@ -43,7 +43,9 @@
                         <label for="petfarm" class="control-label col-sm-3">犬舍：</label>
                         <div class="col-sm-4">
                             <select name="petfarm" id="petfarm" class="form-control">
-                                <option value="111">111</option>
+                            	{% for petfarm in petfarms %}
+                                <option value="{{ petfarm.id }}">{{ petfarm.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
