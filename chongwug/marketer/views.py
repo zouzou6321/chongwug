@@ -98,3 +98,10 @@ def market_nestofpet_info_view(request):
     data['infos'] = adapters.market_nestofpet_info_get(request)
     data['page'] = 'nestofpet'
     return render_to_response('market/tpl/market_nestofpet_info.html',data)
+
+def market_usr_attention_mod_select_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MARKET_ROOT)
+    if request.session['score'] < 20:
+        return render_to_response('404.html')
+    return HttpResponse(adapters.select_change(request))

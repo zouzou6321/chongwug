@@ -1,16 +1,10 @@
 # -*- coding: UTF-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
-from manager.models import ad,tmppic_monitor
-from customer.models import user,nestofpet_attention
+from customer.models import nestofpet_attention
 from petfarm.models import pet_farm,nestofpet
-from PIL import Image
-from chongwug import settings
-from upyun import UpYun
-from django.contrib.auth.models import User
-import string,re,json
-import os,uuid,datetime
-from django.db.models import Q
+from chongwug.config import __addresses
+import string,json
 '''
 管理员鉴权
 '''
@@ -133,3 +127,21 @@ def attention_data(request):
         datas.append(data)
     pagedata = {'data':datas,'draw':string.atoi(request.REQUEST.get('draw')),'recordsTotal':count, 'recordsFiltered': count}
     return json.dumps(pagedata)
+
+def select_change(request):
+    if 'petfarm' in request.GET:
+        petfarm = pet_farm.objects.get(id=request.REQUEST.get('petfarm'),dele=False)
+        pettypes = petfarm.nestofpet_set.filter(dele=False).values('name').distinct()
+        print 
+        return pettypes
+    elif 'range' in request.GET:
+        addresses = __addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]
+        if 'city' in request.GET:
+            addresses = addresses['sublist'][string.atoi(request.REQUEST.get('city'))]
+        if 'district' in request.GET:
+            addresses = addresses['sublist'][string.atoi(request.REQUEST.get('district'))]
+        arr = []
+        for address in addresses['sublist']:
+            arr.append({'id': address['index'], 'name': address['name']})
+        return {'locations': arr}
+    return 
