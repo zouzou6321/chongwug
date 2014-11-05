@@ -136,7 +136,7 @@ def market_untreated_info(request):
 def select_change(request):
     if 'petfarm' in request.GET:
         petfarm = pet_farm.objects.get(id=request.REQUEST.get('petfarm'),dele=False)
-        pettypes = petfarm.nestofpet_set.filter(dele=False).values('name').distinct()
+        pettypes = petfarm.nestofpet_set.filter(dele=False).values('type').distinct()
         print pettypes
         return pettypes
     elif 'range' in request.GET:
