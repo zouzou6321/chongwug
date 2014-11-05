@@ -334,3 +334,8 @@ body {
 
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
   color: #fff; }
+
+table th {
+  background: #969696;
+  color: #fff;
+  white-space: nowrap; }
