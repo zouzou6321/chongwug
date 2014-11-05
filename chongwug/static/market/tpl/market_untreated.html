@@ -424,7 +424,12 @@
             dataType: 'json',
             data: data,
             success: function(data){
-                orderInfoTable.ajax.reload();
+                if(data.status == 0){
+                    orderInfoTable.ajax.reload();
+                    $modal.modal('hide');
+                }else{
+                    alert(data.message);
+                }
             },
             complete: function(){
                 $btn.button('reset');
