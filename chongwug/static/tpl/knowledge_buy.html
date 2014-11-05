@@ -486,6 +486,7 @@
     //filter
     var $petFilter = $('#js-pet-filter'),
         $keyInput = $('#js-key-input'),
+        $btnSearch = $petFilter.find('.btn-search'),
         $noResult = $petList.find('.no-result');
         param = {
             filter: true,
@@ -542,6 +543,10 @@
 
     $keyInput.on('change', function(){
         param.key = this.value;
+    }).on('keyup', function(e){
+        if(e.keyCode == 13){
+            $btnSearch.trigger('click');
+        }
     });
 
     $petFilter.on('click', '.btn-search, li', function(){
