@@ -40,7 +40,7 @@ def market_usr_attention_info_view(request):
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
     data['page'] = 'attention'
-    return render_to_response('market/tpl/market_attentions.html',data)
+    return render_to_response('market/tpl/market_attentions.html',data,context_instance=RequestContext(request))
 
 def market_usr_processed_info_view(request):
     if adapters.manage_authentication(request) == False:
@@ -49,7 +49,7 @@ def market_usr_processed_info_view(request):
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
     data['page'] = 'processed'
-    return render_to_response('market/tpl/market_processed.html',data)
+    return render_to_response('market/tpl/market_processed.html',data,context_instance=RequestContext(request))
 
 def market_usr_untreated_info_view(request):
     if adapters.manage_authentication(request) == False:
@@ -59,7 +59,7 @@ def market_usr_untreated_info_view(request):
     data = adapters.market_untreated_info(request)
     data['manager'] = adapters.manage_home_data_get(request)['manager']
     data['page'] = 'untreated'
-    return render_to_response('market/tpl/market_untreated.html',data)
+    return render_to_response('market/tpl/market_untreated.html',data,context_instance=RequestContext(request))
 
 def market_usr_fail_info_view(request):
     if adapters.manage_authentication(request) == False:
@@ -79,7 +79,6 @@ def market_usr_success_info_view(request):
     data['page'] = 'success'
     return render_to_response('market/tpl/market_success.html',data)
 
-@csrf_exempt
 def market_usr_attention_mod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MARKET_ROOT)
