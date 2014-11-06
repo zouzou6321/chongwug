@@ -179,6 +179,20 @@
                 </div>
                 {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
                 {% endfor %}
+                <div class="clearfix"></div>
+                <div class="text-center">
+                    <ul class="pagination pagination-primary">
+                        <li><a href="#">首页</a></li>
+                        <li class="disabled"><a href="#">上一页</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">下一页</a></li>
+                        <li><a href="#">尾页</a></li>
+                     </ul>
+                </div>
             {% else %}
                 <div class="col-xs-12">
                     <p class="text-center no-result">没有找到符合条件的宠物</p>
