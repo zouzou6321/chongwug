@@ -262,7 +262,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><span>藏獒</span>基本资料</h4>
+            <h4 class="modal-title"><span id="js-title"></span>基本资料</h4>
           </div>
           <div class="modal-body">
             <div class="media">
@@ -425,6 +425,7 @@
 
 (function($){
     var $modal = $('#js-knowledge-buy-modal'),
+        $title = $modal.find('#js-title'),
         $petList = $('#js-pet-list'),
         $petWrap = $petList.find('.pet-wap'),
         $bdBaike = $modal.find('#js-bd-baike'),
@@ -488,6 +489,7 @@
                     }
                 }
 
+                $title.text(data.name);
                 $bdBaike.attr('href',  '//baike.baidu.com/item/' + encodeURIComponent(data.name));
                 $bdImage.attr('href',  '//image.baidu.com/i?tn=baiduimage&ie=utf-8&word=' + encodeURIComponent(data.name));
 
