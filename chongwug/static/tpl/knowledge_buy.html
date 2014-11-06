@@ -430,6 +430,7 @@
         $bdBaike = $modal.find('#js-bd-baike'),
         $bdImage = $modal.find('#js-bd-image'),
         keyMap = {
+            huopo: $modal.find('#js-lively-rate'),
             diaomao: $modal.find('#js-hair-rate'),
             animfred: $modal.find('#js-animal-friendly-rate'),
             cityfred: $modal.find('#js-city-rate'),
@@ -439,7 +440,7 @@
             meirong_hz: $modal.find('#js-beauty-rate'),
             naire: $modal.find('#js-hot-rate'),
             nianren: $modal.find('#js-sweet-rate'),
-            nickname: $modal.find('#js-type-rate'),
+            nickname: $modal.find('#js-type'),
             koushui: $modal.find('#js-saliva-rate'),
             otherfred: $modal.find('#js-stranger-friendly-rate'),
             xijiao: $modal.find('#js-bark-rate'),
@@ -447,7 +448,18 @@
             yundong: $modal.find('#js-sport-rate'),
             naihan: $modal.find('#js-cold-rate'),
             tiwei: $modal.find('#js-odour-rate'),
-            imgurl: $modal.find('#js-looks')
+            imgurl: $modal.find('#js-looks'),
+            jiage: $modal.find('#js-price'),
+            tizhong: $modal.find('#js-weight'),
+            color: $modal.find('#js-color'),
+            siyang: $modal.find('#js-feeding'),
+            gongneng: $modal.find('#js-function'),
+            zhishang: $modal.find('#js-iq')
+        },
+        rateMap = {
+            diaomao:'', animfred:'', cityfred:'', kidfred:'', meirong_hz:'',
+            naire:'', koushui:'', otherfred:'', xijiao:'', yundong:'',
+            naihan:'', tiwei:'', xulian:'', nianren:'', huopo:''
         };
 
     $petList.on('click', '.pet-wap', function(){
@@ -463,15 +475,15 @@
             if(data.status == 0){
                 for(var i in keyMap){
                     if(keyMap.hasOwnProperty(i)){
-                        var currD = data[i],
+                        var currD = $.trim(data[i]),
                             currE = keyMap[i];
 
                         if(i == 'imgurl'){
                             currE.attr('src', currD);
-                        }else if(!isNaN(currD)){
+                        }else if(i in rateMap){
                             currE.width(currD + '%');
                         }else{
-                            currE.text(currD);
+                            currE.text(currD || '暂无数据');
                         }
                     }
                 }
