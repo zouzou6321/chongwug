@@ -48,6 +48,10 @@
 
 .article-modal{
 
+  .article-date{
+    padding-right: 15px;
+  }
+
   .modal-open &{
     overflow-y: hidden;
   }
