@@ -42,18 +42,6 @@
   }
 }
 
-.content-container{
-  @media (min-width: $screen-lg) {
-    width: $content-width;
-  }
-
-  background-color: #fff;
-
-  .cwg-container > &{
-    @include box-shadow(2px 2px 4px rgba(127, 127, 127, .3));
-  }
-}
-
 .breadcrumb-container{
   font-size: 12px;
   padding-left: 0;

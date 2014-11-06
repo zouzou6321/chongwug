@@ -3299,6 +3299,31 @@ The provided mixins are intended to be used with the array-like variables
       float: left;
       width: 12.5%; } }
 
+.container {
+  width: 1170px; }
+  @media (min-width: 768px) {
+    .container {
+      width: 1170px; } }
+  @media (min-width: 992px) {
+    .container {
+      width: 1170px; } }
+
+.content-container {
+  width: 1000px;
+  background-color: #fff; }
+  @media (min-width: 768px) {
+    .content-container {
+      width: 1000px; } }
+  @media (min-width: 992px) {
+    .content-container {
+      width: 1000px; } }
+  @media (min-width: 1200px) {
+    .content-container {
+      width: 1000px; } }
+  .cwg-container > .content-container {
+    -webkit-box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3);
+    box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3); }
+
 .sprite {
   display: inline-block;
   background-image: url(../imgs/sprites.png); }
@@ -3479,6 +3504,7 @@ Copyright (c) 2014 Daniel Eden
  * Objects and abstractions
 */
 .cwg-carousel {
+  min-width: 1170px;
   max-width: 1920px;
   margin-left: auto;
   margin-right: auto;
@@ -4101,15 +4127,6 @@ Copyright (c) 2014 Daniel Eden
   .dog-select-row .dog-selected a {
     color: #e4bd3f;
     border: 1px solid #e4bd3f; }
-
-.content-container {
-  background-color: #fff; }
-  @media (min-width: 1200px) {
-    .content-container {
-      width: 1000px; } }
-  .cwg-container > .content-container {
-    -webkit-box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3);
-    box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3); }
 
 .breadcrumb-container {
   font-size: 12px;
