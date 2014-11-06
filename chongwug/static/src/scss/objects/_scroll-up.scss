@@ -1,0 +1,14 @@
+#scroll-up{
+  bottom: 100px;
+  background-color: $primary-color;
+  color: #fff;
+  font-weight: bold;
+
+  margin-left: 550px;
+  left: 50%;
+  padding: 10px 5px;
+
+  &:hover{
+    text-decoration: none;
+  }
+}
