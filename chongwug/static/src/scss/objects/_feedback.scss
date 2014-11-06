@@ -1,0 +1,18 @@
+.feedback{
+  position: fixed;
+  right: 0;
+  top: 60%;
+
+  background: $primary-color;
+
+  a{
+    color: #fff;
+    display: block;
+    padding: 15px 10px;
+    text-align: center;
+
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
