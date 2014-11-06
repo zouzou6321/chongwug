@@ -54,7 +54,7 @@
   .supplies-container{
     width: $container;
     padding-top: 45px;
-    padding-bottom: 70px;
+    padding-bottom: 1;
     margin-left: auto;
     margin-right: auto;
   }
@@ -63,6 +63,7 @@
     padding: 20px 8px;
     margin-left: $gutter / 2;
     margin-right: $gutter / 2;
+    margin-bottom: $gutter;
 
     float: left;
 
@@ -99,7 +100,9 @@
     .btn-text{
       position: absolute;
       left: 18px;
-      bottom: 3px;
+      bottom: 6px;
+
+      line-height: 16px;
     }
 
     .media{

@@ -5337,13 +5337,14 @@ img.mfp-img {
 .supplies .supplies-container {
   width: 1102px;
   padding-top: 45px;
-  padding-bottom: 70px;
+  padding-bottom: 1;
   margin-left: auto;
   margin-right: auto; }
 .supplies .supplies-item {
   padding: 20px 8px;
   margin-left: 25px;
   margin-right: 25px;
+  margin-bottom: 50px;
   float: left;
   width: 238px;
   overflow: hidden;
@@ -5367,7 +5368,8 @@ img.mfp-img {
   .supplies .supplies-item .btn-text {
     position: absolute;
     left: 18px;
-    bottom: 3px; }
+    bottom: 6px;
+    line-height: 16px; }
   .supplies .supplies-item .media {
     margin-top: 10px; }
   .supplies .supplies-item .media-body {
