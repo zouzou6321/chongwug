@@ -405,9 +405,9 @@
                 <div class="clearfix">
                     <p class="pull-right">
                         详见
-                        <a href="" target="_blank">百度百科</a>
+                        <a href="#" target="_blank" id="js-bd-baike">百度百科</a>
                         -
-                        <a href="" target="_blank">百度图片</a>
+                        <a href="#" target="_blank" id="js-bd-image">百度图片</a>
                     </p>
                 </div>
             </div>
@@ -427,6 +427,8 @@
     var $modal = $('#js-knowledge-buy-modal'),
         $petList = $('#js-pet-list'),
         $petWrap = $petList.find('.pet-wap'),
+        $bdBaike = $modal.find('#js-bd-baike'),
+        $bdImage = $modal.find('#js-bd-image'),
         keyMap = {
             diaomao: $modal.find('#js-hair-rate'),
             animfred: $modal.find('#js-animal-friendly-rate'),
@@ -473,6 +475,9 @@
                         }
                     }
                 }
+
+                $bdBaike.attr('href',  '//baike.baidu.com/item/' + encodeURIComponent(data.name));
+                $bdImage.attr('href',  '//image.baidu.com/i?tn=baiduimage&ie=utf-8&word=' + encodeURIComponent(data.name));
 
                 $modal.removeClass('loading');
             }else{
