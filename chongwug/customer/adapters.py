@@ -363,7 +363,9 @@ def get_knowledge_buy(request):
         knowledge = dog123.objects.get(id=string.atoi(request.REQUEST.get('id')))
         dogs = dog123.objects.all()
         return {'name':knowledge.name,'ename':knowledge.name,'where':knowledge.where,'age': knowledge.age,'nickname':knowledge.nickname,
-                'maleheight':knowledge.maleheight,'fmaleheight':knowledge.fmaleheight,'score':knowledge.score,'nianren':knowledge.nianren,
+                'maleheight':knowledge.maleheight,'fmaleheight':knowledge.fmaleheight,'color':knowledge.color,'siyang':knowledge.siyang,
+                'jiage':knowledge.jiage,'gongneng':knowledge.gongneng,'tizhong':knowledge.tizhong,'zhishang':knowledge.zhishang,
+                'huopo':knowledge.huopo,'score':knowledge.score,'nianren':knowledge.nianren,
                 'xijiao':knowledge.xijiao,'diaomao':knowledge.diaomao,'tiwei':knowledge.tiwei,'meirong_hz':knowledge.meirong_hz,
                 'kidfred':knowledge.kidfred,'otherfred':knowledge.otherfred,'animfred':knowledge.animfred,'yundong':knowledge.yundong,
                 'xulian':knowledge.xulian,'koushui':knowledge.xulian,'naihan':knowledge.naihan,'naire':knowledge.naire,
