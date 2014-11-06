@@ -3285,19 +3285,16 @@ The provided mixins are intended to be used with the array-like variables
       float: left;
       width: 20%; } }
 
-@media (min-width: 992px) {
-  .col-md-offset-0_5 {
-    margin-left: 4.16666667%; } }
+.col-xs-offset-0_5 {
+  margin-left: 4.16666667%; }
 
-.col-md-1_5 {
+.col-xs-1_5 {
   position: relative;
+  float: left;
+  width: 12.5%;
   min-height: 1px;
   padding-left: 10px;
   padding-right: 10px; }
-  @media (min-width: 992px) {
-    .col-md-1_5 {
-      float: left;
-      width: 12.5%; } }
 
 .container {
   width: 1170px; }
