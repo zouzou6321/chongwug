@@ -7,7 +7,7 @@ from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from chongwug.config import __petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
+from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re,json
 from chongwug.commom import __errorcode__,sendSMS
 from django.contrib.auth.models import User
@@ -169,6 +169,29 @@ def buy_main_adapter(re):
     pets = nestofpet.objects.filter(**kwargs)
     if searchkey:
         pets = pets.filter(Q(farm__name__contains=searchkey)|Q(farm__detail_address__contains=searchkey))
+    curPage = int(re.REQUEST.get('curPage', '1'))
+    pageType = str(re.REQUEST.get('pageType', ''))
+  
+    #判断点击了【下一页】还是【上一页】  
+    if pageType == 'pageDown':  
+        curPage += 1  
+    elif pageType == 'pageUp':  
+        curPage -= 1  
+  
+    startPos = (curPage - 1) * __onepageofdata__  
+    endPos = startPos + __onepageofdata__  
+    petscount = pets.count()
+    pets = pets[startPos:endPos]  
+    pages = []
+    allPostCounts = petscount
+    allPage = allPostCounts / __onepageofdata__  
+    remainPost = allPostCounts % __onepageofdata__  
+    if remainPost > 0:  
+        allPage += 1
+    i = 0
+    while i < allPage:
+        i += 1
+        pages.append(i)
     for pet_one in pets:
         if epidemickey and pet_one.pet_set.filter(epidemic_period=epidemickey).count() <= 0:
             continue;
@@ -187,7 +210,7 @@ def buy_main_adapter(re):
                 epidemic_period = epidemic
                 break
         pets_imgs.append({'pet':pet_one,'img':petimg,'min_price':min_price,'max_price':max_price,'count':othor_pets.count(),'epidemic':epidemic_period})
-    return {'pets_imgs':pets_imgs,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
+    return {'pets_imgs':pets_imgs, 'pages':pages,'allPage':allPage, 'curPage':curPage,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
             'princekey':princekey,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,
             'epidemickey':epidemickey,'ages':ages,'agekey':agekey,'page':'buy'}
 

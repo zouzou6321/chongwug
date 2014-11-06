@@ -182,15 +182,13 @@
                 <div class="clearfix"></div>
                 <div class="text-center">
                     <ul class="pagination pagination-primary">
-                        <li><a href="#">首页</a></li>
-                        <li class="disabled"><a href="#">上一页</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">下一页</a></li>
-                        <li><a href="#">尾页</a></li>
+                        <li><a href="/buy/">首页</a></li>
+                        <li{% ifequal curPage 1 %} class="disabled"{% endifequal %}><a href="?curPage={{ curPage }}&&pageType=pageUp">上一页</a></li>
+                        {% for page in pages %}
+                        <li{% ifequal page curPage %} class="active"{% endifequal %}><a href="?curPage={{ page }}">{{ page }}</a></li>
+                        {% endfor %}
+                        <li{% ifequal curPage allPage %} class="disabled"{% endifequal %}><a href="?curPage={{ curPage }}&&pageType=pageDown">下一页</a></li>
+                        <li><a href="?curPage={{ allPage }}">尾页</a></li>
                      </ul>
                 </div>
             {% else %}
