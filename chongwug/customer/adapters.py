@@ -384,7 +384,6 @@ def get_knowledge_buy(request):
     if 'id' in request.GET:
 
         knowledge = dog123.objects.get(id=string.atoi(request.REQUEST.get('id')))
-        dogs = dog123.objects.all()
         return {'name':knowledge.name,'ename':knowledge.name,'where':knowledge.where,'age': knowledge.age,'nickname':knowledge.nickname,
                 'maleheight':knowledge.maleheight,'fmaleheight':knowledge.fmaleheight,'color':knowledge.color,'siyang':knowledge.siyang,
                 'jiage':knowledge.jiage,'gongneng':knowledge.gongneng,'tizhong':knowledge.tizhong,'zhishang':knowledge.zhishang,
@@ -411,8 +410,10 @@ def get_knowledge_buy(request):
                     kwargs[enum[1] + '__lte'] = __petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 1]
                     if string.atoi(request.REQUEST.get(enum[0])) >= 2:
                         kwargs[enum[1] + '__gt'] = __petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 2]
-                    
-        dogsinfo = dog123.objects.filter(args,**kwargs)
+        if args == ():
+            dogsinfo = dog123.objects.filter(**kwargs)
+        else:
+            dogsinfo = dog123.objects.filter(args,**kwargs)
         for doginfo in dogsinfo:
             idlist.append(doginfo.id)
         return {'idlist':idlist}
