@@ -544,6 +544,7 @@
 
         $.each(temp, function(idx, el){
             el.removeClass('hide');
+            el.find('img').trigger('appear');
         });
     }
 
