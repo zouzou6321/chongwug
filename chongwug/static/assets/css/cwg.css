@@ -3507,7 +3507,8 @@ Copyright (c) 2014 Daniel Eden
   margin-right: auto;
   padding-bottom: 40px; }
   .cwg-carousel .item {
-    min-height: 300px; }
+    min-height: 300px;
+    max-height: 500px; }
   .cwg-carousel img {
     width: 100%; }
   .cwg-carousel .carousel-lace {
