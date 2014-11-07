@@ -206,6 +206,8 @@ def manage_nestofpet_add(request):
     
     if request.POST['nest-desc'] == '':
         return __errorcode__(20)
+    if request.POST['nest-longdesc'] == '':
+        return __errorcode__(20)
     new_petscount = string.atoi(request.POST['count'])
     petnum = 0
     while petnum < new_petscount:
@@ -221,7 +223,8 @@ def manage_nestofpet_add(request):
                                 color = request.POST['nest-color'],
                                 age = string.atoi(request.POST['nest-age']),
                                 type = request.POST['nest-type'],
-                                short_desc = request.POST['nest-desc'])
+                                short_desc = request.POST['nest-desc'],
+                                txt_desc = request.POST['nest-longdesc'])
         new_nestofpet.save()
         cur_datetime = datetime.datetime.now()
         new_nestofpet.num = "%d%d%d%d%d" % (farm.id,cur_datetime.year,cur_datetime.month,cur_datetime.day,new_nestofpet.id)
@@ -436,6 +439,7 @@ def manage_nestofpet_mod(request):
         curnestofpet.age = string.atoi(request.POST['age'])
         curnestofpet.type = request.POST['type']
         curnestofpet.short_desc = request.POST['short_desc']
+        curnestofpet.txt_desc = request.POST['nest-longdesc']
         curnestofpet.save()
         petids = request.POST.getlist('pets[]')
         for petid in petids:
