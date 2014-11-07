@@ -67,8 +67,10 @@ def manage_nestofpet_mod_view(request):
             if 'del' in request.GET:
                 return HttpResponse(adapters.manage_del_pet(request))
             data = adapters.manage_nestofpet_mod_info(request)
+            data['types'] = adapters.get_petpic_types()['types']
             return render_to_response('petfarm/tpl/manage_nestofpet_mod_ajax.html',data)
     pagedata = adapters.manage_nestofpet_mod_info(request)
+    data['types'] = adapters.get_petpic_types()['types']
     pagedata['manager'] = data['manager']
     return render_to_response('petfarm/tpl/manage_nestofpet_mod.html',pagedata,context_instance=RequestContext(request))
 
