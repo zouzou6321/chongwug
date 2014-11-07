@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="carousel slide cwg-carousel" data-ride="carousel">
+<div class="carousel slide cwg-carousel" data-ride="carousel" id="js-carousel" data-interval="4000">
   <div class="carousel-inner">
     {% for ad in ads %}
     <div class="item loading{% if forloop.first %} active{% endif %}">
@@ -15,7 +15,7 @@
   </div>
   <ol class="carousel-indicators">
     {% for ad in ads %}
-    <li data-target=".cwg-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+    <li data-target="#js-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
     {% endfor %}
   </ol>
   <div class="carousel-lace"></div>
