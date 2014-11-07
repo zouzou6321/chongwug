@@ -11,6 +11,12 @@ def process_json_file(json_file):
     fin.close()
     return s
 
+manifest_map = {
+    'js': process_json_file(WEB_CONFIG_ROOT + '/js-manifest.json'),
+    'css': process_json_file(WEB_CONFIG_ROOT + '/css-manifest.json'),
+    'imgs': process_json_file(WEB_CONFIG_ROOT + '/imgs-manifest.json'),
+}
+
 
 @register.filter
 def assets(value):
@@ -23,7 +29,7 @@ def assets(value):
         prefix = arr[0]
         del arr[0]
         basename = '/'.join(arr)
-        manifest = process_json_file(WEB_CONFIG_ROOT + '/' + prefix + '-manifest.json')
+        manifest = manifest_map[prefix]
 
         try:
             path = prefix + '/' + manifest[basename]
