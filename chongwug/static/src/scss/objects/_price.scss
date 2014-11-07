@@ -3,8 +3,7 @@
   font-size: 22px;
   font-weight: bold;
 
-  &:before{
-    content: '¥';
+  .price-symbol{
     padding-right: 5px;
   }
 
@@ -21,7 +20,7 @@
 .price-light{
   color: $primary-color;
 
-  &:before, .price-desc{
+  .price-symbol, .price-desc{
     color: #fff;
   }
 }
@@ -29,7 +28,7 @@
 .price-dark{
   color: $primary-color;
 
-  &:before, .price-desc{
+  .price-symbol, .price-desc{
     color: $text-color;
   }
 }
@@ -45,12 +44,12 @@
 .price-sm{
   font-size: 16px;
 
-  &:before, .price-desc{
+  .price-symbol, .price-desc{
     font-size: 14px;
     font-weight: normal;
   }
 
-  &:before{
+  .price-symbol{
     padding-right: 3px;
   }
 }
@@ -58,7 +57,7 @@
 .price-xs{
   font-size: 14px;
 
-  &:before{
+  .price-symbol{
     padding-right: 3px;
   }
 }

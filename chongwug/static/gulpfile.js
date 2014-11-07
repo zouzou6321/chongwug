@@ -42,7 +42,7 @@ gulp.task('sprites', function(){
 });
 
 
-gulp.task('css', dep, function(){
+gulp.task('css', function(){
     var map = JSON.parse(fs.readFileSync('./imgs-manifest.json')),
         keys = Object.keys(map),
         reg = new RegExp(keys.join('|'), 'gm');

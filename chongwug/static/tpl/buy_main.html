@@ -172,7 +172,7 @@
                             <label class="pet-tag">{{ pet_img.epidemic }}</label>
                         </div>
                         <p>
-                            <span class="price price-primary">{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元/只</span></span>
+                            <span class="price price-primary"><span class="price-symbol">&yen;</span>{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元/只</span></span>
                             <a href="detail/?petid={{pet_img.pet.id}}" class="btn btn-primary pull-right btn-dog" role="button">去看看</a>
                         </p>
                     </div>
@@ -189,7 +189,11 @@
                         <li><a href="?curPage={{ curPage }}&&pageType=pageUp">上一页</a></li>
                         {% endif %}
                         {% for page in pages %}
-                        <li{% ifequal page curPage %} class="active"{% endifequal %}><a href="?curPage={{ page }}">{{ page }}</a></li>
+                        {% if page == curPage %}
+                        <li class="active"><span>{{ page }}</span></li>
+                        {% else %}
+                        <li><a href="?curPage={{ page }}">{{ page }}</a></li>
+                        {% endif %}
                         {% endfor %}
                         {% if curPage ==  allPage%}
                         <li class="disabled"><span>下一页</span></li>
