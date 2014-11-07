@@ -187,20 +187,11 @@
             ]
         });
 
-    //select box focus out
-    $('.select-box').on('focusout', function(){
-        $(this).hide();
-    });
-
     //时间选择
     var $btnTime = $('#js-btn-time'),
         $timeBox = $('#js-time-box'),
         $time = $('#js-time'),
         $timeInput = $('#js-time-input');
-
-    $btnTime.on('click', function(){
-        $timeBox.is(':visible') ? $timeBox.trigger('focusout') : $timeBox.show().trigger('focus');
-    });
 
     $timeBox.on('click', 'td', function(){
         var $this = $(this),
@@ -234,10 +225,6 @@
         render = template('location-select-tpl'),
         param = {},
         location = [];
-
-    $btnLocation.on('click', function(){
-        $locationBox.is(':visible') ? $locationBox.trigger('focusout') : $locationBox.show().trigger('focus');
-    });
 
     function renderData(param, $parent, cb){
         $.ajax({
@@ -437,7 +424,31 @@
         });
     });
 
+    //global click handle
+    $btnTime.on('click', function(e){
+        e.stopPropagation();
+        $locationBox.hide();
+        $timeBox.is(':visible') ? $timeBox.hide() : $timeBox.show();
+    });
 
+    $btnLocation.on('click', function(e){
+        e.stopPropagation();
+        $timeBox.hide();
+        $locationBox.is(':visible') ? $locationBox.hide() : $locationBox.show();
+    });
+
+    $timeBox.on('click', function(e){
+        e.stopPropagation();
+    });
+
+    $locationBox.on('click', function(e){
+        e.stopPropagation();
+    });
+
+    $(document).on('click', function(){
+        $timeBox.hide();
+        $locationBox.hide();
+    });
 }(jQuery));
 
 </script>
