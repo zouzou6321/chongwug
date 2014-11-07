@@ -3556,8 +3556,7 @@ Copyright (c) 2014 Daniel Eden
   color: #fff;
   font-size: 22px;
   font-weight: bold; }
-  .price:before {
-    content: '¥';
+  .price .price-symbol {
     padding-right: 5px; }
   .price .price-desc {
     font-size: 14px;
@@ -3568,12 +3567,12 @@ Copyright (c) 2014 Daniel Eden
 
 .price-light {
   color: #ff3500; }
-  .price-light:before, .price-light .price-desc {
+  .price-light .price-symbol, .price-light .price-desc {
     color: #fff; }
 
 .price-dark {
   color: #ff3500; }
-  .price-dark:before, .price-dark .price-desc {
+  .price-dark .price-symbol, .price-dark .price-desc {
     color: #333333; }
 
 .price-lg {
@@ -3583,15 +3582,15 @@ Copyright (c) 2014 Daniel Eden
 
 .price-sm {
   font-size: 16px; }
-  .price-sm:before, .price-sm .price-desc {
+  .price-sm .price-symbol, .price-sm .price-desc {
     font-size: 14px;
     font-weight: normal; }
-  .price-sm:before {
+  .price-sm .price-symbol {
     padding-right: 3px; }
 
 .price-xs {
   font-size: 14px; }
-  .price-xs:before {
+  .price-xs .price-symbol {
     padding-right: 3px; }
 
 .table-primary {
