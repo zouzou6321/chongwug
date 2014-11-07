@@ -189,7 +189,11 @@
                         <li><a href="?curPage={{ curPage }}&&pageType=pageUp">上一页</a></li>
                         {% endif %}
                         {% for page in pages %}
-                        <li{% ifequal page curPage %} class="active"{% endifequal %}><a href="?curPage={{ page }}">{{ page }}</a></li>
+                        {% if page == curPage %}
+                        <li class="active"><span>{{ page }}</span></li>
+                        {% else %}
+                        <li><a href="?curPage={{ page }}">{{ page }}</a></li>
+                        {% endif %}
                         {% endfor %}
                         {% if curPage ==  allPage%}
                         <li class="disabled"><span>下一页</span></li>
