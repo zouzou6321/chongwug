@@ -5345,8 +5345,16 @@ img.mfp-img {
   font-family: '\9ed1\4f53'; }
 
 .supplies .supplies-banner {
+  background: #ffdf5e;
+  overflow: hidden;
+  max-width: 1902px;
   height: 571px;
-  background: #ffdf5e url(../imgs/supplies-banner.jpg) top center no-repeat; }
+  position: relative; }
+  .supplies .supplies-banner img {
+    position: absolute;
+    top: 0;
+    margin-left: -951px;
+    left: 50%; }
 .supplies .supplies-title {
   width: 301px;
   height: 61px;

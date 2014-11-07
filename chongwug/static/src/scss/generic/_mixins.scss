@@ -19,3 +19,17 @@
     filter: none;
   }
 }
+
+
+@mixin absolute-center($width, $height){
+  @if $width{
+    margin-left: -$width/2;
+    left: 50%;
+  }
+
+  @if $height{
+    margin-top: -$height/2;
+    top: 50%;
+  }
+}
+

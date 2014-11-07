@@ -7,10 +7,23 @@
   $img: 222px;
   $padding: 8px;
   $container: 3 * $gutter + ($img + $padding * 2) * 4;
+  $banner-width: 1902px;
+  $banner-height: 571px;
 
   .supplies-banner{
-    height: 571px;
-    background: $bg1 url(../imgs/supplies-banner.jpg) top center no-repeat;
+    background: $bg1;
+    overflow: hidden;
+    max-width: $banner-width;
+    height: $banner-height;
+
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 0;
+
+      @include absolute-center($banner-width, null);
+    }
   }
 
   .supplies-title{
