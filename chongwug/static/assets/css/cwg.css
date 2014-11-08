@@ -4285,6 +4285,9 @@ Copyright (c) 2014 Daniel Eden
 
 .article-modal .article-date {
   padding-right: 15px; }
+.article-modal .article-content {
+  font-size: 17px;
+  letter-spacing: 1px; }
 .modal-open .article-modal {
   overflow-y: hidden; }
 .article-modal .modal-body {
