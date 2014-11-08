@@ -297,7 +297,7 @@ def attention_sendsms(req):
     cur_user = user.objects.get(auth_user=auth.get_user(req),dele=False)
     if attention.user.id != cur_user.id:
         return __errorcode__(2)
-    sendSMS(attention.user.tel,u"发送到客户")
+    #sendSMS(attention.user.tel,u"发送到客户")
 
 def buy_attention_sure(req):
     if 'id' not in req.GET:
@@ -311,7 +311,7 @@ def buy_attention_sure(req):
     attention.attention_type = 1
     attention.save()
     farmuser = user.objects.get(farm=attention.nestofpet_id.farm,dele=False,type=1)
-    sendSMS(farmuser.tel,u"发送到养殖场")
+    #sendSMS(farmuser.tel,u"发送到养殖场")
     return __errorcode__(0)
     
 def buy_attention_adapter(req):
