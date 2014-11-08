@@ -290,10 +290,28 @@ def buy_detail_adapter(re):
     else:
         return False
 
+def attention_sendsms(req):
+    if not req.user.is_authenticated():
+            return __errorcode__(1)
+    attention = nestofpet_attention.objects.get(id=req.REQUEST.get('id'),attention_type=0,dele=False)
+    cur_user = user.objects.get(auth_user=auth.get_user(req),dele=False)
+    if attention.user.id != cur_user.id:
+        return __errorcode__(2)
+    #sendSMS(attention.user.tel,u"发送到客户")
+
 def buy_attention_sure(req):
     if 'id' not in req.GET:
         return __errorcode__(7)
-    nestofpet_attention.objects.filter(id=req.REQUEST.get('id'),attention_type=0,dele=False).update(attention_type=1)
+    if not req.user.is_authenticated():
+            return __errorcode__(1)
+    attention = nestofpet_attention.objects.get(id=req.REQUEST.get('id'),attention_type=0,dele=False)
+    cur_user = user.objects.get(auth_user=auth.get_user(req),dele=False)
+    if attention.user.id != cur_user.id:
+        return __errorcode__(2)
+    attention.attention_type = 1
+    attention.save()
+    farmuser = user.objects.get(petfarm=attention.nestofpet_id.farm,dele=False,type=1)
+    #sendSMS(farmuser.tel,u"发送到养殖场")
     return __errorcode__(0)
     
 def buy_attention_adapter(req):
@@ -366,10 +384,6 @@ def buy_attention_adapter(req):
         curattentions[0].trans = transport
         curattentions[0].save()
         id = curattentions[0].id
-    try:
-        sendSMS(tel,"test1")
-    except:
-        traceback.print_exc()
     return __errorcode__(0,{'id':id,'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
     #except Exception, e:
