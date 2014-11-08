@@ -345,7 +345,9 @@
         $serviceCharge = $orderModal.find('#js-service-charge'),
         $chargeType = $orderModal.find('#js-charge-type'),
         $toFirst = $orderModal.find('#js-to-first'),
-        $liftInput = $orderModal.find('#js-lift-btn');
+        $liftInput = $orderModal.find('#js-lift-btn'),
+        $sendMessage = $orderModal.find('#js-send-message'),
+        $agreement = $orderModal.find('#js-agreement');
 
     //pass the pet id
     $('.js-btn-order').on('click', function(){
@@ -448,6 +450,11 @@
 
         var $this = $(this);
 
+        if(!$agreement.is(':checked')){
+            alert('同意《用户够犬协议》才能预约哟~');
+            return false;
+        }
+
         $.ajax({
             url: '/buy/detail/attention/',
             data: {id: $orderModal.data('appointmentId')},
@@ -464,6 +471,57 @@
             },
             complete: function(){
                 $this.button('reset');
+            }
+        });
+    });
+
+    function countTime($el){
+        if($el.data('counting')){
+            return false;
+        }
+
+        var delay = $el.data('delay'),
+            text = '重新发送 ';
+
+        delay = !isNaN(delay) && parseInt(delay, 10) || 60,
+
+
+        $el.text(text + delay);
+
+        function updateText(){
+            delay--;
+
+            if(delay > 0){
+                $el.text(text + delay);
+                setTimeout(updateText, 1000);
+            }else{
+                $el.data('counting', false);
+                $el.prop('disabled', false).removeClass('disabled').text(text);
+            }
+        }
+        $el.data('counting', true);
+        setTimeout(updateText, 1000);
+    }
+
+    $sendMessage.on('click', function(){
+        $.ajax({
+            url: '/buy/detail/attention/sendsms/',
+            data: {id: $orderModal.data('appointmentId')},
+            dataType: 'json',
+            beforeSend: function(){
+                $sendMessage.prop('disabled', true).addClass('disabled');
+            },
+            success: function(data){
+                if(data.status == 0){
+                    alert('发送成功，请注意查收');
+                    countTime($sendMessage);
+                }else{
+                    alert(data.message);
+                    $sendMessage.prop('disabled', false).removeClass('disabled');
+                }
+            },
+            error: function(){
+                $sendMessage.prop('disabled', false).removeClass('disabled');
             }
         });
     });
