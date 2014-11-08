@@ -2525,6 +2525,65 @@ tbody.collapse.in {
 a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
   border-color: #428bca; }
 
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px; }
+  .alert h4 {
+    margin-top: 0;
+    color: inherit; }
+  .alert .alert-link {
+    font-weight: bold; }
+  .alert > p, .alert > ul {
+    margin-bottom: 0; }
+  .alert > p + p {
+    margin-top: 5px; }
+
+.alert-dismissable, .alert-dismissible {
+  padding-right: 35px; }
+  .alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit; }
+
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d7e9c6;
+  color: #3c763d; }
+  .alert-success hr {
+    border-top-color: #cae2b3; }
+  .alert-success .alert-link {
+    color: #2b542b; }
+
+.alert-info {
+  background-color: #d9edf7;
+  border-color: #bce9f1;
+  color: #31708f; }
+  .alert-info hr {
+    border-top-color: #a6e2ec; }
+  .alert-info .alert-link {
+    color: #245369; }
+
+.alert-warning {
+  background-color: #fcf8e3;
+  border-color: #faeacc;
+  color: #8a6d3b; }
+  .alert-warning hr {
+    border-top-color: #f7e0b5; }
+  .alert-warning .alert-link {
+    color: #66502c; }
+
+.alert-danger {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442; }
+  .alert-danger hr {
+    border-top-color: #e4b9c0; }
+  .alert-danger .alert-link {
+    color: #843534; }
+
 .media, .media-body {
   overflow: hidden;
   zoom: 1; }
@@ -3241,27 +3300,6 @@ button.close {
 /**
  * Generic utility styles etc.
  */
-/*
-SCSS variables are information about icon's compiled state, stored under its original file name
-
-.icon-home {
-  width: $icon-home-width;
-}
-
-The large array-like variables contain all information about a single icon
-$icon-home: x y offset_x offset_y width height total_width total_height image_path;
-*/
-/*
-The provided mixins are intended to be used with the array-like variables
-
-.icon-home {
-  @include sprite-width($icon-home);
-}
-
-.icon-email {
-  @include sprite($icon-email);
-}
-*/
 /**
  * Base styles; unclassed HTML elements etc.
  */
@@ -3321,24 +3359,40 @@ The provided mixins are intended to be used with the array-like variables
     -webkit-box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3);
     box-shadow: 2px 2px 4px rgba(127, 127, 127, 0.3); }
 
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
 .sprite {
   display: inline-block;
   background-image: url(../imgs/sprites.png); }
-
-.sprite-checked {
-  background-position: -215px -36px;
-  width: 10px;
-  height: 10px; }
-
-.sprite-pet {
-  background-position: -154px -36px;
-  width: 30px;
-  height: 24px; }
 
 .sprite-car {
   background-position: -184px -36px;
   width: 31px;
   height: 13px; }
+
+.sprite-checked {
+  background-position: -215px -36px;
+  width: 10px;
+  height: 10px; }
 
 .sprite-flow {
   background-position: 0px 0px;
@@ -3349,6 +3403,16 @@ The provided mixins are intended to be used with the array-like variables
   background-position: -60px -36px;
   width: 94px;
   height: 30px; }
+
+.sprite-pet {
+  background-position: -154px -36px;
+  width: 30px;
+  height: 24px; }
+
+.sprite-tag {
+  background-position: 0px -36px;
+  width: 60px;
+  height: 34px; }
 
 @font-face {
   font-family: 'fontello';
@@ -4285,6 +4349,9 @@ Copyright (c) 2014 Daniel Eden
 
 .article-modal .article-date {
   padding-right: 15px; }
+.article-modal .article-content {
+  font-size: 17px;
+  letter-spacing: 1px; }
 .modal-open .article-modal {
   overflow-y: hidden; }
 .article-modal .modal-body {

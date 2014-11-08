@@ -30,6 +30,7 @@ gulp.task('sprites', function(){
         cssVarMap: function (sprite) {
           sprite.name = 'sprite-' + sprite.name;
         },
+        cssTemplate: './scss.template.mustache',
         cssOpts: {
           cssClass: function (item) {
             return '.sprite-' + item.name;
