@@ -11,6 +11,15 @@
     <![endif]-->
 </head>
 <body {% block bodyhook %}{% endblock %}>
+<!--[if lt IE 8]>
+<div class="alert alert-danger text-center margin-none radius-none" role="alert">
+    您正在使用一个<strong>过时的</strong>浏览器。为保证您的正常使用，请升级浏览器：<a href="http://browsehappy.com" target="_blank">点此查看</a>
+</div>
+<![endif]-->
+<div class="alert alert-danger text-center margin-none radius-none hide" role="alert" id="js-cookie-alert">
+    您的浏览器禁用了<strong>Cookie</strong>，会导致不能正常使用本站功能。<a href="#" target="_blank">点此查看如何开启<strong>Cookie</strong></a>
+</div>
+
 {% block header %}
     {% include 'tpl/base/header.html' %}
 {% endblock %}
@@ -31,8 +40,17 @@
 {% endblock %}
 
 
-<!--统计代码-->
 <script type="text/javascript">
+    function isCookieEnabled(){
+        return navigator.cookieEnabled || ("cookie" in document && (document.cookie.length > 0 || (document.cookie = "test").indexOf.call(document.cookie, "test") > -1));
+    }
+
+    //cookie 提示
+    if(!isCookieEnabled()){
+        $('#js-cookie-alert').removeClass('hide');
+    }
+
+    //<!--统计代码-->
     if(window.location.hostname === 'chongwug.com'){
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fddd73710a5679013c750d68e5c7efa37' type='text/javascript'%3E%3C/script%3E"));
