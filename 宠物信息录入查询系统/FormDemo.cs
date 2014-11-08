@@ -60,7 +60,7 @@ namespace BTDemo {
                 if (count == myPortNames.Length)
                 {
                     MessageBox.Show("未检测到对端设备,点击确定退出程序");
-                    //Environment.Exit(0);
+                    Environment.Exit(0);
                 }
             }
             webBrowser1.ScriptErrorsSuppressed = true;
@@ -132,7 +132,7 @@ namespace BTDemo {
                     }
                     _oDevice.ClearAllRecords(); 
                 }
-                Thread.Sleep(2000);
+                Thread.Sleep(8000);
             }
         }
 

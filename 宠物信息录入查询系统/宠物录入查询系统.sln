@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "宠物录入查询系统", "宠物录入查询系统.csproj", "{9C160715-7FD8-4C45-92FD-2D3B6BB3E50A}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "setup", "..\宠物信息录入查询\宠物信息录入查询.vdproj", "{A8EFB59E-BC20-47F1-A969-815B374D2852}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{9C160715-7FD8-4C45-92FD-2D3B6BB3E50A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C160715-7FD8-4C45-92FD-2D3B6BB3E50A}.Release|x86.ActiveCfg = Release|x86
 		{9C160715-7FD8-4C45-92FD-2D3B6BB3E50A}.Release|x86.Build.0 = Release|x86
+		{A8EFB59E-BC20-47F1-A969-815B374D2852}.Debug|Any CPU.ActiveCfg = Debug
+		{A8EFB59E-BC20-47F1-A969-815B374D2852}.Debug|x86.ActiveCfg = Debug
+		{A8EFB59E-BC20-47F1-A969-815B374D2852}.Release|Any CPU.ActiveCfg = Release
+		{A8EFB59E-BC20-47F1-A969-815B374D2852}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

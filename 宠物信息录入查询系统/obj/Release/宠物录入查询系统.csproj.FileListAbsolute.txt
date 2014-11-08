@@ -7,3 +7,12 @@ C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\bin\Release\PTDemo.exe
 C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\bin\Release\PTDemo.pdb
 C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\bin\Release\DeviceSDK2.dll
 C:\Users\hhy\Desktop\PT-SDK2013\DeviceSDK2\Sample\RTFDemo\obj\Release\BTDemo.form1.resources
+G:\chongwug\宠物信息录入查询系统\obj\Release\PTDemo.exe
+G:\chongwug\宠物信息录入查询系统\obj\Release\PTDemo.pdb
+G:\chongwug\宠物信息录入查询系统\bin\Release\PTDemo.exe
+G:\chongwug\宠物信息录入查询系统\bin\Release\PTDemo.pdb
+G:\chongwug\宠物信息录入查询系统\bin\Release\DeviceSDK2.dll
+G:\chongwug\宠物信息录入查询系统\obj\Release\ResolveAssemblyReference.cache
+G:\chongwug\宠物信息录入查询系统\obj\Release\BTDemo.form1.resources
+G:\chongwug\宠物信息录入查询系统\obj\Release\PTDemo.Properties.Resources.resources
+G:\chongwug\宠物信息录入查询系统\obj\Release\宠物录入查询系统.csproj.GenerateResource.Cache
