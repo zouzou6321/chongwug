@@ -310,7 +310,7 @@ def buy_attention_sure(req):
         return __errorcode__(2)
     attention.attention_type = 1
     attention.save()
-    farmuser = user.objects.get(farm=attention.nestofpet_id.farm,dele=False,type=1)
+    farmuser = user.objects.get(petfarm=attention.nestofpet_id.farm,dele=False,type=1)
     #sendSMS(farmuser.tel,u"发送到养殖场")
     return __errorcode__(0)
     
