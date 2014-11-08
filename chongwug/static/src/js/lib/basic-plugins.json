@@ -1,10 +1,10 @@
 {
-    "ie10-viewport-bug-workaround": true,
+    "ie10-viewport-bug-workaround": false,
     "affix" : true,
     "alert" : false,
     "button" : true,
     "carousel" : true,
-    "collapse" : true,
+    "collapse" : false,
     "dropdown" : false,
     "tab" : true,
     "transition" : true,
