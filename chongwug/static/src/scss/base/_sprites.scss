@@ -1,24 +1,130 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+$sprite-car-x: 184px;
+$sprite-car-y: 36px;
+$sprite-car-offset-x: -184px;
+$sprite-car-offset-y: -36px;
+$sprite-car-width: 31px;
+$sprite-car-height: 13px;
+$sprite-car-total-width: 395px;
+$sprite-car-total-height: 70px;
+$sprite-car-image: '../imgs/sprites.png';
+$sprite-car: 184px 36px -184px -36px 31px 13px 395px 70px '../imgs/sprites.png';
+$sprite-checked-x: 215px;
+$sprite-checked-y: 36px;
+$sprite-checked-offset-x: -215px;
+$sprite-checked-offset-y: -36px;
+$sprite-checked-width: 10px;
+$sprite-checked-height: 10px;
+$sprite-checked-total-width: 395px;
+$sprite-checked-total-height: 70px;
+$sprite-checked-image: '../imgs/sprites.png';
+$sprite-checked: 215px 36px -215px -36px 10px 10px 395px 70px '../imgs/sprites.png';
+$sprite-flow-x: 0px;
+$sprite-flow-y: 0px;
+$sprite-flow-offset-x: 0px;
+$sprite-flow-offset-y: 0px;
+$sprite-flow-width: 395px;
+$sprite-flow-height: 36px;
+$sprite-flow-total-width: 395px;
+$sprite-flow-total-height: 70px;
+$sprite-flow-image: '../imgs/sprites.png';
+$sprite-flow: 0px 0px 0px 0px 395px 36px 395px 70px '../imgs/sprites.png';
+$sprite-logo-simple-x: 60px;
+$sprite-logo-simple-y: 36px;
+$sprite-logo-simple-offset-x: -60px;
+$sprite-logo-simple-offset-y: -36px;
+$sprite-logo-simple-width: 94px;
+$sprite-logo-simple-height: 30px;
+$sprite-logo-simple-total-width: 395px;
+$sprite-logo-simple-total-height: 70px;
+$sprite-logo-simple-image: '../imgs/sprites.png';
+$sprite-logo-simple: 60px 36px -60px -36px 94px 30px 395px 70px '../imgs/sprites.png';
+$sprite-pet-x: 154px;
+$sprite-pet-y: 36px;
+$sprite-pet-offset-x: -154px;
+$sprite-pet-offset-y: -36px;
+$sprite-pet-width: 30px;
+$sprite-pet-height: 24px;
+$sprite-pet-total-width: 395px;
+$sprite-pet-total-height: 70px;
+$sprite-pet-image: '../imgs/sprites.png';
+$sprite-pet: 154px 36px -154px -36px 30px 24px 395px 70px '../imgs/sprites.png';
+$sprite-tag-x: 0px;
+$sprite-tag-y: 36px;
+$sprite-tag-offset-x: 0px;
+$sprite-tag-offset-y: -36px;
+$sprite-tag-width: 60px;
+$sprite-tag-height: 34px;
+$sprite-tag-total-width: 395px;
+$sprite-tag-total-height: 70px;
+$sprite-tag-image: '../imgs/sprites.png';
+$sprite-tag: 0px 36px 0px -36px 60px 34px 395px 70px '../imgs/sprites.png';
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
 .sprite{
-  display: inline-block;
-  @include sprite-image($sprite-car);
-}
-
-.sprite-checked{
-  @include sprite($sprite-checked);
-}
-
-.sprite-pet{
-  @include sprite($sprite-pet);
+    display: inline-block;
+    background-image: url(../imgs/sprites.png);
 }
 
 .sprite-car{
-  @include sprite($sprite-car);
+    @include sprite($sprite-car);
 }
-
+.sprite-checked{
+    @include sprite($sprite-checked);
+}
 .sprite-flow{
-  @include sprite($sprite-flow);
+    @include sprite($sprite-flow);
 }
-
 .sprite-logo-simple{
-  @include sprite($sprite-logo-simple);
+    @include sprite($sprite-logo-simple);
+}
+.sprite-pet{
+    @include sprite($sprite-pet);
+}
+.sprite-tag{
+    @include sprite($sprite-tag);
 }
