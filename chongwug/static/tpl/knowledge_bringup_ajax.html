@@ -1,6 +1,6 @@
 <div>
     {% for knowledge in knowledges %}
-    <div class="col-xs-6 outline dashed-top{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}"
+    <div class="col-6 outline dashed-top{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}"
          data-title="{{ knowledge.title }}"
          data-img="{{ knowledge.imgurl }}"
          data-date="{{ knowledge.time|date:'Y-m-d' }}"

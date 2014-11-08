@@ -14,7 +14,7 @@
     </div>
     <div class="container buy-main content-container">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-1 col-md-6">
+            <div class="col-6">
                 <form action="/buy/" method="get">
                     <div class="input-group cwg-search-wrap">
                     	<input type="text" class="form-control" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != None %}value="{{ searchkey }}"{% endif %}>
@@ -28,8 +28,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">犬种：</div>
-            <div class="col-xs-12 col-sm-11">
+            <div class="col-1 dog-select-title">犬种：</div>
+            <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if typekey == None%}
                     <li class="active"><a href="{{ urls.type_all_url }}">全部</a></li>
@@ -47,8 +47,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">价格：</div>
-            <div class="col-xs-12 col-sm-11">
+            <div class="col-1 dog-select-title">价格：</div>
+            <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if princekey == None%}
                     <li class="active"><a href="{{ urls.prince_all_url }}">全部</a></li>
@@ -66,8 +66,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">区域：</div>
-            <div class="col-xs-12 col-sm-11">
+            <div class="col-1 dog-select-title">区域：</div>
+            <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if directkey == None%}
                     <li class="active"><a href="{{ urls.direct_all_url }}">全部</a></li>
@@ -85,8 +85,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">疫苗：</div>
-            <div class="col-xs-12 col-sm-11">
+            <div class="col-1 dog-select-title">疫苗：</div>
+            <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if epidemickey == None%}
                     <li class="active"><a href="{{ urls.epidemic_all_url }}">全部</a></li>
@@ -104,8 +104,8 @@
             </div>
         </div>
         <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">月龄：</div>
-            <div class="col-xs-12 col-sm-11">
+            <div class="col-1 dog-select-title">月龄：</div>
+            <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if agekey == None%}
                     <li class="active"><a href="{{ urls.age_all_url }}">全部</a></li>
@@ -125,8 +125,8 @@
         {% if searchkey == None and  typekey == None and princekey == None and directkey == None and epidemickey == None and agekey == None %}
         {% else %}
         <div class="row dog-select-row">
-            <div class="col-sm-1 dog-select-title">筛选：</div>
-            <div class="col-xs-12 col-sm-11">
+            <div class="col-1 dog-select-title">筛选：</div>
+            <div class="col-11">
                 <ul class="nav nav-pills dog-selected">
                 	{% if searchkey == None %}
                 	{% else %}
@@ -160,7 +160,7 @@
         <div class="row dog-list">
             {% if pets_imgs%}
                 {% for pet_img in pets_imgs %}
-                <div class="col-sm-6 col-md-4 dog-list-item">
+                <div class="col-4 dog-list-item">
                     <a href="detail/?petid={{pet_img.pet.id}}">
                         <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ pet_img.img.img_url }}" class="img-full js-lazy"/>
                     </a>
@@ -204,7 +204,7 @@
                      </ul>
                 </div>
             {% else %}
-                <div class="col-xs-12">
+                <div class="col-12">
                     <p class="text-center no-result">没有找到符合条件的宠物</p>
                 </div>
             {% endif %}

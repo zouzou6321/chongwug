@@ -16,7 +16,7 @@
     </div>
     <div class="container content-container">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-5">
                 <a href="javascript:" class="cwg-thumb">
                     <img src="{{ petimg_a.img_url }}" class="img-full mfp-zoom"/>
                 </a>
@@ -64,7 +64,7 @@
 {#                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>#}
 {#                <!-- JiaThis Button END -->#}
             </div>
-            <div class="col-md-7">
+            <div class="col-7">
                 <h1 class="cwg-detail-title">[{{ nestpet.farm.name }}] {{ nestpet.short_desc }}</h1>
                 <div class="cwg-detail-info">
                     <div class="info-row clearfix">
@@ -122,7 +122,7 @@
     </div>
     <div class="container content-container">
         <div class="row">
-            <div class="col-md-9 detail-main">
+            <div class="col-9 detail-main">
                 <div id="pet-info">
                     <h2 class="desc-tit">
                         <span class="placard">犬</span>狗狗资料
@@ -181,7 +181,7 @@
                     <div class="desc-main">
                         <div class="row img-row">
                         	{% for farmimg in farmimgs %}
-                            <div class="col-xs-6">
+                            <div class="col-6">
                                 <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
                             {% if forloop.counter|divisibleby:2 %}<div class="clearfix"></div>{% endif %}
@@ -205,7 +205,7 @@
                     <div class="desc-main">
                         <div class="row margin-sm">
                             {% for pet_img in pets_img %}
-                            <div class="col-md-6 padding-sm pet-showcase-wrap">
+                            <div class="col-6 padding-sm pet-showcase-wrap">
                                 <div class="pet-showcase-item shade shade-hover">
                                     <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
                                     <p class="tag">{{ pet_img.pet.type }}</p>
@@ -247,7 +247,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 most-popular">
+            <div class="col-3 most-popular">
             <h5><strong>热门犬种</strong></h5>
             {% for recommendpet_img in recommendpets_img %}
                 <div>

@@ -1,49 +1,43 @@
-.col-md-2_4 {
-  @include make-md-column(2.4, 18px);
-}
-
-.col-sm-2_4 {
-  @include make-sm-column(2.4, 18px);
-}
-
-.col-xs-offset-0_5{
-  @include  make-xs-column-offset(0.5);
-}
-
-.col-xs-1_5{
-  @include make-xs-column(1.5, 20px);
-}
-
 .container{
   width: 1170px;
-
-  @media (min-width: $screen-sm) {
-    width: 1170px;
-  }
-
-  @media (min-width: $screen-md) {
-    width: 1170px;
-  }
+  @include container-fixed();
 }
 
 .content-container{
   width: $content-width;
-
-  @media (min-width: $screen-sm) {
-    width: $content-width;
-  }
-
-  @media (min-width: $screen-md) {
-    width: $content-width;
-  }
-
-  @media (min-width: $screen-lg) {
-    width: $content-width;
-  }
-
   background-color: #fff;
 
   .cwg-container > &{
     @include box-shadow(2px 2px 4px rgba(127, 127, 127, .3));
   }
+}
+
+.row {
+  @include make-row();
+}
+
+@mixin make-grid-columns($i: 1, $list: ".col-#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .col-#{$i}";
+  }
+  #{$list} {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    padding-left:  ($grid-gutter-width / 2);
+    padding-right: ($grid-gutter-width / 2);
+  }
+}
+
+@include make-grid-columns();
+
+@include make-grid('');
+
+.col-1_5{
+  @include make-xs-column(1.5, 20px);
+}
+
+.col-offset-0_5{
+  @include make-xs-column-offset(.5)
 }

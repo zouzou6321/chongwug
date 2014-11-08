@@ -19,8 +19,8 @@
         <div class="row-separate row"></div>
         <div id="js-pet-filter">
             <div class="row dog-select-row">
-                <div class="col-xs-1 dog-select-title form-horizontal"><label class="control-label">犬种：</label></div>
-                <div class="col-xs-6 col-xs-6">
+                <div class="col-1 dog-select-title form-horizontal"><label class="control-label">犬种：</label></div>
+                <div class="col-6">
                     <div class="input-group cwg-search-wrap padding-none">
                         <input type="text" class="form-control" placeholder="可根据名字搜索犬种" name="key" id="js-key-input">
                         <span class="input-group-btn">
@@ -32,24 +32,24 @@
                 </div>
             </div>
             <div class="row dog-select-row">
-                <div class="col-xs-1 dog-select-title">体型：</div>
-                <div class="col-xs-3">
+                <div class="col-1 dog-select-title">体型：</div>
+                <div class="col-3">
                     <ul class="nav nav-pills" data-name="tixing">
                         <li data-value="大型犬"><a href="javascript:">大型犬</a></li>
                         <li data-value="中型犬"><a href="javascript:">中型犬</a></li>
                         <li data-value="小型犬"><a href="javascript:">小型犬</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-1 dog-select-title">友善：</div>
-                <div class="col-xs-3">
+                <div class="col-1 dog-select-title">友善：</div>
+                <div class="col-3">
                     <ul class="nav nav-pills"  data-name="youshan">
                         <li data-value="3"><a href="javascript:">很友善</a></li>
                         <li data-value="1"><a href="javascript:">不友善</a></li>
                         <li data-value="2"><a href="javascript:">一般</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-1 dog-select-title">美容频率：</div>
-                <div class="col-xs-3">
+                <div class="col-1 dog-select-title">美容频率：</div>
+                <div class="col-3">
                     <ul class="nav nav-pills" data-name="meirong_hz">
                         <li data-value="3"><a href="javascript:">高</a></li>
                         <li data-value="1"><a href="javascript:">低</a></li>
@@ -58,24 +58,24 @@
                 </div>
             </div>
             <div class="row dog-select-row">
-                <div class="col-xs-1 dog-select-title">训练：</div>
-                <div class="col-xs-3">
+                <div class="col-1 dog-select-title">训练：</div>
+                <div class="col-3">
                     <ul class="nav nav-pills" data-name="xulian">
                         <li data-value="3"><a href="javascript:">好训练</a></li>
                         <li data-value="1"><a href="javascript:">难训练</a></li>
                         <li data-value="2"><a href="javascript:">一般</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-1 dog-select-title">掉毛：</div>
-                <div class="col-xs-3">
+                <div class="col-1 dog-select-title">掉毛：</div>
+                <div class="col-3">
                     <ul class="nav nav-pills" data-name="diaomao">
                         <li data-value="1"><a href="javascript:">不掉毛</a></li>
                         <li data-value="3"><a href="javascript:">易掉毛</a></li>
                         <li data-value="2"><a href="javascript:">一般</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-1 dog-select-title">吠叫：</div>
-                <div class="col-xs-3">
+                <div class="col-1 dog-select-title">吠叫：</div>
+                <div class="col-3">
                     <ul class="nav nav-pills" data-name="xijiao">
                         <li data-value="3"><a href="javascript:">喜欢</a></li>
                         <li data-value="1"><a href="javascript:">不喜欢</a></li>
@@ -84,16 +84,16 @@
                 </div>
             </div>
             <div class="row dog-select-row">
-                <div class="col-xs-1 dog-select-title">运动：</div>
-                <div class="col-xs-3">
+                <div class="col-1 dog-select-title">运动：</div>
+                <div class="col-3">
                     <ul class="nav nav-pills" data-name="yundong">
                         <li data-value="3"><a href="javascript:">量大</a></li>
                         <li data-value="1"><a href="javascript:">量少</a></li>
                         <li data-value="2"><a href="javascript:">一般</a></li>
                     </ul>
                 </div>
-                <div class="col-xs-1 dog-select-title">口水：</div>
-                <div class="col-xs-3">
+                <div class="col-1 dog-select-title">口水：</div>
+                <div class="col-3">
                     <ul class="nav nav-pills" data-name="koushui">
                         <li data-value="3"><a href="javascript:">量大</a></li>
                         <li data-value="1"><a href="javascript:">量少</a></li>
@@ -105,7 +105,7 @@
         <div class="row-separate row"></div>
         <div class="row" id="js-pet-list">
         	{% for knowledge in knowledges %}
-            <div class="col-xs-1_5 pet-wap" data-id="{{ knowledge.id }}">
+            <div class="col-1_5 pet-wap" data-id="{{ knowledge.id }}">
                 <div class="pet-box">
                     <img data-original="{{ knowledge.imgurl }}" class="img-full pet-img js-lazy" src="{{'imgs/loading.gif'|assets}}"/>
                     <p class="pet-name">{{ knowledge.name }}</p>

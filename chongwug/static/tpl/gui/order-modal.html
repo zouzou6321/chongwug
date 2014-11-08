@@ -13,20 +13,20 @@
                 {% csrf_token %}
                 <p class="text-muted">请如实填写信息，我们将尽快与您联系：</p>
                 <div class="form-group">
-                    <label for="name" class="col-sm-4 control-label text-muted">您的名字：</label>
-                    <div class="col-sm-7">
+                    <label for="name" class="col-4 control-label text-muted">您的名字：</label>
+                    <div class="col-7">
                         <input type="text" class="form-control radius-none required" id="name" name="name" value="{% if cuser%}{{ cuser.nickname }}{% endif %}" autofocus>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="phone" class="col-sm-4 control-label text-muted">您的手机：</label>
-                    <div class="col-sm-7">
+                    <label for="phone" class="col-4 control-label text-muted">您的手机：</label>
+                    <div class="col-7">
                         <input type="text" maxlength="11" class="form-control radius-none required phone" id="phone" name="phone" value="{% if cuser%}{{ cuser.tel }}{% endif %}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label text-muted">所在区域：</label>
-                    <div class="col-sm-7">
+                    <label class="col-4 control-label text-muted">所在区域：</label>
+                    <div class="col-7">
                         <button class="btn btn-select radius-none" type="button" id="js-btn-location">
                             <span class="select-title" id="js-location" data-text="选择城市">选择城市</span>
                             <div class="vertical-center">
@@ -37,8 +37,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="time" class="col-sm-4 control-label text-muted">预约看狗时间：</label>
-                    <div class="col-sm-7">
+                    <label for="time" class="col-4 control-label text-muted">预约看狗时间：</label>
+                    <div class="col-7">
                         <button class="btn btn-select radius-none" type="button" id="js-btn-time">
                             <span class="select-title" id="js-time" data-text="选择时间">选择时间</span>
                             <div class="vertical-center">
@@ -49,8 +49,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label text-muted">交通方式：</label>
-                    <div class="col-sm-7 btn-group" data-toggle="buttons">
+                    <label class="col-4 control-label text-muted">交通方式：</label>
+                    <div class="col-7 btn-group" data-toggle="buttons">
                         <label class="btn btn-check">
                             <input type="radio" name="transportation" value="drive" class="js-trans-input"/>自驾
                             <i class="sprite sprite-checked"></i>
@@ -72,38 +72,38 @@
               <div class="modal-body">
                   <div class="form-horizontal">
                       <div class="form-group">
-                          <label class="col-sm-4 text-right text-muted">本窝犬已预约用户：</label>
-                          <div class="col-sm-6">
+                          <label class="col-4 text-right text-muted">本窝犬已预约用户：</label>
+                          <div class="col-6">
                               <span id="js-other-order" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
 {#                      <div class="form-group">#}
-{#                          <label class="col-sm-4 text-right text-muted">已预约用户看犬时间：</label>#}
-{#                          <div class="col-sm-6">#}
+{#                          <label class="col-4 text-right text-muted">已预约用户看犬时间：</label>#}
+{#                          <div class="col-6">#}
 {#                              <span id="js-other-time" class="js-need-reset" data-text=""></span>#}
 {#                          </div>#}
 {#                      </div>#}
                       <div class="form-group">
-                          <label class="col-sm-4 text-right text-muted">您的排队号：</label>
-                          <div class="col-sm-6">
+                          <label class="col-4 text-right text-muted">您的排队号：</label>
+                          <div class="col-6">
                               <span id="js-queue-num" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
 {#                      <div class="form-group">#}
-{#                          <label class="col-sm-4 text-right text-muted">用户编号：</label>#}
-{#                          <div class="col-sm-6">#}
+{#                          <label class="col-4 text-right text-muted">用户编号：</label>#}
+{#                          <div class="col-6">#}
 {#                              <span id="js-order-num" class="js-need-reset" data-text=""></span>#}
 {#                          </div>#}
 {#                      </div>#}
                       <div class="form-group">
-                          <div class="col-sm-6 col-sm-offset-4">
+                          <div class="col-6 col-offset-4">
                               <label class="checkbox-inline">
                                   <input type="checkbox" checked id="js-agreement"> 同意<a href="" target="_blank">《用户够犬协议》</a>
                               </label>
                           </div>
                       </div>
                       <div class="form-group">
-                          <div class="tips col-sm-10 col-sm-offset-1">
+                          <div class="tips col-10 col-offset-1">
                               <i class="icon icon-attention-circled tips-icon"></i>
                               <p class="tips-content text-muted">
                                   提示：若看犬过程中多位用户同时看中某一只狗狗，则以用户编号顺序决定优先挑选权及购买权。
@@ -121,36 +121,36 @@
               <div class="modal-body">
                   <div class="form-horizontal">
                       <div class="form-group">
-                          <label class="col-sm-4 text-right text-muted">犬舍位置：</label>
-                          <div class="col-sm-6">
+                          <label class="col-4 text-right text-muted">犬舍位置：</label>
+                          <div class="col-6">
                               <span id="js-kennel-location" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
                       <div class="form-group">
-                          <label class="col-sm-4 text-right text-muted">等待接送地点：</label>
-                          <div class="col-sm-6">
+                          <label class="col-4 text-right text-muted">等待接送地点：</label>
+                          <div class="col-6">
                               <span id="js-wait-location" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
                       <div class="form-group">
-                          <label class="col-sm-4 text-right text-muted">等待接送时间：</label>
-                          <div class="col-sm-6">
+                          <label class="col-4 text-right text-muted">等待接送时间：</label>
+                          <div class="col-6">
                               <span id="js-wait-time" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
 {#                      <div class="form-group">#}
-{#                          <label class="col-sm-4 text-right text-muted"><span id="js-charge-type" class="js-need-reset" data-text="交通费">交通费</span>：</label>#}
-{#                          <div class="col-sm-6">#}
+{#                          <label class="col-4 text-right text-muted"><span id="js-charge-type" class="js-need-reset" data-text="交通费">交通费</span>：</label>#}
+{#                          <div class="col-6">#}
 {#                              <span id="js-service-charge" class="js-need-reset" data-text=""></span>#}
 {#                          </div>#}
 {#                      </div>#}
                       <div class="form-group">
-                          <div class="col-sm-6 col-sm-offset-4">
+                          <div class="col-6 col-offset-4">
                               <button type="button" class="btn btn-primary" id="js-send-message" data-delay="60">发送到手机</button>
                           </div>
                       </div>
                       <div class="form-group">
-                          <div class="tips col-sm-10 col-sm-offset-1">
+                          <div class="tips col-10 col-offset-1">
                               <i class="icon icon-attention-circled tips-icon"></i>
                               <p class="tips-content text-muted">
                                   提示：您需要在等待接送时间之前赶到等待接送地点，我们的工作人员会在此等候您，并接送或带领您去预约犬舍挑选、购买狗狗！我们会准时发车，请您务必在指定接送时间前到达指定接送地点集合！
