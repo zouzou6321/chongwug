@@ -3,7 +3,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 import adapters,traceback,string
-from chongwug.commom import __errorcode__
+from chongwug.commom import __errorcode__,sendSMS
 from django.template import RequestContext
 #auth:huhuaiyong
 #date:2014/8/16
@@ -51,6 +51,9 @@ def buy_detail_view(request):
         data['title'] = u'%s|%s|%s' % (data['nestpet'].type,data['nestpet'].short_desc,data['nestpet'].farm.name)
         data['description'] = data['nestpet'].txt_desc
         return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
+
+def buy_attention_sendsms_view(request):
+    return HttpResponse(adapters.attention_sendsms(request))
 
 def buy_attention_view(request):
     if request.method == 'POST':
