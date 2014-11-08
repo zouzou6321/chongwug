@@ -293,7 +293,7 @@ def buy_detail_adapter(re):
 def attention_sendsms(req):
     if not req.user.is_authenticated():
             return __errorcode__(1)
-    attention = nestofpet_attention.objects.get(id=req.REQUEST.get('id'),attention_type=0,dele=False)
+    attention = nestofpet_attention.objects.get(id=req.REQUEST.get('id'),attention_type=1,dele=False)
     cur_user = user.objects.get(auth_user=auth.get_user(req),dele=False)
     if attention.user.id != cur_user.id:
         return __errorcode__(2)
