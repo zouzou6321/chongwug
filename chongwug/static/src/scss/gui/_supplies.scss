@@ -3,16 +3,24 @@
   $bg2: #f24646;
   $font-color: #994e0d;
   $price-color: #fe2a26;
-  $gutter: 50px;
+  $gutter: 40px;
   $img: 222px;
   $padding: 8px;
   $container: 3 * $gutter + ($img + $padding * 2) * 4;
   $banner-width: 1902px;
   $banner-height: 571px;
 
+  min-width: 1170px;
+
+  .supplies-row{
+    margin-left: -$gutter/2;
+    margin-right: -$gutter/2;
+  }
+
   .supplies-banner{
     background: $bg1;
     overflow: hidden;
+    min-width: 1170px;
     max-width: $banner-width;
     height: $banner-height;
 

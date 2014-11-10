@@ -12,7 +12,7 @@
     <div class="supplies-necessary">
         <div class="supplies-container">
             <h2 class="supplies-title"></h2>
-            <div class="row margin-lg">
+            <div class="row supplies-row">
             	{% for supplie in supplies %}
             	{% ifequal supplie.type '必备用品' %}
                 <div class="supplies-item">
@@ -43,7 +43,7 @@
     <div class="supplies-daily">
         <div class="supplies-container">
             <h2 class="supplies-title"></h2>
-            <div class="row margin-lg">
+            <div class="row supplies-row">
                 {% for supplie in supplies %}
             	{% ifequal supplie.type '生活用品' %}
                 <div class="supplies-item">
@@ -74,7 +74,7 @@
     <div class="supplies-medical">
         <div class="supplies-container">
             <h2 class="supplies-title"></h2>
-            <div class="row margin-lg">
+            <div class="row supplies-row">
                 {% for supplie in supplies %}
             	{% ifequal supplie.type '保健医疗' %}
                 <div class="supplies-item">
@@ -105,7 +105,7 @@
     <div class="supplies-clean">
         <div class="supplies-container">
             <h2 class="supplies-title"></h2>
-            <div class="row margin-lg">
+            <div class="row supplies-row">
                 {% for supplie in supplies %}
             	{% ifequal supplie.type '清洁卫生' %}
                 <div class="supplies-item">
