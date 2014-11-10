@@ -286,8 +286,15 @@ def manage_ad_select(request):
         return htmltoken
     return  'False'
 
-def manage_get_supplies():
-    return supplies.objects.filter(dele=False)
+def manage_get_supplies(request):
+    supplietype = request.REQUEST.get('type', u'必备用品')
+    return supplies.objects.filter(dele=False,type=supplietype)
+
+def manage_get_supplie(request):
+    try:
+        return supplies.objects.get(id = string.atoi(request.REQUEST.get('id')),dele=False)
+    except:
+        return None
 
 def manage_supplie_add(req,photo):
     if photo == None:
@@ -312,4 +319,31 @@ def manage_supplie_add(req,photo):
         new_supplie.save()
     except:
         return False
+    return True
+
+def manage_supplie_mod(req,photo):
+    supplie = supplies.objects.get(id=string.atoi(req.POST['id']),dele=False)
+    img_url = supplie.img_url
+    if photo != None:
+        try:
+            img = Image.open(photo)
+            filename='%s' % str(uuid.uuid1())
+            photo.name = filename + '.jpg'
+            url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
+            name = settings.STATIC_ROOT+url
+            img.save(name,'jpeg',quality=75)
+            file_path_name = settings.SUPPLIE_PIC_ROOT + photo.name
+            up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
+            with open(name, 'rb') as f:
+                res = up.put(file_path_name, f, checksum=False)
+            os.remove(name)
+            img_url = settings.PIC_ROOT + file_path_name
+        except:
+            None
+    supplie.img_url = img_url
+    supplie.type = req.POST['type']
+    supplie.tar_url = req.POST['tarurl']
+    supplie.price = string.atof(req.POST['price'])
+    supplie.title = req.POST['title']
+    supplie.save()
     return True
