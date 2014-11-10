@@ -130,21 +130,15 @@
   overflow: scroll;
 }
 
-// Scale up the modal
-@media (min-width: $screen-sm-min) {
-  // Automatically set modal's width for larger viewports
-  .modal-dialog {
-    width: $modal-md;
-    margin: 30px auto;
-  }
-  .modal-content {
-    @include box-shadow(0 5px 15px rgba(0,0,0,.5));
-  }
-
-  // Modal sizes
-  .modal-sm { width: $modal-sm; }
+// Automatically set modal's width for larger viewports
+.modal-dialog {
+  width: $modal-md;
+  margin: 30px auto;
+}
+.modal-content {
+  @include box-shadow(0 5px 15px rgba(0,0,0,.5));
 }
 
-@media (min-width: $screen-md-min) {
-  .modal-lg { width: $modal-lg; }
-}
+// Modal sizes
+.modal-sm { width: $modal-sm; }
+.modal-lg { width: $modal-lg; }
