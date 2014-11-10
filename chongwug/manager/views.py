@@ -113,9 +113,15 @@ def manage_supplie_mod_view(request):
     if request.session['score'] < 50:
         return render_to_response('404.html')
     if request.method == 'POST':
-        return False
+        photo = request.FILES.get('imgurl',None)
+        data = adapters.manage_supplie_mod(request,photo)
+        return HttpResponseRedirect(MANAGE_ROOT +'supplie/mod/')
     
     data = adapters.manage_home_data_get(request)
     data['types'] = config.__supplietypes
-    data['supplies'] = adapters.manage_get_supplies()
-    return render_to_response('manager/tpl/manage_supplie_mod.html',data,context_instance=RequestContext(request))
+    if 'id' in request.GET:
+        data['supplie'] = adapters.manage_get_supplie(request)
+        return render_to_response('manager/tpl/manage_supplie_mod_item.html',data,context_instance=RequestContext(request))
+    else:
+        data['supplies'] = adapters.manage_get_supplies(request)
+        return render_to_response('manager/tpl/manage_supplie_mod.html',data,context_instance=RequestContext(request))

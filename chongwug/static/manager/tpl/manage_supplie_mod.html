@@ -26,13 +26,15 @@
         </div>
 	</div>
     <div class="row">
+    	{% for supplie in supplies %}
         <div class="col-xs-3">
-            <a href="" target="_blank">
-                <img src="xx" class="supplies-img"/>
-                <p class="supplies-title">title</p>
+            <a href="./?id={{ supplie.id }}" target="_blank">
+                <img src="{{ supplie.img_url }}" class="supplies-img"/>
+                <p class="supplies-title">{{ supplie.title }}</p>
             </a>
             <a class="btn btn-default" href="?id=xx&">删除</a>
         </div>
+        {% endfor %}
     </div>
 {% endblock %}
 
