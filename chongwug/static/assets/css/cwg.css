@@ -465,12 +465,9 @@ p {
 
 .lead {
   margin-bottom: 20px;
-  font-size: 16px;
   font-weight: 300;
-  line-height: 1.4; }
-  @media (min-width: 768px) {
-    .lead {
-      font-size: 21px; } }
+  line-height: 1.4;
+  font-size: 21px; }
 
 small, .small {
   font-size: 85%; }
@@ -1237,37 +1234,36 @@ textarea.input-lg, .form-horizontal .form-group-lg textarea.form-control, .input
   margin-bottom: 10px;
   color: #737373; }
 
-@media (min-width: 768px) {
-  .form-inline .form-group {
-    display: inline-block;
-    margin-bottom: 0;
-    vertical-align: middle; }
-  .form-inline .form-control {
-    display: inline-block;
-    width: auto;
-    vertical-align: middle; }
-  .form-inline .input-group {
-    display: inline-table;
-    vertical-align: middle; }
-    .form-inline .input-group .input-group-addon, .form-inline .input-group .input-group-btn, .form-inline .input-group .form-control {
-      width: auto; }
-  .form-inline .input-group > .form-control {
-    width: 100%; }
-  .form-inline .control-label {
-    margin-bottom: 0;
-    vertical-align: middle; }
-  .form-inline .radio, .form-inline .checkbox {
-    display: inline-block;
-    margin-top: 0;
-    margin-bottom: 0;
-    vertical-align: middle; }
-    .form-inline .radio label, .form-inline .checkbox label {
-      padding-left: 0; }
-  .form-inline .radio input[type="radio"], .form-inline .checkbox input[type="checkbox"] {
-    position: relative;
-    margin-left: 0; }
-  .form-inline .has-feedback .form-control-feedback {
-    top: 0; } }
+.form-inline .form-group {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle; }
+.form-inline .form-control {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle; }
+.form-inline .input-group {
+  display: inline-table;
+  vertical-align: middle; }
+  .form-inline .input-group .input-group-addon, .form-inline .input-group .input-group-btn, .form-inline .input-group .form-control {
+    width: auto; }
+.form-inline .input-group > .form-control {
+  width: 100%; }
+.form-inline .control-label {
+  margin-bottom: 0;
+  vertical-align: middle; }
+.form-inline .radio, .form-inline .checkbox {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: middle; }
+  .form-inline .radio label, .form-inline .checkbox label {
+    padding-left: 0; }
+.form-inline .radio input[type="radio"], .form-inline .checkbox input[type="checkbox"] {
+  position: relative;
+  margin-left: 0; }
+.form-inline .has-feedback .form-control-feedback {
+  top: 0; }
 
 .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
   margin-top: 0;
@@ -1283,20 +1279,17 @@ textarea.input-lg, .form-horizontal .form-group-lg textarea.form-control, .input
     display: table; }
   .form-horizontal .form-group:after {
     clear: both; }
-@media (min-width: 768px) {
-  .form-horizontal .control-label {
-    text-align: right;
-    margin-bottom: 0;
-    padding-top: 7px; } }
+.form-horizontal .control-label {
+  text-align: right;
+  margin-bottom: 0;
+  padding-top: 7px; }
 .form-horizontal .has-feedback .form-control-feedback {
   top: 0;
   right: 15px; }
-@media (min-width: 768px) {
-  .form-horizontal .form-group-lg .control-label {
-    padding-top: 14.3px; } }
-@media (min-width: 768px) {
-  .form-horizontal .form-group-sm .control-label {
-    padding-top: 6px; } }
+.form-horizontal .form-group-lg .control-label {
+  padding-top: 14.3px; }
+.form-horizontal .form-group-sm .control-label {
+  padding-top: 6px; }
 
 .btn {
   display: inline-block;
@@ -2111,19 +2104,19 @@ button.close {
   height: 50px;
   overflow: scroll; }
 
-@media (min-width: 768px) {
-  .modal-dialog {
-    width: 600px;
-    margin: 30px auto; }
-  .modal-content {
-    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }
-  .modal-sm {
-    width: 300px; } }
+.modal-dialog {
+  width: 600px;
+  margin: 30px auto; }
 
-@media (min-width: 992px) {
-  .modal-lg {
-    width: 900px; } }
+.modal-content {
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }
+
+.modal-sm {
+  width: 300px; }
+
+.modal-lg {
+  width: 900px; }
 
 .tooltip {
   position: absolute;
@@ -2450,22 +2443,23 @@ button.close {
   .carousel-caption .btn {
     text-shadow: none; }
 
-@media screen and (min-width: 768px) {
-  .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-prev, .carousel-control .icon-next {
-    width: 30px;
-    height: 30px;
-    margin-top: -15px;
-    font-size: 30px; }
-  .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
-    margin-left: -15px; }
-  .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
-    margin-right: -15px; }
-  .carousel-caption {
-    left: 20%;
-    right: 20%;
-    padding-bottom: 30px; }
-  .carousel-indicators {
-    bottom: 20px; } }
+.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-prev, .carousel-control .icon-next {
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  font-size: 30px; }
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+  margin-left: -15px; }
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+  margin-right: -15px; }
+
+.carousel-caption {
+  left: 20%;
+  right: 20%;
+  padding-bottom: 30px; }
+
+.carousel-indicators {
+  bottom: 20px; }
 
 .clearfix:before, .clearfix:after {
   content: " ";
@@ -3117,6 +3111,21 @@ Copyright (c) 2014 Daniel Eden
 
 .modal.loading .modal-content {
   display: none; }
+
+.agreement {
+  padding-left: 0; }
+  .agreement .agreement-content {
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 12px; }
+    .agreement .agreement-content h3 {
+      font-size: 18px; }
+    .agreement .agreement-content h4 {
+      font-size: 16px; }
 
 .pagination-primary > .active > a, .pagination-primary > .active > a:hover, .pagination-primary > .active > a:focus, .pagination-primary > .active > span, .pagination-primary > .active > span:hover, .pagination-primary > .active > span:focus {
   background-color: #ffd401;
