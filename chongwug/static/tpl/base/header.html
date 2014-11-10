@@ -23,30 +23,28 @@
             <div class="navbar-header">
                 <a href="/home" class="logo-simple"><i class="sprite sprite-logo-simple"></i></a>
             </div>
-            <div class="collapse navbar-collapse" id="js-navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li {% if page == 'home' %}class="active"{% endif %}><a href="/home/">首页</a></li>
-                    <li {% if page == 'buy' %}class="active"{% endif %}><a href="/buy/">我要买狗</a></li>
-                    <li {% if page == 'supplie' %}class="active"{% endif %}><a href="/supplie/">宠物用品</a></li>
-                    <li {% if page == 'knowbuy' %}class="active"{% endif %}><a href="/knowledge/buy/">购犬须知</a></li>
-                    <li {% if page == 'knowbringup' %}class="active"{% endif %}><a href="/knowledge/bringup/">养犬必知</a></li>
-                </ul>
-                <div class="pull-right">
-                    <div class="cwg-tel pull-left">
-                        <p class="cwg-tel-main">客服热线：<i class="icon icon-phone"></i><span>028-85230309</span></p>
-                    </div>
-                    <ul class="cwg-social pull-left">
-                        <li>
-                            <a href="javascript:" data-toggle="popover" data-html="true" data-placement="bottom" tabindex="0" data-trigger="focus"
-                               data-content="<img src={{ 'imgs/weixin.jpg'|assets }}>">
-                                <i class="icon icon-wechat"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="//weibo.com/chongwug" target="_blank"><i class="icon icon-weibo"></i></a>
-                        </li>
-                    </ul>
+            <ul class="nav navbar-nav">
+                <li {% if page == 'home' %}class="active"{% endif %}><a href="/home/">首页</a></li>
+                <li {% if page == 'buy' %}class="active"{% endif %}><a href="/buy/">我要买狗</a></li>
+                <li {% if page == 'supplie' %}class="active"{% endif %}><a href="/supplie/">宠物用品</a></li>
+                <li {% if page == 'knowbuy' %}class="active"{% endif %}><a href="/knowledge/buy/">购犬须知</a></li>
+                <li {% if page == 'knowbringup' %}class="active"{% endif %}><a href="/knowledge/bringup/">养犬必知</a></li>
+            </ul>
+            <div class="pull-right">
+                <div class="cwg-tel pull-left">
+                    <p class="cwg-tel-main">客服热线：<i class="icon icon-phone"></i><span>028-85230309</span></p>
                 </div>
+                <ul class="cwg-social pull-left">
+                    <li>
+                        <a href="javascript:" data-toggle="popover" data-html="true" data-placement="bottom" tabindex="0" data-trigger="focus"
+                           data-content="<img src={{ 'imgs/weixin.jpg'|assets }}>">
+                            <i class="icon icon-wechat"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="//weibo.com/chongwug" target="_blank"><i class="icon icon-weibo"></i></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
