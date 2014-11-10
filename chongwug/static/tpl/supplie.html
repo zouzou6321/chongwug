@@ -13,126 +13,30 @@
         <div class="supplies-container">
             <h2 class="supplies-title"></h2>
             <div class="row margin-lg">
+            	{% for supplie in supplies %}
+            	{% ifequal supplie.type '必备用品' %}
                 <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a1z0k.7385961.1997985097.d4918997.Y1GULZ&id=16184074398&_u=589heai83f1" target="_blank">
-                        <img src="{{ 'imgs/goods/001.jpg'|assets }}" />
+                    <a href="{{ supplie.tar_url }}" target="_blank">
+                        <img src="{{ supplie.img_url }}" />
                     </a>
                     <div class="media">
                         <div class="media-left">
                             <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a1z0k.7385961.1997985097.d4918997.Y1GULZ&id=16184074398&_u=589heai83f1" target="_blank" class="goods-title">金毛萨摩耶狗窝房子 方管宠物狗笼子中型犬小型犬泰迪比熊狗笼子</a>
+                                <a href="{{ supplie.tar_url }}" target="_blank" class="goods-title">{{ supplie.title }}</a>
                             </p>
                             <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>95</span>
+                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>{{ supplie.price }}</span>
                             </p>
                         </div>
                         <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a1z0k.7385961.1997985097.d4918997.Y1GULZ&id=16184074398&_u=589heai83f1" target="_blank">
+                            <a class="btn-buy" href="{{ supplie.tar_url }}" target="_blank">
                                 <span class="btn-text">立即<br>购买</span>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a1z0k.7385961.1997985097.d4918997.Y1GULZ&id=3200082346&_u=589heai2166" target="_blank">
-                        <img src="{{ 'imgs/goods/002.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a1z0k.7385961.1997985097.d4918997.Y1GULZ&id=3200082346&_u=589heai2166" target="_blank" class="goods-title">全国24省包邮 宠物粗铁丝笼泰迪狗笼猫笼兔笼 小型犬大型犬狗笼子</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>36.88</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a1z0k.7385961.1997985097.d4918997.Y1GULZ&id=3200082346&_u=589heai2166" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.44.0Mx0DQ&id=16819346423&abbucket=16&_u=589heai459e" target="_blank">
-                        <img src="{{ 'imgs/goods/003.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.44.0Mx0DQ&id=16819346423&abbucket=16&_u=589heai459e" target="_blank" class="goods-title">皇家狗粮幼犬 小型犬泰迪贵宾雪纳瑞比熊幼犬粮2kg犬主粮25省包邮</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>99</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.44.0Mx0DQ&id=16819346423&abbucket=16&_u=589heai459e" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.236.0Mx0DQ&id=38001396506&ns=1&abbucket=16&_u=589heai8a03" target="_blank">
-                        <img src="{{ 'imgs/goods/004.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.236.0Mx0DQ&id=38001396506&ns=1&abbucket=16&_u=589heai8a03" target="_blank" class="goods-title">14省包邮.皇家MIJ 小型犬幼犬犬粮2kg 10月龄以下狗粮</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>89</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a230r.1.14.236.0Mx0DQ&id=38001396506&ns=1&abbucket=16&_u=589heai8a03" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.60.VaI1KR&id=39069939579&abbucket=16&_u=589heaibd0d" target="_blank">
-                        <img src="{{ 'imgs/goods/005.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.60.VaI1KR&id=39069939579&abbucket=16&_u=589heaibd0d" target="_blank" class="goods-title">特惠包邮 狗碗狗盆狗狗用品狗食盆 猫碗宠物用品 不锈钢精美双碗</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>23.8</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.60.VaI1KR&id=39069939579&abbucket=16&_u=589heaibd0d" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.27.VaI1KR&id=35246549497&ns=1&abbucket=16&_u=589heaie82b#detail" target="_blank">
-                        <img src="{{ 'imgs/goods/006.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.27.VaI1KR&id=35246549497&ns=1&abbucket=16&_u=589heaie82b#detail" target="_blank" class="goods-title">super休普狗碗猫碗宠物碗不锈钢单碗猫盆狗盆圆形碗 秒杀包邮</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>22.8</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a230r.1.14.27.VaI1KR&id=35246549497&ns=1&abbucket=16&_u=589heaie82b#detail" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% endifequal %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -140,166 +44,30 @@
         <div class="supplies-container">
             <h2 class="supplies-title"></h2>
             <div class="row margin-lg">
+                {% for supplie in supplies %}
+            	{% ifequal supplie.type '生活用品' %}
                 <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?id=38556844853&ali_refid=a3_420434_1006:1109195940:N:%C7%A3%D2%FD%B4%F8:2aa53058e9c7459a38ebede1a4d46e05&ali_trackid=1_2aa53058e9c7459a38ebede1a4d46e05&spm=a230r.1.0.0.B4BDss" target="_blank">
-                        <img src="{{ 'imgs/goods/007.jpg'|assets }}" />
+                    <a href="{{ supplie.tar_url }}" target="_blank">
+                        <img src="{{ supplie.img_url }}" />
                     </a>
                     <div class="media">
                         <div class="media-left">
                             <p>
-                                <a href="http://detail.tmall.com/item.htm?id=38556844853&ali_refid=a3_420434_1006:1109195940:N:%C7%A3%D2%FD%B4%F8:2aa53058e9c7459a38ebede1a4d46e05&ali_trackid=1_2aa53058e9c7459a38ebede1a4d46e05&spm=a230r.1.0.0.B4BDss" target="_blank" class="goods-title">得乐自动伸缩牵引绳 大中小型犬金毛泰迪狗链 狗绳 猫咪可用 包邮</a>
+                                <a href="{{ supplie.tar_url }}" target="_blank" class="goods-title">{{ supplie.title }}</a>
                             </p>
                             <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>27</span>
+                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>{{ supplie.price }}</span>
                             </p>
                         </div>
                         <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?id=38556844853&ali_refid=a3_420434_1006:1109195940:N:%C7%A3%D2%FD%B4%F8:2aa53058e9c7459a38ebede1a4d46e05&ali_trackid=1_2aa53058e9c7459a38ebede1a4d46e05&spm=a230r.1.0.0.B4BDss" target="_blank">
+                            <a class="btn-buy" href="{{ supplie.tar_url }}" target="_blank">
                                 <span class="btn-text">立即<br>购买</span>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.B4BDss&id=10376884102&abbucket=16&_u=589heaia6af" target="_blank">
-                        <img src="{{ 'imgs/goods/008.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.B4BDss&id=10376884102&abbucket=16&_u=589heaia6af" target="_blank" class="goods-title">包邮狗链子狗狗牵引绳胸背带宠物牵引绳金毛狗绳小型犬大型犬用品</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>12.8</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.B4BDss&id=10376884102&abbucket=16&_u=589heaia6af" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.67.79rjyy&id=41207340994&abbucket=16&_u=589heai3f01" target="_blank">
-                        <img src="{{ 'imgs/goods/009.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.67.79rjyy&id=41207340994&abbucket=16&_u=589heai3f01" target="_blank" class="goods-title">狗狗项圈 真牛皮狗圈防走失 大中小型犬猫颈圈宠物泰迪脖圈 包邮</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>16</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.67.79rjyy&id=41207340994&abbucket=16&_u=589heai3f01" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?id=35385164882&ali_refid=a3_420435_1006:1102256198:N:%B3%E8%CE%EF%CF%EE%C8%A6:52c46fba8145448d85f2f772bff6058a&ali_trackid=1_52c46fba8145448d85f2f772bff6058a&spm=a230r.1.0.0.79rjyy" target="_blank">
-                        <img src="{{ 'imgs/goods/010.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?id=35385164882&ali_refid=a3_420435_1006:1102256198:N:%B3%E8%CE%EF%CF%EE%C8%A6:52c46fba8145448d85f2f772bff6058a&ali_trackid=1_52c46fba8145448d85f2f772bff6058a&spm=a230r.1.0.0.79rjyy" target="_blank" class="goods-title">舒乐 12颗钻泰迪镶钻项圈 带钻 猫狗项圈 宠物项圈 随机发货 BJ</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>5</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?id=35385164882&ali_refid=a3_420435_1006:1102256198:N:%B3%E8%CE%EF%CF%EE%C8%A6:52c46fba8145448d85f2f772bff6058a&ali_trackid=1_52c46fba8145448d85f2f772bff6058a&spm=a230r.1.0.0.79rjyy" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.35.WxtcuS&id=39007304413&abbucket=16&_u=589heai3214" target="_blank">
-                        <img src="{{ 'imgs/goods/011.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.35.WxtcuS&id=39007304413&abbucket=16&_u=589heai3214" target="_blank" class="goods-title">狗嘴套 防咬防叫口罩 狗狗用品包邮 止吠器 泰迪贵宾金毛口罩</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>9.9</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.35.WxtcuS&id=39007304413&abbucket=16&_u=589heai3214" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.141.colv4L&id=16004537644&ns=1&abbucket=16&_u=589heaia24b#detail" target="_blank">
-                        <img src="{{ 'imgs/goods/012.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.141.colv4L&id=16004537644&ns=1&abbucket=16&_u=589heaia24b#detail" target="_blank" class="goods-title">狗掌狗窝泰迪博美比熊狗窝狗狗睡垫狗垫PP棉窝垫可配宠物毛毯被子</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>16.56</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a230r.1.14.141.colv4L&id=16004537644&ns=1&abbucket=16&_u=589heaia24b#detail" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.hsGrEa&id=27388448077&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank">
-                        <img src="{{ 'imgs/goods/013.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.hsGrEa&id=27388448077&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank" class="goods-title">1件包邮 吉米娃娃立体小狗狗衣服秋冬装四脚加厚宠物款泰迪小型犬</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>26</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.hsGrEa&id=27388448077&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?id=41391544917&ali_refid=a3_420434_1006:1104647086:N:%B9%B7%B9%B7%D0%AC%D7%D3:e31dae0301066c9b2fea71474e3e28b4&ali_trackid=1_e31dae0301066c9b2fea71474e3e28b4&spm=a230r.1.0.0.aaEvKn" target="_blank">
-                        <img src="{{ 'imgs/goods/014.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?id=41391544917&ali_refid=a3_420434_1006:1104647086:N:%B9%B7%B9%B7%D0%AC%D7%D3:e31dae0301066c9b2fea71474e3e28b4&ali_trackid=1_e31dae0301066c9b2fea71474e3e28b4&spm=a230r.1.0.0.aaEvKn" target="_blank" class="goods-title">买二送毛巾狗狗鞋子泰迪宠物狗鞋子秋冬犬小狗防水羊羔绒棉鞋雪地</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>16.5</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?id=41391544917&ali_refid=a3_420434_1006:1104647086:N:%B9%B7%B9%B7%D0%AC%D7%D3:e31dae0301066c9b2fea71474e3e28b4&ali_trackid=1_e31dae0301066c9b2fea71474e3e28b4&spm=a230r.1.0.0.aaEvKn" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% endifequal %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -307,166 +75,30 @@
         <div class="supplies-container">
             <h2 class="supplies-title"></h2>
             <div class="row margin-lg">
+                {% for supplie in supplies %}
+            	{% ifequal supplie.type '保健医疗' %}
                 <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.abPLGn&id=18855625313&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank">
-                        <img src="{{ 'imgs/goods/015.jpg'|assets }}" />
+                    <a href="{{ supplie.tar_url }}" target="_blank">
+                        <img src="{{ supplie.img_url }}" />
                     </a>
                     <div class="media">
                         <div class="media-left">
                             <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.abPLGn&id=18855625313&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank" class="goods-title">包邮 狗狗钙片宠物钙片大型幼犬泰迪萨摩耶金毛猫卫仕乳补钙粉片</a>
+                                <a href="{{ supplie.tar_url }}" target="_blank" class="goods-title">{{ supplie.title }}</a>
                             </p>
                             <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>28</span>
+                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>{{ supplie.price }}</span>
                             </p>
                         </div>
                         <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.abPLGn&id=18855625313&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank">
+                            <a class="btn-buy" href="{{ supplie.tar_url }}" target="_blank">
                                 <span class="btn-text">立即<br>购买</span>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.98.NISFy5&id=23480496988&abbucket=16&_u=589heai2211" target="_blank">
-                        <img src="{{ 'imgs/goods/016.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.98.NISFy5&id=23480496988&abbucket=16&_u=589heai2211" target="_blank" class="goods-title">包邮送牛肉条 卫仕狗微量元素片160片 宠物微量元素粉 狗狗营养品</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>28</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.98.NISFy5&id=23480496988&abbucket=16&_u=589heai2211" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-{#                <div class="supplies-item">#}
-{#                    <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.303.ih8Xvu&id=20424639589&ns=1&abbucket=16&_u=589heai89b3#detail" target="_blank">#}
-{#                        <img src="{{ 'imgs/goods/017.jpg'|assets }}" />#}
-{#                    </a>#}
-{#                    <div class="media">#}
-{#                        <div class="media-left">#}
-{#                            <p>#}
-{#                                <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.303.ih8Xvu&id=20424639589&ns=1&abbucket=16&_u=589heai89b3#detail" target="_blank" class="goods-title">卫仕微量元素片160片 宠物狗狗营养品贫血消瘦防食便啃土美毛包邮</a>#}
-{#                            </p>#}
-{#                            <p class="margin-none">#}
-{#                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>28</span>#}
-{#                            </p>#}
-{#                        </div>#}
-{#                        <div class="media-body">#}
-{#                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a230r.1.14.303.ih8Xvu&id=20424639589&ns=1&abbucket=16&_u=589heai89b3#detail" target="_blank">#}
-{#                                <span class="btn-text">立即<br>购买</span>#}
-{#                            </a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.287.Cr1H73&id=19156067147&abbucket=16&_u=589heai648e" target="_blank">
-                        <img src="{{ 'imgs/goods/018.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.287.Cr1H73&id=19156067147&abbucket=16&_u=589heai648e" target="_blank" class="goods-title">拍下99 狗狗羊奶粉 宠物奶粉幼猫幼犬奶粉 卫仕营养小狗猫羊奶粉</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>99</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.287.Cr1H73&id=19156067147&abbucket=16&_u=589heai648e" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.240.s9rRt1&id=37814974776&ns=1&abbucket=16&_u=589heai1220#detail" target="_blank">
-                        <img src="{{ 'imgs/goods/019.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.240.s9rRt1&id=37814974776&ns=1&abbucket=16&_u=589heai1220#detail" target="_blank" class="goods-title">狗狗感冒药 美贝惠中感康口服液 宠物咳嗽流鼻涕药 10ml单支</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>3</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a230r.1.14.240.s9rRt1&id=37814974776&ns=1&abbucket=16&_u=589heai1220#detail" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.221.24SpOY&id=119112335&ns=1&abbucket=16&_u=589heai0832#detail" target="_blank">
-                        <img src="{{ 'imgs/goods/020.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.221.24SpOY&id=119112335&ns=1&abbucket=16&_u=589heai0832#detail" target="_blank" class="goods-title">金盾消炎杀螨膏 狗狗皮肤病 抗真菌 消炎 止痒杀螨虫宠物药品 BJ</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>15</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a230r.1.14.221.24SpOY&id=119112335&ns=1&abbucket=16&_u=589heai0832#detail" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.129.DKicgc&id=17915138625&ns=1&abbucket=16&_u=589heai8d2a#detail" target="_blank">
-                        <img src="{{ 'imgs/goods/021.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a230r.1.14.129.DKicgc&id=17915138625&ns=1&abbucket=16&_u=589heai8d2a#detail" target="_blank" class="goods-title">宠物/狗狗用品 新版英特威六联疫苗 含 六种病毒正品行货 冰袋邮</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>25</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a230r.1.14.129.DKicgc&id=17915138625&ns=1&abbucket=16&_u=589heai8d2a#detail" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?spm=a230r.1.0.0.YoQ9VZ&id=39516307765&ns=1&abbucket=16&_u=589heaie073#detail" target="_blank">
-                        <img src="{{ 'imgs/goods/022.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?spm=a230r.1.0.0.YoQ9VZ&id=39516307765&ns=1&abbucket=16&_u=589heaie073#detail" target="_blank" class="goods-title">全国包邮德国拜耳宠物驱虫药狗狗泰迪体内打虫药片犬用内服单粒装</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>9.9</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?spm=a230r.1.0.0.YoQ9VZ&id=39516307765&ns=1&abbucket=16&_u=589heaie073#detail" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% endifequal %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -474,146 +106,30 @@
         <div class="supplies-container">
             <h2 class="supplies-title"></h2>
             <div class="row margin-lg">
+                {% for supplie in supplies %}
+            	{% ifequal supplie.type '清洁卫生' %}
                 <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.QHEiya&id=9012967410&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank">
-                        <img src="{{ 'imgs/goods/023.jpg'|assets }}" />
+                    <a href="{{ supplie.tar_url }}" target="_blank">
+                        <img src="{{ supplie.img_url }}" />
                     </a>
                     <div class="media">
                         <div class="media-left">
                             <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.QHEiya&id=9012967410&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank" class="goods-title">狗狗沐浴露包邮 除螨除臭止痒 泰迪金毛萨摩比熊专用宠物用品香波</a>
+                                <a href="{{ supplie.tar_url }}" target="_blank" class="goods-title">{{ supplie.title }}</a>
                             </p>
                             <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>25</span>
+                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>{{ supplie.price }}</span>
                             </p>
                         </div>
                         <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.1.QHEiya&id=9012967410&ad_id=&am_id=&cm_id=140105335569ed55e27b&pm_id=&abbucket=16" target="_blank">
+                            <a class="btn-buy" href="{{ supplie.tar_url }}" target="_blank">
                                 <span class="btn-text">立即<br>购买</span>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.114.QHEiya&id=13081872725&abbucket=16&_u=589heai102d" target="_blank">
-                        <img src="{{ 'imgs/goods/024.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.114.QHEiya&id=13081872725&abbucket=16&_u=589heai102d" target="_blank" class="goods-title">澳路雪杀菌止痒宠物沐浴露狗狗香波浴液泰迪金毛洗澡宠物用品包邮</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>22.8</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.114.QHEiya&id=13081872725&abbucket=16&_u=589heai102d" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?id=26393340245&ali_refid=a3_420434_1006:1102871271:N:%B9%B7%B2%DE%CB%F9:d3defe947ea661f25d5b7826bdde557a&ali_trackid=1_d3defe947ea661f25d5b7826bdde557a&spm=a230r.1.0.0.WRj5bs" target="_blank">
-                        <img src="{{ 'imgs/goods/025.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?id=26393340245&ali_refid=a3_420434_1006:1102871271:N:%B9%B7%B2%DE%CB%F9:d3defe947ea661f25d5b7826bdde557a&ali_trackid=1_d3defe947ea661f25d5b7826bdde557a&spm=a230r.1.0.0.WRj5bs" target="_blank" class="goods-title">狗狗厕所特价小号大号 泰迪金毛宠物厕所围栏尿盆小型犬便盆用品</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>19.8</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?id=26393340245&ali_refid=a3_420434_1006:1102871271:N:%B9%B7%B2%DE%CB%F9:d3defe947ea661f25d5b7826bdde557a&ali_trackid=1_d3defe947ea661f25d5b7826bdde557a&spm=a230r.1.0.0.WRj5bs" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?id=37414900786&ali_refid=a3_420434_1006:1108136001:N:%B9%B7%B9%B7%CF%FB%B6%BE%B3%FD%B3%F4%C5%E7%CE%ED:b82957e84d3727cadafdbb6938b9e124&ali_trackid=1_b82957e84d3727cadafdbb6938b9e124&spm=a230r.1.0.0.t4Hbnj" target="_blank">
-                        <img src="{{ 'imgs/goods/026.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?id=37414900786&ali_refid=a3_420434_1006:1108136001:N:%B9%B7%B9%B7%CF%FB%B6%BE%B3%FD%B3%F4%C5%E7%CE%ED:b82957e84d3727cadafdbb6938b9e124&ali_trackid=1_b82957e84d3727cadafdbb6938b9e124&spm=a230r.1.0.0.t4Hbnj" target="_blank" class="goods-title">雷米高路士宠物消毒液犬瘟细小病毒消毒水驱虫杀菌杀虫去味消毒剂</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>27</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?id=37414900786&ali_refid=a3_420434_1006:1108136001:N:%B9%B7%B9%B7%CF%FB%B6%BE%B3%FD%B3%F4%C5%E7%CE%ED:b82957e84d3727cadafdbb6938b9e124&ali_trackid=1_b82957e84d3727cadafdbb6938b9e124&spm=a230r.1.0.0.t4Hbnj" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?id=41431394905&ali_refid=a3_420434_1006:1109890016:N:%B9%B7%B4%B5%C3%AB%BB%FA:a6be350e0d84f821ba6005648f9aea0b&ali_trackid=1_a6be350e0d84f821ba6005648f9aea0b&spm=a230r.1.0.0.v3f2UQ" target="_blank">
-                        <img src="{{ 'imgs/goods/027.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?id=41431394905&ali_refid=a3_420434_1006:1109890016:N:%B9%B7%B4%B5%C3%AB%BB%FA:a6be350e0d84f821ba6005648f9aea0b&ali_trackid=1_a6be350e0d84f821ba6005648f9aea0b&spm=a230r.1.0.0.v3f2UQ" target="_blank" class="goods-title">TOBY专业宠物吹风机/狗狗猫咪电吹风机筒/大功率低噪音包邮</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>87</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?id=41431394905&ali_refid=a3_420434_1006:1109890016:N:%B9%B7%B4%B5%C3%AB%BB%FA:a6be350e0d84f821ba6005648f9aea0b&ali_trackid=1_a6be350e0d84f821ba6005648f9aea0b&spm=a230r.1.0.0.v3f2UQ" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://item.taobao.com/item.htm?id=36811747954&ali_refid=a3_420434_1006:1106930502:N:%B9%B7%B4%B5%C3%AB%BB%FA:2fa69055d59cc042ffb8e3eb4425a5ee&ali_trackid=1_2fa69055d59cc042ffb8e3eb4425a5ee&spm=a230r.1.0.0.v3f2UQ" target="_blank">
-                        <img src="{{ 'imgs/goods/028.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://item.taobao.com/item.htm?id=36811747954&ali_refid=a3_420434_1006:1106930502:N:%B9%B7%B4%B5%C3%AB%BB%FA:2fa69055d59cc042ffb8e3eb4425a5ee&ali_trackid=1_2fa69055d59cc042ffb8e3eb4425a5ee&spm=a230r.1.0.0.v3f2UQ" target="_blank" class="goods-title">神悦 宠物吹水机 宠物专用 狗狗吹风机大功率 狗狗吹水机吹毛机</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>265</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://item.taobao.com/item.htm?id=36811747954&ali_refid=a3_420434_1006:1106930502:N:%B9%B7%B4%B5%C3%AB%BB%FA:2fa69055d59cc042ffb8e3eb4425a5ee&ali_trackid=1_2fa69055d59cc042ffb8e3eb4425a5ee&spm=a230r.1.0.0.v3f2UQ" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="supplies-item">
-                    <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.30.asx835&id=39205773451&abbucket=16&_u=589heai23c8" target="_blank">
-                        <img src="{{ 'imgs/goods/029.jpg'|assets }}" />
-                    </a>
-                    <div class="media">
-                        <div class="media-left">
-                            <p>
-                                <a href="http://detail.tmall.com/item.htm?spm=a230r.1.14.30.asx835&id=39205773451&abbucket=16&_u=589heai23c8" target="_blank" class="goods-title">包邮 狗狗用品宠物开结梳狗毛梳狗梳子泰迪梳子宠物梳子猫狗针梳</a>
-                            </p>
-                            <p class="margin-none">
-                                <span class="price-title">惊爆价:</span><span class="price-content"><span class="price-symbol">&yen;</span>9.9</span>
-                            </p>
-                        </div>
-                        <div class="media-body">
-                            <a class="btn-buy" href="http://detail.tmall.com/item.htm?spm=a230r.1.14.30.asx835&id=39205773451&abbucket=16&_u=589heai23c8" target="_blank">
-                                <span class="btn-text">立即<br>购买</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% endifequal %}
+                {% endfor %}
             </div>
         </div>
     </div>
