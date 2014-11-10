@@ -126,5 +126,5 @@ def manage_supplie_mod_view(request):
         adapters.manage_del_supplie(request)
         return HttpResponseRedirect(MANAGE_ROOT +'supplie/mod/')
     else:
-        data['supplies'] = adapters.manage_get_supplies(request)
+        data['supplietype'],data['supplies'] = adapters.manage_get_supplies(request)
         return render_to_response('manager/tpl/manage_supplie_mod.html',data,context_instance=RequestContext(request))

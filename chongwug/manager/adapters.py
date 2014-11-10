@@ -288,7 +288,7 @@ def manage_ad_select(request):
 
 def manage_get_supplies(request):
     supplietype = request.REQUEST.get('type', u'必备用品')
-    return supplies.objects.filter(dele=False,type=supplietype)
+    return (supplietype, supplies.objects.filter(dele=False,type=supplietype))
 
 def manage_get_supplie(request):
     try:
