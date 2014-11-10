@@ -119,7 +119,9 @@ PET_FARM_PIC_ROOT = "/farmpic/"
 PET_AD_PIC_ROOT = "/gfile/"
 PET_PIC_ROOT = "/petpic/"
 CDN_ROOT = "//chongwug-cdn.b0.upaiyun.com"
+SUPPLIE_PIC_ROOT = "/suppliepic/"
 PIC_TMP_PATH = "/manage/pictest/"
+
 
 SESSION_COOKIE_AGE = 60 * 30#session 30min 
 

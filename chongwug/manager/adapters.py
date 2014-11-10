@@ -288,3 +288,25 @@ def manage_ad_select(request):
 
 def manage_get_supplies():
     return supplies.objects.filter(dele=False)
+
+def manage_supplie_add(req,photo):
+    if photo == None:
+        return False
+    try:
+        img = Image.open(photo)
+    except:
+        return False
+    filename='%s' % str(uuid.uuid1())
+    photo.name = filename + '.jpg'
+    url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
+    name = settings.STATIC_ROOT+url
+    img.save(name,'jpeg',quality=75)
+    file_path_name = settings.SUPPLIE_PIC_ROOT + photo.name
+    up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
+    with open(name, 'rb') as f:
+        res = up.put(file_path_name, f, checksum=False)
+    os.remove(name)
+    img_url = settings.PIC_ROOT + file_path_name
+    new_supplie = supplies(type=req.POST['type'],img_url=img_url,tar_url=req.POST['tarurl'],price=string.atof(req.POST['price']),title=req.POST['title'])
+    new_supplie.save()
+    return True

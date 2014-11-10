@@ -99,7 +99,10 @@ def manage_supplie_add_view(request):
     if request.session['score'] < 50:
         return render_to_response('404.html')
     if request.method == 'POST':
-        return False
+        photo = request.FILES.get('imgurl',None)
+        data = adapters.manage_supplie_add(request,photo)
+        if not data:
+            return HttpResponse(u'数据错误，请检查上传的数据，再重新上传')
     data = adapters.manage_home_data_get(request)
     data['types'] = config.__supplietypes
     return render_to_response('manager/tpl/manage_supplie_add.html',data,context_instance=RequestContext(request))
