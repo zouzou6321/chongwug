@@ -292,9 +292,12 @@ def manage_get_supplies(request):
 
 def manage_get_supplie(request):
     try:
-        return supplies.objects.get(id = string.atoi(request.REQUEST.get('id')),dele=False)
+        return supplies.objects.get(id=string.atoi(request.REQUEST.get('id')),dele=False)
     except:
         return None
+
+def manage_del_supplie(request):
+    supplies.objects.filter(id=string.atoi(request.REQUEST.get('id')),dele=False).update(dele=True)
 
 def manage_supplie_add(req,photo):
     if photo == None:
