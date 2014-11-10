@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-import adapters,config
+import adapters,config,string
 from chongwug.commom import __errorcode__
 from chongwug.config import __adtypes
 MANAGE_ROOT='/manage/'
@@ -115,12 +115,18 @@ def manage_supplie_mod_view(request):
     if request.method == 'POST':
         photo = request.FILES.get('imgurl',None)
         data = adapters.manage_supplie_mod(request,photo)
+        if not data:
+            data = adapters.manage_home_data_get(request)
+            data['types'] = config.__supplietypes
+            data['supplie'] = adapters.manage_get_supplie(string.atoi(request.POST['id']))
+            data['error'] = u'修改失败，请检查是否存在输入数据异常'
+            return render_to_response('manager/tpl/manage_supplie_mod_item.html',data,context_instance=RequestContext(request))
         return HttpResponseRedirect(MANAGE_ROOT +'supplie/mod/')
     
     data = adapters.manage_home_data_get(request)
     data['types'] = config.__supplietypes
     if 'id' in request.GET:
-        data['supplie'] = adapters.manage_get_supplie(request)
+        data['supplie'] = adapters.manage_get_supplie(string.atoi(request.REQUEST.get('id')))
         return render_to_response('manager/tpl/manage_supplie_mod_item.html',data,context_instance=RequestContext(request))
     elif 'del' in request.GET:
         adapters.manage_del_supplie(request)

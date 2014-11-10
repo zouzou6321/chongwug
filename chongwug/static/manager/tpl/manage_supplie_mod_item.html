@@ -17,7 +17,7 @@
         <div class="col-sm-4">
           <select class="form-control required" id="type" name="type">
             {% for type in types %}
-            <option value="{{ type }}">{{ type }}</option>
+            <option value="{{ type }}"{% ifequal supplie。type type %} selected{% endifequal %}>{{ type }}</option>
             {% endfor %}
           </select>
         </div>

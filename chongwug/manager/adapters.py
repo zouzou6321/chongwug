@@ -12,7 +12,7 @@ import string,re
 import os,uuid,datetime
 import config
 from chongwug.commom import __errorcode__
-from chongwug.config import __directs,__addresses,__regular_expression_idnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
+from chongwug.config import __supplietypes,__directs,__addresses,__regular_expression_idnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
 '''
 管理员鉴权
 '''
@@ -287,17 +287,17 @@ def manage_ad_select(request):
     return  'False'
 
 def manage_get_supplies(request):
-    supplietype = request.REQUEST.get('type', u'必备用品')
+    supplietype = request.REQUEST.get('type', __supplietypes[0])
     return (supplietype, supplies.objects.filter(dele=False,type=supplietype))
 
-def manage_get_supplie(request):
+def manage_get_supplie(id):
     try:
-        return supplies.objects.get(id=string.atoi(request.REQUEST.get('id')),dele=False)
+        return supplies.objects.get(id=id,dele=False)
     except:
         return None
 
 def manage_del_supplie(request):
-    supplies.objects.filter(id=string.atoi(request.REQUEST.get('id')),dele=False).update(dele=True)
+    supplies.objects.filter(id=string.atoi(request.REQUEST.get('del')),dele=False).update(dele=True)
 
 def manage_supplie_add(req,photo):
     if photo == None:
@@ -343,10 +343,13 @@ def manage_supplie_mod(req,photo):
             img_url = settings.PIC_ROOT + file_path_name
         except:
             None
-    supplie.img_url = img_url
-    supplie.type = req.POST['type']
-    supplie.tar_url = req.POST['tarurl']
-    supplie.price = string.atof(req.POST['price'])
-    supplie.title = req.POST['title']
-    supplie.save()
-    return True
+    try:
+        supplie.img_url = img_url
+        supplie.type = req.POST['type']
+        supplie.tar_url = req.POST['tarurl']
+        supplie.price = string.atof(req.POST['price'])
+        supplie.title = req.POST['title']
+        supplie.save()
+        return True
+    except:
+        return False
