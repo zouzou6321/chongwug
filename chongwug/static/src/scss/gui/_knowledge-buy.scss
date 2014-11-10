@@ -64,9 +64,7 @@
   }
   
   .modal-dialog{
-    @media (min-width: $screen-sm) {
-      width: 690px;
-    }
+    width: 690px;
 
     .media{
       img{

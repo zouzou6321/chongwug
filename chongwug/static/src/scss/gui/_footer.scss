@@ -77,10 +77,7 @@
 
   .copyright{
     margin-bottom: 0;
-
-    @media (min-width: $screen-sm) {
-      text-align: left;
-    }
+    text-align: left;
   }
 
   a{
