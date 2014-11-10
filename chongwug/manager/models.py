@@ -25,6 +25,15 @@ class tmppic_monitor(models.Model):
     monitor_time= models.DateTimeField(default=datetime.datetime.now)
     dele = models.BooleanField(default=False)
 
+class supplies (models.Model):
+    type = models.TextField()
+    img_url = models.URLField()
+    tar_url = models.URLField()
+    price = models.FloatField()
+    title = models.TextField()
+    updatetime = models.DateTimeField(default=datetime.datetime.now)
+    dele = models.BooleanField(default=False)
+
 class dog123(models.Model):
     url = models.TextField()
     name = models.TextField()

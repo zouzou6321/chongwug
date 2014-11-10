@@ -1,0 +1,123 @@
+{% extends 'manager/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+{% load assets_manager %}
+{% block main %}
+
+<h1 class="page-header">新增商品</h1>
+<p>加*为必填项</p>
+	<div class="form-group">
+	    <label for="id" class="col-sm-2 control-label">选择商品<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <select class="form-control required" id="id" name="id">
+	      	{% for supplie in supplies %}
+	        <option value="{{ supplie.id }}">{{ supplie.title }}</option>
+	        {% endfor %}
+	      </select>
+	    </div>
+	</div>
+	<form class="form-horizontal">
+	{% csrf_token %}
+	<div class="form-group">
+	    <label for="type" class="col-sm-2 control-label">商品类型<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <select class="form-control required" id="type" name="type">
+	      	{% for type in types %}
+	        <option value="{{ type }}">{{ type }}</option>
+	        {% endfor %}
+	      </select>
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="tarurl" class="col-sm-2 control-label">跳转目标url<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="tarurl" name="tarurl">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="price" class="col-sm-2 control-label">售价<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="price" name="price">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="title" class="col-sm-2 control-label">标题<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="title" name="title">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="imgurl" class="col-sm-2 control-label">商品图片<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="imgurl" name="imgurl">
+	    </div>
+	</div>
+	<div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button type="submit" id="js-btn-submit" data-loading-text="提交中..." class="btn btn-primary form-control">提交</button>
+        </div>
+    </div>
+	</form>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% load assets_petfarm %}
+<script src="{{ 'lib/ckeditor/ckeditor.js'|assets_manager }}"></script>
+<script>
+
+CKEDITOR.replace('pet-desc');
+CKEDITOR.instances['pet-desc'].on('change', function() {
+    CKEDITOR.instances['pet-desc'].updateElement();
+});
+
+var validator = $('form').validate(commonvalidateConfig);
+(function($){
+
+    //form submit
+    var $form = $('form'),
+        $submit = $form.find('#js-btn-submit');
+
+    
+    $submit.on('click', function(){
+    	validator.form();
+    
+    	if(!$form.valid()){
+    		return;
+    	}
+    
+        $submit.button('loading');
+
+        var data = {};
+
+        $.each($form.serializeArray(), function(i, e){
+            data[e.name] = e.value;
+        });
+
+        $.ajax({
+            url: './',
+            data: data,
+            type:'POST',
+            dataType: 'json',
+            success: function(data){
+                if(data.status == 0){
+                    alert('提交成功！');
+                    window.location.reload();
+                }else{
+                    alert('提交失败：'+ data.message +'，请重试！');
+                    $submit.button('reset');
+                }
+            },
+            error: function(){
+                $submit.button('reset');
+            }
+        });
+
+        return false;
+    });
+
+
+})(jQuery);
+</script>
+{% endblock %}

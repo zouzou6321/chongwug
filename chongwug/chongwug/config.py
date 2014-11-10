@@ -3,7 +3,7 @@
 __adtypes = [[0,'nav_m','首页主广告',1920,530]]
 __petpictypes = [[0,u'buy_main',u'主图',750,500],[1,u'normal',u'辅图',750,500]]
 __farmpictypes = [[0,u'buy_home',u'首页展示图',427,300],[1,u'normal',u'养殖场介绍图',427,300]]
-
+__supplietypes = [u'必备用品',u'生活用品',u'保健医疗',u'清洁卫生']
 __onepageofdata__ = 12
 #系统支持的犬种
 __pettypes = [u'泰迪',u'比熊',u'金毛',u'萨摩耶',u'哈士奇',u'拉布拉多',u'边牧',u'松狮',u'阿拉斯加', u'博美',u'巴哥',

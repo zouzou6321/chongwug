@@ -92,3 +92,27 @@ def manage_ad_select_view(request):
     if request.session['score'] < 50:
         return render_to_response('404.html')
     return HttpResponse(adapters.manage_ad_select(request))
+
+def manage_supplie_add_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return render_to_response('404.html')
+    if request.method == 'POST':
+        return False
+    data = adapters.manage_home_data_get(request)
+    data['types'] = config.__supplietypes
+    return render_to_response('manager/tpl/manage_supplie_add.html',data,context_instance=RequestContext(request))
+
+def manage_supplie_mod_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return render_to_response('404.html')
+    if request.method == 'POST':
+        return False
+    
+    data = adapters.manage_home_data_get(request)
+    data['types'] = config.__supplietypes
+    data['supplies'] = adapters.manage_get_supplies()
+    return render_to_response('manager/tpl/manage_supplie_mod.html',data,context_instance=RequestContext(request))

@@ -1,2 +1,2 @@
 # -*- coding: UTF-8 -*-
-from chongwug.config import __adtypes
+from chongwug.config import __adtypes,__supplietypes

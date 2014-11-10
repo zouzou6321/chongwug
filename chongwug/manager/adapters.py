@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
-from manager.models import ad,tmppic_monitor
+from manager.models import ad,tmppic_monitor,supplies
 from customer.models import user
 from petfarm.models import pet_farm
 from PIL import Image
@@ -285,3 +285,6 @@ def manage_ad_select(request):
             htmltoken = '<p><input type="checkbox" name="ads" value="' + tmp_ad.id + '"><img src="' + tmp_ad.img_url + '" /></input></p>'
         return htmltoken
     return  'False'
+
+def manage_get_supplies():
+    return supplies.objects.filter(dele=False)
