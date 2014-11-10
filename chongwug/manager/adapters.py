@@ -307,6 +307,9 @@ def manage_supplie_add(req,photo):
         res = up.put(file_path_name, f, checksum=False)
     os.remove(name)
     img_url = settings.PIC_ROOT + file_path_name
-    new_supplie = supplies(type=req.POST['type'],img_url=img_url,tar_url=req.POST['tarurl'],price=string.atof(req.POST['price']),title=req.POST['title'])
-    new_supplie.save()
+    try:
+        new_supplie = supplies(type=req.POST['type'],img_url=img_url,tar_url=req.POST['tarurl'],price=string.atof(req.POST['price']),title=req.POST['title'])
+        new_supplie.save()
+    except:
+        return False
     return True
