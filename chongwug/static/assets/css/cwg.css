@@ -2493,6 +2493,10 @@ The provided mixins are intended to be used with the array-like variables
 .icon-md {
   font-size: 16px; }
 
+.icon-up-circle:before {
+  content: '\e800'; }
+
+/* '' */
 .icon-help-circled:before {
   content: '\e804'; }
 

@@ -65,6 +65,12 @@
       "css": "weibo",
       "code": 59402,
       "src": "fontawesome"
+    },
+    {
+      "uid": "a7e3ce91275bb77c0f4ec44a548b325c",
+      "css": "up-circle",
+      "code": 59392,
+      "src": "websymbols"
     }
   ]
 }
