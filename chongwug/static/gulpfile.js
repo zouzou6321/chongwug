@@ -44,9 +44,12 @@ gulp.task('sprites', function(){
 
 
 gulp.task('css', function(){
-    var map = JSON.parse(fs.readFileSync('./imgs-manifest.json')),
-        keys = Object.keys(map),
-        reg = new RegExp(keys.join('|'), 'gm');
+    var imgsMap = JSON.parse(fs.readFileSync('./imgs-manifest.json')),
+        fontsMap = JSON.parse(fs.readFileSync('./fonts-manifest.json')),
+        imgsKeys = Object.keys(imgsMap),
+        imgsReg = new RegExp(imgsKeys.join('|'), 'gm'),
+        fontsKeys = Object.keys(fontsMap),
+        fontsReg = new RegExp(fontsKeys.join('|'), 'gm');
 
     gulp.src(config.css.src)
         // compile sass
@@ -72,7 +75,8 @@ gulp.task('css', function(){
         .pipe(reload({stream: true}))
         //filter *.map
         .pipe(plugins.if(prod, plugins.filter('**/*.css')))
-        .pipe(plugins.if(prod, plugins.replace(reg, function(e){ return map[e]; })))
+        .pipe(plugins.if(prod, plugins.replace(imgsReg, function(e){ return imgsMap[e]; })))
+        .pipe(plugins.if(prod, plugins.replace(fontsReg, function(e){ return fontsMap[e]; })))
         //compress css
         .pipe(plugins.if(prod, plugins.minifyCss({keepSpecialComments: 0, noAdvanced: true})))
         //version css
@@ -123,7 +127,10 @@ gulp.task('imgs', function(){
 gulp.task('fonts', function(){
     gulp.src(config.fonts.src)
         .pipe(gulp.dest(config.fonts.dev))
+        .pipe(plugins.if(prod, plugins.rev()))
         .pipe(plugins.if(prod, gulp.dest(config.fonts.prod)))
+        .pipe(plugins.if(prod, plugins.rev.manifest({path: 'fonts-manifest.json'})))
+        .pipe(plugins.if(prod, gulp.dest('./')))
         .on('error', function(e){ console.log(e); });
 });
 
