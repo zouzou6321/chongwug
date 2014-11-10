@@ -16,18 +16,8 @@
 	      </select>
 	    </div>
 	</div>
-	<form class="form-horizontal">
+	<form class="form-horizontal" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
-	<div class="form-group">
-	    <label for="type" class="col-sm-2 control-label">商品类型<span class="warn">*</span>：</label>
-	    <div class="col-sm-4">
-	      <select class="form-control required" id="type" name="type">
-	      	{% for type in types %}
-	        <option value="{{ type }}">{{ type }}</option>
-	        {% endfor %}
-	      </select>
-	    </div>
-	</div>
 	<div class="form-group">
 	    <label for="tarurl" class="col-sm-2 control-label">跳转目标url<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
@@ -47,9 +37,9 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="imgurl" class="col-sm-2 control-label">商品图片<span class="warn">*</span>：</label>
+	    <label for="imgurl" class="col-sm-2 control-label">重新上传图片<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="imgurl" name="imgurl">
+	        <input type="file" class="form-control required" id="imgurl" name="imgurl">
 	    </div>
 	</div>
 	<div class="form-group">
