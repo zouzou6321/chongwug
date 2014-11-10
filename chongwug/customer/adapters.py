@@ -326,7 +326,7 @@ def attention_sendsms(req):
         return __errorcode__(23)
     smsuser.save()
     smsattention.save()
-    #sendSMS(attention.user.tel,u"发送到客户")
+    sendSMS(attention.user.tel,u"发送到客户")
     return __errorcode__(0)
 
 def buy_attention_sure(req):
