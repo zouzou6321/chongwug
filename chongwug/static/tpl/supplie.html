@@ -17,7 +17,7 @@
             	{% ifequal supplie.type '必备用品' %}
                 <div class="supplies-item">
                     <a href="{{ supplie.tar_url }}" target="_blank">
-                        <img src="{{ supplie.img_url }}" />
+                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
                     </a>
                     <div class="media">
                         <div class="media-left">
@@ -48,7 +48,7 @@
             	{% ifequal supplie.type '生活用品' %}
                 <div class="supplies-item">
                     <a href="{{ supplie.tar_url }}" target="_blank">
-                        <img src="{{ supplie.img_url }}" />
+                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
                     </a>
                     <div class="media">
                         <div class="media-left">
@@ -79,7 +79,7 @@
             	{% ifequal supplie.type '保健医疗' %}
                 <div class="supplies-item">
                     <a href="{{ supplie.tar_url }}" target="_blank">
-                        <img src="{{ supplie.img_url }}" />
+                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
                     </a>
                     <div class="media">
                         <div class="media-left">
@@ -110,7 +110,7 @@
             	{% ifequal supplie.type '清洁卫生' %}
                 <div class="supplies-item">
                     <a href="{{ supplie.tar_url }}" target="_blank">
-                        <img src="{{ supplie.img_url }}" />
+                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
                     </a>
                     <div class="media">
                         <div class="media-left">

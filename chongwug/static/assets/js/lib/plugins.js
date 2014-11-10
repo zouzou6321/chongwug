@@ -6087,6 +6087,7 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
         } else {
             $self = $('<a/>', {
                 id: o.scrollName,
+                class: o.scrollClass,
                 href: '#top'
             });
         }

@@ -31,6 +31,7 @@
         } else {
             $self = $('<a/>', {
                 id: o.scrollName,
+                class: o.scrollClass,
                 href: '#top'
             });
         }
