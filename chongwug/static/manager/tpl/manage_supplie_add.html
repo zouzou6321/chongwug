@@ -7,7 +7,7 @@
 
 <h1 class="page-header">新增商品</h1>
 <p>加*为必填项</p>
-	<form class="form-horizontal" method="post">
+	<form class="form-horizontal" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
 	<div class="form-group">
 	    <label for="type" class="col-sm-2 control-label">商品类型<span class="warn">*</span>：</label>
