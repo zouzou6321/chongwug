@@ -94,6 +94,7 @@ def knowledge_bringup_view(request):
 
 def supplie_view(request):
     data = {}
+    data['supplies'] = adapters.get_supplies()
     data['page'] = 'supplie'
     data['title'] = u'宠物用品|精选必备用品，生活用品，保健医疗，清洁卫生物品 '
     data['description'] = u'人工精选高性价比，质量可靠，销量领先的宠物用品，让用户不用花冤枉钱走冤枉路。客户放心，我们安心'

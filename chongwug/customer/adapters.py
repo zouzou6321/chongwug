@@ -2,7 +2,7 @@
 '''
 文件功能：针对购宠用户涉及的页面，根据展示的数据需要，整理出格式化的数据返回
 '''
-from manager.models import ad,dog123,pclady
+from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention,smssend_countor
 from django.db.models import Q
@@ -463,3 +463,6 @@ def get_knowledge_buy(request):
         return {'idlist':idlist}
     else:
         return dog123.objects.all()
+
+def get_supplies():
+    return supplies.objects.filter(dele=False)
