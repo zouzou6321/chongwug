@@ -2,6 +2,11 @@
 
 {% block title %}内容编辑{% endblock %}
 {% load assets_manager %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ 'lib/uploadify/uploadify.css'|assets_manager }}"/>
+{% endblock %}
+
 {% block main %}
 
 <h1 class="page-header">新增商品</h1>
@@ -39,7 +44,8 @@
 	<div class="form-group">
 	    <label for="imgurl" class="col-sm-2 control-label">商品图片<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="imgurl" name="imgurl">
+	      <input type="hidden" class="form-control required" id="imgurl" name="imgurl">
+          <div id="uploadify"></div>
 	    </div>
 	</div>
 	<div class="form-group">
@@ -48,66 +54,43 @@
         </div>
     </div>
 	</form>
-
 {% endblock %}
 
 {% block scripts %}
-
-{% load assets_petfarm %}
-<script src="{{ 'lib/ckeditor/ckeditor.js'|assets_manager }}"></script>
+<script src="{{ 'lib/uploadify/jquery.uploadify.js'|assets_manager }}"></script>
 <script>
-
-CKEDITOR.replace('pet-desc');
-CKEDITOR.instances['pet-desc'].on('change', function() {
-    CKEDITOR.instances['pet-desc'].updateElement();
-});
-
-var validator = $('form').validate(commonvalidateConfig);
-(function($){
-
-    //form submit
-    var $form = $('form'),
-        $submit = $form.find('#js-btn-submit');
-
-    
-    $submit.on('click', function(){
-    	validator.form();
-    
-    	if(!$form.valid()){
-    		return;
-    	}
-    
-        $submit.button('loading');
-
-        var data = {};
-
-        $.each($form.serializeArray(), function(i, e){
-            data[e.name] = e.value;
-        });
-
-        $.ajax({
-            url: './',
-            data: data,
-            type:'POST',
-            dataType: 'json',
-            success: function(data){
-                if(data.status == 0){
-                    alert('提交成功！');
-                    window.location.reload();
-                }else{
-                    alert('提交失败：'+ data.message +'，请重试！');
-                    $submit.button('reset');
-                }
-            },
-            error: function(){
-                $submit.button('reset');
+(function(){
+    $('#uploadify').uploadify({
+        buttonText: '浏览并上传',
+        buttonClass: 'btn-info',
+        swf: '/static/lib/dist/uploadify/uploadify.swf',
+        uploader: './',
+        fileTypeExts: '*.jpg;*.jpeg;*.gif;*.png;*.bmp;',
+        fileSizeLimit: '4MB',
+        multi: false,
+        formData: {},
+        onUploadError: function(file, errorCode, errorMsg, errorString){
+            if(errorMsg == "500"){
+                errorString = '服务器内部错误';
             }
-        });
 
-        return false;
+            alert('"' + file.name + '" 上传失败：' + errorString);
+        },
+        onUploadSuccess: function(file, data, response){
+            if (!response) {
+                alert('请求超时，请稍后重试！');
+                return;
+            }
+
+            data = $.parseJSON(data);
+
+            if(data.status == 0){
+
+            }else{
+                alert('图片上传失败：' + data.message);
+            }
+        }
     });
-
-
-})(jQuery);
+}());
 </script>
 {% endblock %}
