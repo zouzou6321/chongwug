@@ -1,4 +1,4 @@
-import os,json,string
+import os,json,string,time
 from django import template
 from chongwug.settings import WEB_CONFIG_ROOT, PROD_TEST, CDN_TEST, CDN_ROOT
 
@@ -24,6 +24,10 @@ def assets_manager(value):
     prefix = arr[0]
     del arr[0]
     basename = '/'.join(arr)
+
+    if 'jquery.uploadify.js' in value:
+        value = value + '?random=' + str(time.time())
+        basename = basename + '?random=' + str(time.time())
 
     if cdn or PROD_TEST:
         if prefix == 'lib':
