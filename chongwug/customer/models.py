@@ -32,3 +32,10 @@ class nestofpet_attention(models.Model):
     #attention_type：表示关注、预约、预定
     attention_type = models.TextField(default=0)
     dele = models.BooleanField(default=False)
+
+class smssend_countor(models.Model):
+    count = models.IntegerField(default=0)
+    nexttime = models.DateTimeField(default=datetime.datetime.now)
+    attention = models.ForeignKey(nestofpet_attention,blank=True, null=True)
+    user = models.ForeignKey(user,blank=True, null=True)
+    dele = models.BooleanField(default=False)

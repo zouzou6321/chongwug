@@ -4,7 +4,7 @@
 '''
 from manager.models import ad,dog123,pclady
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
-from customer.models import user,nestofpet_attention
+from customer.models import user,nestofpet_attention,smssend_countor
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
@@ -297,7 +297,37 @@ def attention_sendsms(req):
     cur_user = user.objects.get(auth_user=auth.get_user(req),dele=False)
     if attention.user.id != cur_user.id:
         return __errorcode__(2)
+    smsusers = smssend_countor.objects.filter(user=cur_user,dele=False)
+    if smsusers.count() > 0:
+        smsuser = smsusers[0]
+        smsattentions = smssend_countor.objects.filter(attention=attention,dele=False)
+        if smsattentions.count() > 0:
+            smsattention = smsattentions[0]
+        else:
+            smsattention = smssend_countor(attention=attention)
+            smsattention.save()
+    else:
+        smsuser = smssend_countor(user=cur_user)
+        smsuser.save()
+        smsattention = smssend_countor(attention=attention)
+        smsattention.save()
+    now = datetime.datetime.now()
+    if (now - smsuser.nexttime).days >= 1:
+        smsuser.nexttime = now
+        smsuser.count = 0
+    if (now - smsattention.nexttime).days >= 1:
+        smsattention.nexttime = now
+        smsattention.count = 0
+
+    smsuser.count = smsuser.count + 1
+    smsattention.count = smsattention.count + 1
+    
+    if smsuser.count > 9 or smsattention.count > 3:
+        return __errorcode__(23)
+    smsuser.save()
+    smsattention.save()
     #sendSMS(attention.user.tel,u"发送到客户")
+    return __errorcode__(0)
 
 def buy_attention_sure(req):
     if 'id' not in req.GET:

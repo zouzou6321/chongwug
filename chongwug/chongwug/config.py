@@ -125,6 +125,7 @@ __errorcode = [
                [20,u'short desc error',u'简介不可以为空'],
                [21,u'pwd can not be null',u'密码不能为空'],
                [22,u'main img lost',u'未识别到主图，请确保主图存在'],
+               [23,u'sms send times to many',u'今天的短信获取已达上限，请24小时过后再尝试'],
                [404,u'page not found',u'页面不存在'],
                [500,u'internal fault',u'服务器内部错误']
               ]
