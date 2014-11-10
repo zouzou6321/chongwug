@@ -3,10 +3,6 @@
 {% block title %}内容编辑{% endblock %}
 {% load assets_manager %}
 
-{% block css %}
-<link rel="stylesheet" href="{{ 'lib/uploadify/uploadify.css'|assets_manager }}"/>
-{% endblock %}
-
 {% block main %}
 
 <h1 class="page-header">新增商品</h1>
@@ -44,8 +40,7 @@
 	<div class="form-group">
 	    <label for="imgurl" class="col-sm-2 control-label">商品图片<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="hidden" class="form-control required" id="imgurl" name="imgurl">
-          <div id="uploadify"></div>
+	      <input type="file" class="form-control required" id="imgurl" name="imgurl">
 	    </div>
 	</div>
 	<div class="form-group">
@@ -54,43 +49,4 @@
         </div>
     </div>
 	</form>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ 'lib/uploadify/jquery.uploadify.js'|assets_manager }}"></script>
-<script>
-(function(){
-    $('#uploadify').uploadify({
-        buttonText: '浏览并上传',
-        buttonClass: 'btn-info',
-        swf: '/static/lib/dist/uploadify/uploadify.swf',
-        uploader: './',
-        fileTypeExts: '*.jpg;*.jpeg;*.gif;*.png;*.bmp;',
-        fileSizeLimit: '4MB',
-        multi: false,
-        formData: {},
-        onUploadError: function(file, errorCode, errorMsg, errorString){
-            if(errorMsg == "500"){
-                errorString = '服务器内部错误';
-            }
-
-            alert('"' + file.name + '" 上传失败：' + errorString);
-        },
-        onUploadSuccess: function(file, data, response){
-            if (!response) {
-                alert('请求超时，请稍后重试！');
-                return;
-            }
-
-            data = $.parseJSON(data);
-
-            if(data.status == 0){
-
-            }else{
-                alert('图片上传失败：' + data.message);
-            }
-        }
-    });
-}());
-</script>
 {% endblock %}
