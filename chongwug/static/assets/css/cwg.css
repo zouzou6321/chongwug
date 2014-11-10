@@ -1713,6 +1713,11 @@ tbody.collapse.in {
     color: #fff;
     background-color: #428bca; }
 
+.tab-content > .tab-pane {
+  display: none; }
+.tab-content > .active {
+  display: block; }
+
 .breadcrumb {
   padding: 20px 0;
   list-style: none;
