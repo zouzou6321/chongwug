@@ -6,6 +6,7 @@ import settings
 # admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'', include('customer.urls')),
+                       url(r'^ckeditor/', include('ckeditor.urls')),
                        url(r'^back_manage/', include('back_manager.urls')),
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),

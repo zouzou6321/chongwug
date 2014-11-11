@@ -1,11 +1,11 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
 import datetime
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 class pet_farm(models.Model):
     name = models.TextField()
-    desc = models.TextField(blank=True, null=True)
+    desc = RichTextField(config_name='default')
     contry = models.TextField(default='china')
     province = models.TextField()
     city = models.TextField()

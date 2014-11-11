@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 import string,re
 import os,uuid,datetime
 import config
+from ckeditor.widgets import CKEditorWidget
+from django import forms
 from chongwug.commom import __errorcode__
 from chongwug.config import __supplietypes,__directs,__addresses,__regular_expression_idnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
 '''
@@ -72,21 +74,25 @@ def addressHandle(re):
         districts.append({'id': _district['index'], 'name': _district['name']})
     return {'provinces':provinces, 'citys':citys, 'districts':districts}
 
+class descform(forms.Form):
+    content = forms.CharField(widget=CKEditorWidget(),label=u'详细介绍:')
+
 def manage_pet_farm_add(request):
     try:
         if 'pwd' not in request.POST or request.POST['pwd'] == '':
             return __errorcode__(21)
         
         if 'province' not in request.POST or request.POST['province'] == '':
-            province = '四川'
+            province = u'四川'
         else:
             province = request.POST['province']
         if 'city' not in request.POST or request.POST['city'] == '':
-            city = '成都'
+            city = u'成都'
         else:
             city = request.POST['city']
         
         error = True
+        
         for _addresse in __addresses:
             for _province in _addresse['sublist']:
                 if _province['name'] == province:
@@ -126,7 +132,9 @@ def manage_pet_farm_add(request):
         p = re.compile(__regular_expression_idnum)
         if not p.match(request.POST['idnum']):
             return __errorcode__(17)
-        
+        content = descform({'content':request.POST['content']})
+        if not content.is_valid():
+            return __errorcode__(1)
         auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
         new_user = user(nickname = request.POST['name'],
                         tel = request.POST['tel'],
@@ -137,7 +145,7 @@ def manage_pet_farm_add(request):
                         pwd = request.POST['pwd'])
         new_user.save()
         new_pet_farm = pet_farm(name = request.POST['name'],
-                                desc = request.POST['desc'],
+                                desc = request.POST['content'],
                                 detail_address = request.POST['dest'],
                                 province = province,
                                 city = city,

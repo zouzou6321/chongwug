@@ -33,6 +33,9 @@ if 'SERVER_SOFTWARE' in os.environ:
     ALLOWED_HOSTS = ['.chongwug.com','.chongwug.com.']
     
     STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
+    # URL prefix for static files.
+    # Example: "http://media.lawrence.com/static/"
+    STATIC_URL = 'http://www.chongwug.com/static/'
 else:
     DEBUG = True
     TEMPLATE_DEBUG = True
@@ -59,6 +62,9 @@ else:
     ALLOWED_HOSTS = ['localhost']
 
     STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
+    # URL prefix for static files.
+    # Example: "http://media.lawrence.com/static/"
+    STATIC_URL = 'http://localhost:8000/static/'
 
 MANAGERS = ADMINS
 
@@ -104,12 +110,12 @@ USE_TZ = False
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = STATIC_ROOT + 'manage/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = 'http://www.chongwug.com/static/manage/'
 
 WEB_CONFIG_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static').replace('\\','/')
 
@@ -125,10 +131,6 @@ PIC_TMP_PATH = "/manage/pictest/"
 
 SESSION_COOKIE_AGE = 60 * 30#session 30min 
 
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
-STATIC_URL = 'http://www.chongwug.com/static/'
-
 # Additional locations of static files
 STATICFILES_DIRS = (
                     #os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static/src').replace('\\','/'),
@@ -136,7 +138,23 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
-
+CKEDITOR_MEDIA_PREFIX = "/static/ckeditor/" 
+CKEDITOR_UPLOAD_PATH = "pictest/" 
+CKEDITOR_UPLOAD_PREFIX = MEDIA_URL + "pictest/"
+CKEDITOR_RESTRICT_BY_USER=False
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar':[       
+            ['PasteText','PasteFromWord','Undo','Redo','-','SelectAll'],
+            ['Bold','Italic','NumberedList','BulletedList','-','Outdent','Indent'],        
+            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Font','FontSize'],
+            ['Maximize']        
+        ],
+        'width': 700,
+        'height': 200,
+        'toolbarCanCollapse': False,
+    },
+}
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -189,6 +207,7 @@ INSTALLED_APPS = (
     'petfarm',
     'manager',
     'marketer',
+    'ckeditor',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

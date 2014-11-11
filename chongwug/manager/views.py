@@ -31,7 +31,7 @@ def manage_home_view(request):
 def address_handle_view(request):
     data = adapters.addressHandle(request);
     return HttpResponse(data.__str__())
-
+    
 def manage_pet_farm_add_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MANAGE_ROOT)
@@ -43,6 +43,7 @@ def manage_pet_farm_add_view(request):
     pagedata = adapters.addressHandle(request)
     pagedata['manager'] = data['manager']
     pagedata['directs'] = data['directs']
+    pagedata['form'] = adapters.descform()
     return render_to_response('manager/tpl/manage_pet_farm_add.html',pagedata,context_instance=RequestContext(request))
 
 def manage_ad_add_view(request):
