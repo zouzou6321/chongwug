@@ -36,7 +36,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     # URL prefix for static files.
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://www.chongwug.com/static/'
-    CKEDITOR_STATIC_URL = 'http://www.chongwug.com/static/'
+    CKEDITOR_STATIC_URL = '//chongwug-cdn.b0.upaiyun.com/lib/'
 else:
     DEBUG = True
     TEMPLATE_DEBUG = True
@@ -66,7 +66,7 @@ else:
     # URL prefix for static files.
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://localhost:8000/static/'
-    CKEDITOR_STATIC_URL = 'http://localhost:8000/static/'
+    CKEDITOR_STATIC_URL = 'http://localhost:8000/static/lib/dist/'
 
 MANAGERS = ADMINS
 
