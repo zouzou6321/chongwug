@@ -1,80 +1,80 @@
 <div id="getinfo">
 	<form class="form-horizontal business-result-form">
 		<div class="form-group">
-			<label class="col-sm-3 control-label">宠物编号:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">宠物编号:</label>
+			<div class="col-3">
 				<input class="form-control" name="petidnumlabel" readonly type="text" value="{{ pet.id_num }}"/>
 			</div>
-			<label class="col-sm-3 control-label">宠物主人姓名:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">宠物主人姓名:</label>
+			<div class="col-3">
 				<input class="form-control" name="mastername" readonly type="text" value="{{ pet.petmaster.name }}"/>
 			</div>
         </div>
         <div class="form-group">
-			<label class="col-sm-3 control-label">繁殖者名字:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">繁殖者名字:</label>
+			<div class="col-3">
 				<input class="form-control" name="breedername" readonly type="text" value="{{ pet.petbreeder.name }}"/>
 			</div>
-			<label class="col-sm-3 control-label">宠物主人身份证号:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">宠物主人身份证号:</label>
+			<div class="col-3">
 				<input class="form-control" name="masteridnum" readonly type="text" value="{{ pet.petmaster.id_num }}"/>
 			</div>
         </div>
         <div class="form-group">
-			<label class="col-sm-3 control-label">繁殖者身份证号:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">繁殖者身份证号:</label>
+			<div class="col-3">
 				<input class="form-control" name="breederidnum" readonly type="text" value="{{ pet.petbreeder.id_num }}"/>
 			</div>
-			<label class="col-sm-3 control-label">宠物主人联系方式:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">宠物主人联系方式:</label>
+			<div class="col-3">
 				<input class="form-control" name="mastercontact" readonly type="text" value="{{ pet.petmaster.contact }}"/>
 			</div>
         </div>
         <div class="form-group">
-			<label class="col-sm-3 control-label">繁殖者联系方式:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">繁殖者联系方式:</label>
+			<div class="col-3">
 				<input class="form-control" name="breedercontact" readonly type="text" value="{{ pet.petbreeder.contact }}"/>
 			</div>
 		</div>
 		<br />
 		<div class="form-group">
-			<label class="col-sm-3 control-label">犬种:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">犬种:</label>
+			<div class="col-3">
 				<input class="form-control" name="pettype" readonly type="text" value="{{ pet.type }}"/>
 			</div>
-            <label class="col-sm-3 control-label">英文名:</label>
-			<div class="col-sm-3">
+            <label class="col-3 control-label">英文名:</label>
+			<div class="col-3">
 				<input class="form-control" name="petsex" readonly type="text" value="{{ pet.englishname }}"/>
 			</div>
         </div>
         <div class="form-group">
-			<label class="col-sm-3 control-label">性别:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">性别:</label>
+			<div class="col-3">
 				<input class="form-control" name="petsex" readonly type="text" value="{{ pet.sex }}"/>
 			</div>
-			<label class="col-sm-3 control-label">颜色:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">颜色:</label>
+			<div class="col-3">
 				<input class="form-control" name="petcolor" readonly type="text" value="{{ pet.color }}"/>
 			</div>
         </div>
         <div class="form-group">
-			<label class="col-sm-3 control-label">出生日期:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">出生日期:</label>
+			<div class="col-3">
 				<input class="form-control" name="petbirthdate" readonly type="text" value="{{ pet.birthdate|date:'Y-m-d' }}"/>
 			</div>
-			<label class="col-sm-3 control-label">母亲身份识别号码:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">母亲身份识别号码:</label>
+			<div class="col-3">
 				<input class="form-control" name="petmather" readonly type="text" value="{{ pet.mather }}"/>
 			</div>
         </div>
         <div class="form-group">
-			<label class="col-sm-3 control-label">父亲身份识别号码:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label">父亲身份识别号码:</label>
+			<div class="col-3">
 				<input class="form-control" name="petfather" readonly type="text" value="{{ pet.father }}"/>
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-sm-3 col-sm-offset-3">
+			<div class="col-3 col-offset-3">
 				<button class="btn btn-business form-control" type="button" onclick="reset_idnum();">下一只</button>
 			</div>
 		</div>

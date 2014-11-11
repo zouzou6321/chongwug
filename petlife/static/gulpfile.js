@@ -92,13 +92,13 @@ gulp.task('fonts', function(){
 
 
 gulp.task('watch', function(){
-    plugins.watch({
-        glob: config.imgs.src,
-        emitOnGlob: false,
-        passThrough: false
-    }, function(files) {
-        gulp.start('imgs');
-    });
+//    plugins.watch({
+//        glob: config.imgs.src,
+//        emitOnGlob: false,
+//        passThrough: false
+//    }, function(files) {
+//        gulp.start('imgs');
+//    });
 
     gulp.watch(config.css.src, ['css']);
 });

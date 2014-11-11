@@ -13,11 +13,11 @@
     <div class="business-bg hide"></div>
     <form class="form-horizontal business-num-form">
         <div class="form-group">
-            <label class="col-sm-3 control-label" for="setnum">宠物编号:</label>
-            <div class="col-sm-7" style="padding-left: 0;">
+            <label class="col-3 control-label" for="setnum">宠物编号:</label>
+            <div class="col-7" style="padding-left: 0;">
                 <input class="form-control required setnum" id="setnum" name="setnum" type="text" placeholder="请输入完整的芯片号码"/>
             </div>
-            <div class="col-sm-2" style="padding: 0;">
+            <div class="col-2" style="padding: 0;">
                 <button id="putinfo" type="button" class="btn btn-business form-control" style="padding: 0;" data-loading-text="请稍等...">查询/录入</button>
             </div>
         </div>
@@ -25,45 +25,45 @@
 	<form class="form-horizontal business-data-form hide" id="js-data-form">
         <input name="petidnum" id="petidnum" type="hidden"/>
 		<div class="form-group">
-			<label class="col-sm-3 control-label" for="mastername">宠物主人姓名:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="mastername">宠物主人姓名:</label>
+			<div class="col-3">
 				<input class="form-control required" id="mastername" name="mastername" type="text"/>
                 <span class="warn">*</span>
 			</div>
-			<label class="col-sm-3 control-label" for="breedername">繁殖者名字:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="breedername">繁殖者名字:</label>
+			<div class="col-3">
 				<input class="form-control required" id="breedername" name="breedername" type="text"/>
                 <span class="warn">*</span>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label" for="masteridnum">宠物主人身份证号:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="masteridnum">宠物主人身份证号:</label>
+			<div class="col-3">
 				<input class="form-control required" id="masteridnum" name="masteridnum" type="text"/>
                 <span class="warn">*</span>
 			</div>
-			<label class="col-sm-3 control-label" for="breederidnum">繁殖者身份证号:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="breederidnum">繁殖者身份证号:</label>
+			<div class="col-3">
 				<input class="form-control required" id="breederidnum" name="breederidnum" type="text"/>
                 <span class="warn">*</span>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label" for="mastercontact">宠物主人联系方式:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="mastercontact">宠物主人联系方式:</label>
+			<div class="col-3">
 				<input class="form-control required" id="mastercontact" name="mastercontact" type="text"/>
                 <span class="warn">*</span>
 			</div>
-			<label class="col-sm-3 control-label" for="breedercontact">繁殖者联系方式:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="breedercontact">繁殖者联系方式:</label>
+			<div class="col-3">
 				<input class="form-control required" id="breedercontact" name="breedercontact" type="text"/>
                 <span class="warn">*</span>
 			</div>
 		</div>
 		<br />
 		<div class="form-group">
-			<label class="col-sm-3 control-label" for="pettype">犬种:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="pettype">犬种:</label>
+			<div class="col-3">
 				<select class="form-control required" id="pettype" name="pettype" >
 					{% for type in types %}
                     <option value="{{ type }}">{{ type }}</option>
@@ -71,22 +71,22 @@
                 </select>
                 <span class="warn">*</span>
 			</div>
-            <label class="col-sm-3 control-label" for="petenglish">英文名:</label>
-			<div class="col-sm-3">
+            <label class="col-3 control-label" for="petenglish">英文名:</label>
+			<div class="col-3">
 				<input class="form-control" id="petenglish" name="petenglish" type="text"/>
 			</div>
 		</div>
 		<div class="form-group">
-            <label class="col-sm-3 control-label" for="petsex">性别:</label>
-			<div class="col-sm-3">
+            <label class="col-3 control-label" for="petsex">性别:</label>
+			<div class="col-3">
 				<select class="form-control required" id="petsex" name="petsex">
                     <option value="公">公</option>
                     <option value="母">母</option>
                 </select>
                 <span class="warn">*</span>
 			</div>
-			<label class="col-sm-3 control-label" for="petcolor">颜色:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="petcolor">颜色:</label>
+			<div class="col-3">
 				<select class="form-control required" id="petcolor" name="petcolor" >
 					{% for color in colors %}
                     <option value="{{ color }}">{{ color }}</option>
@@ -96,28 +96,28 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label" for="petbirthdate">出生日期:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="petbirthdate">出生日期:</label>
+			<div class="col-3">
 				<input class="form-control required" id="petbirthdate" name="petbirthdate" type="text" readonly/>
                 <span class="warn">*</span>
 			</div>
-			<label class="col-sm-3 control-label" for="petmather">母亲身份识别号码:</label>
-			<div class="col-sm-3">
+			<label class="col-3 control-label" for="petmather">母亲身份识别号码:</label>
+			<div class="col-3">
 				<input class="form-control" id="petmather" name="petmather" type="text"/>
 			</div>
 		</div>
         <div class="form-group">
-            <label class="col-sm-3 control-label" for="petfather">父亲身份识别号码:</label>
-			<div class="col-sm-3">
+            <label class="col-3 control-label" for="petfather">父亲身份识别号码:</label>
+			<div class="col-3">
 				<input class="form-control" id="petfather" name="petfather" type="text"/>
 			</div>
         </div>
         <br/>
 		<div class="form-group">
-			<div class="col-sm-3 col-sm-offset-3">
+			<div class="col-3 col-offset-3">
                 <button type="button" class="btn btn-custom form-control" id="petsubmit" data-loading-text="请稍等...">保 存</button>
 			</div>
-            <div class="col-sm-4">
+            <div class="col-4">
                 <span style="color: #d80000;line-height: 34px;"><i class="glyphicon glyphicon-exclamation-sign" style="margin-right: 5px;"></i>提示：带*的内容必须填写!</span>
             </div>
 		</div>
