@@ -36,6 +36,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     # URL prefix for static files.
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://www.chongwug.com/static/'
+    CKEDITOR_STATIC_URL = 'http://www.chongwug.com/static/'
 else:
     DEBUG = True
     TEMPLATE_DEBUG = True
@@ -65,6 +66,7 @@ else:
     # URL prefix for static files.
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://localhost:8000/static/'
+    CKEDITOR_STATIC_URL = 'http://localhost:8000/static/'
 
 MANAGERS = ADMINS
 
@@ -138,6 +140,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
 CKEDITOR_MEDIA_PREFIX = "/static/ckeditor/" 
 CKEDITOR_UPLOAD_PATH = "pictest/" 
 CKEDITOR_UPLOAD_PREFIX = MEDIA_URL + "pictest/"
