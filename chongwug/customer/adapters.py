@@ -326,7 +326,10 @@ def attention_sendsms(req):
         return __errorcode__(23)
     smsuser.save()
     smsattention.save()
-    sendSMS(attention.user.tel,u"发送到客户")
+    locations = attention.user.location.split('-')
+    sendSMS(attention.user.tel,u"%s您好，您的预约信息如下：预约看犬时间为：%s年%s月%s日 %s点%s分,等待接送地点为：%s%s%s%s,预约看犬犬舍为：%s,预约看犬犬种为：%s。祝您就此遇见心仪的爱犬！"
+            % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day, 
+               attention.appoint_time.hour, attention.appoint_time.minute, locations[0], locations[1], locations[2], locations[3], attention.nestofpet_id.farm.name, attention.nestofpet_id.type))
     return __errorcode__(0)
 
 def buy_attention_sure(req):
@@ -383,6 +386,8 @@ def buy_attention_adapter(req):
         totalpay = __transpay
     attentions = nestofpet_attention.objects.filter(dele=False,nestofpet_id=cupet)
     
+    if req.user.is_authenticated() and auth.get_user(req).username != tel:
+        auth.logout(req)
     if not req.user.is_authenticated():
         auth_user = None
         try:
