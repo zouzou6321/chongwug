@@ -2502,6 +2502,14 @@ The provided mixins are intended to be used with the array-like variables
   content: '\e800'; }
 
 /* '' */
+.icon-forward:before {
+  content: '\e801'; }
+
+/* '' */
+.icon-down-open:before {
+  content: '\e802'; }
+
+/* '' */
 .icon-help-circled:before {
   content: '\e804'; }
 
@@ -3069,6 +3077,26 @@ Copyright (c) 2014 Daniel Eden
 
 .adg-buy {
   background-color: #ff8da0; }
+
+.skip-guide, .next-guide {
+  position: fixed;
+  color: #fff;
+  text-align: center; }
+  .skip-guide:hover, .next-guide:hover {
+    color: #fff;
+    text-decoration: none; }
+  .skip-guide .icon, .next-guide .icon {
+    font-size: 30px; }
+
+.skip-guide {
+  top: 50px;
+  right: 15px; }
+
+.next-guide {
+  bottom: 15px;
+  width: 50px;
+  margin-left: -25px;
+  left: 50%; }
 
 /**
  * fullPage 2.1.9

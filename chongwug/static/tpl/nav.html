@@ -41,17 +41,38 @@
 </div>
 
 
+<a href="/home" class="skip-guide">
+    <i class="icon icon-forward"></i>
+    <p>进入主页</p>
+</a>
+<a href="javascript:" class="next-guide">
+    <i class="icon icon-down-open"></i>
+</a>
+
 {% endblock %}
 
 {% block plugins %}
 <script src="{{ 'js/lib/jquery.fullPage.js'|assets }}"></script>
 <script>
+var $nextGuide = $('.next-guide');
+
 $('#js-full-page').fullpage({
     'easing': 'swing',
     'css3': true,
     'navigation': true,
     'navigationPosition': 'right',
-    'navigationTooltips': ['健康有保障', '价格很公道', '品相很优质', '流程很标准', '赶紧去挑选吧']
+    'navigationTooltips': ['健康有保障', '价格很公道', '品相很优质', '流程很标准', '赶紧去挑选吧'],
+    'onLeave': function(index, nextIndex, direction){
+        if(nextIndex == 5){
+            $nextGuide.addClass('hide');
+        }else{
+            $nextGuide.removeClass('hide');
+        }
+    }
+});
+
+$nextGuide.on('click', function(){
+    $.fn.fullpage.moveSectionDown();
 });
 </script>
 <script src="{{'js/lib/plugins.js'|assets}}"></script>

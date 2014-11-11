@@ -31,3 +31,30 @@ $nav-dotted-color: #0c7987;
 .adg-buy{
   background-color: $adg5-bg-color;
 }
+
+.skip-guide, .next-guide{
+  position: fixed;
+  color: #fff;
+  text-align: center;
+
+  &:hover{
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .icon{
+    font-size: 30px;
+  }
+}
+
+.skip-guide{
+  top: 50px;
+  right: 15px;
+}
+
+.next-guide{
+  bottom: 15px;
+  width: 50px;
+  margin-left: -25px;
+  left: 50%;
+}
