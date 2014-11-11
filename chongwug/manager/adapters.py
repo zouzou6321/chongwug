@@ -88,7 +88,7 @@ class myCKEditorWidget(CKEditorWidget):
             js += (jquery_url, )
         try:
             js += (
-                settings.CKEDITOR_STATIC_URL + 'ckeditor/ckeditor/ckeditor.js',
+                settings.CKEDITOR_STATIC_URL + 'ckeditor/ckeditor.js',
                 settings.CKEDITOR_STATIC_URL + 'ckeditor/ckeditor-init.js',
             )
         except AttributeError:
