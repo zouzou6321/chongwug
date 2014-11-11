@@ -1,4 +1,6 @@
-import os,json,string,time
+import os
+import json
+import time
 from django import template
 from chongwug.settings import WEB_CONFIG_ROOT, PROD_TEST, CDN_TEST, CDN_ROOT
 
@@ -6,10 +8,19 @@ register = template.Library()
 
 
 def process_json_file(json_file):
-    fin = open(json_file, 'r')
-    s = json.loads(fin.read())
-    fin.close()
+    try:
+        fin = open(json_file, 'r')
+        s = json.loads(fin.read())
+        fin.close()
+    except:
+        s = {}
     return s
+
+manifest_map = {
+    'js': process_json_file(WEB_CONFIG_ROOT + '/petfarm/js-manifest.json'),
+    'css': process_json_file(WEB_CONFIG_ROOT + '/petfarm/css-manifest.json'),
+    'imgs': process_json_file(WEB_CONFIG_ROOT + '/petfarm/imgs-manifest.json'),
+}
 
 
 @register.filter
@@ -33,9 +44,8 @@ def assets_petfarm(value):
         if prefix == 'lib':
             path = 'lib/' + dist + basename
         else:
-            manifest = process_json_file(WEB_CONFIG_ROOT + '/' + folder + prefix + '-manifest.json')
-
             try:
+                manifest = manifest_map[prefix]
                 path = folder + dist + prefix + '/' + manifest[basename]
             except:
                 path = folder + dist + value

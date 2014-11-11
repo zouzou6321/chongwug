@@ -1,4 +1,6 @@
-import os,json,string,time
+import os
+import json
+import time
 from django import template
 from chongwug.settings import WEB_CONFIG_ROOT, PROD_TEST, CDN_TEST, CDN_ROOT
 
@@ -6,10 +8,19 @@ register = template.Library()
 
 
 def process_json_file(json_file):
-    fin = open(json_file, 'r')
-    s = json.loads(fin.read())
-    fin.close()
+    try:
+        fin = open(json_file, 'r')
+        s = json.loads(fin.read())
+        fin.close()
+    except:
+        s = {}
     return s
+
+manifest_map = {
+    'js': process_json_file(WEB_CONFIG_ROOT + '/manager/js-manifest.json'),
+    'css': process_json_file(WEB_CONFIG_ROOT + '/manager/css-manifest.json'),
+    'imgs': process_json_file(WEB_CONFIG_ROOT + '/manager/imgs-manifest.json'),
+}
 
 
 @register.filter
@@ -34,8 +45,7 @@ def assets_manager(value):
             path = 'lib/' + dist + basename
         else:
             try:
-                manifest = process_json_file(WEB_CONFIG_ROOT + '/' + folder + prefix + '-manifest.json')
-
+                manifest = manifest_map[prefix]
                 try:
                     path = folder + dist + prefix + '/' + manifest[basename]
                 except:

@@ -1,4 +1,5 @@
-import os,json,string
+import os
+import json
 from django import template
 from petlife.settings import STATIC_ROOT, PROD_TEST, CDN_TEST, CDN_ROOT
 
@@ -6,10 +7,19 @@ register = template.Library()
 
 
 def process_json_file(json_file):
-    fin = open(json_file, 'r')
-    s = json.loads(fin.read())
-    fin.close()
+    try:
+        fin = open(json_file, 'r')
+        s = json.loads(fin.read())
+        fin.close()
+    except:
+        s = {}
     return s
+
+manifest_map = {
+    'js': process_json_file(STATIC_ROOT + '/js-manifest.json'),
+    'css': process_json_file(STATIC_ROOT + '/css-manifest.json'),
+    'imgs': process_json_file(STATIC_ROOT + '/imgs-manifest.json'),
+}
 
 
 @register.filter
@@ -30,7 +40,7 @@ def assets(value):
             path = 'lib/' + dist + basename
         else:
             try:
-                manifest = process_json_file(STATIC_ROOT + '/' + folder + prefix + '-manifest.json')
+                manifest = manifest_map[prefix]
 
                 try:
                     path = folder + dist + prefix + '/' + manifest[basename]

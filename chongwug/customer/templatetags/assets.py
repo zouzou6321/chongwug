@@ -1,4 +1,5 @@
-import os,json,string
+import os
+import json
 from django import template
 from chongwug.settings import WEB_CONFIG_ROOT, PROD_TEST, CDN_TEST, CDN_ROOT
 
@@ -6,10 +7,14 @@ register = template.Library()
 
 
 def process_json_file(json_file):
-    fin = open(json_file, 'r')
-    s = json.loads(fin.read())
-    fin.close()
+    try:
+        fin = open(json_file, 'r')
+        s = json.loads(fin.read())
+        fin.close()
+    except:
+        s = {}
     return s
+
 
 manifest_map = {
     'js': process_json_file(WEB_CONFIG_ROOT + '/js-manifest.json'),
@@ -29,9 +34,9 @@ def assets(value):
         prefix = arr[0]
         del arr[0]
         basename = '/'.join(arr)
-        manifest = manifest_map[prefix]
 
         try:
+            manifest = manifest_map[prefix]
             path = prefix + '/' + manifest[basename]
         except:
             path = value
