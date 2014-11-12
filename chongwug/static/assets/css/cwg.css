@@ -3031,7 +3031,8 @@ Copyright (c) 2014 Daniel Eden
   border-color: #ffd401; }
 .pagination-primary > li > a, .pagination-primary > li > span {
   margin-left: 5px;
-  margin-right: 5px; }
+  margin-right: 5px;
+  color: #777; }
 
 .feedback {
   position: fixed;

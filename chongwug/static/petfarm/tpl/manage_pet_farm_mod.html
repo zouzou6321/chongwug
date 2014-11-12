@@ -141,13 +141,10 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ 'lib/ckeditor/ckeditor.js'|assets_petfarm }}"></script>
+{{ media }}
+
 <script>
 
-CKEDITOR.replace('farm-desc');
-CKEDITOR.instances['farm-desc'].on('change', function() {
-    CKEDITOR.instances['farm-desc'].updateElement();
-});
 </script>
 <script src="{{ 'lib/uploadify/jquery.uploadify.js'|assets_petfarm }}"></script>
 <script src="{{ 'lib/template.js'|assets_petfarm }}"></script>
@@ -230,6 +227,9 @@ $('.uploadAndCrop').uploadAndCrop({
     var validator = $form.validate(commonvalidateConfig);
 
     $submit.on('click', function(){
+        for (var instance in CKEDITOR.instances){
+             CKEDITOR.instances[instance].updateElement();
+        }
 
         validator.form();
 
