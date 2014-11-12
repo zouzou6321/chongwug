@@ -43,7 +43,11 @@ def manage_pet_farm_add_view(request):
     pagedata = adapters.addressHandle(request)
     pagedata['manager'] = data['manager']
     pagedata['directs'] = data['directs']
-    pagedata['form'] = adapters.descform()
+    form = adapters.descform()
+    medialist = str(form.media).split('\n')
+    media = '%s\n%s' % (medialist[-2],medialist[-1])
+    pagedata['form'] = form
+    pagedata['media'] = media
     return render_to_response('manager/tpl/manage_pet_farm_add.html',pagedata,context_instance=RequestContext(request))
 
 def manage_ad_add_view(request):
