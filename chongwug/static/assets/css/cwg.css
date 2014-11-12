@@ -3082,15 +3082,17 @@ Copyright (c) 2014 Daniel Eden
   position: fixed;
   color: #fff;
   text-align: center; }
-  .skip-guide:hover, .next-guide:hover {
+  .skip-guide:hover, .skip-guide:active, .skip-guide:focus, .next-guide:hover, .next-guide:active, .next-guide:focus {
     color: #fff;
     text-decoration: none; }
   .skip-guide .icon, .next-guide .icon {
     font-size: 30px; }
 
 .skip-guide {
-  top: 50px;
+  top: 25px;
   right: 15px; }
+  .skip-guide p {
+    font-size: 14px; }
 
 .next-guide {
   bottom: 15px;

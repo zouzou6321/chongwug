@@ -37,7 +37,7 @@ $nav-dotted-color: #0c7987;
   color: #fff;
   text-align: center;
 
-  &:hover{
+  &:hover, &:active, &:focus{
     color: #fff;
     text-decoration: none;
   }
@@ -48,8 +48,12 @@ $nav-dotted-color: #0c7987;
 }
 
 .skip-guide{
-  top: 50px;
+  top: 25px;
   right: 15px;
+
+  p{
+    font-size: 14px;
+  }
 }
 
 .next-guide{
