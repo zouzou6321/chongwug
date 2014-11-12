@@ -38,9 +38,10 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="farm-desc" class="col-sm-3 control-label">养殖场介绍<span class="warn">*</span>：</label>
+        <label class="col-sm-3 control-label">养殖场介绍<span class="warn">*</span>：</label>
         <div class="col-sm-8">
-            <textarea name="desc" class="form-control" rows="3" id="farm-desc">{{ manager.petfarm.desc }}</textarea>
+            {{ form.as_p }}
+            <p class="hide" id="farm-desc">{{ manager.petfarm.desc }}</p>
         </div>
     </div>
     <div class="form-group">
@@ -141,11 +142,21 @@
 {% endblock %}
 
 {% block scripts %}
-{{ media }}
+{{ media|safe }}
 
 <script>
+(function(){
 
+CKEDITOR.on('instanceReady', function(){
+    var content = $('#farm-desc').text();
+    for (var instance in CKEDITOR.instances){
+        CKEDITOR.instances[instance].setData(content);
+    }
+});
+
+}());
 </script>
+
 <script src="{{ 'lib/uploadify/jquery.uploadify.js'|assets_petfarm }}"></script>
 <script src="{{ 'lib/template.js'|assets_petfarm }}"></script>
 <script src="{{ 'lib/jcrop/jquery.Jcrop.js'|assets_petfarm }}"></script>
