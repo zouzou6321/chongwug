@@ -5,7 +5,8 @@ from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
 from chongwug.config import __epidemics,__regular_expression_email,__regular_expression_chinatelnum,__directs,__addresses,__petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petcolors,__petages
-from chongwug.commom import __errorcode__
+from django import forms
+from chongwug.commom import __errorcode__,myCKEditorWidget
 from upyun import UpYun
 from django.contrib import auth
 import traceback
@@ -289,6 +290,9 @@ def addressHandle(re):
         districts.append({'id': _district['index'], 'name': _district['name']})
     return {'provinces':provinces, 'citys':citys, 'districts':districts}
 
+class descform(forms.Form):
+    content = forms.CharField(widget=myCKEditorWidget(),label=u'详细介绍:')
+
 def manage_pet_farm_mod(request):
     try:
         if 'province' not in request.POST or request.POST['province'] == '':
@@ -329,6 +333,9 @@ def manage_pet_farm_mod(request):
         p = re.compile(__regular_expression_email)
         if not p.match(request.POST['email']):
             return __errorcode__(16)
+        content = descform({'content':request.POST['content']})
+        if not content.is_valid():
+            return __errorcode__(1)
         curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
         curuser.tel = request.POST['tel']
         curuser.email = request.POST['email']

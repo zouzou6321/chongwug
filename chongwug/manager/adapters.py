@@ -11,10 +11,8 @@ from django.contrib.auth.models import User
 import string,re
 import os,uuid,datetime
 import config
-from ckeditor.widgets import CKEditorWidget
 from django import forms
-from django.core.exceptions import ImproperlyConfigured
-from chongwug.commom import __errorcode__
+from chongwug.commom import __errorcode__,myCKEditorWidget
 from chongwug.config import __supplietypes,__directs,__addresses,__regular_expression_idnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
 '''
 管理员鉴权
@@ -74,29 +72,6 @@ def addressHandle(re):
     for _district in __addresses[0]['sublist'][0]['sublist'][0]['sublist']:
         districts.append({'id': _district['index'], 'name': _district['name']})
     return {'provinces':provinces, 'citys':citys, 'districts':districts}
-
-#重载CKEditorWidget,不要直接使用STATIC_URL作为目录，改成使用CKEDITOR_STATIC_URL
-class myCKEditorWidget(CKEditorWidget):
-    """
-    Widget providing CKEditor for Rich Text Editing.
-    Supports direct image uploads and embed.
-    """
-    class Media:
-        js = ()
-        jquery_url = getattr(settings, 'CKEDITOR_JQUERY_URL', None)
-        if jquery_url:
-            js += (jquery_url, )
-        try:
-            js += (
-                settings.CKEDITOR_STATIC_URL + 'ckeditor/ckeditor.js',
-                settings.CKEDITOR_STATIC_URL + 'ckeditor/ckeditor-init.js',
-            )
-        except AttributeError:
-            raise ImproperlyConfigured("django-ckeditor requires \
-                    CKEDITOR_MEDIA_PREFIX setting. This setting specifies a \
-                    URL prefix to the ckeditor JS and CSS media (not \
-                    uploaded media). Make sure to use a trailing slash: \
-                    CKEDITOR_MEDIA_PREFIX = '/media/ckeditor/'")
 
 class descform(forms.Form):
     content = forms.CharField(widget=myCKEditorWidget(),label=u'详细介绍:')
