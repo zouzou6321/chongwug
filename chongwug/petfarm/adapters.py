@@ -342,7 +342,7 @@ def manage_pet_farm_mod(request):
         if request.POST['pwd'] != '':
             curuser.pwd = request.POST['pwd']
         curuser.petfarm.name = request.POST['name']
-        curuser.petfarm.desc = request.POST['desc']
+        curuser.petfarm.desc = request.POST['content']
         curuser.petfarm.detail_address = request.POST['detail_address']
         curuser.petfarm.province = province
         curuser.petfarm.city = city
