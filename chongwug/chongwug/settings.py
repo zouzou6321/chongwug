@@ -217,6 +217,40 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+
+from django.utils.log import AdminEmailHandler
+from django.core.mail  import  send_mail
+from django.views.debug import get_exception_reporter_filter
+import traceback
+class myAdminEmailHandler(AdminEmailHandler):
+    def emit(self, record):
+        stack_trace = '\n'.join(traceback.format_exception(*record.exc_info))
+        try:
+            request = record.request
+            subject = '%s ( IP): %s' % (
+                record.levelname,
+                record.getMessage()
+            )
+            filter = get_exception_reporter_filter(request)
+            request_repr = filter.get_request_repr(request)
+        except Exception:
+            subject = '%s: %s' % (
+                record.levelname,
+                record.getMessage()
+            )
+            request = None
+            request_repr = "Request repr() unavailable."
+        message = "%s\n\n%s" % (stack_trace, request_repr)
+        sender=EMAIL_HOST_USER
+        mail_list= ADMINS
+        send_mail(
+                    subject=subject,  
+                    message=message,  
+                    from_email=sender,
+                    recipient_list=mail_list,  
+                    fail_silently=False,  
+                    connection=None  
+                )
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -234,7 +268,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
-            'class': 'chongwug.commom.myAdminEmailHandler'
+            'class': 'chongwug.settings.myAdminEmailHandler'
         }
     },
     'loggers': {

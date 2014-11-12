@@ -6,14 +6,14 @@ Created on 2014年10月15日
 '''
 from chongwug.config import __errorcode
 import json,traceback,urllib,urllib2
-from django.utils.log import AdminEmailHandler
-from django.core.mail  import  send_mail
-from chongwug.settings import EMAIL_HOST_USER,ADMINS
-from django.views.debug import get_exception_reporter_filter
+from chongwug.settings import CKEDITOR_STATIC_URL
+from ckeditor.widgets import CKEditorWidget
+from django.core.exceptions import ImproperlyConfigured
+
 def __errorcode__(errornum,otherdata = None):
     index = 0
     for errorcode in __errorcode:
-        if errornum == __errorcode[index][0]:
+        if errornum == errorcode[0]:
             errornum = index
             break
         index += 1
@@ -33,32 +33,22 @@ def sendSMS(telnum,SMScontent):
         return content
     return True
 
-class myAdminEmailHandler(AdminEmailHandler):
-    def emit(self, record):
-        stack_trace = '\n'.join(traceback.format_exception(*record.exc_info))
+#重载CKEditorWidget,不要直接使用STATIC_URL作为目录，改成使用CKEDITOR_STATIC_URL
+class myCKEditorWidget(CKEditorWidget):
+    """
+    Widget providing CKEditor for Rich Text Editing.
+    Supports direct image uploads and embed.
+    """
+    class Media:
+        js = ()
         try:
-            request = record.request
-            subject = '%s ( IP): %s' % (
-                record.levelname,
-                record.getMessage()
+            js += (
+                CKEDITOR_STATIC_URL + 'ckeditor/ckeditor.js',
+                CKEDITOR_STATIC_URL + 'ckeditor/ckeditor-init.js',
             )
-            filter = get_exception_reporter_filter(request)
-            request_repr = filter.get_request_repr(request)
-        except Exception:
-            subject = '%s: %s' % (
-                record.levelname,
-                record.getMessage()
-            )
-            request = None
-            request_repr = "Request repr() unavailable."
-        message = "%s\n\n%s" % (stack_trace, request_repr)
-        sender=EMAIL_HOST_USER
-        mail_list= ADMINS
-        send_mail(
-                    subject=subject,  
-                    message=message,  
-                    from_email=sender,
-                    recipient_list=mail_list,  
-                    fail_silently=False,  
-                    connection=None  
-                ) 
+        except AttributeError:
+            raise ImproperlyConfigured("django-ckeditor requires \
+                    CKEDITOR_MEDIA_PREFIX setting. This setting specifies a \
+                    URL prefix to the ckeditor JS and CSS media (not \
+                    uploaded media). Make sure to use a trailing slash: \
+                    CKEDITOR_MEDIA_PREFIX = '/media/ckeditor/'")

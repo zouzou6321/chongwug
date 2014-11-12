@@ -102,7 +102,7 @@
 
 {% block scripts %}
 
-{{ media }}
+{{ media|safe }}
 
 <script>
 var validator = $('form').validate(commonvalidateConfig);
