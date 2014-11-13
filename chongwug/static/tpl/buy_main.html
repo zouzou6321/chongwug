@@ -15,9 +15,9 @@
     <div class="container buy-main content-container">
         <div class="row">
             <div class="col-6 col-offset-1">
-                <form action="/buy/" method="get">
+                <form action="/buy/" method="get" id="js-form">
                     <div class="input-group cwg-search-wrap">
-                    	<input type="text" class="form-control" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != None %}value="{{ searchkey }}"{% endif %}>
+                    	<input type="text" class="form-control" id="js-key" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != None %}value="{{ searchkey }}"{% endif %}>
                         <span class="input-group-btn">
                             <button class="btn btn-search" type="submit">
                                 <i class="icon icon-search"></i>
@@ -214,4 +214,20 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function(){
+    var $form = $('#js-form'),
+        $key = $form.find('#js-key');
+
+    $form.on('submit', function(e){
+        if($.trim($key.val()) == ''){
+            $key.focus();
+            e.preventDefault();
+        }
+    });
+}());
+</script>
 {% endblock %}
