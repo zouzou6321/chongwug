@@ -67,7 +67,7 @@ def market_attention_mod(request):
             attention.attention_type = 5
         elif request.POST['data[accept]'] == '3':
             attention.attention_type = 3
-        elif request.POST['data[name]'] == '4':
+        elif request.POST['data[accept]'] == '4':
             attention.attention_type = 4
     elif filter == 'untreated':
         petfarm = pet_farm.objects.get(id=string.atoi(request.POST['data[petfarm]']),dele=False)
