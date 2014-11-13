@@ -24,7 +24,7 @@ manifest_map = {
 
 @register.filter
 def assets_market(value):
-    flag = 'SERVER_SOFTWARE' in os.environ
+    flag = ('SERVER_SOFTWARE' in os.environ) or ('TEST_SERVER' in os.environ)
     cdn = True if (flag or CDN_TEST) else False
     cdnUrl = CDN_ROOT if cdn else '/static'
     dist = 'dist/' if PROD_TEST else ''

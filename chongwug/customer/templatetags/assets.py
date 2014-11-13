@@ -25,7 +25,7 @@ manifest_map = {
 
 @register.filter
 def assets(value):
-    flag = 'SERVER_SOFTWARE' in os.environ
+    flag = ('SERVER_SOFTWARE' in os.environ) or ('TEST_SERVER' in os.environ)
     cdn = CDN_ROOT if (flag or CDN_TEST) else ''
     production = '' if (flag or CDN_TEST) else 'static/prod/'
 
