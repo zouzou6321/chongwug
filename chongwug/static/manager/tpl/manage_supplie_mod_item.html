@@ -12,6 +12,7 @@
 <p>加*为必填项</p>
 	<form class="form-horizontal" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
+    <input name="id" type="hidden" value="{{ supplie.id }}"/>
     <div class="form-group">
         <label for="type" class="col-sm-2 control-label">商品类型<span class="warn">*</span>：</label>
         <div class="col-sm-4">
