@@ -243,4 +243,13 @@
 
 $(function(){
     $(".js-lazy").lazyload();
+
+    $(".js-progressive").lazyload({
+        data_attribute: 'small',
+        load: function(elements_left, settings){
+            var $this = $(this),
+                src = $this.data('original');
+            $("<img />").addClass('img-full img-original').attr('src', src).insertAfter($this);
+        }
+    });
 });

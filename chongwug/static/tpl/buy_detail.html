@@ -17,8 +17,9 @@
     <div class="container content-container">
         <div class="row">
             <div class="col-5">
-                <a href="javascript:" class="cwg-thumb loading">
-                    <img src="{{ petimg_a.img_url }}" class="img-full mfp-zoom"/>
+                <a href="javascript:" class="cwg-thumb loading progressive">
+                    <img src="{{ petimg_a.img_url }}!small" class="img-full img-small mfp-zoom"/>
+                    <img src="{{ petimg_a.img_url }}" class="img-full img-original"/>
                 </a>
                 <div class="cwg-dog-imgs">
                     <a class="prev-thumb" href="javascript:"><i class="icon icon-left-dir"></i></a>
@@ -302,7 +303,8 @@
 (function($){
     //image light-box
     var $thumb = $('.cwg-thumb'),
-        $img = $thumb.find('img'),
+        $imgSmall = $thumb.find('.img-small'),
+        $imgOriginal = $thumb.find('.img-original'),
         $thumbnail = $('.cwg-thumbnail'),
         $li = $thumbnail.find('li'),
         items = [];
@@ -329,7 +331,8 @@
         prev: '.prev-thumb',
         next: '.next-thumb',
         callback: function($curr){
-            $img.attr('src', $curr.data('src'));
+            $imgSmall.attr('src', $curr.find('img').attr('src'));
+            $imgOriginal.attr('src', $curr.data('src'));
         }
     });
 

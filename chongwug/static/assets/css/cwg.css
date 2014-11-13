@@ -2623,6 +2623,14 @@ Copyright (c) 2014 Daniel Eden
   border-right: 4px solid transparent;
   border-left: 4px solid transparent; }
 
+.progressive {
+  position: relative; }
+  .progressive .img-original {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6; }
+
 .cwg-carousel {
   min-width: 1170px;
   max-width: 1920px;
