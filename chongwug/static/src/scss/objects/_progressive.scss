@@ -1,0 +1,10 @@
+.progressive{
+  position: relative;
+
+  .img-original{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6;
+  }
+}

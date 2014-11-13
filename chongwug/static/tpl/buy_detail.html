@@ -17,8 +17,9 @@
     <div class="container content-container">
         <div class="row">
             <div class="col-5">
-                <a href="javascript:" class="cwg-thumb loading">
-                    <img src="{{ petimg_a.img_url }}" class="img-full mfp-zoom"/>
+                <a href="javascript:" class="cwg-thumb loading progressive">
+                    <img src="{{ petimg_a.img_url }}!small" class="img-full img-small mfp-zoom"/>
+                    <img src="{{ petimg_a.img_url }}" class="img-full img-original"/>
                 </a>
                 <div class="cwg-dog-imgs">
                     <a class="prev-thumb" href="javascript:"><i class="icon icon-left-dir"></i></a>
@@ -102,7 +103,7 @@
                     <div class="info-row clearfix">
                         <div class="info-td-right">
                             <button class="btn btn-primary btn-order js-btn-order" data-id="{{ nestpet.id }}" type="button">预约看狗</button>
-                            <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=399632600&amp;site=qq&amp;menu=yes" target="_blank" class="btn btn-info btn-consult">在线咨询</a>
+                            <a href="tencent://message?uin=399632600&amp;site=qq&amp;menu=yes" target="_blank" class="btn btn-info btn-consult">在线咨询</a>
                             <a href="" class="cwg-clause"><i class="icon icon-help-circled icon-sm"></i>购犬须知</a>
                         </div>
                     </div>
@@ -181,8 +182,8 @@
                     <div class="desc-main">
                         <div class="row img-row">
                         	{% for farmimg in farmimgs %}
-                            <div class="col-6">
-                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                            <div class="col-6 progressive">
+                                <img data-small="{{ farmimg.img_url }}!small" data-original="{{ farmimg.img_url }}" class="js-progressive img-full" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
                             {% if forloop.counter|divisibleby:2 %}<div class="clearfix"></div>{% endif %}
                             {% endfor %}
@@ -302,7 +303,7 @@
 (function($){
     //image light-box
     var $thumb = $('.cwg-thumb'),
-        $img = $thumb.find('img'),
+        $imgSmall = $thumb.find('.img-small'),
         $thumbnail = $('.cwg-thumbnail'),
         $li = $thumbnail.find('li'),
         items = [];
@@ -329,7 +330,9 @@
         prev: '.prev-thumb',
         next: '.next-thumb',
         callback: function($curr){
-            $img.attr('src', $curr.data('src'));
+            $thumb.find('.img-original').remove();
+            $imgSmall.attr('src', $curr.find('img').attr('src'));
+            $('<img/>').addClass('img-full img-original').attr('src', $curr.data('src')).insertAfter($imgSmall);
         }
     });
 

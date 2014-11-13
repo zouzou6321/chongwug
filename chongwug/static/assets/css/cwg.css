@@ -2483,14 +2483,17 @@ The provided mixins are intended to be used with the array-like variables
   font-variant: normal;
   text-transform: none;
   /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
+  line-height: 1;
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
   /* margin-left: .2em; */
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
   /* Uncomment for 3D effect */
-  text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); }
+  text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale; }
 
 .icon-sm {
   font-size: 14px; }
@@ -2622,6 +2625,14 @@ Copyright (c) 2014 Daniel Eden
   border-top: 4px solid;
   border-right: 4px solid transparent;
   border-left: 4px solid transparent; }
+
+.progressive {
+  position: relative; }
+  .progressive .img-original {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6; }
 
 .cwg-carousel {
   min-width: 1170px;

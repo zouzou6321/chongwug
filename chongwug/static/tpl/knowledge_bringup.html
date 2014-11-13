@@ -149,11 +149,13 @@
         $modalDialog = $modal.find('.modal-dialog'),
         $modalBody = $modal.find('.modal-body'),
         $container = $('#js-outline-container'),
-        winHeight = $(window).height(),
         loadMap = {};
 
-    $modalDialog.height(winHeight);
-    $modalBody.height(winHeight - 87 - 45);
+    $(window).on('resize', function(){
+        var winHeight = $(this).height();
+        $modalDialog.height(winHeight);
+        $modalBody.height(winHeight - 87 - 45);
+    }).trigger('resize');
 
     $container.on('click', '.outline', function(){
         var $this = $(this),
