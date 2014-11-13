@@ -142,7 +142,7 @@ def attention_data(request):
     elif filter == 'success':
         attentions = nestofpet_attention.objects.filter(dele=False,attention_type=5).order_by('id')
     count = attentions.count()
-    attentions = attentions[start:length]
+    attentions = attentions[start:start + length]
     for attention in attentions:
         data = {}
         data['id'] = attention.id
