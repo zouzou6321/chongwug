@@ -185,7 +185,7 @@ def manage_picupload(photo,width,height):
         photo.name = file+'.jpg'
         url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
         name = settings.STATIC_ROOT+url
-        img.save(name,'jpeg',quality=75)
+        img.save(name,'jpeg',quality=75,optimize=True, progressive=True)
         monitor = tmppic_monitor(fname=name)
         monitor.save()
     json = '{"url":"'+'/static'+url+'","width":"'+str(w)+'","height":"'+str(h)+'"}'
@@ -214,7 +214,7 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     file_path_name = pic_dir + file_name
     url = (settings.PIC_TMP_PATH+file_name).encode('utf8')
     name = settings.STATIC_ROOT + url
-    cropimg.save(name)
+    cropimg.save(name,quality=75,optimize=True, progressive=True)
     
     up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
     with open(name, 'rb') as f:
@@ -316,7 +316,7 @@ def manage_supplie_add(req,photo):
     photo.name = filename + '.jpg'
     url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
     name = settings.STATIC_ROOT+url
-    img.save(name,'jpeg',quality=75)
+    img.save(name,'jpeg',quality=75,optimize=True, progressive=True)
     file_path_name = settings.SUPPLIE_PIC_ROOT + photo.name
     up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
     with open(name, 'rb') as f:
@@ -340,7 +340,7 @@ def manage_supplie_mod(req,photo):
             photo.name = filename + '.jpg'
             url = (settings.PIC_TMP_PATH+photo.name).encode('utf8')
             name = settings.STATIC_ROOT+url
-            img.save(name,'jpeg',quality=75)
+            img.save(name,'jpeg',quality=75,optimize=True, progressive=True)
             file_path_name = settings.SUPPLIE_PIC_ROOT + photo.name
             up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
             with open(name, 'rb') as f:

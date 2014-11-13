@@ -20,11 +20,11 @@ def manage_home_view(request):
     if request.method == 'POST' and 'username' in request.POST and 'userpassd'  in request.POST:
         if adapters.manage_login_check(request) == True:
             return HttpResponseRedirect(PETFARM_ROOT)
+    if adapters.manage_authentication(request) == False:
+        return manage_login(request)
     if request.method == 'GET' and 'logout' in request.GET:
         auth.logout(request)
         return HttpResponseRedirect(PETFARM_ROOT)
-    if adapters.manage_authentication(request) == False:
-        return manage_login(request)
     data = adapters.manage_home_data_get(request)
     return render_to_response('petfarm/tpl/manage_home.html',data)
 
