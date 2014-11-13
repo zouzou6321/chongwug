@@ -182,8 +182,8 @@
                     <div class="desc-main">
                         <div class="row img-row">
                         	{% for farmimg in farmimgs %}
-                            <div class="col-6">
-                                <img data-original="{{ farmimg.img_url }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                            <div class="col-6 progressive">
+                                <img data-small="{{ farmimg.img_url }}!small" data-original="{{ farmimg.img_url }}" class="js-progressive img-full" src="{{'imgs/loading.gif'|assets}}"/>
                             </div>
                             {% if forloop.counter|divisibleby:2 %}<div class="clearfix"></div>{% endif %}
                             {% endfor %}
@@ -304,7 +304,6 @@
     //image light-box
     var $thumb = $('.cwg-thumb'),
         $imgSmall = $thumb.find('.img-small'),
-        $imgOriginal = $thumb.find('.img-original'),
         $thumbnail = $('.cwg-thumbnail'),
         $li = $thumbnail.find('li'),
         items = [];
@@ -331,8 +330,9 @@
         prev: '.prev-thumb',
         next: '.next-thumb',
         callback: function($curr){
+            $thumb.find('.img-original').remove();
             $imgSmall.attr('src', $curr.find('img').attr('src'));
-            $imgOriginal.attr('src', $curr.data('src'));
+            $('<img/>').addClass('img-full img-original').attr('src', $curr.data('src')).insertAfter($imgSmall);
         }
     });
 
