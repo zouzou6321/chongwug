@@ -7,7 +7,7 @@
 
 <h1 class="page-header">新增商品</h1>
 <p>加*为必填项</p>
-	<form class="form-horizontal" method="post" enctype="multipart/form-data">
+	<form class="form-horizontal" method="post" enctype="multipart/form-data" id="js-form">
 	{% csrf_token %}
 	<div class="form-group">
 	    <label for="type" class="col-sm-2 control-label">商品类型<span class="warn">*</span>：</label>
@@ -45,7 +45,7 @@
 	</div>
 	<div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
-          <button type="submit" id="js-btn-submit" data-loading-text="提交中..." class="btn btn-primary form-control">提交</button>
+          <button type="submit" id="js-submit" data-loading-text="提交中..." class="btn btn-primary form-control">提交</button>
         </div>
     </div>
 	</form>
@@ -53,6 +53,15 @@
 
 {% block scripts %}
 <script>
-    $('form').validate(commonvalidateConfig);
+    var $form = $('#js-form'),
+        $btn = $form.find('#js-submit');
+
+    $form.validate(commonvalidateConfig);
+
+    $form.on('submit', function(){
+        if($form.valid()){
+            $btn.button('loading');
+        }
+    });
 </script>
 {% endblock %}

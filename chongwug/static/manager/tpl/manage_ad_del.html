@@ -5,8 +5,8 @@
 {% block main %}
 
 <h1 class="page-header">删除广告</h1>
-<p>加*为必填项</p>
-			<form method="post" action="./">
+
+			<form method="post" action="./" id="js-form">
 				{% csrf_token %}
 				<div>
 				广告类型：	<select id="adtype" name="adtype" onchange="adtypeselected();">
@@ -21,21 +21,28 @@
 					<p><input type="checkbox" name="ads" value="{{ ad.id }}"><img src="{{ ad.img_url }}" style="width:900px;"/></input></p>
 					{% endfor %} 
 				</div>
-				<button type="submit" >删除</button>
+				<button type="submit" id="js-submit" data-loading-text="正在删除..." class="btn btn-primary">删除</button>
 			</form>
 		</div>
-		<script>
-		function adtypeselected(){
-			data = {'adtype':$("#adtype").val()};
-			$.get("./adtypeselect/", data, function(recive){
-				if(recive != 'False'){
-					$("#adinfo").empty();
-					$("#adinfo").append(recive);
-				}
-				else{
-					alert('数据异常');
-				}
-			});
-		}
-		</script>
+{% endblock %}
+{% block scripts %}
+<script>
+    function adtypeselected(){
+        data = {'adtype':$("#adtype").val()};
+        $.get("./adtypeselect/", data, function(recive){
+            if(recive != 'False'){
+                $("#adinfo").empty();
+                $("#adinfo").append(recive);
+            }
+            else{
+                alert('数据异常');
+            }
+        });
+    }
+    var $form = $('#js-form'),
+        $btn = $form.find('#js-submit');
+    $form.on('submit', function(){
+        $btn.button('loading');
+    });
+</script>
 {% endblock %}

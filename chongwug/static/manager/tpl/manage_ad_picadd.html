@@ -67,7 +67,7 @@
 			<img  border="0"  id="personheadpre" alt="截图预览"/>
 		</div>
 	</div>
-	<div><button onclick="submitpreimg();" class="btn btn-primary button-modify-head">保存</button></div>
+	<div><button onclick="submitpreimg(this);" type="button" class="btn btn-primary button-modify-head" data-loading-text="正在保存...">保存</button></div>
 </div>
 {% endblock %}
 
@@ -264,8 +264,11 @@ function Imagess(url,imgid,callback){
 	var y1 = 0;
 	var y2 = 0;
 	
-	function submitpreimg()
+	function submitpreimg(btn)
 	{
+        var $btn = $(btn);
+        $btn.button('loading');
+
 		var timg = source;
 		data = {
 			'x1':x1,
@@ -281,12 +284,12 @@ function Imagess(url,imgid,callback){
 		};
 		$.post("/manage/ad/picadd/preupload/", data, function(recive){
 			if(recive.status == 0){
-				if(alert('保存成功,启动时间到达后会自动筛选启动')){
-					window.location.href="/back_manage/ad/picadd/";
-				}
+				alert('保存成功,启动时间到达后会自动筛选启动');
+                window.location.href="/manage/ad/add/";
 			}
 			else{
 				alert(recive.message);
+                $btn.button('reset');
 			}
 		},
 		'json');
