@@ -37,6 +37,35 @@ if 'SERVER_SOFTWARE' in os.environ:
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://www.chongwug.com/static/'
     CKEDITOR_STATIC_URL = '//chongwug-cdn.b0.upaiyun.com/lib/'
+elif 'TEST_SERVER' in os.environ:
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+    
+    ADMINS = [
+              '692673390@qq.com',
+             ]
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = False
+    EMAIL_HOST = 'smtp.163.com'
+    EMAIL_PORT = 25
+    EMAIL_HOST_USER = 'fccsl6321@163.com'
+    EMAIL_HOST_PASSWORD = '8792833'
+    
+    MYSQL_HOST = 'localhost'
+    MYSQL_PORT = '3306'
+    MYSQL_USER = 'root'
+    MYSQL_PASS = ''
+    MYSQL_DB   = 'chongwug'
+    
+    # Hosts/domain names that are valid for this site; required if DEBUG is False
+    # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
+    ALLOWED_HOSTS = ['.cwg.com','.cwg.com.']
+    
+    STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
+    # URL prefix for static files.
+    # Example: "http://media.lawrence.com/static/"
+    STATIC_URL = 'http://www.chongwug.com/static/'
+    CKEDITOR_STATIC_URL = '//chongwug-cdn.b0.upaiyun.com/lib/'
 else:
     DEBUG = True
     TEMPLATE_DEBUG = True
