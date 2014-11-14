@@ -9,37 +9,37 @@
 	<form class="form-horizontal">
 	{% csrf_token %}
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">养殖场名字<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">养殖场名字<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="pet-color" name="name">
+	      <input type="text" class="form-control required" name="name">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">联系电话<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">联系电话<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="pet-color" name="tel">
+	      <input type="text" class="form-control required digits" name="tel">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">邮箱地址<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">邮箱地址<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="pet-color" name="email">
+	      <input type="text" class="form-control required email" name="email">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">养殖场预置密码<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">养殖场预置密码<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="password" class="form-control required" id="pet-color" name="pwd">
+	      <input type="password" class="form-control required" name="pwd">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">身份证号码<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">身份证号码<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="pet-color" name="idnum">
+	      <input type="text" class="form-control required" name="idnum">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">省会<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">省会<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
 	        <select name="province" id="farm-province" class="form-control">
 	        	{% for province in provinces %}
@@ -49,7 +49,7 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">城市<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">城市<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
 	      	<select name="city" id="farm-city" class="form-control">
                 {% for city in citys %}
@@ -59,7 +59,7 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">片区<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">片区<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
 	      	<select name="district" id="farm-district" class="form-control">
             	{% for district in districts %}
@@ -69,23 +69,25 @@
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">所处方位<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">所处方位<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
 	    	{% for direct in directs %}
-		    <input type="radio" name="direct" value="{{ direct }}"> 城{{ direct }} </input> 
+{#            <label class="radio-inline">#}
+                <input type="radio" name="direct" value="{{ direct }}" class="required"> 城{{ direct }}
+{#            </label>#}
 		    {% endfor %}
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">详细地址<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">详细地址<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="pet-color" name="dest">
+	      <input type="text" class="form-control required" name="dest">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="pet-color" class="col-sm-2 control-label">评分（高分会获得系统展示,默认1.0）<span class="warn">*</span>：</label>
+	    <label class="col-sm-2 control-label">评分（高分会获得系统展示,默认1.0）<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="pet-color" name="manage_score">
+	      <input type="text" class="form-control required number" name="manage_score">
 	    </div>
 	</div>
 	<div class="form-group">
@@ -105,6 +107,59 @@
 {{ media|safe }}
 
 <script>
+
+(function($){
+    var $province = $('#farm-province'),
+        $city = $('#farm-city'),
+        $district = $('#farm-district'),
+        param = {},
+        map = {
+            'districts': $district,
+            'citys': $city
+        };
+
+    $province.on('change', function(){
+        var data = getSelectedId($province);
+        param.province = data.id;
+        param.range = data.range;
+        delete param.city;
+
+        renderData();
+    });
+
+    $city.on('change', function(){
+        var data = getSelectedId($province);
+        param.city = data.id;
+
+        renderData();
+    });
+
+    function getSelectedId($select){
+        return $select.find('option').filter(':selected').data();
+    }
+
+    function renderData(){
+        $.ajax({
+            url: '/manage/petfarm/address/',
+            data: param,
+            dataType: 'json',
+            success: function(data){
+                console.log(data)
+                for(var i in data){
+                    var options = '';
+
+                    $.each(data[i], function(idx, el){
+                        options += '<option data-id="'+ el.id +'" value="'+ el.name +'">' + el.name + '</option>';
+                    });
+
+                    options && map[i].html(options);
+                }
+            }
+        });
+    }
+
+})(jQuery);
+
 var validator = $('form').validate(commonvalidateConfig);
 (function($){
 
