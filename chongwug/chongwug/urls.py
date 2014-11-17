@@ -11,6 +11,7 @@ urlpatterns = patterns('',
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),
                        url(r'^market/', include('marketer.urls')),
+                       url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/favicon.ico'}),
                        url(r'^/static/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':False}),
                        #url(r'^crossdomain.xml$',direct_to_template,{'template':'crossdomain.xml','mimetype':'text/xml'}),
     # Examples:
