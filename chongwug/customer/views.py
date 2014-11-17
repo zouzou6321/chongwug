@@ -51,13 +51,8 @@ def buy_detail_view(request):
     data = adapters.buy_detail_adapter(request)
     if data == False:
         return HttpResponse(__errorcode__(2))
-    
-    if 'pets_imgs' in data:
-        if adapters.is_wap(request):
-            return render_to_response('mobile/tpl/buy_detail_ajax.html',data)
-        else:
-            return render_to_response('tpl/buy_detail_ajax.html',data)
-    elif 'locations' in data:
+
+    if 'locations' in data:
         return HttpResponse(__errorcode__(0,data))
     else:
         data['title'] = u'%s|%s|%s' % (data['nestpet'].type,data['nestpet'].short_desc,data['nestpet'].farm.name)
