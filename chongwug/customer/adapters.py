@@ -13,6 +13,12 @@ from chongwug.commom import __errorcode__,sendSMS
 from django.contrib.auth.models import User
 from django.contrib import auth
 import traceback
+
+def is_wap(request):
+    if request.META['HTTP_ACCEPT'].find('wap') == -1:
+        return False
+    return True
+
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
