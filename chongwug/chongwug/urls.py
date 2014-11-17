@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.views.generic import RedirectView
 import settings
 #from django.views.generic.simple import direct_to_template
 # Uncomment the next two lines to enable the admin:
@@ -11,7 +12,7 @@ urlpatterns = patterns('',
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),
                        url(r'^market/', include('marketer.urls')),
-                       url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/favicon.ico'}),
+                       url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
                        url(r'^/static/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':False}),
                        #url(r'^crossdomain.xml$',direct_to_template,{'template':'crossdomain.xml','mimetype':'text/xml'}),
     # Examples:
