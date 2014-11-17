@@ -6,7 +6,14 @@
             <div class="row cwg-global-search">
                 <div class="col-3">
                     <a href="/home" class="logo"><img src="{{ 'imgs/logo.jpg'|assets }}"></a>
-                    <span class="cwg-city">成都</span>
+                    <div class="dropdown cwg-city">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:">
+                        成都 <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu radius-none">
+                        <li><a tabindex="-1" href="/home">成都</a></li>
+                      </ul>
+                    </div>
                 </div>
                 <div class="col-3 pull-right">
                     <div class="cwg-tel pull-right">

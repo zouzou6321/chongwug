@@ -5,7 +5,7 @@
     "button" : true,
     "carousel" : true,
     "collapse" : false,
-    "dropdown" : false,
+    "dropdown" : true,
     "tab" : true,
     "transition" : true,
     "scrollspy" : true,
