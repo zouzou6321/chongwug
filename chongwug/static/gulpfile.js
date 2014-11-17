@@ -116,7 +116,7 @@ gulp.task('js', function(){
 gulp.task('imgs', function(){
     gulp.src(config.imgs.src)
         .pipe(gulp.dest(config.imgs.dev))
-        .pipe(plugins.if(prod, plugins.imagemin({progressive: true})))
+        .pipe(plugins.if(prod, plugins.cache(plugins.imagemin({progressive: true}))))
         .pipe(plugins.if(prod, plugins.rev()))
         .pipe(plugins.if(prod, gulp.dest(config.imgs.prod)))
         .on('error', function(e){ console.log(e); })
