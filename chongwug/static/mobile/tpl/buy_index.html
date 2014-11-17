@@ -1,5 +1,5 @@
-{% extends 'tpl/base/base.html' %}
-{% load assets %}
+{% extends 'mobile/tpl/base/base.html' %}
+{% load mobile %}
 
 {% block title %}{{ title }}{% endblock %}
 
@@ -29,14 +29,13 @@
             <div>
                 {% if direct_farm.pic %}
                 <a href="/buy/?direct={{ direct_farm.direct }}">
-                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy">
+                    <img src="{{ 'imgs/loading.gif'|mobile }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy">
                 </a>
                 {% else %}
                 <a href="/buy/?direct={{ direct_farm.direct }}">
-                    <img  src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ 'imgs/test.jpg'|assets }}" class="img-full js-lazy">
+                    <img  src="{{ 'imgs/loading.gif'|mobile }}" data-original="{{ 'imgs/test.jpg'|mobile }}" class="img-full js-lazy">
                 </a>
                 {% endif %}
-{#                <p><span class="price price-lg">{{ direct_farm.farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>#}
             </div>
         </div>
         {% endfor %}
