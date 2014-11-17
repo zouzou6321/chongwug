@@ -8,13 +8,13 @@ import settings
 # admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'', include('customer.urls')),
-                       url(r'^home/tc_verify\.txt$', TemplateView.as_view(template_name='tpl/tc_verify.txt')),
                        url(r'^ckeditor/', include('ckeditor.urls')),
                        url(r'^back_manage/', include('back_manager.urls')),
                        url(r'^petfarm/', include('petfarm.urls')),
                        url(r'^manage/', include('manager.urls')),
                        url(r'^market/', include('marketer.urls')),
                        url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
+                       url(r'^tc_verify\.txt$', TemplateView.as_view(template_name='tpl/tc_verify.txt')),
                        url(r'^/static/(?P<path>.*)$','django.views.static.serve', {'document_root': settings.STATIC_ROOT,'show_indexes':False}),
                        #url(r'^crossdomain.xml$',direct_to_template,{'template':'crossdomain.xml','mimetype':'text/xml'}),
     # Examples:
