@@ -1,0 +1,67 @@
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}关于宠物购|宠物购 只为给你一只健康可爱的狗狗{% endblock %}
+
+{% block content %}
+<div class="cwg-container aboutus">
+    <div class="container breadcrumb-container">
+        <ol class="breadcrumb">
+          <li><a href="/home">首页</a></li>
+          <li class="active">关于宠物购</li>
+        </ol>
+    </div>
+    <div class="container content-container">
+        <div class="about-title">
+            <h1 class="text-uppercase">about us</h1>
+            <h2>关于我们</h2>
+            <p>————</p>
+        </div>
+        <h3 class="about-for">“宠物购”是定位于活体宠物犬交易的平台</h3>
+        <div class="about-item">
+            <h4>我们的宗旨</h4>
+            <p>让爱犬人士方便快捷的找到适合并需要你的爱犬</p>
+        </div>
+        <div class="about-item">
+            <h4>我们的目标</h4>
+            <p>成为国内最大的活体宠物交易平台</p>
+        </div>
+        <div class="about-item">
+            <h4>我们的初衷</h4>
+            <p>
+                让爱犬并想养狗狗的人士不再被“星期狗”所困扰， <br/>
+                我们将让您与犬舍、养殖场或被宠物购实际考察认定的宠物店直接对接，<br/>
+                让广大购犬人士不再买到“星期狗”，<br/>
+                在“宠物购”你将买到健康、好品相的纯种及血统狗狗。<br/>
+                目前，我们的覆盖范围仅限于成都，未来，我们将覆盖更多的城市乃至全国。
+            </p>
+        </div>
+        <h1 class="about-action">你还在犹豫什么呢？放心购（狗）吧！</h1>
+        <div class="row">
+            <div class="clearfix workspace-wrap">
+                <img src="{{ 'imgs/workspace.jpg'|assets }}" class="pull-left"/>
+                <div class="pull-left text-left text-uppercase workspace-desc vertical-center">
+                    <p>
+                        good <br/>
+                        working <br/>
+                        conditions
+                    </p>
+                </div>
+                <div class="pull-left vertical-center">
+                    <img src="{{ 'imgs/logo-original.png'|assets }}" class="logo-original"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="clearfix">
+                <img src="{{ 'imgs/visit.jpg'|assets }}" width="611" class="pull-left"/>
+                <div class="pull-left text-left">
+                    <p class="visit-desc">
+                        2014年10月24日，国务院副总理马凯到访本公司，与宠物购创始团队一起聊创业、聊行业，并对本公司给与高度评价与充分肯定，鼓励我们推动中国宠物行业的发展与进步！
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

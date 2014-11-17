@@ -1,0 +1,8 @@
+{
+     "modals": true
+    ,"popovers": true
+    ,"push": true
+    ,"segmented-controllers": true
+    ,"sliders": true
+    ,"toggles": true
+}

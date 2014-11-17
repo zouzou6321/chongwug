@@ -1,0 +1,28 @@
+{
+    "css": {
+        "src": ["src/scss/**/*.scss"],
+        "dev": "assets/css",
+        "prod": "prod/assets/css"
+    },
+    "js": {
+        "src": ["src/js/**/*.js", "!src/js/lib/ratchet/*.js"],
+        "lib": "src/js/lib",
+        "dev": "assets/js",
+        "prod": "prod/assets/js"
+    },
+    "imgs": {
+        "src": ["src/imgs/**/*.+(jpg|png|gif)", "!src/imgs/sprites/*"],
+        "dev": "assets/imgs",
+        "prod": "prod/assets/imgs"
+    },
+    "fonts": {
+        "src": ["src/fonts/*", "!src/fonts/*.json", "!src/fonts/*.html"],
+        "dev": "assets/fonts",
+        "prod": "prod/assets/fonts"
+    },
+    "sprites": {
+        "src": ["src/imgs/sprites/*"],
+        "imgDev": "src/imgs",
+        "cssDev": "src/scss/base"
+    }
+}

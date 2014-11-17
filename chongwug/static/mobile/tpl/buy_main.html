@@ -1,0 +1,233 @@
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="cwg-container">
+    <div class="container breadcrumb-container">
+        <ol class="breadcrumb">
+          <li><a href="/home">首页</a></li>
+          <li class="active">我要买狗</li>
+        </ol>
+    </div>
+    <div class="container buy-main content-container">
+        <div class="row">
+            <div class="col-6 col-offset-1">
+                <form action="/buy/" method="get" id="js-form">
+                    <div class="input-group cwg-search-wrap">
+                    	<input type="text" class="form-control" id="js-key" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != None %}value="{{ searchkey }}"{% endif %}>
+                        <span class="input-group-btn">
+                            <button class="btn btn-search" type="submit">
+                                <i class="icon icon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-1 dog-select-title">犬种：</div>
+            <div class="col-11">
+                <ul class="nav nav-pills">
+                	{% if typekey == None%}
+                    <li class="active"><a href="{{ urls.type_all_url }}">全部</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.type_all_url }}">全部</a></li>
+                    {% endif %}
+                    {% for type in types %}
+                    {% if type == typekey %}
+                    <li class="active"><a href="{{ urls.url }}type={{ type }}">{{ type }}</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.url }}type={{ type }}">{{ type }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-1 dog-select-title">价格：</div>
+            <div class="col-11">
+                <ul class="nav nav-pills">
+                	{% if princekey == None%}
+                    <li class="active"><a href="{{ urls.prince_all_url }}">全部</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.prince_all_url }}">全部</a></li>
+                    {% endif %}
+                    {% for prince in princes %}
+                    {% if prince.a == princekey %}
+                    <li class="active"><a href="{{ urls.url }}prince={{ prince.a }}">{{ prince.d }}</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.url }}prince={{ prince.a }}">{{ prince.d }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-1 dog-select-title">区域：</div>
+            <div class="col-11">
+                <ul class="nav nav-pills">
+                	{% if directkey == None%}
+                    <li class="active"><a href="{{ urls.direct_all_url }}">全部</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.direct_all_url }}">全部</a></li>
+                    {% endif %}
+                    {% for direct in directs %}
+                    {% if direct == directkey %}
+                    <li class="active"><a href="{{ urls.url }}direct={{ direct }}">城{{ direct }}</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.url }}direct={{ direct }}">城{{ direct }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-1 dog-select-title">疫苗：</div>
+            <div class="col-11">
+                <ul class="nav nav-pills">
+                	{% if epidemickey == None%}
+                    <li class="active"><a href="{{ urls.epidemic_all_url }}">全部</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.epidemic_all_url }}">全部</a></li>
+                    {% endif %}
+                    {% for epidemic in epidemics %}
+                    {% if epidemic == epidemickey %}
+                    <li class="active"><a href="{{ urls.url }}epidemic={{ epidemic }}">{{ epidemic }}</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.url }}epidemic={{ epidemic }}">{{ epidemic }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row dog-select-row">
+            <div class="col-1 dog-select-title">月龄：</div>
+            <div class="col-11">
+                <ul class="nav nav-pills">
+                	{% if agekey == None%}
+                    <li class="active"><a href="{{ urls.age_all_url }}">全部</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.age_all_url }}">全部</a></li>
+                    {% endif %}
+                    {% for age in ages %}
+                    {% if age.a == agekey %}
+                    <li class="active"><a href="{{ urls.url }}age={{ age.a }}">{{ age.d }}</a></li>
+                    {% else %}
+                    <li><a href="{{ urls.url }}age={{ age.a }}">{{ age.d }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% if searchkey == None and  typekey == None and princekey == None and directkey == None and epidemickey == None and agekey == None %}
+        {% else %}
+        <div class="row dog-select-row">
+            <div class="col-1 dog-select-title">筛选：</div>
+            <div class="col-11">
+                <ul class="nav nav-pills dog-selected">
+                	{% if searchkey == None %}
+                	{% else %}
+                	<li><a href="{{ urls.search_all_url }}">{{ searchkey }} &times;</a></li>
+                	{% endif %}
+                	{% if typekey == None %}
+                	{% else %}
+                    <li><a href="{{ urls.type_all_url }}">{{ typekey }} &times;</a></li>
+                    {% endif %}
+                    {% if princekey == None %}
+                	{% else %}
+                    <li><a href="{{ urls.prince_all_url }}">价格 &times;</a></li>
+                    {% endif %}
+                    {% if directkey == None %}
+                	{% else %}
+                    <li><a href="{{ urls.direct_all_url }}">城{{ directkey }} &times;</a></li>
+                    {% endif %}
+                    {% if epidemickey == None %}
+                	{% else %}
+                    <li><a href="{{ urls.epidemic_all_url }}">{{ epidemickey }} &times;</a></li>
+                    {% endif %}
+                    {% if agekey == None %}
+                	{% else %}
+                    <li><a href="{{ urls.age_all_url }}">月龄 &times;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row-separate row"></div>
+        <div class="row dog-list">
+            {% if pets_imgs%}
+                {% for pet_img in pets_imgs %}
+                <div class="col-4 dog-list-item">
+                    <a href="detail/?petid={{pet_img.pet.id}}">
+                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ pet_img.img.img_url }}" class="img-full js-lazy"/>
+                    </a>
+                    <div class="dog-desc">
+                        <h4><a href="detail/?petid={{pet_img.pet.id}}"><strong>[{{ pet_img.pet.farm.name }}]</strong> {{ pet_img.pet.short_desc }}</a></h4>
+                        <div>
+                            <label class="pet-tag">{{ pet_img.pet.age }}个月</label>
+                            <label class="pet-tag">{{ pet_img.count }}只</label>
+                            <label class="pet-tag">{{ pet_img.epidemic }}</label>
+                        </div>
+                        <p>
+                            <span class="price price-primary"><span class="price-symbol">&yen;</span>{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元/只</span></span>
+                            <a href="detail/?petid={{pet_img.pet.id}}" class="btn btn-primary pull-right btn-dog" role="button">去看看</a>
+                        </p>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+                {% endfor %}
+                <div class="clearfix"></div>
+                <div class="text-center">
+                    <ul class="pagination pagination-primary">
+                        {% if curPage == 1 %}
+                        <li class="disabled"><span>首页</span></li>
+                        <li class="disabled"><span>上一页</span></li>
+                        {% else %}
+                        <li><a href="/buy/">首页</a></li>
+                        <li><a href="?curPage={{ curPage }}&&pageType=pageUp">上一页</a></li>
+                        {% endif %}
+                        {% for page in pages %}
+                        {% if page == curPage %}
+                        <li class="active"><span>{{ page }}</span></li>
+                        {% else %}
+                        <li><a href="?curPage={{ page }}">{{ page }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if curPage ==  allPage%}
+                        <li class="disabled"><span>下一页</span></li>
+                        <li class="disabled"><span>尾页</span></li>
+                        {% else %}
+                        <li><a href="?curPage={{ curPage }}&&pageType=pageDown">下一页</a></li>
+                        <li><a href="?curPage={{ allPage }}">尾页</a></li>
+                        {% endif %}
+                     </ul>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-center no-result">没有找到符合条件的宠物</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function(){
+    var $form = $('#js-form'),
+        $key = $form.find('#js-key');
+
+    $form.on('submit', function(e){
+        if($.trim($key.val()) == ''){
+            $key.focus();
+            e.preventDefault();
+        }
+    });
+}());
+</script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}宠物购 只为给你一只健康可爱的狗狗{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block htmlhook %}class="full-page"{% endblock %}
+{% block bodyhook %}class="full-page"{% endblock %}
+
+{% block content %}
+
+<div class="guide" id="js-full-page">
+	<div class="adg-health section">
+        <div class="container" style="text-align:center;font-size:30px;">
+            本站正在如火如荼的开发中，请各位爱狗狗的亲稍事休息~！
+        </div>
+    </div>
+    <div class="adg-health section">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg1.png'|assets }}" class="img-responsive"/>
+        </div>
+    </div>
+    <div class="adg-price section">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg2.png'|assets }}" class="img-responsive"/>
+        </div>
+    </div>
+    <div class="adg-purebred section">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg3.png'|assets }}" class="img-responsive"/>
+        </div>
+    </div>
+    <div class="adg-process section">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg4.png'|assets }}" class="img-responsive"/>
+        </div>
+    </div>
+    <div class="adg-buy section">
+        <div class="container">
+            <img src="{{ 'imgs/nav/adg5.png'|assets }}" class="img-responsive"/>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block plugins %}
+<script src="{{ 'js/lib/jquery.fullPage.js'|assets }}"></script>
+<script>
+$('#js-full-page').fullpage({
+    'easing': 'swing',
+    'css3': true,
+    'navigation': true,
+    'navigationPosition': 'right',
+    'navigationTooltips': ['健康有保障', '价格很公道', '品相很优质', '流程很标准', '赶紧去挑选吧']
+});
+</script>
+<script src="{{'js/lib/plugins.js'|assets}}"></script>
+{% endblock %}
+
+{% block footer %}{% endblock %}
