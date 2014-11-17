@@ -16,7 +16,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     EMAIL_HOST_USER = 'fccsl6321@163.com'
     EMAIL_HOST_PASSWORD = '8792833'
     
-    MYSQL_HOST = 'chongwug.mysql.rds.aliyuncs.com'
+    MYSQL_HOST = 'rdsaera2yaera2y.mysql.rds.aliyuncs.com'
     MYSQL_PORT = '3306'
     MYSQL_USER = 'chongwug'
     MYSQL_PASS = 'weet6321'
