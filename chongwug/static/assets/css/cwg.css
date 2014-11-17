@@ -4380,6 +4380,11 @@ img.mfp-img {
   display: inline-block;
   vertical-align: middle;
   padding-left: 120px; }
+.aboutus .visit-desc {
+  width: 300px;
+  margin-left: 45px;
+  font-size: 16px;
+  margin-top: 150px; }
 
 .aboutus .content-container {
   padding-top: 10px; }
