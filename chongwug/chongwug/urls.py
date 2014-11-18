@@ -1,12 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import RedirectView
 import settings
+from django.views.generic import TemplateView
 #from django.views.generic.simple import direct_to_template
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'', include('customer.urls')),
+                       url(r'baidu_verify_NajFqKiOny\.html$', TemplateView.as_view(template_name='tpl/baidu_verify_NajFqKiOny.html')),
                        url(r'^ckeditor/', include('ckeditor.urls')),
                        url(r'^back_manage/', include('back_manager.urls')),
                        url(r'^petfarm/', include('petfarm.urls')),
