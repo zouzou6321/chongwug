@@ -162,7 +162,7 @@
                 {% for pet_img in pets_imgs %}
                 <div class="col-4 dog-list-item">
                     <a href="detail/?petid={{pet_img.pet.id}}">
-                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ pet_img.img.img_url }}" class="img-full js-lazy"/>
+                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ pet_img.img.img_url }}" class="img-full js-lazy" alt="{{ pet_img.pet.farm.name }}-{{ pet_img.pet.short_desc }}"/>
                     </a>
                     <div class="dog-desc">
                         <h4><a href="detail/?petid={{pet_img.pet.id}}"><strong>[{{ pet_img.pet.farm.name }}]</strong> {{ pet_img.pet.short_desc }}</a></h4>

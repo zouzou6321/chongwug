@@ -18,16 +18,16 @@
         <div class="row">
             <div class="col-5">
                 <a href="javascript:" class="cwg-thumb loading progressive">
-                    <img src="{{ petimg_a.img_url }}!small" class="img-full img-small mfp-zoom"/>
-                    <img src="{{ petimg_a.img_url }}" class="img-full img-original"/>
+                    <img src="{{ petimg_a.img_url }}!small" class="img-full img-small mfp-zoom" alt="{{ nestpet.farm.name }}-{{ nestpet.type }}-{{ nestpet.short_desc }}"/>
+                    <img src="{{ petimg_a.img_url }}" class="img-full img-original" alt="{{ nestpet.farm.name }}-{{ nestpet.type }}-{{ nestpet.short_desc }}"/>
                 </a>
                 <div class="cwg-dog-imgs">
                     <a class="prev-thumb" href="javascript:"><i class="icon icon-left-dir"></i></a>
                     <div class="thumbnail-wrap">
                         <ul class="cwg-thumbnail clearfix">
-                        <li class="active" data-src="{{ petimg_a.img_url }}"><img src="{{ petimg_a.img_url }}!small"/></li>
+                        <li class="active" data-src="{{ petimg_a.img_url }}"><img src="{{ petimg_a.img_url }}!small" alt="{{ nestpet.farm.name }}-{{ nestpet.type }}-{{ nestpet.short_desc }}"/></li>
                         {% for nowimg in nowimgs %}
-                            <li data-src="{{ nowimg.img_url }}"><img src="{{ nowimg.img_url }}!small"/></li>
+                            <li data-src="{{ nowimg.img_url }}"><img src="{{ nowimg.img_url }}!small" alt="{{ nestpet.farm.name }}-{{ nestpet.type }}-{{ nestpet.short_desc }}"/></li>
                         {% endfor %}
                         </ul>
                     </div>
@@ -183,7 +183,7 @@
                         <div class="row img-row">
                         	{% for farmimg in farmimgs %}
                             <div class="col-6 progressive">
-                                <img data-small="{{ farmimg.img_url }}!small" data-original="{{ farmimg.img_url }}" class="js-progressive img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                <img data-small="{{ farmimg.img_url }}!small" data-original="{{ farmimg.img_url }}" class="js-progressive img-full" src="{{'imgs/loading.gif'|assets}}" alt="{{ nestpet.farm.name }}"/>
                             </div>
                             {% if forloop.counter|divisibleby:2 %}<div class="clearfix"></div>{% endif %}
                             {% endfor %}
@@ -234,16 +234,16 @@
                     </h2>
                     <div class="desc-main">
                         <div class="adg-health">
-                            <img src="{{ 'imgs/nav/adg1.png'|assets }}" class="img-full"/>
+                            <img src="{{ 'imgs/nav/adg1.png'|assets }}" class="img-full" alt="健康有保障"/>
                         </div>
                         <div class="adg-price">
-                            <img src="{{ 'imgs/nav/adg2.png'|assets }}" class="img-full"/>
+                            <img src="{{ 'imgs/nav/adg2.png'|assets }}" class="img-full" alt="价格很公道"/>
                         </div>
                         <div class="adg-purebred">
-                            <img src="{{ 'imgs/nav/adg3.png'|assets }}" class="img-full"/>
+                            <img src="{{ 'imgs/nav/adg3.png'|assets }}" class="img-full" alt="品相很优质"/>
                         </div>
                         <div class="adg-process">
-                            <img src="{{ 'imgs/nav/adg4.png'|assets }}" class="img-full"/>
+                            <img src="{{ 'imgs/nav/adg4.png'|assets }}" class="img-full" alt="流程很标准"/>
                         </div>
                     </div>
                 </div>
@@ -253,7 +253,7 @@
             {% for recommendpet_img in recommendpets_img %}
                 <div>
                     <a href="?petid={{ recommendpet_img.pet.id }}">
-                        <img class="img-full" src="{{ recommendpet_img.img.img_url }}" >
+                        <img class="img-full" src="{{ recommendpet_img.img.img_url }}" alt="{{ recommendpet_img.pet.farm.name }}-{{ recommendpet_img.pet.short_desc }}">
                     </a>
                     <div class="dog-desc">
                         <h4><a href="?petid={{ recommendpet_img.pet.id }}">[{{ recommendpet_img.pet.farm.name }}] {{ recommendpet_img.pet.short_desc }}</a></h4>
