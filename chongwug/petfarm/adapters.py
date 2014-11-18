@@ -40,7 +40,7 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
     cropimg.save(name,quality=75,optimize=True, progressive=True)
     up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
     with open(name, 'rb') as f:
-        res = up.put(file_path_name, f, checksum=False)
+        res = up.put(file_path_name, f, checksum=False,headers={"x-gmkerl-thumbnail": "pnp"})
     #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 
     #删除服务器本地缓存的图片
     os.remove(name)
