@@ -7,7 +7,7 @@ from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention,smssend_countor
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__appointdays,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
+from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re,json
 from chongwug.commom import __errorcode__,sendSMS
 from django.contrib.auth.models import User
@@ -280,7 +280,16 @@ def buy_detail_adapter(re):
         cuser = None
         if re.user.is_authenticated():
             cuser = user.objects.get(auth_user=auth.get_user(re),dele = False)
-        return {'cuser':cuser,'appointtime':__appointtime,'appointdays':__appointdays,'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
+        appointdays = []
+        now = datetime.datetime.now()
+        days = 0
+        weeks = [u'周一',u'周二',u'周三',u'周四',u'周五',u'周六',u'周日']
+        while days < 14:
+            days += 1
+            delta = datetime.timedelta(days=days)
+            n_days = now + delta
+            appointdays.append({'day':n_days.day,'year':n_days.year,'mouth':n_days.month,'week':weeks[n_days.weekday()],'selectable':{'time1':True,'time2':True}})
+        return {'cuser':cuser,'appointtime':__appointtime,'appointdays':appointdays,'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
 
     elif 'range' in re.GET:
@@ -332,10 +341,10 @@ def attention_sendsms(req):
         return __errorcode__(23)
     smsuser.save()
     smsattention.save()
-    locations = attention.user.location.split('-')
-    sendSMS(attention.user.tel,u"%s您好，您的预约信息如下：预约看犬时间为：%s年%s月%s日 %s点%s分,等待接送地点为：%s%s%s%s,预约看犬犬舍为：%s,预约看犬犬种为：%s。祝您就此遇见心仪的爱犬！"
+    location = get_waitpoint(attention.nestofpet_id.farm.district)
+    sendSMS(attention.user.tel,u"%s您好，您的预约信息如下：预约看犬时间为：%s年%s月%s日 %s点%s分,等待接送地点为：%s,预约看犬犬舍为：%s,预约看犬犬种为：%s。祝您就此遇见心仪的爱犬！"
             % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day, 
-               attention.appoint_time.hour, attention.appoint_time.minute, locations[0], locations[1], locations[2], locations[3], attention.nestofpet_id.farm.name, attention.nestofpet_id.type))
+               attention.appoint_time.hour, attention.appoint_time.minute, location, attention.nestofpet_id.farm.name, attention.nestofpet_id.type))
     return __errorcode__(0)
 
 def buy_attention_sure(req):
@@ -352,7 +361,14 @@ def buy_attention_sure(req):
     farmuser = user.objects.get(petfarm=attention.nestofpet_id.farm,dele=False,type=1)
     #sendSMS(farmuser.tel,u"发送到养殖场")
     return __errorcode__(0)
-    
+
+def get_waitpoint(_district):
+    for addresse in __addresses:
+        for province in addresse['sublist']:
+            for city in province['sublist']:
+                for district in city['sublist']:
+                    if _district == district['name']:
+                        return district['waitpoint']
 def buy_attention_adapter(req):
     #try:
     if ('id' or 'name' or 'phone' or 'location' or 'time' or 'transportation') not in req.POST:
@@ -378,7 +394,7 @@ def buy_attention_adapter(req):
         city = province['sublist'][location['city']]
         district = city['sublist'][location['district']]
         street = district['sublist'][location['street']]
-        waitpoint = district['waitpoint']
+        waitpoint = get_waitpoint(cupet.farm.district)
     except:
         return __errorcode__(11)
     try:
@@ -417,6 +433,9 @@ def buy_attention_adapter(req):
     
     curattentions = nestofpet_attention.objects.filter(nestofpet_id=cupet,user=curuser,attention_type=0,dele=False)
     if curattentions.count() == 0:
+        curattentions = nestofpet_attention.objects.filter(nestofpet_id=cupet,user=curuser,dele=False)
+        if curattentions.count() > 0:
+            return __errorcode__(1)
         attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
         attention.save()
         id = attention.id

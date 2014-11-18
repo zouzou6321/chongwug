@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
 from customer.models import user,nestofpet_attention
 from petfarm.models import pet_farm,nestofpet
-from chongwug.config import __addresses,__appointtime,__appointdays
+from chongwug.config import __addresses,__appointtime
 from chongwug.commom import __errorcode__
 import string,json,datetime
 '''
@@ -162,7 +162,16 @@ def attention_data(request):
 
 def market_untreated_info(request):
     petfarms = pet_farm.objects.filter(dele=False)
-    return {'petfarms':petfarms,'appointtime':__appointtime,'appointdays':__appointdays,'addresses':__addresses}
+    appointdays = []
+    now = datetime.datetime.now()
+    days = 0
+    weeks = [u'周一',u'周二',u'周三',u'周四',u'周五',u'周六',u'周日']
+    while days < 14:
+        days += 1
+        delta = datetime.timedelta(days=days)
+        n_days = now + delta
+        appointdays.append({'day':n_days.day,'year':n_days.year,'mouth':n_days.month,'week':weeks[n_days.weekday()],'selectable':{'time1':True,'time2':True}})
+    return {'petfarms':petfarms,'appointtime':__appointtime,'appointdays':appointdays,'addresses':__addresses}
 
 def select_change(request):
     if 'petfarm' in request.GET:

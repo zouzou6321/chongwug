@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
 encoding//tests/test_upyun.py=utf-8
+encoding//tools/adressspider/webspider/items.py=utf-8
+encoding//tools/adressspider/webspider/pipelines.py=utf-8
+encoding//tools/adressspider/webspider/settings.py=utf-8
+encoding//tools/adressspider/webspider/spiders/__init__.py=utf-8
 encoding//tools/bringupspider/webspider/items.py=utf-8
 encoding//tools/bringupspider/webspider/pipelines.py=utf-8
 encoding//tools/bringupspider/webspider/settings.py=utf-8
