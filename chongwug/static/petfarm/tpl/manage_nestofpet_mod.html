@@ -36,11 +36,7 @@
     <div class="form-group">
         <label for="pet-color" class="col-sm-2 control-label">宠物主要颜色<span class="warn">*</span>：</label>
         <div class="col-sm-4">
-            <select name="color" id="pet-color" class="form-control required">
-            	{% for pet_color in pet_colors %}
-                <option value="{{ pet_color }}" {% if pet_color == pet_one.color %}selected{% endif %}>{{ pet_color }}</option>
-                {% endfor %}
-            </select>
+            <input type="text" id="pet-color" name="color" class="form-control required" value="{{ pet_one.color }}"/>
         </div>
     </div>
     <div class="form-group">
