@@ -15,9 +15,9 @@ from django.contrib import auth
 import traceback
 
 def is_wap(request):
-    if request.META['HTTP_ACCEPT'].find('wap') == -1:
-        return False
-    return True
+    #if request.META['HTTP_ACCEPT'].find('wap') == -1:
+        #return False
+    return False
 
 '''
 函数功能：首页数据适配器
