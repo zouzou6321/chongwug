@@ -4,7 +4,7 @@ from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
-from chongwug.config import __epidemics,__regular_expression_email,__regular_expression_chinatelnum,__directs,__addresses,__petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petcolors,__petages
+from chongwug.config import __epidemics,__regular_expression_email,__regular_expression_chinatelnum,__directs,__addresses,__petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petages
 from django import forms
 from chongwug.commom import __errorcode__,myCKEditorWidget
 from upyun import UpYun
@@ -78,9 +78,6 @@ def manage_home_data_get(request):
 
 def get_pet_types():
     return {'pettypes':__pettypes}
-
-def get_pet_colors():
-    return {'petcolors':__petcolors}
 
 def get_pet_ages():
     return {'petages':__petages}
@@ -425,7 +422,6 @@ def manage_nestofpet_mod_info(request):
         data['pet_one'] = pets[0]
         data['pet_set'] = pets[0].pet_set.filter(dele=False)
         data['pet_types'] = __pettypes
-        data['pet_colors'] = __petcolors
         data['pet_ages'] = __petages
         data['epidemics'] = __epidemics
         data['petimgs'] = pets[0].nestofpet_img_set.filter(dele=False)
@@ -433,7 +429,6 @@ def manage_nestofpet_mod_info(request):
         data['pet_one'] = pets
         data['pet_set'] = pets.pet_set.filter(dele=False)
         data['pet_types'] = __pettypes
-        data['pet_colors'] = __petcolors
         data['pet_ages'] = __petages
         data['epidemics'] = __epidemics
         data['petimgs'] = pets.nestofpet_img_set.filter(dele=False)
