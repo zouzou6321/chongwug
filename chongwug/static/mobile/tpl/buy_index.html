@@ -4,42 +4,17 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-
-<div class="carousel slide cwg-carousel" data-ride="carousel" id="js-carousel" data-interval="4000">
-  <div class="carousel-inner">
-    {% for ad in ads %}
-    <div class="item loading{% if forloop.first %} active{% endif %}">
-        <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}"></a>
-    </div>
+<div class="content">
+    <ul class="table-view">
+    {% for direct_farm in direct_farms %}
+    <li class="table-view-cell">
+        <a href="/buy/?direct={{ direct_farm.direct }}">
+            <h3>城{{ direct_farm.direct }}犬舍</h3>
+            <img src="{{ direct_farm.pic.img_url }}" class="img-full" alt="城{{ direct_farm.direct }}犬舍">
+        </a>
+    </li>
     {% endfor %}
-  </div>
-  <ol class="carousel-indicators">
-    {% for ad in ads %}
-    <li data-target="#js-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
-    {% endfor %}
-  </ol>
-  <div class="carousel-lace"></div>
-</div>
-
-<div class="container">
-    <div class="row cwg-area-row">
-        {% for direct_farm in direct_farms %}
-        <div class="col-3 cwg-area">
-            <h2><a href="/buy/?direct={{ direct_farm.direct }}" >城{{ direct_farm.direct }}犬舍</a></h2>
-            <div>
-                {% if direct_farm.pic %}
-                <a href="/buy/?direct={{ direct_farm.direct }}">
-                    <img src="{{ 'imgs/loading.gif'|mobile }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy">
-                </a>
-                {% else %}
-                <a href="/buy/?direct={{ direct_farm.direct }}">
-                    <img  src="{{ 'imgs/loading.gif'|mobile }}" data-original="{{ 'imgs/test.jpg'|mobile }}" class="img-full js-lazy">
-                </a>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    </ul>
 </div>
 
 {% endblock %}

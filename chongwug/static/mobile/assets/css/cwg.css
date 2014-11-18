@@ -1077,3 +1077,21 @@ select {
 
 .icon-left:before {
   content: '\e822'; }
+
+/**
+ * Generic utility styles etc.
+ */
+/**
+ * Base styles; unclassed HTML elements etc.
+ */
+/**
+ * Objects and abstractions
+*/
+/**
+ * gui
+*/
+/**
+ * Style trumps; helper and brand classes
+*/
+.img-full {
+  width: 100%; }
