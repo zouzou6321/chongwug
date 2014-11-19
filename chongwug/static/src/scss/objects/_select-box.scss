@@ -109,7 +109,7 @@
 
   .table{
     margin-bottom: 0;
-    width: 500px;
+    table-layout: fixed;
 
     > thead > tr > th{
       border-bottom: 0;

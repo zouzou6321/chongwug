@@ -1,15 +1,11 @@
 <input name="time" type="hidden" id="js-time-input" class="required"/>
-<div class="select-box" id="js-time-box" tabindex="0">
+<div class="select-box" id="js-time-box" tabindex="0" style="left: -85px;">
     <table class="table table-bordered table-center">
         <colgroup>
             <col width="100px"/>
+            {% for appointday in appointdays %}
             <col width="50px"/>
-            <col width="50px"/>
-            <col width="50px"/>
-            <col width="50px"/>
-            <col width="50px"/>
-            <col width="50px"/>
-            <col width="50px"/>
+            {% endfor %}
         </colgroup>
         <thead>
             <tr>

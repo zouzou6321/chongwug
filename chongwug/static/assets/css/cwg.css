@@ -3066,7 +3066,7 @@ Copyright (c) 2014 Daniel Eden
       width: 233px; }
   .select-box .table {
     margin-bottom: 0;
-    width: 500px; }
+    table-layout: fixed; }
     .select-box .table > thead > tr > th {
       border-bottom: 0;
       vertical-align: middle;

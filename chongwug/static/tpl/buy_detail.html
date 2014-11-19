@@ -301,7 +301,7 @@
         callback: function($curr){
             $thumb.find('.img-original').remove();
             $imgSmall.attr('src', $curr.find('img').attr('src'));
-            $('<img/>').addClass('img-full img-original').attr('src', $curr.data('src')).insertAfter($imgSmall);
+            $('<img/>').addClass('img-full img-original mfp-zoom').attr('src', $curr.data('src')).insertAfter($imgSmall);
         }
     });
 
