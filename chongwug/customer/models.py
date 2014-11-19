@@ -39,3 +39,13 @@ class smssend_countor(models.Model):
     attention = models.ForeignKey(nestofpet_attention,blank=True, null=True)
     user = models.ForeignKey(user,blank=True, null=True)
     dele = models.BooleanField(default=False)
+
+class buyselectinfo(models.Model):
+    directkey=models.TextField()
+    typekey=models.TextField()
+    princekey=models.IntegerField()
+    agekey=models.IntegerField()
+    epidemickey=models.TextField()
+    searchkey=models.TextField()
+    curpage=models.IntegerField()
+    dele = models.BooleanField(default=False)
