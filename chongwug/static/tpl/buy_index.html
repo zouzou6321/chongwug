@@ -25,14 +25,14 @@
     <div class="row cwg-area-row">
         {% for direct_farm in direct_farms %}
         <div class="col-3 cwg-area">
-            <h2><a href="/buy/?direct={{ direct_farm.direct }}" >城{{ direct_farm.direct }}犬舍</a></h2>
+            <h2><a href="/buy/{{ direct_farm.direct }}/all/0/0/all/all/1/" >城{{ direct_farm.direct }}犬舍</a></h2>
             <div>
                 {% if direct_farm.pic %}
-                <a href="/buy/?direct={{ direct_farm.direct }}">
+                <a href="/buy/{{ direct_farm.direct }}/all/0/0/all/all/1/">
                     <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
                 </a>
                 {% else %}
-                <a href="/buy/?direct={{ direct_farm.direct }}">
+                <a href="/buy/{{ direct_farm.direct }}/all/0/0/all/all/1/">
                     <img  src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ 'imgs/test.jpg'|assets }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
                 </a>
                 {% endif %}
