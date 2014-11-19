@@ -261,9 +261,9 @@ def attention_sendsms(req):
     smsuser.save()
     smsattention.save()
     location = get_waitpoint(attention.nestofpet_id.farm.district)
-    sendSMS(attention.user.tel,u"%s您好，您的预约信息如下：预约看犬时间为：%s年%s月%s日 %s点%s分,等待接送地点为：%s,预约看犬犬舍为：%s,预约看犬犬种为：%s。祝您就此遇见心仪的爱犬！"
-            % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day, 
-               attention.appoint_time.hour, attention.appoint_time.minute, location, attention.nestofpet_id.farm.name, attention.nestofpet_id.type))
+    content = u"%s您好，您的预约信息如下：预约看犬时间为：%s年%s月%s日 %s点%s分,等待接送地点为：%s,预约看犬犬舍为：%s,预约看犬犬种为：%s。祝您就此遇见心仪的爱犬！" % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day, 
+               attention.appoint_time.hour, attention.appoint_time.minute, location.decode('utf8'), attention.nestofpet_id.farm.name, attention.nestofpet_id.type)
+    sendSMS(attention.user.tel,content)
     return __errorcode__(0)
 
 def buy_attention_sure(req):
@@ -278,7 +278,12 @@ def buy_attention_sure(req):
     attention.attention_type = 1
     attention.save()
     farmuser = user.objects.get(petfarm=attention.nestofpet_id.farm,dele=False,type=1)
-    #sendSMS(farmuser.tel,u"发送到养殖场")
+    pets = pet.objects.filter(nestofpet=attention.nestofpet_id,dele=False)
+    min_price = pets.order_by('price')[0].price
+    max_price = pets.order_by('-price')[0].price
+    content = u"【宠物购】接生意了！ 订单信息：%s将于%s年%s月%s日%s时%s分前往贵犬舍挑选%s犬，他/她看中的窝号为%s，价格区间为%s-%s。 稍后宠物购工作人员将会电话与您确认，请保持您所预留的手机/电话畅通！" % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day,
+                attention.appoint_time.hour, attention.appoint_time.minute, attention.nestofpet_id.type, attention.nestofpet_id.num,min_price,max_price)
+    sendSMS(farmuser.tel,content)
     return __errorcode__(0)
 
 def get_waitpoint(_district):
