@@ -140,7 +140,7 @@ def workchance_view(request):
 
 def aboutus_view(request):
     data = {}
-    data['description'] = u'关于宠物购'
+    data['description'] = u'关于我们'
     if adapters.is_wap(request):
         return render_to_response('mobile/tpl/aboutus.html',data)
     else:

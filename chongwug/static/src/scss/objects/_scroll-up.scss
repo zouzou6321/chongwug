@@ -8,7 +8,7 @@
 
   padding: 5px;
 
-  &:hover{
+  &:hover, &:focus{
     text-decoration: none;
   }
 }
