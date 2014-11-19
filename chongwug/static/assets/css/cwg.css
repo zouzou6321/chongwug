@@ -3616,7 +3616,10 @@ Copyright (c) 2014 Daniel Eden
   margin: 0;
   padding: 0;
   position: relative;
-  left: 0; }
+  left: 0;
+  -webkit-transition: 0.3s left;
+  -o-transition: 0.3s left;
+  transition: 0.3s left; }
   .cwg-thumbnail li {
     border: 3px solid transparent;
     float: left;

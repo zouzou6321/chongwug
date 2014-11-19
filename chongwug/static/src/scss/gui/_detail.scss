@@ -41,6 +41,8 @@
   position: relative;
   left: 0;
 
+  @include transition(.3s left);
+
   li{
     border: 3px solid transparent;
     float: left;

@@ -3911,8 +3911,8 @@ $.magnificPopup.registerModule(RETINA_NS, {
                $li = $ul.find('li'),
                $curr = $li.filter('.active'),
                itemWidth = settings.itemWidth || $curr.outerWidth(),
-               totalWidth = itemWidth * $li.length,
-               wrapperWidth = $wrapper.width(),
+               itemTotal = $li.length,
+               totalWidth = itemWidth * itemTotal,
                $prev = $(settings.prev),
                $next = $(settings.next);
 
@@ -3920,12 +3920,14 @@ $.magnificPopup.registerModule(RETINA_NS, {
 
             $next.on('click', function(){
                 $curr.removeClass('active');
+                moveNext();
                 ($curr = nextLi()).addClass('active');
                 settings.callback($curr);
             });
 
             $prev.on('click', function(){
                 $curr.removeClass('active');
+                movePrev();
                 ($curr = prevLi()).addClass('active');
                 settings.callback($curr);
             });
@@ -3952,39 +3954,32 @@ $.magnificPopup.registerModule(RETINA_NS, {
                 return $prev.length ? $prev : $li.last();
             }
 
-            function animateUl(){
-                var len = $curr.index() + 1;
+            function movePrev(){
+                var prev = prevLi().index(),
+                    left = parseInt($ul.css('left'), 10),
+                    leftNum = Math.abs(left) / itemWidth;
 
-                
+                if(prev == itemTotal - 1){
+                    $ul.css('left', -(itemTotal - 5) * itemWidth);
+                }else if(leftNum == prev + 1){
+                    $ul.css('left', left + itemWidth);
+                }
+            }
+
+            function moveNext(){
+                var next = nextLi().index(),
+                    left = parseInt($ul.css('left'), 10),
+                    leftNum = Math.abs(left) / itemWidth;
+
+                if(next == 0){
+                    $ul.css('left', 0);
+                }else if(leftNum + 5 == next){
+                    $ul.css('left', left - itemWidth);
+                }
             }
         });
     }
 
-})(jQuery);
-
-(function($){
-    $.args = function (key){
-        var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
-            args = {},
-            items = qs.length ? qs.split("&") : [],
-            item = null,
-            name = null,
-            value = null,
-            i = 0,
-            len = items.length;
-
-        for (i=0; i < len; i++){
-            item = items[i].split("=");
-            name = decodeURIComponent(item[0]);
-            value = decodeURIComponent(item[1]);
-
-            if (name.length){
-                args[name] = value;
-            }
-        }
-
-        return args[key] || args;
-    };
 })(jQuery);
 /*
  * Lazy Load - jQuery plugin for lazy loading images
