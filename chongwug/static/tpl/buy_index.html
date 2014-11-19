@@ -5,19 +5,20 @@
 
 {% block content %}
 
-<div class="carousel slide cwg-carousel" data-ride="carousel" id="js-carousel" data-interval="4000">
+<div class="carousel cwg-carousel">
   <div class="carousel-inner">
     {% for ad in ads %}
-    <div class="item loading{% if forloop.first %} active{% endif %}">
-        <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}"></a>
+    <div class="item{% if not forloop.first %} hide{% endif %}">
+        <a target="_blank" href="{{ ad.tar_url }}">
+            {% if forloop.first %}
+            <img src="{{ ad.img_url }}" class="img-full">
+            {% else %}
+            <img data-lazy="{{ ad.img_url }}" class="img-full">
+            {% endif %}
+        </a>
     </div>
     {% endfor %}
   </div>
-  <ol class="carousel-indicators">
-    {% for ad in ads %}
-    <li data-target="#js-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
-    {% endfor %}
-  </ol>
   <div class="carousel-lace"></div>
 </div>
 
@@ -43,4 +44,26 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function($){
+    var $carousel = $('.carousel-inner');
+
+    $carousel.find('.hide').removeClass('hide');
+
+    $carousel.slick({
+        draggable: false,
+        arrows: false,
+        dots: true,
+        fade: true,
+        autoplay: true,
+        autoplaySpeed: 3500,
+        customPaging: function(slider, i){
+            return '<i class="icon icon-circle-thin"></i>';
+        }
+    });
+})(jQuery);
+</script>
 {% endblock %}
