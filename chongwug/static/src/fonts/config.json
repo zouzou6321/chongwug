@@ -67,6 +67,18 @@
       "src": "fontawesome"
     },
     {
+      "uid": "130380e481a7defc690dfb24123a1f0c",
+      "css": "circle",
+      "code": 59395,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "5774d0a0e50f6eefc8be01bd761e5dd3",
+      "css": "circle-thin",
+      "code": 59398,
+      "src": "fontawesome"
+    },
+    {
       "uid": "34cb6ce62bf3f1efd59e2f5eb0d79f82",
       "css": "wechat",
       "code": 59401,

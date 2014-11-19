@@ -2637,6 +2637,10 @@ The provided mixins are intended to be used with the array-like variables
   content: '\e802'; }
 
 /* '' */
+.icon-circle:before {
+  content: '\e803'; }
+
+/* '' */
 .icon-help-circled:before {
   content: '\e804'; }
 
@@ -2645,6 +2649,10 @@ The provided mixins are intended to be used with the array-like variables
   content: '\e805'; }
 
 /* '' */
+.icon-circle-thin:before {
+  content: '\e806'; }
+
+/* '' */
 .icon-search:before {
   content: '\e808'; }
 
