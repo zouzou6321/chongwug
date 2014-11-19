@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="carousel slide cwg-carousel" data-ride="carousel" id="js-carousel" data-interval="4000">
+<div class="carousel cwg-carousel" style="overflow:hidden;">
   <div class="carousel-inner">
     {% for ad in ads %}
     <div class="item loading{% if forloop.first %} active{% endif %}">
@@ -13,11 +13,6 @@
     </div>
     {% endfor %}
   </div>
-  <ol class="carousel-indicators">
-    {% for ad in ads %}
-    <li data-target="#js-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
-    {% endfor %}
-  </ol>
   <div class="carousel-lace"></div>
 </div>
 
@@ -43,4 +38,16 @@
     </div>
 </div>
 
+{% endblock %}
+{% block scripts %}
+<script>
+    $('.carousel-inner').slick({
+        draggable: false,
+        arrows: false,
+        dots: true,
+        fade: true,
+        autoplay: true,
+        autoplaySpeed: 3500
+    });
+</script>
 {% endblock %}
