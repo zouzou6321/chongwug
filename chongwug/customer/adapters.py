@@ -263,7 +263,7 @@ def attention_sendsms(req):
     smsuser.save()
     smsattention.save()
     location = get_waitpoint(attention.nestofpet_id.farm.district)
-    content = u"%s您好，您的预约信息如下：预约看犬时间为：%s年%s月%s日 %s点%s分,等待接送地点为：%s,预约看犬犬舍为：%s,预约看犬犬种为：%s。祝您就此遇见心仪的爱犬！" % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day, 
+    content = u"%s您好，您的预约信息如下：预约看犬时间：%s年%s月%s日 %s点%s分,等待接送地点：%s,预约犬舍：%s,预约犬种：%s。祝您就此遇见心仪的爱犬！" % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day, 
                attention.appoint_time.hour, attention.appoint_time.minute, location.decode('utf8'), attention.nestofpet_id.farm.name, attention.nestofpet_id.type)
     sendSMS(attention.user.tel,content)
     return __errorcode__(0)
@@ -283,7 +283,7 @@ def buy_attention_sure(req):
     pets = pet.objects.filter(nestofpet=attention.nestofpet_id,dele=False)
     min_price = pets.order_by('price')[0].price
     max_price = pets.order_by('-price')[0].price
-    content = u"【宠物购】接生意了！ 订单信息：%s将于%s年%s月%s日%s时%s分前往贵犬舍挑选%s犬，他/她看中的窝号为%s，价格区间为%s-%s。 稍后宠物购工作人员将会电话与您确认，请保持您所预留的手机/电话畅通！" % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day,
+    content = u"【宠物购】接生意了！ 订单信息：%s将于%s年%s月%s日%s时%s分前往贵犬舍挑选:%s，他/她看中的窝号为%s，价格区间为%s-%s。 稍后宠物购工作人员将会电话与您确认，请保持您所预留的手机/电话畅通！" % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day,
                 attention.appoint_time.hour, attention.appoint_time.minute, attention.nestofpet_id.type, attention.nestofpet_id.num,min_price,max_price)
     sendSMS(farmuser.tel,content)
     return __errorcode__(0)
@@ -368,7 +368,7 @@ def buy_attention_adapter(req):
         curattentions[0].trans = transport
         curattentions[0].save()
         id = curattentions[0].id
-    return __errorcode__(0,{'id':id,'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
+    return __errorcode__(0,{'id':id,'count':attentions.count(),'ordernum':'C%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
 
 def get_knowledge_bringup(request):
