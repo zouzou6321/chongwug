@@ -35,10 +35,11 @@
                 previewItemTpl = $(settings.previewItemTpl).html(),
                 $uploadBtn = $container.find(settings.uploadBtn),
                 $cropModal = $(settings.cropModal),
+                $cropModalBody = $cropModal.find('.modal-body'),
                 $imgCount= $(settings.imgCount),
                 previewSize = settings.previewSize,
 
-                $currCropImg = $('<img>').appendTo($cropModal.find('.modal-body')),
+                $currCropImg = $cropModalBody.find('img').length ? $cropModalBody.find('img') : $('<img>').appendTo($cropModalBody),
                 $currPreviewImg = null,
                 $currPreviewLi = null,
                 jCrop = null,

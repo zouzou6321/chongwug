@@ -195,6 +195,7 @@ function select()
 		if(recive != 'False'){
 			$("#form_main").html(recive);
             delArr = [];
+            $('#js-crop-modal').off('hidden');
             initCrop();
 		}
 		else{
