@@ -15,9 +15,9 @@
     <div class="container buy-main content-container">
         <div class="row">
             <div class="col-6 col-offset-1">
-                <form action="/buy/" method="get" id="js-form">
+                <form action="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/" method="get" id="js-form">
                     <div class="input-group cwg-search-wrap">
-                    	<input type="text" class="form-control" id="js-key" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != None %}value="{{ searchkey }}"{% endif %}>
+                    	<input type="text" class="form-control" id="js-key" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != 'all' %}value="{{ searchkey }}"{% endif %}>
                         <span class="input-group-btn">
                             <button class="btn btn-search" type="submit">
                                 <i class="icon icon-search"></i>
@@ -31,16 +31,16 @@
             <div class="col-1 dog-select-title">犬种：</div>
             <div class="col-11">
                 <ul class="nav nav-pills">
-                	{% if typekey == None%}
-                    <li class="active"><a href="{{ urls.type_all_url }}">全部</a></li>
+                	{% if typekey == 'all'%}
+                    <li class="active"><a href="{{ urls }}{{ directkey }}/all/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls.type_all_url }}">全部</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/all/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
                     {% endif %}
                     {% for type in types %}
                     {% if type == typekey %}
-                    <li class="active"><a href="{{ urls.url }}type={{ type }}">{{ type }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}/{{ type }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ type }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls.url }}type={{ type }}">{{ type }}</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ type }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ type }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -50,16 +50,16 @@
             <div class="col-1 dog-select-title">价格：</div>
             <div class="col-11">
                 <ul class="nav nav-pills">
-                	{% if princekey == None%}
-                    <li class="active"><a href="{{ urls.prince_all_url }}">全部</a></li>
+                	{% if princekey == '0' %}
+                    <li class="active"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/0/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls.prince_all_url }}">全部</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/0/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
                     {% endif %}
                     {% for prince in princes %}
                     {% if prince.a == princekey %}
-                    <li class="active"><a href="{{ urls.url }}prince={{ prince.a }}">{{ prince.d }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ prince.a }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ prince.d }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls.url }}prince={{ prince.a }}">{{ prince.d }}</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ prince.a }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ prince.d }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -69,16 +69,16 @@
             <div class="col-1 dog-select-title">区域：</div>
             <div class="col-11">
                 <ul class="nav nav-pills">
-                	{% if directkey == None%}
-                    <li class="active"><a href="{{ urls.direct_all_url }}">全部</a></li>
+                	{% if directkey == 'all'%}
+                    <li class="active"><a href="{{ urls }}all/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls.direct_all_url }}">全部</a></li>
+                    <li><a href="{{ urls }}all/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
                     {% endif %}
                     {% for direct in directs %}
                     {% if direct == directkey %}
-                    <li class="active"><a href="{{ urls.url }}direct={{ direct }}">城{{ direct }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ direct }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">城{{ direct }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls.url }}direct={{ direct }}">城{{ direct }}</a></li>
+                    <li><a href="{{ urls }}{{ direct }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">城{{ direct }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -88,16 +88,16 @@
             <div class="col-1 dog-select-title">疫苗：</div>
             <div class="col-11">
                 <ul class="nav nav-pills">
-                	{% if epidemickey == None%}
-                    <li class="active"><a href="{{ urls.epidemic_all_url }}">全部</a></li>
+                	{% if epidemickey == 'all'%}
+                    <li class="active"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/all/{{ searchkey }}/1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls.epidemic_all_url }}">全部</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/all/{{ searchkey }}/1/">全部</a></li>
                     {% endif %}
                     {% for epidemic in epidemics %}
                     {% if epidemic == epidemickey %}
-                    <li class="active"><a href="{{ urls.url }}epidemic={{ epidemic }}">{{ epidemic }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemic }}/{{ searchkey }}/1/">{{ epidemic }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls.url }}epidemic={{ epidemic }}">{{ epidemic }}</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemic }}/{{ searchkey }}/1/">{{ epidemic }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -107,50 +107,50 @@
             <div class="col-1 dog-select-title">月龄：</div>
             <div class="col-11">
                 <ul class="nav nav-pills">
-                	{% if agekey == None%}
-                    <li class="active"><a href="{{ urls.age_all_url }}">全部</a></li>
+                	{% if agekey == '0'%}
+                    <li class="active"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/0/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls.age_all_url }}">全部</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/0/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
                     {% endif %}
                     {% for age in ages %}
                     {% if age.a == agekey %}
-                    <li class="active"><a href="{{ urls.url }}age={{ age.a }}">{{ age.d }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ age.a }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ age.d }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls.url }}age={{ age.a }}">{{ age.d }}</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ age.a }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ age.d }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
             </div>
         </div>
-        {% if searchkey == None and  typekey == None and princekey == None and directkey == None and epidemickey == None and agekey == None %}
+        {% if searchkey == 'all' and  typekey == 'all' and princekey == '0' and directkey == 'all' and epidemickey == 'all' and agekey == '0' %}
         {% else %}
         <div class="row dog-select-row">
             <div class="col-1 dog-select-title">筛选：</div>
             <div class="col-11">
                 <ul class="nav nav-pills dog-selected">
-                	{% if searchkey == None %}
+                	{% if searchkey == 'all' %}
                 	{% else %}
-                	<li><a href="{{ urls.search_all_url }}">{{ searchkey }} &times;</a></li>
+                	<li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/all/{{ curpage }}/">{{ searchkey }} &times;</a></li>
                 	{% endif %}
-                	{% if typekey == None %}
+                	{% if typekey == 'all' %}
                 	{% else %}
-                    <li><a href="{{ urls.type_all_url }}">{{ typekey }} &times;</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/all/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ curpage }}/">{{ typekey }} &times;</a></li>
                     {% endif %}
-                    {% if princekey == None %}
+                    {% if princekey == '0' %}
                 	{% else %}
-                    <li><a href="{{ urls.prince_all_url }}">价格 &times;</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/0/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ curpage }}/">价格 &times;</a></li>
                     {% endif %}
-                    {% if directkey == None %}
+                    {% if directkey == 'all' %}
                 	{% else %}
-                    <li><a href="{{ urls.direct_all_url }}">城{{ directkey }} &times;</a></li>
+                    <li><a href="{{ urls }}all/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ curpage }}/">城{{ directkey }} &times;</a></li>
                     {% endif %}
-                    {% if epidemickey == None %}
+                    {% if epidemickey == 'all' %}
                 	{% else %}
-                    <li><a href="{{ urls.epidemic_all_url }}">{{ epidemickey }} &times;</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/all/{{ searchkey }}/{{ curpage }}/">{{ epidemickey }} &times;</a></li>
                     {% endif %}
-                    {% if agekey == None %}
+                    {% if agekey == '0' %}
                 	{% else %}
-                    <li><a href="{{ urls.age_all_url }}">月龄 &times;</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/0/{{ epidemickey }}/{{ searchkey }}/{{ curpage }}/">月龄 &times;</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -161,11 +161,11 @@
             {% if pets_imgs%}
                 {% for pet_img in pets_imgs %}
                 <div class="col-4 dog-list-item">
-                    <a href="detail/?petid={{pet_img.pet.id}}">
+                    <a href="{{ urls }}detail/{{ pet_img.pet.id }}/">
                         <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ pet_img.img.img_url }}" class="img-full js-lazy" alt="{{ pet_img.pet.farm.name }}-{{ pet_img.pet.short_desc }}"/>
                     </a>
                     <div class="dog-desc">
-                        <h4><a href="detail/?petid={{pet_img.pet.id}}"><strong>[{{ pet_img.pet.farm.name }}]</strong> {{ pet_img.pet.short_desc }}</a></h4>
+                        <h4><a href="{{ urls }}detail/{{ pet_img.pet.id }}/"><strong>[{{ pet_img.pet.farm.name }}]</strong> {{ pet_img.pet.short_desc }}</a></h4>
                         <div>
                             <label class="pet-tag">{{ pet_img.pet.age }}个月</label>
                             <label class="pet-tag">{{ pet_img.count }}只</label>
@@ -173,7 +173,7 @@
                         </div>
                         <p>
                             <span class="price price-primary"><span class="price-symbol">&yen;</span>{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元/只</span></span>
-                            <a href="detail/?petid={{pet_img.pet.id}}" class="btn btn-primary pull-right btn-dog" role="button">去看看</a>
+                            <a href="{{ urls }}detail/{{ pet_img.pet.id }}/" class="btn btn-primary pull-right btn-dog" role="button">去看看</a>
                         </p>
                     </div>
                 </div>
@@ -182,26 +182,26 @@
                 <div class="clearfix"></div>
                 <div class="text-center">
                     <ul class="pagination pagination-primary">
-                        {% if curPage == 1 %}
+                        {% if curpage == 1 %}
                         <li class="disabled"><span>首页</span></li>
                         <li class="disabled"><span>上一页</span></li>
                         {% else %}
                         <li><a href="/buy/">首页</a></li>
-                        <li><a href="?curPage={{ curPage }}&&pageType=pageUp">上一页</a></li>
+                        <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ pageup }}/">上一页</a></li>
                         {% endif %}
                         {% for page in pages %}
-                        {% if page == curPage %}
+                        {% if page == curpage %}
                         <li class="active"><span>{{ page }}</span></li>
                         {% else %}
-                        <li><a href="?curPage={{ page }}">{{ page }}</a></li>
+                        <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ page }}/">{{ page }}</a></li>
                         {% endif %}
                         {% endfor %}
-                        {% if curPage ==  allPage%}
+                        {% if curpage ==  allpage%}
                         <li class="disabled"><span>下一页</span></li>
                         <li class="disabled"><span>尾页</span></li>
                         {% else %}
-                        <li><a href="?curPage={{ curPage }}&&pageType=pageDown">下一页</a></li>
-                        <li><a href="?curPage={{ allPage }}">尾页</a></li>
+                        <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ pagedown }}/">下一页</a></li>
+                        <li><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ allpage }}/">尾页</a></li>
                         {% endif %}
                      </ul>
                 </div>

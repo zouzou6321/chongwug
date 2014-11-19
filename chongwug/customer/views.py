@@ -37,8 +37,8 @@ def buy_home_view(request):
 #auth:renwei
 #date:2014/9/8
 #discription:购宠购买展示页
-def buy_main_view(request):
-    data = adapters.buy_main_adapter(request)
+def buy_main_view(request,direct='all',type='all',prince='0',age='0',epidemic='all',key='all',curpage='1'):
+    data = adapters.buy_main_adapter(request,direct,type,string.atoi(prince),string.atoi(age),epidemic,key,string.atoi(curpage))
     data['title'] = u'狗狗挑选'
     data['description'] = u'国内最正规的狗狗交易平台'
     if adapters.is_wap(request):
@@ -47,8 +47,8 @@ def buy_main_view(request):
         return render_to_response('tpl/buy_main.html',data)
 
 
-def buy_detail_view(request):
-    data = adapters.buy_detail_adapter(request)
+def buy_detail_view(request,petid='-1'):
+    data = adapters.buy_detail_adapter(request,string.atoi(petid))
     if data == False:
         return HttpResponse(__errorcode__(2))
 

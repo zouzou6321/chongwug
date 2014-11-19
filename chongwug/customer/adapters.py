@@ -78,128 +78,34 @@ def buy_home_adapter(request):
 作者：胡怀勇
 时间：2014-9-22
 '''
-def buy_main_adapter(re):
-    cur_url = '/buy/?'
-    url = cur_url
-    price = None
+def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,epidemickey='all',searchkey='all',curpage=1):
     #筛选条件
     types = __pettypes
     princes = __prices
     directs = __directs
     epidemics = __epidemics
     ages = __ages
-    
-    #筛选条件所对应的数据表列名称，从enums中获取
-    typekey = None
-    princekey = None
-    directkey = None
-    epidemickey = None
-    agekey = None
-    searchkey = None
-    if 'key' in re.GET:
-        #只是简单检索养殖场名称、养殖场地址
-        searchkey = re.REQUEST.get('key')
-        url = cur_url + 'key=' + searchkey + '&'
-    
+    if 'key' in request.GET:
+        searchkey = request.REQUEST.get('key')
     #数据库查询语句整合
     kwargs = {}
     kwargs['dele'] = False
     kwargs['sale_out'] = False
-    
-    #取消某筛选条件时的url需要独立处理
-    type_all_url = url
-    prince_all_url = url
-    direct_all_url = url
-    epidemic_all_url = url
-    age_all_url = url
-    search_all_url = cur_url
-    
-    #数据库查询语句生成和部分不依赖数据库的数据生成
-    enums = [['type','type'],['prince','min_price'],['direct','farm__direct'],['age','age'],['epidemic','epidemic_period']]
-    for enum in enums:
-        if enum[0] in re.GET:
-            url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
-            search_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
-            if enum[0] != 'type':
-                type_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
-            else:
-                typekey = re.REQUEST.get(enum[0])
-                
-            if enum[0] != 'direct':
-                direct_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
-            else:
-                directkey = re.REQUEST.get(enum[0])
-            
-            if enum[0] != 'epidemic':
-                epidemic_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
-            else:
-                epidemickey = re.REQUEST.get(enum[0])
-                
-            if enum[0] != 'prince' and enum[0] != 'age' and enum[0] != 'epidemic':
-                kwargs[enum[1]] = re.REQUEST.get(enum[0])
-                prince_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
-                age_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
-                epidemic_all_url += enum[0] + '=' + re.REQUEST.get(enum[0]) + '&'
-            elif enum[0] == 'epidemic':
-                epidemickey = re.REQUEST.get(enum[0])
-            elif enum[0] == 'prince':
-                price = string.atoi(re.REQUEST.get(enum[0]))
-                if price > len(princes):
-                    price = len(princes)
-                elif price < 1:
-                    price = 1
-                princekey = price.__str__()
-                age_all_url += '%s=%d&' % (enum[0], price)
-            elif enum[0] == 'age':
-                age = string.atoi(re.REQUEST.get(enum[0]))
-                if age > len(ages):
-                    age = len(ages)
-                elif age < 1:
-                    age = 1
-                kwargs[enum[1] + '__gte'] = ages[age - 1]['b']
-                kwargs[enum[1] + '__lte'] = ages[age - 1]['c']
-                agekey = age.__str__()
-                prince_all_url += '%s=%d&' % (enum[0], age)
-    
-    urls = {}
-    urls['url'] = url
-    urls['type_all_url'] = type_all_url
-    urls['prince_all_url'] = prince_all_url
-    urls['direct_all_url'] = direct_all_url
-    urls['epidemic_all_url'] = epidemic_all_url
-    urls['age_all_url'] = age_all_url
-    urls['search_all_url'] = search_all_url
+    if directkey != 'all':
+        kwargs['farm__direct'] = directkey
+    if typekey != 'all':
+        kwargs['type'] = typekey
+    if agekey != 0:
+        kwargs['age__gte'] = ages[agekey - 1]['b']
+        kwargs['age__lte'] = ages[agekey - 1]['c']
     
     #查询数据库获取数据
     pets_imgs = []
     pets = nestofpet.objects.filter(**kwargs)
-    if searchkey:
+    if searchkey != 'all':
         pets = pets.filter(Q(farm__name__contains=searchkey)|Q(farm__detail_address__contains=searchkey))
-    curPage = int(re.REQUEST.get('curPage', '1'))
-    pageType = str(re.REQUEST.get('pageType', ''))
-  
-    #判断点击了【下一页】还是【上一页】  
-    if pageType == 'pageDown':  
-        curPage += 1  
-    elif pageType == 'pageUp':  
-        curPage -= 1  
-  
-    startPos = (curPage - 1) * __onepageofdata__  
-    endPos = startPos + __onepageofdata__  
-    petscount = pets.count()
-    pets = pets[startPos:endPos]  
-    pages = []
-    allPostCounts = petscount
-    allPage = allPostCounts / __onepageofdata__  
-    remainPost = allPostCounts % __onepageofdata__  
-    if remainPost > 0:  
-        allPage += 1
-    i = 0
-    while i < allPage:
-        i += 1
-        pages.append(i)
     for pet_one in pets:
-        if epidemickey and pet_one.pet_set.filter(epidemic_period=epidemickey).count() <= 0:
+        if epidemickey != 'all' and pet_one.pet_set.filter(epidemic_period=epidemickey).count() <= 0:
             continue;
         try:
             petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor=__petpictypes[0][1])[0]
@@ -208,27 +114,51 @@ def buy_main_adapter(re):
         othor_pets = pet_one.pet_set.filter(dele=False)
         min_price = othor_pets.order_by('price')[0].price
         max_price = othor_pets.order_by('-price')[0].price
-        if price != None:
-            if (max_price < princes[price - 1]['b'] or min_price > princes[price - 1]['c']):
+        if princekey > 0:
+            if (max_price < princes[princekey - 1]['b'] or min_price > princes[princekey - 1]['c']):
                 continue
         for epidemic in __epidemics:
             if othor_pets.filter(epidemic_period = epidemic).count() > 0:
                 epidemic_period = epidemic
                 break
         pets_imgs.append({'pet':pet_one,'img':petimg,'min_price':min_price,'max_price':max_price,'count':othor_pets.count(),'epidemic':epidemic_period})
-    return {'pets_imgs':pets_imgs, 'pages':pages,'allPage':allPage, 'curPage':curPage,'urls':urls,'types':types,'typekey':typekey,'princes':princes,
-            'princekey':princekey,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,
-            'epidemickey':epidemickey,'ages':ages,'agekey':agekey,'page':'buy'}
+    
+    startpos = (curpage - 1) * __onepageofdata__  
+    endpos = startpos + __onepageofdata__  
+    petscount = len(pets_imgs)
+    pets_imgs = pets_imgs[startpos:endpos]  
+    pages = []
+    allPostCounts = petscount
+    allpage = allPostCounts / __onepageofdata__  
+    remainPost = allPostCounts % __onepageofdata__  
+    if remainPost > 0:  
+        allpage += 1
+    i = 0
+    while i < allpage:
+        i += 1
+        pages.append(i)
+    return {'pets_imgs':pets_imgs,'urls': '/buy/','types':types,'typekey':typekey,'princes':princes,'princekey':str(princekey),
+            'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,'epidemickey':epidemickey,
+            'ages':ages,'agekey':str(agekey),'curpage':curpage,'pageup':curpage-1,'pagedown':curpage+1,'pages':pages,'allpage':allpage,'page':'buy'}
 
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
 时间：2014-9-22
 '''
-def buy_detail_adapter(re):
-    if 'petid' in re.GET:
+def buy_detail_adapter(re,petid):
+    if 'range' in re.GET:
+        addresses = __addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
+        if 'city' in re.GET:
+            addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
+        if 'district' in re.GET:
+            addresses = addresses['sublist'][string.atoi(re.REQUEST.get('district'))]
+        arr = []
+        for address in addresses['sublist']:
+            arr.append({'id': address['index'], 'name': address['name']})
+        return {'locations': arr}
+    elif petid != -1:
         '''获取当前这窝宠物信息'''
-        petid = string.atoi(re.REQUEST.get('petid'))
         try:
             nest_pet = nestofpet.objects.filter(id=petid,dele=False,sale_out=False)[0]
             curtype = nest_pet.type
@@ -290,18 +220,7 @@ def buy_detail_adapter(re):
             n_days = now + delta
             appointdays.append({'day':n_days.day,'year':n_days.year,'mouth':n_days.month,'week':weeks[n_days.weekday()],'selectable':{'time1':True,'time2':True}})
         return {'cuser':cuser,'appointtime':__appointtime,'appointdays':appointdays,'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
-                'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy'}
-
-    elif 'range' in re.GET:
-        addresses = __addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
-        if 'city' in re.GET:
-            addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
-        if 'district' in re.GET:
-            addresses = addresses['sublist'][string.atoi(re.REQUEST.get('district'))]
-        arr = []
-        for address in addresses['sublist']:
-            arr.append({'id': address['index'], 'name': address['name']})
-        return {'locations': arr}
+                'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy','urls':'/buy/detail/'}
     else:
         return False
 
@@ -370,7 +289,6 @@ def get_waitpoint(_district):
                     if _district == district['name']:
                         return district['waitpoint']
 def buy_attention_adapter(req):
-    #try:
     if ('id' or 'name' or 'phone' or 'location' or 'time' or 'transportation') not in req.POST:
         return __errorcode__(7)
     petid = string.atoi(req.POST['id'])
@@ -414,11 +332,12 @@ def buy_attention_adapter(req):
         auth_user = None
         try:
             auth_user = User.objects.create_user(username=tel,email='',password='123456')
-            curuser =  user(nickname=name,tel=tel,location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
+            curuser =  user(nickname=name,tel=tel,location=(u'%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
             curuser.save()
         except:
             if auth_user:
                 auth_user.delete()
+            return __errorcode__(2)
         '''后续注册登录功能完成后，必须修改此处,目前只需要电话号码，不需要密码即可登录'''
         authuser = auth.authenticate(username=tel, password='123456')
         if authuser is not None and authuser.is_active:
@@ -426,7 +345,6 @@ def buy_attention_adapter(req):
             auth.login(req, authuser)
         else:
             return __errorcode__(1)
-    
     curuser = user.objects.get(auth_user=auth.get_user(req),dele=False)
     curuser.location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name']))
     curuser.save()
@@ -435,7 +353,7 @@ def buy_attention_adapter(req):
     if curattentions.count() == 0:
         curattentions = nestofpet_attention.objects.filter(nestofpet_id=cupet,user=curuser,dele=False)
         if curattentions.count() > 0:
-            return __errorcode__(1)
+            return __errorcode__(24)
         attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
         attention.save()
         id = attention.id
@@ -446,8 +364,6 @@ def buy_attention_adapter(req):
         id = curattentions[0].id
     return __errorcode__(0,{'id':id,'count':attentions.count(),'ordernum':'XL%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
-    #except Exception, e:
-        #traceback.print_exc()
 
 def get_knowledge_bringup(request):
     page = 0

@@ -11,7 +11,7 @@
         <ol class="breadcrumb">
           <li><a href="/home">首页</a></li>
           <li><a href="/buy">我要买狗</a></li>
-          <li class="active"><a href="/buy/?key={{ nestpet.farm.name }}">{{ nestpet.farm.name }}</a></li>
+          <li class="active"><a href="/buy/all/all/0/0/all/{{ nestpet.farm.name }}/1/">{{ nestpet.farm.name }}</a></li>
         </ol>
     </div>
     <div class="container content-container">
@@ -33,37 +33,6 @@
                     </div>
                     <a class="next-thumb" href="javascript:"><i class="icon icon-right-dir"></i></a>
                 </div>
-{#                <!-- JiaThis Button BEGIN -->#}
-{#                <div class="jiathis_style">#}
-{#                <a class="jiathis_button_qzone"></a>#}
-{#                <a class="jiathis_button_tsina"></a>#}
-{#                <a class="jiathis_button_renren"></a>#}
-{#                <a class="jiathis_button_cqq"></a>#}
-{#                <a class="jiathis_button_weixin"></a>#}
-{#                <a class="jiathis_button_douban"></a>#}
-{#                </div>#}
-{#                <script type="text/javascript" >#}
-{#                var jiathis_config={#}
-{#                    url:"chongwug.com",#}
-{#                    summary:"摘要",#}
-{#                    title:"标题 #微博话题#",#}
-{#                    pic:"http://chongwug-pic.b0.upaiyun.com/petpic/8172c56e-4398-11e4-adc8-d9400486119f.jpeg",#}
-{#                    ralateuid:{#}
-{#                        "tsina":"关注新浪ID"#}
-{#                    },#}
-{#                    appkey:{#}
-{#                        "tsina":"3677235683",#}
-{#                        "tqq":"CWu2zuJD94Zi3pcv",#}
-{#                        "t163":"网易key",#}
-{#                        "tsouhu":"搜狐key",#}
-{#                        "tpeople":"人民key"#}
-{#                    },#}
-{#                    shortUrl:true,#}
-{#                    hideMore:true#}
-{#                }#}
-{#                </script>#}
-{#                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>#}
-{#                <!-- JiaThis Button END -->#}
             </div>
             <div class="col-7">
                 <h1 class="cwg-detail-title">[{{ nestpet.farm.name }}] {{ nestpet.short_desc }}</h1>
@@ -216,7 +185,7 @@
                                             <p>月龄：{{ pet_img.pet.age }}个月</p>
                                             <p>价格：<span class="price price-light price-sm"><span class="price-symbol">&yen;</span>{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元</span></span></p>
                                             <p>
-                                                <a class="btn btn-primary btn-trans" href="/buy/detail/?petid={{ pet_img.pet.id }}" target="_blank">详细信息</a>
+                                                <a class="btn btn-primary btn-trans" href="{{ urls }}{{ pet_img.pet.id }}/" target="_blank">详细信息</a>
                                                 <button class="btn btn-primary btn-trans js-btn-order" data-id="{{ pet_img.pet.id }}" type="button">预约看狗</button>
                                             </p>
                                         </div>
@@ -252,11 +221,11 @@
             <h5><strong>热门犬种</strong></h5>
             {% for recommendpet_img in recommendpets_img %}
                 <div>
-                    <a href="?petid={{ recommendpet_img.pet.id }}">
+                    <a href="{{ urls }}{{ recommendpet_img.pet.id }}/">
                         <img class="img-full" src="{{ recommendpet_img.img.img_url }}" alt="{{ recommendpet_img.pet.farm.name }}-{{ recommendpet_img.pet.short_desc }}">
                     </a>
                     <div class="dog-desc">
-                        <h4><a href="?petid={{ recommendpet_img.pet.id }}">[{{ recommendpet_img.pet.farm.name }}] {{ recommendpet_img.pet.short_desc }}</a></h4>
+                        <h4><a href="{{ urls }}{{ recommendpet_img.pet.id }}/">[{{ recommendpet_img.pet.farm.name }}] {{ recommendpet_img.pet.short_desc }}</a></h4>
                         <p>
                             <span class="price price-primary price-xs"><span class="price-symbol">&yen;</span>{{ recommendpet_img.min_price }}-{{ recommendpet_img.max_price }}<span class="price-desc">元/只</span></span>
                         </p>
