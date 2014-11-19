@@ -4,7 +4,7 @@
 '''
 from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
-from customer.models import user,nestofpet_attention,smssend_countor
+from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
@@ -122,7 +122,9 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
                 epidemic_period = epidemic
                 break
         pets_imgs.append({'pet':pet_one,'img':petimg,'min_price':min_price,'max_price':max_price,'count':othor_pets.count(),'epidemic':epidemic_period})
-    
+    selectinfo = buyselectinfo(directkey=directkey,typekey=typekey,princekey=princekey,agekey=agekey,epidemickey=epidemickey,searchkey=searchkey,curpage=curpage)
+    selectinfo.save()
+    #分页实现
     startpos = (curpage - 1) * __onepageofdata__  
     endpos = startpos + __onepageofdata__  
     petscount = len(pets_imgs)
