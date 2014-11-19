@@ -332,13 +332,12 @@ def buy_attention_adapter(req):
         auth_user = None
         try:
             auth_user = User.objects.create_user(username=tel,email='',password='123456')
-            curuser =  user(nickname=name,tel=tel,location=(u'%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
+            curuser =  user(nickname=name,tel=tel,location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
             curuser.save()
         except:
             if auth_user:
                 auth_user.delete()
-            return __errorcode__(2)
-        '''后续注册登录功能完成后，必须修改此处,目前只需要电话号码，不需要密码即可登录'''
+        '''后续注册登录功能完成后，必须修改此处,目前只需要电话号码，不需要密码即可登录,如果用户已经存在，直接登录'''
         authuser = auth.authenticate(username=tel, password='123456')
         if authuser is not None and authuser.is_active:
             # Correct password, and the user is marked "active"
