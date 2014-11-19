@@ -1,21 +1,47 @@
+$carousel-padding-bottom: 40px;
+$indicator-color: #4c4c4c;
+
 .cwg-carousel{
-  position: relative;
   min-width: 1170px;
   max-width: 1920px;
   margin-left: auto;
   margin-right: auto;
-  overflow: hidden;
 
-  .carousel-inner{
-    margin-bottom: 40px;
+  padding-bottom: $carousel-padding-bottom;
+
+  .item{
+    min-height: 300px;
+    max-height: 500px;
+  }
+
+  img{
+    width: 100%;
   }
 
   .carousel-lace{
     position: absolute;
-    bottom: 40px;
+    bottom: $carousel-padding-bottom;
 
     height: 4px;
     width: 100%;
     background: url(../imgs/lace.png) 9px 0 repeat-x;
+  }
+
+  .carousel-indicators{
+    bottom: 0;
+    font-size: 0;
+
+    li{
+      border-color: $indicator-color;
+      width: 12px;
+      height: 12px;
+      vertical-align: middle;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .active{
+      background-color: $indicator-color;
+    }
   }
 }
