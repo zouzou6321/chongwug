@@ -2961,13 +2961,10 @@ Copyright (c) 2014 Daniel Eden
   top: 0;
   left: 10px;
   z-index: 11;
-  background-image: url(../imgs/sprites.png);
-  background-position: 0px -36px;
-  width: 60px;
-  height: 34px;
   color: #fff;
+  background-color: #ff3500;
   text-align: center;
-  padding-top: 5px; }
+  padding: 5px 15px; }
 
 .placard {
   display: inline-block;
