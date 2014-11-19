@@ -4732,7 +4732,8 @@ img.mfp-img {
  * Style trumps; helper and brand classes
 */
 .img-full {
-  width: 100%; }
+  width: 100%;
+  height: auto; }
 
 .margin-sm {
   margin-left: -10px;
