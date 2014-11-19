@@ -175,7 +175,7 @@ def buy_detail_adapter(re,petid):
         price['max_price'] = allpets.order_by('-price')[0].price
         
         '''获取本养殖场的所有宠物信息'''
-        farm_imgs = nest_pet.farm.pet_farm_img_set.filter(dele=False,img_usefor=__farmpictypes[1][1])[0:4]
+        farm_imgs = nest_pet.farm.pet_farm_img_set.filter(dele=False)[0:4]
         pets_img = []
         farm_pet_types = []
         farm_pets = nest_pet.farm.nestofpet_set.filter(dele=False,sale_out=False)
