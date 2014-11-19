@@ -79,7 +79,7 @@
         <div class="col-sm-4">
             <select name="province" id="farm-province" class="form-control">
             	{% for province in provinces %}
-                <option data-range="{{ province.rangeid }}" data-id="{{ province.id }}" value="{{ province.name }}">{{ province.name }}</option>
+                <option data-range="{{ province.rangeid }}" data-id="{{ province.id }}" value="{{ province.name }}"{% ifequal province.name manager.petfarm.province %} selected{% endifequal %}>{{ province.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -89,7 +89,7 @@
         <div class="col-sm-4">
             <select name="city" id="farm-city" class="form-control">
                 {% for city in citys %}
-                <option value="{{ city.name }}" data-id="{{ city.id }}">{{ city.name }}</option>
+                <option value="{{ city.name }}" data-id="{{ city.id }}"{% ifequal city.name manager.petfarm.city %} selected{% endifequal %}>{{ city.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -99,7 +99,7 @@
         <div class="col-sm-4">
             <select name="district" id="farm-district" class="form-control">
             	{% for district in districts %}
-                <option value="{{ district.name }}" data-id="{{ district.id }}">{{ district.name }}</option>
+                <option value="{{ district.name }}" data-id="{{ district.id }}"{% ifequal district.name manager.petfarm.district %} selected{% endifequal %}>{{ district.name }}</option>
                 {% endfor %}
             </select>
         </div>
