@@ -19,7 +19,7 @@
             <div class="col-5">
                 <a href="javascript:" class="cwg-thumb loading progressive">
                     <img src="{{ petimg_a.img_url }}!small" class="img-full img-small mfp-zoom" alt="{{ nestpet.farm.name }}-{{ nestpet.type }}-{{ nestpet.short_desc }}"/>
-                    <img src="{{ petimg_a.img_url }}" class="img-full img-original" alt="{{ nestpet.farm.name }}-{{ nestpet.type }}-{{ nestpet.short_desc }}"/>
+                    <img src="{{ petimg_a.img_url }}" class="img-full img-original mfp-zoom" alt="{{ nestpet.farm.name }}-{{ nestpet.type }}-{{ nestpet.short_desc }}"/>
                 </a>
                 <div class="cwg-dog-imgs">
                     <a class="prev-thumb" href="javascript:"><i class="icon icon-left-dir"></i></a>
@@ -301,7 +301,7 @@
         callback: function($curr){
             $thumb.find('.img-original').remove();
             $imgSmall.attr('src', $curr.find('img').attr('src'));
-            $('<img/>').addClass('img-full img-original').attr('src', $curr.data('src')).insertAfter($imgSmall);
+            $('<img/>').addClass('img-full img-original mfp-zoom').attr('src', $curr.data('src')).insertAfter($imgSmall);
         }
     });
 
