@@ -33,6 +33,14 @@ def sendSMS(telnum,SMScontent):
         return content
     return True
 
+class SubdomainMiddleware(object):
+    def process_request(self, request):
+        domain_parts = request.get_host().split('.')
+        if domain_parts[0] == 'm':
+            # 将subdomain的信息放到URI的第一层级
+            request.path_info = '/%s%s' % (domain_parts[0], request.path)
+        return None
+
 #重载CKEditorWidget,不要直接使用STATIC_URL作为目录，改成使用CKEDITOR_STATIC_URL
 class myCKEditorWidget(CKEditorWidget):
     """

@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 # admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'', include('customer.urls')),
+                       url(r'^m/',include('customer.murls')),
                        url(r'baidu_verify_NajFqKiOny\.html$', TemplateView.as_view(template_name='tpl/baidu_verify_NajFqKiOny.html')),
                        url(r'^ckeditor/', include('ckeditor.urls')),
                        url(r'^back_manage/', include('back_manager.urls')),
