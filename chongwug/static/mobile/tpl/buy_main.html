@@ -4,13 +4,13 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div data-role="header">
+<div data-role="header"  data-position="fixed">
   	<form action="/buy/" method="get" id="js-form">
 	    <input type="search"  id="js-key" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != 'all' %}value="{{ searchkey }}"{% endif %}>
 	</form>
 </div>
 <div data-role="content">
-	<fieldset data-role="controlgroup" data-type="horizontal">
+	<fieldset data-role="controlgroup">
 	    <select>
 	        {% if typekey == 'all'%}
 	        <option selected="selected"><a href="{{ urls.type_all_url }}">全部</a></option>
@@ -24,8 +24,7 @@
 	        <option><a href="{{ urls.url }}type={{ type }}">{{ type }}</a></option>
 	        {% endif %}
 	        {% endfor %}
-	    </select>
-	    <select>
+	    </select><select>
         	{% if princekey == '0'%}
             <option selected="selected"><a href="{{ urls.prince_all_url }}">全部</a></option>
             {% else %}
@@ -38,8 +37,7 @@
             <option><a href="{{ urls.url }}prince={{ prince.a }}">{{ prince.d }}</a></option>
             {% endif %}
             {% endfor %}
-	    </select>
-	    <select>
+	    </select><select>
         	{% if directkey == 'all'%}
             <option selected="selected"><a href="{{ urls.direct_all_url }}">全部</a></option>
             {% else %}
@@ -52,8 +50,7 @@
             <option><a href="{{ urls.url }}direct={{ direct }}">城{{ direct }}</a></option>
             {% endif %}
             {% endfor %}
-	    </select>
-		<select>
+	    </select><select>
         	{% if epidemickey == 'all'%}
             <option selected="selected"><a href="{{ urls.epidemic_all_url }}">全部</a></option>
             {% else %}
@@ -66,8 +63,7 @@
             <option><a href="{{ urls.url }}epidemic={{ epidemic }}">{{ epidemic }}</a></option>
             {% endif %}
             {% endfor %}
-	    </select>
-		<select>
+	    </select><select>
         	{% if agekey == '0'%}
             <option selected="selected"><a href="{{ urls.age_all_url }}">全部</a></option>
             {% else %}
@@ -83,15 +79,13 @@
 	    </select>
 	</fieldset>
 	<ul data-role="listview" data-inset="true">
-		{% for pet_img in pets_imgs %}
-	    <li><a href="detail/?petid={{pet_img.pet.id}}">
-	        <img src="{{ pet_img.img.img_url }}">
-	    <h2>[{{ pet_img.pet.farm.name }}]{{ pet_img.pet.type }}</h2>
-	    <p>{{ pet_img.pet.short_desc }}</p>
-		<p>{{ pet_img.min_price }}元-{{ pet_img.max_price }}元</p>
-		</a>
-	    </li>
-		{% endfor %}
+		{% for pet_img in pets_imgs %}<li>
+		<a href="detail/?petid={{pet_img.pet.id}}">
+		<img src="{{ pet_img.img.img_url }}">
+		<h2>[{{ pet_img.pet.farm.name }}]{{ pet_img.pet.type }}</h2>
+		<p>{{ pet_img.pet.short_desc }}</p>
+	<p>{{ pet_img.min_price }}元-{{ pet_img.max_price }}元</p>
+		</a></li>{% endfor %}
 	</ul>
 </div>
 
