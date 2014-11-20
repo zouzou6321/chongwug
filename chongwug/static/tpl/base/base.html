@@ -80,6 +80,20 @@
                 ga('send', 'exception', { 'exDescription': desc });
             }catch(e){}
         }
+
+        $('.js-statistics').on('click', '.js-statistics-item', function(){
+            var $this = $(this),
+                data = $this.data();
+
+            data.action = data.action || 'click';
+            data.label = data.label || $.trim($this.text()) || $this.attr('href');
+            data.value = data.value || 1;
+
+            try{
+                ga('send', 'event', data.category, data.action, data.label, data.value);
+                _hmt.push(['_trackEvent', data.category, data.action, data.label, data.value]);
+            }catch(e){}
+        });
     }
 </script>
 
