@@ -5,7 +5,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 import adapters,traceback
 from petlife.commom import __errorcode__
 from django.template import RequestContext
-from petlife.config import __petcolors,__pettypes
+from petlife.config import __pettypes
 CURRENT_NAME = 'petmicro'
 def home(req):
     if adapters.authcheck(req):
@@ -13,7 +13,6 @@ def home(req):
             return HttpResponse(adapters.home(req))
         data = {}
         data['types'] = __pettypes
-        data['colors'] = __petcolors
         return render_to_response('%s/tpl/home.html' % CURRENT_NAME,data)
     else:
         if req.method == 'POST':
