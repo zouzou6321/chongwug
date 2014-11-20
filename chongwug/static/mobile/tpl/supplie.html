@@ -1,13 +1,28 @@
-{% extends 'tpl/base/base.html' %}
-{% load assets %}
+{% extends 'mobile/tpl/base/base.html' %}
+{% load mobile %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
 
+<ul data-role="listview" data-inset="true" data-divider-theme="a">
+    {% for supplie in supplies %}
+        {% ifequal supplie.type '必备用品' %}
+        <li data-role="list-divider">{{ supplie.type }}</li>
+        <li>
+            <a href="{{ supplie.tar_url }}" target="_blank">
+                <img src="{{ supplie.img_url }}" alt="{{ supplie.title }}"/>
+                <h3>{{ supplie.title }}</h3>
+                <p>{{ supplie.price }}</p>
+            </a>
+        </li>
+        {% endifequal %}
+    {% endfor %}
+</ul>
+
 <div class="supplies">
     <div class="supplies-banner">
-        <img src="{{ 'imgs/supplies-banner.jpg'|assets }}"/>
+        <img src="{{ 'imgs/supplies-banner.jpg'|mobile }}"/>
     </div>
     <div class="supplies-necessary">
         <div class="supplies-container">
@@ -17,7 +32,7 @@
             	{% ifequal supplie.type '必备用品' %}
                 <div class="supplies-item">
                     <a href="{{ supplie.tar_url }}" target="_blank">
-                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
+                        <img src="{{ 'imgs/loading.gif'|mobile }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
                     </a>
                     <div class="media">
                         <div class="media-left">
@@ -48,7 +63,7 @@
             	{% ifequal supplie.type '生活用品' %}
                 <div class="supplies-item">
                     <a href="{{ supplie.tar_url }}" target="_blank">
-                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
+                        <img src="{{ 'imgs/loading.gif'|mobile }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
                     </a>
                     <div class="media">
                         <div class="media-left">
@@ -79,7 +94,7 @@
             	{% ifequal supplie.type '保健医疗' %}
                 <div class="supplies-item">
                     <a href="{{ supplie.tar_url }}" target="_blank">
-                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
+                        <img src="{{ 'imgs/loading.gif'|mobile }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
                     </a>
                     <div class="media">
                         <div class="media-left">
@@ -110,7 +125,7 @@
             	{% ifequal supplie.type '清洁卫生' %}
                 <div class="supplies-item">
                     <a href="{{ supplie.tar_url }}" target="_blank">
-                        <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
+                        <img src="{{ 'imgs/loading.gif'|mobile }}" data-original="{{ supplie.img_url }}" class="js-lazy"/>
                     </a>
                     <div class="media">
                         <div class="media-left">
