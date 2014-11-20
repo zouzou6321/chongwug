@@ -36,7 +36,7 @@ def sendSMS(telnum,SMScontent):
 class SubdomainMiddleware(object):
     def process_request(self, request):
         domain_parts = request.get_host().split('.')
-        if len(domain_parts) == 3:
+        if domain_parts[0] == 'm':
             # 将subdomain的信息放到URI的第一层级
             request.path_info = '/%s%s' % (domain_parts[0], request.path)
         return None
