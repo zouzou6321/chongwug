@@ -43,7 +43,7 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
         if pic_dir == settings.PET_FARM_PIC_ROOT:
             res = up.put(file_path_name, f, checksum=False)
         else:
-            res = up.put(file_path_name, f, checksum=False,headers={"x-gmkerl-thumbnail": "pnp"})
+            res = up.put(file_path_name, f, checksum=False)#,headers={"x-gmkerl-thumbnail": "pnp"})
     #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 
     #删除服务器本地缓存的图片
     os.remove(name)
