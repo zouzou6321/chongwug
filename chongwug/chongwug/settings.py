@@ -206,6 +206,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'chongwug.commom.SubdomainMiddleware',
     'django.middleware.common.CommonMiddleware',
     'chongwug.mysessionmiddleware.mySessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

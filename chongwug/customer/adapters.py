@@ -15,8 +15,8 @@ from django.contrib import auth
 import traceback
 
 def is_wap(request):
-    #if request.META['HTTP_ACCEPT'].find('wap') == -1:
-        #return False
+    if request.path_info.find('/m/') == 0:
+        return True
     return False
 
 '''
