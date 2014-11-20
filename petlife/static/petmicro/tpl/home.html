@@ -87,11 +87,7 @@
 			</div>
 			<label class="col-3 control-label" for="petcolor">颜色:</label>
 			<div class="col-3">
-				<select class="form-control required" id="petcolor" name="petcolor" >
-					{% for color in colors %}
-                    <option value="{{ color }}">{{ color }}</option>
-                    {% endfor %}
-                </select>
+			    <input type="text" class="form-control required" id="petcolor" name="petcolor" />
                 <span class="warn">*</span>
 			</div>
 		</div>
