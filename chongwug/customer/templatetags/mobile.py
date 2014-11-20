@@ -41,6 +41,6 @@ def mobile(value):
         except:
             path = value
 
-        return cdn + 'mobile/' + production + '/' + path
+        return cdn + '/mobile' + production + '/' + path
     else:
         return '/static/mobile/assets/' + value
