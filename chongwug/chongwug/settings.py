@@ -59,7 +59,7 @@ elif 'TEST_SERVER' in os.environ:
     
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
-    ALLOWED_HOSTS = ['.cwg.com','.cwg.com.']
+    ALLOWED_HOSTS = ['.cwg.com','.cwg.com.','192.168.1.100','192.168.1.100.']
     
     STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
     # URL prefix for static files.
