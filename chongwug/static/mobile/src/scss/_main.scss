@@ -10,7 +10,7 @@
 /**
  * Base styles; unclassed HTML elements etc.
  */
-
+@import "base/grid";
 
 
 
@@ -27,7 +27,8 @@
 /**
  * gui
 */
-@import "gui/scooch";
+@import "gui/common";
+
 
 
 

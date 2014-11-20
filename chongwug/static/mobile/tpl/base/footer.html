@@ -1,14 +1,22 @@
-{% load mobile %}
-{% if page != 'home' %}
-{% endif %}
-<div data-role="footer" data-position="fixed">
-   <div data-role="navbar">
-      <ul>
-        <li><a href="/home/" data-icon="home">首页</a></li>
-        <li><a href="/buy/" data-icon="arrow-r">我要买狗</a></li>
-        <li><a href="/supllie/" data-icon="search">宠物用品</a></li>
-        <li><a href="/knowledge/buy/" data-icon="arrow-r">购犬须知</a></li>
-        <li><a href="/knowledge/bringup/" data-icon="search">养犬必知</a></li>
-      </ul>
-    </div>
-  </div>
+<nav class="bar bar-tab">
+  <a class="tab-item active" href="/m/home/">
+    <span class="icon icon-home"></span>
+    <span class="tab-label">首页</span>
+  </a>
+  <a class="tab-item" href="/m/buy/">
+    <span class="icon icon-person"></span>
+    <span class="tab-label">我要买狗</span>
+  </a>
+  <a class="tab-item" href="/m/supplie/">
+    <span class="icon icon-star-filled"></span>
+    <span class="tab-label">宠物用品</span>
+  </a>
+  <a class="tab-item" href="/m/knowledge/buy/">
+    <span class="icon icon-search"></span>
+    <span class="tab-label">购犬须知</span>
+  </a>
+  <a class="tab-item" href="/m/knowledge/bringup/">
+    <span class="icon icon-gear"></span>
+    <span class="tab-label">养犬必知</span>
+  </a>
+</nav>

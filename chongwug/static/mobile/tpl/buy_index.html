@@ -4,50 +4,25 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ 'css/cwg.css'|mobile }}"/>
-
-<div data-role="page">
-    <div class="m-scooch m-fluid m-scooch-photos">
-      <div class="m-scooch-inner">
-          {% for ad in ads %}
-          <div class="m-item">
-              <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}" /></a>
-          </div>
-          {% endfor %}
-      </div>
-      <div class="m-scooch-controls m-scooch-bulleted">
-        <a href="javascript:" data-m-slide="1">1</a>
-        <a href="javascript:" data-m-slide="2">2</a>
-      </div>
-    </div>
-    <div class="ui-content">
-        <ul data-role="listview" data-inset="true">
-            {% for direct_farm in direct_farms %}
-            <li>
-                <a href="/buy/?direct={{ direct_farm.direct }}">
-                    <img src="{{ direct_farm.pic.img_url }}" alt="城{{ direct_farm.direct }}犬舍">
-                    <h2>城{{ direct_farm.direct }}犬舍</h2>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div data-role="footer" data-position="fixed">
-       <div data-role="navbar">
-          <ul>
-            <li><a href="/home/" data-icon="home" class="ui-btn-active">首页</a></li>
-            <li><a href="/buy/" data-icon="arrow-r">我要买狗</a></li>
-            <li><a href="/supllie/" data-icon="search">宠物用品</a></li>
-            <li><a href="/knowledge/buy/" data-icon="arrow-r">购犬须知</a></li>
-            <li><a href="/knowledge/bringup/" data-icon="search">养犬必知</a></li>
-          </ul>
+<div class="content content-common">
+    <div class="slider">
+      <div class="slide-group">
+        {% for ad in ads %}
+        <div class="slide">
+            <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}"></a>
         </div>
+        {% endfor %}
       </div>
     </div>
-{% endblock %}
-{% block scripts %}
-<script src="{{ 'js/lib/scooch.js'|mobile }}"></script>
-<script>
-$('.m-scooch').scooch();
-</script>
+    <ul class="table-view">
+      {% for direct_farm in direct_farms %}
+      <li class="table-view-cell">
+        <a class="navigate-right" href="/buy/{{ direct_farm.direct }}/all/0/0/all/all/1/">
+          <h3>城{{ direct_farm.direct }}犬舍</h3>
+          <img class="" src="{{ direct_farm.pic.img_url }}">
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+</div>
 {% endblock %}

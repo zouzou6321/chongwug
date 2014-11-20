@@ -1,7 +1,7 @@
 {
      "modals": true
     ,"popovers": true
-    ,"push": true
+    ,"push": false
     ,"segmented-controllers": true
     ,"sliders": true
     ,"toggles": true

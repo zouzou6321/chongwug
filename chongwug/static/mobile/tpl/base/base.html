@@ -4,32 +4,22 @@
 <head>
     {% include 'mobile/tpl/base/meta.html' %}
 	<title>{% block title %}{% endblock %} - 宠物购</title>
-	<link rel="stylesheet" href="{{ 'css/jquery.mobile-1.4.5.min.css'|mobile }}">
+	<link rel="stylesheet" href="{{ 'css/cwg.css'|mobile }}">
 </head>
 <body {% block bodyhook %}{% endblock %}>
-<div data-role="page">
+
 {% block header %}
     {% include 'mobile/tpl/base/header.html' %}
 {% endblock %}
 
 {% block content %}{% endblock %}
 
-<script src="{{ 'js/lib/jquery.js'|mobile }}"></script>
-<script src="{{ 'js/jquery.mobile-1.4.5.min.js'|mobile }}"></script>
+<script src="{{ 'js/lib/ratchet.js'|mobile }}"></script>
 {% block scripts %}{% endblock %}
 
 {% block footer %}
     {% include 'mobile/tpl/base/footer.html' %}
 {% endblock %}
-
-</div>
-<script type="text/javascript">
-    //<!--统计代码-->
-    if(window.location.hostname === 'chongwug.com'){
-        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fddd73710a5679013c750d68e5c7efa37' type='text/javascript'%3E%3C/script%3E"));
-    }
-</script>
 
 </body>
 </html>

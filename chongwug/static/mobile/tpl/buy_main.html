@@ -1,108 +1,34 @@
 {% extends 'mobile/tpl/base/base.html' %}
-{% load assets %}
 {% load mobile %}
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div data-role="header"  data-position="fixed">
-  	<form action="/buy/" method="get" id="js-form">
-	    <input type="search"  id="js-key" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != 'all' %}value="{{ searchkey }}"{% endif %}>
-	</form>
-</div>
-<div data-role="content">
-	<fieldset data-role="controlgroup">
-	    <select>
-	        {% if typekey == 'all'%}
-	        <option selected="selected"><a href="{{ urls.type_all_url }}">全部</a></option>
-	        {% else %}
-	        <option><a href="{{ urls.type_all_url }}">全部</a></option>
-	        {% endif %}
-	        {% for type in types %}
-	        {% if type == typekey %}
-	        <option selected="selected"><a href="{{ urls.url }}type={{ type }}">{{ type }}</a></option>
-	        {% else %}
-	        <option><a href="{{ urls.url }}type={{ type }}">{{ type }}</a></option>
-	        {% endif %}
-	        {% endfor %}
-	    </select><select>
-        	{% if princekey == '0'%}
-            <option selected="selected"><a href="{{ urls.prince_all_url }}">全部</a></option>
-            {% else %}
-            <option><a href="{{ urls.prince_all_url }}">全部</a></li>
-            {% endif %}
-            {% for prince in princes %}
-            {% if prince.a == princekey %}
-            <option selected="selected"><a href="{{ urls.url }}prince={{ prince.a }}">{{ prince.d }}</a></option>
-            {% else %}
-            <option><a href="{{ urls.url }}prince={{ prince.a }}">{{ prince.d }}</a></option>
-            {% endif %}
-            {% endfor %}
-	    </select><select>
-        	{% if directkey == 'all'%}
-            <option selected="selected"><a href="{{ urls.direct_all_url }}">全部</a></option>
-            {% else %}
-            <option><a href="{{ urls.direct_all_url }}">全部</a></option>
-            {% endif %}
-            {% for direct in directs %}
-            {% if direct == directkey %}
-            <option selected="selected"><a href="{{ urls.url }}direct={{ direct }}">城{{ direct }}</a></option>
-            {% else %}
-            <option><a href="{{ urls.url }}direct={{ direct }}">城{{ direct }}</a></option>
-            {% endif %}
-            {% endfor %}
-	    </select><select>
-        	{% if epidemickey == 'all'%}
-            <option selected="selected"><a href="{{ urls.epidemic_all_url }}">全部</a></option>
-            {% else %}
-            <option><a href="{{ urls.epidemic_all_url }}">全部</a></option>
-            {% endif %}
-            {% for epidemic in epidemics %}
-            {% if epidemic == epidemickey %}
-            <option selected="selected"><a href="{{ urls.url }}epidemic={{ epidemic }}">{{ epidemic }}</a></option>
-            {% else %}
-            <option><a href="{{ urls.url }}epidemic={{ epidemic }}">{{ epidemic }}</a></option>
-            {% endif %}
-            {% endfor %}
-	    </select><select>
-        	{% if agekey == '0'%}
-            <option selected="selected"><a href="{{ urls.age_all_url }}">全部</a></option>
-            {% else %}
-            <option><a href="{{ urls.age_all_url }}">全部</a></option>
-            {% endif %}
-            {% for age in ages %}
-            {% if age.a == agekey %}
-            <option selected="selected"><a href="{{ urls.url }}age={{ age.a }}">{{ age.d }}</a></option>
-            {% else %}
-            <option><a href="{{ urls.url }}age={{ age.a }}">{{ age.d }}</a></option>
-            {% endif %}
-            {% endfor %}
-	    </select>
-	</fieldset>
-	<ul data-role="listview" data-inset="true">
-		{% for pet_img in pets_imgs %}<li>
-		<a href="detail/?petid={{pet_img.pet.id}}">
-		<img src="{{ pet_img.img.img_url }}">
-		<h2>[{{ pet_img.pet.farm.name }}]{{ pet_img.pet.type }}</h2>
-		<p>{{ pet_img.pet.short_desc }}</p>
-	<p>{{ pet_img.min_price }}元-{{ pet_img.max_price }}元</p>
-		</a></li>{% endfor %}
-	</ul>
+<div class="content content-common">
+    <form class="row">
+      <div class="col col-three-quarters">
+          <input type="search" placeholder="Search">
+      </div>
+      <div class="col col-quarter">
+          <button class="btn btn-outlined">搜索</button>
+      </div>
+    </form>
+    {% if pets_imgs%}
+    <ul class="table-view">
+      {% for pet_img in pets_imgs %}
+      <li class="table-view-cell media">
+        <a class="navigate-right">
+          <img class="media-object pull-left" src="{{ pet_img.img.img_url }}!small" width="60">
+          <div class="media-body">
+            <strong>[{{ pet_img.pet.farm.name }}]</strong> {{ pet_img.pet.short_desc }}
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>没有找到符合条件的宠物</p>
+    {% endif %}
 </div>
 
-{% endblock %}
 
-{% block scripts %}
-<script>
-(function(){
-    var $form = $('#js-form'),
-        $key = $form.find('#js-key');
-
-    $form.on('submit', function(e){
-        if($.trim($key.val()) == ''){
-            $key.focus();
-            e.preventDefault();
-        }
-    });
-}());
-</script>
 {% endblock %}
