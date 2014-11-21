@@ -4,12 +4,12 @@
 '''
 from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
-from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo
+from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders,pviptongji,adclicktongji
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
 import datetime,string,re,json
-from chongwug.commom import __errorcode__,sendSMS
+from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.contrib.auth.models import User
 from django.contrib import auth
 import traceback
@@ -19,6 +19,18 @@ def is_wap(request):
         return True
     return False
 
+def PVIPtongji(request):
+    pvip = pviptongji( ip = request.META['REMOTE_ADDR'],
+                pageuri = request.path_info,
+                browser = request.META['HTTP_USER_AGENT'])
+    pvip.save()
+
+def ADclicktongji(request):
+    adclick = adclicktongji( ip = request.META['REMOTE_ADDR'],
+                tarurl = request.REQUEST.get('tarurl'),
+                browser = request.META['HTTP_USER_AGENT'])
+    adclick.save()
+    return __errorcode__(0)
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
@@ -229,7 +241,10 @@ def buy_detail_adapter(re,petid):
 def attention_sendsms(req):
     if not req.user.is_authenticated():
             return __errorcode__(1)
-    attention = nestofpet_attention.objects.get(id=req.REQUEST.get('id'),attention_type=1,dele=False)
+    try:
+        attention = nestofpet_attention.objects.get(id=req.REQUEST.get('id'),attention_type=1,dele=False)
+    except:
+        return __errorcode__(2)
     cur_user = user.objects.get(auth_user=auth.get_user(req),dele=False)
     if attention.user.id != cur_user.id:
         return __errorcode__(2)
@@ -268,24 +283,46 @@ def attention_sendsms(req):
     sendSMS(attention.user.tel,content)
     return __errorcode__(0)
 
+from chongwug.settings import ALIPAY
+def alipay_notify(req):
+    params = {u'seller_email': req.POST['seller_email'], u'sign': req.POST['sign'], 
+            u'subject': req.POST['subject'], u'is_total_fee_adjust': req.POST['is_total_fee_adjust'], 
+            u'gmt_create': req.POST['gmt_create'], u'out_trade_no': req.POST['out_trade_no'], u'sign_type': req.POST['sign_type'], 
+            u'price': req.POST['price'], u'buyer_email': req.POST['buyer_email'], u'discount': req.POST['discount'], 
+            u'trade_status': req.POST['trade_status'], u'gmt_payment': req.POST['gmt_payment'], u'trade_no': req.POST['trade_no'],
+             u'seller_id': req.POST['seller_id'], u'use_coupon': req.POST['use_coupon'], u'payment_type': req.POST['payment_type'], 
+             u'total_fee': req.POST['total_fee'],u'notify_time': req.POST['notify_time'], u'buyer_id': req.POST['buyer_id'], 
+              u'notify_id': req.POST['notify_id'], u'notify_type': req.POST['notify_type'], u'quantity': req.POST['quantity']}
+    if ALIPAY.verify_notify(**params):
+        order = appointorders.objects.get(orderno=req.POST['out_trade_no'],dele=False)
+        # this is a valid notify, code business logic here
+        attention = order.attention
+        attention.attention_type = 1
+        attention.save()
+        order.status = u'客户已经付款成功'
+        order.save()
+        farmuser = user.objects.get(petfarm=attention.nestofpet_id.farm,dele=False,type=1)
+        pets = pet.objects.filter(nestofpet=attention.nestofpet_id,dele=False)
+        min_price = pets.order_by('price')[0].price
+        max_price = pets.order_by('-price')[0].price
+        content = u"【宠物购】接生意了！ 订单信息：%s将于%s年%s月%s日%s时%s分前往贵犬舍挑选:%s，他/她看中的窝号为%s，价格区间为%s-%s。 稍后宠物购工作人员将会电话与您确认，请保持您所预留的手机/电话畅通！" % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day,
+                    attention.appoint_time.hour, attention.appoint_time.minute, attention.nestofpet_id.type, attention.nestofpet_id.num,min_price,max_price)
+        sendSMS(farmuser.tel,content)
+        return 'success'
+    return 'fail'
+
 def buy_attention_sure(req):
     if 'id' not in req.GET:
         return __errorcode__(7)
     if not req.user.is_authenticated():
-            return __errorcode__(1)
-    attention = nestofpet_attention.objects.get(id=req.REQUEST.get('id'),attention_type=0,dele=False)
+            return __errorcode__(2)
+    attention = nestofpet_attention.objects.get(id=req.REQUEST.get('id'),dele=False)
     cur_user = user.objects.get(auth_user=auth.get_user(req),dele=False)
     if attention.user.id != cur_user.id:
         return __errorcode__(2)
-    attention.attention_type = 1
-    attention.save()
-    farmuser = user.objects.get(petfarm=attention.nestofpet_id.farm,dele=False,type=1)
-    pets = pet.objects.filter(nestofpet=attention.nestofpet_id,dele=False)
-    min_price = pets.order_by('price')[0].price
-    max_price = pets.order_by('-price')[0].price
-    content = u"【宠物购】接生意了！ 订单信息：%s将于%s年%s月%s日%s时%s分前往贵犬舍挑选:%s，他/她看中的窝号为%s，价格区间为%s-%s。 稍后宠物购工作人员将会电话与您确认，请保持您所预留的手机/电话畅通！" % (attention.user.nickname, attention.appoint_time.year, attention.appoint_time.month, attention.appoint_time.day,
-                attention.appoint_time.hour, attention.appoint_time.minute, attention.nestofpet_id.type, attention.nestofpet_id.num,min_price,max_price)
-    sendSMS(farmuser.tel,content)
+    print attention.attention_type
+    if attention.attention_type == '0':
+        return __errorcode__(1)
     return __errorcode__(0)
 
 def get_waitpoint(_district):
@@ -362,14 +399,19 @@ def buy_attention_adapter(req):
             return __errorcode__(24)
         attention = nestofpet_attention(nestofpet_id=cupet,user=curuser,appoint_time=appoint_time,trans=transport)
         attention.save()
-        id = attention.id
     else:
         curattentions[0].appoint_time = appoint_time
         curattentions[0].trans = transport
         curattentions[0].save()
-        id = curattentions[0].id
-    return __errorcode__(0,{'id':id,'count':attentions.count(),'ordernum':'C%d' % attentions.count(),'waittime':req.POST['time'],
-                            'waitpoint':waitpoint,'pay':totalpay,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
+        attention = curattentions[0]
+    now = datetime.datetime.now()
+    order = appointorders(attention=attention)
+    order.save()
+    order.orderno = '%s%s%s%d' % (now.year, now.month, now.day, order.id % 10000)
+    order.save()
+    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee=str(totalpay), notify_url='www.chongwug.com/buy/detail/attention/alipay/notify/')
+    return __errorcode__(0,{'id':attention.id,'count':attentions.count(),'ordernum':'C%d' % attentions.count(),'waittime':req.POST['time'],
+                            'waitpoint':waitpoint,'alipayurl':alipayurl,'pay':totalpay,'orderno':order.orderno,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
 
 def get_knowledge_bringup(request):
     page = 0

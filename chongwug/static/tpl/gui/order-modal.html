@@ -1,5 +1,5 @@
-<div class="modal fade" id="js-order-modal" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog">
+<div class="modal fade vertical-center" id="js-order-modal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog vertical-content" style="margin: 0;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
@@ -10,7 +10,7 @@
           <div class="tab-pane active" id="js-order-info">
             <div class="modal-body">
               <form class="form-horizontal" id="js-order-form">
-                {% csrf_token %}
+{#                {% csrf_token %}#}
                 <p class="text-muted">请如实填写信息，我们将尽快与您联系：</p>
                 <div class="form-group">
                     <label for="name" class="col-4 control-label text-muted">您的名字：</label>
@@ -64,7 +64,7 @@
               </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default prev-step" data-dismiss="modal">取消</a>
+                <button class="btn btn-default prev-step" data-dismiss="modal">取消</button>
                 <button class="btn btn-primary next-step" href="#js-order-confirm" data-loading-text="正在提交...">下一步</button>
             </div>
           </div>
@@ -77,24 +77,12 @@
                               <span id="js-other-order" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
-{#                      <div class="form-group">#}
-{#                          <label class="col-4 text-right text-muted">已预约用户看犬时间：</label>#}
-{#                          <div class="col-6">#}
-{#                              <span id="js-other-time" class="js-need-reset" data-text=""></span>#}
-{#                          </div>#}
-{#                      </div>#}
                       <div class="form-group">
                           <label class="col-4 text-right text-muted">您的排队号：</label>
                           <div class="col-6">
                               <span id="js-queue-num" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
-{#                      <div class="form-group">#}
-{#                          <label class="col-4 text-right text-muted">用户编号：</label>#}
-{#                          <div class="col-6">#}
-{#                              <span id="js-order-num" class="js-need-reset" data-text=""></span>#}
-{#                          </div>#}
-{#                      </div>#}
                       {% include 'tpl/components/agreement.html' %}
                       <div class="form-group">
                           <div class="col-6 col-offset-1">
@@ -114,8 +102,8 @@
                   </div>
               </div>
               <div class="modal-footer">
-                <a class="btn btn-default prev-step" href="#js-order-info" data-toggle="tab" id="js-to-first">上一步</a>
-                <a class="btn btn-primary next-step" href="#js-order-pay" {# data-toggle="tab" #} data-loading-text="正在提交...">确认预约</a>
+                <button class="btn btn-default prev-step" href="#js-order-info" data-toggle="tab" id="js-to-first">上一步</button>
+                <button class="btn btn-primary next-step" href="#js-order-pay" data-toggle="tab">确认预约</button>
               </div>
           </div>
           <div class="tab-pane" id="js-order-pay">
@@ -124,30 +112,31 @@
                       <div class="form-group">
                           <label class="col-4 text-right text-muted">犬舍位置：</label>
                           <div class="col-6">
-                              <span id="js-kennel-location" class="js-need-reset" data-text=""></span>
+                              <span class="js-need-reset js-kennel-location" data-text=""></span>
                           </div>
                       </div>
                       <div class="form-group">
                           <label class="col-4 text-right text-muted">等待接送地点：</label>
                           <div class="col-6">
-                              <span id="js-wait-location" class="js-need-reset" data-text=""></span>
+                              <span class="js-need-reset js-wait-location" data-text=""></span>
                           </div>
                       </div>
                       <div class="form-group">
                           <label class="col-4 text-right text-muted">等待接送时间：</label>
                           <div class="col-6">
-                              <span id="js-wait-time" class="js-need-reset" data-text=""></span>
+                              <span class="js-need-reset js-wait-time" data-text=""></span>
                           </div>
                       </div>
-{#                      <div class="form-group">#}
-{#                          <label class="col-4 text-right text-muted"><span id="js-charge-type" class="js-need-reset" data-text="交通费">交通费</span>：</label>#}
-{#                          <div class="col-6">#}
-{#                              <span id="js-service-charge" class="js-need-reset" data-text=""></span>#}
-{#                          </div>#}
-{#                      </div>#}
                       <div class="form-group">
-                          <div class="col-6 col-offset-4">
-                              <button type="button" class="btn btn-primary" id="js-send-message" data-delay="60">发送到手机</button>
+                          <label class="col-4 text-right text-muted"><span id="js-charge-type" class="js-need-reset" data-text="交通费">交通费</span>：</label>
+                          <div class="col-6">
+                              <span id="js-service-charge" class="js-need-reset" data-text=""></span>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-4 text-right text-muted">订单号：</label>
+                          <div class="col-6">
+                              <span id="js-charge-num" class="js-need-reset" data-text=""></span>
                           </div>
                       </div>
                       <div class="form-group">
@@ -155,15 +144,57 @@
                               <i class="icon icon-attention-circled tips-icon"></i>
                               <p class="tips-content text-muted">
                                   提示：您需要在等待接送时间之前赶到等待接送地点，我们的工作人员会在此等候您，并接送或带领您去预约犬舍挑选、购买狗狗！我们会准时发车，请您务必在指定接送时间前到达指定接送地点集合！
-{#                                  购犬成功后，将返还交通费给您！#}
+                                  购犬成功后，将返还交通费给您！
                               </p>
                           </div>
                       </div>
                   </div>
               </div>
               <div class="modal-footer">
-{#                <a class="btn btn-default prev-step" href="#js-order-confirm" data-toggle="tab">上一步</a>#}
-                <a class="btn btn-primary next-step" data-dismiss="modal">确定</a>
+                <button class="hide" href="#js-order-pay-status" data-toggle="tab" id="js-to-status"></button>
+                <button class="btn btn-default prev-step" href="#js-order-confirm" data-toggle="tab">上一步</button>
+                <a class="btn btn-primary next-step js-pay-link" target="_blank">去付款</a>
+              </div>
+          </div>
+          <div class="tab-pane" id="js-order-pay-status">
+              <div class="modal-body">
+                <div class="row" style="padding: 50px 0;">
+                    <div class="col-6">
+                        <button class="btn btn-primary btn-block" type="button" data-toggle="tab" href="#js-order-success" id="js-to-success" data-loading-text="正在确认...">付款完成</button>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-primary btn-block js-pay-link" target="_blank">再次支付</a>
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="tab-pane" id="js-order-success">
+              <div class="modal-body">
+                  <div class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-4 text-right text-muted">犬舍位置：</label>
+                          <div class="col-6">
+                              <span class="js-kennel-location js-need-reset" data-text=""></span>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-4 text-right text-muted">等待接送地点：</label>
+                          <div class="col-6">
+                              <span class="js-wait-location js-need-reset" data-text=""></span>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-4 text-right text-muted">等待接送时间：</label>
+                          <div class="col-6">
+                              <span class="js-need-reset js-wait-time" data-text=""></span>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-6 col-offset-4">
+                              <button type="button" class="btn btn-primary" id="js-send-message" data-delay="60">发送到手机</button>
+                          </div>
+                      </div>
+                  </div>
               </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ urlpatterns = patterns(
                        url(r'^buy/detail/$','buy_detail_view'),
                        url(r'^buy/detail/(?P<petid>\d+)/$','buy_detail_view'),
                        url(r'^buy/detail/attention/$','buy_attention_view'),
+                       url(r'^buy/detail/attention/alipay/notify/$','buy_order_notify_view'),
                        url(r'^buy/detail/attention/sendsms/$','buy_attention_sendsms_view'),
                        url(r'^knowledge/buy/$','knowledge_buy_view'),
                        url(r'^knowledge/bringup/$','knowledge_bringup_view'),
@@ -17,4 +18,5 @@ urlpatterns = patterns(
                        url(r'^aboutus/$','aboutus_view'),
                        url(r'^workchance/$','workchance_view'),
                        url(r'^contactus/$','contactus_view'),
+                       url(r'^tarurl/click/$','adclicktongji_view'),
                        )

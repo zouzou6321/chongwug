@@ -17,6 +17,7 @@
     "jquery.lazyload": true,
     "template": true,
     "jquery.validate": true,
+    "jquery.cookie": true,
     "waypoints": true,
     "waypoints-infinite": true,
     "jquery.scrollUp": true
