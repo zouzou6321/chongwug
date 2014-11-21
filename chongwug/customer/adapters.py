@@ -285,7 +285,7 @@ def alipay_notify(req):
                     fail_silently=False,  
                     connection=None  
                 )
-    if Alipay.verify_notify(req.params):
+    if Alipay.verify_notify(req.POST):
         order = appointorders.objects.filter(orderno=req.POST['out_trade_no'],dele=False)
         # this is a valid notify, code business logic here
         attention = order.attention
