@@ -21,14 +21,12 @@ def is_wap(request):
 
 def PVIPtongji(request):
     pvip = pviptongji( ip = request.META['REMOTE_ADDR'],
-                port = request.META['REMOTE_PORT'],
                 pageuri = request.META['REQUEST_URI'],
                 browser = request.META['HTTP_USER_AGENT'])
     pvip.save()
 
 def ADclicktongji(request):
     adclick = adclicktongji( ip = request.META['REMOTE_ADDR'],
-                port = request.META['REMOTE_PORT'],
                 tarurl = request.REQUEST.get('tarurl'),
                 browser = request.META['HTTP_USER_AGENT'])
     adclick.save()
