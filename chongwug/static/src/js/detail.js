@@ -40,17 +40,18 @@
         $needReset = $orderModal.find('.js-need-reset'),
         $otherOrder = $orderModal.find('#js-other-order'),
         $queueNum = $orderModal.find('#js-queue-num'),
-        $kennelLocation = $orderModal.find('#js-kennel-location'),
-        $waitLocation = $orderModal.find('#js-wait-location'),
-        $waitTime = $orderModal.find('#js-wait-time'),
+        $kennelLocation = $orderModal.find('.js-kennel-location'),
+        $waitLocation = $orderModal.find('.js-wait-location'),
+        $waitTime = $orderModal.find('.js-wait-time'),
         $serviceCharge = $orderModal.find('#js-service-charge'),
         $chargeType = $orderModal.find('#js-charge-type'),
         $toFirst = $orderModal.find('#js-to-first'),
         $liftInput = $orderModal.find('#js-lift-btn'),
         $sendMessage = $orderModal.find('#js-send-message'),
         $agreement = $orderModal.find('#js-agreement'),
-        $payLink = $orderModal.find('#js-pay-link'),
-        $chargeNum = $orderModal.find('#js-charge-num');
+        $payLink = $orderModal.find('.js-pay-link'),
+        $chargeNum = $orderModal.find('#js-charge-num'),
+        appointmentData = null;
 
     //pass the pet id
     $('.js-btn-order').on('click', function(){
@@ -71,6 +72,8 @@
     }
 
     function fillOrderInfo(data){
+        appointmentData = data;
+
         $otherOrder.text(data.count);
         $queueNum.text(data.ordernum);
         $kennelLocation.text(data.farm);
