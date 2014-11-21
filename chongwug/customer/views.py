@@ -165,4 +165,4 @@ def aboutus_view(request):
         return render_to_response('tpl/aboutus.html',data)
 
 def adclicktongji_view(request):
-    return adapters.ADclicktongji(request)
+    return HttpResponse(adapters.ADclicktongji(request))
