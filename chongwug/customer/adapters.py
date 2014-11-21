@@ -286,7 +286,7 @@ def alipay_notify(req):
                     attention.appoint_time.hour, attention.appoint_time.minute, attention.nestofpet_id.type, attention.nestofpet_id.num,min_price,max_price)
         sendSMS(farmuser.tel,content)
         return 'success'
-    return 'false'
+    return 'fail'
 
 def buy_attention_sure(req):
     if 'id' not in req.GET:
