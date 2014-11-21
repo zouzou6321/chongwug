@@ -272,8 +272,6 @@ def attention_sendsms(req):
     return __errorcode__(0)
 
 from chongwug.settings import ALIPAY
-from django.core.mail  import  send_mail
-from django.views.debug import get_exception_reporter_filter
 def alipay_notify(req):
     params = {u'seller_email': req.POST['seller_email'], u'sign': req.POST['sign'], 
             u'subject': req.POST['subject'], u'is_total_fee_adjust': req.POST['is_total_fee_adjust'], 
@@ -399,7 +397,7 @@ def buy_attention_adapter(req):
     order.save()
     order.orderno = '%s%s%s%d' % (now.year, now.month, now.day, order.id % 10000)
     order.save()
-    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee='0.01', notify_url='www.chongwug.com/buy/detail/attention/alipay/notify/')
+    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee=str(totalpay), notify_url='www.chongwug.com/buy/detail/attention/alipay/notify/')
     return __errorcode__(0,{'id':attention.id,'count':attentions.count(),'ordernum':'C%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'alipayurl':alipayurl,'pay':totalpay,'orderno':order.orderno,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
 
