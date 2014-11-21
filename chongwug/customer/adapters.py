@@ -272,7 +272,19 @@ def attention_sendsms(req):
     sendSMS(attention.user.tel,content)
     return __errorcode__(0)
 
+from django.core.mail  import  send_mail
+from django.views.debug import get_exception_reporter_filter
 def alipay_notify(req):
+    filter = get_exception_reporter_filter(req)
+    request_repr = filter.get_request_repr(req)
+    send_mail(
+                    subject=u'支付宝测试',  
+                    message=request_repr,  
+                    from_email='fccsl6321@163.com',
+                    recipient_list=['692673390@qq.com',],  
+                    fail_silently=False,  
+                    connection=None  
+                )
     if Alipay.verify_notify(req.params):
         order = appointorders.objects.filter(orderno=req.POST['out_trade_no'],dele=False)
         # this is a valid notify, code business logic here
