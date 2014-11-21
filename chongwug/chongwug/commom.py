@@ -6,7 +6,7 @@ Created on 2014年10月15日
 '''
 from chongwug.config import __errorcode
 import json,traceback,urllib,urllib2
-from chongwug.settings import CKEDITOR_STATIC_URL
+from chongwug.settings import CKEDITOR_STATIC_URL,ALIPAY_ID,ALIPAY_KEY,ALIPAY_EMAIL
 from ckeditor.widgets import CKEditorWidget
 from django.core.exceptions import ImproperlyConfigured
 from customer.models import appointorders
@@ -26,7 +26,7 @@ def __errorcode__(errornum,otherdata = None):
     return json.dumps({"status":__errorcode[errornum][0],"message":__errorcode[errornum][2]})
 
 def getalipayurl(out_trade_no, subject, total_fee,  notify_url):
-    alipay = Alipay(pid='2088611905683894', key='xjmcw6c697a2t10gji4l1mu1hqeqe84g', seller_email='zhifubao@chongwug.com')
+    alipay = Alipay(pid=ALIPAY_ID, key=ALIPAY_KEY, seller_email=ALIPAY_EMAIL)
     return alipay.create_direct_pay_by_user_url(out_trade_no=out_trade_no, subject=subject, total_fee=total_fee, notify_url=notify_url)
 
 def sendSMS(telnum,SMScontent):

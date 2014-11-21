@@ -158,7 +158,9 @@ PET_PIC_ROOT = "/petpic/"
 CDN_ROOT = "//chongwug-cdn.b0.upaiyun.com"
 SUPPLIE_PIC_ROOT = "/suppliepic/"
 PIC_TMP_PATH = "/manage/pictest/"
-
+ALIPAY_ID = '2088611905683894'
+ALIPAY_KEY = 'xjmcw6c697a2t10gji4l1mu1hqeqe84g'
+ALIPAY_EMAIL = 'zhifubao@chongwug.com'
 
 SESSION_COOKIE_AGE = 60 * 30#session 30min 
 
