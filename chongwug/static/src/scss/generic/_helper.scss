@@ -47,12 +47,19 @@
 
 .vertical-center{
   height: 100%;
+  text-align: center;
 
   &:before{
     height: 100%;
     content: ' ';
     display: inline-block;
     vertical-align: middle;
+  }
+
+  .vertical-content{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
   }
 }
 

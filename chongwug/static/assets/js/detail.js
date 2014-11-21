@@ -332,6 +332,7 @@
             data = {};
 
         data.id = $orderModal.data('id');
+        data.csrfmiddlewaretoken = $.cookie('csrftoken');
 
         for(var i = 0, len = arr.length; i < len; i++){
             var curr = arr[i];
