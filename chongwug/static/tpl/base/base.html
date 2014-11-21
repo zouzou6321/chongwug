@@ -47,9 +47,14 @@
         $('#js-cookie-alert').removeClass('hide');
     }
 
+    function loadJS(e,t){"use strict";var n=window.document.getElementsByTagName("script")[0],o=window.document.createElement("script");return o.src=e,o.async=!0,n.parentNode.insertBefore(o,n),t&&"function"==typeof t&&(o.onload=t),o}
+
     //<!--统计代码-->
-    if(window.location.hostname === 'chongwug.com'){
-        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1253614808'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1253614808' type='text/javascript'%3E%3C/script%3E"));
+    if(window.location.hostname.indexOf('chongwug') > -1){
+        //cnzz
+        loadJS(decodeURIComponent('//s23.cnzz.com/z_stat.php%3Fid%3D1253614808'));
+        //baidu
+        loadJS(decodeURIComponent('//hm.baidu.com/h.js%3Fddd73710a5679013c750d68e5c7efa37'));
     }
 </script>
 
