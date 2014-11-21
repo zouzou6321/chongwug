@@ -18,4 +18,5 @@ urlpatterns = patterns(
                        url(r'^aboutus/$','aboutus_view'),
                        url(r'^workchance/$','workchance_view'),
                        url(r'^contactus/$','contactus_view'),
+                       url(r'^tarurl/click/$','adclicktongji_view'),
                        )

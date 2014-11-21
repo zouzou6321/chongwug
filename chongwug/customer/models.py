@@ -56,3 +56,17 @@ class appointorders(models.Model):
     status = models.TextField(default='')
     time = models.DateTimeField(default=datetime.datetime.now)
     dele = models.BooleanField(default=False)
+
+class pviptongji(models.Model):
+    ip = models.CharField(max_length=20)
+    port = models.CharField(max_length=10)
+    pageuri = models.TextField()
+    browser = models.TextField()
+    time = models.DateTimeField(default=datetime.datetime.now)
+
+class adclicktongji(models.Model):
+    ip = models.CharField(max_length=20)
+    port = models.CharField(max_length=10)
+    tarurl = models.TextField()
+    browser = models.TextField()
+    time = models.DateTimeField(default=datetime.datetime.now)

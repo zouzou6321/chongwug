@@ -4,7 +4,7 @@
 '''
 from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
-from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders
+from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders,pviptongji,adclicktongji
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
@@ -19,6 +19,20 @@ def is_wap(request):
         return True
     return False
 
+def PVIPtongji(request):
+    pvip = pviptongji( ip = request.META['REMOTE_ADDR'],
+                port = request.META['REMOTE_PORT'],
+                pageuri = request.META['REQUEST_URI'],
+                browser = request.META['HTTP_USER_AGENT'])
+    pvip.save()
+
+def ADclicktongji(request):
+    adclick = adclicktongji( ip = request.META['REMOTE_ADDR'],
+                port = request.META['REMOTE_PORT'],
+                tarurl = request.REQUEST.get('tarurl'),
+                browser = request.META['HTTP_USER_AGENT'])
+    adclick.save()
+    return __errorcode__(0)
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
