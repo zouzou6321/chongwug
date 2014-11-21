@@ -21,7 +21,7 @@ def is_wap(request):
 
 def PVIPtongji(request):
     pvip = pviptongji( ip = request.META['REMOTE_ADDR'],
-                pageuri = request.META['REQUEST_URI'],
+                pageuri = request.path_info,
                 browser = request.META['HTTP_USER_AGENT'])
     pvip.save()
 
