@@ -1,10 +1,66 @@
-{% extends 'tpl/base/base.html' %}
-{% load assets %}
+{% extends 'mobile/tpl/base/base.html' %}
+{% load mobile %}
 
 {% block title %}{{ title }}{% endblock %}
 {% block bodyhook %}class="has-position"{% endblock %}
 
 {% block content %}
+<div class="content content-common">
+    <div class="slider">
+      <div class="slide-group">
+        <div class="slide">
+            <img src="{{ petimg_a.img_url }}" class="img-full"/>
+        </div>
+        {% for nowimg in nowimgs %}
+        <div class="slide">
+            <img src="{{ nowimg.img_url }}" class="img-full"/>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <ul class="table-view">
+      <li class="table-view-cell">
+        <h4>[{{ nestpet.farm.name }}] {{ nestpet.short_desc }}</h4>
+      </li>
+      <li class="table-view-cell">
+          编号：{{ nestpet.num }}
+      </li>
+      <li class="table-view-cell">
+          犬种：{{ nestpet.type }}
+      </li>
+      <li class="table-view-cell">
+          月龄：{{ nestpet.age }}个月
+      </li>
+        <li class="table-view-cell">
+            价格：&yen;{{ price.min_price }}-{{ price.max_price }}元/只
+        </li>
+    </ul>
+    <div class="content-padded">
+        <button class="btn btn-primary btn-block">预约看狗</button>
+    </div>
+    <div class="segmented-control content-padded">
+      <a class="control-item active" href="#item1mobile">
+        狗狗资料
+      </a>
+      <a class="control-item" href="#item2mobile">
+        犬舍简介
+      </a>
+      <a class="control-item" href="#item3mobile">
+        其他犬种
+      </a>
+    </div>
+    <div id="item1mobile" class="control-content active">
+        <div class="slider">
+          <div class="slide-group">
+            <div class="slide">
+                <img src="{{ nowimg.img_url }}" class="img-full"/>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div id="item2mobile" class="control-content">2</div>
+    <div id="item3mobile" class="control-content">3</div>
+</div>
 
 <div class="cwg-container detail">
     <div class="container breadcrumb-container">
@@ -183,7 +239,7 @@
                         <div class="row img-row">
                         	{% for farmimg in farmimgs %}
                             <div class="col-6 progressive">
-                                <img data-small="{{ farmimg.img_url }}!small" data-original="{{ farmimg.img_url }}" class="js-progressive img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                <img data-small="{{ farmimg.img_url }}!small" data-original="{{ farmimg.img_url }}" class="js-progressive img-full" src="{{'imgs/loading.gif'|mobile}}"/>
                             </div>
                             {% if forloop.counter|divisibleby:2 %}<div class="clearfix"></div>{% endif %}
                             {% endfor %}
@@ -208,7 +264,7 @@
                             {% for pet_img in pets_img %}
                             <div class="col-6 padding-sm pet-showcase-wrap">
                                 <div class="pet-showcase-item shade shade-hover">
-                                    <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|assets}}"/>
+                                    <img data-original="{{ pet_img.img.img_url }}" alt="{{ pet_img.pet.type }}" class="js-lazy img-full" src="{{'imgs/loading.gif'|mobile}}"/>
                                     <p class="tag">{{ pet_img.pet.type }}</p>
                                     <div class="shade-content">
                                         <div class="pet-showcase-detail">
@@ -234,16 +290,16 @@
                     </h2>
                     <div class="desc-main">
                         <div class="adg-health">
-                            <img src="{{ 'imgs/nav/adg1.png'|assets }}" class="img-full"/>
+                            <img src="{{ 'imgs/nav/adg1.png'|mobile }}" class="img-full"/>
                         </div>
                         <div class="adg-price">
-                            <img src="{{ 'imgs/nav/adg2.png'|assets }}" class="img-full"/>
+                            <img src="{{ 'imgs/nav/adg2.png'|mobile }}" class="img-full"/>
                         </div>
                         <div class="adg-purebred">
-                            <img src="{{ 'imgs/nav/adg3.png'|assets }}" class="img-full"/>
+                            <img src="{{ 'imgs/nav/adg3.png'|mobile }}" class="img-full"/>
                         </div>
                         <div class="adg-process">
-                            <img src="{{ 'imgs/nav/adg4.png'|assets }}" class="img-full"/>
+                            <img src="{{ 'imgs/nav/adg4.png'|mobile }}" class="img-full"/>
                         </div>
                     </div>
                 </div>
