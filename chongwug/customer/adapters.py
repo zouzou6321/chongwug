@@ -4,7 +4,7 @@
 '''
 from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
-from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders
+from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders,pviptongji,adclicktongji
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
@@ -19,6 +19,18 @@ def is_wap(request):
         return True
     return False
 
+def PVIPtongji(request):
+    pvip = pviptongji( ip = request.META['REMOTE_ADDR'],
+                pageuri = request.META['REQUEST_URI'],
+                browser = request.META['HTTP_USER_AGENT'])
+    pvip.save()
+
+def ADclicktongji(request):
+    adclick = adclicktongji( ip = request.META['REMOTE_ADDR'],
+                tarurl = request.REQUEST.get('tarurl'),
+                browser = request.META['HTTP_USER_AGENT'])
+    adclick.save()
+    return __errorcode__(0)
 '''
 函数功能：首页数据适配器
 作者：胡怀勇
@@ -272,11 +284,7 @@ def attention_sendsms(req):
     return __errorcode__(0)
 
 from chongwug.settings import ALIPAY
-from django.core.mail  import  send_mail
-from django.views.debug import get_exception_reporter_filter
 def alipay_notify(req):
-    filter = get_exception_reporter_filter(req)
-    request_repr = filter.get_request_repr(req)
     params = {u'seller_email': req.POST['seller_email'], u'sign': req.POST['sign'], 
             u'subject': req.POST['subject'], u'is_total_fee_adjust': req.POST['is_total_fee_adjust'], 
             u'gmt_create': req.POST['gmt_create'], u'out_trade_no': req.POST['out_trade_no'], u'sign_type': req.POST['sign_type'], 
@@ -285,17 +293,8 @@ def alipay_notify(req):
              u'seller_id': req.POST['seller_id'], u'use_coupon': req.POST['use_coupon'], u'payment_type': req.POST['payment_type'], 
              u'total_fee': req.POST['total_fee'],u'notify_time': req.POST['notify_time'], u'buyer_id': req.POST['buyer_id'], 
               u'notify_id': req.POST['notify_id'], u'notify_type': req.POST['notify_type'], u'quantity': req.POST['quantity']}
-    message = '%s%s' % (request_repr, str(params))
-    send_mail(
-                    subject=u'支付宝测试',  
-                    message=message,  
-                    from_email='fccsl6321@163.com',
-                    recipient_list=['692673390@qq.com',],  
-                    fail_silently=False,  
-                    connection=None  
-                )
     if ALIPAY.verify_notify(**params):
-        order = appointorders.objects.filter(orderno=req.POST['out_trade_no'],dele=False)
+        order = appointorders.objects.get(orderno=req.POST['out_trade_no'],dele=False)
         # this is a valid notify, code business logic here
         attention = order.attention
         attention.attention_type = 1
@@ -410,7 +409,7 @@ def buy_attention_adapter(req):
     order.save()
     order.orderno = '%s%s%s%d' % (now.year, now.month, now.day, order.id % 10000)
     order.save()
-    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee='0.01', notify_url='www.chongwug.com/buy/detail/attention/alipay/notify/')
+    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee=str(totalpay), notify_url='www.chongwug.com/buy/detail/attention/alipay/notify/')
     return __errorcode__(0,{'id':attention.id,'count':attentions.count(),'ordernum':'C%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'alipayurl':alipayurl,'pay':totalpay,'orderno':order.orderno,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
 
