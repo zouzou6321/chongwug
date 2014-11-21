@@ -12,7 +12,6 @@ import datetime,string,re,json
 from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.contrib.auth.models import User
 from django.contrib import auth
-from alipay import Alipay
 import traceback
 
 def is_wap(request):
@@ -272,8 +271,30 @@ def attention_sendsms(req):
     sendSMS(attention.user.tel,content)
     return __errorcode__(0)
 
+from chongwug.settings import ALIPAY
+from django.core.mail  import  send_mail
+from django.views.debug import get_exception_reporter_filter
 def alipay_notify(req):
-    if Alipay.verify_notify(req.params):
+    filter = get_exception_reporter_filter(req)
+    request_repr = filter.get_request_repr(req)
+    params = {u'seller_email': req.POST['seller_email'], u'sign': req.POST['sign'], 
+            u'subject': req.POST['subject'], u'is_total_fee_adjust': req.POST['is_total_fee_adjust'], 
+            u'gmt_create': req.POST['gmt_create'], u'out_trade_no': req.POST['out_trade_no'], u'sign_type': req.POST['sign_type'], 
+            u'price': req.POST['price'], u'buyer_email': req.POST['buyer_email'], u'discount': req.POST['discount'], 
+            u'trade_status': req.POST['trade_status'], u'gmt_payment': req.POST['gmt_payment'], u'trade_no': req.POST['trade_no'],
+             u'seller_id': req.POST['seller_id'], u'use_coupon': req.POST['use_coupon'], u'payment_type': req.POST['payment_type'], 
+             u'total_fee': req.POST['total_fee'],u'notify_time': req.POST['notify_time'], u'buyer_id': req.POST['buyer_id'], 
+              u'notify_id': req.POST['notify_id'], u'notify_type': req.POST['notify_type'], u'quantity': req.POST['quantity']}
+    message = '%s%s' % (request_repr, str(params))
+    send_mail(
+                    subject=u'支付宝测试',  
+                    message=message,  
+                    from_email='fccsl6321@163.com',
+                    recipient_list=['692673390@qq.com',],  
+                    fail_silently=False,  
+                    connection=None  
+                )
+    if ALIPAY.verify_notify(**params):
         order = appointorders.objects.filter(orderno=req.POST['out_trade_no'],dele=False)
         # this is a valid notify, code business logic here
         attention = order.attention
@@ -389,7 +410,7 @@ def buy_attention_adapter(req):
     order.save()
     order.orderno = '%s%s%s%d' % (now.year, now.month, now.day, order.id % 10000)
     order.save()
-    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee='0.1', notify_url='www.chongwug.com/alipay/notify/')
+    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee='0.01', notify_url='www.chongwug.com/buy/detail/attention/alipay/notify/')
     return __errorcode__(0,{'id':attention.id,'count':attentions.count(),'ordernum':'C%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'alipayurl':alipayurl,'pay':totalpay,'orderno':order.orderno,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
 

@@ -161,7 +161,8 @@ PIC_TMP_PATH = "/manage/pictest/"
 ALIPAY_ID = '2088611905683894'
 ALIPAY_KEY = 'xjmcw6c697a2t10gji4l1mu1hqeqe84g'
 ALIPAY_EMAIL = 'zhifubao@chongwug.com'
-
+from alipay import Alipay
+ALIPAY = Alipay(pid=ALIPAY_ID, key=ALIPAY_KEY, seller_email=ALIPAY_EMAIL)
 SESSION_COOKIE_AGE = 60 * 30#session 30min 
 
 # Additional locations of static files
