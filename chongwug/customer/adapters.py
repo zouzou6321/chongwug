@@ -401,7 +401,7 @@ def buy_attention_adapter(req):
     order.save()
     order.orderno = '%s%s%s%d' % (now.year, now.month, now.day, order.id % 10000)
     order.save()
-    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee='0.1', notify_url='www.chongwug.com/alipay/notify/')
+    alipayurl = getalipayurl(out_trade_no=order.orderno, subject=u'预约看狗定金', total_fee='0.01', notify_url='www.chongwug.com/buy/detail/attention/alipay/notify/')
     return __errorcode__(0,{'id':attention.id,'count':attentions.count(),'ordernum':'C%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'alipayurl':alipayurl,'pay':totalpay,'orderno':order.orderno,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
 
