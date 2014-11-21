@@ -49,3 +49,10 @@ class buyselectinfo(models.Model):
     searchkey=models.TextField()
     curpage=models.IntegerField()
     dele = models.BooleanField(default=False)
+
+class appointorders(models.Model):
+    orderno = models.TextField(blank=True, null=True)
+    attention = models.ForeignKey(nestofpet_attention)
+    status = models.TextField(default='')
+    time = models.DateTimeField(default=datetime.datetime.now)
+    dele = models.BooleanField(default=False)

@@ -9,6 +9,8 @@ import json,traceback,urllib,urllib2
 from chongwug.settings import CKEDITOR_STATIC_URL
 from ckeditor.widgets import CKEditorWidget
 from django.core.exceptions import ImproperlyConfigured
+from customer.models import appointorders
+from alipay import Alipay
 
 def __errorcode__(errornum,otherdata = None):
     index = 0
@@ -22,6 +24,10 @@ def __errorcode__(errornum,otherdata = None):
         otherdata['message'] = __errorcode[errornum][2]
         return json.dumps(otherdata)
     return json.dumps({"status":__errorcode[errornum][0],"message":__errorcode[errornum][2]})
+
+def getalipayurl(out_trade_no, subject, total_fee,  notify_url):
+    alipay = Alipay(pid='2088611905683894', key='xjmcw6c697a2t10gji4l1mu1hqeqe84g', seller_email='zhifubao@chongwug.com')
+    return alipay.create_direct_pay_by_user_url(out_trade_no=out_trade_no, subject=subject, total_fee=total_fee, notify_url=notify_url)
 
 def sendSMS(telnum,SMScontent):
     url=u'http://api.cnsms.cn/?ac=send&uid=106869&pwd=4da6bfc8811f85d9d10b59690e31f6fc&mobile=%s&content=%s&encode=utf8' % (telnum, SMScontent)

@@ -3,8 +3,10 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 import adapters,traceback,string
-from chongwug.commom import __errorcode__,sendSMS
+from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.template import RequestContext
+from django.views.decorators.csrf import csrf_exempt
+
 #auth:huhuaiyong
 #date:2014/8/16
 #discription:导航页面展示
@@ -71,6 +73,10 @@ def buy_attention_view(request):
     else:
         data = adapters.buy_attention_sure(request)
     return HttpResponse(data)
+
+@csrf_exempt
+def buy_order_notify_view(request):
+    return HttpResponse(adapters.alipay_notify(request))
 
 def knowledge_buy_view(request):
     try:
