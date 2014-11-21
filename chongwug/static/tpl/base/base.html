@@ -49,51 +49,7 @@
 
     //<!--统计代码-->
     if(window.location.hostname === 'chongwug.com'){
-{#        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){#}
-{#        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),#}
-{#        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)#}
-{#        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');#}
-{##}
-{#        ga('create', 'UA-56836755-1', 'auto');#}
-{#        ga('send', 'pageview');#}
-
-        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fddd73710a5679013c750d68e5c7efa37' type='text/javascript'%3E%3C/script%3E"));
-
-        if (window.addEventListener) {
-            window.addEventListener('error', trackErrors, false);
-        } else if (window.attachEvent) {
-            window.attachEvent('onerror', trackErrors);
-        } else {
-            window.onerror = trackErrors;
-        }
-
-        function trackErrors(e) {
-            var ie = window.event,
-                desc = (e.message || ie.errorMessage) + ', ' + (e.filename || ie.errorUrl) + ': ' + (e.lineno || ie.errorLine),
-                url = window.location.href;
-
-            desc += '; ' + url;
-
-            try{
-                _hmt.push(['_setCustomVar', 1, 'exception', desc]);
-{#                ga('send', 'exception', { 'exDescription': desc });#}
-            }catch(e){}
-        }
-
-        $('.js-statistics').on('click', '.js-statistics-item', function(){
-            var $this = $(this),
-                data = $this.data();
-
-            data.action = data.action || 'click';
-            data.label = data.label || $.trim($this.text()) || $this.attr('href');
-            data.value = data.value || 1;
-
-            try{
-{#                ga('send', 'event', data.category, data.action, data.label, data.value);#}
-                _hmt.push(['_trackEvent', data.category, data.action, data.label, data.value]);
-            }catch(e){}
-        });
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1253614808'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1253614808' type='text/javascript'%3E%3C/script%3E"));
     }
 </script>
 
