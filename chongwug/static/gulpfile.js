@@ -153,7 +153,8 @@ gulp.task('watch', ['sync'], function(){
         gulp.start('imgs');
     });
 
-    gulp.watch(config.css.src, ['css']);
+    //gulp.watch(config.css.src, ['css']);
+    gulp.watch([config.js.src, '!js/lib/**/*'], ['js']);
 
 //    plugins.watch({glob: config.css.src}, function(){
 //        gulp.start('css');
