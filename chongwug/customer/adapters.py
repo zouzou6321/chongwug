@@ -297,7 +297,8 @@ def buy_attention_sure(req):
     cur_user = user.objects.get(auth_user=auth.get_user(req),dele=False)
     if attention.user.id != cur_user.id:
         return __errorcode__(2)
-    if attention.attention_type == 0:
+    print attention.attention_type
+    if attention.attention_type == '0':
         return __errorcode__(1)
     return __errorcode__(0)
 
