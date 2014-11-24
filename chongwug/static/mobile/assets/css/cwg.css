@@ -1,3 +1,12 @@
+/*------------------------------------*\
+    #global
+\*------------------------------------*/
+/*------------------------------------*\
+    #font
+\*------------------------------------*/
+/*------------------------------------*\
+    #nav
+\*------------------------------------*/
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -161,11 +170,11 @@ body {
   background-color: #fff; }
 
 a {
-  color: #428bca;
+  color: #ff3500;
   text-decoration: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
   a:active {
-    color: #3073a9; }
+    color: #cc2900; }
 
 .content {
   position: absolute;
@@ -270,12 +279,12 @@ p {
 
 .btn-primary {
   color: #fff;
-  background-color: #428bca;
-  border: 1px solid #428bca; }
+  background-color: #ff3500;
+  border: 1px solid #ff3500; }
   .btn-primary:active, .btn-primary.active {
     color: #fff;
-    background-color: #3073a9;
-    border: 1px solid #3073a9; }
+    background-color: #cc2900;
+    border: 1px solid #cc2900; }
 
 .btn-positive {
   color: #fff;
@@ -298,7 +307,7 @@ p {
 .btn-outlined {
   background-color: transparent; }
   .btn-outlined.btn-primary {
-    color: #428bca; }
+    color: #ff3500; }
   .btn-outlined.btn-positive {
     color: #5cb85c; }
   .btn-outlined.btn-negative {
@@ -309,11 +318,11 @@ p {
 .btn-link {
   padding-top: 6px;
   padding-bottom: 6px;
-  color: #428bca;
+  color: #ff3500;
   background-color: transparent;
   border: 0; }
   .btn-link:active, .btn-link.active {
-    color: #3073a9;
+    color: #cc2900;
     background-color: transparent; }
 
 .btn-block {
@@ -410,7 +419,7 @@ input[type="submit"], input[type="reset"], input[type="button"] {
     text-align: center;
     vertical-align: middle; }
     .bar-tab .tab-item.active, .bar-tab .tab-item:active {
-      color: #428bca; }
+      color: #ff3500; }
     .bar-tab .tab-item .icon {
       top: 3px;
       width: 24px;
@@ -438,10 +447,10 @@ input[type="submit"], input[type="reset"], input[type="button"] {
   padding: 0;
   font-size: 16px;
   line-height: 44px;
-  color: #428bca;
+  color: #ff3500;
   border: 0; }
   .bar .btn-link:active, .bar .btn-link.active {
-    color: #3073a9; }
+    color: #cc2900; }
 
 .bar .btn-block {
   top: 6px;
@@ -495,9 +504,9 @@ input[type="submit"], input[type="reset"], input[type="button"] {
 
 .badge-primary {
   color: #fff;
-  background-color: #428bca; }
+  background-color: #ff3500; }
   .badge-primary.badge-inverted {
-    color: #428bca; }
+    color: #ff3500; }
 
 .badge-positive {
   color: #fff;
@@ -692,15 +701,15 @@ select {
       background-color: #ccc; }
 
 .segmented-control-primary {
-  border-color: #428bca; }
+  border-color: #ff3500; }
   .segmented-control-primary .control-item {
-    color: #428bca;
+    color: #ff3500;
     border-color: inherit; }
     .segmented-control-primary .control-item:active {
-      background-color: #cde1f1; }
+      background-color: #ffc2b3; }
     .segmented-control-primary .control-item.active {
       color: #fff;
-      background-color: #428bca; }
+      background-color: #ff3500; }
 
 .segmented-control-positive {
   border-color: #5cb85c; }
@@ -1103,9 +1112,212 @@ select {
 .col-three-quarters {
   width: 75%; }
 
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+.sprite {
+  display: inline-block;
+  background-image: url(../imgs/sprites.png); }
+
+.sprite-car {
+  background-position: -184px -36px;
+  width: 31px;
+  height: 13px; }
+
+.sprite-checked {
+  background-position: -215px -36px;
+  width: 10px;
+  height: 10px; }
+
+.sprite-flow {
+  background-position: 0px 0px;
+  width: 395px;
+  height: 36px; }
+
+.sprite-logo-simple {
+  background-position: -60px -36px;
+  width: 94px;
+  height: 30px; }
+
+.sprite-pet {
+  background-position: -154px -36px;
+  width: 30px;
+  height: 24px; }
+
+.sprite-tag {
+  background-position: 0px -36px;
+  width: 60px;
+  height: 34px; }
+
 /**
  * Objects and abstractions
 */
+.table {
+  width: 100%;
+  text-align: center; }
+  .table td, .table th {
+    padding: 5px;
+    font-size: 14px; }
+  .table caption {
+    text-align: left;
+    color: #fff;
+    background-color: #ffd401;
+    padding: 5px 10px;
+    font-weight: bold; }
+  .table thead, .table tfoot {
+    background-color: #fffcf0;
+    font-weight: bold; }
+  .table tfoot {
+    text-align: left;
+    padding-left: 10px; }
+    .table tfoot .pet-tip {
+      margin-bottom: 0;
+      padding-left: 10px; }
+      .table tfoot .pet-tip span {
+        padding-left: 3px; }
+
+.select-wrap {
+  position: relative; }
+
+.select-box {
+  font-size: 12px;
+  background: #fff;
+  position: absolute;
+  top: 34px;
+  left: 0;
+  z-index: 6;
+  display: none; }
+  .select-box .segmented-control {
+    width: 301px;
+    border: 0;
+    border-radius: 0;
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd; }
+    .select-box .segmented-control .control-item {
+      color: #4d4d4d;
+      background: #f0f0f0;
+      border-left: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding-top: 10px;
+      padding-bottom: 10px; }
+      .select-box .segmented-control .control-item.active {
+        color: #ff3500;
+        background: #fff;
+        border-bottom-color: transparent; }
+  .select-box .card {
+    margin: 0;
+    border-radius: 0;
+    padding: 10px 14px;
+    border-top: 0; }
+    .select-box .card a {
+      padding: 0 10px;
+      float: left;
+      color: #4d4d4d;
+      border-radius: 2px; }
+      .select-box .card a:hover {
+        text-decoration: none;
+        color: #ff3500;
+        background: #fff8f3; }
+      .select-box .card a.active {
+        color: #fff;
+        background: #ff3500; }
+    .select-box .card dt, .select-box .card dd {
+      margin: 0;
+      float: left;
+      line-height: 2; }
+    .select-box .card dl {
+      margin: 0;
+      padding: 3px 0; }
+    .select-box .card dt {
+      padding-right: 10px; }
+    .select-box .card dd {
+      width: 270px; }
+    .select-box .card .province-select dd {
+      width: 233px; }
+  .select-box .table {
+    margin-bottom: 0;
+    table-layout: fixed; }
+    .select-box .table > thead > tr > th {
+      border-bottom: 0;
+      vertical-align: middle;
+      text-align: center;
+      font-weight: normal; }
+    .select-box .table > tbody > tr > th {
+      vertical-align: middle;
+      text-align: center;
+      font-weight: normal; }
+    .select-box .table td {
+      cursor: pointer;
+      color: #7abd54; }
+      .select-box .table td:hover, .select-box .table td.active {
+        background: #7abd54;
+        color: #fff; }
+    .select-box .table .disabled {
+      cursor: default; }
+      .select-box .table .disabled:hover {
+        background: none; }
+
+.btn-primary.disabled, .btn-primary[disabled] {
+  background-color: #b2b2b2;
+  border-color: #b2b2b2; }
+
+.btn-trans {
+  background-color: transparent; }
+
+.btn-check {
+  border-color: #ccc;
+  border-radius: 0;
+  width: 48%; }
+  .btn-check.active, .btn-check:active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: #ff3500;
+    color: #ff3500; }
+    .btn-check.active .sprite-checked, .btn-check:active .sprite-checked {
+      display: inline-block; }
+  .btn-check .sprite-checked {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    display: none; }
+
+.btn-select {
+  position: relative;
+  border: 1px solid #ddd;
+  height: 35px;
+  line-height: 33px;
+  border-radius: 3px;
+  padding-left: 15px;
+  margin-bottom: 15px; }
+  .btn-select .vertical-center {
+    position: absolute;
+    right: 6px;
+    top: 0; }
+  .btn-select .select-icon {
+    vertical-align: middle; }
+  .btn-select .select-title {
+    display: inline-block;
+    max-width: 90%;
+    overflow: hidden; }
+
 /**
  * gui
 */

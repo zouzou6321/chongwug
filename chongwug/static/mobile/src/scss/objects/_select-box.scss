@@ -1,0 +1,132 @@
+.select-wrap{
+  position: relative;
+}
+.select-box{
+  $color: #4d4d4d;
+  $border-color: #ddd;
+
+  font-size: 12px;
+  background: #fff;
+
+  position: absolute;
+  top: 34px;
+  left: 0;
+  z-index: 6;
+
+  display: none;
+
+  .segmented-control{
+    width: 301px;
+
+    border: 0;
+    border-radius: 0;
+    border-right: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+
+    .control-item{
+      color: $color;
+      background: #f0f0f0;
+
+      border-left: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
+
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      &.active{
+        color: $primary-color;
+        background: #fff;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  .card{
+    margin: 0;
+    border-radius: 0;
+    padding: 10px 14px;
+
+    border-top: 0;
+
+    a{
+      padding: 0 10px;
+      float: left;
+
+      color: $color;
+
+      border-radius: 2px;
+
+      &:hover{
+        text-decoration: none;
+        color: $primary-color;
+        background: #fff8f3;
+      }
+
+      &.active{
+        color: #fff;
+        background: $primary-color;
+      }
+    }
+
+    dt, dd{
+      margin: 0;
+      float: left;
+      line-height: 2;
+    }
+
+    dl{
+      margin: 0;
+      padding: 3px 0;
+    }
+
+    dt{
+      padding-right: 10px;
+    }
+
+    dd{
+      width: 270px;
+    }
+
+    .province-select dd{
+      width: 233px;
+    }
+  }
+
+  .table{
+    margin-bottom: 0;
+    table-layout: fixed;
+
+    > thead > tr > th{
+      border-bottom: 0;
+      vertical-align: middle;
+      text-align: center;
+
+      font-weight: normal;
+    }
+
+    > tbody > tr > th{
+      vertical-align: middle;
+      text-align: center;
+
+      font-weight: normal;
+    }
+
+    td{
+      cursor: pointer;
+      color: #7abd54;
+
+      &:hover, &.active{
+        background: #7abd54;
+        color: #fff;
+      }
+    }
+
+    .disabled{
+      cursor: default;
+
+      &:hover{
+        background: none;
+      }
+    }
+  }
+}

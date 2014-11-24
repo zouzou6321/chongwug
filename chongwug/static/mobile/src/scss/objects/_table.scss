@@ -1,0 +1,36 @@
+.table{
+  width: 100%;
+  text-align: center;
+
+  td, th{
+    padding: 5px;
+    font-size: 14px;
+  }
+
+  caption{
+    text-align: left;
+    color: #fff;
+    background-color: $primary-bg-color;
+    padding: 5px 10px;
+    font-weight: bold;
+  }
+
+  thead, tfoot{
+    background-color: #fffcf0;
+    font-weight: bold;
+  }
+
+  tfoot{
+    text-align: left;
+    padding-left: 10px;
+
+    .pet-tip{
+      margin-bottom: 0;
+      padding-left: 10px;
+
+      span{
+        padding-left: 3px;
+      }
+    }
+  }
+}

@@ -1,26 +1,26 @@
 <input name="location" type="hidden" id="js-location-input" class="required"/>
-<div class="select-box" id="js-location-box" tabindex="0">
-    <ul class="tab clearfix">
-      <li class="active"><a href="#province" id="js-to-province" role="tab" data-toggle="tab">省份</a></li>
-      <li><a href="#city" id="js-to-city" role="tab" data-toggle="tab">城市</a></li>
-      <li><a href="#district" id="js-to-district" role="tab" data-toggle="tab">县区</a></li>
-      <li><a href="#street" id="js-to-street" role="tab" data-toggle="tab">街道</a></li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane active province-select" id="province">
-      	  {% for address in addresses %}
+<div class="select-box" id="js-location-box">
+    <div class="segmented-control">
+        <a class="control-item active" href="#province" id="js-to-province">省份</a>
+        <a class="control-item" href="#city" id="js-to-city">城市</a>
+        <a class="control-item" href="#district" id="js-to-district">县区</a>
+        <a class="control-item" href="#street" id="js-to-street">街道</a>
+    </div>
+    <div class="card">
+        <div class="control-content active province-select" id="province">
+          {% for address in addresses %}
           <dl class="clearfix">
               <dt data-id="{{ address.index }}">{{ address.name }}</dt>
               <dd>
-              	  {% for province in address.sublist %}
+                  {% for province in address.sublist %}
                   <a href="javascript:" data-id="{{ province.index }}">{{ province.name }}</a>
                   {% endfor %}
               </dd>
           </dl>
           {% endfor %}
-      </div>
-      <div class="tab-pane" id="city"></div>
-      <div class="tab-pane" id="district"></div>
-      <div class="tab-pane" id="street"></div>
+        </div>
+        <div class="control-content" id="city"></div>
+        <div class="control-content" id="district"></div>
+        <div class="control-content" id="street"></div>
     </div>
 </div>

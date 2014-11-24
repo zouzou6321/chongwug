@@ -11,6 +11,7 @@
  * Base styles; unclassed HTML elements etc.
  */
 @import "base/grid";
+@import "base/sprites";
 
 
 
@@ -19,6 +20,9 @@
 /**
  * Objects and abstractions
 */
+@import "objects/table";
+@import "objects/select-box";
+@import "objects/buttons";
 
 
 

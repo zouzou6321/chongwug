@@ -1,0 +1,60 @@
+.btn-primary.disabled, .btn-primary[disabled]{
+  background-color: #b2b2b2;
+  border-color: #b2b2b2;
+}
+
+.btn-trans{
+  background-color: transparent;
+}
+
+.btn-check{
+  border-color: #ccc;
+  border-radius: 0;
+  width: 48%;
+
+  &.active, &:active{
+    @include box-shadow(none);
+
+    border-color: $primary-color;
+    color: $primary-color;
+
+    .sprite-checked{
+      display: inline-block;
+    }
+  }
+
+  .sprite-checked{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+
+    display: none;
+  }
+}
+
+.btn-select{
+  position: relative;
+  border: 1px solid #ddd;
+
+  height: 35px;
+  line-height: 33px;
+  border-radius: 3px;
+  padding-left: 15px;
+  margin-bottom: 15px;
+
+  .vertical-center{
+    position: absolute;
+    right: 6px;
+    top: 0;
+  }
+
+  .select-icon{
+    vertical-align: middle;
+  }
+
+  .select-title{
+    display: inline-block;
+    max-width: 90%;
+    overflow: hidden;
+  }
+}

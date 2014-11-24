@@ -22,7 +22,7 @@
     }
   };
 
-  window.addEventListener('touchend', function (e) {
+  function handler(e){
     var activeTab;
     var activeBodies;
     var targetBody;
@@ -59,7 +59,10 @@
     }
 
     targetBody.classList.add(className);
-  });
+  }
+
+  window.addEventListener('touchend', handler);
+  window.segmented = handler;
 
   window.addEventListener('click', function (e) { if (getTarget(e.target)) {e.preventDefault();} });
 }());
