@@ -1212,6 +1212,9 @@ The provided mixins are intended to be used with the array-like variables
 .content-common {
   padding-bottom: 51px; }
 
+.select-fixed {
+  height: 35px; }
+
 .detail .pet-tip {
   margin-bottom: 0;
   padding-left: 5px; }
