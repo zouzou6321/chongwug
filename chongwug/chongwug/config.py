@@ -31,11 +31,11 @@ __regular_expression_idnum = r"^(^\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$"
 __petfeaturescore = [45,70,100]
 
 #服务费与交通费
-__servpay = 15
-__transpay = 5
+__servpay = 50
+__transpay = 0
 
 #预约时间信息
-__appointtime = {'time1':'9:30','time2':'15:00'}
+__appointtime = {'time1':'10:00','time2':'14:30'}
 
 #地址信息
 __addresses = [
@@ -70,11 +70,11 @@ __addresses = [
                                 {'name':u'白家','index':0},{'name':u'东升镇','index':1},{'name':u'航空港','index':2},{'name':u'黄龙溪','index':3},{'name':u'华阳','index':4},{'name':u'蛟龙港','index':5},{'name':u'麓山','index':6},{'name':u'牧马山','index':7},{'name':u'彭镇','index':8},{'name':u'双流周边','index':9},{'name':u'文星','index':10}
                                 ]
                             },
-                            {'name':u'温江区','index':7,'waitpoint':'成都市地铁二号线犀浦地铁站A出口','sublist':[
+                            {'name':u'温江区','index':7,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
                                 {'name':u'北部新城','index':0},{'name':u'公平镇','index':1},{'name':u'光华大道','index':2},{'name':u'金马镇','index':3},{'name':u'南熏大道','index':4},{'name':u'寿安','index':5},{'name':u'踏水镇','index':6},{'name':u'万春镇','index':7},{'name':u'温江城区','index':8},{'name':u'永宁镇','index':9}
                                 ]
                             },
-                            {'name':u'龙泉驿区','index':8,'waitpoint':'成都市地铁二号线龙泉驿地铁站A出口','sublist':[
+                            {'name':u'龙泉驿区','index':8,'waitpoint':'成都市地铁二号线成都行政学院站','sublist':[
                                 {'name':u'滨河片区','index':0},{'name':u'大面镇','index':1},{'name':u'航天片区','index':2},{'name':u'恒大绿洲','index':3},{'name':u'洪河镇','index':4},{'name':u'龙泉驿周边','index':5},{'name':u'商业片区','index':6},{'name':u'十陵镇','index':7},{'name':u'阳光城','index':8},{'name':u'总站片区','index':9}
                                 ]
                             },
