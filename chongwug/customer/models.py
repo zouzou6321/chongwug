@@ -63,6 +63,13 @@ class pviptongji(models.Model):
     browser = models.TextField()
     time = models.DateTimeField(default=datetime.datetime.now)
 
+class uvpviptongji(models.Model):
+    ip = models.CharField(max_length=20)
+    uv = models.TextField(blank=True, null=True)
+    pageuri = models.TextField()
+    browser = models.TextField()
+    time = models.DateTimeField(default=datetime.datetime.now)
+
 class adclicktongji(models.Model):
     ip = models.CharField(max_length=20)
     tarurl = models.TextField()
