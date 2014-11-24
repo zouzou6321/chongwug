@@ -1048,27 +1048,23 @@ The provided mixins are intended to be used with the array-like variables
 */
 .table {
   width: 100%;
-  text-align: center; }
+  font-size: 14px; }
   .table td, .table th {
-    padding: 5px;
-    font-size: 14px; }
-  .table caption {
+    padding: 5px; }
+
+.table-primary {
+  text-align: center; }
+  .table-primary caption {
     text-align: left;
     color: #fff;
     background-color: #ffd401;
     padding: 5px 10px;
     font-weight: bold; }
-  .table thead, .table tfoot {
+  .table-primary thead, .table-primary tfoot {
     background-color: #fffcf0;
     font-weight: bold; }
-  .table tfoot {
-    text-align: left;
-    padding-left: 10px; }
-    .table tfoot .pet-tip {
-      margin-bottom: 0;
-      padding-left: 10px; }
-      .table tfoot .pet-tip span {
-        padding-left: 3px; }
+  .table-primary tfoot {
+    text-align: left; }
 
 .select-wrap {
   position: relative; }
@@ -1207,6 +1203,18 @@ The provided mixins are intended to be used with the array-like variables
 .content-common {
   padding-bottom: 51px; }
 
+.detail .pet-tip {
+  margin-bottom: 0;
+  padding-left: 5px; }
+  .detail .pet-tip span {
+    padding-left: 3px; }
+.detail .pet-showcase-item .pet-showcase-title {
+  color: #000; }
+.detail .pet-showcase-item .price {
+  padding-left: 15px;
+  color: #ff3500;
+  font-weight: bold; }
+
 .supplies .supplies-title {
   font-size: 16px;
   height: 42px;
@@ -1236,6 +1244,9 @@ The provided mixins are intended to be used with the array-like variables
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0; }
+
+.border-none {
+  border: 0; }
 
 .font-sm {
   font-size: 14px; }

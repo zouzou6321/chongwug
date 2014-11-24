@@ -1,0 +1,22 @@
+.detail{
+  .pet-tip{
+    margin-bottom: 0;
+    padding-left: 5px;
+
+    span{
+      padding-left: 3px;
+    }
+  }
+
+  .pet-showcase-item{
+    .pet-showcase-title{
+      color: #000;
+    }
+
+    .price{
+      padding-left: 15px;
+      color: $primary-color;
+      font-weight: bold;
+    }
+  }
+}

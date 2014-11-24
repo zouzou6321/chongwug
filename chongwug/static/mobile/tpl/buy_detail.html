@@ -5,7 +5,7 @@
 {% block bodyhook %}class="has-position"{% endblock %}
 
 {% block content %}
-<div class="content content-common">
+<div class="content content-common detail">
     <div class="slider">
       <div class="slide-group">
         <div class="slide">
@@ -38,20 +38,14 @@
     <div class="content-padded">
         <a class="btn btn-primary btn-block" href="#js-order-modal">预约看狗</a>
     </div>
-    <div class="segmented-control content-padded">
-      <a class="control-item active" href="#item1mobile">
-        狗狗资料
-      </a>
-      <a class="control-item" href="#item2mobile">
-        犬舍简介
-      </a>
-      <a class="control-item" href="#item3mobile">
-        其他犬种
-      </a>
+    <div class="segmented-control content-padded font-sm">
+      <a class="control-item active" href="#item1">狗狗资料</a>
+      <a class="control-item" href="#item2">犬舍简介</a>
+      <a class="control-item" href="#item3">其他犬种</a>
     </div>
-    <div class="card">
-        <div id="item1mobile" class="control-content active">
-            <table class="table">
+    <div class="card border-none radius-none">
+        <div id="item1" class="control-content active">
+            <table class="table table-primary">
                 <caption>{{ nestpet.type }}</caption>
                 <thead>
                     <tr>
@@ -92,7 +86,7 @@
                 </tfoot>
             </table>
         </div>
-        <div id="item2mobile" class="control-content">
+        <div id="item2" class="control-content">
             <div class="slider">
               <div class="slide-group">
                 {% for farmimg in farmimgs %}
@@ -106,15 +100,15 @@
                 {{ nestpet.farm.desc|safe }}
             </div>
         </div>
-        <div id="item3mobile" class="control-content">
-            <ul class="table-view">
+        <div id="item3" class="control-content">
+            <ul class="table-view pet-showcase">
                 {% for pet_img in pets_img %}
-                <li class="table-view-cell media">
+                <li class="table-view-cell media pet-showcase-item">
                     <img class="media-object pull-left" src="{{ pet_img.img.img_url }}!small">
                     <div class="media-body">
-                        <h5 style="margin-top: 0;">{{ pet_img.pet.type }} &yen;{{ pet_img.min_price }}-{{ pet_img.max_price }} 元</h5>
-                        <button class="btn">预约看狗</button>
-                        <a class="btn" href="" target="_blank">详细信息</a>
+                        <p class="pet-showcase-title">{{ pet_img.pet.type }}<span class="price">&yen;{{ pet_img.min_price }}-{{ pet_img.max_price }} 元</span></p>
+                        <button class="btn btn-outlined" data-id="{{ pet_img.pet.id }}">预约看狗</button>
+                        <a class="btn btn-outlined" href="{{ urls }}{{ pet_img.pet.id }}/" target="_blank">详细信息</a>
                     </div>
                 </li>
                 {% endfor %}
