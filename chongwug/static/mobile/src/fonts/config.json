@@ -127,6 +127,12 @@
       "src": "elusive"
     },
     {
+      "uid": "8da3ac534210aae9c0f0e13804c1df97",
+      "css": "cancel",
+      "code": 59413,
+      "src": "websymbols"
+    },
+    {
       "uid": "a7e3ce91275bb77c0f4ec44a548b325c",
       "css": "up-circle",
       "code": 59392,

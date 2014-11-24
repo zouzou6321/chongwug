@@ -963,6 +963,10 @@ select {
   content: '\e814'; }
 
 /* '' */
+.icon-cancel:before {
+  content: '\e815'; }
+
+/* '' */
 /**
  * Generic utility styles etc.
  */
