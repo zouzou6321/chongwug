@@ -1229,6 +1229,9 @@ The provided mixins are intended to be used with the array-like variables
 .text-muted {
   color: #777; }
 
+.text-primary {
+  color: #ffd401; }
+
 .radius-none {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;

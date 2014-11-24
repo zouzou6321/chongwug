@@ -6,6 +6,10 @@
   color: #777;
 }
 
+.text-primary{
+  color: $primary-bg-color;
+}
+
 .radius-none{
   -webkit-border-radius: 0;
   -moz-border-radius: 0;

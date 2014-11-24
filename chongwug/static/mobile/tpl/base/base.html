@@ -12,14 +12,15 @@
     {% include 'mobile/tpl/base/header.html' %}
 {% endblock %}
 
+{% block nav %}
+    {% include 'mobile/tpl/base/nav.html' %}
+{% endblock %}
+
 {% block content %}{% endblock %}
+
 <script src="{{ 'js/lib/jquery.js'|mobile }}"></script>
 <script src="{{ 'js/lib/ratchet.js'|mobile }}"></script>
 {% block scripts %}{% endblock %}
-
-{% block footer %}
-    {% include 'mobile/tpl/base/footer.html' %}
-{% endblock %}
 
 </body>
 </html>
