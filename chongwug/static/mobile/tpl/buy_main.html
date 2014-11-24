@@ -4,77 +4,72 @@
 
 {% block content %}
 <div class="content content-common">
-    <form class="row" action="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/" method="get">
-      <div class="col col-three-quarters">
-          <input type="search" placeholder="Search">
-      </div>
-      <div class="col col-quarter">
-          <button class="btn btn-outlined">搜索</button>
-      </div>
+    <form action="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/" method="get">
+      <input type="search" placeholder="Search">
     </form>
-    <select class="table-view">
-        {% if typekey == 'all'%}
-        <option selected="selected"><a href="{{ urls }}{{ directkey }}/all/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></option>
+    <select style="width:50%;font-size:17px;background-color:#fff;" onchange="buy_select(this)">
+    {% if typekey == 'all'%}
+    <option selected="selected" value="{{ urls }}{{ directkey }}/all/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</option>
+    {% else %}
+    <option value="{{ urls }}{{ directkey }}/all/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</option>
+    {% endif %}
+    {% for type in types %}
+    {% if type == typekey %}
+    <option selected="selected" value="{{ urls }}{{ directkey }}/{{ type }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ type }}</option>
+    {% else %}
+    <option value="{{ urls }}{{ directkey }}/{{ type }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ type }}</option>
+    {% endif %}
+    {% endfor %}
+    </select><select style="width:50%;font-size:17px;background-color:#fff;" onchange="buy_select(this)">
+{% if princekey == '0'%}
+<option selected="selected" value="{{ urls }}{{ directkey }}/{{ typekey }}/0/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</option>
         {% else %}
-        <option><a href="{{ urls }}{{ directkey }}/all/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></option>
-        {% endif %}
-        {% for type in types %}
-        {% if type == typekey %}
-        <option selected="selected"><a href="{{ urls }}{{ directkey }}/{{ type }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ type }}</a></option>
-        {% else %}
-        <option><a href="{{ urls }}{{ directkey }}/{{ type }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ type }}</a></option>
-        {% endif %}
-        {% endfor %}
-    </select><select class="table-view">
-    	{% if princekey == '0'%}
-        <option selected="selected"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/0/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></option>
-        {% else %}
-        <option><a href="{{ urls }}{{ directkey }}/{{ typekey }}/0/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></li>
+        <option value="{{ urls }}{{ directkey }}/{{ typekey }}/0/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</li>
         {% endif %}
         {% for prince in princes %}
         {% if prince.a == princekey %}
-        <option selected="selected"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ prince.a }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ prince.d }}</a></option>
+        <option selected="selected" value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ prince.a }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ prince.d }}</option>
         {% else %}
-        <option><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ prince.a }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ prince.d }}</a></option>
+        <option value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ prince.a }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ prince.d }}</option>
         {% endif %}
         {% endfor %}
-    </select><select class="table-view">
+    </select><select style="width:50%;font-size:17px;background-color:#fff;" onchange="buy_select(this)">
     	{% if directkey == 'all'%}
-        <option selected="selected"><a href="{{ urls }}all/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></option>
+        <option selected="selected" value="{{ urls }}all/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</option>
         {% else %}
-        <option><a href="{{ urls }}all/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></option>
+        <option value="{{ urls }}all/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">全部</option>
         {% endif %}
         {% for direct in directs %}
         {% if direct == directkey %}
-        <option selected="selected"><a href="{{ urls }}{{ direct }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">城{{ direct }}</a></option>
+        <option selected="selected" value="{{ urls }}{{ direct }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">城{{ direct }}</option>
         {% else %}
-        <option><a href="{{ urls }}{{ direct }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">城{{ direct }}</a></option>
+        <option value="{{ urls }}{{ direct }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/">城{{ direct }}</option>
         {% endif %}
         {% endfor %}
-    </select><select class="table-view">
+    </select><select style="width:50%;font-size:17px;background-color:#fff;" onchange="buy_select(this)">
     	{% if epidemickey == 'all'%}
-        <option selected="selected"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/all/{{ searchkey }}/1/">全部</a></option>
+        <option selected="selected" value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/all/{{ searchkey }}/1/">全部</option>
         {% else %}
-        <option><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/all/{{ searchkey }}/1/">全部</a></option>
+        <option value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/all/{{ searchkey }}/1/">全部</option>
         {% endif %}
         {% for epidemic in epidemics %}
         {% if epidemic == epidemickey %}
-        <option selected="selected"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemic }}/{{ searchkey }}/1/">{{ epidemic }}</a></option>
+        <option selected="selected" value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemic }}/{{ searchkey }}/1/">{{ epidemic }}</option>
         {% else %}
-        <option><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemic }}/{{ searchkey }}/1/">{{ epidemic }}</a></option>
+        <option value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemic }}/{{ searchkey }}/1/">{{ epidemic }}</option>
         {% endif %}
         {% endfor %}
-    </select><select class="table-view">
+    </select><select style="font-size:17px;background-color:#fff;"  onchange="buy_select(this)">
     	{% if agekey == '0'%}
-        <option selected="selected"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/0/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></option>
+        <option selected="selected" value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/0/{{ epidemickey }}/{{ searchkey }}/1/">全部</option>
         {% else %}
-        <option><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/0/{{ epidemickey }}/{{ searchkey }}/1/">全部</a></option>
+        <option value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/0/{{ epidemickey }}/{{ searchkey }}/1/">全部</option>
         {% endif %}
         {% for age in ages %}
         {% if age.a == agekey %}
-        <option selected="selected"><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ age.a }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ age.d }}</a></option>
+        <option selected="selected" value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ age.a }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ age.d }}</option>
         {% else %}
-        <option><a href="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ age.a }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ age.d }}</a></option>
+        <option value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ age.a }}/{{ epidemickey }}/{{ searchkey }}/1/">{{ age.d }}</option>
         {% endif %}
         {% endfor %}
     </select>
@@ -85,7 +80,7 @@
         <a class="navigate-right" href="{{ urls }}detail/{{ pet_img.pet.id }}/">
           <img class="media-object pull-left" src="{{ pet_img.img.img_url }}!small" width="90">
           <div class="media-body">
-            <strong>[{{ pet_img.pet.farm.name }}]</strong> {{ pet_img.pet.short_desc }}
+            <div style="height:44px; overflow:hidden;"><strong>[{{ pet_img.pet.farm.name }}]</strong> <span style="font-size:15px;">{{ pet_img.pet.short_desc }}</span></div>
             <p>{{ pet_img.min_price }}元-{{ pet_img.max_price }}元</p>
           </div>
         </a>
@@ -128,4 +123,11 @@
 </div>
 
 
+{% endblock %}
+{% block scripts %}
+<script>
+function buy_select(obj){
+	window.location=obj.value;
+}
+</script>
 {% endblock %}
