@@ -316,6 +316,7 @@
             success: function(data){
                 if(data.status == 0){
                     $this.tab('show');
+                    countTime($sendMessage);
                 }else{
                     alert(data.message);
                 }
@@ -338,9 +339,6 @@
             var curr = arr[i];
             data[curr.name] = curr.value;
         }
-
-        //存储交通方式，便于 reset text
-        $orderModal.data('transportation', data.transportation);
 
         validator.form();
 
@@ -410,7 +408,7 @@
         }
 
         var delay = $el.data('delay'),
-            text = '重新发送 ';
+            text = '重新发送短信 ';
 
         delay = !isNaN(delay) && parseInt(delay, 10) || 60,
 
@@ -454,9 +452,5 @@
         $serviceCharge.text(data.pay);
         $chargeNum.text(data.orderno);
         $payLink.attr('href', data.alipayurl);
-
-        if($orderModal.data('transportation') != 'lift'){
-            $chargeType.text('服务费');
-        }
     }
 }(jQuery));
