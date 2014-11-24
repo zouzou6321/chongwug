@@ -4,26 +4,38 @@
 '''
 from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
-from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders,pviptongji,adclicktongji
+from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders,pviptongji,adclicktongji,uvpviptongji
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
-from chongwug.config import __onepageofdata__,__petfeaturescore,__farmpictypes,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_telnum,__regular_expression_chinatelnum
+from chongwug.config import __onepageofdata__,__petfeaturescore,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_chinatelnum
 import datetime,string,re,json
 from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.contrib.auth.models import User
 from django.contrib import auth
-import traceback
 
 def is_wap(request):
     if request.path_info.find('/m/') == 0:
         return True
     return False
 
-def PVIPtongji(request):
-    pvip = pviptongji( ip = request.META['REMOTE_ADDR'],
-                pageuri = request.path_info,
-                browser = request.META['HTTP_USER_AGENT'])
-    pvip.save()
+def UVPVIPtongji(request):
+    if 'HTTP_X_FORWARDED_FOR' in request.META:
+        ip = request.META['HTTP_X_FORWARDED_FOR']
+    else:
+        ip = request.META['REMOTE_ADDR']
+    if 'uniquevisitor' in request.COOKIES:
+        #带有cookie的，基本上是正常访问
+        uvpvip = uvpviptongji(ip = ip,
+                            uv = request.COOKIES['uniquevisitor'],
+                            pageuri = request.path_info,
+                            browser = request.META['HTTP_USER_AGENT'])
+        uvpvip.save()
+    else:
+        #不带cookie的访问，有可能是异常访问
+        pvip = pviptongji(  ip = ip,
+                            pageuri = request.path_info,
+                            browser = request.META['HTTP_USER_AGENT'])
+        pvip.save()
+    return "success"
 
 def ADclicktongji(request):
     adclick = adclicktongji( ip = request.META['REMOTE_ADDR'],
@@ -31,6 +43,7 @@ def ADclicktongji(request):
                 browser = request.META['HTTP_USER_AGENT'])
     adclick.save()
     return __errorcode__(0)
+
 '''
 函数功能：首页数据适配器
 作者：胡怀勇

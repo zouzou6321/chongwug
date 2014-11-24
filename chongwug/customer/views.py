@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 #discription:导航页面展示
 from django.core.mail  import  send_mail
 def nav_page_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     if 'visitor' not in request.session:
         request.session['visitor'] = 1
         data = {}
@@ -29,7 +29,7 @@ def nav_page_view(request):
 #date:2014/8/16
 #discription:购宠首页展示
 def buy_home_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     data = adapters.buy_home_adapter(request)
     data['title'] = u'宠物犬交易平台'
     data['description'] = u'专注宠物犬交易'
@@ -42,7 +42,7 @@ def buy_home_view(request):
 #date:2014/9/8
 #discription:购宠购买展示页
 def buy_main_view(request,direct='all',type='all',prince='0',age='0',epidemic='all',key='all',curpage='1'):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     data = adapters.buy_main_adapter(request,direct,type,string.atoi(prince),string.atoi(age),epidemic,key,string.atoi(curpage))
     data['title'] = u'狗狗挑选'
     data['description'] = u'国内最正规的狗狗交易平台'
@@ -53,7 +53,7 @@ def buy_main_view(request,direct='all',type='all',prince='0',age='0',epidemic='a
 
 
 def buy_detail_view(request,petid='-1'):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     data = adapters.buy_detail_adapter(request,string.atoi(petid))
     if data == False:
         return HttpResponse(__errorcode__(2))
@@ -69,11 +69,11 @@ def buy_detail_view(request,petid='-1'):
             return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
 
 def buy_attention_sendsms_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     return HttpResponse(adapters.attention_sendsms(request))
 
 def buy_attention_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     if request.method == 'POST':
         data = adapters.buy_attention_adapter(request)
     else:
@@ -85,7 +85,7 @@ def buy_order_notify_view(request):
     return HttpResponse(adapters.alipay_notify(request))
 
 def knowledge_buy_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     try:
         data = adapters.get_knowledge_buy(request)
         if 'name' in data or 'idlist' in data:
@@ -104,7 +104,7 @@ def knowledge_buy_view(request):
         return HttpResponse('aa')
 
 def knowledge_bringup_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     data = adapters.get_knowledge_bringup(request)
     if 'page' in request.GET:
         if data.count() > 0:
@@ -126,7 +126,7 @@ def knowledge_bringup_view(request):
         return render_to_response('tpl/knowledge_bringup.html',pagedata)
 
 def supplie_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     data = {}
     data['supplies'] = adapters.get_supplies()
     data['page'] = 'supplie'
@@ -138,7 +138,7 @@ def supplie_view(request):
         return render_to_response('tpl/supplie.html',data)
 
 def contactus_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     data = {}
     data['description'] = u'联系我们'
     if adapters.is_wap(request):
@@ -147,7 +147,7 @@ def contactus_view(request):
         return render_to_response('tpl/contactus.html',data)
 
 def workchance_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     data = {}
     data['description'] = u'工作机会'
     if adapters.is_wap(request):
@@ -156,7 +156,7 @@ def workchance_view(request):
         return render_to_response('tpl/workchance.html',data)
 
 def aboutus_view(request):
-    adapters.PVIPtongji(request)
+    adapters.UVPVIPtongji(request)
     data = {}
     data['description'] = u'关于我们'
     if adapters.is_wap(request):
@@ -166,3 +166,6 @@ def aboutus_view(request):
 
 def adclicktongji_view(request):
     return HttpResponse(adapters.ADclicktongji(request))
+
+def uvtongji_view(request):
+    return HttpResponse(adapters.UVPVIPtongji(request))
