@@ -4,66 +4,77 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-
-<div class="content content-common">
-    <ul class="table-view">
-      <li class="table-view-divider">必备用品</li>
-      {% for supplie in supplies %}
-      {% ifequal supplie.type '必备用品' %}
-      <li class="table-view-cell media">
-        <a class="navigate-right">
-          <img class="media-object pull-left" src="{{ supplie.img_url }}!small">
-          <div class="media-body">
-            {{ supplie.title }}
-            &yen;{{ supplie.price }}
-          </div>
-        </a>
-      </li>
-      {% endifequal %}
-      {% endfor %}
-      <li class="table-view-divider">生活用品</li>
-      {% for supplie in supplies %}
-      {% ifequal supplie.type '生活用品' %}
-      <li class="table-view-cell media">
-        <a class="navigate-right">
-          <img class="media-object pull-left" src="{{ supplie.img_url }}!small">
-          <div class="media-body">
-            {{ supplie.title }}
-            &yen;{{ supplie.price }}
-          </div>
-        </a>
-      </li>
-      {% endifequal %}
-      {% endfor %}
-      <li class="table-view-divider">保健医疗</li>
-      {% for supplie in supplies %}
-      {% ifequal supplie.type '保健医疗' %}
-      <li class="table-view-cell media">
-        <a class="navigate-right">
-          <img class="media-object pull-left" src="{{ supplie.img_url }}!small">
-          <div class="media-body">
-            {{ supplie.title }}
-            &yen;{{ supplie.price }}
-          </div>
-        </a>
-      </li>
-      {% endifequal %}
-      {% endfor %}
-      <li class="table-view-divider">清洁卫生</li>
-      {% for supplie in supplies %}
-      {% ifequal supplie.type '清洁卫生' %}
-      <li class="table-view-cell media">
-        <a class="navigate-right">
-          <img class="media-object pull-left" src="{{ supplie.img_url }}!small">
-          <div class="media-body">
-            {{ supplie.title }}
-            &yen;{{ supplie.price }}
-          </div>
-        </a>
-      </li>
-      {% endifequal %}
-      {% endfor %}
-    </ul>
+<div class="bar bar-header-secondary">
+  <div class="segmented-control content-padded font-sm">
+    <a class="control-item active" href="#item1">必备用品</a>
+    <a class="control-item" href="#item2">生活用品</a>
+    <a class="control-item" href="#item3">保健医疗</a>
+    <a class="control-item" href="#item4">清洁卫生</a>
+  </div>
+</div>
+<div class="content content-common supplies">
+    <div class="card radius-none">
+      <ul class="table-view control-content active" id="item1">
+        {% for supplie in supplies %}
+        {% ifequal supplie.type '必备用品' %}
+        <li class="table-view-cell media">
+          <a href="{{ supplie.tar_url }}" target="_blank">
+            <img class="media-object pull-left" src="{{ supplie.img_url }}!small">
+            <div class="media-body">
+              <p class="supplies-title">{{ supplie.title }}</p>
+              <p>惊爆价：<span class="supplies-price">&yen;{{ supplie.price }}</span></p>
+            </div>
+          </a>
+        </li>
+        {% endifequal %}
+        {% endfor %}
+      </ul>
+      <ul class="table-view control-content" id="item2">
+        {% for supplie in supplies %}
+        {% ifequal supplie.type '生活用品' %}
+        <li class="table-view-cell media">
+          <a href="{{ supplie.tar_url }}" target="_blank">
+            <img class="media-object pull-left" src="{{ supplie.img_url }}!small">
+            <div class="media-body">
+              <p class="supplies-title">{{ supplie.title }}</p>
+              <p>惊爆价：<span class="supplies-price">&yen;{{ supplie.price }}</span></p>
+            </div>
+          </a>
+        </li>
+        {% endifequal %}
+        {% endfor %}
+      </ul>
+      <ul class="table-view control-content" id="item3">
+        {% for supplie in supplies %}
+        {% ifequal supplie.type '保健医疗' %}
+        <li class="table-view-cell media">
+          <a href="{{ supplie.tar_url }}" target="_blank">
+            <img class="media-object pull-left" src="{{ supplie.img_url }}!small">
+            <div class="media-body">
+              <p class="supplies-title">{{ supplie.title }}</p>
+              <p>惊爆价：<span class="supplies-price">&yen;{{ supplie.price }}</span></p>
+            </div>
+          </a>
+        </li>
+        {% endifequal %}
+        {% endfor %}
+      </ul>
+      <ul class="table-view control-content" id="item4">
+        {% for supplie in supplies %}
+        {% ifequal supplie.type '清洁卫生' %}
+        <li class="table-view-cell media">
+          <a href="{{ supplie.tar_url }}" target="_blank">
+            <img class="media-object pull-left" src="{{ supplie.img_url }}!small">
+            <div class="media-body">
+              <p class="supplies-title">{{ supplie.title }}</p>
+              <p>惊爆价：<span class="supplies-price">&yen;{{ supplie.price }}</span></p>
+            </div>
+          </a>
+        </li>
+        {% endifequal %}
+        {% endfor %}
+      </ul>
+    </div>
 </div>
 
 {% endblock %}

@@ -1,3 +1,13 @@
+.header{
+  background-color: $primary-bg-color;
+  border-bottom-color: $primary-bg-color;
+
+  .title{
+    color: #fff;
+    font-weight: bold;
+  }
+}
+
 .content-common{
   padding-bottom: 51px;
 }
