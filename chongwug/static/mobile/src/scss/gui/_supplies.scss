@@ -10,12 +10,4 @@
     font-size: 16px;
     color: $primary-color;
   }
-
-  .table-view-cell{
-    padding-right: 15px;
-
-    > a:not(.btn) {
-      margin-right: -15px;
-    }
-  }
 }

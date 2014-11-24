@@ -1190,6 +1190,11 @@ The provided mixins are intended to be used with the array-like variables
     max-width: 90%;
     overflow: hidden; }
 
+.table-view-extend .table-view-cell {
+  padding-right: 15px; }
+  .table-view-extend .table-view-cell > a:not(.btn) {
+    margin-right: -15px; }
+
 /**
  * gui
 */
@@ -1223,10 +1228,6 @@ The provided mixins are intended to be used with the array-like variables
 .supplies .supplies-price {
   font-size: 16px;
   color: #ff3500; }
-.supplies .table-view-cell {
-  padding-right: 15px; }
-  .supplies .table-view-cell > a:not(.btn) {
-    margin-right: -15px; }
 
 /**
  * Style trumps; helper and brand classes

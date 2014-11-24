@@ -14,7 +14,7 @@
 </div>
 <div class="content content-common supplies">
     <div class="card radius-none">
-      <ul class="table-view control-content active" id="item1">
+      <ul class="table-view table-view-extend control-content active" id="item1">
         {% for supplie in supplies %}
         {% ifequal supplie.type '必备用品' %}
         <li class="table-view-cell media">
@@ -29,7 +29,7 @@
         {% endifequal %}
         {% endfor %}
       </ul>
-      <ul class="table-view control-content" id="item2">
+      <ul class="table-view table-view-extend control-content" id="item2">
         {% for supplie in supplies %}
         {% ifequal supplie.type '生活用品' %}
         <li class="table-view-cell media">
@@ -44,7 +44,7 @@
         {% endifequal %}
         {% endfor %}
       </ul>
-      <ul class="table-view control-content" id="item3">
+      <ul class="table-view table-view-extend control-content" id="item3">
         {% for supplie in supplies %}
         {% ifequal supplie.type '保健医疗' %}
         <li class="table-view-cell media">
@@ -59,7 +59,7 @@
         {% endifequal %}
         {% endfor %}
       </ul>
-      <ul class="table-view control-content" id="item4">
+      <ul class="table-view table-view-extend control-content" id="item4">
         {% for supplie in supplies %}
         {% ifequal supplie.type '清洁卫生' %}
         <li class="table-view-cell media">
