@@ -1,10 +1,9 @@
 //select box - location and time
 ;(function($){
         //time
-    var $timeBox = $('#js-time-box'), //time wrapper
-        $btnTime = $('#js-btn-time'), //time choose btn
-        $timeInput = $('#js-time-input'), // hidden time input
-        $time = $('#js-time'), //time text
+    var $timeInput = $('#js-time-input'), // hidden time input
+        $appointTime = $('#js-appoint-time'),
+        $appointDate = $('#js-appoint-date'),
 
         //location
         $locationBox = $('#js-location-box'), //location wrapper
@@ -22,46 +21,30 @@
         param = {},
         location = [];
 
-    //global click handle
-    $btnTime.on('click', function(e){
-        $locationBox.hide();
-        $timeBox.is(':visible') ? $timeBox.hide() : $timeBox.show();
-    });
-
     $btnLocation.on('click', function(e){
-        $timeBox.hide();
         $locationBox.is(':visible') ? $locationBox.hide() : $locationBox.show();
     });
 
     $(document).on('click', function(e){
         var $target = $(e.target),
             $targetLocation = $target.closest('#js-location-box'),
-            $targetTime = $target.closest('#js-time-box'),
             $targetBtn = $target.closest('.btn-select');
 
-        if(!$targetLocation.length && !$targetTime.length && !$targetBtn.length){
-            $timeBox.hide();
+        if(!$targetLocation.length && !$targetBtn.length){
             $locationBox.hide();
         }
     });
 
     //时间选择
-    $timeBox.on('click', 'td', function(){
-        var $this = $(this),
-            time = $.trim($this.closest('tr').find('th').text()),
-            data = $this.data();
+    $appointTime.on('change', timeChange);
+    $appointDate.on('change', timeChange);
+    timeChange();
 
-        if($this.hasClass('disabled')){
-            return;
-        }
+    function timeChange(){
+        var arr = [$.trim($appointDate.val()), $.trim($appointTime.val())];
+        $timeInput.val(arr.join(' '));
+    }
 
-        changeActive($timeBox, $this);
-
-        var text = data.year + '-' + data.date + '（'+ data.day +'）' + time;
-        $time.text(text);
-        $timeInput.val(data.year + '-' + data.date + ' ' + time);
-        $timeBox.hide();
-    });
 
     //地址选择
     $province.on('click', 'a', function(){
@@ -256,7 +239,7 @@
             data: data,
             dataType: 'json',
             beforeSend: function(){
-                $this.button('loading');
+                $this.prop('disabled', true);
             },
             success: function(data){
                 if(data.status == 0){
@@ -268,7 +251,10 @@
                 }
             },
             complete: function(){
-                $this.button('reset');
+                $this.prop('disabled', false);
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(textStatus + ': ' + errorThrown);
             }
         });
     });
@@ -343,7 +329,7 @@
             return $(this).data('text');
         });
 
-        $toFirst.tab('show');
+        window.segmented({target: $toFirst[0]});
     }
 
     function fillOrderInfo(data){

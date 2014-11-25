@@ -979,6 +979,10 @@ select {
 .row:after {
   clear: both; }
 
+.row-margin {
+  margin-left: -10px;
+  margin-right: -10px; }
+
 .col {
   position: relative;
   min-height: 1px;
@@ -991,6 +995,9 @@ select {
 
 .col-three-quarters {
   width: 75%; }
+
+.col-half {
+  width: 50%; }
 
 /*
 SCSS variables are information about icon's compiled state, stored under its original file name
@@ -1128,28 +1135,6 @@ The provided mixins are intended to be used with the array-like variables
       width: 270px; }
     .select-box .card .province-select dd {
       width: 233px; }
-  .select-box .table {
-    margin-bottom: 0;
-    table-layout: fixed; }
-    .select-box .table > thead > tr > th {
-      border-bottom: 0;
-      vertical-align: middle;
-      text-align: center;
-      font-weight: normal; }
-    .select-box .table > tbody > tr > th {
-      vertical-align: middle;
-      text-align: center;
-      font-weight: normal; }
-    .select-box .table td {
-      cursor: pointer;
-      color: #7abd54; }
-      .select-box .table td:hover, .select-box .table td.active {
-        background: #7abd54;
-        color: #fff; }
-    .select-box .table .disabled {
-      cursor: default; }
-      .select-box .table .disabled:hover {
-        background: none; }
 
 .btn-primary.disabled, .btn-primary[disabled] {
   background-color: #b2b2b2;

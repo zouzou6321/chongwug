@@ -33,6 +33,10 @@
     var modal = getModal(event);
     if (modal) {
       if (modal && modal.classList.contains('modal')) {
+        var $modal = $(modal);
+        if(!$modal.hasClass('active')){
+          $modal.trigger('show.bs.modal');
+        }
         modal.classList.toggle('active');
       }
       event.preventDefault(); // prevents rewriting url (apps can still use hash values in url)

@@ -1,41 +1,17 @@
 <input name="time" type="hidden" id="js-time-input" class="required"/>
-<div class="select-box" id="js-time-box" tabindex="0" style="left: -85px;">
-    <table class="table table-bordered table-center">
-        <colgroup>
-            <col width="100px"/>
+
+<div class="row row-margin">
+    <div class="col col-half">
+        <select id="js-appoint-date" class="select-fixed">
             {% for appointday in appointdays %}
-            <col width="50px"/>
+            <option value="{{ appointday.year }}-{{ appointday.mouth }}-{{ appointday.day }}">{{ appointday.mouth }}-{{ appointday.day }} ({{ appointday.week }})</option>
             {% endfor %}
-        </colgroup>
-        <thead>
-            <tr>
-                <th>时间</th>
-                {% for appointday in appointdays %}
-                <th>{{ appointday.mouth }}-{{ appointday.day }} <br/> {{ appointday.week }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>{{ appointtime.time1 }}</th>
-                {% for appointday in appointdays %}
-                {% if appointday.selectable.time1 %}
-                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}" data-year="{{ appointday.year }}">可选</td>
-                {% else %}
-                <td class="disabled">&nbsp;</td>
-                {% endif %}
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>{{ appointtime.time2 }}</th>
-                {% for appointday in appointdays %}
-                {% if appointday.selectable.time1 %}
-                <td data-date="{{ appointday.mouth }}-{{ appointday.day }}" data-day="{{ appointday.week }}" data-year="{{ appointday.year }}">可选</td>
-                {% else %}
-                <td class="disabled">&nbsp;</td>
-                {% endif %}
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
+        </select>
+    </div>
+    <div class="col col-half">
+        <select id="js-appoint-time" class="select-fixed">
+            <option value="{{ appointtime.time1 }}">{{ appointtime.time1 }}</option>
+            <option value="{{ appointtime.time2 }}">{{ appointtime.time2 }}</option>
+        </select>
+    </div>
 </div>

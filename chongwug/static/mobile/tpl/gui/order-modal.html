@@ -6,6 +6,7 @@
     <div class="content">
         <div class="control-content content-padded active" id="js-order-info">
             <form id="js-order-form">
+                {% csrf_token %}
                 <p>请如实填写信息，我们将尽快与您联系：</p>
                 <p><label for="name">您的名字：</label></p>
                 <input type="text" id="name" name="name" value="{% if cuser%}{{ cuser.nickname }}{% endif %}">
@@ -23,12 +24,6 @@
                 </div>
                 <p><label>看狗时间：</label></p>
                 <div class="select-wrap">
-                    <div class="btn-select" id="js-btn-time">
-                        <span class="select-title" id="js-time" data-text="选择时间">选择时间</span>
-                        <div class="vertical-center">
-                            <span class="icon icon-caret select-icon"></span>
-                        </div>
-                    </div>
                     {% include 'mobile/tpl/components/time-box.html' %}
                 </div>
                 <p><label>交通方式：</label></p>
@@ -37,7 +32,7 @@
                     <option value="lift" selected>接送</option>
                 </select>
             </form>
-            <button class="btn btn-primary btn-block">下一步</button>
+            <button class="btn btn-primary btn-block next-step">下一步</button>
             <a class="btn btn-block" href="#js-order-modal">取消</a>
         </div>
     </div>

@@ -2,6 +2,11 @@
   @include clearfix();
 }
 
+.row-margin{
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
 .col{
   position: relative;
   min-height: 1px;
@@ -16,6 +21,10 @@
 
 .col-three-quarters{
   width: 75%;
+}
+
+.col-half{
+  width: 50%;
 }
 
 

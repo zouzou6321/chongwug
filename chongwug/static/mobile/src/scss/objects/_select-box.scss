@@ -91,42 +91,4 @@
       width: 233px;
     }
   }
-
-  .table{
-    margin-bottom: 0;
-    table-layout: fixed;
-
-    > thead > tr > th{
-      border-bottom: 0;
-      vertical-align: middle;
-      text-align: center;
-
-      font-weight: normal;
-    }
-
-    > tbody > tr > th{
-      vertical-align: middle;
-      text-align: center;
-
-      font-weight: normal;
-    }
-
-    td{
-      cursor: pointer;
-      color: #7abd54;
-
-      &:hover, &.active{
-        background: #7abd54;
-        color: #fff;
-      }
-    }
-
-    .disabled{
-      cursor: default;
-
-      &:hover{
-        background: none;
-      }
-    }
-  }
 }
