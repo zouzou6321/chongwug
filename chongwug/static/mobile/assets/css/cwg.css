@@ -967,6 +967,10 @@ select {
   content: '\e815'; }
 
 /* '' */
+.icon-filter:before {
+  content: '\e816'; }
+
+/* '' */
 /**
  * Generic utility styles etc.
  */
@@ -1214,6 +1218,27 @@ The provided mixins are intended to be used with the array-like variables
 
 .select-fixed {
   height: 35px; }
+
+.price {
+  color: #ff3500; }
+
+a {
+  color: #428bca; }
+
+.bar .icon-close {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 30px; }
+
+.buy .row-filter {
+  margin-top: 15px; }
+.buy .buy-title {
+  height: 42px;
+  overflow: hidden; }
+.buy .select-page {
+  width: auto; }
+.buy .btn-filter .icon {
+  font-size: 15px; }
 
 .detail .pet-tip {
   margin-bottom: 0;

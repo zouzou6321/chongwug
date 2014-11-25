@@ -15,3 +15,20 @@
 .select-fixed{
   height: 35px;
 }
+
+.price{
+  color: $primary-color;
+}
+
+a{
+  color: #428bca;
+}
+
+.bar{
+  .icon-close{
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 30px;
+  }
+}
+
