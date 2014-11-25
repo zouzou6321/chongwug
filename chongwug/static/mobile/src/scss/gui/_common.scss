@@ -32,3 +32,10 @@ a{
   }
 }
 
+.bar-tab .tab-item {
+  &.active,
+  &:active {
+    color: $primary-bg-color;
+  }
+}
+

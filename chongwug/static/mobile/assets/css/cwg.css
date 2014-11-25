@@ -1230,6 +1230,9 @@ a {
   padding-right: 10px;
   font-size: 30px; }
 
+.bar-tab .tab-item.active, .bar-tab .tab-item:active {
+  color: #ffd401; }
+
 .buy .row-filter {
   margin-top: 15px; }
 .buy .buy-title {
