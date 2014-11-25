@@ -1184,6 +1184,21 @@ The provided mixins are intended to be used with the array-like variables
   .table-view-extend .table-view-cell > a:not(.btn) {
     margin-right: -15px; }
 
+.agreement {
+  margin-bottom: 10px; }
+  .agreement .agreement-content {
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    font-size: 12px; }
+    .agreement .agreement-content h3 {
+      font-size: 18px; }
+    .agreement .agreement-content h4 {
+      margin-top: 10px;
+      font-size: 16px; }
+
 /**
  * gui
 */
@@ -1246,3 +1261,6 @@ The provided mixins are intended to be used with the array-like variables
 
 .font-xs {
   font-size: 12px; }
+
+.text-center {
+  text-align: center; }

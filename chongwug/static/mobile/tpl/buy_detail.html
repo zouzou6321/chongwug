@@ -36,7 +36,7 @@
         </li>
     </ul>
     <div class="content-padded">
-        <a class="btn btn-primary btn-block" href="#js-order-modal">预约看狗</a>
+        <a class="btn btn-primary btn-block js-btn-order" href="#js-order-modal" data-id="{{ nestpet.id }}">预约看狗</a>
     </div>
     <div class="segmented-control content-padded font-sm">
       <a class="control-item active" href="#item1">狗狗资料</a>
@@ -107,7 +107,7 @@
                     <img class="media-object pull-left" src="{{ pet_img.img.img_url }}!small">
                     <div class="media-body">
                         <p class="pet-showcase-title">{{ pet_img.pet.type }}<span class="price">&yen;{{ pet_img.min_price }}-{{ pet_img.max_price }} 元</span></p>
-                        <button class="btn btn-outlined" data-id="{{ pet_img.pet.id }}">预约看狗</button>
+                        <a class="btn btn-outlined js-btn-order" href="#js-order-modal" data-id="{{ pet_img.pet.id }}">预约看狗</a>
                         <a class="btn btn-outlined" href="{{ urls }}{{ pet_img.pet.id }}/" target="_blank">详细信息</a>
                     </div>
                 </li>

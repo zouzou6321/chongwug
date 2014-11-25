@@ -63,6 +63,17 @@
 
   window.addEventListener('touchend', handler);
   window.segmented = handler;
+  window.segmented.show = function($el){
+    var href = $el.attr('href'),
+        $target = $(href);
+
+    $target.addClass('active').siblings('.control-content').removeClass('active');
+  };
+
+  $(document).on('click', '[data-toggle="segmented"]', function (e) {
+    e.preventDefault();
+    window.segmented.show($(this));
+  });
 
   window.addEventListener('click', function (e) { if (getTarget(e.target)) {e.preventDefault();} });
 }());

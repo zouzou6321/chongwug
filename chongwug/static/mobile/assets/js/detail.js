@@ -177,8 +177,8 @@
 
 
     //store the pet id when click the order btn
-    $('.js-btn-order').on('click', function(){
-        $orderModal.data('id', $(this).data('id')).modal('show');
+    $('.js-btn-order').on('touchend', function(){
+        $orderModal.data('id', $(this).data('id'));
     });
 
     //reset modal when modal open
@@ -226,12 +226,13 @@
             data = {};
 
         data.id = $orderModal.data('id');
-        data.csrfmiddlewaretoken = $.cookie('csrftoken');
 
         for(var i = 0, len = arr.length; i < len; i++){
             var curr = arr[i];
             data[curr.name] = curr.value;
         }
+
+        data.csrfmiddlewaretoken = $.cookie('csrftoken') || data.csrfmiddlewaretoken;
 
         $.ajax({
             url: '/buy/detail/attention/',
@@ -245,7 +246,7 @@
                 if(data.status == 0){
                     fillOrderInfo(data);
                     $orderModal.data('appointmentId', data.id);
-                    $this.tab('show');
+                    window.segmented.show($this);
                 }else{
                     alert(data.message);
                 }
@@ -329,7 +330,7 @@
             return $(this).data('text');
         });
 
-        window.segmented({target: $toFirst[0]});
+        window.segmented.show($toFirst);
     }
 
     function fillOrderInfo(data){

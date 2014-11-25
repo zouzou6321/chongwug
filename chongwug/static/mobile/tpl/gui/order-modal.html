@@ -32,8 +32,30 @@
                     <option value="lift" selected>接送</option>
                 </select>
             </form>
-            <button class="btn btn-primary btn-block next-step">下一步</button>
+            <button class="btn btn-primary btn-block next-step" href="#js-order-confirm">下一步</button>
             <a class="btn btn-block" href="#js-order-modal">取消</a>
+        </div>
+        <div class="control-content content-padded" id="js-order-confirm">
+            <ul class="table-view table-view-extend">
+                <li class="table-view-cell">
+                    <span class="text-muted">本窝犬已预约用户：</span><span id="js-other-order" class="js-need-reset" data-text=""></span>
+                </li>
+                <li class="table-view-cell">
+                    <span class="text-muted">您的排队号：</span><span id="js-queue-num" class="js-need-reset" data-text=""></span>
+                </li>
+                <li class="table-view-cell">
+                    {% include 'mobile/tpl/components/agreement.html' %}
+                    <label>
+                        <input type="checkbox" checked id="js-agreement"> 同意《宠物购用户协议》
+                    </label>
+                </li>
+                <li class="table-view-cell">
+                    <i class="icon icon-attention-circled text-primary"></i>
+                    <span class="text-muted">提示：若看犬过程中多位用户同时看中某一只狗狗，则以用户编号顺序决定优先挑选权及购买权。</span>
+                </li>
+            </ul>
+            <button class="btn btn-block btn-primary next-step" href="#js-order-pay" data-toggle="segmented">确认预约</button>
+            <button class="btn btn-block prev-step" href="#js-order-info" data-toggle="segmented" id="js-to-first">上一步</button>
         </div>
     </div>
 </div>
