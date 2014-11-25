@@ -107,12 +107,14 @@
     targetBody.classList.add(className);
   }
 
+  var $content = $('.modal').find('.content');
   window.addEventListener('touchend', handler);
   window.segmented = handler;
   window.segmented.show = function($el){
     var href = $el.attr('href'),
         $target = $(href);
 
+    $content.scrollTop(0);
     $target.addClass('active').siblings('.control-content').removeClass('active');
   };
 

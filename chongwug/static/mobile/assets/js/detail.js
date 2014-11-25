@@ -164,7 +164,6 @@
         $waitLocation = $orderModal.find('.js-wait-location'), //等待接送地点
         $waitTime = $orderModal.find('.js-wait-time'), //等待接送时间
         $serviceCharge = $orderModal.find('#js-service-charge'), //支付费用
-        $chargeType = $orderModal.find('#js-charge-type'), //支付费用类别
         $payLink = $orderModal.find('.js-pay-link'), //支付链接
         $chargeNum = $orderModal.find('#js-charge-num'), //订单号
         $toStatus = $orderModal.find('#js-to-status'), // got to order pay status Tab (hide)
