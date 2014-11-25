@@ -188,7 +188,7 @@
 
     //go to order pay status Tab when click pay link
     $payLink.on('click', function(){
-        $toStatus.tab('show');
+        window.segmented.show($toStatus);
     });
 
     $toSuccess.on('click', function(e){
@@ -203,18 +203,18 @@
             data: {id: $orderModal.data('appointmentId')},
             dataType: 'json',
             beforeSend: function(){
-                $this.button('loading');
+                $this.prop('disabled', true);
             },
             success: function(data){
                 if(data.status == 0){
-                    $this.tab('show');
+                    window.segmented.show($this);
                     countTime($sendMessage);
                 }else{
                     alert(data.message);
                 }
             },
             complete: function(){
-                $this.button('reset');
+                $this.prop('disabled', false);
             }
         });
     });

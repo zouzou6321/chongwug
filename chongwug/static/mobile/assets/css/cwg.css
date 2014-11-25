@@ -1259,6 +1259,12 @@ The provided mixins are intended to be used with the array-like variables
 .border-none {
   border: 0; }
 
+.border-top-none {
+  border-top: 0; }
+
+.border-bottom-none {
+  border-bottom: 0; }
+
 .font-sm {
   font-size: 14px; }
 

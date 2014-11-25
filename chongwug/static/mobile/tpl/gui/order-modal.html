@@ -36,7 +36,7 @@
             <a class="btn btn-block" href="#js-order-modal">取消</a>
         </div>
         <div class="control-content content-padded" id="js-order-confirm">
-            <ul class="table-view table-view-extend">
+            <ul class="table-view table-view-extend border-top-none">
                 <li class="table-view-cell">
                     <span class="text-muted">本窝犬已预约用户：</span><span id="js-other-order" class="js-need-reset" data-text=""></span>
                 </li>
@@ -59,7 +59,7 @@
             <button class="btn btn-block prev-step" href="#js-order-info" data-toggle="segmented" id="js-to-first">上一步</button>
         </div>
         <div class="control-content content-padded" id="js-order-pay">
-            <ul class="table-view table-view-extend">
+            <ul class="table-view table-view-extend border-top-none">
               <li class="table-view-cell">
                   <span class="text-muted">犬舍位置：</span><span class="js-need-reset js-kennel-location" data-text=""></span>
               </li>
@@ -85,6 +85,27 @@
             <a class="btn btn-block btn-primary next-step js-pay-link" target="_blank">去付款</a>
             <button class="btn btn-block prev-step" href="#js-order-confirm" data-toggle="segmented">上一步</button>
             <button class="hide" href="#js-order-pay-status" data-toggle="segmented" id="js-to-status"></button>
+          </div>
+          <div class="control-content content-padded" id="js-order-pay-status">
+            <div style="padding-top: 50px;">
+                <button class="btn btn-primary btn-block" data-toggle="segmented" href="#js-order-success" id="js-to-success" data-loading-text="正在确认...">付款完成</button>
+                <a class="btn btn-primary btn-block js-pay-link" target="_blank">再次支付</a>
+            </div>
+          </div>
+          <div class="control-content content-padded" id="js-order-success">
+              <ul class="table-view table-view-extend border-top-none">
+                  <li class="table-view-cell">
+                      <span class="text-muted">犬舍位置：</span><span class="js-need-reset js-kennel-location" data-text=""></span>
+                  </li>
+                  <li class="table-view-cell">
+                      <span class="text-muted">等待接送地点：</span><span class="js-need-reset js-wait-location" data-text=""></span>
+                  </li>
+                  <li class="table-view-cell">
+                      <span class="text-muted">等待接送时间：</span><span class="js-need-reset js-wait-time" data-text=""></span>
+                  </li>
+              </ul>
+              <p>预约信息已发送至您的手机，请注意查收。</p>
+              <button class="btn btn-block btn-primary disabled" id="js-send-message" data-delay="60" disabled>重新发送短信</button>
           </div>
     </div>
 </div>
