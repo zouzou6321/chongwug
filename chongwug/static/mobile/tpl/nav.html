@@ -1,81 +1,25 @@
-{% extends 'tpl/base/base.html' %}
-{% load assets %}
+{% extends 'mobile/tpl/base/base.html' %}
+{% load mobile %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block header %}{% endblock %}
 
-{% block htmlhook %}class="full-page"{% endblock %}
-{% block bodyhook %}class="full-page"{% endblock %}
+{% block nav %}{% endblock %}
+
+{% block bodyhook %}class="guide"{% endblock %}
 
 {% block content %}
 
-<div class="guide" id="js-full-page">
-    <div class="adg-health section">
-        <div class="container">
-            <img src="{{ 'imgs/nav/adg1.png'|assets }}" class="img-responsive"/>
-        </div>
-    </div>
-    <div class="adg-price section">
-        <div class="container">
-            <img src="{{ 'imgs/nav/adg2.png'|assets }}" class="img-responsive"/>
-        </div>
-    </div>
-    <div class="adg-purebred section">
-        <div class="container">
-            <img src="{{ 'imgs/nav/adg3.png'|assets }}" class="img-responsive"/>
-        </div>
-    </div>
-    <div class="adg-process section">
-        <div class="container">
-            <img src="{{ 'imgs/nav/adg4.png'|assets }}" class="img-responsive"/>
-        </div>
-    </div>
-    <div class="adg-buy section">
-        <div class="container">
-            <a href="/home">
-                <img src="{{ 'imgs/nav/adg5.png'|assets }}" class="img-responsive"/>
-            </a>
-        </div>
+<div class="vertical-center">
+    <div class="vertical-content">
+        <img src="{{ 'imgs/logo.png'|mobile }}" alt="logo"/>
+        <h1 class="guide-title">国内首个活体宠物O2O交易平台</h1>
     </div>
 </div>
 
-
-<a href="/home" class="skip-guide">
-    <i class="icon icon-forward"></i>
-    <p>进入主页</p>
-</a>
-<a href="javascript:" class="next-guide">
-    <i class="icon icon-down-open"></i>
-</a>
-
 {% endblock %}
 
-{% block plugins %}
-<script src="{{ 'js/lib/jquery.fullPage.js'|assets }}"></script>
-<script>
-var $nextGuide = $('.next-guide');
-
-$('#js-full-page').fullpage({
-    'easing': 'swing',
-    'css3': true,
-    'navigation': true,
-    'navigationPosition': 'right',
-    'navigationTooltips': ['健康有保障', '价格很公道', '品相很优质', '流程很标准', '赶紧去挑选吧'],
-    'onLeave': function(index, nextIndex, direction){
-        if(nextIndex == 5){
-            $nextGuide.addClass('hide');
-        }else{
-            $nextGuide.removeClass('hide');
-        }
-    }
-});
-
-$nextGuide.on('click', function(){
-    $.fn.fullpage.moveSectionDown();
-});
-</script>
-<script src="{{'js/lib/plugins.js'|assets}}"></script>
+{% block scripts %}
+<script src="{{ 'js/guide.js'|mobile }}"></script>
 {% endblock %}
-
-{% block footer %}{% endblock %}

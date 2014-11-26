@@ -11,6 +11,7 @@
  * Base styles; unclassed HTML elements etc.
  */
 @import "base/grid";
+@import "base/animate";
 @import "base/sprites";
 
 
@@ -34,6 +35,7 @@
  * gui
 */
 @import "gui/common";
+@import "gui/guide";
 @import "gui/buy";
 @import "gui/detail";
 @import "gui/supplies";

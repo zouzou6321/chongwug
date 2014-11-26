@@ -1002,6 +1002,30 @@ select {
 .col-half {
   width: 50%; }
 
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn; }
+
 /*
 SCSS variables are information about icon's compiled state, stored under its original file name
 
@@ -1235,6 +1259,29 @@ a {
 .middle-space {
   padding-left: 2em; }
 
+.guide {
+  background-color: #ffd401;
+  color: #310b0e; }
+  .guide img {
+    width: 60%;
+    max-width: 100%; }
+  .guide .guide-title {
+    font-size: 17px;
+    line-height: 44px;
+    font-weight: 500; }
+  .guide .vertical-center {
+    height: 100%;
+    text-align: center; }
+    .guide .vertical-center:before {
+      height: 100%;
+      content: ' ';
+      display: inline-block;
+      vertical-align: middle; }
+    .guide .vertical-center .vertical-content {
+      display: inline-block;
+      vertical-align: middle;
+      padding-bottom: 60px; }
+
 .buy .row-filter {
   margin-top: 15px; }
 .buy .buy-title {
@@ -1383,3 +1430,6 @@ a {
 
 .margin-top-none {
   margin-top: 0; }
+
+.img-responsive {
+  max-width: 100%; }
