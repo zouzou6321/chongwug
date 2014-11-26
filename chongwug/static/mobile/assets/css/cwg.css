@@ -1259,6 +1259,19 @@ a {
 .middle-space {
   padding-left: 2em; }
 
+.home-slider .home-slider-content {
+  display: block;
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-size: cover; }
+
+.switch-desktop {
+  text-align: center;
+  padding: 10px 0 20px 0; }
+  .switch-desktop a {
+    color: #333; }
+
 .guide {
   background-color: #ffd401;
   color: #310b0e; }

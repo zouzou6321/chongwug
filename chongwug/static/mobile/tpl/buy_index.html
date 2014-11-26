@@ -5,11 +5,11 @@
 
 {% block content %}
 <div class="content content-common">
-    <div class="slider">
+    <div class="slider home-slider">
       <div class="slide-group">
         {% for ad in ads %}
         <div class="slide">
-            <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}" class="img-full"></a>
+            <a class="home-slider-content" target="_blank" href="{{ ad.tar_url }}" style="background-image: url({{ ad.img_url }});"></a>
         </div>
         {% endfor %}
       </div>
@@ -24,5 +24,6 @@
       </li>
       {% endfor %}
     </ul>
+    {% include 'mobile/tpl/base/desktop.html' %}
 </div>
 {% endblock %}
