@@ -176,7 +176,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     while i < allpage:
         i += 1
         pages.append(i)
-    return {'pets_imgs':pets_imgs,'urls': '/buy/','types':types,'typekey':typekey,'princes':princes,'princekey':str(princekey),
+    return {'pets_imgs':pets_imgs,'petscount':petscount,'urls': '/buy/','types':types,'typekey':typekey,'princes':princes,'princekey':str(princekey),
             'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,'epidemickey':epidemickey,
             'ages':ages,'agekey':str(agekey),'curpage':curpage,'pageup':curpage-1,'pagedown':curpage+1,'pages':pages,'allpage':allpage,'page':'buy'}
 
