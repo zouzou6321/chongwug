@@ -101,7 +101,7 @@ gulp.task('js', function(){
         }
     }
 
-    merge(gulp.src(arr).pipe(plugins.concat('lib/ratchet.js')), gulp.src(config.js.src))
+    merge(gulp.src(arr).pipe(plugins.concat('lib/plugins.js')), gulp.src(config.js.src))
         .pipe(gulp.dest(config.js.dev))
         .pipe(plugins.if(prod, plugins.uglify()))
         .on('error', function(e){
@@ -116,7 +116,7 @@ gulp.task('js', function(){
 gulp.task('imgs', function(){
     gulp.src(config.imgs.src)
         .pipe(gulp.dest(config.imgs.dev))
-        .pipe(plugins.if(prod, plugins.cache(plugins.imagemin({progressive: true}))))
+        .pipe(plugins.if(prod, plugins.imagemin({progressive: true})))
         .pipe(plugins.if(prod, plugins.rev()))
         .pipe(plugins.if(prod, gulp.dest(config.imgs.prod)))
         .on('error', function(e){ console.log(e); })

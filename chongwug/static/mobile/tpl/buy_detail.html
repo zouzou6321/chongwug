@@ -18,27 +18,30 @@
         {% endfor %}
       </div>
     </div>
-    <ul class="table-view">
-      <li class="table-view-cell">
-        <h4>[{{ nestpet.farm.name }}] {{ nestpet.short_desc }}</h4>
-      </li>
-      <li class="table-view-cell">
-          编号：{{ nestpet.num }}
-      </li>
-      <li class="table-view-cell">
-          犬种：{{ nestpet.type }}
-      </li>
-      <li class="table-view-cell">
-          月龄：{{ nestpet.age }}个月
-      </li>
+    <ul class="table-view table-view-extend border-none">
         <li class="table-view-cell">
-            价格：&yen;{{ price.min_price }}-{{ price.max_price }}元/只
+        <h4 class="detail-title">[{{ nestpet.farm.name }}] {{ nestpet.short_desc }}</h4>
+        </li>
+        <li class="table-view-cell">
+          编<span class="middle-space"></span>号： {{ nestpet.num }}
+        </li>
+        <li class="table-view-cell">
+          犬<span class="middle-space"></span>种： {{ nestpet.type }}
+        </li>
+        <li class="table-view-cell">
+          月<span class="middle-space"></span>龄： {{ nestpet.age }}个月
+        </li>
+        <li class="table-view-cell">
+            价<span class="middle-space"></span>格： <span class="text-positive">&yen;{{ price.min_price }}-{{ price.max_price }}</span>元/只
+        </li>
+        <li class="table-view-cell">
+            客服热线： <strong class="text-positive font-lg">028-85230309</strong>
         </li>
     </ul>
     <div class="content-padded">
         <a class="btn btn-primary btn-block js-btn-order" href="#js-order-modal" data-id="{{ nestpet.id }}">预约看狗</a>
     </div>
-    <div class="segmented-control content-padded font-sm">
+    <div class="segmented-control content-padded font-sm detail-segmented">
       <a class="control-item active" href="#item1">狗狗资料</a>
       <a class="control-item" href="#item2">犬舍简介</a>
       <a class="control-item" href="#item3">其他犬种</a>
@@ -131,6 +134,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ 'js/template.js'|mobile }}"></script>
 <script src="{{ 'js/detail.js'|mobile }}"></script>
 {% endblock %}

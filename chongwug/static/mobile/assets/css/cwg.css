@@ -767,8 +767,7 @@ select {
   width: 100%; }
 
 .slider {
-  overflow: hidden;
-  background-color: #000; }
+  overflow: hidden; }
   .slider .slide-group {
     position: relative;
     font-size: 0;
@@ -1003,6 +1002,30 @@ select {
 .col-half {
   width: 50%; }
 
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+
+  100% {
+    opacity: 1; } }
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn; }
+
 /*
 SCSS variables are information about icon's compiled state, stored under its original file name
 
@@ -1233,6 +1256,45 @@ a {
 .bar-tab .tab-item.active, .bar-tab .tab-item:active {
   color: #ffd401; }
 
+.middle-space {
+  padding-left: 2em; }
+
+.home-slider .home-slider-content {
+  display: block;
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-size: cover; }
+
+.switch-desktop {
+  text-align: center;
+  padding: 10px 0 20px 0; }
+  .switch-desktop a {
+    color: #333; }
+
+.guide {
+  background-color: #ffd401;
+  color: #310b0e; }
+  .guide img {
+    width: 60%;
+    max-width: 100%; }
+  .guide .guide-title {
+    font-size: 17px;
+    line-height: 44px;
+    font-weight: 500; }
+  .guide .vertical-center {
+    height: 100%;
+    text-align: center; }
+    .guide .vertical-center:before {
+      height: 100%;
+      content: ' ';
+      display: inline-block;
+      vertical-align: middle; }
+    .guide .vertical-center .vertical-content {
+      display: inline-block;
+      vertical-align: middle;
+      padding-bottom: 60px; }
+
 .buy .row-filter {
   margin-top: 15px; }
 .buy .buy-title {
@@ -1254,6 +1316,16 @@ a {
   padding-left: 15px;
   color: #ff3500;
   font-weight: bold; }
+.detail .detail-title {
+  line-height: 1.5;
+  margin-bottom: 0; }
+.detail .pet-showcase .media-object {
+  width: 75px; }
+.detail .pet-showcase .btn {
+  border-color: #ff3500;
+  color: #ff3500; }
+.detail .detail-segmented {
+  margin-top: 30px; }
 
 .supplies .supplies-title {
   font-size: 16px;
@@ -1264,19 +1336,63 @@ a {
   font-size: 16px;
   color: #ff3500; }
 
-.bringup .desc-tit {
+.knowledge-bringup .desc-tit {
   font-size: 18px; }
-.bringup li {
+.knowledge-bringup li {
   color: #777;
   font-size: 14px; }
-.bringup .outline-content {
+.knowledge-bringup .outline-content {
   height: 63px;
   overflow: hidden;
   margin-bottom: 5px; }
-.bringup p {
+.knowledge-bringup p {
   margin-bottom: 5px; }
-.bringup h2 {
+.knowledge-bringup h2 {
   line-height: 1.5; }
+
+.knowledge-buy .desc-tit {
+  font-size: 18px; }
+.knowledge-buy li {
+  color: #777;
+  font-size: 14px; }
+.knowledge-buy p {
+  margin-bottom: 5px; }
+.knowledge-buy h2 {
+  line-height: 1.5; }
+.knowledge-buy .pet-box {
+  margin-bottom: 10px; }
+  .knowledge-buy .pet-box .pet-name {
+    margin-bottom: 0;
+    text-align: center;
+    height: 21px;
+    overflow: hidden; }
+  .knowledge-buy .pet-box .pet-img {
+    border: 1px solid #ffd401; }
+.knowledge-buy .row-filter {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding: 11px 15px; }
+  .knowledge-buy .row-filter a {
+    color: #333; }
+  .knowledge-buy .row-filter .icon {
+    font-size: 15px; }
+
+.knowledge-buy-moddal .media-object {
+  width: 102px;
+  overflow: hidden; }
+.knowledge-buy-moddal .rate {
+  position: relative;
+  display: block;
+  height: 21px;
+  background-color: #ffc2b3; }
+  .knowledge-buy-moddal .rate .rate-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 21px;
+    width: 0;
+    background-color: #ff3500;
+    transition: all 0.5s; }
 
 /**
  * Style trumps; helper and brand classes
@@ -1313,8 +1429,20 @@ a {
 .font-xs {
   font-size: 12px; }
 
+.font-lg {
+  font-size: 24px; }
+
 .text-center {
   text-align: center; }
 
 .hide {
   display: none; }
+
+.margin-none {
+  margin: 0; }
+
+.margin-top-none {
+  margin-top: 0; }
+
+.img-responsive {
+  max-width: 100%; }

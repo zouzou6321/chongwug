@@ -1,421 +1,430 @@
-{% extends 'tpl/base/base.html' %}
-{% load assets %}
+{% extends 'mobile/tpl/base/base.html' %}
+{% load mobile %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="cwg-container knowledge-buy">
-    <div class="container breadcrumb-container">
-        <ol class="breadcrumb">
-          <li><a href="/home">首页</a></li>
-          <li class="active">购犬须知</li>
-        </ol>
-    </div>
-	<div class="container content-container padding-none">
-		<img src="{{ 'imgs/knowmain.jpg'|assets }}" alt="养一只与你性格相似并适合你生活环境的爱犬" class="img-full">
-	</div>
-    <div class="container content-container">
-    	<h3>[ 品种挑选 ] CHOICE</h3>
-        <div class="row-separate row"></div>
-        <div id="js-pet-filter">
-            <div class="row dog-select-row">
-                <div class="col-1 dog-select-title form-horizontal"><label class="control-label">犬种：</label></div>
-                <div class="col-6">
-                    <div class="input-group cwg-search-wrap padding-none">
-                        <input type="text" class="form-control" placeholder="可根据名字搜索犬种" name="key" id="js-key-input">
-                        <span class="input-group-btn">
-                            <button class="btn btn-search" type="button">
-                                <i class="icon icon-search"></i>
-                            </button>
-                        </span>
+<div class="bar bar-header-secondary">
+  <div class="segmented-control content-padded font-sm">
+    <a class="control-item active" href="#item1">品种挑选</a>
+    <a class="control-item" href="#item2">狗狗鉴别</a>
+  </div>
+</div>
+
+<div class="content knowledge-buy">
+    <div class="card radius-none border-none margin-none">
+        <div class="control-content active" id="item1">
+            <div class="row-filter clearfix">
+                <span id="js-dog-num">70</span> 个犬种
+                <a class="btn-filter pull-right" href="#js-modal-filter">筛选 <i class="icon icon-filter"></i></a>
+            </div>
+            <div class="row" id="js-pet-list">
+                {% for knowledge in knowledges %}
+                <div class="col col-half pet-wrap" data-id="{{ knowledge.id }}">
+                    <div class="pet-box">
+                        <img data-original="{{ knowledge.imgurl }}" class="img-full pet-img" src="{{ knowledge.imgurl }}"/>
+                        <p class="pet-name">{{ knowledge.name }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <p class="no-result text-center hide">没有找到符合条件的犬种</p>
+            </div>
+        </div>
+        <div class="control-content" id="item2">
+            <div class="content-padded">
+                <div>
+                    <h2 class="desc-tit">
+                        一、挑选技巧
+                    </h2>
+                    <div class="desc-main">
+                        <ol>
+                            <li><strong>犬的来源：</strong>首先，大家要切记：健康的好犬一定来自于专业的犬场，来自职业的繁殖者，绝不是那些狗贩子、私人家庭、宠物店、狗市。</li>
+                            <li><strong>幼犬生活环境：</strong>注意幼犬是否群居，群居的幼犬说明是健康的，相反独自居住的幼犬就要注意，可能是该犬患病被饲养人员隔离开，犬舍是不会让患病狗狗与健康狗狗同居的，防止传染。</li>
+                            <li><strong>识别犬的健康：</strong>挑选犬时，看犬是否有眼屎、泪痕、鼻涕，耳朵是否干净，鼻镜是否湿润。有眼屎、泪痕和鼻涕、耳朵内部不干净、鼻镜干燥或非常湿润，以上症状有任何一种说明该犬有问题，你就应该特别注意，慎重考虑是否购买。</li>
+                            <li><strong>鉴别犬的精神：</strong>牵出来的犬，看到陌生人害怕、迟疑不前、目光闪烁、尾巴夹紧、这样的犬肯定缺少环境锻炼，对适应新的生活环境可能有问题，不建议购买。</li>
+                            <li><strong>注射疫苗情况：</strong>注射疫苗是防止犬患病唯一方法，一般幼犬4-6周注射第一针（二联）疫苗，6-8周注射第二针（四联）疫苗，10-12周注射第三针（六联）+狂犬疫苗，一般建议至少驱虫2次并注射完2针疫苗再购买或带回家中。</li>
+                            <li><strong>识别犬的品相：</strong>如何辨别一只优质品相/血统的狗狗，请根据您想购买的狗狗的“犬种特征”进行识别（关注“宠物购”微信服务号，回复你所要购买狗狗的犬种，如：萨摩耶、金毛等。即可获得该犬种的识别方法，以便到犬舍现场挑选狗狗时对照挑选）</li>
+                        </ol>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="desc-tit">
+                        二、狗市卖家三大派别分辨技巧
+                    </h2>
+                    <div class="desc-main">
+                        <p>当今狗市分为两派：自养派和倒狗派；自养派又分为两种：实力派和繁殖派，所以，目前狗市分为三大派：实力派、繁殖派、倒狗派</p>
+                        <ol>
+                            <li>
+                                <strong>实力派特征：</strong>
+                                <p>
+                                    ①　简介：实力派的犬首先是自家养殖场繁殖的，在狗狗出生30天后就开始做疫苗，至少做2针，而且质量要比繁殖派和倒狗派好得多，不过价格较高。但是至少买回去的狗不用去医院，狗狗治个病至少都是大几百、上千，所以，如何选择各位朋友心里应该清楚了（建议初次养狗者从此渠道购买，否则会因你照顾不周导致狗狗生病，后续花费很大）
+                                </p>
+                                <p>
+                                    ②　狗狗存活率：98%以上
+                                </p>
+                                <p>
+                                    ③　狗狗纯种度：极高，甚至有些是血统狗
+                                </p>
+                                <p>
+                                    ④　价格：较高（例：雪纳瑞：3000）
+                                </p>
+                            </li>
+                            <li>
+                                <strong>繁殖派特征：</strong>
+                                <p>
+                                    简介：狗狗为自家狗场繁殖的，但是大多没注射疫苗，如果回家照顾不周，很容易生病，医疗费少则几百，多则上千（用户根据自身情况决定，有养犬经验者可以考虑繁殖派，毕竟价格便宜）
+                                </p>
+                                <p>
+                                    ②　狗狗存活率：50%以上
+                                </p>
+                                <p>
+                                    ③　狗狗纯种度：较高，一般为纯种，但不会有血统狗
+                                </p>
+                                <p>
+                                    ④　价格：正常市价（例：雪纳瑞：1500）
+                                </p>
+                            </li>
+                            <li>
+                                <strong>倒狗派特征：</strong>
+                                <p>
+                                    ①　简介：狗狗都是从各种渠道（私人、流浪狗、串串等）收来，来源非常不正规，狗狗存活率也极低，而且经常连环蒙人（坚决不建议用户选择此渠道买狗）
+                                </p>
+                                <p>
+                                    ②　狗狗存活率：10%左右
+                                </p>
+                                <p>
+                                    ③　狗狗纯种度：一般，有很多为串串
+                                </p>
+                                <p>
+                                    ④　价格：正常市价（例：雪纳瑞：1500）
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="desc-tit">
+                        三、当今狗市、宠物店、直营店十大阴险招术
+                    </h2>
+                    <div class="desc-main">
+                        <ol>
+                            <li>
+                                <strong>签保障协议</strong>
+                                <p>
+                                    最大的阴谋/连环圈套：现在很多直营店、宠物店和狗市都会承诺和你签购犬协议，病狗包换，其实这是天大的圈套。当你第一只狗买回去死了以后返回去找售犬商家时，他们不会退钱给你，但同意给你换一只，不过要加钱，因为他们会说现在给你换的这一只狗品相比你之前买的好（一般加500-2000），当你第二只狗又带回去后，过了几天又会死掉，然后你还可以去换，还是要加钱，这样的例子各位朋友可以去网上搜一搜，太多太多，这也是目前最流行的骗术。
+                                </p>
+                            </li>
+                            <li>
+                                <strong>隐瞒来路</strong>
+                                <p>
+                                    一般你去直营店、宠物店或狗市，店里的销售人员都会告诉你他们的狗是自家狗场繁殖的，其实都是从各种渠道超低价收来的（这些狗往往是100-500甚至几十元收来的，有没有问题大家也应该明白了），当你问他能不能去你们养殖场购买或挑选时，他们都会回答你：养殖场很远（在！@#￥%……&*，反正就是你一听就会放弃去的地方）而且不准外人进入。（大家可以按小编的方式去店里试试，看他们如何回答）
+                                </p>
+                            </li>
+                            <li>
+                                <strong>给病狗注入血清</strong>
+                                <p>
+                                    经过长途运输，一些宠物狗在笼子里经过挤压和缺氧等不利生活条件下，经常得病。而一些无良商贩，不是抓紧给这些得病或者亚健康的狗治病（因为治病时间长、费用高），而是对病狗注射血清，使之短时间里看起很精神，甚至兴奋得生龙活虎。但是，这些狗不久就会原形毕露，血清还能加剧病情，导致病狗的死亡。
+                                </p>
+                            </li>
+                            <li>
+                                <strong>隐瞒年龄</strong>
+                                <p>
+                                    据饲养犬的业内专业人士透露，一般幼犬3个月以内（或打完2针疫苗后）才能出售，一般的直营店、宠物店和狗市在售的狗都是45-60天（不超过2月）的狗，这样的狗拿回家养很容易生病。
+                                </p>
+                            </li>
+                            <li>
+                                <strong>隐瞒品种</strong>
+                                <p>
+                                    无良商贩经常将一些品相不佳、血统不纯的狗狗，推销给不懂狗的消费者，把中华田园犬说成是松狮、秋田、柴犬的多的是（小编有一次去一家直营店买狗就是，销售人员指着只土狗告诉我这是秋田犬，600块，我当时心里就笑喷了，秋田纯种的都一万起价，这卖600，难道我要赚大发了。。。哈哈），所以，购买狗狗的朋友们，你们首先要清楚自己买什么狗，然后在我们宠物购上面的“犬种特征”当中认真了解一下你所要购买的狗狗特征再去挑选爱犬。
+                                </p>
+                            </li>
+                            <li>
+                                <strong>美容染色</strong>
+                                <p>
+                                    买狗的人大都喜欢狗狗毛泽光亮、毛色纯净。而一些不良商贩将待售的宠物狗染色，通过美容狗的外形，抬升狗的品相，以此卖一个好价钱。殊不知，这些染色的化学药剂大都有腐蚀作用，给狗的皮肤造成伤害，对狗的健康十分不利。小编调查发现，这招大多用在泰迪（贵宾）、松狮、大白熊、雪獒等犬种身上。
+                                </p>
+                            </li>
+                            <li>
+                                <strong>用父母做幌子</strong>
+                                <p>
+                                    俗话说，虎父无犬子。一对品相优良的狗父母所生的狗崽，品相自然受人追捧。买狗者在观察待售的狗崽时，很喜欢关心这只小狗的父母长得如何。无良商贩经常用品相优良的大狗放置在待售的狗崽边，当买狗者询问，他们习惯性指着一只品相上佳的大狗称：它就是这窝小狗的父亲(母亲)，小狗长大就是这个样子。这招用的最多的是狗市，所以，提醒大家：不要追捧狗的父母，一只品相好的狗从幼犬品相上就能看出，最重要是懂得识别方法（仔细阅读我们的“犬种特征”)
+                                </p>
+                            </li>
+                            <li>
+                                <strong>给狗喷香水</strong>
+                                <p>
+                                    很多病狗，特别是有皮肤病的狗都会有很难闻的味道，这时给它洗澡后喷上香水就可以掩盖臭味了，所以看见香喷喷的狗狗特别要注意（一般的正规养殖场是不会对幼犬喷香水和洗澡的）。这招也用在体味特别大的犬种身上。例如：沙皮，可卡，北京犬等
+                                </p>
+                            </li>
+                            <li>
+                                <strong>注射止血针</strong>
+                                <p>
+                                    很多染了犬瘟、细小等病毒的狗都会出现拉血现象，这时打针后可以一时止住，可是如果不马上治疗死亡率会很高的，可买狗时你是没法知道的。
+                                </p>
+                            </li>
+                            <li>
+                                <strong>给狗洗澡</strong>
+                                <p>
+                                    把狗洗干净就算你看了他的眼睛，耳朵，肛门都是干干净净的、身上也是香喷喷的，这样就算你按书上写的也检查不出什么了，所以洗的很干净的狗也要注意了，还是那句话，正规的养殖场是不会给幼犬洗澡的，所以，幼犬身上闻起香喷喷的一定要慎重购买。
+                                </p>
+                            </li>
+                        </ol>
                     </div>
                 </div>
             </div>
-            <div class="row dog-select-row">
-                <div class="col-1 dog-select-title">体型：</div>
-                <div class="col-3">
-                    <ul class="nav nav-pills" data-name="tixing">
-                        <li data-value="大型犬"><a href="javascript:">大型犬</a></li>
-                        <li data-value="中型犬"><a href="javascript:">中型犬</a></li>
-                        <li data-value="小型犬"><a href="javascript:">小型犬</a></li>
-                    </ul>
-                </div>
-                <div class="col-1 dog-select-title">友善：</div>
-                <div class="col-3">
-                    <ul class="nav nav-pills"  data-name="youshan">
-                        <li data-value="3"><a href="javascript:">很友善</a></li>
-                        <li data-value="1"><a href="javascript:">不友善</a></li>
-                        <li data-value="2"><a href="javascript:">一般</a></li>
-                    </ul>
-                </div>
-                <div class="col-1 dog-select-title">美容频率：</div>
-                <div class="col-3">
-                    <ul class="nav nav-pills" data-name="meirong_hz">
-                        <li data-value="3"><a href="javascript:">高</a></li>
-                        <li data-value="1"><a href="javascript:">低</a></li>
-                        <li data-value="2"><a href="javascript:">一般</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row dog-select-row">
-                <div class="col-1 dog-select-title">训练：</div>
-                <div class="col-3">
-                    <ul class="nav nav-pills" data-name="xulian">
-                        <li data-value="3"><a href="javascript:">好训练</a></li>
-                        <li data-value="1"><a href="javascript:">难训练</a></li>
-                        <li data-value="2"><a href="javascript:">一般</a></li>
-                    </ul>
-                </div>
-                <div class="col-1 dog-select-title">掉毛：</div>
-                <div class="col-3">
-                    <ul class="nav nav-pills" data-name="diaomao">
-                        <li data-value="1"><a href="javascript:">不掉毛</a></li>
-                        <li data-value="3"><a href="javascript:">易掉毛</a></li>
-                        <li data-value="2"><a href="javascript:">一般</a></li>
-                    </ul>
-                </div>
-                <div class="col-1 dog-select-title">吠叫：</div>
-                <div class="col-3">
-                    <ul class="nav nav-pills" data-name="xijiao">
-                        <li data-value="3"><a href="javascript:">喜欢</a></li>
-                        <li data-value="1"><a href="javascript:">不喜欢</a></li>
-                        <li data-value="2"><a href="javascript:">一般</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row dog-select-row">
-                <div class="col-1 dog-select-title">运动：</div>
-                <div class="col-3">
-                    <ul class="nav nav-pills" data-name="yundong">
-                        <li data-value="3"><a href="javascript:">量大</a></li>
-                        <li data-value="1"><a href="javascript:">量少</a></li>
-                        <li data-value="2"><a href="javascript:">一般</a></li>
-                    </ul>
-                </div>
-                <div class="col-1 dog-select-title">口水：</div>
-                <div class="col-3">
-                    <ul class="nav nav-pills" data-name="koushui">
-                        <li data-value="3"><a href="javascript:">量大</a></li>
-                        <li data-value="1"><a href="javascript:">量少</a></li>
-                        <li data-value="2"><a href="javascript:">一般</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row-separate row"></div>
-        <div class="row" id="js-pet-list">
-        	{% for knowledge in knowledges %}
-            <div class="col-1_5 pet-wap" data-id="{{ knowledge.id }}">
-                <div class="pet-box">
-                    <img data-original="{{ knowledge.imgurl }}" class="img-full pet-img js-lazy" src="{{'imgs/loading.gif'|assets}}"/>
-                    <p class="pet-name">{{ knowledge.name }}</p>
-                </div>
-            </div>
-            {% endfor %}
-            <p class="no-result text-center hide">没有找到符合条件的犬种</p>
         </div>
     </div>
-    <div class="container content-container knowledge-content">
-        <div>
-            <h2 class="desc-tit">
-                <span class="placard">犬</span> 挑选技巧
-            </h2>
-            <div class="desc-main">
-                <ol>
-                    <li><strong>犬的来源：</strong>首先，大家要切记：健康的好犬一定来自于专业的犬场，来自职业的繁殖者，绝不是那些狗贩子、私人家庭、宠物店、狗市。</li>
-                    <li><strong>幼犬生活环境：</strong>注意幼犬是否群居，群居的幼犬说明是健康的，相反独自居住的幼犬就要注意，可能是该犬患病被饲养人员隔离开，犬舍是不会让患病狗狗与健康狗狗同居的，防止传染。</li>
-                    <li><strong>识别犬的健康：</strong>挑选犬时，看犬是否有眼屎、泪痕、鼻涕，耳朵是否干净，鼻镜是否湿润。有眼屎、泪痕和鼻涕、耳朵内部不干净、鼻镜干燥或非常湿润，以上症状有任何一种说明该犬有问题，你就应该特别注意，慎重考虑是否购买。</li>
-                    <li><strong>鉴别犬的精神：</strong>牵出来的犬，看到陌生人害怕、迟疑不前、目光闪烁、尾巴夹紧、这样的犬肯定缺少环境锻炼，对适应新的生活环境可能有问题，不建议购买。</li>
-                    <li><strong>注射疫苗情况：</strong>注射疫苗是防止犬患病唯一方法，一般幼犬4-6周注射第一针（二联）疫苗，6-8周注射第二针（四联）疫苗，10-12周注射第三针（六联）+狂犬疫苗，一般建议至少驱虫2次并注射完2针疫苗再购买或带回家中。</li>
-                    <li><strong>识别犬的品相：</strong>如何辨别一只优质品相/血统的狗狗，请根据您想购买的狗狗的“犬种特征”进行识别（关注“宠物购”微信服务号，回复你所要购买狗狗的犬种，如：萨摩耶、金毛等。即可获得该犬种的识别方法，以便到犬舍现场挑选狗狗时对照挑选）</li>
-                </ol>
-            </div>
-        </div>
-        <div>
-            <h2 class="desc-tit">
-                <span class="placard">技</span> 狗市卖家三大派别分辨技巧
-            </h2>
-            <div class="desc-main">
-                <p>当今狗市分为两派：自养派和倒狗派；自养派又分为两种：实力派和繁殖派，所以，目前狗市分为三大派：实力派、繁殖派、倒狗派</p>
-                <ol>
-                    <li>
-                        <strong>实力派特征：</strong>
-                        <p>
-                            ①　简介：实力派的犬首先是自家养殖场繁殖的，在狗狗出生30天后就开始做疫苗，至少做2针，而且质量要比繁殖派和倒狗派好得多，不过价格较高。但是至少买回去的狗不用去医院，狗狗治个病至少都是大几百、上千，所以，如何选择各位朋友心里应该清楚了（建议初次养狗者从此渠道购买，否则会因你照顾不周导致狗狗生病，后续花费很大）
-                        </p>
-                        <p>
-                            ②　狗狗存活率：98%以上
-                        </p>
-                        <p>
-                            ③　狗狗纯种度：极高，甚至有些是血统狗
-                        </p>
-                        <p>
-                            ④　价格：较高（例：雪纳瑞：3000）
-                        </p>
-                    </li>
-                    <li>
-                        <strong>繁殖派特征：</strong>
-                        <p>
-                            简介：狗狗为自家狗场繁殖的，但是大多没注射疫苗，如果回家照顾不周，很容易生病，医疗费少则几百，多则上千（用户根据自身情况决定，有养犬经验者可以考虑繁殖派，毕竟价格便宜）
-                        </p>
-                        <p>
-                            ②　狗狗存活率：50%以上
-                        </p>
-                        <p>
-                            ③　狗狗纯种度：较高，一般为纯种，但不会有血统狗
-                        </p>
-                        <p>
-                            ④　价格：正常市价（例：雪纳瑞：1500）
-                        </p>
-                    </li>
-                    <li>
-                        <strong>倒狗派特征：</strong>
-                        <p>
-                            ①　简介：狗狗都是从各种渠道（私人、流浪狗、串串等）收来，来源非常不正规，狗狗存活率也极低，而且经常连环蒙人（坚决不建议用户选择此渠道买狗）
-                        </p>
-                        <p>
-                            ②　狗狗存活率：10%左右
-                        </p>
-                        <p>
-                            ③　狗狗纯种度：一般，有很多为串串
-                        </p>
-                        <p>
-                            ④　价格：正常市价（例：雪纳瑞：1500）
-                        </p>
-                    </li>
-                </ol>
-            </div>
-        </div>
-        <div>
-            <h2 class="desc-tit">
-                <span class="placard">辨</span> 当今狗市、宠物店、直营店十大阴险招术
-            </h2>
-            <div class="desc-main">
-                <ol>
-                    <li>
-                        <strong>签保障协议</strong>
-                        <p>
-                            最大的阴谋/连环圈套：现在很多直营店、宠物店和狗市都会承诺和你签购犬协议，病狗包换，其实这是天大的圈套。当你第一只狗买回去死了以后返回去找售犬商家时，他们不会退钱给你，但同意给你换一只，不过要加钱，因为他们会说现在给你换的这一只狗品相比你之前买的好（一般加500-2000），当你第二只狗又带回去后，过了几天又会死掉，然后你还可以去换，还是要加钱，这样的例子各位朋友可以去网上搜一搜，太多太多，这也是目前最流行的骗术。
-                        </p>
-                    </li>
-                    <li>
-                        <strong>隐瞒来路</strong>
-                        <p>
-                            一般你去直营店、宠物店或狗市，店里的销售人员都会告诉你他们的狗是自家狗场繁殖的，其实都是从各种渠道超低价收来的（这些狗往往是100-500甚至几十元收来的，有没有问题大家也应该明白了），当你问他能不能去你们养殖场购买或挑选时，他们都会回答你：养殖场很远（在！@#￥%……&*，反正就是你一听就会放弃去的地方）而且不准外人进入。（大家可以按小编的方式去店里试试，看他们如何回答）
-                        </p>
-                    </li>
-                    <li>
-                        <strong>给病狗注入血清</strong>
-                        <p>
-                            经过长途运输，一些宠物狗在笼子里经过挤压和缺氧等不利生活条件下，经常得病。而一些无良商贩，不是抓紧给这些得病或者亚健康的狗治病（因为治病时间长、费用高），而是对病狗注射血清，使之短时间里看起很精神，甚至兴奋得生龙活虎。但是，这些狗不久就会原形毕露，血清还能加剧病情，导致病狗的死亡。
-                        </p>
-                    </li>
-                    <li>
-                        <strong>隐瞒年龄</strong>
-                        <p>
-                            据饲养犬的业内专业人士透露，一般幼犬3个月以内（或打完2针疫苗后）才能出售，一般的直营店、宠物店和狗市在售的狗都是45-60天（不超过2月）的狗，这样的狗拿回家养很容易生病。
-                        </p>
-                    </li>
-                    <li>
-                        <strong>隐瞒品种</strong>
-                        <p>
-                            无良商贩经常将一些品相不佳、血统不纯的狗狗，推销给不懂狗的消费者，把中华田园犬说成是松狮、秋田、柴犬的多的是（小编有一次去一家直营店买狗就是，销售人员指着只土狗告诉我这是秋田犬，600块，我当时心里就笑喷了，秋田纯种的都一万起价，这卖600，难道我要赚大发了。。。哈哈），所以，购买狗狗的朋友们，你们首先要清楚自己买什么狗，然后在我们宠物购上面的“犬种特征”当中认真了解一下你所要购买的狗狗特征再去挑选爱犬。
-                        </p>
-                    </li>
-                    <li>
-                        <strong>美容染色</strong>
-                        <p>
-                            买狗的人大都喜欢狗狗毛泽光亮、毛色纯净。而一些不良商贩将待售的宠物狗染色，通过美容狗的外形，抬升狗的品相，以此卖一个好价钱。殊不知，这些染色的化学药剂大都有腐蚀作用，给狗的皮肤造成伤害，对狗的健康十分不利。小编调查发现，这招大多用在泰迪（贵宾）、松狮、大白熊、雪獒等犬种身上。
-                        </p>
-                    </li>
-                    <li>
-                        <strong>用父母做幌子</strong>
-                        <p>
-                            俗话说，虎父无犬子。一对品相优良的狗父母所生的狗崽，品相自然受人追捧。买狗者在观察待售的狗崽时，很喜欢关心这只小狗的父母长得如何。无良商贩经常用品相优良的大狗放置在待售的狗崽边，当买狗者询问，他们习惯性指着一只品相上佳的大狗称：它就是这窝小狗的父亲(母亲)，小狗长大就是这个样子。这招用的最多的是狗市，所以，提醒大家：不要追捧狗的父母，一只品相好的狗从幼犬品相上就能看出，最重要是懂得识别方法（仔细阅读我们的“犬种特征”)
-                        </p>
-                    </li>
-                    <li>
-                        <strong>给狗喷香水</strong>
-                        <p>
-                            很多病狗，特别是有皮肤病的狗都会有很难闻的味道，这时给它洗澡后喷上香水就可以掩盖臭味了，所以看见香喷喷的狗狗特别要注意（一般的正规养殖场是不会对幼犬喷香水和洗澡的）。这招也用在体味特别大的犬种身上。例如：沙皮，可卡，北京犬等
-                        </p>
-                    </li>
-                    <li>
-                        <strong>注射止血针</strong>
-                        <p>
-                            很多染了犬瘟、细小等病毒的狗都会出现拉血现象，这时打针后可以一时止住，可是如果不马上治疗死亡率会很高的，可买狗时你是没法知道的。
-                        </p>
-                    </li>
-                    <li>
-                        <strong>给狗洗澡</strong>
-                        <p>
-                            把狗洗干净就算你看了他的眼睛，耳朵，肛门都是干干净净的、身上也是香喷喷的，这样就算你按书上写的也检查不出什么了，所以洗的很干净的狗也要注意了，还是那句话，正规的养殖场是不会给幼犬洗澡的，所以，幼犬身上闻起香喷喷的一定要慎重购买。
-                        </p>
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
+</div>
 
-    <div class="modal fade" id="js-knowledge-buy-modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><span id="js-title"></span>基本资料</h4>
-          </div>
-          <div class="modal-body">
-            <div class="media">
-              <div class="pull-left">
-                <img class="media-object" src="{{ 'imgs/loading.gif'|assets }}" id="js-looks">
-              </div>
-              <div class="media-body">
-                <table class="table table-pet-detail">
-                    <colgroup>
-                        <col width="30%"/>
-                        <col width="30%"/>
-                        <col width="40%"/>
-                    </colgroup>
-                    <tr>
-                        <td>全名：<span id="js-name"></span></td>
-                        <td>价格：<span id="js-price"></span></td>
-                        <td>类型：<span id="js-type"></span></td>
-                    </tr>
-                    <tr>
-                        <td>体重：<span id="js-weight"></span></td>
-                        <td>肩高：<span id="js-height"></span></td>
-                        <td>智商：<span id="js-iq"></span></td>
-                    </tr>
-                    <tr>
-                        <td>颜色：<span id="js-color"></span></td>
-                        <td>饲养：<span id="js-feeding"></span></td>
-                        <td>功能：<span id="js-function"></span></td>
-                    </tr>
-                </table>
-              </div>
+<div class="modal" id="js-modal-filter">
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#js-modal-filter">&times;</a>
+        <h1 class="title">筛选</h1>
+    </header>
+    <div class="content">
+        <form class="content-padded" id="js-form-filter">
+            <input type="search" name="key" id="js-key-input" placeholder="可根据名字搜索犬种"/>
+            <div class="row row-margin">
+                <div class="col col-half">
+                    <select class="select-fixed" name="tixing">
+                        <option value="">体型</option>
+                        <option value="大型犬">大型犬</option>
+                        <option value="中型犬">中型犬</option>
+                        <option value="小型犬">小型犬</option>
+                    </select>
+                </div>
+                <div class="col col-half">
+                    <select class="select-fixed" name="youshan">
+                        <option value="">友善</option>
+                        <option value="3">很友善</option>
+                        <option value="1">不友善</option>
+                        <option value="2">一般</option>
+                    </select>
+                </div>
+                <div class="col col-half">
+                    <select class="select-fixed" name="meirong_hz">
+                        <option value="">美容频率</option>
+                        <option value="3">高</option>
+                        <option value="1">低</option>
+                        <option value="2">一般</option>
+                    </select>
+                </div>
+                <div class="col col-half">
+                    <select class="select-fixed" name="xulian">
+                        <option value="">训练</option>
+                        <option value="3">好训练</option>
+                        <option value="1">难训练</option>
+                        <option value="2">一般</option>
+                    </select>
+                </div>
+                <div class="col col-half">
+                    <select class="select-fixed" name="diaomao">
+                        <option value="">掉毛</option>
+                        <option value="1">不掉毛</option>
+                        <option value="3">易掉毛</option>
+                        <option value="2">一般</option>
+                    </select>
+                </div>
+                <div class="col col-half">
+                    <select class="select-fixed" name="xijiao">
+                        <option value="">吠叫</option>
+                        <option value="3">喜欢</option>
+                        <option value="1">不喜欢</option>
+                        <option value="2">一般</option>
+                    </select>
+                </div>
+                <div class="col col-half">
+                    <select class="select-fixed" name="yundong">
+                        <option value="">运动</option>
+                        <option value="3">量大</option>
+                        <option value="1">量少</option>
+                        <option value="2">一般</option>
+                    </select>
+                </div>
+                <div class="col col-half">
+                    <select class="select-fixed" name="koushui">
+                        <option value="">口水</option>
+                        <option value="3">量大</option>
+                        <option value="1">量少</option>
+                        <option value="2">一般</option>
+                    </select>
+                </div>
             </div>
-            <div class="pet-rate-wrap">
-                <table class="table table-pet-rate">
-                    <colgroup>
-                        <col width="35%"/>
-                        <col width="35%"/>
-                        <col width="30%"/>
-                    </colgroup>
-                    <tr>
-                        <td>
-                            <label>粘人程度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-sweet-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>喜叫程度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-bark-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>对小孩友善</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-child-friendly-rate"></span>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>对生人友善</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-stranger-friendly-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>对动物友善</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-animal-friendly-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>运动量大小</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-sport-rate"></span>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>可训练性</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-train-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                           <label>耐寒程度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-cold-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>耐热程度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-hot-rate"></span>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>城市适应度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-city-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>掉毛程度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-hair-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>体味程度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-odour-rate"></span>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>美容频度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-beauty-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>口水程度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-saliva-rate"></span>
-                            </span>
-                        </td>
-                        <td>
-                            <label>活泼程度</label>
-                            <span class="rate rate-dog">
-                                <span class="rate-content" id="js-lively-rate"></span>
-                            </span>
-                        </td>
-                    </tr>
-                </table>
-                <div class="clearfix">
-                    <p class="pull-right">
-                        详见
-                        <a href="#" target="_blank" id="js-bd-baike">百度百科</a>
-                        -
+            <button class="btn btn-block btn-primary">确定</button>
+            <a class="btn btn-block" href="#js-modal-filter">取消</a>
+        </form>
+    </div>
+</div>
+
+<div class="modal knowledge-buy-moddal" id="js-modal-detail">
+    <header class="bar bar-nav">
+        <a class="icon icon-close pull-right" href="#js-modal-detail">&times;</a>
+        <h1 class="title"><span id="js-title"></span>基本资料</h1>
+    </header>
+    <div class="content">
+        <div class="text-center">
+            <img id="js-looks" />
+        </div>
+        <ul class="table-view table-view-extend">
+            <li class="table-view-cell">
+                <span class="text-muted">全名：</span><span id="js-name"></span>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted">价格：</span><span id="js-price"></span>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted">类型：</span><span id="js-type"></span>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted">体重：</span><span id="js-weight"></span>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted">肩高：</span><span id="js-height"></span>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted">智商：</span><span id="js-iq"></span>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted">颜色：</span><span id="js-color"></span>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted">饲养：</span><span id="js-feeding"></span>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted"> 功能：</span><span id="js-function"></span>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">粘人程度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-sweet-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">喜叫程度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-bark-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">对小孩友善：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-child-friendly-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">对生人友善：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-stranger-friendly-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">对动物友善：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-animal-friendly-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">运动量大小：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-sport-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">可训练性：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-train-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">耐寒程度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-cold-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">耐热程度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-hot-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">城市适应度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-city-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">掉毛程度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-hair-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">体味程度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-odour-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">美容频度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-beauty-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">口水程度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-saliva-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell media">
+                <span class="media-object pull-left text-muted">活泼程度：</span>
+                <div class="media-body">
+                    <span class="rate">
+                        <span class="rate-content" id="js-lively-rate"></span>
+                    </span>
+                </div>
+            </li>
+            <li class="table-view-cell">
+                <span class="text-muted">
+                    详见：<a href="#" target="_blank" id="js-bd-baike">百度百科</a>
+                            -
                         <a href="#" target="_blank" id="js-bd-image">百度图片</a>
-                    </p>
-                </div>
-            </div>
-          </div>
+                </span>
+            </li>
+        </ul>
+        <div class="content-padded">
+            <a class="btn btn-block" href="#js-modal-detail">关闭</a>
         </div>
-      </div>
     </div>
-
 </div>
 
 {% endblock %}
@@ -424,38 +433,39 @@
 <script>
 
 (function($){
-    var $modal = $('#js-knowledge-buy-modal'),
-        $title = $modal.find('#js-title'),
+    var $modalDetail = $('#js-modal-detail'),
+        $detailConent = $modalDetail.find('.content'),
+        $title = $modalDetail.find('#js-title'),
         $petList = $('#js-pet-list'),
-        $petWrap = $petList.find('.pet-wap'),
-        $bdBaike = $modal.find('#js-bd-baike'),
-        $bdImage = $modal.find('#js-bd-image'),
+        $petWrap = $petList.find('.pet-wrap'),
+        $bdBaike = $modalDetail.find('#js-bd-baike'),
+        $bdImage = $modalDetail.find('#js-bd-image'),
         keyMap = {
-            huopo: $modal.find('#js-lively-rate'),
-            diaomao: $modal.find('#js-hair-rate'),
-            animfred: $modal.find('#js-animal-friendly-rate'),
-            cityfred: $modal.find('#js-city-rate'),
-            name: $modal.find('#js-name'),
-            maleheight: $modal.find('#js-height'),
-            kidfred: $modal.find('#js-child-friendly-rate'),
-            meirong_hz: $modal.find('#js-beauty-rate'),
-            naire: $modal.find('#js-hot-rate'),
-            nianren: $modal.find('#js-sweet-rate'),
-            nickname: $modal.find('#js-type'),
-            koushui: $modal.find('#js-saliva-rate'),
-            otherfred: $modal.find('#js-stranger-friendly-rate'),
-            xijiao: $modal.find('#js-bark-rate'),
-            xulian: $modal.find('#js-train-rate'),
-            yundong: $modal.find('#js-sport-rate'),
-            naihan: $modal.find('#js-cold-rate'),
-            tiwei: $modal.find('#js-odour-rate'),
-            imgurl: $modal.find('#js-looks'),
-            jiage: $modal.find('#js-price'),
-            tizhong: $modal.find('#js-weight'),
-            color: $modal.find('#js-color'),
-            siyang: $modal.find('#js-feeding'),
-            gongneng: $modal.find('#js-function'),
-            zhishang: $modal.find('#js-iq')
+            huopo: $modalDetail.find('#js-lively-rate'),
+            diaomao: $modalDetail.find('#js-hair-rate'),
+            animfred: $modalDetail.find('#js-animal-friendly-rate'),
+            cityfred: $modalDetail.find('#js-city-rate'),
+            name: $modalDetail.find('#js-name'),
+            maleheight: $modalDetail.find('#js-height'),
+            kidfred: $modalDetail.find('#js-child-friendly-rate'),
+            meirong_hz: $modalDetail.find('#js-beauty-rate'),
+            naire: $modalDetail.find('#js-hot-rate'),
+            nianren: $modalDetail.find('#js-sweet-rate'),
+            nickname: $modalDetail.find('#js-type'),
+            koushui: $modalDetail.find('#js-saliva-rate'),
+            otherfred: $modalDetail.find('#js-stranger-friendly-rate'),
+            xijiao: $modalDetail.find('#js-bark-rate'),
+            xulian: $modalDetail.find('#js-train-rate'),
+            yundong: $modalDetail.find('#js-sport-rate'),
+            naihan: $modalDetail.find('#js-cold-rate'),
+            tiwei: $modalDetail.find('#js-odour-rate'),
+            imgurl: $modalDetail.find('#js-looks'),
+            jiage: $modalDetail.find('#js-price'),
+            tizhong: $modalDetail.find('#js-weight'),
+            color: $modalDetail.find('#js-color'),
+            siyang: $modalDetail.find('#js-feeding'),
+            gongneng: $modalDetail.find('#js-function'),
+            zhishang: $modalDetail.find('#js-iq')
         },
         rateMap = {
             diaomao:'', animfred:'', cityfred:'', kidfred:'', meirong_hz:'',
@@ -463,11 +473,12 @@
             naihan:'', tiwei:'', xulian:'', nianren:'', huopo:''
         };
 
-    $petList.on('click', '.pet-wap', function(){
+    $petList.on('click', '.pet-wrap', function(){
 
         var $this = $(this);
 
-        $modal.addClass('loading').modal('show');
+        $detailConent.scrollTop(0);
+        $modalDetail.addClass('active');
 
         $.ajax('./', {
             data: {id: $this.data('id')},
@@ -493,9 +504,9 @@
                 $bdBaike.attr('href',  '//baike.baidu.com/item/' + encodeURIComponent(data.name));
                 $bdImage.attr('href',  '//image.baidu.com/i?tn=baiduimage&ie=utf-8&word=' + encodeURIComponent(data.name));
 
-                $modal.removeClass('loading');
+                $modalDetail.removeClass('loading');
             }else{
-                $modal.modal('hide');
+                $modalDetail.modal('hide');
                 alert(data.message);
             }
         });
@@ -503,33 +514,52 @@
     });
 
     //filter
-    var $petFilter = $('#js-pet-filter'),
-        $keyInput = $('#js-key-input'),
-        $btnSearch = $petFilter.find('.btn-search'),
-        $noResult = $petList.find('.no-result');
-        param = {
-            filter: true,
-            key: '',
-            tixing: '',
-            youshan: '',
-            meirong_hz: '',
-            xulian: '',
-            diaomao: '',
-            xijiao: '',
-            yundong: '',
-            koushui: ''
-        };
+    var $modalFilter = $('#js-modal-filter'),
+        $formFilter = $modalFilter.find('#js-form-filter'),
+        $btnSubmit = $formFilter.find('.btn-primary'),
+        $dogNum = $('#js-dog-num'),
+        $noResult = $petList.find('.no-result'),
+        petIdMap = (function(){
+            var arr = [];
 
-    var petIdMap = (function(){
-        var arr = [];
+            $.each($petWrap, function(idx, el){
+                var $this = $(el);
+                arr[$this.data('id')] = $this;
+            });
 
-        $.each($petWrap, function(idx, el){
-            var $this = $(el);
-            arr[$this.data('id')] = $this;
+            return arr;
+        }());
+
+    $formFilter.on('submit', function(event){
+        event.preventDefault();
+
+        $btnSubmit.prop('disabled', true);
+
+        var data = {filter: true},
+            arr = $formFilter.serializeArray();
+
+        for(var i = 0, len = arr.length; i < len; i++){
+            var curr = arr[i];
+            data[curr.name] = curr.value;
+        }
+
+        $.ajax({
+            url: './',
+            data: data,
+            dataType: 'json',
+            success: function(data){
+                if(data.status == 0){
+                    $modalFilter.removeClass('active');
+                    showById(data.idlist);
+                }else{
+                    alert(data.message);
+                }
+            },
+            complete: function(){
+                $btnSubmit.prop('disabled', false);
+            }
         });
-
-        return arr;
-    }());
+    });
 
     function showById(arr){
         var temp = [];
@@ -539,7 +569,7 @@
         });
 
         $petWrap.addClass('hide');
-
+        $dogNum.text(temp.length);
         temp.length === 0 ? $noResult.removeClass('hide') : $noResult.addClass('hide');
 
         $.each(temp, function(idx, el){
@@ -547,66 +577,6 @@
             el.find('img').trigger('appear');
         });
     }
-
-    function fillActive(){
-        var $active = $petFilter.find('.active');
-
-        $.each($active, function(idx, el){
-            var $this = $(el);
-            param[$this.closest('ul').data('name')] = $this.data('value');
-        });
-    }
-
-    function cancelActive($el){
-        param[$el.closest('ul').data('name')] = '';
-    }
-
-    $keyInput.on('change', function(){
-        param.key = this.value;
-    }).on('keyup', function(e){
-        if(e.keyCode == 13){
-            $btnSearch.trigger('click');
-        }
-    });
-
-    $petFilter.on('click', '.btn-search, li', function(){
-        var $this = $(this);
-
-        if($this.is('.btn-search')){
-            var val = $keyInput.val();
-
-{#            if($.trim(val) === ''){#}
-{#                alert('请输入关键字');#}
-{#                return;#}
-{#            }#}
-
-            param.key = val;
-
-        }else if($this.is('li')){
-            if($this.hasClass('active')){
-               $this.removeClass('active');
-               cancelActive($this);
-            }else{
-                $this.addClass('active').siblings('li').removeClass('active');
-            }
-
-            fillActive();
-        }
-
-        $.ajax({
-            url: './',
-            data: param,
-            dataType: 'json',
-            success: function(data){
-                if(data.status == 0){
-                    showById(data.idlist);
-                }else{
-                    alert(data.message);
-                }
-            }
-        });
-    });
-
 
 }(jQuery));
 

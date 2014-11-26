@@ -8,6 +8,11 @@
   }
 }
 
+//body{
+//  max-width: 640px;
+//  margin: 0 auto;
+//}
+
 .content-common{
   padding-bottom: 51px;
 }
@@ -39,3 +44,27 @@ a{
   }
 }
 
+.middle-space{
+  padding-left: 2em;
+}
+
+.home-slider{
+  .home-slider-content{
+    display: block;
+
+    width: 100%;
+    height: 200px;
+
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+.switch-desktop{
+  text-align: center;
+  padding: 10px 0 20px 0;
+
+  a{
+    color: #333;
+  }
+}
