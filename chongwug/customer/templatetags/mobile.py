@@ -17,9 +17,9 @@ def process_json_file(json_file):
 
 
 manifest_map = {
-    'js': process_json_file(WEB_CONFIG_ROOT + 'mobile/js-manifest.json'),
-    'css': process_json_file(WEB_CONFIG_ROOT + 'mobile/css-manifest.json'),
-    'imgs': process_json_file(WEB_CONFIG_ROOT + 'mobile/imgs-manifest.json'),
+    'js': process_json_file(WEB_CONFIG_ROOT + '/mobile/js-manifest.json'),
+    'css': process_json_file(WEB_CONFIG_ROOT + '/mobile/css-manifest.json'),
+    'imgs': process_json_file(WEB_CONFIG_ROOT + '/mobile/imgs-manifest.json'),
 }
 
 
@@ -27,7 +27,8 @@ manifest_map = {
 def mobile(value):
     flag = ('SERVER_SOFTWARE' in os.environ) or ('TEST_SERVER' in os.environ)
     cdn = CDN_ROOT if (flag or CDN_TEST) else ''
-    production = '' if (flag or CDN_TEST) else 'static/mobile/prod/'
+    production = '' if (flag or CDN_TEST) else '/static/mobile/prod/assets'
+    folder = '/mobile' if (flag or CDN_TEST) else ''
 
     if flag or PROD_TEST or CDN_TEST:
         arr = value.strip().split('/')
@@ -41,6 +42,6 @@ def mobile(value):
         except:
             path = value
 
-        return cdn + '/mobile' + production + '/' + path
+        return cdn + folder + production + '/' + path
     else:
         return '/static/mobile/assets/' + value
