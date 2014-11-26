@@ -9,12 +9,12 @@
       <div class="slide-group">
         {% for ad in ads %}
         <div class="slide">
-            <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}"></a>
+            <a target="_blank" href="{{ ad.tar_url }}"><img src="{{ ad.img_url }}" class="img-full"></a>
         </div>
         {% endfor %}
       </div>
     </div>
-    <ul class="table-view">
+    <ul class="table-view border-top-none">
       {% for direct_farm in direct_farms %}
       <li class="table-view-cell">
         <a class="navigate-right" href="/buy/{{ direct_farm.direct }}/all/0/0/all/all/1/">

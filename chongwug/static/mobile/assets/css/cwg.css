@@ -767,8 +767,7 @@ select {
   width: 100%; }
 
 .slider {
-  overflow: hidden;
-  background-color: #000; }
+  overflow: hidden; }
   .slider .slide-group {
     position: relative;
     font-size: 0;
@@ -1233,6 +1232,9 @@ a {
 .bar-tab .tab-item.active, .bar-tab .tab-item:active {
   color: #ffd401; }
 
+.middle-space {
+  padding-left: 2em; }
+
 .buy .row-filter {
   margin-top: 15px; }
 .buy .buy-title {
@@ -1254,6 +1256,16 @@ a {
   padding-left: 15px;
   color: #ff3500;
   font-weight: bold; }
+.detail .detail-title {
+  line-height: 1.5;
+  margin-bottom: 0; }
+.detail .pet-showcase .media-object {
+  width: 75px; }
+.detail .pet-showcase .btn {
+  border-color: #ff3500;
+  color: #ff3500; }
+.detail .detail-segmented {
+  margin-top: 30px; }
 
 .supplies .supplies-title {
   font-size: 16px;
@@ -1357,6 +1369,9 @@ a {
 .font-xs {
   font-size: 12px; }
 
+.font-lg {
+  font-size: 24px; }
+
 .text-center {
   text-align: center; }
 
@@ -1365,3 +1380,6 @@ a {
 
 .margin-none {
   margin: 0; }
+
+.margin-top-none {
+  margin-top: 0; }

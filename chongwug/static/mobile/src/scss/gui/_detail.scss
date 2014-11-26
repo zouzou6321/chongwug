@@ -19,4 +19,24 @@
       font-weight: bold;
     }
   }
+
+  .detail-title{
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .pet-showcase{
+    .media-object{
+      width: 75px;
+    }
+
+    .btn{
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+  }
+
+  .detail-segmented{
+    margin-top: 30px;
+  }
 }
