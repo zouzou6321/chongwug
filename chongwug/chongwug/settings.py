@@ -31,6 +31,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['.chongwug.com','.chongwug.com.']
+    WAP_ROOT = 'm.chongwug.com'
     
     STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
     # URL prefix for static files.
@@ -60,7 +61,7 @@ elif 'TEST_SERVER' in os.environ:
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['.cwg.com','.cwg.com.','192.168.1.100','192.168.1.100.']
-    
+    WAP_ROOT = '192.168.1.100/m/'
     STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
     # URL prefix for static files.
     # Example: "http://media.lawrence.com/static/"
@@ -90,7 +91,7 @@ else:
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ['localhost']
-
+    WAP_ROOT = '/m'
     STATIC_PATH_URL = url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT,'show_indexes':False  })
     # URL prefix for static files.
     # Example: "http://media.lawrence.com/static/"
