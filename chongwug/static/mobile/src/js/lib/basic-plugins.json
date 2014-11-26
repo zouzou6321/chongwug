@@ -6,5 +6,5 @@
     ,"sliders": true
     ,"toggles": false
     ,"jquery.cookie": true
-    ,"template.js": true
+    ,"template": true
 }
