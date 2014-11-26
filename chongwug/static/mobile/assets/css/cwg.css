@@ -166,7 +166,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 17px;
   line-height: 21px;
-  color: #000;
+  color: #333;
   background-color: #fff; }
 
 a {
@@ -1259,17 +1259,24 @@ a {
   font-size: 16px;
   height: 42px;
   overflow: hidden;
-  color: #000; }
+  color: #333; }
 .supplies .supplies-price {
   font-size: 16px;
   color: #ff3500; }
 
 .bringup .desc-tit {
   font-size: 18px; }
+.bringup li {
+  color: #777;
+  font-size: 14px; }
 .bringup .outline-content {
   height: 63px;
   overflow: hidden;
   margin-bottom: 5px; }
+.bringup p {
+  margin-bottom: 5px; }
+.bringup h2 {
+  line-height: 1.5; }
 
 /**
  * Style trumps; helper and brand classes
