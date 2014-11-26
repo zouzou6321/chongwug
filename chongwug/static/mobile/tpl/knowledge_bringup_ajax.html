@@ -1,21 +1,18 @@
-<div>
-    {% for knowledge in knowledges %}
-    <div class="col-6 outline dashed-top{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}"
-         data-title="{{ knowledge.title }}"
-         data-img="{{ knowledge.imgurl }}"
-         data-date="{{ knowledge.time|date:'Y-m-d' }}"
-         data-from="{{ knowledge.contentfrom }}" >
-        <h4 class="outline-title">
-            <span class="title-limit">{{ knowledge.title }}</span>
-            <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
-        </h4>
+{% for knowledge in knowledges %}
+<li class="table-view-cell outline"
+    data-title="{{ knowledge.title }}"
+    data-img="{{ knowledge.imgurl }}"
+    data-date="{{ knowledge.time|date:'Y-m-d' }}"
+    data-from="{{ knowledge.contentfrom }}" >
+    <a href="#js-article-modal">
+        <h4 class="outline-title">{{ knowledge.title }}</h4>
         <div class="outline-content">
             {{ knowledge.content|safe }}
         </div>
-        <span class="outline-more">查看更多>></span>
-    </div>
-    {% endfor %}
-    {% if pageid %}
-    <a href="./?page={{ pageid }}" class="infinite-more-link hide"></a>
-    {% endif %}
-</div>
+        <p class="pull-right">查看更多&raquo;</p>
+    </a>
+</li>
+{% endfor %}
+{% if pageid %}
+<li class="hide infinite-more-link" data-href="./?page={{ pageid }}"></li>
+{% endif %}
