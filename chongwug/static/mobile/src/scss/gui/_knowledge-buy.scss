@@ -1,0 +1,72 @@
+.knowledge-buy{
+  .desc-tit{
+    font-size: 18px;
+  }
+
+  li{
+    color: #777;
+    font-size: 14px;
+  }
+
+  p{
+    margin-bottom: 5px;
+  }
+
+  h2{
+    line-height: 1.5;
+  }
+
+  .pet-box{
+    margin-bottom: 10px;
+
+    .pet-name{
+      margin-bottom: 0;
+      text-align: center;
+
+      height: 21px;
+      overflow: hidden;
+    }
+
+    .pet-img{
+      border: 1px solid $primary-bg-color;
+    }
+  }
+
+  .row-filter{
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding: 11px 15px;
+    a{
+      color: #333;
+    }
+
+    .icon{
+      font-size: 15px;
+    }
+  }
+}
+
+.knowledge-buy-moddal{
+  .media-object{
+    width: 17 * 6px;
+    overflow: hidden;
+  }
+
+  .rate{
+    position: relative;
+    display: block;
+    height: 21px;
+    background-color: lighten($primary-color, 35%);
+
+    .rate-content{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 21px;
+      width: 0;
+      background-color: $primary-color;
+
+      transition: all 0.5s;
+    }
+  }
+}
