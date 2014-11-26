@@ -26,7 +26,7 @@ def __errorcode__(errornum,otherdata = None):
 
 def getalipayurl(out_trade_no, subject, total_fee,  notify_url,iswap):
     if iswap:
-        return WAPALIPAY.create_direct_pay_by_user_url(out_trade_no=out_trade_no, subject=subject, total_fee=total_fee,seller_account_name="zhifubao@chongwug.com", call_back_url=notify_url)
+        return WAPALIPAY.create_direct_pay_by_user_url(out_trade_no=out_trade_no, total_fee=total_fee,seller_account_name="zhifubao@chongwug.com", call_back_url=notify_url)
     else:
         return ALIPAY.create_direct_pay_by_user_url(out_trade_no=out_trade_no, subject=subject, total_fee=total_fee, notify_url=notify_url)
 
