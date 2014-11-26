@@ -6,7 +6,7 @@ import adapters,traceback,string
 from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-
+from chongwug.settings import WAP_ROOT
 #auth:huhuaiyong
 #date:2014/8/16
 #discription:导航页面展示
@@ -14,6 +14,9 @@ from django.core.mail  import  send_mail
 def nav_page_view(request):
     adapters.UVPVIPtongji(request)
     if 'visitor' not in request.session:
+        if not adapters.is_wap(request):
+            if adapters.redict_wap(request):
+                return HttpResponseRedirect(WAP_ROOT)
         request.session['visitor'] = 1
         data = {}
         data['title'] = u'宠物交易平台'
@@ -23,6 +26,9 @@ def nav_page_view(request):
         else:
             return render_to_response('tpl/nav.html',data)
     else:
+        if not adapters.is_wap(request):
+            if adapters.redict_wap(request):
+                return HttpResponseRedirect(WAP_ROOT + '/home/')
         return HttpResponseRedirect('/home/')
 
 #auth:huhuaiyong

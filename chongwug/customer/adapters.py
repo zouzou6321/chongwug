@@ -12,6 +12,18 @@ from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.contrib.auth.models import User
 from django.contrib import auth
 
+def redict_wap(request):
+    if 'HTTP_USER_AGENT' in request.META:
+        clientkeywords = [ 
+          'nokia', 'sony', 'ericsson', 'mot', 'samsung', 'htc', 'sgh', 'lg', 'sharp', 'sie-'  
+          ,'philips', 'panasonic', 'alcatel', 'lenovo', 'iphone', 'ipod', 'blackberry', 'meizu',   
+          'android', 'netfront', 'symbian', 'ucweb', 'windowsce', 'palm', 'operamini',   
+          'operamobi', 'opera mobi', 'openwave', 'nexusone', 'cldc', 'midp', 'wap', 'mobile']
+        for clientkeyword in clientkeywords:
+            if request.META['HTTP_USER_AGENT'].upper().find(clientkeyword.upper()) >= 0:
+                return True
+    return False
+
 def is_wap(request):
     if request.path_info.find('/m/') == 0:
         return True
