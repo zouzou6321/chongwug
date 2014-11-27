@@ -29,7 +29,7 @@
     }
   };
 
-  window.addEventListener('touchend', function (event) {
+  window.addEventListener('click', function (event) {
     var modal = getModal(event);
     if (modal) {
       if (modal && modal.classList.contains('modal')) {
