@@ -147,7 +147,7 @@ def contactus_view(request):
     adapters.UVPVIPtongji(request)
     data = {}
     data['title'] = u'联系我们| 宠物购交易平台-国内首个活体宠物O2O交易平台'
-    data['description'] = u'联系我们'
+    data['description'] = u'联系我们 宠物购交易平台-国内首个活体宠物O2O交易平台'
     if adapters.is_wap(request):
         return render_to_response('mobile/tpl/contactus.html',data)
     else:
@@ -157,7 +157,7 @@ def workchance_view(request):
     adapters.UVPVIPtongji(request)
     data = {}
     data['title'] = u'工作机会| 宠物购交易平台-国内首个活体宠物O2O交易平台'
-    data['description'] = u'工作机会'
+    data['description'] = u'工作机会 宠物购交易平台-国内首个活体宠物O2O交易平台'
     if adapters.is_wap(request):
         return render_to_response('mobile/tpl/workchance.html',data)
     else:
@@ -167,7 +167,7 @@ def aboutus_view(request):
     adapters.UVPVIPtongji(request)
     data = {}
     data['title'] = u'关于我们| 宠物购交易平台-国内首个活体宠物O2O交易平台'
-    data['description'] = u'关于我们'
+    data['description'] = u'关于我们 宠物购交易平台-国内首个活体宠物O2O交易平台'
     if adapters.is_wap(request):
         return render_to_response('mobile/tpl/aboutus.html',data)
     else:
