@@ -98,14 +98,16 @@
                          data-img="{{ knowledge.imgurl }}"
                          data-date="{{ knowledge.time|date:'Y-m-d' }}"
                          data-from="{{ knowledge.contentfrom }}" >
-                        <h4 class="outline-title">
-                            <span class="title-limit">{{ knowledge.title }}</span>
-                            <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
-                        </h4>
-                        <div class="outline-content">
-                            {{ knowledge.content|safe }}
-                        </div>
-                        <span class="outline-more">查看更多>></span>
+                        <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank">
+                            <h4 class="outline-title">
+                                <span class="title-limit">{{ knowledge.title }}</span>
+                                <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
+                            </h4>
+                            <div class="outline-content">
+                                {{ knowledge.content|safe }}
+                            </div>
+                            <span class="outline-more">查看更多>></span>
+                        </a>
                     </div>
                     {% endfor %}
                     <a href="./?page=1" class="infinite-more-link hide"></a>
@@ -145,53 +147,55 @@
 <script>
 
 (function($){
-    var $modal = $('#js-article-modal'),
-        $modalDialog = $modal.find('.modal-dialog'),
-        $modalBody = $modal.find('.modal-body'),
-        $container = $('#js-outline-container'),
-        loadMap = {};
 
-    $(window).on('resize', function(){
-        var winHeight = $(this).height();
-        $modalDialog.height(winHeight);
-        $modalBody.height(winHeight - 87 - 45);
-    }).trigger('resize');
+{#    var $modal = $('#js-article-modal'),#}
+{#        $modalDialog = $modal.find('.modal-dialog'),#}
+{#        $modalBody = $modal.find('.modal-body'),#}
+{#        $container = $('#js-outline-container'),#}
+{#        loadMap = {};#}
+{##}
+{#    $(window).on('resize', function(){#}
+{#        var winHeight = $(this).height();#}
+{#        $modalDialog.height(winHeight);#}
+{#        $modalBody.height(winHeight - 87 - 45);#}
+{#    }).trigger('resize');#}
+{##}
+{#    $container.on('click', '.outline', function(){#}
+{#        var $this = $(this),#}
+{#            data = $this.data(),#}
+{#            imgUrl = data.img;#}
+{##}
+{#        data.content || (data.content = $.trim($this.find('.outline-content').html()));#}
+{##}
+{#        $modal.addClass('loading').modal('show');#}
+{##}
+{#        if(!loadMap[imgUrl]){#}
+{#            $('<img>').on('load', function(){#}
+{#                loadMap[imgUrl] = true;#}
+{#                updateImg(imgUrl);#}
+{#            }).attr('src', imgUrl);#}
+{#        }else{#}
+{#            updateImg(imgUrl);#}
+{#        }#}
+{##}
+{#        updateModalArticle(data);#}
+{#    });#}
+{##}
+{#    function updateImg(imgUrl){#}
+{#        $modal.find('.article-img').attr('src', imgUrl);#}
+{#        $modal.removeClass('loading');#}
+{#        $modalBody.scrollTop(0);#}
+{#    }#}
+{##}
+{#    function updateModalArticle(data){#}
+{#        for(var i in data){#}
+{#            if(data.hasOwnProperty(i) && i != 'img'){#}
+{#                $modal.find('.article-' + i).html(data[i]);#}
+{#            }#}
+{#        }#}
+{#    }#}
 
-    $container.on('click', '.outline', function(){
-        var $this = $(this),
-            data = $this.data(),
-            imgUrl = data.img;
-
-        data.content || (data.content = $.trim($this.find('.outline-content').html()));
-
-        $modal.addClass('loading').modal('show');
-
-        if(!loadMap[imgUrl]){
-            $('<img>').on('load', function(){
-                loadMap[imgUrl] = true;
-                updateImg(imgUrl);
-            }).attr('src', imgUrl);
-        }else{
-            updateImg(imgUrl);
-        }
-
-        updateModalArticle(data);
-    });
-
-    function updateImg(imgUrl){
-        $modal.find('.article-img').attr('src', imgUrl);
-        $modal.removeClass('loading');
-        $modalBody.scrollTop(0);
-    }
-
-    function updateModalArticle(data){
-        for(var i in data){
-            if(data.hasOwnProperty(i) && i != 'img'){
-                $modal.find('.article-' + i).html(data[i]);
-            }
-        }
-    }
-
+    var $container = $('#js-outline-container');
     $container.waypoint('infinite', {
         items: '.outline'
     });

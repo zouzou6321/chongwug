@@ -44,6 +44,12 @@
       bottom: 0;
     }
   }
+
+  .outline a{
+    &:hover, &:focus{
+      text-decoration: none;
+    }
+  }
 }
 
 .article-modal{

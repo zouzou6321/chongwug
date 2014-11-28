@@ -3561,6 +3561,8 @@ Copyright (c) 2014 Daniel Eden
     width: 100%;
     left: 0;
     bottom: 0; }
+.knowledge-bringup .outline a:hover, .knowledge-bringup .outline a:focus {
+  text-decoration: none; }
 
 .article-modal .article-date {
   padding-right: 15px; }
