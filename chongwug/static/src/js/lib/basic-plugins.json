@@ -18,7 +18,7 @@
     "template": true,
     "jquery.validate": true,
     "jquery.cookie": true,
-    "waypoints": true,
-    "waypoints-infinite": true,
+    "waypoints": false,
+    "waypoints-infinite": false,
     "jquery.scrollUp": true
 }
