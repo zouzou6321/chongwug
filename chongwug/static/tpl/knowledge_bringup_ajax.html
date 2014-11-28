@@ -5,14 +5,16 @@
          data-img="{{ knowledge.imgurl }}"
          data-date="{{ knowledge.time|date:'Y-m-d' }}"
          data-from="{{ knowledge.contentfrom }}" >
-        <h4 class="outline-title">
-            <span class="title-limit">{{ knowledge.title }}</span>
-            <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
-        </h4>
-        <div class="outline-content">
-            {{ knowledge.content|safe }}
-        </div>
-        <span class="outline-more">查看更多>></span>
+        <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank">
+            <h4 class="outline-title">
+                <span class="title-limit">{{ knowledge.title }}</span>
+                <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
+            </h4>
+            <div class="outline-content">
+                {{ knowledge.content|safe }}
+            </div>
+            <span class="outline-more">查看更多>></span>
+        </a>
     </div>
     {% endfor %}
     {% if pageid %}

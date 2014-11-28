@@ -1345,6 +1345,8 @@ a {
   height: 63px;
   overflow: hidden;
   margin-bottom: 5px; }
+  .knowledge-bringup .outline-content p {
+    margin-bottom: 0; }
 .knowledge-bringup p {
   margin-bottom: 5px; }
 .knowledge-bringup h2 {
