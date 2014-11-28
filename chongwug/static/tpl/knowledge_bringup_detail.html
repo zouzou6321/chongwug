@@ -1,0 +1,42 @@
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="cwg-container knowledge-bringup">
+    <div class="container breadcrumb-container">
+        <ol class="breadcrumb">
+          <li><a href="/home">首页</a></li>
+          <li class="active">养犬必知</li>
+        </ol>
+    </div>
+	<div class="container content-container padding-none">
+		<img src="{{ 'imgs/knowmain.jpg'|assets }}" alt="养一只与你性格相似并适合你生活环境的爱犬" class="img-full">
+	</div>
+	{% if bringup != None %}
+    <div class="container content-container knowledge-content">
+        <div>
+            <h4 class="article-title text-center">{{ bringup.title }}</h4>
+            <div class="row font-xs">
+                <div class="col-3 col-offset-9">
+                    <span class="article-date">{{ bringup.time|date:"Y-m-d" }}</span>
+                    <span>来源：<span class="article-from">{{ bringup.contentfrom }}</span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="article-figure text-center">
+                <img class="article-img" src="{{ bringup.imgurl }}"/>
+                <p class="article-figcaption text-center"></p>
+            </div>
+            <div class="article-content">{{ bringup.content|safe }}</div>
+        </div>
+    </div>
+    {% else %}
+    您要查找的数据飞出地球外了
+    {% endif %}
+</div>
+
+
+{% endblock %}

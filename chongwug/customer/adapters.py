@@ -448,6 +448,14 @@ def get_knowledge_bringup(request):
     if 'page' in request.GET:
         page = string.atoi(request.REQUEST.get('page'))
     return pclady.objects.all().order_by('id')[(page*6):(page*6 + 6)]
+
+def get_knowledge_bringup_detail(id):
+    try:
+        bringup = pclady.objects.get(id=id)
+        return bringup
+    except:
+        return None
+
 def get_knowledge_buy(request):
     if 'id' in request.GET:
 

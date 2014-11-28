@@ -130,7 +130,14 @@ def knowledge_bringup_view(request):
         return render_to_response('mobile/tpl/knowledge_bringup.html',pagedata)
     else:
         return render_to_response('tpl/knowledge_bringup.html',pagedata)
-
+def knowledge_bringup_detail_view(request,id):
+    adapters.UVPVIPtongji(request)
+    data = {}
+    data['bringup'] = adapters.get_knowledge_bringup_detail(id)
+    data['page'] = 'knowbringup'
+    data['title'] = u'宠物喂养| 宠物购交易平台-%s-国内首个活体宠物O2O交易平台' % (data['bringup'].title)
+    data['description'] = data['bringup'].content
+    return render_to_response('tpl/knowledge_bringup_detail.html',data)
 def supplie_view(request):
     adapters.UVPVIPtongji(request)
     data = {}
