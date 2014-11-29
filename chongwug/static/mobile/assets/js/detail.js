@@ -1,3 +1,10 @@
+//slider
+;(function($){
+    $('.swipe').Swipe({
+        auto: 3000
+    });
+})(jQuery);
+
 //select box - location and time
 ;(function($){
         //time

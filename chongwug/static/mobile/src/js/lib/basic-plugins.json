@@ -7,4 +7,5 @@
     ,"toggles": false
     ,"jquery.cookie": true
     ,"template": true
+    ,"swipe": true
 }

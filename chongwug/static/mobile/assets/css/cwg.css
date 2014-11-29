@@ -1295,6 +1295,20 @@ a {
       vertical-align: middle;
       padding-bottom: 60px; }
 
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative; }
+
+.swipe-wrap {
+  overflow: hidden;
+  position: relative; }
+
+.swipe-wrap > div {
+  float: left;
+  width: 100%;
+  position: relative; }
+
 .buy .row-filter {
   margin-top: 15px; }
 .buy .buy-title {

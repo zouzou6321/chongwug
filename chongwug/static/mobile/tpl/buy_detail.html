@@ -6,13 +6,13 @@
 
 {% block content %}
 <div class="content content-common detail">
-    <div class="slider">
-      <div class="slide-group">
-        <div class="slide">
+    <div class="swipe">
+      <div class="swipe-wrap">
+        <div>
             <img src="{{ petimg_a.img_url }}" class="img-full"/>
         </div>
         {% for nowimg in nowimgs %}
-        <div class="slide">
+        <div>
             <img src="{{ nowimg.img_url }}" class="img-full"/>
         </div>
         {% endfor %}

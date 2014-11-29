@@ -5,10 +5,10 @@
 
 {% block content %}
 <div class="content content-common">
-    <div class="slider home-slider">
-      <div class="slide-group">
+    <div class="swipe home-slider">
+      <div class="swipe-wrap">
         {% for ad in ads %}
-        <div class="slide">
+        <div>
             <a class="home-slider-content" target="_blank" href="{{ ad.tar_url }}" style="background-image: url({{ ad.img_url }});"></a>
         </div>
         {% endfor %}
@@ -26,4 +26,14 @@
     </ul>
     {% include 'mobile/tpl/base/desktop.html' %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function($){
+    $('.swipe').Swipe({
+        auto: 3000
+    });
+})(jQuery);
+</script>
 {% endblock %}
