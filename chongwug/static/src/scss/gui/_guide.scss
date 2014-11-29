@@ -6,6 +6,15 @@ $adg5-bg-color: #ff8da0;
 
 $nav-dotted-color: #0c7987;
 
+.guide-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 19;
+}
+
 .guide{
   .container{
     padding: 0;

@@ -5,13 +5,13 @@
         <div class="container">
             <div class="row cwg-global-search">
                 <div class="col-3">
-                    <a href="/home" class="logo"><img src="{{ 'imgs/logo.jpg'|assets }}" alt="宠物购"></a>
+                    <a href="/" class="logo"><img src="{{ 'imgs/logo.jpg'|assets }}" alt="宠物购"></a>
                     <div class="dropdown cwg-city">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:">
                         成都 <span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu radius-none">
-                        <li><a tabindex="-1" href="/home">成都</a></li>
+                        <li><a tabindex="-1" href="/">成都</a></li>
                       </ul>
                     </div>
                 </div>
@@ -28,10 +28,10 @@
     <div class="navbar cwg-navbar{% if page != 'home' %} cwg-navbar-sub{% endif %}">
         <div class="container">
             <div class="navbar-header">
-                <a href="/home" class="logo-simple"><i class="sprite sprite-logo-simple"></i></a>
+                <a href="/" class="logo-simple"><i class="sprite sprite-logo-simple"></i></a>
             </div>
             <ul class="nav navbar-nav js-statistics">
-                <li {% if page == 'home' %}class="active"{% endif %}><a class="js-statistics-item" data-category="导航条" href="/home/">首页</a></li>
+                <li {% if page == 'home' %}class="active"{% endif %}><a class="js-statistics-item" data-category="导航条" href="/">首页</a></li>
                 <li {% if page == 'buy' %}class="active"{% endif %}><a class="js-statistics-item" data-category="导航条" href="/buy/">我要买狗</a></li>
                 <li {% if page == 'supplie' %}class="active"{% endif %}><a class="js-statistics-item" data-category="导航条" href="/supplie/">必备用品</a></li>
                 <li {% if page == 'knowbuy' %}class="active"{% endif %}><a class="js-statistics-item" data-category="导航条" href="/knowledge/buy/">购犬须知</a></li>

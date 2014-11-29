@@ -4,7 +4,46 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-
+{% if visitor %}
+<div class="guide-container">
+    <div class="guide" id="js-full-page">
+        <div class="adg-health section">
+            <div class="container">
+                <img src="{{ 'imgs/nav/guide1.png'|assets }}" class="img-responsive" alt="健康有保障"/>
+            </div>
+        </div>
+        <div class="adg-price section">
+            <div class="container">
+                <img src="{{ 'imgs/nav/guide2.png'|assets }}" class="img-responsive" alt="价格很公道"/>
+            </div>
+        </div>
+        <div class="adg-purebred section">
+            <div class="container">
+                <img src="{{ 'imgs/nav/guide3.png'|assets }}" class="img-responsive" alt="品相很优质"/>
+            </div>
+        </div>
+        <div class="adg-process section">
+            <div class="container">
+                <img src="{{ 'imgs/nav/guide4.png'|assets }}" class="img-responsive" alt="流程很标准"/>
+            </div>
+        </div>
+        <div class="adg-buy section">
+            <div class="container">
+                <a href="javascript:" class="js-skip-guide">
+                    <img src="{{ 'imgs/nav/guide5.png'|assets }}" class="img-responsive" alt="赶紧去挑选吧"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:" class="skip-guide js-skip-guide">
+        <i class="icon icon-forward"></i>
+        <p>进入主页</p>
+    </a>
+    <a href="javascript:" class="next-guide">
+        <i class="icon icon-down-open"></i>
+    </a>
+</div>
+{% endif %}
 <div class="carousel slide cwg-carousel" data-ride="carousel" id="js-carousel" data-interval="4000">
   <div class="carousel-inner js-statistics">
     {% for ad in ads %}
@@ -43,4 +82,40 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+{% if visitor %}
+<script src="{{ 'js/lib/jquery.fullPage.js'|assets }}"></script>
+<script>
+(function($){
+    var $nextGuide = $('.next-guide');
+
+    $('#js-full-page').fullpage({
+        'easing': 'swing',
+        'css3': true,
+        'navigation': true,
+        'slideSelector': '.null',
+        'navigationPosition': 'right',
+        'navigationTooltips': ['健康有保障', '价格很公道', '品相很优质', '流程很标准', '赶紧去挑选吧'],
+        'onLeave': function(index, nextIndex, direction){
+            if(nextIndex == 5){
+                $nextGuide.addClass('hide');
+            }else{
+                $nextGuide.removeClass('hide');
+            }
+        }
+    });
+
+    $nextGuide.on('click', function(){
+        $.fn.fullpage.moveSectionDown();
+    });
+
+    $('.js-skip-guide').on('click', function(){
+        $.fn.fullpage.destroy('all');
+        $('.guide-container').remove();
+    });
+})(jQuery);
+{% endif %}
+</script>
 {% endblock %}
