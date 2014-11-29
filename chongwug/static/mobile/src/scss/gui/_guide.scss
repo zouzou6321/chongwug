@@ -1,4 +1,11 @@
 .guide{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 19;
+
   $color: #310b0e;
   background-color: $primary-bg-color;
   color: $color;

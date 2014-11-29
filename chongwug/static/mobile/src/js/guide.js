@@ -362,9 +362,7 @@
           effect: 'fadeIn'
       },
       callback: function(){
-          window.setTimeout(function(){
-            window.location.href = '/home/';
-          }, 1500);
+          $('.guide').remove();
       }
   });
 })(jQuery);

@@ -4,6 +4,16 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+{% if visitor %}
+<div class="guide">
+    <div class="vertical-center">
+        <div class="vertical-content">
+            <img src="{{ 'imgs/logo.png'|mobile }}" alt="logo"/>
+            <h1 class="guide-title">国内首个活体宠物O2O交易平台</h1>
+        </div>
+    </div>
+</div>
+{% endif %}
 <div class="content content-common">
     <div class="swipe home-slider">
       <div class="swipe-wrap">
@@ -29,6 +39,9 @@
 {% endblock %}
 
 {% block scripts %}
+{% if visitor %}
+<script src="{{ 'js/guide.js'|mobile }}"></script>
+{% endif %}
 <script>
 (function($){
     $('.swipe').Swipe({
