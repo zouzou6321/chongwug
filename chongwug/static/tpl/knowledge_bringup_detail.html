@@ -8,14 +8,11 @@
     <div class="container breadcrumb-container">
         <ol class="breadcrumb">
           <li><a href="/">首页</a></li>
-          <li class="active">养犬必知</li>
+          <li class="active"><a href="/knowledge/bringup/">养犬必知</a></li>
         </ol>
     </div>
-	<div class="container content-container padding-none">
-		<img src="{{ 'imgs/knowmain.jpg'|assets }}" alt="养一只与你性格相似并适合你生活环境的爱犬" class="img-full">
-	</div>
 	{% if bringup != None %}
-    <div class="container content-container knowledge-content">
+    <div class="container content-container knowledge-content" style="padding-top: 25px;">
         <div>
             <h4 class="article-title text-center">{{ bringup.title }}</h4>
             <div class="row font-xs">
