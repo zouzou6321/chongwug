@@ -7,29 +7,6 @@ from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from chongwug.settings import WAP_ROOT
-#auth:huhuaiyong
-#date:2014/8/16
-#discription:导航页面展示
-from django.core.mail  import  send_mail
-def nav_page_view(request):
-    adapters.UVPVIPtongji(request)
-    if 'visitor' not in request.session:
-        if not adapters.is_wap(request):
-            if adapters.redict_wap(request):
-                return HttpResponseRedirect(WAP_ROOT)
-        request.session['visitor'] = 1
-        data = {}
-        data['title'] = u'流程介绍 | 宠物狗交易平台-呵护爱犬和爱犬的您-国内首个活体宠物O2O交易平台'
-        data['description'] = u'成都，宠物购是国内首个活体宠物O2O交易平台，全程保障宠物狗的健康，目前平台提供：哈士奇，泰迪，金毛犬，阿拉斯加，比熊犬，罗威纳，贵宾犬，拉布拉多，史宾格犬，边境牧羊犬，松狮犬，博美犬，平台接送到养殖场交易，签订保障协议，购宠物犬免费体检。'
-        if adapters.is_wap(request):
-            return render_to_response('mobile/tpl/nav.html',data)
-        else:
-            return render_to_response('tpl/nav.html',data)
-    else:
-        if not adapters.is_wap(request):
-            if adapters.redict_wap(request):
-                return HttpResponseRedirect(WAP_ROOT + '/home/')
-        return HttpResponseRedirect('/home/')
 
 #auth:huhuaiyong
 #date:2014/8/16
@@ -37,6 +14,11 @@ def nav_page_view(request):
 def buy_home_view(request):
     adapters.UVPVIPtongji(request)
     data = adapters.buy_home_adapter(request)
+    if 'visitor' not in request.session:
+        request.session['visitor'] = 1
+        data['visitor'] = True
+    else:
+        data['visitor'] = False
     data['title'] = u'首页 | 宠物购交易平台-呵护爱犬和爱犬的您-国内首个活体宠物O2O交易平台'
     data['description'] = u'狗狗宠物养殖场销售，创新平台，提供买狗建议，注册芯片，通过与养殖场和客户签订买狗协议，保障爱狗人士权益。提供全程接送养殖场看犬买犬服务。要买哈士奇，泰迪，金毛犬，阿拉斯加，比熊犬，罗威纳，贵宾犬，拉布拉多，史宾格犬，边境牧羊犬，松狮犬，博美犬,买狗，淘狗。宠物GPS定位器。请到宠物购平台。'
     if adapters.is_wap(request):
