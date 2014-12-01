@@ -4806,3 +4806,6 @@ img.mfp-img {
 
 .font-xs {
   font-size: 12px; }
+
+.border-none {
+  border: 0; }
