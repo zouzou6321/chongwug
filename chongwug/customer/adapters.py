@@ -131,9 +131,18 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     if typekey != 'all':
         title = title + typekey + u'购买-'
     if princekey != 0:
-        title = title + u'价格为' + str(princes[princekey]['b']) + u'元-' + str(princes[princekey]['c']) + u'元'
+        print princekey
+        print len(princes)
+        if princekey < len(princes):
+            title = title + u'价格为' + str(princes[princekey-1]['b']) + u'元-' + str(princes[princekey-1]['c']) + u'元'
+        else:
+            title = title + u'价格为' + str(princes[princekey-1]['b']) + u'元以上-'
     if agekey != 0:
-        title = title + u'月龄为' + str(ages[princekey]['b']) + u'-' + str(ages[princekey]['c']) + u'月-'
+        if agekey < len(ages):
+            title = title + u'月龄为' + str(ages[agekey-1]['b']) + u'-' + str(ages[agekey-1]['c']) + u'月-'
+        else:
+            title = title + u'月龄为' + str(ages[agekey-1]['b']) + u'月以上-'
+        
     if epidemickey != 'all':
         title = title + epidemickey + u'-'
     if title == '':
