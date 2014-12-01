@@ -4,18 +4,18 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="cwg-container knowledge-bringup">
+<div class="cwg-container">
     <div class="container breadcrumb-container">
         <ol class="breadcrumb">
           <li><a href="/">首页</a></li>
           <li><a href="/knowledge/bringup/">养犬必知</a></li>
-          <li class="active">养犬准备</li>
+{#          <li class="active">养犬准备</li>#}
         </ol>
     </div>
-    <div class="container">
+    <div class="container content-container" style="padding-top: 20px;">
         {% for knowledge in knowledges %}
-        <div class="col-6 outline dashed-top{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}">
-            <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank">
+        <div class="col-6 outline{% if forloop.counter > 2 %} dashed-top{% endif %}{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}">
+            <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank" class="decoration-none">
                 <h4 class="outline-title">
                     <span class="title-limit">{{ knowledge.title }}</span>
                     <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
@@ -27,32 +27,32 @@
             </a>
         </div>
         {% endfor %}
+        <div class="text-center">
+            <ul class="pagination pagination-primary">
+                {% if curpage <= 1 %}
+                <li class="disabled"><span>首页</span></li>
+                <li class="disabled"><span>上一页</span></li>
+                {% else %}
+                <li><a href="/knowledge/bringup/{{ category }}/">首页</a></li>
+                <li><a href="/knowledge/bringup/{{ pageup }}{{ category }}/">上一页</a></li>
+                {% endif %}
+                {% for page in pages %}
+                {% if page == curpage %}
+                <li class="active"><span>{{ page }}</span></li>
+                {% else %}
+                <li><a href="/knowledge/bringup/{{ page }}{{ category }}/">{{ page }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if curpage >=  allpage%}
+                <li class="disabled"><span>下一页</span></li>
+                <li class="disabled"><span>尾页</span></li>
+                {% else %}
+                <li><a href="/knowledge/bringup/{{ pagedown }}{{ category }}/">下一页</a></li>
+                <li><a href="/knowledge/bringup/{{ allpage }}{{ category }}/">尾页</a></li>
+                {% endif %}
+             </ul>
+        </div>
     </div>
-    <div class="text-center">
-                    <ul class="pagination pagination-primary">
-                        {% if curpage <= 1 %}
-                        <li class="disabled"><span>首页</span></li>
-                        <li class="disabled"><span>上一页</span></li>
-                        {% else %}
-                        <li><a href="/knowledge/bringup/{{ category }}/">首页</a></li>
-                        <li><a href="/knowledge/bringup/{{ pageup }}{{ category }}/">上一页</a></li>
-                        {% endif %}
-                        {% for page in pages %}
-                        {% if page == curpage %}
-                        <li class="active"><span>{{ page }}</span></li>
-                        {% else %}
-                        <li><a href="/knowledge/bringup/{{ page }}{{ category }}/">{{ page }}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                        {% if curpage >=  allpage%}
-                        <li class="disabled"><span>下一页</span></li>
-                        <li class="disabled"><span>尾页</span></li>
-                        {% else %}
-                        <li><a href="/knowledge/bringup/{{ pagedown }}{{ category }}/">下一页</a></li>
-                        <li><a href="/knowledge/bringup/{{ allpage }}{{ category }}/">尾页</a></li>
-                        {% endif %}
-                     </ul>
-                </div>
 </div>
 
 {% endblock %}

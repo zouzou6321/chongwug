@@ -4809,3 +4809,6 @@ img.mfp-img {
 
 .border-none {
   border: 0; }
+
+.decoration-none:hover, .decoration-none:focus {
+  text-decoration: none; }
