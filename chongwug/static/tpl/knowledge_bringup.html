@@ -115,6 +115,29 @@
                 </div>
             </div>
         </div>
+        <div class="bringup-outline">
+            <h2 class="desc-tit">
+                <span class="placard">四</span> 幼犬饲养
+            </h2>
+            <div class="desc-main">
+                <div class="row">
+                	{% for knowledge in knowledges %}
+                    <div class="col-6 outline{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}{% if forloop.counter > 2 %} dashed-top{% endif %}">
+                        <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank">
+                            <h4 class="outline-title">
+                                <span class="title-limit">{{ knowledge.title }}</span>
+                                <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
+                            </h4>
+                            <div class="outline-content">
+                                {{ knowledge.content|safe }}
+                            </div>
+                            <span class="outline-more">查看更多>></span>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
