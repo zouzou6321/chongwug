@@ -8,7 +8,8 @@
     <div class="container breadcrumb-container">
         <ol class="breadcrumb">
           <li><a href="/">首页</a></li>
-          <li class="active"><a href="/knowledge/bringup/">养犬必知</a></li>
+          <li><a href="/knowledge/bringup/">养犬必知</a></li>
+          <li class="active">{{ bringup.title }}</li>
         </ol>
     </div>
 	{% if bringup != None %}
@@ -18,7 +19,7 @@
             <div class="row font-xs">
                 <div class="col-3 col-offset-9">
                     <span class="article-date">{{ bringup.time|date:"Y-m-d" }}</span>
-                    <span>来源：<span class="article-from">{{ bringup.contentfrom }}</span></span>
+                    <span>来源：<span class="article-from"><a href="http://{{ bringup.contentfrom }}">{{ bringup.contentfrom }}</a></span></span>
                 </div>
             </div>
         </div>
