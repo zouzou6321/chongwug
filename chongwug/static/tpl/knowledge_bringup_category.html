@@ -1,0 +1,33 @@
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="cwg-container knowledge-bringup">
+    <div class="container breadcrumb-container">
+        <ol class="breadcrumb">
+          <li><a href="/">首页</a></li>
+          <li><a href="/knowledge/bringup/">养犬必知</a></li>
+          <li class="active">养犬准备</li>
+        </ol>
+    </div>
+    <div class="container">
+        {% for knowledge in knowledges %}
+        <div class="col-6 outline dashed-top{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}">
+            <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank">
+                <h4 class="outline-title">
+                    <span class="title-limit">{{ knowledge.title }}</span>
+                    <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
+                </h4>
+                <div class="outline-content">
+                    {{ knowledge.content|safe }}
+                </div>
+                <span class="outline-more">查看更多>></span>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
