@@ -28,10 +28,10 @@ class webspiderSpider(Spider):
     download_delay = 1
     allowed_domains = ["pclady.com.cn"]  
     start_urls = [  
-        "http://pet.pclady.com.cn/baike/ggsy/zbyg/",
+        "http://pet.pclady.com.cn/baike/ggsy/yq/",
         #"http://www.dog126.com/doginfo_136.html"
     ]  
-    urllist = ['http://pet.pclady.com.cn/baike/ggsy/zbyg/']
+    urllist = ['http://pet.pclady.com.cn/baike/ggsy/yq/']
     def parse(self, response):  
   
         sel = Selector(response)
@@ -67,7 +67,7 @@ class webspiderSpider(Spider):
 
             imgpath = u'http://chongwug-pic.b0.upaiyun.com/petbringpic/%s' % (item['image_urls'][0].split('/')[-1]).decode('utf8')
             cur = conn.cursor()
-            sql = u"INSERT INTO `manager_pclady`(`url`, `name`,`imgurl`, `title`, `content`, `contentfrom`, `time`) VALUES ('" + item['url'].decode('utf8') + u"','" + item['name'].decode('utf8') + u"','" + imgpath + u"','" + item['title'].decode('utf8') + u"','" + item['content'].decode('utf8') +  u"','" + u'chongwug.com'.decode('utf8') + u"','" + time.strftime("%Y-%m-%d %H:%M:%S") + u"')"
+            sql = u"INSERT INTO `manager_pclady`(`url`, `name`,`imgurl`, `title`, `content`, `contentfrom`, `time`, `classify`) VALUES ('" + item['url'].decode('utf8') + u"','" + item['name'].decode('utf8') + u"','" + imgpath + u"','" + item['title'].decode('utf8') + u"','" + item['content'].decode('utf8') +  u"','" + u'chongwug.com'.decode('utf8') + u"','" + time.strftime("%Y-%m-%d %H:%M:%S") +  u"','" + u"幼犬" + u"')"
             cur.execute(sql)
             conn.commit()
             #conn.close()

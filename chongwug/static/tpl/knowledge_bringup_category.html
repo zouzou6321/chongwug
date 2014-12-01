@@ -28,6 +28,31 @@
         </div>
         {% endfor %}
     </div>
+    <div class="text-center">
+                    <ul class="pagination pagination-primary">
+                        {% if curpage <= 1 %}
+                        <li class="disabled"><span>首页</span></li>
+                        <li class="disabled"><span>上一页</span></li>
+                        {% else %}
+                        <li><a href="/knowledge/bringup/{{ category }}/">首页</a></li>
+                        <li><a href="/knowledge/bringup/{{ pageup }}{{ category }}/">上一页</a></li>
+                        {% endif %}
+                        {% for page in pages %}
+                        {% if page == curpage %}
+                        <li class="active"><span>{{ page }}</span></li>
+                        {% else %}
+                        <li><a href="/knowledge/bringup/{{ page }}{{ category }}/">{{ page }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if curpage >=  allpage%}
+                        <li class="disabled"><span>下一页</span></li>
+                        <li class="disabled"><span>尾页</span></li>
+                        {% else %}
+                        <li><a href="/knowledge/bringup/{{ pagedown }}{{ category }}/">下一页</a></li>
+                        <li><a href="/knowledge/bringup/{{ allpage }}{{ category }}/">尾页</a></li>
+                        {% endif %}
+                     </ul>
+                </div>
 </div>
 
 {% endblock %}

@@ -92,8 +92,9 @@
             </h2>
             <div class="desc-main border-none">
                 <ul class="nav nav-pills">
-                  <li><a href="#" target="_blank">养犬准备</a></li>
-                  <li><a href="#" target="_blank">幼犬</a></li>
+                  {% for category in categorys %}
+                  <li><a href="/knowledge/bringup/{{ category.2 }}/" target="_blank">{{ category.3 }}</a></li>
+                  {% endfor %}
                 </ul>
             </div>
         </div>

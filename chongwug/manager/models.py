@@ -74,5 +74,6 @@ class pclady(models.Model):
     imgurl = models.TextField()
     title = models.TextField()
     content = models.TextField()
+    classify = models.TextField(blank=True, null=True)
     time = models.DateTimeField(default=datetime.datetime.now)
     contentfrom = models.TextField(default='chongwug.com')
