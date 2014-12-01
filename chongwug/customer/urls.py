@@ -14,6 +14,7 @@ urlpatterns = patterns(
                        url(r'^knowledge/buy/$','knowledge_buy_view'),
                        url(r'^knowledge/bringup/$','knowledge_bringup_view'),
                        url(r'^knowledge/bringup/(?P<id>\d+)/$','knowledge_bringup_detail_view'),
+                       url(r'^knowledge/bringup/(?P<page>\d*)(?P<category>[^/]+)/$','knowledge_bringup_category_view'),
                        url(r'^supplie/$','supplie_view'),
                        url(r'^aboutus/$','aboutus_view'),
                        url(r'^workchance/$','workchance_view'),

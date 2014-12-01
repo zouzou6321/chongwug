@@ -13,7 +13,7 @@ class MyImagesPipeline(ImagesPipeline):
 
     def file_path(self, request, response=None, info=None):
         image_guid = request.url.split('/')[-1]
-        return 'brinup/%s' % (image_guid)
+        return 'brinupyq/%s' % (image_guid)
 
     def get_media_requests(self, item, info):
         for image_url in item['image_urls']:

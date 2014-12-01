@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 #所有图片的图片用途,目前暂时包括广告图片、宠物图片、养殖场图片
 __adtypes = [[0,'nav_m','首页主广告',1920,530]]
+__knowledgetypes = [[0,None,'bp',u'养犬准备'],[1,u'幼犬','bs','幼犬知识']]
 __petpictypes = [[0,u'buy_main',u'主图',750,500],[1,u'normal',u'辅图',750,500]]
 __farmpictypes = [[0,u'buy_home',u'首页展示图',427,300],[1,u'normal',u'养殖场介绍图',427,300]]
 __supplietypes = [u'必备用品',u'生活用品',u'保健医疗',u'清洁卫生']

@@ -6,11 +6,12 @@ from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders,pviptongji,adclicktongji,uvpviptongji
 from django.db.models import Q
-from chongwug.config import __onepageofdata__,__petfeaturescore,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_chinatelnum
+from chongwug.config import __knowledgetypes,__onepageofdata__,__petfeaturescore,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_chinatelnum
 import datetime,string,re,json
 from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.contrib.auth.models import User
 from django.contrib import auth
+from _mysql import NULL
 
 def redict_wap(request):
     if 'HTTP_USER_AGENT' in request.META:
@@ -471,10 +472,39 @@ def get_knowledge_bringup(request):
     page = 0
     if 'page' in request.GET:
         page = string.atoi(request.REQUEST.get('page'))
-    return pclady.objects.all().order_by('id')[(page*6):(page*6 + 6)]
+    return pclady.objects.filter(classify=None).order_by('id')[(page*6):(page*6 + 6)]
 
-def get_knowledge_bringup_all():
-    return pclady.objects.all()
+def get_knowledge_bringup_category(page,category):
+    categoryinfo = None
+    if page == u'':
+        page = 1
+    else:
+        page = string.atoi(page)
+    for knowledgetype in __knowledgetypes:
+        if category == knowledgetype[2]:
+            categoryinfo = knowledgetype
+            break
+    if categoryinfo == None:
+        return False
+    onepageofdata = 16
+    knowledges = pclady.objects.filter(classify=categoryinfo[1]).order_by('id')
+    #分页实现
+    
+    startpos = (page - 1) * onepageofdata  
+    endpos = startpos + onepageofdata  
+    knowledgescount = len(knowledges)
+    knowledges = knowledges[startpos:endpos]  
+    pages = []
+    allPostCounts = knowledgescount
+    allpage = allPostCounts / onepageofdata  
+    remainPost = allPostCounts % onepageofdata  
+    if remainPost > 0:  
+        allpage += 1
+    i = 0
+    while i < allpage:
+        i += 1
+        pages.append(i)
+    return {'knowledges':knowledges,'curpage':page,'pages':pages,'allpage':allpage,'pageup':page-1,'pagedown':page+1,'category':categoryinfo[2]}
 
 def get_knowledge_bringup_detail(id):
     try:
