@@ -472,7 +472,7 @@ def get_knowledge_bringup(request):
     page = 0
     if 'page' in request.GET:
         page = string.atoi(request.REQUEST.get('page'))
-    return pclady.objects.filter(classify=None).order_by('id')[(page*6):(page*6 + 6)]
+    return pclady.objects.filter(classify=None,dele=False).order_by('id')[(page*6):(page*6 + 6)]
 
 def get_knowledge_bringup_category(page,category):
     categoryinfo = None
@@ -487,7 +487,7 @@ def get_knowledge_bringup_category(page,category):
     if categoryinfo == None:
         return False
     onepageofdata = 16
-    knowledges = pclady.objects.filter(classify=categoryinfo[1]).order_by('id')
+    knowledges = pclady.objects.filter(classify=categoryinfo[1],dele=False).order_by('id')
     #分页实现
     
     startpos = (page - 1) * onepageofdata  
@@ -508,7 +508,7 @@ def get_knowledge_bringup_category(page,category):
 
 def get_knowledge_bringup_detail(id):
     try:
-        bringup = pclady.objects.get(id=id)
+        bringup = pclady.objects.get(id=id,dele=False)
         return bringup
     except:
         return None
