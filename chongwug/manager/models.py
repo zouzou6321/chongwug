@@ -77,3 +77,4 @@ class pclady(models.Model):
     classify = models.TextField(blank=True, null=True)
     time = models.DateTimeField(default=datetime.datetime.now)
     contentfrom = models.TextField(default='chongwug.com')
+    dele = models.BooleanField(default=True)
