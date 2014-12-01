@@ -124,6 +124,30 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     ages = __ages
     if 'key' in request.GET:
         searchkey = request.REQUEST.get('key')
+        
+    title = ''
+    if directkey != 'all':
+        title = title + u'城' + directkey
+    if typekey != 'all':
+        title = title + typekey + u'购买-'
+    if princekey != 0:
+        print princekey
+        print len(princes)
+        if princekey < len(princes):
+            title = title + u'价格为' + str(princes[princekey-1]['b']) + u'元-' + str(princes[princekey-1]['c']) + u'元'
+        else:
+            title = title + u'价格为' + str(princes[princekey-1]['b']) + u'元以上-'
+    if agekey != 0:
+        if agekey < len(ages):
+            title = title + u'月龄为' + str(ages[agekey-1]['b']) + u'-' + str(ages[agekey-1]['c']) + u'月-'
+        else:
+            title = title + u'月龄为' + str(ages[agekey-1]['b']) + u'月以上-'
+        
+    if epidemickey != 'all':
+        title = title + epidemickey + u'-'
+    if title == '':
+        title = u'购宠物狗'
+    title = title + u'第' + str(curpage) + u'页'
     #数据库查询语句整合
     kwargs = {}
     kwargs['dele'] = False
@@ -177,7 +201,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
         i += 1
         pages.append(i)
     return {'pets_imgs':pets_imgs,'petscount':petscount,'urls': '/buy/','types':types,'typekey':typekey,'princes':princes,'princekey':str(princekey),
-            'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,'epidemickey':epidemickey,
+            'title':title,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,'epidemickey':epidemickey,
             'ages':ages,'agekey':str(agekey),'curpage':curpage,'pageup':curpage-1,'pagedown':curpage+1,'pages':pages,'allpage':allpage,'page':'buy'}
 
 '''
