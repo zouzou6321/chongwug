@@ -107,16 +107,8 @@ def knowledge_bringup_view(request):
     pagedata['keywords'] = u'养狗知识，如何养狗，养狗注意事项'
     pagedata['description'] = u'血统哈士奇，血统泰迪，血统金毛犬，血统阿拉斯加，血统比熊犬，血统罗威纳，血统贵宾犬，血统拉布拉多，血统史宾格犬，血统边境牧羊犬，血统松狮犬，血统博美犬,学习如何养好一只狗狗，毛发打理，口水，喂养，食物。笼子的挑选知识。'
     if adapters.is_wap(request):
-        data = adapters.get_knowledge_bringup(request)
-        if 'page' in request.GET:
-            if data.count() > 0:
-                pageid = string.atoi(request.REQUEST.get('page')) + 1
-            else:
-                pageid = False
-            return render_to_response('mobile/tpl/knowledge_bringup_ajax.html',{'knowledges':data,'pageid':pageid})
-        else:
-            pagedata['knowledges'] = data
-            return render_to_response('mobile/tpl/knowledge_bringup.html',pagedata)
+        pagedata['categorys'] = __knowledgetypes
+        return render_to_response('mobile/tpl/knowledge_bringup.html',pagedata)
     else:
         pagedata['categorys'] = __knowledgetypes
         return render_to_response('tpl/knowledge_bringup.html',pagedata)
