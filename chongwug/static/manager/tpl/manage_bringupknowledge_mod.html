@@ -3,44 +3,27 @@
 {% block title %}内容编辑{% endblock %}
 {% load assets_manager %}
 {% block main %}
-<style>
-    .supplies-title{
-        height: 40px;
-        overflow: hidden;
-    }
-    .supplies-img{
-        width: 100%;
-    }
-    .supplies-item{
-        border: 1px solid #ccc;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-</style>
-<h1 class="page-header">商品列表</h1>
+<h1 class="page-header">文章列表</h1>
 	<div class="form-horizontal">
         <div class="form-group">
-            <label for="type" class="col-sm-2 control-label">商品类型<span class="warn">*</span>：</label>
+            <label for="type" class="col-sm-2 control-label">文章类型：</label>
             <div class="col-sm-4">
               <select class="form-control required" id="type" name="type">
-                {% for type in types %}
-                <option value="{{ type }}"{% ifequal supplietype type %} selected{% endifequal %}>{{ type }}</option>
-                {% endfor %}
+                <option value="xxx">xxxx</option>
               </select>
             </div>
         </div>
 	</div>
-    <div class="row">
-    	{% for supplie in supplies %}
-        <div class="col-xs-3 supplies-item">
-            <a href="./?id={{ supplie.id }}" target="_blank">
-                <img src="{{ supplie.img_url }}" class="supplies-img"/>
-                <p class="supplies-title">{{ supplie.title }}</p>
-            </a>
-            <a class="btn btn-primary" href="?del={{ supplie.id }}">删除</a>
-        </div>
-        {% endfor %}
-    </div>
+    <ul class="list-group">
+      <li class="list-group-item clearfix">
+          <a href="./?id=" target="_blank">标题</a>
+          <a class="pull-right btn btn-primary" href="?del=">删除</a>
+      </li>
+      <li class="list-group-item clearfix">
+          <a href="./?id=" target="_blank">标题</a>
+          <a class="pull-right btn btn-primary" href="?del=">删除</a>
+      </li>
+    </ul>
 {% endblock %}
 
 {% block scripts %}

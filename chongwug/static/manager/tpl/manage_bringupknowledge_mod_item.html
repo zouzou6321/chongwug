@@ -1,0 +1,90 @@
+{% extends 'manager/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+{% load assets_manager %}
+{% block main %}
+<style>
+    .original-img{
+        padding-top: 15px;
+    }
+</style>
+<h1 class="page-header">修改文章</h1>
+<p>加*为必填项</p>
+	<form class="form-horizontal" method="post" id="js-form" action="">
+	{% csrf_token %}
+    <input name="id" type="hidden" value="id"/>
+    <div class="form-group">
+        <label for="type" class="col-sm-2 control-label">类型<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+          <select class="form-control required" id="type" name="type">
+            {% for type in types %}
+            <option value="{{ type }}"{% ifequal supplie.type type %} selected{% endifequal %}>{{ type }}</option>
+            {% endfor %}
+          </select>
+        </div>
+    </div>
+	<div class="form-group">
+	    <label for="title" class="col-sm-2 control-label">标题<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="title" name="title" value="title">
+	    </div>
+	</div>
+    <div class="form-group">
+	    <label for="from" class="col-sm-2 control-label">来源<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="contentfrom" name="contentfrom" value="contentfrom">
+	    </div>
+	</div>
+    <div class="form-group">
+	    <label for="dele" class="col-sm-2 control-label">是否显示<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+            <select name="dele" id="dele" class="form-control">
+                <option value="">是</option>
+                <option value="">否</option>
+            </select>
+	    </div>
+	</div>
+    <div class="form-group">
+	    <label for="time" class="col-sm-2 control-label">收录时间<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" id="time" name="time" value="time">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label for="content" class="col-sm-2 control-label">内容<span class="warn">*</span>：</label>
+	    <div class="col-sm-8">
+            <textarea name="content" id="content"></textarea>
+	    </div>
+	</div>
+	<div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button type="submit" id="js-submit" data-loading-text="提交中..." class="btn btn-primary form-control">提交</button>
+        </div>
+    </div>
+	</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{'lib/ckeditor/ckeditor.js'|assets_manager }}"></script>
+<script>
+(function(){
+    CKEDITOR.replace('content');
+
+    var $form = $('#js-form'),
+    $btn = $form.find('#js-submit');
+
+    $form.validate(commonvalidateConfig);
+
+    $form.on('submit', function(){
+        for (var instance in CKEDITOR.instances){
+             CKEDITOR.instances[instance].updateElement();
+        }
+
+        if($form.valid()){
+            $btn.button('loading');
+        }
+    });
+})();
+</script>
+{% endblock %}
