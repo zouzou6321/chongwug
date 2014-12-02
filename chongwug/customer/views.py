@@ -124,16 +124,16 @@ def knowledge_bringup_view(request):
 def knowledge_bringup_category_view(request,page,category):
     adapters.UVPVIPtongji(request)
     
-    if adapters.is_wap(request):
+    pagedata = adapters.get_knowledge_bringup_category(page,category)
+    if pagedata == False:
         return render_to_response('404.html')
+    pagedata['page'] = 'knowbringup'
+    pagedata['title'] = u'宠物喂养| 宠物购交易平台-狗狗饲养必备常识-国内首个活体宠物O2O交易平台'
+    pagedata['keywords'] = u'养狗知识，如何养狗，养狗注意事项'
+    pagedata['description'] = u'血统哈士奇，血统泰迪，血统金毛犬，血统阿拉斯加，血统比熊犬，血统罗威纳，血统贵宾犬，血统拉布拉多，血统史宾格犬，血统边境牧羊犬，血统松狮犬，血统博美犬,学习如何养好一只狗狗，毛发打理，口水，喂养，食物。笼子的挑选知识。'
+    if adapters.is_wap(request):
+        return render_to_response('mobile/tpl/knowledge_bringup_category.html',pagedata)
     else:
-        pagedata = adapters.get_knowledge_bringup_category(page,category)
-        if pagedata == False:
-            return render_to_response('404.html')
-        pagedata['page'] = 'knowbringup'
-        pagedata['title'] = u'宠物喂养| 宠物购交易平台-狗狗饲养必备常识-国内首个活体宠物O2O交易平台'
-        pagedata['keywords'] = u'养狗知识，如何养狗，养狗注意事项'
-        pagedata['description'] = u'血统哈士奇，血统泰迪，血统金毛犬，血统阿拉斯加，血统比熊犬，血统罗威纳，血统贵宾犬，血统拉布拉多，血统史宾格犬，血统边境牧羊犬，血统松狮犬，血统博美犬,学习如何养好一只狗狗，毛发打理，口水，喂养，食物。笼子的挑选知识。'
         return render_to_response('tpl/knowledge_bringup_category.html',pagedata)
 
 def knowledge_bringup_detail_view(request,id):
@@ -144,7 +144,10 @@ def knowledge_bringup_detail_view(request,id):
     data['title'] = u'宠物喂养| 宠物购交易平台-%s-国内首个活体宠物O2O交易平台' % (data['bringup'].title)
     data['keywords'] = u'养狗知识，如何养狗，养狗注意事项,狗狗护理'
     data['description'] = data['bringup'].content
-    return render_to_response('tpl/knowledge_bringup_detail.html',data)
+    if adapters.is_wap(request):
+        return render_to_response('mobile/tpl/knowledge_bringup_detail.html',data)
+    else:
+        return render_to_response('tpl/knowledge_bringup_detail.html',data)
 def supplie_view(request):
     adapters.UVPVIPtongji(request)
     data = {}
