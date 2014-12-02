@@ -4,11 +4,11 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="content">
-    <ul class="table-view table-view-extend">
+<div class="content knowledge-bringup">
+    <ul class="table-view table-view-extend border-top-none">
         {% for knowledge in knowledges %}
         <li class="table-view-cell outline">
-            <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank">
+            <a href="/knowledge/bringup/{{ knowledge.id }}/">
                 <h4 class="outline-title">{{ knowledge.title }}</h4>
                 <div class="outline-content">
                     {{ knowledge.content|safe }}
@@ -20,7 +20,7 @@
     </ul>
     <div class="text-center">
         第
-        <select class="select-fixed select-page js-select">
+        <select class="select-fixed select-page js-select" style="width: auto;">
             {% for page in pages %}
             <option {% if page == curpage %}selected{% endif %} value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ page }}/">{{ page }}</option>
             {% endfor %}

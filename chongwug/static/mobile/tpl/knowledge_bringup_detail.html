@@ -6,8 +6,11 @@
 {% block content %}
 <div class="content">
     {% if bringup != None %}
-    <h4 class="text-center">{{ bringup.title }}</h4>
+    <h4 class="text-center" style="padding-top: 20px;">{{ bringup.title }}</h4>
     <div class="content-padded">
+        <p class="row" style="font-size: 12px;">
+            <span class="pull-right">{{ bringup.time|date:"Y-m-d" }}，来源：<a href="http://{{ bringup.contentfrom }}">{{ bringup.contentfrom }}</a></span>
+        </p>
         <div class="text-center">
             <img class="img-responsive" src="{{ bringup.imgurl }}"/>
         </div>
