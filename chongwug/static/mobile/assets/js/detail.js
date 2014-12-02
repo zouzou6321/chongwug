@@ -183,7 +183,7 @@
 
 
     //store the pet id when click the order btn
-    $('.js-btn-order').on('touchend', function(){
+    $('.js-btn-order').on('click', function(){
         $orderModal.data('id', $(this).data('id'));
     });
 
