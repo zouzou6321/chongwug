@@ -94,119 +94,107 @@
         </div>
         <div class="bringup-outline">
             <h2 class="desc-tit">
-                三、狗狗日常饲养必备常识
+                三、养犬百科
             </h2>
             <div class="desc-main">
-                <ul class="table-view table-view-extend border-bottom-none" id="js-outline-container">
-                    {% for knowledge in knowledges %}
-                    <li class="table-view-cell outline"
-                        data-title="{{ knowledge.title }}"
-                        data-img="{{ knowledge.imgurl }}"
-                        data-date="{{ knowledge.time|date:'Y-m-d' }}"
-                        data-from="{{ knowledge.contentfrom }}" >
-                        <a href="#js-article-modal">
-                            <h4 class="outline-title">{{ knowledge.title }}</h4>
-                            <div class="outline-content">
-                                {{ knowledge.content|safe }}
-                            </div>
-                            <p class="pull-right">查看更多&raquo;</p>
-                        </a>
-                    </li>
-                    {% endfor %}
-                    <li class="hide infinite-more-link" data-href="./?page=1"></li>
+                <ul class="table-view table-view-extend">
+                  {% for category in categorys %}
+                  <li class="table-view-cell">
+                      <a class="navigate-right" href="/knowledge/bringup/{{ category.2 }}/" target="_blank">{{ category.3 }}</a>
+                  </li>
+                  {% endfor %}
                 </ul>
-                <button class="btn btn-block btn-primary" id="js-load-more">加载更多</button>
             </div>
         </div>
     </div>
 </div>
 
-<div id="js-article-modal" class="modal">
-  <header class="bar bar-nav">
-    <a class="icon pull-right" href="#js-article-modal">&times;</a>
-    <h1 class="title article-title"></h1>
-  </header>
-  <div class="content">
-    <div class="content-padded">
-        <div class="text-center">
-            <img class="article-img img-responsive"/>
-        </div>
-        <p class="article-content"></p>
-        <a class="btn btn-block" href="#js-article-modal">关闭</a>
-    </div>
-  </div>
-</div>
+{#<div id="js-article-modal" class="modal">#}
+{#  <header class="bar bar-nav">#}
+{#    <a class="icon pull-right" href="#js-article-modal">&times;</a>#}
+{#    <h1 class="title article-title"></h1>#}
+{#  </header>#}
+{#  <div class="content">#}
+{#    <div class="content-padded">#}
+{#        <div class="text-center">#}
+{#            <img class="article-img img-responsive"/>#}
+{#        </div>#}
+{#        <p class="article-content"></p>#}
+{#        <a class="btn btn-block" href="#js-article-modal">关闭</a>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
 
 {% endblock %}
 {% block scripts %}
 <script>
 
 (function($){
-    var $modal = $('#js-article-modal'),
-        $modalBody = $modal.find('.content'),
-        $container = $('#js-outline-container'),
-        loadMap = {};
-
-    $container.on('touchend', '.outline', function(){
-        var $this = $(this),
-            data = $this.data(),
-            imgUrl = data.img;
-
-        data.content || (data.content = $.trim($this.find('.outline-content').html()));
-        $modal.find('.article-img').css('visibility', 'hidden');
-
-        if(!loadMap[imgUrl]){
-            $('<img>').on('load', function(){
-                loadMap[imgUrl] = true;
-                updateImg(imgUrl);
-            }).attr('src', imgUrl);
-        }else{
-            updateImg(imgUrl);
-        }
-
-        updateModalArticle(data);
-    });
-
-    function updateImg(imgUrl){
-        $modal.find('.article-img').css('visibility', 'visible').attr('src', imgUrl);
-        $modalBody.scrollTop(0);
-    }
-
-    function updateModalArticle(data){
-        for(var i in data){
-            if(data.hasOwnProperty(i) && i != 'img'){
-                $modal.find('.article-' + i).html(data[i]);
-            }
-        }
-    }
-
-    var $loadMore = $('#js-load-more');
-
-    $loadMore.on('click', function(){
-        var $link = $container.find('.infinite-more-link'),
-            href = $link.data('href');
-
-        if($link.length){
-            $.ajax({
-                url: href,
-                beforeSend: function(){
-                    $loadMore.prop('disabled', true);
-                },
-                success: function(data){
-                    var $html = $($.parseHTML(data));
-                    $html.insertBefore($link);
-                    $link.remove();
-
-                    if(!$container.find('.infinite-more-link').length){
-                        $loadMore.off('touchend').remove();
-                    }
-                },
-                complete: function(){
-                    $loadMore.prop('disabled', false);
-                }
-            });
-        }
-    });
+{#    var $modal = $('#js-article-modal'),#}
+{#        $modalBody = $modal.find('.content'),#}
+{#        $container = $('#js-outline-container'),#}
+{#        loadMap = {};#}
+{##}
+{#    $container.on('touchend', '.outline', function(){#}
+{#        var $this = $(this),#}
+{#            data = $this.data(),#}
+{#            imgUrl = data.img;#}
+{##}
+{#        data.content || (data.content = $.trim($this.find('.outline-content').html()));#}
+{#        $modal.find('.article-img').css('visibility', 'hidden');#}
+{##}
+{#        if(!loadMap[imgUrl]){#}
+{#            $('<img>').on('load', function(){#}
+{#                loadMap[imgUrl] = true;#}
+{#                updateImg(imgUrl);#}
+{#            }).attr('src', imgUrl);#}
+{#        }else{#}
+{#            updateImg(imgUrl);#}
+{#        }#}
+{##}
+{#        updateModalArticle(data);#}
+{#    });#}
+{##}
+{#    function updateImg(imgUrl){#}
+{#        $modal.find('.article-img').css('visibility', 'visible').attr('src', imgUrl);#}
+{#        $modalBody.scrollTop(0);#}
+{#    }#}
+{##}
+{#    function updateModalArticle(data){#}
+{#        for(var i in data){#}
+{#            if(data.hasOwnProperty(i) && i != 'img'){#}
+{#                $modal.find('.article-' + i).html(data[i]);#}
+{#            }#}
+{#        }#}
+{#    }#}
+{##}
+{#    var $loadMore = $('#js-load-more');#}
+{##}
+{#    $loadMore.on('click', function(){#}
+{#        var $link = $container.find('.infinite-more-link'),#}
+{#            href = $link.data('href');#}
+{##}
+{#        if($link.length){#}
+{#            $.ajax({#}
+{#                url: href,#}
+{#                beforeSend: function(){#}
+{#                    $loadMore.prop('disabled', true);#}
+{#                },#}
+{#                success: function(data){#}
+{#                    var $html = $($.parseHTML(data));#}
+{#                    $html.insertBefore($link);#}
+{#                    $link.remove();#}
+{##}
+{#                    if(!$container.find('.infinite-more-link').length){#}
+{#                        $loadMore.off('touchend').remove();#}
+{#                    }#}
+{#                },#}
+{#                complete: function(){#}
+{#                    $loadMore.prop('disabled', false);#}
+{#                }#}
+{#            });#}
+{#        }#}
+{#    });#}
 
 })(jQuery);
 

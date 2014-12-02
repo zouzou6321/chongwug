@@ -1,0 +1,31 @@
+{% extends 'mobile/tpl/base/base.html' %}
+{% load mobile %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="content">
+    <ul class="table-view table-view-extend">
+        {% for knowledge in knowledges %}
+        <li class="table-view-cell outline">
+            <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank">
+                <h4 class="outline-title">{{ knowledge.title }}</h4>
+                <div class="outline-content">
+                    {{ knowledge.content|safe }}
+                </div>
+                <p class="pull-right">查看更多&raquo;</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="text-center">
+        第
+        <select class="select-fixed select-page js-select">
+            {% for page in pages %}
+            <option {% if page == curpage %}selected{% endif %} value="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/{{ page }}/">{{ page }}</option>
+            {% endfor %}
+        </select>
+        页，共 {{ allpage }} 页
+    </div>
+</div>
+{% endblock %}

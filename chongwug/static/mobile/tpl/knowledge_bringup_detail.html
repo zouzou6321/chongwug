@@ -1,0 +1,22 @@
+{% extends 'mobile/tpl/base/base.html' %}
+{% load mobile %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="content">
+    {% if bringup != None %}
+    <h4 class="text-center">{{ bringup.title }}</h4>
+    <div class="content-padded">
+        <div class="text-center">
+            <img class="img-responsive" src="{{ bringup.imgurl }}"/>
+        </div>
+        <p>
+            {{ bringup.content|safe }}
+        </p>
+    </div>
+    {% else %}
+    您要查找的数据飞出地球外了
+    {% endif %}
+</div>
+{% endblock %}
