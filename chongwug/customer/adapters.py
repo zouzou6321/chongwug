@@ -468,12 +468,6 @@ def buy_attention_adapter(req):
     return __errorcode__(0,{'id':attention.id,'count':attentions.count(),'ordernum':'C%d' % attentions.count(),'waittime':req.POST['time'],
                             'waitpoint':waitpoint,'alipayurl':alipayurl,'pay':totalpay,'orderno':order.orderno,'farm':('%s-%s' % (cupet.farm.city, cupet.farm.district))})
 
-def get_knowledge_bringup(request):
-    page = 0
-    if 'page' in request.GET:
-        page = string.atoi(request.REQUEST.get('page'))
-    return pclady.objects.filter(classify=None,dele=False).order_by('id')[(page*6):(page*6 + 6)]
-
 def get_knowledge_bringup_category(page,category):
     categoryinfo = None
     if page == u'':
