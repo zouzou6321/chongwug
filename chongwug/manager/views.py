@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 import adapters,config,string
 from chongwug.commom import __errorcode__
-from chongwug.config import __adtypes
+from chongwug.config import __adtypes,__knowledgetypes
 MANAGE_ROOT='/manage/'
 
 def manage_login(request):
@@ -146,4 +146,20 @@ def manage_knowledge_mode_view(request):
     if request.session['score'] < 50:
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
-    return render_to_response('manager/tpl/manage_bringupknowledge_mod.html',data,context_instance=RequestContext(request))
+    if request.method == 'POST':
+        if not adapters.manage_knowledge_mod(request):
+            data['types'] = __knowledgetypes
+            data['knowledges'] = adapters.manage_get_knowledges(request,id=string.atoi(request.POST['id']))
+            data['error'] = u'修改失败，请检查是否存在输入数据异常'
+            return render_to_response('manager/tpl/manage_bringupknowledge_mod_item.html',data,context_instance=RequestContext(request))
+        return HttpResponseRedirect(MANAGE_ROOT +'knowledge/mod/')
+    
+    data['types'] = __knowledgetypes
+    if 'type' in request.GET:
+        data['curtype'] = string.atoi(request.REQUEST.get('type'))
+    if 'id' in request.GET:
+        data['knowledge'] = adapters.manage_get_knowledges(request,string.atoi(request.REQUEST.get('id')))
+        return render_to_response('manager/tpl/manage_bringupknowledge_mod_item.html',data,context_instance=RequestContext(request))
+    else:
+        data['knowledges'] = adapters.manage_get_knowledges(request)
+        return render_to_response('manager/tpl/manage_bringupknowledge_mod.html',data)

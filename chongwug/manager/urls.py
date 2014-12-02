@@ -14,5 +14,5 @@ urlpatterns = patterns(
                        url(r'^supplie/mod/$',manage_supplie_mod_view),
                        url(r'^petfarm/add/$',manage_pet_farm_add_view),
                        url(r'^petfarm/address/',address_handle_view),
-                       url(r'^knowledge/mode/',manage_knowledge_mode_view),
+                       url(r'^knowledge/mod/',manage_knowledge_mode_view),
                        )

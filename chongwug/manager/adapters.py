@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
-from manager.models import ad,tmppic_monitor,supplies
+from manager.models import ad,tmppic_monitor,supplies,pclady
 from customer.models import user
 from petfarm.models import pet_farm
 from PIL import Image
@@ -13,7 +13,7 @@ import os,uuid,datetime
 import config
 from django import forms
 from chongwug.commom import __errorcode__,myCKEditorWidget
-from chongwug.config import __supplietypes,__directs,__addresses,__regular_expression_idnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
+from chongwug.config import __knowledgetypes,__supplietypes,__directs,__addresses,__regular_expression_idnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
 '''
 管理员鉴权
 '''
@@ -359,3 +359,26 @@ def manage_supplie_mod(req,photo):
         return True
     except:
         return False
+
+def manage_get_knowledges(request,id=None):
+    if id != None:
+        return pclady.objects.get(id = id)
+    if 'del' in request.GET:
+        try:
+            datadel = pclady.objects.get(dele=True, id = string.atoi(request.REQUEST.get('del')))
+            datadel.delete()
+        except:
+            pass
+    if 'type' in request.GET:
+        return pclady.objects.filter(dele=True, classify = __knowledgetypes[string.atoi(request.REQUEST.get('type'))][1])
+    else:
+        return pclady.objects.filter(dele=True, classify = __knowledgetypes[0][1])
+def manage_knowledge_mod(request):
+        knowledge = pclady.objects.get(id=string.atoi(request.POST['id']))
+        knowledge.title = request.POST['title']
+        knowledge.content = request.POST['content']
+        knowledge.classify = __knowledgetypes[string.atoi(request.POST['type'])][1]
+        knowledge.contentfrom = request.POST['contentfrom']
+        knowledge.dele = string.atoi(request.POST['dele'])
+        knowledge.save()
+        return True

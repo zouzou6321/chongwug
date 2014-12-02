@@ -12,13 +12,13 @@
 <p>加*为必填项</p>
 	<form class="form-horizontal" method="post" id="js-form" action="">
 	{% csrf_token %}
-    <input name="id" type="hidden" value="id"/>
+    <input name="id" type="hidden" value="{{ knowledge.id }}"/>
     <div class="form-group">
         <label for="type" class="col-sm-2 control-label">类型<span class="warn">*</span>：</label>
         <div class="col-sm-4">
           <select class="form-control required" id="type" name="type">
             {% for type in types %}
-            <option value="{{ type }}"{% ifequal supplie.type type %} selected{% endifequal %}>{{ type }}</option>
+            <option value="{{ type.0 }}" {% if curtype == type.0 %}selected{% endif %}>{{ type.3 }}</option>
             {% endfor %}
           </select>
         </div>
@@ -26,34 +26,28 @@
 	<div class="form-group">
 	    <label for="title" class="col-sm-2 control-label">标题<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="title" name="title" value="title">
+	      <input type="text" class="form-control required" id="title" name="title" value="{{ knowledge.title }}">
 	    </div>
 	</div>
     <div class="form-group">
 	    <label for="from" class="col-sm-2 control-label">来源<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="contentfrom" name="contentfrom" value="contentfrom">
+	      <input type="text" class="form-control required" id="contentfrom" name="contentfrom" value="{{ knowledge.contentfrom }}">
 	    </div>
 	</div>
     <div class="form-group">
 	    <label for="dele" class="col-sm-2 control-label">是否显示<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
             <select name="dele" id="dele" class="form-control">
-                <option value="">是</option>
-                <option value="">否</option>
+                <option value="0" {% if knowledge.dele == 0 %}selected{% endif %}>是</option>
+                <option value="1" {% if knowledge.dele == 1 %}selected{% endif %}>否</option>
             </select>
-	    </div>
-	</div>
-    <div class="form-group">
-	    <label for="time" class="col-sm-2 control-label">收录时间<span class="warn">*</span>：</label>
-	    <div class="col-sm-4">
-	      <input type="text" class="form-control required" id="time" name="time" value="time">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label for="content" class="col-sm-2 control-label">内容<span class="warn">*</span>：</label>
 	    <div class="col-sm-8">
-            <textarea name="content" id="content"></textarea>
+            <textarea name="content" id="content">{{ knowledge.content|safe }}</textarea>
 	    </div>
 	</div>
 	<div class="form-group">

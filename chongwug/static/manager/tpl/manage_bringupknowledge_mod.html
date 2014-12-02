@@ -9,20 +9,20 @@
             <label for="type" class="col-sm-2 control-label">文章类型：</label>
             <div class="col-sm-4">
               <select class="form-control required" id="type" name="type">
-                <option value="xxx">xxxx</option>
+              	{% for type in types %}
+                <option value="{{ type.0 }}" {% if curtype == type.0 %}selected{% endif %}>{{ type.3 }}</option>
+                {% endfor %}
               </select>
             </div>
         </div>
 	</div>
     <ul class="list-group">
+      {% for knowledge in knowledges %}
       <li class="list-group-item clearfix">
-          <a href="./?id=" target="_blank">标题</a>
-          <a class="pull-right btn btn-primary" href="?del=">删除</a>
+          <a href="./?id={{ knowledge.id }}" target="_blank">{{ knowledge.title }}</a>
+          <a class="pull-right btn btn-primary" href="?del={{ knowledge.id }}">删除</a>
       </li>
-      <li class="list-group-item clearfix">
-          <a href="./?id=" target="_blank">标题</a>
-          <a class="pull-right btn btn-primary" href="?del=">删除</a>
-      </li>
+      {% endfor %}
     </ul>
 {% endblock %}
 
