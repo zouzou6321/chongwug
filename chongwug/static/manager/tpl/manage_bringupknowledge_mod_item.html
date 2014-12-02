@@ -63,7 +63,10 @@
 <script src="{{'lib/ckeditor/ckeditor.js'|assets_manager }}"></script>
 <script>
 (function(){
-    CKEDITOR.replace('content');
+    var config = {"filebrowserWindowWidth": 940, "toolbar_Basic": [["Source", "-", "Bold", "Italic"]], "language": "zh-cn", "toolbar_Full": [["Styles", "Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker", "Undo", "Redo"], ["Image", "Flash", "Table", "HorizontalRule"], ["TextColor", "BGColor"], ["Smiley", "SpecialChar"], ["Source"]], "filebrowserUploadUrl": "/ckeditor/upload/", "height": 200, "width": 700, "toolbarCanCollapse": false, "filebrowserBrowseUrl": "/ckeditor/browse/", "skin": "moono", "filebrowserWindowHeight": 725, "toolbar": [["PasteText", "PasteFromWord", "Undo", "Redo", "-", "SelectAll"], ["Bold", "Italic", "NumberedList", "BulletedList", "-", "Outdent", "Indent"], ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "Font", "FontSize"], ["Maximize"]]};
+    config.height = 500;
+
+    CKEDITOR.replace('content', config);
 
     var $form = $('#js-form'),
     $btn = $form.find('#js-submit');
