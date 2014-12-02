@@ -145,4 +145,5 @@ def manage_knowledge_mode_view(request):
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
         return render_to_response('404.html')
-    return HttpResponse('True')
+    data = {}
+    return render_to_response('manager/tpl/manage_bringupknowledge_mod.html',data,context_instance=RequestContext(request))
