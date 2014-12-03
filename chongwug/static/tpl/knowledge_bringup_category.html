@@ -13,20 +13,22 @@
         </ol>
     </div>
     <div class="container content-container" style="padding-top: 20px;">
-        {% for knowledge in knowledges %}
-        <div class="col-6 outline{% if forloop.counter > 2 %} dashed-top{% endif %}{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}">
-            <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank" class="decoration-none">
-                <h4 class="outline-title">
-                    <span class="title-limit">{{ knowledge.title }}</span>
-                    <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
-                </h4>
-                <div class="outline-content">
-                    {{ knowledge.content|safe }}
-                </div>
-                <span class="outline-more">查看更多>></span>
-            </a>
+        <div class="row">
+            {% for knowledge in knowledges %}
+            <div class="col-6 outline{% if forloop.counter > 2 %} dashed-top{% endif %}{% if not forloop.counter|divisibleby:2 %} dashed-right{% endif %}">
+                <a href="/knowledge/bringup/{{ knowledge.id }}/" target="_blank" class="decoration-none">
+                    <h4 class="outline-title">
+                        <span class="title-limit">{{ knowledge.title }}</span>
+                        <span class="outline-date">{{ knowledge.time|date:'Y-m-d' }}</span>
+                    </h4>
+                    <div class="outline-content">
+                        {{ knowledge.content|safe }}
+                    </div>
+                    <span class="outline-more">查看更多>></span>
+                </a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
         <div class="text-center">
             <ul class="pagination pagination-primary">
                 {% if curpage <= 1 %}
