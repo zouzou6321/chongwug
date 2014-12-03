@@ -17,8 +17,8 @@
         <label for="type" class="col-sm-2 control-label">类型<span class="warn">*</span>：</label>
         <div class="col-sm-4">
           <select class="form-control required" id="type" name="type">
-            {% for type in types %}
-            <option value="{{ type.0 }}" {% if curtype == type.0 %}selected{% endif %}>{{ type.3 }}</option>
+            {% for type in types %}{{ knowledge.classify }}
+            <option value="{{ type.0 }}" {% if knowledge.classify == type.1 %}selected{% endif %}>{{ type.3 }}</option>
             {% endfor %}
           </select>
         </div>
