@@ -149,7 +149,7 @@ def attention_data(request):
         data['DT_RowId'] = attention.id
         data['name'] = attention.user.nickname
         data['tel'] = attention.user.tel
-        data['petfarm'] = attention.nestofpet_id.farm.name
+        data['petfarm'] = {'content':attention.nestofpet_id.farm.name + u'-本窝编号' + attention.nestofpet_id.num,'url':'/buy/detail/%d/' % attention.nestofpet_id.id}
         data['pettype'] = attention.nestofpet_id.type
         data['appointtime'] = attention.appoint_time.strftime('%Y-%m-%d %H:%M:%S')
         data['location'] = attention.user.location
