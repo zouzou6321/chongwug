@@ -66,6 +66,15 @@
                 url: "/static/lib/dist/datatables/zh-CN.json"
             }
             ,columnDefs: [{
+                targets: 3,
+                render: function(data, type, full, meta){
+                    if(type == 'display'){
+                        return '<a target="_blank" href="http://www.chongwug.com'+ data.url +'">'+ data.content +'</a>';
+                    }
+
+                    return data.content;
+                }
+            }, {
                 targets: 7,
                 render: function(data, type, full, meta){
                     return type == 'display' ? transMap[data] : data;

@@ -158,6 +158,15 @@
                 url: "/static/lib/dist/datatables/zh-CN.json"
             }
             ,columnDefs: [{
+                targets: 3,
+                render: function(data, type, full, meta){
+                    if(type == 'display'){
+                        return '<a target="_blank" href="http://www.chongwug.com'+ data.url +'">'+ data.content +'</a>';
+                    }
+
+                    return data.content;
+                }
+            }, {
                 targets: 7,
                 render: function(data, type, full, meta){
                     return type == 'display' ? transMap[data] : data;
@@ -379,8 +388,13 @@
        initData(data);
     });
 
+    function formatPetfarm(str){
+        var i = str.indexOf('-');
+        return str.substring(0, i);
+    }
+
     function initData(data){
-        $petFarm.find('option').filter(':contains("'+ data.petfarm +'")').prop('selected', true);
+        $petFarm.find('option').filter(':contains("'+ formatPetfarm(data.petfarm.content) +'")').prop('selected', true);
         $petFarm.trigger('change', {pettype: data.pettype});
 
         $id.val(data.DT_RowId);
@@ -400,8 +414,6 @@
             var name = e.name in present ? e.name : 'data['+ e.name +']';
             data[name] = e.value;
         });
-
-        console.log(data);
 
         $btn.button('loading');
 
