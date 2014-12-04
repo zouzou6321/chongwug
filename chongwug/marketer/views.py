@@ -86,7 +86,7 @@ def market_usr_unpay_info_view(request):
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
     data['page'] = 'unpay'
-    return render_to_response('market/tpl/market_unpay.html',data)
+    return render_to_response('market/tpl/market_unpay.html',data,context_instance=RequestContext(request))
 
 def market_usr_unpayclose_info_view(request):
     if adapters.manage_authentication(request) == False:
