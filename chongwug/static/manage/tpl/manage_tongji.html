@@ -1,17 +1,16 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>内容编辑</title>
-	</head>
-	<body>
-		<h1>30日访问统计</h1>
-		<table>
+{% extends 'manage/tpl/base/base.html' %}
+{% block title %}30日访问统计{% endblock %}
+
+
+{% block main %}
+	<h1 class="page-header">30日访问统计</h1>
+	<div class="col-sm-6">
+        <table class="table table-bordered table-striped">
 			<thead>
 				<td>日期</td>
-				<td>IP数</td>
-				<td>UV数</td>
-				<td>PV数</td>
+				<td>IP 数</td>
+				<td>UV 数</td>
+				<td>PV 数</td>
 			</thead>
 			<tbody>
 			{% for data in datas %}
@@ -24,5 +23,5 @@
 			{% endfor %}
 			</tbody>
 		</table>
-	</body>
-</html>
+    </div>
+{% endblock %}
