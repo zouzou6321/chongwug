@@ -1,38 +1,36 @@
-{% load assets_manager %}
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>内容编辑</title>
-		<script src="{{ 'lib/jquery.js'|assets_petfarm }}"></script>
-	</head>
-	<body>
+{% extends 'manage/tpl/base/base.html' %}
+{% load assets_manage %}
 
-<h1 class="page-header">删除管理员</h1>
-				<div id="adinfo">
-					{% for manager in managers %}
-					<p>
-					<div style="border:1px solid #ccc;border-radius:4px;width:90%;" id="manage_{{ manager.id }}">
-					名字：{{ manager.name }}
-					密码：{{ manager.passwd }}
-					类型：{{ manager.type }}
-					权限：{{ manager.permission_score }}
-					<button onclick="delemanager({{ manager.id }})">删除</button>
-					</div></p>
-					{% endfor %} 
-				</div>
-		</div>
-		<script>
-		function delemanager(id){
-			$.get("./?id="+id, function(recive){
-				if(recive != 'False'){
-					$("#manage_" + id).hide();
-				}
-				else{
-					alert('删除失败');
-				}
-			});
+{% block title %}删除管理员{% endblock %}
+
+{% block main %}
+	<h1 class="page-header">删除管理员</h1>
+    <div class="row">
+    	{% for manager in managers %}
+    	<div class="col-sm-3">
+			<p>名字：{{ manager.name }}</p>
+			<p>密码：{{ manager.passwd }}</p>
+			<p>类型：{{ manager.type }}</p>
+			<p>权限：{{ manager.permission_score }}</p>
+			<p>
+				<button type="button" class="btn btn-primary" onclick="delemanager({{ manager.id }})">刪除</button>
+			</p>
+        </div>
+    	{% endfor %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function delemanager(id){
+	$.get("./?id="+id, function(recive){
+		if(recive != 'False'){
+			window.location.reload();
 		}
-		</script>
-	</body>
-</html>
+		else{
+			alert('删除失败');
+		}
+	});
+}
+</script>
+{% endblock %}
