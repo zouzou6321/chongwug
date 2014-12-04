@@ -152,6 +152,8 @@ def attention_data(request):
         now = datetime.datetime.now()
         kwargs['time__lte'] = now - datetime.timedelta(days = 1)
         attentions = nestofpet_attention.objects.filter(**kwargs).order_by('id')
+    elif filter == 'unpayclose':
+        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=6).order_by('id')
     count = attentions.count()
     attentions = attentions[start:start + length]
     for attention in attentions:
