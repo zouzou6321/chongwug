@@ -1,0 +1,147 @@
+{% extends 'market/tpl/base/base.html' %}
+{% load assets_market %}
+{% block title %}内容编辑{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ 'css/jquery.dataTables.css'|assets_market }}"/>
+<link rel="stylesheet" href="{{ 'css/dataTables.editor.css'|assets_market }}"/>
+{% endblock %}
+{% block main %}
+<h1 class="page-header">未付款</h1>
+
+<table class="table table-striped table-bordered" id="js-order-info-table">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>电话</th>
+            <th>犬舍</th>
+            <th>犬种</th>
+            <th>预约时间</th>
+            <th>预约地点</th>
+            <th>交通方式</th>
+            <th>状态</th>
+            <th>订单提交时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+{% csrf_token %}
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ 'lib/datatables/jquery.datatables.js'|assets_market }}"></script>
+<script src="{{ 'lib/datatables/datatables.tabletools.js'|assets_market }}"></script>
+<script src="{{ 'lib/datatables/datatables.editor.js'|assets_market }}"></script>
+<script>
+;(function($){
+    var $orderInfoTable = $('#js-order-info-table'),
+        filter = 'unpay',
+        acceptMap = {
+            '0': '未付款',
+            '1': '已预约',
+            '2': '已受理',
+            '3': '未受理',
+            '4': '预约失败',
+            '5': '已完成',
+            '6': '已回访'
+        },
+        transMap = {
+            'lift': '接送',
+            'drive': '自驾'
+        },
+        orderInfoTable = $orderInfoTable.DataTable({
+            serverSide: true,
+            processing: true,
+            ajax: {
+                url: '/market/attention/data/',
+                data: function ( d ) {
+                    d.filter = filter;
+                }
+            },
+            ordering: false,
+            searching: false,
+            lengthChange: false,
+            bAutoWidth: false,
+            language: {
+                url: "/static/lib/dist/datatables/zh-CN.json"
+            }
+            ,columnDefs: [{
+                targets: 3,
+                render: function(data, type, full, meta){
+                    if(type == 'display'){
+                        return '<a target="_blank" href="http://www.chongwug.com'+ data.url +'">'+ data.content +'</a>';
+                    }
+
+                    return data.content;
+                }
+            }, {
+                targets: 7,
+                render: function(data, type, full, meta){
+                    return type == 'display' ? transMap[data] : data;
+                }
+            }, {
+                targets: 8,
+                className: 'col-accept',
+                render: function(data, type, full, meta){
+                    return type == 'display' ? acceptMap[data] : data;
+                }
+            }]
+            ,columns: [
+                {data: 'id'},
+                {data: 'name'},
+                {data: 'tel'},
+                {data: 'petfarm'},
+                {data: 'pettype'},
+                {data: 'appointtime'},
+                {data: 'location'},
+                {data: 'trans'},
+                {data: 'accept'},
+                {data: 'time'},
+                {
+                    data: null,
+                    defaultContent: '<a href="javascript:" class="btn-edit"><i class="glyphicon glyphicon-pencil"></i></a>'
+                }
+            ]
+        });
+
+    var orderInfoEditor = new $.fn.dataTable.Editor({
+        ajax: '/market/attention/mod/',
+        table: "#js-order-info-table",
+        fields: [{
+            name: 'accept',
+            label: '状态',
+            type: 'select',
+            ipOpts: [{
+                label: acceptMap[6],
+                value: '6'
+            }]
+        }]
+    });
+
+    var csr = $('input[name="csrfmiddlewaretoken"]').val();
+
+    $orderInfoTable.on('click', '.btn-edit', function(){
+        orderInfoEditor
+            .title( '修改' )
+            .buttons( { "label": "确定", "fn": function () { orderInfoEditor.submit(null, null, function(data){
+                    data.filter = filter;
+                    data.csrfmiddlewaretoken = csr;
+                    console.log(csr);
+                }) } } )
+            .edit( $(this).closest('tr') );
+    });
+
+{#    $orderInfoTable.on('click', '.col-accept', function(){#}
+{#        orderInfoEditor.inline(this, {#}
+{#            buttons: { label: '确定', fn: function () { this.submit(null, null, function(data){#}
+{#                data.filter = filter;#}
+{#            }); } }#}
+{#        });#}
+{#    });#}
+
+}(jQuery));
+
+</script>
+{% endblock %}
