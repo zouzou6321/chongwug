@@ -19,7 +19,7 @@
 {% block navbar %}
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/manage/">后台审核管理系统</a>
+      <a class="navbar-brand" href="/manage/">管理员系统</a>
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -40,15 +40,9 @@
         {% block sidebar %}
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                {% if manager.permission_score < 50 %}
-				{% else %}
-				<li><a href="/manage/petfarm/add/">添加新养殖场</a></li>
-				<li><a href="/manage/ad/add/">添加广告</a></li>
-				<li><a href="/manage/ad/del/">删除广告</a></li>
-				<li><a href="/manage/supplie/add/">添加宠物用品</a></li>
-				<li><a href="/manage/supplie/mod/">删除/修改宠物用品</a></li>
-				<li><a href="/manage/knowledge/mod/">删除/修改宠物知识</a></li>
-				{% endif %}
+                <li><a href="./ad/show/">广告展示</a></li>
+                <li><a href="./manager/add/">添加管理人员</a></li>
+                <li><a href="./manager/del/">删除管理人员</a></li>
             </ul>
         </div>
         {% endblock %}

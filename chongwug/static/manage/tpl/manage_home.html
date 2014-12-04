@@ -1,15 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>内容编辑</title>
-	</head>
-	<body>
-		<h1>管理员系统</h1>
-		<h2>当前操作员：{{ manager.name }}</h2>
-		<li><a href="./ad/show/">广告展示</a></li>
-		<li><a href="./manager/add/">添加管理人员</a></li>
-		<li><a href="./manager/del/">删除管理人员</a></li>
-		<li><a href="./?logout=true">注销登录</a></li>
-	</body>
-</html>
+{% extends 'manage/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+
+{% block main %}
+<h1 class="page-header">欢迎使用！</h1>
+{% endblock %}
