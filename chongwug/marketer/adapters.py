@@ -69,6 +69,10 @@ def market_attention_mod(request):
             attention.attention_type = 3
         elif request.POST['data[accept]'] == '4':
             attention.attention_type = 4
+    elif filter == 'unpay':
+        attention = nestofpet_attention.objects.get(id=string.atoi(request.POST['id']), dele=False,attention_type=0)
+        if request.POST['data[accept]'] == '6':
+            attention.attention_type = 6
     elif filter == 'untreated':
         petfarm = pet_farm.objects.get(id=string.atoi(request.POST['data[petfarm]']),dele=False)
         nestpets = petfarm.nestofpet_set.filter(type=request.POST['data[pettype]'],dele=False)
@@ -141,6 +145,13 @@ def attention_data(request):
         attentions = nestofpet_attention.objects.filter(dele=False,attention_type=4).order_by('id')
     elif filter == 'success':
         attentions = nestofpet_attention.objects.filter(dele=False,attention_type=5).order_by('id')
+    elif filter == 'unpay':
+        kwargs = {}
+        kwargs['dele'] = False
+        kwargs['attention_type'] = 0
+        now = datetime.datetime.now()
+        kwargs['time__lte'] = now - datetime.timedelta(days = 1)
+        attentions = nestofpet_attention.objects.filter(**kwargs).order_by('id')
     count = attentions.count()
     attentions = attentions[start:start + length]
     for attention in attentions:

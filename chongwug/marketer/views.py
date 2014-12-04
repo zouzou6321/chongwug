@@ -79,6 +79,15 @@ def market_usr_success_info_view(request):
     data['page'] = 'success'
     return render_to_response('market/tpl/market_success.html',data)
 
+def market_usr_unpay_info_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MARKET_ROOT)
+    if request.session['score'] < 20:
+        return render_to_response('404.html')
+    data = adapters.manage_home_data_get(request)
+    data['page'] = 'unpay'
+    return render_to_response('market/tpl/market_unpay.html',data)
+
 def market_usr_attention_mod_view(request):
     if adapters.manage_authentication(request) == False:
         return HttpResponseRedirect(MARKET_ROOT)
