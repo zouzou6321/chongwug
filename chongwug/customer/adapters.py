@@ -51,11 +51,14 @@ def UVPVIPtongji(request):
     return "success"
 
 def ADclicktongji(request):
-    adclick = adclicktongji( ip = request.META['REMOTE_ADDR'],
-                tarurl = request.REQUEST.get('tarurl'),
-                browser = request.META['HTTP_USER_AGENT'])
-    adclick.save()
-    return __errorcode__(0)
+    try:
+        adclick = adclicktongji( ip = request.META['REMOTE_ADDR'],
+                    tarurl = request.REQUEST.get('tarurl'),
+                    browser = request.META['HTTP_USER_AGENT'])
+        adclick.save()
+        return __errorcode__(0)
+    except:
+        return __errorcode__(2)
 
 '''
 函数功能：首页数据适配器
