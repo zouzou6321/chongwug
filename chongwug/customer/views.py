@@ -132,6 +132,8 @@ def knowledge_bringup_detail_view(request,id):
     adapters.UVPVIPtongji(request)
     data = {}
     data['bringup'] = adapters.get_knowledge_bringup_detail(id)
+    if data['bringup'] == None:
+        return render_to_response('404.html')
     data['page'] = 'knowbringup'
     data['title'] = u'宠物喂养| 宠物购交易平台-%s-国内首个活体宠物O2O交易平台' % (data['bringup'].title)
     data['keywords'] = u'养狗知识，如何养狗，养狗注意事项,狗狗护理'
