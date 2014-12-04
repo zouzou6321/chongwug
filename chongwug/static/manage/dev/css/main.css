@@ -40,6 +40,9 @@
       padding-right: 40px;
       padding-left: 40px; } }
 
+.img-full {
+  max-width: 100%; }
+
 .modal-loading {
   position: absolute;
   display: none;
