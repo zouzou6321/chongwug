@@ -51,3 +51,10 @@ def manage_adshow_view(request):
     else:
         return render_to_response('manage/tpl/manage_ad_show.html',data,context_instance=RequestContext(request))
     return render_to_response('manage/tpl/manage_ad_show.html',data,context_instance=RequestContext(request))
+
+def manage_tongji_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    data = adapters.manage_home_data_get(request)
+    data['datas'] = adapters.manage_tongji_get()
+    return render_to_response('manage/tpl/manage_tongji.html',data,context_instance=RequestContext(request))

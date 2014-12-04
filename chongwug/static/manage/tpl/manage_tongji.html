@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>内容编辑</title>
+	</head>
+	<body>
+		<h1>30日访问统计</h1>
+		<table>
+			<thead>
+				<td>日期</td>
+				<td>IP数</td>
+				<td>UV数</td>
+				<td>PV数</td>
+			</thead>
+			<tbody>
+			{% for data in datas %}
+			<tr>
+				<td>{{ data.time }}</td>
+				<td>{{ data.ip }}</td>
+				<td>{{ data.uv }}</td>
+				<td>{{ data.pv }}</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
