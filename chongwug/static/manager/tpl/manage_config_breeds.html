@@ -17,10 +17,23 @@
 <p>新增犬种：</p>
 <form action="" class="form-horizontal" method="post">
     {% csrf_token %}
+    <div>
+        <label class="control-label col-sm-2">添加位置：</label>
+        <div class="col-sm-4">
+            <select name="" id="">
+                <option value="">空</option>
+            </select>
+        </div>
+    </div>
     <div class="form-group">
-        <label for="type" class="control-label">犬种名称：</label>
+        <label for="type" class="control-label col-sm-2">犬种名称：</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" id="type"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button type="submit">提交</button>
         </div>
     </div>
 </form>
