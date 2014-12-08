@@ -388,8 +388,9 @@ from chongwug.commom import flushconfig
 def manage_config(request,who):
     if who == None:
         return None
-    infos = []
+    
     if who == 'breeds':
+        data = manage_home_data_get(request)
         if 'add' in request.GET:
             add = request.REQUEST.get('add')
             after = request.REQUEST.get('after')
@@ -404,6 +405,26 @@ def manage_config(request,who):
         elif 'del' in request.GET:
             config.__pettypes.remove(request.REQUEST.get('del'))
         else:
-            infos = config.__pettypes
-    flushconfig()
-    return infos
+            data['infos'] = config.__pettypes
+            return data,False
+        flushconfig()
+        return data,True
+    elif who == 'adrress':
+        data = []
+        if 'ranges' in request.GET:
+            for range in config.__addresses:
+                data.append({ "id" : range['index'], "parent" : "#", "text" : range['name'] })
+        elif 'provinces' in request.GET:
+            for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
+                data.append({ "id" : province['index'], "parent" : request.REQUEST.get('range'), "text" : province['name'] })
+        elif 'citys' in request.GET:
+            for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
+                data.append({ "id" : city['index'], "parent" : request.REQUEST.get('province'), "text" : city['name'] })
+        elif 'disticts' in request.GET:
+            for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
+                data.append({ "id" : distict['index'], "parent" : request.REQUEST.get('city'), "text" : distict['name'] })
+        elif 'streets' in request.GET:
+            for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
+                data.append({ "id" : street['index'], "parent" : request.REQUEST.get('distict'), "text" : street['name'] })
+        return data.__repr__()
+    return None

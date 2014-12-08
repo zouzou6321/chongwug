@@ -169,8 +169,10 @@ def manage_config_view(request,who):
         return HttpResponseRedirect(MANAGE_ROOT)
     if request.session['score'] < 50:
         return render_to_response('404.html')
-    data = adapters.manage_home_data_get(request)
-    data['infos'] = adapters.manage_config(request,who)
-    if data['infos'] == []:
+    data,redirect = adapters.manage_config(request,who)
+    if redirect == True:
         return HttpResponseRedirect(MANAGE_ROOT +('config/%s/' % who))
-    return render_to_response('manager/tpl/manage_config_breeds.html',data)
+    elif redirect == False:
+        return render_to_response('manager/tpl/manage_config_%s.html' % who,data)
+    else:
+        return HttpResponse(data)
