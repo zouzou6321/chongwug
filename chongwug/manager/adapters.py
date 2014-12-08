@@ -393,19 +393,14 @@ def manage_config(request,who):
         if 'add' in request.GET:
             add = request.REQUEST.get('add')
             after = request.REQUEST.get('after')
-            index = 0
-            count = 0
-            for pettype in config.__pettypes:
-                count = count + 1
-                if pettype == after:
-                    index = count
-            config.__pettypes.insert(index, add)
+            if after == '':
+                config.__pettypes.insert(0, add)
+            else:
+                config.__pettypes.insert(config.__pettypes.index(after) + 1, add)
         elif 'modify' in request.GET:
             new = request.REQUEST.get('modify')
             old = request.REQUEST.get('old')
-            for pettype in config.__pettypes:
-                if pettype == old:
-                    pettype = new
+            config.__pettypes[config.__pettypes.index(old)] = new
         elif 'del' in request.GET:
             config.__pettypes.remove(request.REQUEST.get('del'))
         else:
