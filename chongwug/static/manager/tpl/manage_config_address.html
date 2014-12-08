@@ -1,0 +1,45 @@
+{% extends 'manager/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+{% load assets_manager %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ 'lib/jstree/style.css'|assets_manager }}"/>
+{% endblock %}
+
+{% block main %}
+<h1 class="page-header">地址编辑</h1>
+
+<div id="address-tree"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ 'lib/jstree/jstree.js'|assets_manager }}"></script>
+<script>
+(function(){
+
+
+$('#address-tree').jstree({
+    'core': {
+        'data': {
+            'url': './',
+            'dataType': 'json',
+            'data': function(node){
+                var id = node.id,
+                    data = {};
+                if(id == '#'){
+                    data.ranges = 'ranges';
+                }else{
+                    data.range = id;
+                }
+
+                return data;
+            }
+        }
+    }
+});
+
+})();
+</script>
+{% endblock %}

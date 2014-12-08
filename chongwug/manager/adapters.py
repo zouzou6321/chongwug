@@ -428,5 +428,5 @@ def manage_config(request,who):
                 data.append({ "id" : street['index'], "parent" : request.REQUEST.get('distict'), "text" : street['name'] })
         else:
             return data.__repr__(),False
-        return data.__repr__(),None
+        return json.dumps(data),None
     return None,None
