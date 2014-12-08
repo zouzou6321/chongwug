@@ -1,0 +1,36 @@
+{% extends 'manager/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+{% load assets_manager %}
+{% block main %}
+
+<h1 class="page-header">犬种编辑</h1>
+<p>犬种列表</p>
+
+<div>
+    <a href="?del=id" class="label label-info">
+        xxx
+        <i class="glyphicon glyphicon-remove"></i>
+    </a>
+</div>
+
+<p>新增犬种：</p>
+<form action="" class="form-horizontal" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="type" class="control-label">犬种名称：</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="type"/>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function(){
+
+})();
+</script>
+{% endblock %}
