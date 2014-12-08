@@ -409,7 +409,7 @@ def manage_config(request,who):
             return data,False
         flushconfig()
         return data,True
-    elif who == 'adrress':
+    elif who == 'address':
         data = []
         if 'ranges' in request.GET:
             for range in config.__addresses:
@@ -426,5 +426,7 @@ def manage_config(request,who):
         elif 'streets' in request.GET:
             for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
                 data.append({ "id" : street['index'], "parent" : request.REQUEST.get('distict'), "text" : street['name'] })
-        return data.__repr__()
-    return None
+        else:
+            return data.__repr__(),False
+        return data.__repr__(),None
+    return None,None
