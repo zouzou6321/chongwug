@@ -13,7 +13,7 @@ import os,uuid,datetime
 import config
 from django import forms
 from chongwug.commom import __errorcode__,myCKEditorWidget
-from chongwug.config import __knowledgetypes,__supplietypes,__directs,__addresses,__regular_expression_idnum,__regular_expression_chinatelnum,__regular_expression_email,__upyun_picpath,__upyun_name,__upyun_pwd
+from chongwug import config
 '''
 管理员鉴权
 '''
@@ -40,11 +40,11 @@ def manage_login_check(request):
 
 def manage_home_data_get(request):
     manager = manage.objects.get(id=request.session['manage_id'])
-    return {'manager':manager,'directs':__directs}
+    return {'manager':manager,'directs':config.__directs}
 
 def addressHandle(re):
     if 'province' in re.GET:
-        addresses = __addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
+        addresses = config.__addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
         if 'city' in re.GET:
             addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
             arr = []
@@ -62,14 +62,14 @@ def addressHandle(re):
     provinces = []
     citys = []
     districts = []
-    for _addresse in __addresses:
+    for _addresse in config.__addresses:
         rangeid = _addresse['index']
         _provinces = _addresse['sublist']
         for _province in _provinces:
             provinces.append({'rangeid':rangeid,'id':_province['index'], 'name':_province['name']})
-    for _city in __addresses[0]['sublist'][0]['sublist']:
+    for _city in config.__addresses[0]['sublist'][0]['sublist']:
         citys.append({'id': _city['index'], 'name': _city['name']})
-    for _district in __addresses[0]['sublist'][0]['sublist'][0]['sublist']:
+    for _district in config.__addresses[0]['sublist'][0]['sublist'][0]['sublist']:
         districts.append({'id': _district['index'], 'name': _district['name']})
     return {'provinces':provinces, 'citys':citys, 'districts':districts}
 
@@ -92,7 +92,7 @@ def manage_pet_farm_add(request):
         
         error = True
         
-        for _addresse in __addresses:
+        for _addresse in config.__addresses:
             for _province in _addresse['sublist']:
                 if _province['name'] == province:
                     for _city in _province['sublist']:
@@ -107,7 +107,7 @@ def manage_pet_farm_add(request):
             return __errorcode__(11)
         
         error = True
-        for _direct in __directs:
+        for _direct in config.__directs:
             if _direct == request.POST['direct']:
                 error = False
                 break
@@ -122,13 +122,13 @@ def manage_pet_farm_add(request):
         except:
             return __errorcode__(19)
         
-        p = re.compile(__regular_expression_chinatelnum)
+        p = re.compile(config.__regular_expression_chinatelnum)
         if not p.match(request.POST['tel']):
             return __errorcode__(9)
-        p = re.compile(__regular_expression_email)
+        p = re.compile(config.__regular_expression_email)
         if not p.match(request.POST['email']):
             return __errorcode__(16)
-        p = re.compile(__regular_expression_idnum)
+        p = re.compile(config.__regular_expression_idnum)
         if not p.match(request.POST['idnum']):
             return __errorcode__(17)
         content = descform({'content':request.POST['content']})
@@ -216,7 +216,7 @@ def pic_preupload(request,pic_dir,max_height,max_width):
     name = settings.STATIC_ROOT + url
     cropimg.save(name,quality=75,optimize=True, progressive=True)
     
-    up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
+    up = UpYun(config.__upyun_picpath,config.__upyun_name,config.__upyun_pwd)
     with open(name, 'rb') as f:
         res = up.put(file_path_name, f, checksum=False)
     #rr = _u.put(file_name, cropimg, checksum=False,headers={"x-gmkerl-rotate": "180"}) 
@@ -293,7 +293,7 @@ def manage_ad_select(request):
     return  'False'
 
 def manage_get_supplies(request):
-    supplietype = request.REQUEST.get('type', __supplietypes[0])
+    supplietype = request.REQUEST.get('type', config.__supplietypes[0])
     return (supplietype, supplies.objects.filter(dele=False,type=supplietype))
 
 def manage_get_supplie(id):
@@ -318,7 +318,7 @@ def manage_supplie_add(req,photo):
     name = settings.STATIC_ROOT+url
     img.save(name,'jpeg',quality=75,optimize=True, progressive=True)
     file_path_name = settings.SUPPLIE_PIC_ROOT + photo.name
-    up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
+    up = UpYun(config.__upyun_picpath,config.__upyun_name,config.__upyun_pwd)
     with open(name, 'rb') as f:
         res = up.put(file_path_name, f, checksum=False)
     os.remove(name)
@@ -342,7 +342,7 @@ def manage_supplie_mod(req,photo):
             name = settings.STATIC_ROOT+url
             img.save(name,'jpeg',quality=75,optimize=True, progressive=True)
             file_path_name = settings.SUPPLIE_PIC_ROOT + photo.name
-            up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
+            up = UpYun(config.__upyun_picpath,config.__upyun_name,config.__upyun_pwd)
             with open(name, 'rb') as f:
                 res = up.put(file_path_name, f, checksum=False)
             os.remove(name)
@@ -370,15 +370,45 @@ def manage_get_knowledges(request,id=None):
         except:
             pass
     if 'type' in request.GET:
-        return pclady.objects.filter(dele=True, classify = __knowledgetypes[string.atoi(request.REQUEST.get('type'))][1])
+        return pclady.objects.filter(dele=True, classify = config.__knowledgetypes[string.atoi(request.REQUEST.get('type'))][1])
     else:
-        return pclady.objects.filter(dele=True, classify = __knowledgetypes[0][1])
+        return pclady.objects.filter(dele=True, classify = config.__knowledgetypes[0][1])
 def manage_knowledge_mod(request):
         knowledge = pclady.objects.get(id=string.atoi(request.POST['id']))
         knowledge.title = request.POST['title']
         knowledge.content = request.POST['content']
-        knowledge.classify = __knowledgetypes[string.atoi(request.POST['type'])][1]
+        knowledge.classify = config.__knowledgetypes[string.atoi(request.POST['type'])][1]
         knowledge.contentfrom = request.POST['contentfrom']
         knowledge.dele = string.atoi(request.POST['dele'])
         knowledge.save()
         return True
+
+import json
+from chongwug.commom import flushconfig
+def manage_config(request,who):
+    if who == None:
+        return None
+    infos = None
+    if who == 'breeds':
+        if 'add' in request.GET:
+            add = request.REQUEST.get('add')
+            after = request.REQUEST.get('after')
+            index = 0
+            count = 0
+            for pettype in config.__pettypes:
+                count = count + 1
+                if pettype == after:
+                    index = count
+            config.__pettypes.insert(index, add)
+        elif 'modify' in request.GET:
+            new = request.REQUEST.get('modify')
+            old = request.REQUEST.get('old')
+            for pettype in config.__pettypes:
+                if pettype == old:
+                    pettype = new
+        elif 'del' in request.GET:
+            config.__pettypes.remove(request.REQUEST.get('del'))
+        else:
+            infos = config.__pettypes
+    flushconfig()
+    return infos
