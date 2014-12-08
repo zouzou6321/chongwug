@@ -20,25 +20,57 @@
 (function(){
 
 
-$('#address-tree').jstree({
+var $tree = $('#address-tree').jstree({
     'core': {
         'data': {
             'url': './',
             'dataType': 'json',
             'data': function(node){
-                var id = node.id,
+                var original = node.original,
                     data = {};
-                if(id == '#'){
-                    data.ranges = 'ranges';
+
+                if(original){
+                    data = paramMap(original, node.parents);
                 }else{
-                    data.range = id;
+                    data.ranges = 'ranges';
                 }
 
                 return data;
             }
         }
     }
-});
+}).jstree(true);
+
+
+function paramMap(orignal, parents){
+    var data = {},
+        len = parents.length - 1,
+        type = orignal.type;
+
+    data[type] = orignal.id;
+
+    for(var i = 0; i < len; i++){
+        var node = $tree.get_node(parents[i]).original;
+        data[node.type] = node.id;
+    }
+
+    switch (type){
+        case 'range':
+            data.provinces = 'provinces';
+            break;
+        case 'province':
+            data.citys = 'citys';
+            break;
+        case 'city':
+            data.disticts = 'disticts';
+            break;
+        case 'distict':
+            data.streets = 'streets';
+            break;
+    }
+
+    return data;
+}
 
 })();
 </script>
