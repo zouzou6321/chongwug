@@ -388,7 +388,7 @@ from chongwug.commom import flushconfig
 def manage_config(request,who):
     if who == None:
         return None
-    infos = None
+    infos = []
     if who == 'breeds':
         if 'add' in request.GET:
             add = request.REQUEST.get('add')
