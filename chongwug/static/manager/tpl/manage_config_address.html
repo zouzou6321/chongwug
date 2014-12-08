@@ -47,11 +47,11 @@ function paramMap(orignal, parents){
         len = parents.length - 1,
         type = orignal.type;
 
-    data[type] = orignal.id;
+    data[type] = orignal.index;
 
     for(var i = 0; i < len; i++){
         var node = $tree.get_node(parents[i]).original;
-        data[node.type] = node.id;
+        data[node.type] = node.index;
     }
 
     switch (type){

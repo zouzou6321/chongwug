@@ -413,19 +413,19 @@ def manage_config(request,who):
         data = []
         if 'ranges' in request.GET:
             for range in config.__addresses:
-                data.append({ "id" : range['index'],  "text" : range['name'], "children" : True, "type": "range" })
+                data.append({ "index" : range['index'],  "text" : range['name'], "children" : True, "type": "range" })
         elif 'provinces' in request.GET:
             for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
-                data.append({ "id" : province['index'],  "text" : province['name'], "children" : True, "type": "province" })
+                data.append({ "index" : province['index'],  "text" : province['name'], "children" : True, "type": "province" })
         elif 'citys' in request.GET:
             for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
-                data.append({ "id" : city['index'],  "text" : city['name'], "children" : True, "type": "city" })
+                data.append({ "index" : city['index'],  "text" : city['name'], "children" : True, "type": "city" })
         elif 'disticts' in request.GET:
             for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
-                data.append({ "id" : distict['index'],  "text" : distict['name'], "children" : True, "type": "distict" })
+                data.append({ "index" : distict['index'],  "text" : distict['name'], "children" : True, "type": "distict" })
         elif 'streets' in request.GET:
             for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
-                data.append({ "id" : street['index'],  "text" : street['name'], "children" : False, "type": "street" })
+                data.append({ "index" : street['index'],  "text" : street['name'], "children" : False, "type": "street" })
         else:
             return data.__repr__(),False
         return json.dumps(data),None
