@@ -163,3 +163,12 @@ def manage_knowledge_mode_view(request):
     else:
         data['knowledges'] = adapters.manage_get_knowledges(request)
         return render_to_response('manager/tpl/manage_bringupknowledge_mod.html',data)
+
+def manage_config_view(request,who):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return render_to_response('404.html')
+    data = adapters.manage_home_data_get(request)
+    data['infos'] = adapters.manage_config(request,who)
+    return render_to_response('manager/tpl/manage_config_breeds.html',data)

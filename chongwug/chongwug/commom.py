@@ -40,6 +40,27 @@ def sendSMS(telnum,SMScontent):
         return content
     return True
 
+import config,sys,os
+
+def flushconfig():
+    keylist = dir(config)
+    configfile = open(os.path.dirname(__file__).replace('\\','/') + '/config.py','w')
+    configfile.write("# -*- coding: UTF-8 -*-\r\n")
+    for key in keylist:
+        if key == '__builtins__' or key == '__name__' or key == '__file__' or key == '__doc__' or key == '__package__':
+            continue
+        if len(key.split('regular_expression')) > 1 or len(key.split('upyun')) > 1:
+            if len(key.split ('regular_expression_username')) > 1:
+                str = u"%s = u'%s'\r\n" % (key, eval('config.' + key))
+            else:
+                str = u"%s = r'%s'\r\n" % (key, eval('config.' + key))
+        else:
+            str = u"%s = %s\r\n" % (key, eval('config.' + key))
+        configfile.write(str.encode('utf8'))
+    configfile.close()
+    reload(config)  
+    __import__('chongwug.config')
+
 class SubdomainMiddleware(object):
     def process_request(self, request):
         domain_parts = request.get_host().split('.')
