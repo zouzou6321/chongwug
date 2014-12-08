@@ -171,4 +171,6 @@ def manage_config_view(request,who):
         return render_to_response('404.html')
     data = adapters.manage_home_data_get(request)
     data['infos'] = adapters.manage_config(request,who)
+    if data['infos'] == []:
+        return HttpResponseRedirect(MANAGE_ROOT +('config/%s/' % who))
     return render_to_response('manager/tpl/manage_config_breeds.html',data)
