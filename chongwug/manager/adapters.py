@@ -416,7 +416,7 @@ def manage_config(request,who):
             count = 0
             if 'street' in request.GET:
                 for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
-                    if street['index'] == string.atoi(request.REQUEST.get('street')) and  not isfind:
+                    if street['name'] == request.REQUEST.get('street') and  not isfind:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'].remove(street)
                         isfind = True
                     if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']) > count:
@@ -424,7 +424,7 @@ def manage_config(request,who):
                     count = count + 1
             elif 'distict' in request.GET:
                 for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
-                    if distict['index'] == string.atoi(request.REQUEST.get('distict')) and  not isfind:
+                    if distict['name'] == request.REQUEST.get('distict') and  not isfind:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'].remove(distict)
                         isfind = True
                     if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']) > count:
@@ -432,7 +432,7 @@ def manage_config(request,who):
                     count = count + 1
             elif 'city' in request.GET:
                 for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
-                    if city['index'] == string.atoi(request.REQUEST.get('city')) and  not isfind:
+                    if city['name'] == request.REQUEST.get('city') and  not isfind:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'].remove(city)
                         isfind = True
                     if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']) > count:
@@ -440,7 +440,7 @@ def manage_config(request,who):
                     count = count + 1
             elif 'province' in request.GET:
                 for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
-                    if province['index'] == string.atoi(request.REQUEST.get('province')) and  not isfind:
+                    if province['name'] == request.REQUEST.get('province') and  not isfind:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'].remove(province)
                         isfind = True
                     if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']) > count:
@@ -448,7 +448,7 @@ def manage_config(request,who):
                     count = count + 1
             elif 'range' in request.GET:
                 for range in config.__addresses:
-                    if range['index'] == string.atoi(request.REQUEST.get('range')) and  not isfind:
+                    if range['name'] == request.REQUEST.get('range') and  not isfind:
                         config.__addresses.remove(range)
                         isfind = True
                     if isfind and len(config.__addresses) > count:
