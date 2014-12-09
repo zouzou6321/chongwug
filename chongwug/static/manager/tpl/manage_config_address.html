@@ -29,7 +29,7 @@ var $tree = $('#address-tree').jstree({
                     len = parents.length - 1,
                     data = {};
 
-                data[original.type] = original.index;
+                data[original.type] = original.text;
                 for(var i = 0; i < len; i++){
                     var node = $tree.get_node(parents[i]).original;
                     data[node.type] = node.index;
