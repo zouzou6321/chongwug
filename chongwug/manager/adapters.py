@@ -464,18 +464,23 @@ def manage_config_address(request):
         if 'distict' in request.GET:
             index = len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'])
             config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'].append({'name':request.REQUEST.get('text'),'index':index})
+            data = {'type':'street','index':index}
         elif 'city' in request.GET:
             index = len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'])
             config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'].append({'name':request.REQUEST.get('text'),'index':index,'waitpoint':request.REQUEST.get('area'),'sublist':[]})
+            data = {'type':'distict','index':index}
         elif 'province' in request.GET:
             index = len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'])
             config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'].append({'name':request.REQUEST.get('text'),'index':index,'sublist':[]})
+            data = {'type':'city','index':index}
         elif 'range' in request.GET:
             index = len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'])
             config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'].append({'name':request.REQUEST.get('text'),'index':index,'sublist':[]})
+            data = {'type':'province','index':index}
         else:
             index = len(config.__addresses)
             config.__addresses.append({'name':request.REQUEST.get('text'),'index':index,'sublist':[]})
+            data = {'type':'range','index':index}
         flushconfig()
     else:
         if 'ranges' in request.GET:
