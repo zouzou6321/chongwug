@@ -461,19 +461,19 @@ def manage_config_address(request):
                     break
         flushconfig()
     elif 'add' in request.GET:
-        if 'street' in request.GET:
+        if 'distict' in request.GET:
             index = len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'])
             config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'].append({'name':request.REQUEST.get('text'),'index':index})
-        elif 'distict' in request.GET:
+        elif 'city' in request.GET:
             index = len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'])
             config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'].append({'name':request.REQUEST.get('text'),'index':index,'waitpoint':request.REQUEST.get('area'),'sublist':[]})
-        elif 'city' in request.GET:
+        elif 'province' in request.GET:
             index = len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'])
             config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'].append({'name':request.REQUEST.get('text'),'index':index,'sublist':[]})
-        elif 'province' in request.GET:
+        elif 'range' in request.GET:
             index = len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'])
             config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'].append({'name':request.REQUEST.get('text'),'index':index,'sublist':[]})
-        elif 'range' in request.GET:
+        else:
             index = len(config.__addresses)
             config.__addresses.append({'name':request.REQUEST.get('text'),'index':index,'sublist':[]})
         flushconfig()
