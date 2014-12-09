@@ -10,8 +10,12 @@
 {% block main %}
 <h1 class="page-header">地址编辑</h1>
 
+<div style="margin-bottom: 20px;">
+    <button class="btn btn-primary" id="js-btn-add">新增</button>
+</div>
+
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div id="address-tree"></div>
     </div>
     <div class="col-sm-6">
@@ -19,23 +23,63 @@
             <h3>修改</h3>
             <div class="form-group">
                 <label class="control-label col-sm-3">名称：</label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <input type="text" class="form-control" id="js-text-input"/>
                 </div>
             </div>
             <div class="form-group hide" id="js-area">
                 <label class="control-label col-sm-3">接送地点：</label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <input type="text" class="form-control" id="js-area-input"/>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <button class="btn btn-primary">提交</button>
+                <div class="col-sm-8 col-sm-offset-3">
+                    <button class="btn btn-primary" id="js-modify-submit">提交</button>
                 </div>
             </div>
         </form>
     </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="js-add-modal" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">新增</h4>
+      </div>
+      <div class="modal-body">
+          <form class="form-horizontal">
+              <div class="form-group">
+                  <label class="control-label col-sm-3">新增位置：</label>
+                  <div class="col-sm-5">
+                      <label class="radio-inline">
+                          <input type="radio" name="location" value="root" checked id="js-root-input"/> 根节点
+                      </label>
+                        <label class="radio-inline hide">
+                          <input type="radio" name="location" id="js-curr-input"/> <span id="js-curr-location"></span>
+                      </label>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-sm-3">名称：</label>
+                  <div class="col-sm-5">
+                      <input type="text" class="form-control" id="js-add-text"/>
+                  </div>
+              </div>
+                <div class="form-group hide">
+                  <label class="control-label col-sm-3">接送地点：</label>
+                  <div class="col-sm-5">
+                      <input type="text" class="form-control" id="js-add-area"/>
+                  </div>
+              </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
@@ -83,10 +127,32 @@ var $addressTree = $('#address-tree'),
             }
         }
     },
-    'plugins' : [ 'contextmenu' ]
+    'plugins' : [ 'contextmenu' ],
+    'contextmenu': {
+        'items': {
+            'remove': {
+					"separator_before"	: false,
+					"icon"				: false,
+					"separator_after"	: false,
+					"_disabled"			: false, //(this.check("delete_node", data.reference, this.get_parent(data.reference), "")),
+					"label"				: "删除",
+					"action"			: function (data) {
+						var inst = $.jstree.reference(data.reference),
+							obj = inst.get_node(data.reference);
+						if(inst.is_selected(obj)) {
+							inst.delete_node(inst.get_selected());
+						}
+						else {
+							inst.delete_node(obj);
+						}
+					}
+				}
+        }
+    }
 }).jstree(true);
 
 var $modifyForm = $('#js-modify-form'),
+    $modifySubmit = $modifyForm.find('#js-modify-submit'),
     $area = $modifyForm.find('#js-area'),
     $textInput = $modifyForm.find('#js-text-input'),
     $areaInput = $modifyForm.find('#js-area-input'),
@@ -121,6 +187,7 @@ $addressTree.on('select_node.jstree', function(event, data){
 
 $modifyForm.on('submit', function(event){
     event.preventDefault();
+    $modifySubmit.button('loading');
 
     modifyData.text = $.trim($textInput.val());
     modifyData.area = $.trim($areaInput.val());
@@ -130,8 +197,77 @@ $modifyForm.on('submit', function(event){
 
     ajax(modifyData, function(){
         $modifyForm[0].reset();
+        $modifySubmit.button('reset');
     });
 });
+
+var $add = $('#js-btn-add'),
+    insert = '#',
+    $addModal = $('#js-add-modal'),
+    $currInput = $addModal.find('#js-curr-input'),
+    $rootInput = $addModal.find('#js-root-input'),
+    $currLocation = $addModal.find('#js-curr-location'),
+    $addText = $addModal.find('#js-add-text'),
+    $addArea = $addModal.find('#js-add-area');
+
+$add.on('click', function(){
+    var selected = $tree.get_selected();
+
+    if(selected.length){
+        var node = $tree.get_node(selected[0]),
+            text = node.original.text;
+        insert = node.id;
+        $currInput.val(text).prop('checked', true);
+        $currLocation.text(text);
+        $currInput.parent().removeClass('hide');
+
+        if(node.parents.length == 4){
+            $addArea.closest('.form-group').removeClass('hide');
+        }else{
+            $addArea.closest('.form-group').addClass('hide');
+        }
+    }else{
+        insert = '#';
+        $rootInput.prop('checked', true);
+        $currInput.parent().addClass('hide');
+    }
+    $addModal.modal('show');
+});
+
+$addModal.on('click', 'button', function(){
+    var data = {},
+        $btn = $(this);
+
+    $btn.button('loading');
+
+    if(insert != '#'){
+        var node = $tree.get_node(insert),
+            original = node.original,
+            parents = node.parents,
+            len = parents.length - 1;
+
+        data[original.type] = original.index;
+        for(var i = 0; i < len; i++){
+            var node = $tree.get_node(parents[i]).original;
+            data[node.type] = node.index;
+        }
+    }
+
+    data.text = $addText.val();
+    data.area = $addArea.val();
+    data.add = true;
+
+    ajax(data, function(ajax_data){
+        $btn.button('reset');
+
+        if($tree.get_node(insert).state.opened){
+            $tree.create_node(insert, {text: data.text, type: ajax_data.type, index: ajax_data.index});
+        }
+
+        $addModal.modal('hide');
+    });
+});
+
 
 function ajax(data, cb){
     $.ajax({
@@ -139,7 +275,7 @@ function ajax(data, cb){
         dataType: 'json',
         data: data,
         success: function(data){
-            cb();
+            cb(data);
             console.log(data);
         }
     });
