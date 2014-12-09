@@ -454,6 +454,7 @@ def manage_config(request,who):
                     if isfind:
                         config.__addresses[count]['index'] = count
                     count = count + 1
+            flushconfig()
         else:
             if 'ranges' in request.GET:
                 for range in config.__addresses:
