@@ -419,7 +419,7 @@ def manage_config(request,who):
                     if street['index'] == string.atoi(request.REQUEST.get('street')) and  not isfind:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'].remove(street)
                         isfind = True
-                    if isfind:
+                    if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']) > count:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'][count]['index'] = count
                     count = count + 1
             elif 'distict' in request.GET:
@@ -427,7 +427,7 @@ def manage_config(request,who):
                     if distict['index'] == string.atoi(request.REQUEST.get('distict')) and  not isfind:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'].remove(distict)
                         isfind = True
-                    if isfind:
+                    if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']) > count:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][count]['index'] = count
                     count = count + 1
             elif 'city' in request.GET:
@@ -435,7 +435,7 @@ def manage_config(request,who):
                     if city['index'] == string.atoi(request.REQUEST.get('city')) and  not isfind:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'].remove(city)
                         isfind = True
-                    if isfind:
+                    if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']) > count:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][count]['index'] = count
                     count = count + 1
             elif 'province' in request.GET:
@@ -443,7 +443,7 @@ def manage_config(request,who):
                     if province['index'] == string.atoi(request.REQUEST.get('province')) and  not isfind:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'].remove(province)
                         isfind = True
-                    if isfind:
+                    if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']) > count:
                         config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][count]['index'] = count
                     count = count + 1
             elif 'range' in request.GET:
@@ -451,7 +451,7 @@ def manage_config(request,who):
                     if range['index'] == string.atoi(request.REQUEST.get('range')) and  not isfind:
                         config.__addresses.remove(range)
                         isfind = True
-                    if isfind:
+                    if isfind and len(config.__addresses) > count:
                         config.__addresses[count]['index'] = count
                     count = count + 1
             flushconfig()
