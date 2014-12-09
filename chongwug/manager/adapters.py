@@ -494,7 +494,8 @@ def manage_config_address(request):
             for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
                 data.append({ "index" : street['index'],  "text" : street['name'], "children" : False, "type": "street" })
         else:
-            return json.dumps(data),False
+            data = manage_home_data_get(request)
+            return data,False
     return json.dumps(data),None
 
 def manage_config(request,who):
