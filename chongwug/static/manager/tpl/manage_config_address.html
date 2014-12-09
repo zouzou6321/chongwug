@@ -240,6 +240,10 @@ $addModal.on('click', 'button', function(){
 
     $btn.button('loading');
 
+    if($('input[name="location"]:checked').val() == 'root'){
+        insert = '#';
+    }
+
     if(insert != '#'){
         var node = $tree.get_node(insert),
             original = node.original,
@@ -260,8 +264,8 @@ $addModal.on('click', 'button', function(){
     ajax(data, function(ajax_data){
         $btn.button('reset');
 
-        if($tree.get_node(insert).state.opened){
-            $tree.create_node(insert, {text: data.text, type: ajax_data.type, index: ajax_data.index});
+        if($tree.get_node(insert).state.opened != false){
+            $tree.create_node(insert, {text: data.text, type: ajax_data.type, index: ajax_data.index, state: {opened: true}});
         }
 
         $addModal.modal('hide');
