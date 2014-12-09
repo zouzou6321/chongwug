@@ -435,28 +435,28 @@ def manage_config_address(request):
     elif 'modify' in request.GET:
         if 'street' in request.GET:
             for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
-                if street['index'] == string.atoi(request.REQUEST.get('street')) and  not isfind:
+                if street['index'] == string.atoi(request.REQUEST.get('street')):
                     config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'][street['index']]['name'] = request.REQUEST.get('text')
                     break
         elif 'distict' in request.GET:
             for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
-                if distict['index'] == string.atoi(request.REQUEST.get('distict')) and  not isfind:
+                if distict['index'] == string.atoi(request.REQUEST.get('distict')):
                     config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][distict['index']]['name'] = request.REQUEST.get('text')
                     config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][distict['index']]['waitpoint'] = request.REQUEST.get('area')
                     break
         elif 'city' in request.GET:
             for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
-                if city['index'] == string.atoi(request.REQUEST.get('city')) and  not isfind:
+                if city['index'] == string.atoi(request.REQUEST.get('city')):
                     config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][city['index']]['name'] = request.REQUEST.get('text')
                     break
         elif 'province' in request.GET:
             for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
-                if province['index'] == string.atoi(request.REQUEST.get('province')) and  not isfind:
+                if province['index'] == string.atoi(request.REQUEST.get('province')):
                     config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][province['index']]['name'] = request.REQUEST.get('text')
                     break
         elif 'range' in request.GET:
             for range in config.__addresses:
-                if range['index'] == string.atoi(request.REQUEST.get('range')) and  not isfind:
+                if range['index'] == string.atoi(request.REQUEST.get('range')):
                     config.__addresses[range['index']]['name'] = request.REQUEST.get('text')
                     break
         flushconfig()
