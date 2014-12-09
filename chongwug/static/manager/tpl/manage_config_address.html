@@ -10,7 +10,33 @@
 {% block main %}
 <h1 class="page-header">地址编辑</h1>
 
-<div id="address-tree"></div>
+<div class="row">
+    <div class="col-sm-6">
+        <div id="address-tree"></div>
+    </div>
+    <div class="col-sm-6">
+        <form class="form-horizontal" id="js-modify-form">
+            <h3>修改</h3>
+            <div class="form-group">
+                <label class="control-label col-sm-3">名称：</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="js-text-input"/>
+                </div>
+            </div>
+            <div class="form-group hide" id="js-area">
+                <label class="control-label col-sm-3">接送地点：</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="js-area-input"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <button class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
 
@@ -20,7 +46,8 @@
 (function(){
 
 
-var $tree = $('#address-tree').jstree({
+var $addressTree = $('#address-tree'),
+    $tree = $addressTree.jstree({
     'core': {
         'check_callback': function(operation, node, node_parent, node_position){
             if(operation == 'delete_node'){
@@ -59,12 +86,60 @@ var $tree = $('#address-tree').jstree({
     'plugins' : [ 'contextmenu' ]
 }).jstree(true);
 
-function ajax(data){
+var $modifyForm = $('#js-modify-form'),
+    $area = $modifyForm.find('#js-area'),
+    $textInput = $modifyForm.find('#js-text-input'),
+    $areaInput = $modifyForm.find('#js-area-input'),
+    modifyData = {};
+
+$addressTree.on('select_node.jstree', function(event, data){
+    var node = data.node,
+        parents = node.parents,
+        len = parents.length - 1,
+        data = {},
+        original = node.original;
+
+    $textInput.val(original.text);
+
+    if(original.area){
+        $areaInput.val(original.area);
+        $area.removeClass('hide');
+    }else{
+        $area.addClass('hide');
+    }
+
+    data.node = node.id;
+    data[original.type] = original.index;
+    for(var i = 0; i < len; i++){
+        var node = $tree.get_node(parents[i]).original;
+        data[node.type] = node.index;
+    }
+
+    modifyData = data;
+});
+
+
+$modifyForm.on('submit', function(event){
+    event.preventDefault();
+
+    modifyData.text = $.trim($textInput.val());
+    modifyData.area = $.trim($areaInput.val());
+    modifyData.modify = true;
+
+    $tree.rename_node(modifyData.node, modifyData.text);
+
+    ajax(modifyData, function(){
+        $modifyForm[0].reset();
+    });
+});
+
+function ajax(data, cb){
     $.ajax({
         url: './',
         dataType: 'json',
         data: data,
         success: function(data){
+            cb();
             console.log(data);
         }
     });
