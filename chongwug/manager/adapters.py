@@ -385,6 +385,101 @@ def manage_knowledge_mod(request):
 
 import json
 from chongwug.commom import flushconfig
+
+def manage_config_address(request):
+    data = []
+    if 'del' in request.GET:
+        isfind = False
+        count = 0
+        if 'street' in request.GET:
+            for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
+                if street['name'] == request.REQUEST.get('street') and  not isfind:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'].remove(street)
+                    isfind = True
+                if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']) > count:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'][count]['index'] = count
+                count = count + 1
+        elif 'distict' in request.GET:
+            for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
+                if distict['name'] == request.REQUEST.get('distict') and  not isfind:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'].remove(distict)
+                    isfind = True
+                if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']) > count:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][count]['index'] = count
+                count = count + 1
+        elif 'city' in request.GET:
+            for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
+                if city['name'] == request.REQUEST.get('city') and  not isfind:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'].remove(city)
+                    isfind = True
+                if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']) > count:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][count]['index'] = count
+                count = count + 1
+        elif 'province' in request.GET:
+            for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
+                if province['name'] == request.REQUEST.get('province') and  not isfind:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'].remove(province)
+                    isfind = True
+                if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']) > count:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][count]['index'] = count
+                count = count + 1
+        elif 'range' in request.GET:
+            for range in config.__addresses:
+                if range['name'] == request.REQUEST.get('range') and  not isfind:
+                    config.__addresses.remove(range)
+                    isfind = True
+                if isfind and len(config.__addresses) > count:
+                    config.__addresses[count]['index'] = count
+                count = count + 1
+        flushconfig()
+    elif 'modify' in request.GET:
+        if 'street' in request.GET:
+            for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
+                if street['index'] == string.atoi(request.REQUEST.get('street')) and  not isfind:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'][street['index']]['name'] = request.REQUEST.get('text')
+                    break
+        elif 'distict' in request.GET:
+            for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
+                if distict['index'] == string.atoi(request.REQUEST.get('distict')) and  not isfind:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][distict['index']]['name'] = request.REQUEST.get('text')
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][distict['index']]['waitpoint'] = request.REQUEST.get('area')
+                    break
+        elif 'city' in request.GET:
+            for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
+                if city['index'] == string.atoi(request.REQUEST.get('city')) and  not isfind:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][city['index']]['name'] = request.REQUEST.get('text')
+                    break
+        elif 'province' in request.GET:
+            for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
+                if province['index'] == string.atoi(request.REQUEST.get('province')) and  not isfind:
+                    config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][province['index']]['name'] = request.REQUEST.get('text')
+                    break
+        elif 'range' in request.GET:
+            for range in config.__addresses:
+                if range['index'] == string.atoi(request.REQUEST.get('range')) and  not isfind:
+                    config.__addresses[range['index']]['name'] = request.REQUEST.get('text')
+                    break
+        flushconfig()
+    else:
+        if 'ranges' in request.GET:
+            for range in config.__addresses:
+                data.append({ "index" : range['index'],  "text" : range['name'], "children" : True, "type": "range" })
+        elif 'provinces' in request.GET:
+            for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
+                data.append({ "index" : province['index'],  "text" : province['name'], "children" : True, "type": "province" })
+        elif 'citys' in request.GET:
+            for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
+                data.append({ "index" : city['index'],  "text" : city['name'], "children" : True, "type": "city" })
+        elif 'disticts' in request.GET:
+            for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
+                data.append({ "index" : distict['index'],  "text" : distict['name'], "children" : True, "type": "distict", "area" : distict['waitpoint'] })
+        elif 'streets' in request.GET:
+            for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
+                data.append({ "index" : street['index'],  "text" : street['name'], "children" : False, "type": "street" })
+        else:
+            return json.dumps(data),False
+    return json.dumps(data),None
+
 def manage_config(request,who):
     if who == None:
         return None
@@ -410,68 +505,5 @@ def manage_config(request,who):
         flushconfig()
         return data,True
     elif who == 'address':
-        data = []
-        if 'del' in request.GET:
-            isfind = False
-            count = 0
-            if 'street' in request.GET:
-                for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
-                    if street['name'] == request.REQUEST.get('street') and  not isfind:
-                        config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'].remove(street)
-                        isfind = True
-                    if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']) > count:
-                        config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist'][count]['index'] = count
-                    count = count + 1
-            elif 'distict' in request.GET:
-                for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
-                    if distict['name'] == request.REQUEST.get('distict') and  not isfind:
-                        config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'].remove(distict)
-                        isfind = True
-                    if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']) > count:
-                        config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][count]['index'] = count
-                    count = count + 1
-            elif 'city' in request.GET:
-                for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
-                    if city['name'] == request.REQUEST.get('city') and  not isfind:
-                        config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'].remove(city)
-                        isfind = True
-                    if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']) > count:
-                        config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][count]['index'] = count
-                    count = count + 1
-            elif 'province' in request.GET:
-                for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
-                    if province['name'] == request.REQUEST.get('province') and  not isfind:
-                        config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'].remove(province)
-                        isfind = True
-                    if isfind and len(config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']) > count:
-                        config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][count]['index'] = count
-                    count = count + 1
-            elif 'range' in request.GET:
-                for range in config.__addresses:
-                    if range['name'] == request.REQUEST.get('range') and  not isfind:
-                        config.__addresses.remove(range)
-                        isfind = True
-                    if isfind and len(config.__addresses) > count:
-                        config.__addresses[count]['index'] = count
-                    count = count + 1
-            flushconfig()
-        else:
-            if 'ranges' in request.GET:
-                for range in config.__addresses:
-                    data.append({ "index" : range['index'],  "text" : range['name'], "children" : True, "type": "range" })
-            elif 'provinces' in request.GET:
-                for province in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist']:
-                    data.append({ "index" : province['index'],  "text" : province['name'], "children" : True, "type": "province" })
-            elif 'citys' in request.GET:
-                for city in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist']:
-                    data.append({ "index" : city['index'],  "text" : city['name'], "children" : True, "type": "city" })
-            elif 'disticts' in request.GET:
-                for distict in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist']:
-                    data.append({ "index" : distict['index'],  "text" : distict['name'], "children" : True, "type": "distict" })
-            elif 'streets' in request.GET:
-                for street in config.__addresses[string.atoi(request.REQUEST.get('range'))]['sublist'][string.atoi(request.REQUEST.get('province'))]['sublist'][string.atoi(request.REQUEST.get('city'))]['sublist'][string.atoi(request.REQUEST.get('distict'))]['sublist']:
-                    data.append({ "index" : street['index'],  "text" : street['name'], "children" : False, "type": "street" })
-            else:
-                return json.dumps(data),False
-        return json.dumps(data),None
+        return manage_config_address(request)
     return None,None
