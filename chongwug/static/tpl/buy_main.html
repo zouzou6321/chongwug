@@ -156,7 +156,14 @@
             </div>
         </div>
         {% endif %}
-        <div class="row-separate row"></div>
+{#        <div class="row-separate row"></div>#}
+        <div class="clearfix buy-tabs">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home">认证犬舍</a></li>
+                <li><a href="#home">养殖场</a></li>
+                <li><a href="#home">个人繁育</a></li>
+            </ul>
+        </div>
         <div class="row dog-list">
             {% if pets_imgs%}
                 {% for pet_img in pets_imgs %}
@@ -168,11 +175,11 @@
                         <h4><a href="{{ urls }}detail/{{ pet_img.pet.id }}/"><strong>[{{ pet_img.pet.farm.name }}]</strong> {{ pet_img.pet.short_desc }}</a></h4>
                         <div>
                             <label class="pet-tag">{{ pet_img.pet.age }}个月</label>
-                            <label class="pet-tag">{{ pet_img.count }}只</label>
+{#                            <label class="pet-tag">{{ pet_img.count }}只</label>#}
                             <label class="pet-tag">{{ pet_img.epidemic }}</label>
                         </div>
                         <p>
-                            <span class="price price-primary"><span class="price-symbol">&yen;</span>{{ pet_img.min_price }}-{{ pet_img.max_price }}<span class="price-desc">元/只</span></span>
+                            <span class="price price-primary"><span class="price-symbol">&yen;</span>{{ pet_img.min_price }}<span class="price-desc">元/只</span></span>
                             <a href="{{ urls }}detail/{{ pet_img.pet.id }}/" class="btn btn-primary pull-right btn-dog" role="button">去看看</a>
                         </p>
                     </div>

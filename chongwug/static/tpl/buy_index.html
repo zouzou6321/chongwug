@@ -62,23 +62,47 @@
 
 <div class="container">
     <div class="row cwg-area-row">
-        {% for direct_farm in direct_farms %}
-        <div class="col-3 cwg-area">
-            <h2><a href="/buy/" >城{{ direct_farm.direct }}犬舍</a></h2>
+        <div class="col-4 cwg-area">
+            <h2><a href="/buy/" >认证犬舍</a></h2>
             <div>
-                {% if direct_farm.pic %}
                 <a href="/buy/">
                     <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
                 </a>
-                {% else %}
-                <a href="/buy/">
-                    <img  src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ 'imgs/test.jpg'|assets }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
-                </a>
-                {% endif %}
-{#                <p><span class="price price-lg">{{ direct_farm.farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>#}
             </div>
         </div>
-        {% endfor %}
+        <div class="col-4 cwg-area">
+            <h2><a href="/buy/" >养殖场</a></h2>
+            <div>
+                <a href="/buy/">
+                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
+                </a>
+            </div>
+        </div>
+        <div class="col-4 cwg-area">
+            <h2><a href="/buy/" >个人繁育</a></h2>
+            <div>
+                <a href="/buy/">
+                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
+                </a>
+            </div>
+        </div>
+{#        {% for direct_farm in direct_farms %}#}
+{#        <div class="col-3 cwg-area">#}
+{#            <h2><a href="/buy/" >城{{ direct_farm.direct }}犬舍</a></h2>#}
+{#            <div>#}
+{#                {% if direct_farm.pic %}#}
+{#                <a href="/buy/">#}
+{#                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">#}
+{#                </a>#}
+{#                {% else %}#}
+{#                <a href="/buy/">#}
+{#                    <img  src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ 'imgs/test.jpg'|assets }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">#}
+{#                </a>#}
+{#                {% endif %}#}
+{#                <p><span class="price price-lg">{{ direct_farm.farm.min_prince|floatformat }}<span class="price-desc">起</span></span></p>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endfor %}#}
     </div>
 </div>
 
