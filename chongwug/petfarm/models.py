@@ -22,6 +22,7 @@ class pet_farm(models.Model):
     end_time = models.DateTimeField(blank=True, null=True)
     #manage_score：系统赋予的积分，用来限制养殖场卖家权限，小于等于0时，卖家被拉黑
     manage_score = models.FloatField(default=1.0)
+    type = models.IntegerField(default=1)
     dele = models.BooleanField(default=False)
     
 class pet_mam(models.Model):

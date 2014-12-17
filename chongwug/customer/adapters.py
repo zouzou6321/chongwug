@@ -6,7 +6,7 @@ from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders,pviptongji,adclicktongji,uvpviptongji
 from django.db.models import Q
-from chongwug.config import __knowledgetypes,__onepageofdata__,__petfeaturescore,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_chinatelnum
+from chongwug.config import __petfarmtypes,__knowledgetypes,__onepageofdata__,__petfeaturescore,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_chinatelnum
 import datetime,string,re,json
 from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.contrib.auth.models import User
@@ -70,8 +70,7 @@ def buy_home_adapter(request):
     contry = "china"
     province = "四川"
     city = "成都"
-    directs = __directs
-    direct_farms = []
+    type_farms = []
     #获取首页需要展示的广告信息
     ads = ad.objects.filter(Q(type__exact = 'nav_m'),Q(dele__exact = False),Q(start_time__lte = datetime.datetime.now),Q(end_time__gte = datetime.datetime.now)).order_by('-prince')
     
@@ -97,8 +96,9 @@ def buy_home_adapter(request):
             city_farm.save()
         except:
             None
-    for direct in directs:
-        tmp_farm = city_farms.filter(direct=direct,dele=False).order_by('-manage_score')
+    types = __petfarmtypes
+    for typeone in types:
+        tmp_farm = city_farms.filter(type=typeone['type'],dele=False).order_by('-manage_score')
         if tmp_farm.count() > 0:
             tmp_farm = tmp_farm[0]
             tmp_farm_img = pet_farm_img.objects.filter(pet_farm_id=tmp_farm,img_usefor='buy_home',dele=False)
@@ -109,8 +109,8 @@ def buy_home_adapter(request):
         else:
             tmp_farm = None
             tmp_farm_img = None
-        direct_farms.append({'direct':direct,'farm':tmp_farm,'pic':tmp_farm_img})
-    data['direct_farms'] = direct_farms
+        type_farms.append({'typeone':typeone,'farm':tmp_farm,'pic':tmp_farm_img})
+    data['type_farms'] = type_farms
     data['page'] = 'home'
     return data
 

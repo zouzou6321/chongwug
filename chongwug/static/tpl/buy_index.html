@@ -62,30 +62,16 @@
 
 <div class="container">
     <div class="row cwg-area-row">
+    	{% for type_farm in type_farms %}
         <div class="col-4 cwg-area">
-            <h2><a href="/buy/" >认证犬舍</a></h2>
+            <h2><a href="/buy/" >{{ type_farm.typeone.title }}</a></h2>
             <div>
                 <a href="/buy/">
-                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
+                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ type_farm.pic.img_url }}" class="img-full js-lazy" alt="{{ type_farm.typeone.title }}">
                 </a>
             </div>
         </div>
-        <div class="col-4 cwg-area">
-            <h2><a href="/buy/" >养殖场</a></h2>
-            <div>
-                <a href="/buy/">
-                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
-                </a>
-            </div>
-        </div>
-        <div class="col-4 cwg-area">
-            <h2><a href="/buy/" >个人繁育</a></h2>
-            <div>
-                <a href="/buy/">
-                    <img src="{{ 'imgs/loading.gif'|assets }}" data-original="{{ direct_farm.pic.img_url }}" class="img-full js-lazy" alt="城{{ direct_farm.direct }}犬舍">
-                </a>
-            </div>
-        </div>
+        {% endfor %}
 {#        {% for direct_farm in direct_farms %}#}
 {#        <div class="col-3 cwg-area">#}
 {#            <h2><a href="/buy/" >城{{ direct_farm.direct }}犬舍</a></h2>#}

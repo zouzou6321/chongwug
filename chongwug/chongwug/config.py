@@ -1,131 +1,27 @@
-# -*- coding: UTF-8 -*-
-#所有图片的图片用途,目前暂时包括广告图片、宠物图片、养殖场图片
-__adtypes = [[0,'nav_m','首页主广告',1920,530]]
-__knowledgetypes = [[0,None,'bp',u'养犬准备'],[1,u'幼犬','bs','幼犬知识'],[2,u'细小病毒','mv','细小病毒'],[3,u'狗瘟','dp','狗瘟']]
-__petpictypes = [[0,u'buy_main',u'主图',750,500],[1,u'normal',u'辅图',750,500]]
-__farmpictypes = [[0,u'buy_home',u'首页展示图',427,300],[1,u'normal',u'养殖场介绍图',427,300]]
-__supplietypes = [u'必备用品',u'生活用品',u'保健医疗',u'清洁卫生']
-__onepageofdata__ = 12
-#系统支持的犬种
-__pettypes = [u'金毛',u'拉布拉多',u'泰迪熊',u'比熊',u'博美犬',u'贵宾犬',u'哈士奇',u'萨摩耶',u'边境牧羊犬',u'松狮',u'雪纳瑞',u'德国牧羊犬',u'巴哥犬',u'罗威纳',u'喜乐蒂',u'斗牛犬',u'约克夏',u'古牧',u'阿拉斯加',u'柯基犬',u'牛头梗',u'吉娃娃',u'腊肠犬',u'卡斯罗',u'中亚牧羊犬',u'拳师犬',u'比格犬',u'杜宾犬',u'杜高犬',u'比特犬',u'高加索犬',u'可卡犬',u'马犬',u'秋田犬',u'史宾格',u'柴犬']
-__petages = [1,2,3,4,5,6,7,8,9,10,11,12]
-#筛选页预置筛选条件
-__prices = [{'a':'1','b':600,'c':1000,'d':'600-1000'},{'a':'2','b':1000,'c':1500,'d':'1000-1500'},{'a':'3','b':1500,'c':2000,'d':'1500-2000'},
-            {'a':'4','b':2000,'c':2500,'d':'2000-2500'},{'a':'5','b':2500,'c':1000000,'d':'2500以上'}]
-__ages = [{'a':'1','b':0,'c':3,'d':'0-3月'},{'a':'2','b':3,'c':5,'d':'3-5月'},{'a':'3','b':5,'c':12,'d':'5-12月'},{'a':'4','b':12,'c':100000,'d':'12个月以上'}]
-__epidemics = [u'已种疫苗',u'可种疫苗',u'未种疫苗']
-__directs = [u'东',u'西',u'南',u'北']
-
-#账号密码
-__upyun_picpath = 'chongwug-pic'
-__upyun_name = 'chongwug'
-__upyun_pwd = 'weet6321'
-
-#系统使用的正则表达式
-__regular_expression_telnum = r'1\d{10}'
-__regular_expression_chinatelnum = r'^\(?0\d{2,3}\)?[- ]?\d{7,8}|^0\d{2,3}[- ]?\d{7,8}|^1\d{10}|\(?\+?\d{2,3}\)?[- ]?0\d{2,3}[- ]?\d{7,8}|^\d{7,8}'
-__regular_expression_username = u'^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$'
-__regular_expression_email = r"^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$"
-__regular_expression_idnum = r"^(^\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$"
-
-#评分档次
-__petfeaturescore = [45,70,100]
-
-#服务费与交通费
-__servpay = 50
-__transpay = 0
-
-#预约时间信息
-__appointtime = {'time1':'10:00','time2':'14:30'}
-
-#地址信息
-__addresses = [
-               {'name':'L-S','index':0,'sublist':[
-                   {'name':u'四川','index':0,'sublist':[
-                        {'name':u'成都','index':0,'sublist':[
-                            {'name':u'高新区','index':0,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'大源村','index':0},{'name':u'芳草','index':1},{'name':u'金融城','index':2},{'name':u'理想中心','index':3},{'name':u'美年广场','index':4},{'name':u'南延线','index':5},{'name':u'南苑','index':6},{'name':u'神仙树','index':7},{'name':u'世纪城','index':8},{'name':u'天府长城','index':9},{'name':u'肖家河','index':10},{'name':u'中和镇','index':11},{'name':u'紫荆','index':12}
-                                ]
-                            },
-                            {'name':u'武侯区','index':1,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'川大','index':0},{'name':u'川音','index':1},{'name':u'簇桥','index':2},{'name':u'芳草街','index':3},{'name':u'高攀路','index':4},{'name':u'高升桥','index':5},{'name':u'广福桥','index':6},{'name':u'航空路','index':7},{'name':u'好望角','index':8},{'name':u'红牌楼','index':9},{'name':u'红瓦寺','index':10},{'name':u'火车南站','index':11},{'name':u'金花镇','index':12},{'name':u'机投镇','index':13},{'name':u'科华路','index':14},{'name':u'磨子桥','index':15},{'name':u'内双楠','index':16},{'name':u'清水河','index':17},{'name':u'十二中','index':18},{'name':u'跳伞塔','index':19},{'name':u'桐梓林','index':20},{'name':u'外双楠','index':21},{'name':u'望江路','index':22},{'name':u'五大花园','index':23},{'name':u'武侯祠大街','index':24},{'name':u'武侯周边','index':25},{'name':u'肖家河','index':26},{'name':u'小天竺街','index':27},{'name':u'洗面桥','index':28},{'name':u'衣冠庙','index':29},{'name':u'玉林','index':30},{'name':u'棕北','index':31},{'name':u'棕南','index':32}
-                                ]
-                            },
-                            {'name':u'金牛区','index':2,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'茶店子','index':0},{'name':u'抚琴小区','index':1},{'name':u'国宾','index':2},{'name':u'荷花池','index':3},{'name':u'黄忠','index':4},{'name':u'欢乐谷','index':5},{'name':u'花牌坊','index':6},{'name':u'火车北站','index':7},{'name':u'交大路','index':8},{'name':u'金牛万达','index':9},{'name':u'金牛周边','index':10},{'name':u'九里堤','index':11},{'name':u'梁家巷','index':12},{'name':u'李家沱','index':13},{'name':u'马鞍路','index':14},{'name':u'人民北路','index':15},{'name':u'沙河源','index':16},{'name':u'沙湾','index':17},{'name':u'蜀汉路','index':18},{'name':u'五块石','index':19},{'name':u'营门口','index':20},{'name':u'银沙','index':21},{'name':u'一品天下','index':22}
-                                ]
-                            },
-                            {'name':u'锦江区','index':3,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'成仁路','index':0},{'name':u'川师','index':1},{'name':u'春熙路','index':2},{'name':u'大慈寺','index':3},{'name':u'大观','index':4},{'name':u'东大街','index':5},{'name':u'东光小区','index':6},{'name':u'东教场','index':7},{'name':u'海椒市','index':8},{'name':u'合江亭','index':9},{'name':u'红星路','index':10},{'name':u'静居寺','index':11},{'name':u'锦江周边','index':12},{'name':u'九眼桥','index':13},{'name':u'莲桂路','index':14},{'name':u'龙舟路','index':15},{'name':u'牛沙路','index':16},{'name':u'牛市口','index':17},{'name':u'牛王庙','index':18},{'name':u'三圣乡','index':19},{'name':u'沙河堡','index':20},{'name':u'水碾河','index':21},{'name':u'万达','index':22},{'name':u'新南门','index':23},{'name':u'盐市口','index':24}
-                                ]
-                            },
-                            {'name':u'成华区','index':4,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'八里小区','index':0},{'name':u'财富又一城','index':1},{'name':u'成华周边','index':2},{'name':u'成渝立交','index':3},{'name':u'崔家店','index':4},{'name':u'东风路','index':5},{'name':u'动物园','index':6},{'name':u'二仙桥','index':7},{'name':u'府青路','index':8},{'name':u'槐树店','index':9},{'name':u'火车东站','index':10},{'name':u'建设路','index':11},{'name':u'龙潭寺','index':12},{'name':u'猛追湾','index':13},{'name':u'青龙场','index':14},{'name':u'杉板桥','index':15},{'name':u'圣灯路','index':16},{'name':u'十里店','index':17},{'name':u'双林路','index':18},{'name':u'双桥子','index':19},{'name':u'驷马桥','index':20},{'name':u'SM广场','index':21},{'name':u'万年场','index':22},{'name':u'五桂桥','index':23},{'name':u'新鸿路','index':24},{'name':u'新华公园','index':25}
-                                ]
-                            },
-                            {'name':u'新都区','index':5,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'斑竹园','index':0},{'name':u'大丰','index':1},{'name':u'军屯','index':2},{'name':u'龙桥','index':3},{'name':u'马家','index':4},{'name':u'木兰','index':5},{'name':u'清流','index':6},{'name':u'三河','index':7},{'name':u'石板滩','index':8},{'name':u'泰兴','index':9},{'name':u'新都老城区','index':10},{'name':u'新都新城区','index':11},{'name':u'新繁','index':12},{'name':u'新民','index':13}
-                                ]
-                            },
-                            {'name':u'双流县','index':6,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'白家','index':0},{'name':u'东升镇','index':1},{'name':u'航空港','index':2},{'name':u'黄龙溪','index':3},{'name':u'华阳','index':4},{'name':u'蛟龙港','index':5},{'name':u'麓山','index':6},{'name':u'牧马山','index':7},{'name':u'彭镇','index':8},{'name':u'双流周边','index':9},{'name':u'文星','index':10}
-                                ]
-                            },
-                            {'name':u'温江区','index':7,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'北部新城','index':0},{'name':u'公平镇','index':1},{'name':u'光华大道','index':2},{'name':u'金马镇','index':3},{'name':u'南熏大道','index':4},{'name':u'寿安','index':5},{'name':u'踏水镇','index':6},{'name':u'万春镇','index':7},{'name':u'温江城区','index':8},{'name':u'永宁镇','index':9}
-                                ]
-                            },
-                            {'name':u'龙泉驿区','index':8,'waitpoint':'成都市地铁二号线成都行政学院站','sublist':[
-                                {'name':u'滨河片区','index':0},{'name':u'大面镇','index':1},{'name':u'航天片区','index':2},{'name':u'恒大绿洲','index':3},{'name':u'洪河镇','index':4},{'name':u'龙泉驿周边','index':5},{'name':u'商业片区','index':6},{'name':u'十陵镇','index':7},{'name':u'阳光城','index':8},{'name':u'总站片区','index':9}
-                                ]
-                            },
-                            {'name':u'青羊区','index':9,'waitpoint':'成都市地铁一号线世纪城地铁站C1出口','sublist':[
-                                {'name':u'八宝街','index':0},{'name':u'白果林','index':1},{'name':u'贝森','index':2},{'name':u'草市街','index':3},{'name':u'草堂','index':4},{'name':u'长顺街','index':5},{'name':u'府南新区','index':6},{'name':u'浣花小区','index':7},{'name':u'金沙','index':8},{'name':u'内光华','index':9},{'name':u'宁夏街','index':10},{'name':u'青羊周边','index':11},{'name':u'人民公园','index':12},{'name':u'石人','index':13},{'name':u'顺城街','index':14},{'name':u'太升路','index':15},{'name':u'天府广场','index':16},{'name':u'同仁路','index':17},{'name':u'外光华','index':18},{'name':u'外金沙','index':19},{'name':u'文殊坊','index':20},{'name':u'西南财大区','index':21},{'name':u'新城市广场','index':22},{'name':u'西月城街','index':23},{'name':u'中医附院','index':24}
-                                ]
-                            },
-                            {'name':u'郫县','index':10,'waitpoint':'成都市地铁二号线犀浦地铁站A出口','sublist':[
-                                {'name':u'安德','index':0},{'name':u'安靖','index':1},{'name':u'德源','index':2},{'name':u'古城','index':3},{'name':u'红光','index':4},{'name':u'郫筒','index':5},{'name':u'三道堰','index':6},{'name':u'唐昌','index':7},{'name':u'唐元','index':8},{'name':u'团结','index':9},{'name':u'新民场','index':10},{'name':u'犀浦','index':11},{'name':u'友爱','index':12}
-                                ]
-                            },
-                            {'name':u'高新西区','index':11,'waitpoint':'成都市地铁二号线犀浦地铁站A出口','sublist':[
-                                {'name':u'土桥','index':0},{'name':u'何家桥','index':1},{'name':u'中海国际','index':2}
-                                ]
-                            },
-                            ]
-                        }
-                        ]
-                   }
-                   ]
-                }
-            ]
-
-#系统错误码
-__errorcode = [
-               [0,u'success',u'成功'],
-               [1,u'false',u'失败'],
-               [2,u'data error',u'提交的数据异常'],
-               [3,u'primission delay',u'出现越权操作'],
-               [4,u'picture not found',u'找不到图片,请重新上传'],
-               [5,u'database access error',u'数据库访问错误'],
-               [6,u'picture too small',u'图片太小'],
-               [7,u'imperfect information',u'信息不完整，可能系统有虫子，请联系我们，谢谢~！'],
-               [8,u'the pet sale out',u'实在抱歉，您想预定的宠物售罄了！'],
-               [9,u'telephone num error',u'您这电话号码不对哦，任谁都通过它联系不到您呢~！'],
-               [10,u'name error',u'您的名字~！'],
-               [11,u'address error',u'您选择的地址不对呢！'],
-               [12,u'time error',u'您选择的时间不对呢！'],
-               [13,u'crop size error',u'截取图片的长宽不匹配，请尝试重新截取'],
-               [14,u'time format error',u'时间格式不正确，示例：2014-10-22 14:22:35'],
-               [15,u'prince error',u'价格输入错误，请输入正整数'],
-               [16,u'email error',u'错误的邮箱'],
-               [17,u'idnum error',u'身份证号不正确'],
-               [18,u'direct error',u'方位选择不正确'],
-               [19,u'manage score error',u'评分数据不正确'],
-               [20,u'short desc error',u'简介不可以为空'],
-               [21,u'pwd can not be null',u'密码不能为空'],
-               [22,u'main img lost',u'未识别到主图，请确保主图存在'],
-               [23,u'sms send times to many',u'今天的短信获取已达上限，请24小时过后再尝试'],
-               [24,u'aready attentioned',u'您已经预约了去看本窝犬了'],
-               [404,u'page not found',u'页面不存在'],
-               [500,u'internal fault',u'服务器内部错误']
-              ]
+# -*- coding: UTF-8 -*-
+__addresses = [{'index': 0, 'name': 'L-S', 'sublist': [{'index': 0, 'name': u'\u56db\u5ddd', 'sublist': [{'index': 0, 'name': u'\u6210\u90fd', 'sublist': [{'index': 0, 'name': u'\u9ad8\u65b0\u533a', 'waitpoint': u'\u6210\u90fd\u5e02\u5730\u94c1\u4e00\u53f7\u7ebf\u4e16\u7eaa\u57ce\u5730\u94c1\u7ad9C2\u51fa\u53e3', 'sublist': [{'index': 0, 'name': u'\u91d1\u878d\u57ce1'}, {'index': 1, 'name': u'\u7406\u60f3\u4e2d\u5fc3'}, {'index': 2, 'name': u'\u7f8e\u5e74\u5e7f\u573a'}, {'index': 3, 'name': u'\u5357\u5ef6\u7ebf'}, {'index': 4, 'name': u'\u5357\u82d1'}, {'index': 5, 'name': u'\u795e\u4ed9\u6811'}, {'index': 6, 'name': u'\u4e16\u7eaa\u57ce'}, {'index': 7, 'name': u'\u5929\u5e9c\u957f\u57ce'}, {'index': 8, 'name': u'\u8096\u5bb6\u6cb3'}, {'index': 9, 'name': u'\u4e2d\u548c\u9547'}, {'index': 10, 'name': u'\u7d2b\u8346'}]}, {'index': 1, 'name': u'\u6b66\u4faf\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xb8\x80\xe5\x8f\xb7\xe7\xba\xbf\xe4\xb8\x96\xe7\xba\xaa\xe5\x9f\x8e\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99C1\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u5ddd\u5927'}, {'index': 1, 'name': u'\u5ddd\u97f3'}, {'index': 2, 'name': u'\u7c07\u6865'}, {'index': 3, 'name': u'\u82b3\u8349\u8857'}, {'index': 4, 'name': u'\u9ad8\u6500\u8def'}, {'index': 5, 'name': u'\u9ad8\u5347\u6865'}, {'index': 6, 'name': u'\u5e7f\u798f\u6865'}, {'index': 7, 'name': u'\u822a\u7a7a\u8def'}, {'index': 8, 'name': u'\u597d\u671b\u89d2'}, {'index': 9, 'name': u'\u7ea2\u724c\u697c'}, {'index': 10, 'name': u'\u7ea2\u74e6\u5bfa'}, {'index': 11, 'name': u'\u706b\u8f66\u5357\u7ad9'}, {'index': 12, 'name': u'\u91d1\u82b1\u9547'}, {'index': 13, 'name': u'\u673a\u6295\u9547'}, {'index': 14, 'name': u'\u79d1\u534e\u8def'}, {'index': 15, 'name': u'\u78e8\u5b50\u6865'}, {'index': 16, 'name': u'\u5185\u53cc\u6960'}, {'index': 17, 'name': u'\u6e05\u6c34\u6cb3'}, {'index': 18, 'name': u'\u5341\u4e8c\u4e2d'}, {'index': 19, 'name': u'\u8df3\u4f1e\u5854'}, {'index': 20, 'name': u'\u6850\u6893\u6797'}, {'index': 21, 'name': u'\u5916\u53cc\u6960'}, {'index': 22, 'name': u'\u671b\u6c5f\u8def'}, {'index': 23, 'name': u'\u4e94\u5927\u82b1\u56ed'}, {'index': 24, 'name': u'\u6b66\u4faf\u7960\u5927\u8857'}, {'index': 25, 'name': u'\u6b66\u4faf\u5468\u8fb9'}, {'index': 26, 'name': u'\u8096\u5bb6\u6cb3'}, {'index': 27, 'name': u'\u5c0f\u5929\u7afa\u8857'}, {'index': 28, 'name': u'\u6d17\u9762\u6865'}, {'index': 29, 'name': u'\u8863\u51a0\u5e99'}, {'index': 30, 'name': u'\u7389\u6797'}, {'index': 31, 'name': u'\u68d5\u5317'}, {'index': 32, 'name': u'\u68d5\u5357'}]}, {'index': 2, 'name': u'\u91d1\u725b\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xb8\x80\xe5\x8f\xb7\xe7\xba\xbf\xe4\xb8\x96\xe7\xba\xaa\xe5\x9f\x8e\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99C1\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u8336\u5e97\u5b50'}, {'index': 1, 'name': u'\u629a\u7434\u5c0f\u533a'}, {'index': 2, 'name': u'\u56fd\u5bbe'}, {'index': 3, 'name': u'\u8377\u82b1\u6c60'}, {'index': 4, 'name': u'\u9ec4\u5fe0'}, {'index': 5, 'name': u'\u6b22\u4e50\u8c37'}, {'index': 6, 'name': u'\u82b1\u724c\u574a'}, {'index': 7, 'name': u'\u706b\u8f66\u5317\u7ad9'}, {'index': 8, 'name': u'\u4ea4\u5927\u8def'}, {'index': 9, 'name': u'\u91d1\u725b\u4e07\u8fbe'}, {'index': 10, 'name': u'\u91d1\u725b\u5468\u8fb9'}, {'index': 11, 'name': u'\u4e5d\u91cc\u5824'}, {'index': 12, 'name': u'\u6881\u5bb6\u5df7'}, {'index': 13, 'name': u'\u674e\u5bb6\u6cb1'}, {'index': 14, 'name': u'\u9a6c\u978d\u8def'}, {'index': 15, 'name': u'\u4eba\u6c11\u5317\u8def'}, {'index': 16, 'name': u'\u6c99\u6cb3\u6e90'}, {'index': 17, 'name': u'\u6c99\u6e7e'}, {'index': 18, 'name': u'\u8700\u6c49\u8def'}, {'index': 19, 'name': u'\u4e94\u5757\u77f3'}, {'index': 20, 'name': u'\u8425\u95e8\u53e3'}, {'index': 21, 'name': u'\u94f6\u6c99'}, {'index': 22, 'name': u'\u4e00\u54c1\u5929\u4e0b'}]}, {'index': 3, 'name': u'\u9526\u6c5f\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xb8\x80\xe5\x8f\xb7\xe7\xba\xbf\xe4\xb8\x96\xe7\xba\xaa\xe5\x9f\x8e\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99C1\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u6210\u4ec1\u8def'}, {'index': 1, 'name': u'\u5ddd\u5e08'}, {'index': 2, 'name': u'\u6625\u7199\u8def'}, {'index': 3, 'name': u'\u5927\u6148\u5bfa'}, {'index': 4, 'name': u'\u5927\u89c2'}, {'index': 5, 'name': u'\u4e1c\u5927\u8857'}, {'index': 6, 'name': u'\u4e1c\u5149\u5c0f\u533a'}, {'index': 7, 'name': u'\u4e1c\u6559\u573a'}, {'index': 8, 'name': u'\u6d77\u6912\u5e02'}, {'index': 9, 'name': u'\u5408\u6c5f\u4ead'}, {'index': 10, 'name': u'\u7ea2\u661f\u8def'}, {'index': 11, 'name': u'\u9759\u5c45\u5bfa'}, {'index': 12, 'name': u'\u9526\u6c5f\u5468\u8fb9'}, {'index': 13, 'name': u'\u4e5d\u773c\u6865'}, {'index': 14, 'name': u'\u83b2\u6842\u8def'}, {'index': 15, 'name': u'\u9f99\u821f\u8def'}, {'index': 16, 'name': u'\u725b\u6c99\u8def'}, {'index': 17, 'name': u'\u725b\u5e02\u53e3'}, {'index': 18, 'name': u'\u725b\u738b\u5e99'}, {'index': 19, 'name': u'\u4e09\u5723\u4e61'}, {'index': 20, 'name': u'\u6c99\u6cb3\u5821'}, {'index': 21, 'name': u'\u6c34\u78be\u6cb3'}, {'index': 22, 'name': u'\u4e07\u8fbe'}, {'index': 23, 'name': u'\u65b0\u5357\u95e8'}, {'index': 24, 'name': u'\u76d0\u5e02\u53e3'}]}, {'index': 4, 'name': u'\u6210\u534e\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xb8\x80\xe5\x8f\xb7\xe7\xba\xbf\xe4\xb8\x96\xe7\xba\xaa\xe5\x9f\x8e\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99C1\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u516b\u91cc\u5c0f\u533a'}, {'index': 1, 'name': u'\u8d22\u5bcc\u53c8\u4e00\u57ce'}, {'index': 2, 'name': u'\u6210\u534e\u5468\u8fb9'}, {'index': 3, 'name': u'\u6210\u6e1d\u7acb\u4ea4'}, {'index': 4, 'name': u'\u5d14\u5bb6\u5e97'}, {'index': 5, 'name': u'\u4e1c\u98ce\u8def'}, {'index': 6, 'name': u'\u52a8\u7269\u56ed'}, {'index': 7, 'name': u'\u4e8c\u4ed9\u6865'}, {'index': 8, 'name': u'\u5e9c\u9752\u8def'}, {'index': 9, 'name': u'\u69d0\u6811\u5e97'}, {'index': 10, 'name': u'\u706b\u8f66\u4e1c\u7ad9'}, {'index': 11, 'name': u'\u5efa\u8bbe\u8def'}, {'index': 12, 'name': u'\u9f99\u6f6d\u5bfa'}, {'index': 13, 'name': u'\u731b\u8ffd\u6e7e'}, {'index': 14, 'name': u'\u9752\u9f99\u573a'}, {'index': 15, 'name': u'\u6749\u677f\u6865'}, {'index': 16, 'name': u'\u5723\u706f\u8def'}, {'index': 17, 'name': u'\u5341\u91cc\u5e97'}, {'index': 18, 'name': u'\u53cc\u6797\u8def'}, {'index': 19, 'name': u'\u53cc\u6865\u5b50'}, {'index': 20, 'name': u'\u9a77\u9a6c\u6865'}, {'index': 21, 'name': u'SM\u5e7f\u573a'}, {'index': 22, 'name': u'\u4e07\u5e74\u573a'}, {'index': 23, 'name': u'\u4e94\u6842\u6865'}, {'index': 24, 'name': u'\u65b0\u9e3f\u8def'}, {'index': 25, 'name': u'\u65b0\u534e\u516c\u56ed'}]}, {'index': 5, 'name': u'\u65b0\u90fd\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xb8\x80\xe5\x8f\xb7\xe7\xba\xbf\xe4\xb8\x96\xe7\xba\xaa\xe5\x9f\x8e\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99C1\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u6591\u7af9\u56ed'}, {'index': 1, 'name': u'\u5927\u4e30'}, {'index': 2, 'name': u'\u519b\u5c6f'}, {'index': 3, 'name': u'\u9f99\u6865'}, {'index': 4, 'name': u'\u9a6c\u5bb6'}, {'index': 5, 'name': u'\u6728\u5170'}, {'index': 6, 'name': u'\u6e05\u6d41'}, {'index': 7, 'name': u'\u4e09\u6cb3'}, {'index': 8, 'name': u'\u77f3\u677f\u6ee9'}, {'index': 9, 'name': u'\u6cf0\u5174'}, {'index': 10, 'name': u'\u65b0\u90fd\u8001\u57ce\u533a'}, {'index': 11, 'name': u'\u65b0\u90fd\u65b0\u57ce\u533a'}, {'index': 12, 'name': u'\u65b0\u7e41'}, {'index': 13, 'name': u'\u65b0\u6c11'}]}, {'index': 6, 'name': u'\u53cc\u6d41\u53bf', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xb8\x80\xe5\x8f\xb7\xe7\xba\xbf\xe4\xb8\x96\xe7\xba\xaa\xe5\x9f\x8e\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99C1\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u767d\u5bb6'}, {'index': 1, 'name': u'\u4e1c\u5347\u9547'}, {'index': 2, 'name': u'\u822a\u7a7a\u6e2f'}, {'index': 3, 'name': u'\u9ec4\u9f99\u6eaa'}, {'index': 4, 'name': u'\u534e\u9633'}, {'index': 5, 'name': u'\u86df\u9f99\u6e2f'}, {'index': 6, 'name': u'\u9e93\u5c71'}, {'index': 7, 'name': u'\u7267\u9a6c\u5c71'}, {'index': 8, 'name': u'\u5f6d\u9547'}, {'index': 9, 'name': u'\u53cc\u6d41\u5468\u8fb9'}, {'index': 10, 'name': u'\u6587\u661f'}]}, {'index': 7, 'name': u'\u6e29\u6c5f\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xb8\x80\xe5\x8f\xb7\xe7\xba\xbf\xe4\xb8\x96\xe7\xba\xaa\xe5\x9f\x8e\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99C1\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u5317\u90e8\u65b0\u57ce'}, {'index': 1, 'name': u'\u516c\u5e73\u9547'}, {'index': 2, 'name': u'\u5149\u534e\u5927\u9053'}, {'index': 3, 'name': u'\u91d1\u9a6c\u9547'}, {'index': 4, 'name': u'\u5357\u718f\u5927\u9053'}, {'index': 5, 'name': u'\u5bff\u5b89'}, {'index': 6, 'name': u'\u8e0f\u6c34\u9547'}, {'index': 7, 'name': u'\u4e07\u6625\u9547'}, {'index': 8, 'name': u'\u6e29\u6c5f\u57ce\u533a'}, {'index': 9, 'name': u'\u6c38\u5b81\u9547'}]}, {'index': 8, 'name': u'\u9f99\u6cc9\u9a7f\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xba\x8c\xe5\x8f\xb7\xe7\xba\xbf\xe6\x88\x90\xe9\x83\xbd\xe8\xa1\x8c\xe6\x94\xbf\xe5\xad\xa6\xe9\x99\xa2\xe7\xab\x99', 'sublist': [{'index': 0, 'name': u'\u6ee8\u6cb3\u7247\u533a'}, {'index': 1, 'name': u'\u5927\u9762\u9547'}, {'index': 2, 'name': u'\u822a\u5929\u7247\u533a'}, {'index': 3, 'name': u'\u6052\u5927\u7eff\u6d32'}, {'index': 4, 'name': u'\u6d2a\u6cb3\u9547'}, {'index': 5, 'name': u'\u9f99\u6cc9\u9a7f\u5468\u8fb9'}, {'index': 6, 'name': u'\u5546\u4e1a\u7247\u533a'}, {'index': 7, 'name': u'\u5341\u9675\u9547'}, {'index': 8, 'name': u'\u9633\u5149\u57ce'}, {'index': 9, 'name': u'\u603b\u7ad9\u7247\u533a'}]}, {'index': 9, 'name': u'\u9752\u7f8a\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xb8\x80\xe5\x8f\xb7\xe7\xba\xbf\xe4\xb8\x96\xe7\xba\xaa\xe5\x9f\x8e\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99C1\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u516b\u5b9d\u8857'}, {'index': 1, 'name': u'\u767d\u679c\u6797'}, {'index': 2, 'name': u'\u8d1d\u68ee'}, {'index': 3, 'name': u'\u8349\u5e02\u8857'}, {'index': 4, 'name': u'\u8349\u5802'}, {'index': 5, 'name': u'\u957f\u987a\u8857'}, {'index': 6, 'name': u'\u5e9c\u5357\u65b0\u533a'}, {'index': 7, 'name': u'\u6d63\u82b1\u5c0f\u533a'}, {'index': 8, 'name': u'\u91d1\u6c99'}, {'index': 9, 'name': u'\u5185\u5149\u534e'}, {'index': 10, 'name': u'\u5b81\u590f\u8857'}, {'index': 11, 'name': u'\u9752\u7f8a\u5468\u8fb9'}, {'index': 12, 'name': u'\u4eba\u6c11\u516c\u56ed'}, {'index': 13, 'name': u'\u77f3\u4eba'}, {'index': 14, 'name': u'\u987a\u57ce\u8857'}, {'index': 15, 'name': u'\u592a\u5347\u8def'}, {'index': 16, 'name': u'\u5929\u5e9c\u5e7f\u573a'}, {'index': 17, 'name': u'\u540c\u4ec1\u8def'}, {'index': 18, 'name': u'\u5916\u5149\u534e'}, {'index': 19, 'name': u'\u5916\u91d1\u6c99'}, {'index': 20, 'name': u'\u6587\u6b8a\u574a'}, {'index': 21, 'name': u'\u897f\u5357\u8d22\u5927\u533a'}, {'index': 22, 'name': u'\u65b0\u57ce\u5e02\u5e7f\u573a'}, {'index': 23, 'name': u'\u897f\u6708\u57ce\u8857'}, {'index': 24, 'name': u'\u4e2d\u533b\u9644\u9662'}]}, {'index': 10, 'name': u'\u90eb\u53bf', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xba\x8c\xe5\x8f\xb7\xe7\xba\xbf\xe7\x8a\x80\xe6\xb5\xa6\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99A\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u5b89\u5fb7'}, {'index': 1, 'name': u'\u5b89\u9756'}, {'index': 2, 'name': u'\u5fb7\u6e90'}, {'index': 3, 'name': u'\u53e4\u57ce'}, {'index': 4, 'name': u'\u7ea2\u5149'}, {'index': 5, 'name': u'\u90eb\u7b52'}, {'index': 6, 'name': u'\u4e09\u9053\u5830'}, {'index': 7, 'name': u'\u5510\u660c'}, {'index': 8, 'name': u'\u5510\u5143'}, {'index': 9, 'name': u'\u56e2\u7ed3'}, {'index': 10, 'name': u'\u65b0\u6c11\u573a'}, {'index': 11, 'name': u'\u7280\u6d66'}, {'index': 12, 'name': u'\u53cb\u7231'}]}, {'index': 11, 'name': u'\u9ad8\u65b0\u897f\u533a', 'waitpoint': '\xe6\x88\x90\xe9\x83\xbd\xe5\xb8\x82\xe5\x9c\xb0\xe9\x93\x81\xe4\xba\x8c\xe5\x8f\xb7\xe7\xba\xbf\xe7\x8a\x80\xe6\xb5\xa6\xe5\x9c\xb0\xe9\x93\x81\xe7\xab\x99A\xe5\x87\xba\xe5\x8f\xa3', 'sublist': [{'index': 0, 'name': u'\u571f\u6865'}, {'index': 1, 'name': u'\u4f55\u5bb6\u6865'}, {'index': 2, 'name': u'\u4e2d\u6d77\u56fd\u9645'}]}]}]}]}]
+__adtypes = [[0, 'nav_m', '\xe9\xa6\x96\xe9\xa1\xb5\xe4\xb8\xbb\xe5\xb9\xbf\xe5\x91\x8a', 1920, 530]]
+__ages = [{'a': '1', 'c': 3, 'b': 0, 'd': '0-3\xe6\x9c\x88'}, {'a': '2', 'c': 5, 'b': 3, 'd': '3-5\xe6\x9c\x88'}, {'a': '3', 'c': 12, 'b': 5, 'd': '5-12\xe6\x9c\x88'}, {'a': '4', 'c': 100000, 'b': 12, 'd': '12\xe4\xb8\xaa\xe6\x9c\x88\xe4\xbb\xa5\xe4\xb8\x8a'}]
+__appointtime = {'time1': '10:00', 'time2': '14:30'}__petfarmtypes = [{'type':1,'title' : u'养殖场'},{'type':2,'title' : u'认证犬舍'},{'type':3,'title' : '家庭个人'}]
+__directs = [u'\u4e1c', u'\u897f', u'\u5357', u'\u5317']
+__epidemics = [u'\u5df2\u79cd\u75ab\u82d7', u'\u53ef\u79cd\u75ab\u82d7', u'\u672a\u79cd\u75ab\u82d7']
+__errorcode = [[0, u'success', u'\u6210\u529f'], [1, u'false', u'\u5931\u8d25'], [2, u'data error', u'\u63d0\u4ea4\u7684\u6570\u636e\u5f02\u5e38'], [3, u'primission delay', u'\u51fa\u73b0\u8d8a\u6743\u64cd\u4f5c'], [4, u'picture not found', u'\u627e\u4e0d\u5230\u56fe\u7247,\u8bf7\u91cd\u65b0\u4e0a\u4f20'], [5, u'database access error', u'\u6570\u636e\u5e93\u8bbf\u95ee\u9519\u8bef'], [6, u'picture too small', u'\u56fe\u7247\u592a\u5c0f'], [7, u'imperfect information', u'\u4fe1\u606f\u4e0d\u5b8c\u6574\uff0c\u53ef\u80fd\u7cfb\u7edf\u6709\u866b\u5b50\uff0c\u8bf7\u8054\u7cfb\u6211\u4eec\uff0c\u8c22\u8c22~\uff01'], [8, u'the pet sale out', u'\u5b9e\u5728\u62b1\u6b49\uff0c\u60a8\u60f3\u9884\u5b9a\u7684\u5ba0\u7269\u552e\u7f44\u4e86\uff01'], [9, u'telephone num error', u'\u60a8\u8fd9\u7535\u8bdd\u53f7\u7801\u4e0d\u5bf9\u54e6\uff0c\u4efb\u8c01\u90fd\u901a\u8fc7\u5b83\u8054\u7cfb\u4e0d\u5230\u60a8\u5462~\uff01'], [10, u'name error', u'\u60a8\u7684\u540d\u5b57~\uff01'], [11, u'address error', u'\u60a8\u9009\u62e9\u7684\u5730\u5740\u4e0d\u5bf9\u5462\uff01'], [12, u'time error', u'\u60a8\u9009\u62e9\u7684\u65f6\u95f4\u4e0d\u5bf9\u5462\uff01'], [13, u'crop size error', u'\u622a\u53d6\u56fe\u7247\u7684\u957f\u5bbd\u4e0d\u5339\u914d\uff0c\u8bf7\u5c1d\u8bd5\u91cd\u65b0\u622a\u53d6'], [14, u'time format error', u'\u65f6\u95f4\u683c\u5f0f\u4e0d\u6b63\u786e\uff0c\u793a\u4f8b\uff1a2014-10-22 14:22:35'], [15, u'prince error', u'\u4ef7\u683c\u8f93\u5165\u9519\u8bef\uff0c\u8bf7\u8f93\u5165\u6b63\u6574\u6570'], [16, u'email error', u'\u9519\u8bef\u7684\u90ae\u7bb1'], [17, u'idnum error', u'\u8eab\u4efd\u8bc1\u53f7\u4e0d\u6b63\u786e'], [18, u'direct error', u'\u65b9\u4f4d\u9009\u62e9\u4e0d\u6b63\u786e'], [19, u'manage score error', u'\u8bc4\u5206\u6570\u636e\u4e0d\u6b63\u786e'], [20, u'short desc error', u'\u7b80\u4ecb\u4e0d\u53ef\u4ee5\u4e3a\u7a7a'], [21, u'pwd can not be null', u'\u5bc6\u7801\u4e0d\u80fd\u4e3a\u7a7a'], [22, u'main img lost', u'\u672a\u8bc6\u522b\u5230\u4e3b\u56fe\uff0c\u8bf7\u786e\u4fdd\u4e3b\u56fe\u5b58\u5728'], [23, u'sms send times to many', u'\u4eca\u5929\u7684\u77ed\u4fe1\u83b7\u53d6\u5df2\u8fbe\u4e0a\u9650\uff0c\u8bf724\u5c0f\u65f6\u8fc7\u540e\u518d\u5c1d\u8bd5'], [24, u'aready attentioned', u'\u60a8\u5df2\u7ecf\u9884\u7ea6\u4e86\u53bb\u770b\u672c\u7a9d\u72ac\u4e86'], [404, u'page not found', u'\u9875\u9762\u4e0d\u5b58\u5728'], [500, u'internal fault', u'\u670d\u52a1\u5668\u5185\u90e8\u9519\u8bef']]
+__farmpictypes = [[0, u'buy_home', u'\u9996\u9875\u5c55\u793a\u56fe', 427, 300], [1, u'normal', u'\u517b\u6b96\u573a\u4ecb\u7ecd\u56fe', 427, 300]]
+__knowledgetypes = [[0, None, 'bp', u'\u517b\u72ac\u51c6\u5907'], [1, u'\u5e7c\u72ac', 'bs', '\xe5\xb9\xbc\xe7\x8a\xac\xe7\x9f\xa5\xe8\xaf\x86'], [2, u'\u7ec6\u5c0f\u75c5\u6bd2', 'mv', '\xe7\xbb\x86\xe5\xb0\x8f\xe7\x97\x85\xe6\xaf\x92'], [3, u'\u72d7\u761f', 'dp', '\xe7\x8b\x97\xe7\x98\x9f']]
+__onepageofdata__ = 12
+__petages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+__petfeaturescore = [45, 70, 100]
+__petpictypes = [[0, u'buy_main', u'\u4e3b\u56fe', 750, 500], [1, u'normal', u'\u8f85\u56fe', 750, 500]]
+__pettypes = [u'\u91d1\u6bdb', u'\u62c9\u5e03\u62c9\u591a', u'\u6cf0\u8fea\u718a', u'\u6bd4\u718a', u'\u535a\u7f8e\u72ac', u'\u8d35\u5bbe\u72ac', u'\u54c8\u58eb\u5947', u'\u8428\u6469\u8036', u'\u8fb9\u5883\u7267\u7f8a\u72ac', u'\u677e\u72ee', u'\u96ea\u7eb3\u745e', u'\u5fb7\u56fd\u7267\u7f8a\u72ac', u'\u5df4\u54e5\u72ac', u'\u7f57\u5a01\u7eb3', u'\u559c\u4e50\u8482', u'\u6597\u725b\u72ac', u'\u7ea6\u514b\u590f', u'\u53e4\u7267', u'\u963f\u62c9\u65af\u52a0', u'\u67ef\u57fa\u72ac', u'\u725b\u5934\u6897', u'\u5409\u5a03\u5a03', u'\u814a\u80a0\u72ac', u'\u5361\u65af\u7f57', u'\u4e2d\u4e9a\u7267\u7f8a\u72ac', u'\u62f3\u5e08\u72ac', u'\u6bd4\u683c\u72ac', u'\u675c\u5bbe\u72ac', u'\u675c\u9ad8\u72ac', u'\u6bd4\u7279\u72ac', u'\u9ad8\u52a0\u7d22\u72ac', u'\u53ef\u5361\u72ac', u'\u9a6c\u72ac', u'\u79cb\u7530\u72ac', u'\u53f2\u5bbe\u683c', u'\u67f4\u72ac']
+__prices = [{'a': '1', 'c': 1000, 'b': 600, 'd': '600-1000'}, {'a': '2', 'c': 1500, 'b': 1000, 'd': '1000-1500'}, {'a': '3', 'c': 2000, 'b': 1500, 'd': '1500-2000'}, {'a': '4', 'c': 2500, 'b': 2000, 'd': '2000-2500'}, {'a': '5', 'c': 1000000, 'b': 2500, 'd': '2500\xe4\xbb\xa5\xe4\xb8\x8a'}]
+__regular_expression_chinatelnum = r'^\(?0\d{2,3}\)?[- ]?\d{7,8}|^0\d{2,3}[- ]?\d{7,8}|^1\d{10}|\(?\+?\d{2,3}\)?[- ]?0\d{2,3}[- ]?\d{7,8}|^\d{7,8}'
+__regular_expression_email = r'^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$'
+__regular_expression_idnum = r'^(^\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$'
+__regular_expression_telnum = r'1\d{10}'
+__regular_expression_username = u'^([一-龥]+|([a-zA-Z]+\s?)+)$'
+__servpay = 50
+__supplietypes = [u'\u5fc5\u5907\u7528\u54c1', u'\u751f\u6d3b\u7528\u54c1', u'\u4fdd\u5065\u533b\u7597', u'\u6e05\u6d01\u536b\u751f']
+__transpay = 0
+__upyun_name = r'chongwug'
+__upyun_picpath = r'chongwug-pic'
+__upyun_pwd = r'weet6321'
