@@ -34,7 +34,7 @@ def buy_home_view(request):
 #auth:renwei
 #date:2014/9/8
 #discription:购宠购买展示页
-def buy_main_view(request,direct='all',type='all',prince='0',age='0',epidemic='all',key='all',curpage='1'):
+def buy_main_view(request,direct='all',type='all',prince='0',age='0',epidemic='all',key='all',curpage='1',farmtype='1'):
     adapters.UVPVIPtongji(request)
     data = adapters.buy_main_adapter(request,direct,type,string.atoi(prince),string.atoi(age),epidemic,key,string.atoi(curpage))
     data['title'] = u'狗狗挑选| 宠物购交易平台-成都市%s-国内首个活体宠物O2O交易平台' % (data['title'])
