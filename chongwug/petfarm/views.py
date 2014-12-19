@@ -17,7 +17,8 @@ def manage_regist_view(request):
     if request.method == 'POST':
         data = adapters.petfarm_regist(request)
         return HttpResponse(data)
-    return render_to_response('petfarm/tpl/manage_regist.html',{},context_instance=RequestContext(request))
+    data = adapters.addressHandle(request)
+    return render_to_response('petfarm/tpl/manage_regist.html',data,context_instance=RequestContext(request))
 
 #auth:huhuaiyong
 #date:2014/8/23

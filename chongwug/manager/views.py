@@ -29,7 +29,7 @@ def manage_home_view(request):
     return render_to_response('manager/tpl/manage_home.html',data)
 
 def address_handle_view(request):
-    data = adapters.addressHandle(request);
+    data = adapters.addressHandle(request)
     return HttpResponse(data.__str__())
     
 def manage_pet_farm_add_view(request):
