@@ -2672,6 +2672,10 @@ The provided mixins are intended to be used with the array-like variables
   content: '\e806'; }
 
 /* '' */
+.icon-edit-alt:before {
+  content: '\e807'; }
+
+/* '' */
 .icon-search:before {
   content: '\e808'; }
 
