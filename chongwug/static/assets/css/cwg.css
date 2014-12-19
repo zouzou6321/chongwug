@@ -4263,6 +4263,10 @@ img.mfp-img {
   .navbar-nav li {
     float: left; }
 
+.cwg-publish {
+  font-size: 16px;
+  padding-right: 20px; }
+
 .cwg-navbar {
   min-height: 40px; }
   .cwg-navbar .logo-simple {
@@ -4301,6 +4305,11 @@ img.mfp-img {
       display: inline-block; }
   .cwg-navbar .cwg-tel {
     display: none; }
+  .cwg-navbar .cwg-publish {
+    padding-top: 10px; }
+    .cwg-navbar .cwg-publish a, .cwg-navbar .cwg-publish a:hover {
+      text-decoration: none;
+      color: #D9A300; }
 
 .cwg-navbar-sub {
   background: #ffd401;
@@ -4322,10 +4331,13 @@ img.mfp-img {
     display: inline-block;
     margin-top: 10px;
     margin-right: 20px; }
-  .cwg-navbar-sub .cwg-tel {
+  .cwg-navbar-sub .cwg-tel, .cwg-navbar-sub .cwg-publish {
     display: block;
     line-height: 20px;
     padding-top: 15px; }
+  .cwg-navbar-sub .cwg-publish a, .cwg-navbar-sub .cwg-publish a:hover {
+    text-decoration: none;
+    color: #fff; }
   .cwg-navbar-sub .cwg-tel-main {
     font-size: 16px;
     color: #fff; }

@@ -15,6 +15,11 @@
   }
 }
 
+.cwg-publish{
+    font-size: 16px;
+    padding-right: 20px;
+}
+
 .cwg-navbar{
   min-height: $home-nav-height;
 
@@ -79,6 +84,14 @@
   .cwg-tel{
     display: none;
   }
+
+  .cwg-publish{
+    padding-top: 10px;
+    a, a:hover{
+      text-decoration: none;
+      color: #D9A300;
+    }
+  }
 }
 
 .cwg-navbar-sub{
@@ -111,10 +124,17 @@
     margin-right: 20px;
   }
 
-  .cwg-tel{
+  .cwg-tel, .cwg-publish{
     display: block;
     line-height: 20px;
     padding-top: 15px;
+  }
+
+  .cwg-publish{
+    a, a:hover{
+      text-decoration: none;
+      color: #fff;
+    }
   }
 
   .cwg-tel-main{
