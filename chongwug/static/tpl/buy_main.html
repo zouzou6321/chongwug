@@ -15,7 +15,7 @@
     <div class="container buy-main content-container">
         <div class="row">
             <div class="col-6 col-offset-1">
-                <form action="{{ urls }}{{ directkey }}/{{ typekey }}/{{ princekey }}/{{ agekey }}/{{ epidemickey }}/{{ searchkey }}/1/" method="get" id="js-form">
+                <form action="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/" method="get" id="js-form">
                     <div class="input-group cwg-search-wrap">
                     	<input type="text" class="form-control" id="js-key" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != 'all' %}value="{{ searchkey }}"{% endif %}>
                         <span class="input-group-btn">
@@ -32,15 +32,15 @@
             <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if typekey == 'all'%}
-                    <li class="active"><a href="{{ urls }}{{ directkey }}-all-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">全部</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}-all-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-all-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">全部</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-all-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% endif %}
                     {% for type in types %}
                     {% if type == typekey %}
-                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ type }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">{{ type }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ type }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">{{ type }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ type }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">{{ type }}</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ type }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">{{ type }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -51,15 +51,15 @@
             <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if princekey == '0' %}
-                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-0-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">全部</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-0-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-0-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">全部</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-0-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% endif %}
                     {% for prince in princes %}
                     {% if prince.a == princekey %}
-                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ prince.a }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">{{ prince.d }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ prince.a }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">{{ prince.d }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ prince.a }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">{{ prince.d }}</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ prince.a }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">{{ prince.d }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -70,15 +70,15 @@
             <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if directkey == 'all'%}
-                    <li class="active"><a href="{{ urls }}all-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">全部</a></li>
+                    <li class="active"><a href="{{ urls }}all-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}all-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">全部</a></li>
+                    <li><a href="{{ urls }}all-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% endif %}
                     {% for direct in directs %}
                     {% if direct == directkey %}
-                    <li class="active"><a href="{{ urls }}{{ direct }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">城{{ direct }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ direct }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">城{{ direct }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ direct }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-1/">城{{ direct }}</a></li>
+                    <li><a href="{{ urls }}{{ direct }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">城{{ direct }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -89,15 +89,15 @@
             <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if epidemickey == 'all'%}
-                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-all-{{ searchkey }}-1/">全部</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-all-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-all-{{ searchkey }}-1/">全部</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-all-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% endif %}
                     {% for epidemic in epidemics %}
                     {% if epidemic == epidemickey %}
-                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemic }}-{{ searchkey }}-1/">{{ epidemic }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemic }}-{{ searchkey }}-{{ farmtype }}-1/">{{ epidemic }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemic }}-{{ searchkey }}-1/">{{ epidemic }}</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemic }}-{{ searchkey }}-{{ farmtype }}-1/">{{ epidemic }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -108,15 +108,15 @@
             <div class="col-11">
                 <ul class="nav nav-pills">
                 	{% if agekey == '0'%}
-                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-0-{{ epidemickey }}-{{ searchkey }}-1/">全部</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-0-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-0-{{ epidemickey }}-{{ searchkey }}-1/">全部</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-0-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">全部</a></li>
                     {% endif %}
                     {% for age in ages %}
                     {% if age.a == agekey %}
-                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ age.a }}-{{ epidemickey }}-{{ searchkey }}-1/">{{ age.d }}</a></li>
+                    <li class="active"><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ age.a }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">{{ age.d }}</a></li>
                     {% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ age.a }}-{{ epidemickey }}-{{ searchkey }}-1/">{{ age.d }}</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ age.a }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/">{{ age.d }}</a></li>
                     {% endif %}
                     {% endfor %}
                 </ul>
@@ -130,27 +130,27 @@
                 <ul class="nav nav-pills dog-selected">
                 	{% if searchkey == 'all' %}
                 	{% else %}
-                	<li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-all-{{ curpage }}/">{{ searchkey }} &times;</a></li>
+                	<li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-all-{{ farmtype }}-{{ curpage }}/">{{ searchkey }} &times;</a></li>
                 	{% endif %}
                 	{% if typekey == 'all' %}
                 	{% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-all-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ curpage }}/">{{ typekey }} &times;</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-all-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-{{ curpage }}/">{{ typekey }} &times;</a></li>
                     {% endif %}
                     {% if princekey == '0' %}
                 	{% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-0-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ curpage }}/">价格 &times;</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-0-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-{{ curpage }}/">价格 &times;</a></li>
                     {% endif %}
                     {% if directkey == 'all' %}
                 	{% else %}
-                    <li><a href="{{ urls }}all-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ curpage }}/">城{{ directkey }} &times;</a></li>
+                    <li><a href="{{ urls }}all-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-{{ curpage }}/">城{{ directkey }} &times;</a></li>
                     {% endif %}
                     {% if epidemickey == 'all' %}
                 	{% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-all-{{ searchkey }}-{{ curpage }}/">{{ epidemickey }} &times;</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-all-{{ searchkey }}-{{ farmtype }}-{{ curpage }}/">{{ epidemickey }} &times;</a></li>
                     {% endif %}
                     {% if agekey == '0' %}
                 	{% else %}
-                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-0-{{ epidemickey }}-{{ searchkey }}-{{ curpage }}/">月龄 &times;</a></li>
+                    <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-0-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-{{ curpage }}/">月龄 &times;</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -159,9 +159,9 @@
 {#        <div class="row-separate row"></div>#}
         <div class="clearfix buy-tabs">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#home">认证犬舍</a></li>
-                <li><a href="#home">养殖场</a></li>
-                <li><a href="#home">个人繁育</a></li>
+            	{% for petfarmtype in petfarmtypes %}
+                <li{% ifequal farmtype petfarmtype.type %} class="active"{% endifequal %}><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ petfarmtype.type }}-{{ curpage }}/">{{ petfarmtype.title }}</a></li>
+                {% endfor %}
             </ul>
         </div>
         <div class="row dog-list">
@@ -194,21 +194,21 @@
                         <li class="disabled"><span>上一页</span></li>
                         {% else %}
                         <li><a href="/buy/">首页</a></li>
-                        <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ pageup }}/">上一页</a></li>
+                        <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-{{ pageup }}/">上一页</a></li>
                         {% endif %}
                         {% for page in pages %}
                         {% if page == curpage %}
                         <li class="active"><span>{{ page }}</span></li>
                         {% else %}
-                        <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ page }}/">{{ page }}</a></li>
+                        <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-{{ page }}/">{{ page }}</a></li>
                         {% endif %}
                         {% endfor %}
                         {% if curpage >=  allpage%}
                         <li class="disabled"><span>下一页</span></li>
                         <li class="disabled"><span>尾页</span></li>
                         {% else %}
-                        <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ pagedown }}/">下一页</a></li>
-                        <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ allpage }}/">尾页</a></li>
+                        <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-{{ pagedown }}/">下一页</a></li>
+                        <li><a href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-{{ allpage }}/">尾页</a></li>
                         {% endif %}
                      </ul>
                 </div>

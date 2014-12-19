@@ -36,7 +36,7 @@ def buy_home_view(request):
 #discription:购宠购买展示页
 def buy_main_view(request,direct='all',type='all',prince='0',age='0',epidemic='all',key='all',curpage='1',farmtype='1'):
     adapters.UVPVIPtongji(request)
-    data = adapters.buy_main_adapter(request,direct,type,string.atoi(prince),string.atoi(age),epidemic,key,string.atoi(curpage))
+    data = adapters.buy_main_adapter(request,direct,type,string.atoi(prince),string.atoi(age),epidemic,key,string.atoi(curpage),string.atoi(farmtype))
     data['title'] = u'狗狗挑选| 宠物购交易平台-成都市%s-国内首个活体宠物O2O交易平台' % (data['title'])
     data['keywords'] = u'成都买宠物狗，纯种健康，精细化维度挑选'
     data['description'] = u'国内最正规的狗狗交易平台，第一个以规范宠物犬市场为目标的宠物狗交易平台。通过平台咨询，确认过后进行预约，去宠物狗繁育基地挑选爱犬，全部宠物为纯种犬（价格在1000-2000），部分为高级血统（父母是赛犬，有参加比赛获奖。价格2000-10000）'

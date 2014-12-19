@@ -119,13 +119,19 @@ def buy_home_adapter(request):
 作者：胡怀勇
 时间：2014-9-22
 '''
-def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,epidemickey='all',searchkey='all',curpage=1):
+def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,epidemickey='all',searchkey='all',curpage=1,farmtype=1):
     #筛选条件
     types = __pettypes
     princes = __prices
     directs = __directs
     epidemics = __epidemics
     ages = __ages
+    if farmtype < 1 or farmtype > len(__petfarmtypes):
+        farmtype = 1
+    if princekey < 0 or princekey > len(princes):
+        princekey = 0
+    if agekey < 0 or agekey > len(ages):
+        agekey = 0
     if 'key' in request.GET:
         searchkey = request.REQUEST.get('key')
         
@@ -135,8 +141,6 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     if typekey != 'all':
         title = title + typekey + u'购买-'
     if princekey != 0:
-        print princekey
-        print len(princes)
         if princekey < len(princes):
             title = title + u'价格为' + str(princes[princekey-1]['b']) + u'元-' + str(princes[princekey-1]['c']) + u'元'
         else:
@@ -156,6 +160,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     kwargs = {}
     kwargs['dele'] = False
     kwargs['sale_out'] = False
+    kwargs['farm__type'] = farmtype
     if directkey != 'all':
         kwargs['farm__direct'] = directkey
     if typekey != 'all':
@@ -205,7 +210,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
         i += 1
         pages.append(i)
     return {'pets_imgs':pets_imgs,'petscount':petscount,'urls': '/buy/','types':types,'typekey':typekey,'princes':princes,'princekey':str(princekey),
-            'title':title,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,'epidemickey':epidemickey,
+            'petfarmtypes':__petfarmtypes,'farmtype':farmtype,'title':title,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,'epidemickey':epidemickey,
             'ages':ages,'agekey':str(agekey),'curpage':curpage,'pageup':curpage-1,'pagedown':curpage+1,'pages':pages,'allpage':allpage,'page':'buy'}
 
 '''
