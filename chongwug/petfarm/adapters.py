@@ -4,13 +4,14 @@ from manager.models import tmppic_monitor
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from PIL import Image
 from chongwug import settings
-from chongwug.config import __epidemics,__regular_expression_email,__regular_expression_chinatelnum,__directs,__addresses,__petpictypes,__upyun_picpath,__upyun_name,__upyun_pwd,__farmpictypes,__pettypes,__petages
+from chongwug import config
 from django import forms
 from chongwug.commom import __errorcode__,myCKEditorWidget
 from upyun import UpYun
 from django.contrib import auth
 import traceback
 import os,uuid,string,re,datetime,json
+from django.contrib.auth.models import User
 
 def pic_crop_save(pic_args,pic_dir,max_height,max_width): 
     try:
@@ -38,7 +39,7 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
     url = (settings.PIC_TMP_PATH + file_name).encode('utf8')
     name = settings.STATIC_ROOT + url
     cropimg.save(name,quality=75,optimize=True, progressive=True)
-    up = UpYun(__upyun_picpath,__upyun_name,__upyun_pwd)
+    up = UpYun(config.__upyun_picpath,config.__upyun_name,config.__upyun_pwd)
     with open(name, 'rb') as f:
         if pic_dir == settings.PET_FARM_PIC_ROOT:
             res = up.put(file_path_name, f, checksum=False)
@@ -75,19 +76,94 @@ def manage_login_check(request):
         # Show an error page
         return False
 
+def petfarm_regist(request):
+    try:
+        if 'pwd' not in request.POST or request.POST['pwd'] == '':
+            return __errorcode__(21)
+        
+        if 'province' not in request.POST or request.POST['province'] == '':
+            province = u'四川'
+        else:
+            province = request.POST['province']
+        if 'city' not in request.POST or request.POST['city'] == '':
+            city = u'成都'
+        else:
+            city = request.POST['city']
+        
+        error = True
+        
+        for _addresse in config.__addresses:
+            for _province in _addresse['sublist']:
+                if _province['name'] == province:
+                    for _city in _province['sublist']:
+                        if _city['name'] == city:
+                            for _district in _city['sublist']:
+                                if _district['name'] == request.POST['district']:
+                                    error = False
+                                    break
+                            break
+                    break
+        if error:
+            return __errorcode__(11)
+        
+        error = True
+        for _direct in config.__directs:
+            if _direct == request.POST['direct']:
+                error = False
+                break
+        if error:
+            return __errorcode__(18)
+        
+        p = re.compile(config.__regular_expression_chinatelnum)
+        if not p.match(request.POST['tel']):
+            return __errorcode__(9)
+        p = re.compile(config.__regular_expression_email)
+        if not p.match(request.POST['email']):
+            return __errorcode__(16)
+        p = re.compile(config.__regular_expression_idnum)
+        if not p.match(request.POST['idnum']):
+            return __errorcode__(17)
+        content = descform({'content':request.POST['content']})
+        if not content.is_valid():
+            return __errorcode__(1)
+        auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
+        new_user = user(nickname = request.POST['name'],
+                        tel = request.POST['tel'],
+                        email = request.POST['email'],
+                        id_num = request.POST['idnum'],
+                        type = 1,
+                        auth_user=auth_user,
+                        pwd = request.POST['pwd'])
+        new_user.save()
+        new_pet_farm = pet_farm(name = request.POST['name'],
+                                desc = request.POST['content'],
+                                detail_address = request.POST['dest'],
+                                province = province,
+                                city = city,
+                                district = request.POST['district'],
+                                direct = request.POST['direct'],
+                                min_prince = 10000,
+                                manage_score = 1.0)
+        new_pet_farm.save()
+        new_user.petfarm = new_pet_farm
+        new_user.save()
+        return __errorcode__(0)
+    except:
+        return __errorcode__(2) 
+
 def manage_home_data_get(request):
     manager = user.objects.get(auth_user=auth.get_user(request),dele = False)
     return {'manager':manager}
 
 def get_pet_types():
-    return {'pettypes':__pettypes}
+    return {'pettypes':config.__pettypes}
 
 def get_pet_ages():
-    return {'petages':__petages}
+    return {'petages':config.__petages}
 
 def get_petpic_types():
     types = []
-    for petpictype in __petpictypes:
+    for petpictype in config.__petpictypes:
         types.append({'type':petpictype[1],'desc':petpictype[2],'width':petpictype[3],'height':petpictype[4]})
     return {'types':types}
 
@@ -96,13 +172,13 @@ def get_farmpics(manager):
 
 def get_farmpic_types():
     types = []
-    for farmpictype in __farmpictypes:
+    for farmpictype in config.__farmpictypes:
         types.append({'type':farmpictype[1],'desc':farmpictype[2],'width':farmpictype[3],'height':farmpictype[4]})
     return {'types':types}
 
 def petpic_upload_pre(request):
     imgw,imgh = 0,0
-    for petpictype in __petpictypes:
+    for petpictype in config.__petpictypes:
         if imgw < petpictype[3]:
             imgw = petpictype[3]
         if imgh < petpictype[4]:
@@ -111,7 +187,7 @@ def petpic_upload_pre(request):
 
 def farmpic_upload_pre(request):
     imgw,imgh = 0,0
-    for farmpictype in __farmpictypes:
+    for farmpictype in config.__farmpictypes:
         if imgw < farmpictype[3]:
             imgw = farmpictype[3]
         if imgh < farmpictype[4]:
@@ -123,10 +199,10 @@ def manage_picpreupload(request,_from,_nestofpet=None):
         return __errorcode__(4)
     img_count = string.atoi(request.POST['img-count'])
     if _from == 'farm':
-        pictypes = __farmpictypes
+        pictypes = config.__farmpictypes
         pic_root = settings.PET_FARM_PIC_ROOT
     elif _from == 'pet' or _from == 'petmod':
-        pictypes = __petpictypes
+        pictypes = config.__petpictypes
         pic_root = settings.PET_PIC_ROOT
     #挨个处理上传的图片数据
     imgusefor = pictypes[1][1]
@@ -261,7 +337,7 @@ def pet_farm_all():
 
 def addressHandle(re):
     if 'province' in re.GET:
-        addresses = __addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
+        addresses = config.__addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
         if 'city' in re.GET:
             addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
             arr = []
@@ -279,14 +355,14 @@ def addressHandle(re):
     provinces = []
     citys = []
     districts = []
-    for _addresse in __addresses:
+    for _addresse in config.__addresses:
         rangeid = _addresse['index']
         _provinces = _addresse['sublist']
         for _province in _provinces:
             provinces.append({'rangeid':rangeid,'id':_province['index'], 'name':_province['name']})
-    for _city in __addresses[0]['sublist'][0]['sublist']:
+    for _city in config.__addresses[0]['sublist'][0]['sublist']:
         citys.append({'id': _city['index'], 'name': _city['name']})
-    for _district in __addresses[0]['sublist'][0]['sublist'][0]['sublist']:
+    for _district in config.__addresses[0]['sublist'][0]['sublist'][0]['sublist']:
         districts.append({'id': _district['index'], 'name': _district['name']})
     return {'provinces':provinces, 'citys':citys, 'districts':districts}
 
@@ -305,7 +381,7 @@ def manage_pet_farm_mod(request):
             city = request.POST['city']
         
         error = True
-        for _addresse in __addresses:
+        for _addresse in config.__addresses:
             for _province in _addresse['sublist']:
                 if _province['name'] == province:
                     for _city in _province['sublist']:
@@ -320,17 +396,17 @@ def manage_pet_farm_mod(request):
             return __errorcode__(11)
         
         error = True
-        for _direct in __directs:
+        for _direct in config.__directs:
             if _direct == request.POST['direct']:
                 error = False
                 break
         if error:
             return __errorcode__(18)
         
-        p = re.compile(__regular_expression_chinatelnum)
+        p = re.compile(config.__regular_expression_chinatelnum)
         if not p.match(request.POST['tel']):
             return __errorcode__(9)
-        p = re.compile(__regular_expression_email)
+        p = re.compile(config.__regular_expression_email)
         if not p.match(request.POST['email']):
             return __errorcode__(16)
         content = descform({'content':request.POST['content']})
@@ -353,13 +429,13 @@ def manage_pet_farm_mod(request):
         if 'img-main' not in request.POST:
             return __errorcode__(22)
         else:
-            curuser.petfarm.pet_farm_img_set.filter(img_usefor=__farmpictypes[0][1],dele=False).update(img_usefor=__farmpictypes[1][1])
-            curuser.petfarm.pet_farm_img_set.filter(img_url=request.POST['img-main'],dele=False).update(img_usefor=__farmpictypes[0][1])
+            curuser.petfarm.pet_farm_img_set.filter(img_usefor=config.__farmpictypes[0][1],dele=False).update(img_usefor=config.__farmpictypes[1][1])
+            curuser.petfarm.pet_farm_img_set.filter(img_url=request.POST['img-main'],dele=False).update(img_usefor=config.__farmpictypes[0][1])
         print request.POST
         if 'del[]' in request.POST:
             imgids = request.POST.getlist('del[]')
             for imgid in imgids:
-                curuser.petfarm.pet_farm_img_set.filter(id=string.atoi(imgid),img_usefor=__petpictypes[1][1]).update(dele=True)
+                curuser.petfarm.pet_farm_img_set.filter(id=string.atoi(imgid),img_usefor=config.__petpictypes[1][1]).update(dele=True)
     except NameError:
         return __errorcode__(2)
     return manage_picpreupload(request,'farm')
@@ -424,16 +500,16 @@ def manage_nestofpet_mod_info(request):
     if not isinstance(pets, nestofpet) and pets.count() > 0:
         data['pet_one'] = pets[0]
         data['pet_set'] = pets[0].pet_set.filter(dele=False)
-        data['pet_types'] = __pettypes
-        data['pet_ages'] = __petages
-        data['epidemics'] = __epidemics
+        data['pet_types'] = config.__pettypes
+        data['pet_ages'] = config.__petages
+        data['epidemics'] = config.__epidemics
         data['petimgs'] = pets[0].nestofpet_img_set.filter(dele=False)
     elif isinstance(pets, nestofpet):
         data['pet_one'] = pets
         data['pet_set'] = pets.pet_set.filter(dele=False)
-        data['pet_types'] = __pettypes
-        data['pet_ages'] = __petages
-        data['epidemics'] = __epidemics
+        data['pet_types'] = config.__pettypes
+        data['pet_ages'] = config.__petages
+        data['epidemics'] = config.__epidemics
         data['petimgs'] = pets.nestofpet_img_set.filter(dele=False)
     return data
 def manage_nestofpet_mod(request):
@@ -461,12 +537,12 @@ def manage_nestofpet_mod(request):
         if 'img-main' not in request.POST:
             return __errorcode__(22)
         else:
-            curnestofpet.nestofpet_img_set.filter(img_usefor=__petpictypes[0][1],dele=False).update(img_usefor=__petpictypes[1][1])
-            curnestofpet.nestofpet_img_set.filter(img_url=request.POST['img-main'],dele=False).update(img_usefor=__petpictypes[0][1])
+            curnestofpet.nestofpet_img_set.filter(img_usefor=config.__petpictypes[0][1],dele=False).update(img_usefor=config.__petpictypes[1][1])
+            curnestofpet.nestofpet_img_set.filter(img_url=request.POST['img-main'],dele=False).update(img_usefor=config.__petpictypes[0][1])
         if 'del[]' in request.POST:
             imgids = request.POST.getlist('del[]')
             for imgid in imgids:
-                curnestofpet.nestofpet_img_set.filter(id=string.atoi(imgid),img_usefor=__petpictypes[1][1]).update(dele=True)
+                curnestofpet.nestofpet_img_set.filter(id=string.atoi(imgid),img_usefor=config.__petpictypes[1][1]).update(dele=True)
     except NameError:
         return __errorcode__(2)
     return manage_picpreupload(request,'petmod',curnestofpet)
