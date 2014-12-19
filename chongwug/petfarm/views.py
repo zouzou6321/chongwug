@@ -20,6 +20,11 @@ def manage_regist_view(request):
     data = adapters.addressHandle(request)
     return render_to_response('petfarm/tpl/manage_regist.html',data,context_instance=RequestContext(request))
 
+@csrf_exempt
+def manage_regist_picadd_view(request):
+    photo = request.FILES.get('Filedata',None)
+    imgw,imgh = 500,500
+    return HttpResponse(adapters.manage_picupload(photo,imgw,imgh))
 #auth:huhuaiyong
 #date:2014/8/23
 #discription:管理员首页展示
