@@ -58,7 +58,11 @@
 	<div class="form-group">
 	    <label class="col-sm-2 control-label">手持证件照<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
-          <input type="hidden" name="photo" id="js-photo" class="required"/>
+            <input type="hidden" name="photo" id="js-photo" class="required"/>
+            <input type="hidden" name="x1" value="0"/>
+            <input type="hidden" name="y1" value="0"/>
+            <input type="hidden" name="x2" id="js-width"/>
+            <input type="hidden" name="y2" id="js-height"/>
 	      <div id="js-uploadify"></div>
           <p>
               <a href="javascript:" tabindex="0" data-trigger="focus" data-toggle="popover" data-content="<img src={{ 'imgs/demo.jpg'|assets_petfarm }}>" data-html="true">请参考此示例图片</a>
@@ -137,7 +141,9 @@ var validator = $('form').validate(commonvalidateConfig);
 
 (function($){
     var $photoShow = $('#js-photo-show'),
-        $photo = $('#js-photo');
+        $photo = $('#js-photo'),
+        $width = $('#js-width'),
+        $height = $('#js-height');
 
     $('#js-uploadify').uploadify({
             buttonText: '浏览并上传',
@@ -164,6 +170,8 @@ var validator = $('form').validate(commonvalidateConfig);
 
                 if(data.status == 0){
                     $photo.val(data.url);
+                    $width.val(data.width);
+                    $height.val(data.height);
                     $photoShow.attr('src', data.url);
                     validator.element('#js-photo');
                 }else{
