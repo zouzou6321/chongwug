@@ -1,8 +1,13 @@
 {% extends 'petfarm/tpl/base/base.html' %}
+{% load assets_petfarm %}
 
 {% block title %}注册{% endblock %}
 
 {% block navbar %}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ 'lib/uploadify/uploadify.css'|assets_petfarm }}"/>
+{% endblock %}
 
 {% block container %}
 <style>
@@ -45,6 +50,23 @@
 	    <label class="col-sm-2 control-label">身份证号码<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
 	      <input type="text" class="form-control required" name="idnum">
+	    </div>
+	</div>
+	<div class="form-group">
+	    <label class="col-sm-2 control-label">手持证件照<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <div id="js-uploadify"></div>
+            <a href="javascript:" tabindex="0" data-trigger="focus" data-toggle="popover" data-content="<img src={{ 'imgs/demo.jpg'|assets_petfarm }}>" data-html="true">示例图片</a>
+	    </div>
+	</div>
+    <div class="form-group">
+	    <label class="col-sm-2 control-label">类型<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+            <select class="form-control required" name="type">
+                <option value="">家庭繁育</option>
+                <option value="">宠物店</option>
+                <option value="">犬舍</option>
+            </select>
 	    </div>
 	</div>
 	<div class="form-group">
@@ -94,7 +116,46 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ 'lib/uploadify/jquery.uploadify.js'|assets_petfarm }}"></script>
 <script>
+$(function () {
+  $('[data-toggle="popover"]').popover()
+});
+
+(function($){
+    $('#js-uploadify').uploadify({
+            buttonText: '浏览并上传',
+            buttonClass: 'btn-info',
+            swf: '/static/lib/dist/uploadify/uploadify.swf',
+            uploader: '',
+            fileTypeExts: '*.jpg;*.jpeg;*.gif;*.png;*.bmp;',
+            fileSizeLimit: '4MB',
+            multi: false,
+            onUploadError: function(file, errorCode, errorMsg, errorString){
+                if(errorMsg == "500"){
+                    errorString = '服务器内部错误';
+                }
+
+                alert('"' + file.name + '" 上传失败：' + errorString + '，请重试！');
+            },
+            onUploadSuccess: function(file, data, response){
+                if (!response) {
+                    alert('请求超时，请稍后重试！');
+                    return;
+                }
+
+                data = $.parseJSON(data);
+
+                if(data.status == 0){
+
+                }else{
+                    alert('图片上传失败：' + data.message + '，请重试。');
+                }
+            }
+        });
+})(jQuery);
+
+
 (function($){
     var $province = $('#farm-province'),
         $city = $('#farm-city'),
@@ -172,7 +233,7 @@ var validator = $('form').validate(commonvalidateConfig);
             data[e.name] = e.value;
         });
 
-        console.log(data);
+        //console.log(data);
 
         $.ajax({
             url: './',
