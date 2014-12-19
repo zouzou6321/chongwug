@@ -13,6 +13,9 @@ PETFARM_ROOT='/petfarm/'
 def manage_login(request):
     return render_to_response('petfarm/tpl/manage_login.html',{},context_instance=RequestContext(request))
 
+def manage_regist_view(request):
+    return render_to_response('petfarm/tpl/manage_regist.html',{},context_instance=RequestContext(request))
+
 #auth:huhuaiyong
 #date:2014/8/23
 #discription:管理员首页展示

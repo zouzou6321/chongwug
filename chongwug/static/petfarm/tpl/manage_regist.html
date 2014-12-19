@@ -1,0 +1,149 @@
+{% extends 'petfarm/tpl/base/base.html' %}
+
+{% block title %}登录{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block container %}
+
+<div class="container">
+<form class="form-horizontal" id="js-form">
+{% csrf_token %}
+    <div class="form-group">
+        <label for="farm-name" class="col-sm-3 control-label">养殖场名字<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="name" value="{{ manager.petfarm.name }}" class="form-control required" id="farm-name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-email" class="col-sm-3 control-label">邮箱<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="email" value="{{ manager.email }}" class="form-control required" id="farm-email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-tel" class="col-sm-3 control-label">联系电话<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="tel" value="{{ manager.tel }}" class="form-control required" id="farm-tel">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-pwd" class="col-sm-3 control-label">登陆密码：</label>
+        <div class="col-sm-4">
+            <input type="password" name="pwd" class="form-control" id="farm-pwd">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">养殖场介绍<span class="warn">*</span>：</label>
+        <div class="col-sm-8">
+            {{ form.as_p }}
+            <p class="hide" id="farm-desc">{{ manager.petfarm.desc }}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="hidden" name="img-count" id="js-img-count" value="0"/>
+        <label class="col-sm-3 control-label">本养殖场图片（至少一张）<span class="warn">*</span>：</label>
+        <div class="col-sm-9 uploadAndCrop" data-size="[{{ types.0.width }}, {{ types.0.height }}]">
+            <div id="js-uploadify"></div>
+            <ul class="preview-img">
+            	{% for farmimg in farmimgs %}
+                <li data-id="{{ farmimg.id }}">
+                    <div class="img-box">
+                        <img src="{{ farmimg.img_url }}" style="width: 100%;"/>
+                    </div>
+                    <p class="img-tit">
+                        <label>
+                            <input type="radio" value="{{ farmimg.img_url }}" name="img-main" class="img-main-input"
+                                    {% if farmimg.img_usefor == 'buy_home' %}checked{% endif %}> 设为主图
+                        </label>
+                    </p>
+                    <div class="img-edit">
+                        <i class="glyphicon glyphicon-remove img-del" style="width: 100%;"></i>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <ul class="preview-img" id="js-preview-img"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-province" class="col-sm-3 control-label">省会<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <select name="province" id="farm-province" class="form-control">
+            	{% for province in provinces %}
+                <option data-range="{{ province.rangeid }}" data-id="{{ province.id }}" value="{{ province.name }}"{% ifequal province.name manager.petfarm.province %} selected{% endifequal %}>{{ province.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-city" class="col-sm-3 control-label">城市<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <select name="city" id="farm-city" class="form-control">
+                {% for city in citys %}
+                <option value="{{ city.name }}" data-id="{{ city.id }}"{% ifequal city.name manager.petfarm.city %} selected{% endifequal %}>{{ city.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-district" class="col-sm-3 control-label">片区<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <select name="district" id="farm-district" class="form-control">
+            	{% for district in districts %}
+                <option value="{{ district.name }}" data-id="{{ district.id }}"{% ifequal district.name manager.petfarm.district %} selected{% endifequal %}>{{ district.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">所处方位<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="东" {% if manager.petfarm.direct == '东' %}checked{% endif %}> 城东
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="南" {% if manager.petfarm.direct == '南' %}checked{% endif %}> 城南
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="西" {% if manager.petfarm.direct == '西' %}checked{% endif %}> 城西
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="北" {% if manager.petfarm.direct == '北' %}checked{% endif %}> 城北
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="direct" value="中" {% if manager.petfarm.direct == '中' %}checked{% endif %}> 城中
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="farm-address" class="col-sm-3 control-label">详细地址<span class="warn">*</span>：</label>
+        <div class="col-sm-4">
+            <input type="text" name="detail_address" value="{{ manager.petfarm.detail_address }}" id="farm-address" class="form-control required">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-4">
+          <button type="button" class="btn btn-primary form-control" data-loading-text="提交中..." id="js-btn-submit">提交</button>
+        </div>
+    </div>
+</form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+commonvalidateConfig.errorPlacement = function (error, element) {
+        error.insertAfter(element);
+};
+
+$('form').validate(commonvalidateConfig);
+
+</script>
+{% endblock %}
