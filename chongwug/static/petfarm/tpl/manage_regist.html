@@ -17,6 +17,9 @@
     h1{
         padding-bottom: 15px;
     }
+    .popover{
+        max-width: none;
+    }
 </style>
 <div class="container">
 <h1 class="text-center">注册</h1>
@@ -55,15 +58,22 @@
 	<div class="form-group">
 	    <label class="col-sm-2 control-label">手持证件照<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
+          <input type="hidden" name="photo" id="js-photo" class="required"/>
 	      <div id="js-uploadify"></div>
-            <a href="javascript:" tabindex="0" data-trigger="focus" data-toggle="popover" data-content="<img src={{ 'imgs/demo.jpg'|assets_petfarm }}>" data-html="true">示例图片</a>
+          <p>
+              <a href="javascript:" tabindex="0" data-trigger="focus" data-toggle="popover" data-content="<img src={{ 'imgs/demo.jpg'|assets_petfarm }}>" data-html="true">请参考此示例图片</a>
+              <span>（图片分辨率至少 500 x 500 以上）</span>
+          </p>
+          <p>
+              <img id="js-photo-show" class="img-responsive"/>
+          </p>
 	    </div>
 	</div>
     <div class="form-group">
 	    <label class="col-sm-2 control-label">类型<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
             <select class="form-control required" name="type">
-            	{% for petfarmtype in petfarmtypes %}
+                {% for petfarmtype in petfarmtypes %}
                 <option value="{{ petfarmtype.type }}">{{ petfarmtype.title }}</option>
                 {% endfor %}
             </select>
@@ -122,7 +132,13 @@ $(function () {
   $('[data-toggle="popover"]').popover()
 });
 
+commonvalidateConfig.ignore = '';
+var validator = $('form').validate(commonvalidateConfig);
+
 (function($){
+    var $photoShow = $('#js-photo-show'),
+        $photo = $('#js-photo');
+
     $('#js-uploadify').uploadify({
             buttonText: '浏览并上传',
             buttonClass: 'btn-info',
@@ -147,7 +163,9 @@ $(function () {
                 data = $.parseJSON(data);
 
                 if(data.status == 0){
-
+                    $photo.val(data.url);
+                    $photoShow.attr('src', data.url);
+                    validator.element('#js-photo');
                 }else{
                     alert('图片上传失败：' + data.message + '，请重试。');
                 }
@@ -192,7 +210,6 @@ $(function () {
             data: param,
             dataType: 'json',
             success: function(data){
-                console.log(data)
                 for(var i in data){
                     var options = '';
 
@@ -208,8 +225,6 @@ $(function () {
 
 })(jQuery);
 
-var validator = $('form').validate(commonvalidateConfig);
-
 (function($){
 
     //form submit
@@ -217,7 +232,8 @@ var validator = $('form').validate(commonvalidateConfig);
         $submit = $form.find('#js-btn-submit');
 
 
-    $submit.on('click', function(){
+    $form.on('submit', function(event){
+        event.preventDefault();
 
     	validator.form();
 
@@ -233,8 +249,6 @@ var validator = $('form').validate(commonvalidateConfig);
             data[e.name] = e.value;
         });
 
-        //console.log(data);
-
         $.ajax({
             url: './',
             data: data,
@@ -243,7 +257,7 @@ var validator = $('form').validate(commonvalidateConfig);
             success: function(data){
                 if(data.status == 0){
                     alert('提交成功！');
-                    window.location.reload();
+                    window.location.href = '/petfarm/';
                 }else{
                     alert('提交失败：'+ data.message +'，请重试！');
                     $submit.button('reset');
