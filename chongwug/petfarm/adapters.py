@@ -106,14 +106,6 @@ def petfarm_regist(request):
         if error:
             return __errorcode__(11)
         
-        error = True
-        for _direct in config.__directs:
-            if _direct == request.POST['direct']:
-                error = False
-                break
-        if error:
-            return __errorcode__(18)
-        
         p = re.compile(config.__regular_expression_chinatelnum)
         if not p.match(request.POST['tel']):
             return __errorcode__(9)
@@ -123,9 +115,6 @@ def petfarm_regist(request):
         p = re.compile(config.__regular_expression_idnum)
         if not p.match(request.POST['idnum']):
             return __errorcode__(17)
-        content = descform({'content':request.POST['content']})
-        if not content.is_valid():
-            return __errorcode__(1)
         auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
         new_user = user(nickname = request.POST['name'],
                         tel = request.POST['tel'],
@@ -136,12 +125,12 @@ def petfarm_regist(request):
                         pwd = request.POST['pwd'])
         new_user.save()
         new_pet_farm = pet_farm(name = request.POST['name'],
-                                desc = request.POST['content'],
+                                desc = '',
                                 detail_address = request.POST['dest'],
                                 province = province,
                                 city = city,
                                 district = request.POST['district'],
-                                direct = request.POST['direct'],
+                                direct = u'东',
                                 min_prince = 10000,
                                 manage_score = 1.0)
         new_pet_farm.save()
