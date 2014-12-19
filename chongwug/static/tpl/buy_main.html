@@ -15,7 +15,7 @@
     <div class="container buy-main content-container">
         <div class="row">
             <div class="col-6 col-offset-1">
-                <form action="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ farmtype }}-1/" method="get" id="js-form">
+                <form action="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-searchkey-{{ farmtype }}-1/" method="get" id="js-form">
                     <div class="input-group cwg-search-wrap">
                     	<input type="text" class="form-control" id="js-key" placeholder="输入养殖场名称、所处区县等" name="key" {% if searchkey != 'all' %}value="{{ searchkey }}"{% endif %}>
                         <span class="input-group-btn">
@@ -230,9 +230,15 @@
         $key = $form.find('#js-key');
 
     $form.on('submit', function(e){
-        if($.trim($key.val()) == ''){
+        e.preventDefault();
+
+        var val = $.trim($key.val());
+
+        if( val == ''){
             $key.focus();
             e.preventDefault();
+        }else{
+            window.location.href = $form[0].action.replace('searchkey', val);
         }
     });
 }());
