@@ -63,9 +63,9 @@
 	    <label class="col-sm-2 control-label">类型<span class="warn">*</span>：</label>
 	    <div class="col-sm-4">
             <select class="form-control required" name="type">
-                <option value="">家庭繁育</option>
-                <option value="">宠物店</option>
-                <option value="">犬舍</option>
+            	{% for petfarmtype in petfarmtypes %}
+                <option value="{{ petfarmtype.type }}">{{ petfarmtype.title }}</option>
+                {% endfor %}
             </select>
 	    </div>
 	</div>

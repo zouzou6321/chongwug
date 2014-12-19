@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import auth
 from django.contrib.auth.models import User
+from chongwug import config
 import adapters
 from chongwug.commom import __errorcode__
 PETFARM_ROOT='/petfarm/'
@@ -18,6 +19,7 @@ def manage_regist_view(request):
         data = adapters.petfarm_regist(request)
         return HttpResponse(data)
     data = adapters.addressHandle(request)
+    data['petfarmtypes'] = config.__petfarmtypes
     return render_to_response('petfarm/tpl/manage_regist.html',data,context_instance=RequestContext(request))
 
 @csrf_exempt
