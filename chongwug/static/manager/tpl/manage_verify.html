@@ -1,0 +1,30 @@
+{% extends 'manager/tpl/base/base.html' %}
+
+{% block title %}内容编辑{% endblock %}
+{% load assets_manager %}
+{% block main %}
+<style>
+    .supplies-title{
+        height: 40px;
+        overflow: hidden;
+    }
+    .supplies-img{
+        width: 100%;
+    }
+    .supplies-item{
+        border: 1px solid #ccc;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+</style>
+<h1 class="page-header">新用户列表</h1>
+    <div class="row">
+    	{% for user in users %}
+        <div class="col-xs-3 supplies-item">
+        	{{ user.id_num }}
+            <a class="btn btn-primary" href="?verify=1&id={{ user.id }}">通过</a>
+            <a class="btn btn-primary" href="?verify=2&id={{ user.id }}">不通过</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

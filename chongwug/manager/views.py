@@ -176,3 +176,14 @@ def manage_config_view(request,who):
         return render_to_response('manager/tpl/manage_config_%s.html' % who,data)
     else:
         return HttpResponse(data)
+
+def manage_verify_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return render_to_response('404.html')
+    if 'verify' in request.GET:
+        adapters.manage_verify_newusers(request)
+    data = adapters.manage_home_data_get(request)
+    data['users'] = adapters.manage_get_newusers()
+    return render_to_response('manager/tpl/manage_verify.html',data)
