@@ -8,7 +8,6 @@ from chongwug import config
 from django import forms
 from chongwug.commom import __errorcode__,myCKEditorWidget
 from upyun import UpYun
-from django.contrib import auth
 import traceback
 import os,uuid,string,re,datetime,json
 from django.contrib.auth.models import User
@@ -58,9 +57,10 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
 管理员鉴权
 '''
 def manage_authentication(request):
-    if not request.user.is_authenticated():
+    if 'petfarmlogin' not in request.session or request.session['petfarmlogin'] != True:
         return False
-    cur_user = user.objects.get(auth_user=auth.get_user(request),dele=False)
+    print request.session['petfarmid']
+    cur_user = user.objects.get(id=request.session['petfarmid'],dele=False)
     if cur_user.type < 1:
         return False
     return True
@@ -68,15 +68,20 @@ def manage_authentication(request):
 def manage_login_check(request):
     name = request.POST['username']
     passwd = request.POST['userpassd']
-    user = auth.authenticate(username=name, password=passwd)
-    if user is not None and user.is_active:
-        # Correct password, and the user is marked "active"
-        auth.login(request, user)
-        # Redirect to a success page.
-        return True
-    else:
-        # Show an error page
-        return False
+    try:
+        nowuser = user.objects.get(tel=name,pwd=passwd,dele=False)
+    except:
+        try:
+            nowuser = user.objects.get(email=name,pwd=passwd,dele=False)
+        except:
+            return False
+    request.session['petfarmlogin'] = True
+    request.session['petfarmid'] = nowuser.id
+    return True
+
+def manage_logout(request):
+    del request.session['petfarmlogin']
+    del request.session['petfarmid']
 
 def petfarm_regist(request):
         if 'pwd' not in request.POST or request.POST['pwd'] == '':
@@ -151,7 +156,7 @@ def petfarm_regist(request):
         return __errorcode__(0)
 
 def manage_home_data_get(request):
-    manager = user.objects.get(auth_user=auth.get_user(request),dele = False)
+    manager = user.objects.get(id=request.session['petfarmid'],dele = False)
     return {'manager':manager}
 
 def get_pet_types():
@@ -237,7 +242,7 @@ def manage_picpreupload(request,_from,_nestofpet=None):
         
         #把url存入数据库
         if _from == 'farm':
-            pet_farm_sql = pet_farm_img( pet_farm_id = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm,
+            pet_farm_sql = pet_farm_img( pet_farm_id = user.objects.get(id=request.session['petfarmid'],dele = False).petfarm,
                                     img_url = img_url,
                                     img_with = int(pic_args['x2'] - pic_args['x1']),
                                     img_height = int(pic_args['y2'] - pic_args['y1']),
@@ -294,7 +299,7 @@ def manage_nestofpet_add(request):
         except:
             return __errorcode__(15)
     try:
-        farm = user.objects.get(auth_user=auth.get_user(request),dele = False).petfarm
+        farm = user.objects.get(id=request.session['petfarmid'],dele = False).petfarm
         new_nestofpet = nestofpet(farm = farm,
                                 color = request.POST['nest-color'],
                                 age = string.atoi(request.POST['nest-age']),
@@ -411,7 +416,7 @@ def manage_pet_farm_mod(request):
         content = descform({'content':request.POST['content']})
         if not content.is_valid():
             return __errorcode__(1)
-        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        curuser = user.objects.get(id=request.session['petfarmid'],dele=False)
         curuser.tel = request.POST['tel']
         curuser.email = request.POST['email']
         if request.POST['pwd'] != '':
@@ -472,7 +477,7 @@ def manage_picupload(photo,width,height):
     return __errorcode__(0,data)
 
 def manage_get_pets(request):
-    curuser = user.objects.get(auth_user=auth.get_user(request),dele = False)
+    curuser = user.objects.get(id=request.session['petfarmid'],dele = False)
     if 'id' in request.GET:
         pet_one = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,dele=False,sale_out=False)
         return pet_one
@@ -482,7 +487,7 @@ def manage_get_pets(request):
 
 def manage_del_pet(request):
     try:
-        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        curuser = user.objects.get(id=request.session['petfarmid'],dele=False)
         cur_nestofpet = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),farm=curuser.petfarm,sale_out=False)
         cur_nestofpet.dele=True
         cur_nestofpet.save()
@@ -513,7 +518,7 @@ def manage_nestofpet_mod_info(request):
     return data
 def manage_nestofpet_mod(request):
     try:
-        curuser = user.objects.get(auth_user=auth.get_user(request),dele=False)
+        curuser = user.objects.get(id=request.session['petfarmid'],dele=False)
         curnestofpet = nestofpet.objects.get(id=string.atoi(request.POST['pet_id']),farm=curuser.petfarm,dele=False,sale_out=False)
         curnestofpet.color = request.POST['color']
         curnestofpet.age = string.atoi(request.POST['age'])

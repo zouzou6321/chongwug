@@ -4,7 +4,6 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib import auth
 from django.contrib.auth.models import User
 from chongwug import config
 import adapters
@@ -37,7 +36,7 @@ def manage_home_view(request):
     if adapters.manage_authentication(request) == False:
         return manage_login(request)
     if request.method == 'GET' and 'logout' in request.GET:
-        auth.logout(request)
+        adapters.manage_logout(request)
         return HttpResponseRedirect(PETFARM_ROOT)
     data = adapters.manage_home_data_get(request)
     return render_to_response('petfarm/tpl/manage_home.html',data)
