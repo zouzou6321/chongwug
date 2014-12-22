@@ -298,12 +298,12 @@ function countTime($el){
                         countTime($btnVerify);
                     }else{
                         alert(data.message);
-                        $btnVerify.prop('disabled', true).addClass('disabled');
+                        $btnVerify.prop('disabled', false).removeClass('disabled');
                     }
                 },
                 error: function(){
                     alert('网络错误，请稍候重试');
-                    $btnVerify.prop('disabled', true).addClass('disabled');
+                    $btnVerify.prop('disabled', false).removeClass('disabled');
                 }
             });
         }
