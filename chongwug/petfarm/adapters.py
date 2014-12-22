@@ -159,6 +159,16 @@ def petfarm_regist(request):
         return __errorcode__(4)
     if img_url == 'crop size error':
         return __errorcode__(13)
+    try:
+        user.objects.get(tel=request.POST['tel'])
+        return __errorcode__(26)
+    except:
+        pass
+    try:
+        user.objects.get(email=request.POST['email'])
+        return __errorcode__(28)
+    except:
+        pass
     auth_user = User.objects.create_user(username=request.POST['tel'],email=request.POST['email'],password=request.POST['pwd'])
     new_user = user(nickname = request.POST['name'],
                     tel = request.POST['tel'],
