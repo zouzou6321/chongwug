@@ -102,7 +102,7 @@ def manage_pwdforgot(request):
 
 def petfarm_regist(request):
     if 'verify' in request.POST:
-        old = request.session['verifytime']
+        old = datetime.datetime.strptime(request.session['verifytime'],'%Y-%m-%d %H:%M:%S')
         now = datetime.datetime.now()
         delta = now - old
         if delta.seconds >= 1800:
@@ -189,10 +189,8 @@ def petfarm_regist_sendcheck(request):
     try:
         user.objects.get(tel=request.REQUEST.get('tel'))
     except:
-        if 'verifytime' not in request.session:
-            request.session['verifytime'] = datetime.datetime.now()
-        else:
-            old = request.session['verifytime']
+        if 'verifytime' in request.session:
+            old = datetime.datetime.strptime(request.session['verifytime'],'%Y-%m-%d %H:%M:%S')
             now = datetime.datetime.now()
             delta = now - old
             if delta.seconds <= 60:
@@ -203,6 +201,7 @@ def petfarm_regist_sendcheck(request):
             request.session['verifytimes'] = request.session['verifytimes'] + 1
         if request.session['verifytimes'] > 3:
             return __errorcode__(23)
+        request.session['verifytime'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         request.session['verifycode'] = random_str(4)
         message = u'有客户使用此电话号码注册宠物购平台账号，如果不是本人操作，请忽略。您的验证码是%s,登陆宠物购www.chongwug.com【宠物购科技】' % request.session['verifycode']
         sendSMS(request.REQUEST.get('tel'),message)
