@@ -10,8 +10,8 @@ import adapters
 from chongwug.commom import __errorcode__
 PETFARM_ROOT='/petfarm/'
 
-def manage_login(request):
-    return render_to_response('petfarm/tpl/manage_login.html',{},context_instance=RequestContext(request))
+def manage_login(request,error=''):
+    return render_to_response('petfarm/tpl/manage_login.html',{'error':error},context_instance=RequestContext(request))
 
 def manage_regist_view(request):
     if request.method == 'POST':
@@ -34,7 +34,7 @@ def manage_home_view(request):
         if adapters.manage_login_check(request) == True:
             return HttpResponseRedirect(PETFARM_ROOT)
     if adapters.manage_authentication(request) == False:
-        return manage_login(request)
+        return manage_login(request,u'账号或密码错误')
     if request.method == 'GET' and 'logout' in request.GET:
         adapters.manage_logout(request)
         return HttpResponseRedirect(PETFARM_ROOT)
