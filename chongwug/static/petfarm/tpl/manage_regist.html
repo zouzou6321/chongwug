@@ -293,6 +293,7 @@ function countTime($el){
             $.ajax({
                 url: './',
                 data: {tel: $tel.val()},
+                dataType: 'json',
                 success: function(data){
                     if(data.status == 0){
                         countTime($btnVerify);
