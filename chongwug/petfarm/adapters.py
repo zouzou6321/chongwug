@@ -59,7 +59,6 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
 def manage_authentication(request):
     if 'petfarmlogin' not in request.session or request.session['petfarmlogin'] != True:
         return False
-    print request.session['petfarmid']
     cur_user = user.objects.get(id=request.session['petfarmid'],dele=False)
     if cur_user.type < 1:
         return False
