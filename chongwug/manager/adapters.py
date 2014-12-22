@@ -530,3 +530,11 @@ def manage_config(request,who):
     elif who == 'address':
         return manage_config_address(request)
     return None,None
+
+def manage_get_newusers():
+    return user.objects.filter(verify=0,dele=False)
+
+def manage_verify_newusers(request):
+    obj = user.objects.get(id=string.atoi(request.REQUEST.get('id')),verify=0,dele=False)
+    obj.verify = string.atoi(request.REQUEST.get('verify'))
+    obj.save()
