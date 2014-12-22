@@ -10,6 +10,16 @@ from chongwug.settings import CKEDITOR_STATIC_URL,WAPALIPAY,ALIPAY_ID,ALIPAY_KEY
 from ckeditor.widgets import CKEditorWidget
 from django.core.exceptions import ImproperlyConfigured
 from customer.models import appointorders
+from random import Random
+
+def random_str(randomlength=16):
+    str = ''
+    chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
+    length = len(chars) - 1
+    random = Random()
+    for i in range(randomlength):
+        str+=chars[random.randint(0, length)]
+    return str
 
 def __errorcode__(errornum,otherdata = None):
     index = 0

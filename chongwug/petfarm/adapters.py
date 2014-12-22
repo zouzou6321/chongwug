@@ -6,11 +6,12 @@ from PIL import Image
 from chongwug import settings
 from chongwug import config
 from django import forms
-from chongwug.commom import __errorcode__,myCKEditorWidget
+from chongwug.commom import __errorcode__,myCKEditorWidget,random_str
 from upyun import UpYun
 import traceback
 import os,uuid,string,re,datetime,json
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
 def pic_crop_save(pic_args,pic_dir,max_height,max_width): 
     try:
@@ -549,3 +550,20 @@ def manage_nestofpet_mod(request):
     except NameError:
         return __errorcode__(2)
     return manage_picpreupload(request,'petmod',curnestofpet)
+
+def manage_pwdforgot(request):
+    try:
+        nowuser = user.objects.get(email=request.POST['email'],dele=False)
+    except:
+        return __errorcode__(1)
+    nowuser.pwd = random_str(10)
+    nowuser.save()
+    message = u'尊敬的客户 %s：\n \r刚刚有人在宠物购网站使用了这个邮箱尝试找回密码，新密码为：%s，如果不是本人操作，请忽略本邮件。\n登陆宠物购请点击<a href="www.chongwug.com" target="__blank">宠物购官方网站</a>' % (nowuser.nickname, nowuser.pwd)
+    sender = 'fccsl6321@163.com'
+    a = send_mail(
+              u'宠物购密码找回',
+              message, 
+              sender,
+              [nowuser.email]
+              )
+    return __errorcode__(0)

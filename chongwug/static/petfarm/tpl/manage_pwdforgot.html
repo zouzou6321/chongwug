@@ -1,0 +1,42 @@
+{% extends 'petfarm/tpl/base/base.html' %}
+{% load assets_petfarm %}
+
+{% block title %}找回密码{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ 'lib/uploadify/uploadify.css'|assets_petfarm }}"/>
+{% endblock %}
+
+{% block container %}
+<style>
+    body{
+        padding-top: 0;
+    }
+    h1{
+        padding-bottom: 15px;
+    }
+    .popover{
+        max-width: none;
+    }
+</style>
+<div class="container">
+<h1 class="text-center">找回密码</h1>
+	<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<div class="form-group">
+	    <label class="col-sm-2 control-label">注册邮箱<span class="warn">*</span>：</label>
+	    <div class="col-sm-4">
+	      <input type="text" class="form-control required" name="email">
+	    </div>
+	</div>
+	<div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button type="submit" id="js-btn-submit" data-loading-text="提交中..." class="btn btn-primary form-control">发送新密码到注册邮箱</button>
+        </div>
+    </div>
+	</form>
+</div>
+
+{% endblock %}
