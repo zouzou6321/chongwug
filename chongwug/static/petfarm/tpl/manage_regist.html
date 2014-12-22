@@ -267,7 +267,7 @@ var validator = $('form').validate(commonvalidateConfig);
                     alert('提交成功，我们会将审核结果发送至您的手机，请耐心等候。');
                     window.location.href = '/petfarm/';
                 }else{
-                    alert('提交失败：'+ data.message +'，请重试！');
+                    alert('提交失败：'+ data.message);
                     $submit.button('reset');
                 }
             },
