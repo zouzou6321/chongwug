@@ -18,13 +18,26 @@
     }
 </style>
 <h1 class="page-header">新用户列表</h1>
-    <div class="row">
-    	{% for user in users %}
-        <div class="col-xs-3 supplies-item">
-        	{{ user.id_num }}
-            <a class="btn btn-primary" href="?verify=1&id={{ user.id }}">通过</a>
-            <a class="btn btn-primary" href="?verify=2&id={{ user.id }}">不通过</a>
-        </div>
-        {% endfor %}
+
+<div class="panel-group" id="accordion">
+{% for user in users %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
+            {{ user.nickname }} - {{ user.tel }} - {{ user.email }}
+        </a>
+      </h4>
     </div>
+    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
+      <div class="panel-body">
+        <a class="btn btn-primary" href="?verify=1&id={{ user.id }}">通过</a>
+        <a class="btn btn-default" href="?verify=2&id={{ user.id }}">不通过</a>
+        {{ user.photo }}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
 {% endblock %}
