@@ -13,6 +13,9 @@ class user(models.Model):
     email = models.TextField(blank=True, null=True)
     #身份证号码
     id_num = models.TextField(blank=True, null=True)
+    id_card = models.URLField(blank=True, null=True)
+    #0是未验证通过,1是验证通过
+    verify = models.IntegerField(default=0)
     pwd = models.TextField(blank=True, null=True)
     desc = models.TextField(blank=True, null=True)
     regtime = models.DateTimeField(default=datetime.datetime.now)

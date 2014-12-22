@@ -24,15 +24,17 @@ def pic_crop_save(pic_args,pic_dir,max_height,max_width):
     y1 = int(pic_args['y1'])
     x2 = int(pic_args['x2'])
     y2 = int(pic_args['y2'])
-    if (x2 - x1) + 3 < max_width or (y2 - y1) + 3 < max_height:
-        return 'crop size error'
+    if max_width != -1:
+        if (x2 - x1) + 3 < max_width or (y2 - y1) + 3 < max_height:
+            return 'crop size error'
     if img.mode != 'RGB':
         img = img.convert('RGB')
     cropimg = img.crop((x1,y1,x2,y2))
     if cropimg.mode != 'RGB':
         cropimg.convert('RGB')
-    if (x2 - x1) > max_width:
-        cropimg.thumbnail( (max_width,max_height) )
+    if max_width != -1:
+        if (x2 - x1) > max_width:
+            cropimg.thumbnail( (max_width,max_height) )
     #file_name = '%s'%str(uuid.uuid1()) + '.png'
     file_name = pic_args['source'].split('/')[-1]
     file_path_name = pic_dir + file_name
@@ -77,7 +79,6 @@ def manage_login_check(request):
         return False
 
 def petfarm_regist(request):
-    try:
         if 'pwd' not in request.POST or request.POST['pwd'] == '':
             return __errorcode__(21)
         
@@ -115,11 +116,20 @@ def petfarm_regist(request):
         p = re.compile(config.__regular_expression_idnum)
         if not p.match(request.POST['idnum']):
             return __errorcode__(17)
+        pic_args = {'source':request.POST['photo'].split('/')[-1],'x1':request.POST['x1'],
+                    'x2':request.POST['x2'],'y1':request.POST['y1'],'y2':request.POST['y2']}
+
+        img_url = pic_crop_save(pic_args,settings.IDCARD_PIC_ROOT,-1,-1)
+        if img_url == 'type error':
+            return __errorcode__(4)
+        if img_url == 'crop size error':
+            return __errorcode__(13)
         auth_user = User.objects.create_user(username=request.POST['name'],email=request.POST['email'],password=request.POST['pwd'])
         new_user = user(nickname = request.POST['name'],
                         tel = request.POST['tel'],
                         email = request.POST['email'],
                         id_num = request.POST['idnum'],
+                        id_card = img_url,
                         type = 1,
                         auth_user=auth_user,
                         pwd = request.POST['pwd'])
@@ -132,13 +142,13 @@ def petfarm_regist(request):
                                 district = request.POST['district'],
                                 direct = u'东',
                                 min_prince = 10000,
-                                manage_score = 1.0)
+                                manage_score = 1.0,
+                                type = string.atoi(request.POST['type']))
         new_pet_farm.save()
         new_user.petfarm = new_pet_farm
         new_user.save()
+        
         return __errorcode__(0)
-    except:
-        return __errorcode__(2) 
 
 def manage_home_data_get(request):
     manager = user.objects.get(auth_user=auth.get_user(request),dele = False)
