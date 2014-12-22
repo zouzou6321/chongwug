@@ -264,7 +264,7 @@ var validator = $('form').validate(commonvalidateConfig);
             dataType: 'json',
             success: function(data){
                 if(data.status == 0){
-                    alert('提交成功！');
+                    alert('提交成功，我们会将审核结果发送至您的手机，请耐心等候。');
                     window.location.href = '/petfarm/';
                 }else{
                     alert('提交失败：'+ data.message +'，请重试！');
