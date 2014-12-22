@@ -17,6 +17,9 @@ def manage_regist_view(request):
     if request.method == 'POST':
         data = adapters.petfarm_regist(request)
         return HttpResponse(data)
+    if 'tel' in request.GET:
+        data = adapters.petfarm_regist_sendcheck(request)
+        return HttpResponse(data)
     data = adapters.addressHandle(request)
     data['petfarmtypes'] = config.__petfarmtypes
     return render_to_response('petfarm/tpl/manage_regist.html',data,context_instance=RequestContext(request))
@@ -26,6 +29,12 @@ def manage_regist_picadd_view(request):
     photo = request.FILES.get('Filedata',None)
     imgw,imgh = 500,500
     return HttpResponse(adapters.manage_picupload(photo,imgw,imgh))
+
+def manage_pwdforgot_view(request):
+    if 'email' in request.POST:
+        return HttpResponse(adapters.manage_pwdforgot(request))
+    return render_to_response('petfarm/tpl/manage_pwdforgot.html',{},context_instance=RequestContext(request))
+
 #auth:huhuaiyong
 #date:2014/8/23
 #discription:管理员首页展示
@@ -33,8 +42,10 @@ def manage_home_view(request):
     if request.method == 'POST' and 'username' in request.POST and 'userpassd'  in request.POST:
         if adapters.manage_login_check(request) == True:
             return HttpResponseRedirect(PETFARM_ROOT)
+        else:
+            return manage_login(request,u'账号或密码错误')
     if adapters.manage_authentication(request) == False:
-        return manage_login(request,u'账号或密码错误')
+        return manage_login(request)
     if request.method == 'GET' and 'logout' in request.GET:
         adapters.manage_logout(request)
         return HttpResponseRedirect(PETFARM_ROOT)
@@ -104,8 +115,3 @@ def manage_nestofpet_add_view(request):
     data['pettypes'] = adapters.get_pet_types()['pettypes']
     data['petages'] = adapters.get_pet_ages()['petages']
     return render_to_response('petfarm/tpl/manage_pet_add.html',data,context_instance=RequestContext(request))
-
-def manage_pwdforgot_view(request):
-    if 'email' in request.POST:
-        return HttpResponse(adapters.manage_pwdforgot(request))
-    return render_to_response('petfarm/tpl/manage_pwdforgot.html',{},context_instance=RequestContext(request))

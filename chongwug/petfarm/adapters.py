@@ -6,7 +6,7 @@ from PIL import Image
 from chongwug import settings
 from chongwug import config
 from django import forms
-from chongwug.commom import __errorcode__,myCKEditorWidget,random_str
+from chongwug.commom import __errorcode__,myCKEditorWidget,random_str,sendSMS
 from upyun import UpYun
 import traceback
 import os,uuid,string,re,datetime,json
@@ -83,77 +83,131 @@ def manage_logout(request):
     del request.session['petfarmlogin']
     del request.session['petfarmid']
 
-def petfarm_regist(request):
-        if 'pwd' not in request.POST or request.POST['pwd'] == '':
-            return __errorcode__(21)
-        
-        if 'province' not in request.POST or request.POST['province'] == '':
-            province = u'四川'
-        else:
-            province = request.POST['province']
-        if 'city' not in request.POST or request.POST['city'] == '':
-            city = u'成都'
-        else:
-            city = request.POST['city']
-        
-        error = True
-        
-        for _addresse in config.__addresses:
-            for _province in _addresse['sublist']:
-                if _province['name'] == province:
-                    for _city in _province['sublist']:
-                        if _city['name'] == city:
-                            for _district in _city['sublist']:
-                                if _district['name'] == request.POST['district']:
-                                    error = False
-                                    break
-                            break
-                    break
-        if error:
-            return __errorcode__(11)
-        
-        p = re.compile(config.__regular_expression_chinatelnum)
-        if not p.match(request.POST['tel']):
-            return __errorcode__(9)
-        p = re.compile(config.__regular_expression_email)
-        if not p.match(request.POST['email']):
-            return __errorcode__(16)
-        p = re.compile(config.__regular_expression_idnum)
-        if not p.match(request.POST['idnum']):
-            return __errorcode__(17)
-        pic_args = {'source':request.POST['photo'].split('/')[-1],'x1':request.POST['x1'],
-                    'x2':request.POST['x2'],'y1':request.POST['y1'],'y2':request.POST['y2']}
+def manage_pwdforgot(request):
+    try:
+        nowuser = user.objects.get(email=request.POST['email'],dele=False)
+    except:
+        return __errorcode__(1)
+    nowuser.pwd = random_str(10)
+    nowuser.save()
+    message = u'尊敬的客户 %s：\n \r刚刚有人在宠物购网站使用了这个邮箱尝试找回密码，新密码为：%s，如果不是本人操作，请忽略本邮件。\n登陆宠物购请点击<a href="www.chongwug.com" target="__blank">宠物购官方网站</a>' % (nowuser.nickname, nowuser.pwd)
+    sender = 'fccsl6321@163.com'
+    a = send_mail(
+              u'宠物购密码找回',
+              message, 
+              sender,
+              [nowuser.email]
+              )
+    return __errorcode__(0)
 
-        img_url = pic_crop_save(pic_args,settings.IDCARD_PIC_ROOT,-1,-1)
-        if img_url == 'type error':
-            return __errorcode__(4)
-        if img_url == 'crop size error':
-            return __errorcode__(13)
-        auth_user = User.objects.create_user(username=request.POST['tel'],email=request.POST['email'],password=request.POST['pwd'])
-        new_user = user(nickname = request.POST['name'],
-                        tel = request.POST['tel'],
-                        email = request.POST['email'],
-                        id_num = request.POST['idnum'],
-                        id_card = img_url,
-                        type = 1,
-                        auth_user=auth_user,
-                        pwd = request.POST['pwd'])
-        new_user.save()
-        new_pet_farm = pet_farm(name = request.POST['name'],
-                                desc = '',
-                                detail_address = request.POST['dest'],
-                                province = province,
-                                city = city,
-                                district = request.POST['district'],
-                                direct = u'东',
-                                min_prince = 10000,
-                                manage_score = 1.0,
-                                type = string.atoi(request.POST['type']))
-        new_pet_farm.save()
-        new_user.petfarm = new_pet_farm
-        new_user.save()
+def petfarm_regist(request):
+    if 'verify' in request.POST:
+        old = request.session['verifytime']
+        now = datetime.datetime.now()
+        delta = now - old
+        if delta.seconds >= 1800:
+            return __errorcode__(25)
+        if delta.days >= 1:
+            del request.session['verifytime']
+            del request.session['verifycode']
+            del request.session['verifytimes']
+            return __errorcode__(25)
+        if request.session['verifycode'] != request.POST['verify']:
+            return __errorcode__(25)
+    if 'pwd' not in request.POST or request.POST['pwd'] == '':
+        return __errorcode__(21)
+    
+    if 'province' not in request.POST or request.POST['province'] == '':
+        province = u'四川'
+    else:
+        province = request.POST['province']
+    if 'city' not in request.POST or request.POST['city'] == '':
+        city = u'成都'
+    else:
+        city = request.POST['city']
+    
+    error = True
+    
+    for _addresse in config.__addresses:
+        for _province in _addresse['sublist']:
+            if _province['name'] == province:
+                for _city in _province['sublist']:
+                    if _city['name'] == city:
+                        for _district in _city['sublist']:
+                            if _district['name'] == request.POST['district']:
+                                error = False
+                                break
+                        break
+                break
+    if error:
+        return __errorcode__(11)
+    
+    p = re.compile(config.__regular_expression_chinatelnum)
+    if not p.match(request.POST['tel']):
+        return __errorcode__(9)
+    p = re.compile(config.__regular_expression_email)
+    if not p.match(request.POST['email']):
+        return __errorcode__(16)
+    p = re.compile(config.__regular_expression_idnum)
+    if not p.match(request.POST['idnum']):
+        return __errorcode__(17)
+    pic_args = {'source':request.POST['photo'].split('/')[-1],'x1':request.POST['x1'],
+                'x2':request.POST['x2'],'y1':request.POST['y1'],'y2':request.POST['y2']}
+
+    img_url = pic_crop_save(pic_args,settings.IDCARD_PIC_ROOT,-1,-1)
+    if img_url == 'type error':
+        return __errorcode__(4)
+    if img_url == 'crop size error':
+        return __errorcode__(13)
+    auth_user = User.objects.create_user(username=request.POST['tel'],email=request.POST['email'],password=request.POST['pwd'])
+    new_user = user(nickname = request.POST['name'],
+                    tel = request.POST['tel'],
+                    email = request.POST['email'],
+                    id_num = request.POST['idnum'],
+                    id_card = img_url,
+                    type = 1,
+                    auth_user=auth_user,
+                    pwd = request.POST['pwd'])
+    new_user.save()
+    new_pet_farm = pet_farm(name = request.POST['name'],
+                            desc = '',
+                            detail_address = request.POST['dest'],
+                            province = province,
+                            city = city,
+                            district = request.POST['district'],
+                            direct = u'东',
+                            min_prince = 10000,
+                            manage_score = 1.0,
+                            type = string.atoi(request.POST['type']))
+    new_pet_farm.save()
+    new_user.petfarm = new_pet_farm
+    new_user.save()
         
+    return __errorcode__(0)
+
+def petfarm_regist_sendcheck(request):
+    try:
+        user.objects.get(tel=request.REQUEST.get('tel'))
+    except:
+        if 'verifytime' not in request.session:
+            request.session['verifytime'] = datetime.datetime.now()
+        else:
+            old = request.session['verifytime']
+            now = datetime.datetime.now()
+            delta = now - old
+            if delta.seconds <= 60:
+                return __errorcode__(1)
+        if 'verifytimes' not in request.session:
+            request.session['verifytimes'] = 1
+        else:
+            request.session['verifytimes'] = request.session['verifytimes'] + 1
+        if request.session['verifytimes'] > 3:
+            return __errorcode__(23)
+        request.session['verifycode'] = random_str(4)
+        message = u'有客户使用此电话号码注册宠物购平台账号，如果不是本人操作，请忽略。您的验证码是%s,登陆宠物购www.chongwug.com【宠物购科技】' % request.session['verifycode']
+        sendSMS(request.REQUEST.get('tel'),message)
         return __errorcode__(0)
+    return __errorcode__(26)
 
 def manage_home_data_get(request):
     manager = user.objects.get(id=request.session['petfarmid'],dele = False)
@@ -550,20 +604,3 @@ def manage_nestofpet_mod(request):
     except NameError:
         return __errorcode__(2)
     return manage_picpreupload(request,'petmod',curnestofpet)
-
-def manage_pwdforgot(request):
-    try:
-        nowuser = user.objects.get(email=request.POST['email'],dele=False)
-    except:
-        return __errorcode__(1)
-    nowuser.pwd = random_str(10)
-    nowuser.save()
-    message = u'尊敬的客户 %s：\n \r刚刚有人在宠物购网站使用了这个邮箱尝试找回密码，新密码为：%s，如果不是本人操作，请忽略本邮件。\n登陆宠物购请点击<a href="www.chongwug.com" target="__blank">宠物购官方网站</a>' % (nowuser.nickname, nowuser.pwd)
-    sender = 'fccsl6321@163.com'
-    a = send_mail(
-              u'宠物购密码找回',
-              message, 
-              sender,
-              [nowuser.email]
-              )
-    return __errorcode__(0)
