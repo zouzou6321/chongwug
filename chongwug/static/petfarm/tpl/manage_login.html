@@ -10,6 +10,7 @@
     <form action="./?editor=true" name="adminlogoin" method="post" class="login-form">
         {% csrf_token %}
         <h2 class="form-signin-heading">请登录</h2>
+        <p class="text-muted">请使用注册手机号或者邮箱登录</p>
         <div class="form-group">
             <input type="text" name="username" class="form-control required" placeholder="用户名" autofocus autocomplete="off">
         </div>
