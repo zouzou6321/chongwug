@@ -104,3 +104,8 @@ def manage_nestofpet_add_view(request):
     data['pettypes'] = adapters.get_pet_types()['pettypes']
     data['petages'] = adapters.get_pet_ages()['petages']
     return render_to_response('petfarm/tpl/manage_pet_add.html',data,context_instance=RequestContext(request))
+
+def manage_pwdforgot_view(request):
+    if 'email' in request.POST:
+        return HttpResponse(adapters.manage_pwdforgot(request))
+    return render_to_response('petfarm/tpl/manage_pwdforgot.html',{},context_instance=RequestContext(request))
