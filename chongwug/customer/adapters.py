@@ -316,7 +316,7 @@ def buy_gettel(request):
         request.session['getteltime'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         obj = nestofpet.objects.get(id=request.POST['id'],dele=False)
         content = u"您好，您预约的犬舍是：%s,预约犬种：%s。联系电话为：%s,祝您就此遇见心仪的爱犬！" % (obj.farm.name, obj.type, obj.farm.user_set.filter(dele=False)[0].tel)
-        #sendSMS(request.POST['tel'],content)
+        sendSMS(request.POST['tel'],content)
         curuser = None
         try:
             auth_user = User.objects.create_user(username=request.POST['tel'],email='',password='123456')
