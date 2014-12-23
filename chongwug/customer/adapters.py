@@ -291,7 +291,7 @@ def buy_detail_adapter(re,petid):
             delta = datetime.timedelta(days=days)
             n_days = now + delta
             appointdays.append({'day':n_days.day,'year':n_days.year,'mouth':n_days.month,'week':weeks[n_days.weekday()],'selectable':{'time1':True,'time2':True}})
-        return {'cuser':cuser,'appointtime':__appointtime,'appointdays':appointdays,'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
+        return {'petfarmlocation':nest_pet.farm.detail_address,'cuser':cuser,'appointtime':__appointtime,'appointdays':appointdays,'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy','urls':'/buy/detail/'}
     else:
         return False
@@ -473,7 +473,7 @@ def buy_attention_adapter(req):
         auth_user = None
         try:
             auth_user = User.objects.create_user(username=tel,email='',password='123456')
-            curuser =  user(nickname=name,tel=tel,location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
+            curuser =  user(nickname=name,tel=tel,pwd='123456',location=('%s-%s-%s-%s' % (province['name'],city['name'],district['name'],street['name'])),auth_user=auth_user,type=0)
             curuser.save()
         except:
             if auth_user:
