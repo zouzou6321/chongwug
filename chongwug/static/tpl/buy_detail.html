@@ -81,7 +81,7 @@
                         <div class="info-td-right">
                             <button class="btn btn-primary btn-order js-btn-order" data-id="{{ nestpet.id }}" type="button">预约看狗</button>
                             <a href="tencent://message?uin=399632600&amp;site=qq&amp;menu=yes" target="_blank" class="btn btn-info btn-consult">在线咨询</a>
-                            <a href="" class="cwg-clause"><i class="icon icon-help-circled icon-sm"></i>购犬须知</a>
+{#                            <a href="" class="cwg-clause"><i class="icon icon-help-circled icon-sm"></i>购犬须知</a>#}
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <li class="active"><a href="#pet-info">狗狗资料</a></li>
                 <li><a href="#pet-farm">犬舍简介</a></li>
                 <li><a href="#pet-showcase">其他犬种</a></li>
-                <li><a href="#pet-guarantee">保障服务</a></li>
+{#                <li><a href="#pet-guarantee">保障服务</a></li>#}
            </ul>
        </div>
     </div>
@@ -205,25 +205,25 @@
                         </div>
                     </div>
                 </div>
-                <div id="pet-guarantee">
-                    <h2 class="desc-tit">
-                        <span class="placard">保</span>保障服务
-                    </h2>
-                    <div class="desc-main">
-                        <div class="adg-health">
-                            <img src="{{ 'imgs/nav/guide1.png'|assets }}" class="img-full" alt="健康有保障"/>
-                        </div>
-                        <div class="adg-price">
-                            <img src="{{ 'imgs/nav/guide2.png'|assets }}" class="img-full" alt="价格很公道"/>
-                        </div>
-                        <div class="adg-purebred">
-                            <img src="{{ 'imgs/nav/guide3.png'|assets }}" class="img-full" alt="品相很优质"/>
-                        </div>
-                        <div class="adg-process">
-                            <img src="{{ 'imgs/nav/guide4.png'|assets }}" class="img-full" alt="流程很标准"/>
-                        </div>
-                    </div>
-                </div>
+{#                <div id="pet-guarantee">#}
+{#                    <h2 class="desc-tit">#}
+{#                        <span class="placard">保</span>保障服务#}
+{#                    </h2>#}
+{#                    <div class="desc-main">#}
+{#                        <div class="adg-health">#}
+{#                            <img src="{{ 'imgs/nav/guide1.png'|assets }}" class="img-full" alt="健康有保障"/>#}
+{#                        </div>#}
+{#                        <div class="adg-price">#}
+{#                            <img src="{{ 'imgs/nav/guide2.png'|assets }}" class="img-full" alt="价格很公道"/>#}
+{#                        </div>#}
+{#                        <div class="adg-purebred">#}
+{#                            <img src="{{ 'imgs/nav/guide3.png'|assets }}" class="img-full" alt="品相很优质"/>#}
+{#                        </div>#}
+{#                        <div class="adg-process">#}
+{#                            <img src="{{ 'imgs/nav/guide4.png'|assets }}" class="img-full" alt="流程很标准"/>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
             </div>
             <div class="col-3 most-popular">
             <h5><strong>热门犬种</strong></h5>
@@ -245,22 +245,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="cwg-info-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">预约成功</h4>
-      </div>
-      <div class="modal-body">我们已经收到你的预约！</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-{% include 'tpl/gui/order-modal.html' %}
+{#{% include 'tpl/gui/order-modal.html' %}#}
 
 <script type="text/html" id="location-select-tpl">
 <dl class="clearfix">
@@ -275,5 +260,72 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ 'js/detail.js'|assets }}"></script>
+{#<script src="{{ 'js/detail.js'|assets }}"></script>#}
+<script>
+//image gallery
+;(function($){
+    var $thumb = $('.cwg-thumb'), //big img wrapper
+        $imgSmall = $thumb.find('.img-small'), //small img from thumbnail for progressive display
+        $thumbnail = $('.cwg-thumbnail'),
+        $li = $thumbnail.find('li'),
+        items = [];
+
+    //iterator thumbnail for magnificPopup lightbox
+    $.each($li, function(i, e){
+        items.push({
+            src: $(e).data('src')
+        });
+    });
+
+    //magnificPopup plugin
+    $thumb.on('click', function(){
+        $.magnificPopup.open({
+            items: items,
+            type: 'image',
+            gallery: {
+                enabled: true
+            }
+        }, $li.filter('.active').index());
+    });
+
+    //thumbnail
+    $('.thumbnail-wrap').simpleCarousel({
+        itemWidth: 66,
+        prev: '.prev-thumb',
+        next: '.next-thumb',
+        callback: function($curr){
+            //progressive img display
+            //need to remove the big img first, because change the img's url will not display the new img util the new img is fully download
+            $thumb.find('.img-original').remove();
+            $imgSmall.attr('src', $curr.find('img').attr('src'));
+            $('<img/>').addClass('img-full img-original mfp-zoom').attr('src', $curr.data('src')).insertAfter($imgSmall);
+        }
+    });
+}(jQuery));
+
+//affix and scrollspy
+;(function($){
+    var $affixScrollspy = $('#js-affix-scrollspy');
+
+    $affixScrollspy.affix({
+        offset: {
+            top: 600
+        }
+    });
+
+    $('body').scrollspy({ target: '#js-affix-scrollspy' });
+
+    var animateIn = 'slideInDown',
+        animateOut = 'slideInUp';
+
+    $affixScrollspy.on('affix.bs.affix', function(){
+        $affixScrollspy.addClass(animateIn + ' animated').removeClass(animateOut);
+    });
+
+    $affixScrollspy.on('affix-top.bs.affix', function(){
+        $affixScrollspy.addClass(animateOut).removeClass(animateIn);
+    });
+}(jQuery));
+
+</script>
 {% endblock %}
