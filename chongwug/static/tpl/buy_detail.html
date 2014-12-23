@@ -332,7 +332,7 @@
         $btnSubmit.button('loading');
 
         $.ajax({
-            url: '/buy/detail/attention/',
+            url: '/buy/detail/gettel/',
             method: 'post',
             data: {tel: val, id: $telModal.data('id'), csrfmiddlewaretoken: $.cookie('csrftoken') || csrf},
             dataType: 'json',
