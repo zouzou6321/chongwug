@@ -63,6 +63,10 @@ def buy_detail_view(request,petid='-1'):
         else:
             return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
 
+def buy_gettel_view(request):
+    return HttpResponse(adapters.buy_gettel(request))
+        
+
 def buy_attention_sendsms_view(request):
     adapters.UVPVIPtongji(request)
     return HttpResponse(adapters.attention_sendsms(request))

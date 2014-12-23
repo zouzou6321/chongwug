@@ -205,6 +205,10 @@ def petfarm_regist_sendcheck(request):
             delta = now - old
             if delta.seconds <= 60:
                 return __errorcode__(1)
+            if delta.days >= 1:
+                del request.session['verifytime']
+                del request.session['verifycode']
+                del request.session['verifytimes']
         if 'verifytimes' not in request.session:
             request.session['verifytimes'] = 1
         else:

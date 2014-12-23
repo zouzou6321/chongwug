@@ -296,6 +296,30 @@ def buy_detail_adapter(re,petid):
     else:
         return False
 
+def buy_gettel(request):
+    if 'tel' in request.POST:
+        if 'getteltime' in request.session:
+            old = datetime.datetime.strptime(request.session['getteltime'],'%Y-%m-%d %H:%M:%S')
+            now = datetime.datetime.now()
+            delta = now - old
+            if delta.seconds <= 60:
+                return __errorcode__(1)
+            if delta.days >= 1:
+                del request.session['getteltime']
+                del request.session['getteltimes']
+        if 'getteltimes' not in request.session:
+            request.session['getteltimes'] = 1
+        else:
+            request.session['getteltimes'] = request.session['verifytimes'] + 1
+        if request.session['getteltimes'] > 3:
+            return __errorcode__(23)
+        request.session['getteltime'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        obj = nestofpet.objects.get(id=request.POST['id'],dele=False)
+        content = u"您好，您预约的犬舍是：%s,预约犬种：%s。联系电话为：%s,祝您就此遇见心仪的爱犬！" % (obj.farm.name, obj.type, obj.farm.user_set[0].tel)
+        sendSMS(request.POST['tel'],content)
+        return __errorcode__(0)
+    __errorcode__(1)
+    
 def attention_sendsms(req):
     if not req.user.is_authenticated():
             return __errorcode__(1)
