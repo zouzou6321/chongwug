@@ -16,7 +16,7 @@
     "custom-plugins": true,
     "jquery.lazyload": true,
     "template": true,
-    "jquery.validate": true,
+    "jquery.validate": false,
     "jquery.cookie": true,
     "waypoints": false,
     "waypoints-infinite": false,
