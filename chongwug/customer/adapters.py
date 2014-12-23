@@ -315,16 +315,18 @@ def buy_gettel(request):
             return __errorcode__(23)
         request.session['getteltime'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         obj = nestofpet.objects.get(id=request.POST['id'],dele=False)
-        content = u"您好，您预约的犬舍是：%s,预约犬种：%s。联系电话为：%s,祝您就此遇见心仪的爱犬！" % (obj.farm.name, obj.type, obj.farm.user_set[0].tel)
+        content = u"您好，您预约的犬舍是：%s,预约犬种：%s。联系电话为：%s,祝您就此遇见心仪的爱犬！" % (obj.farm.name, obj.type, obj.farm.user_set.filter(dele=False)[0].tel)
         sendSMS(request.POST['tel'],content)
+        curuser = None
         try:
             auth_user = User.objects.create_user(username=request.POST['tel'],email='',password='123456')
             curuser =  user(nickname=u'未设置',tel=request.POST['tel'],location='',auth_user=auth_user,type=0,pwd='123456')
             curuser.save()
         except:
             pass
-        curuser = user.objects.get(tel=request.POST['tel'],dele=False)
-        attention = nestofpet_attention(nestofpet_id=obj,user=curuser,appoint_time=datetime.datetime.now,trans='drive',attention_type=1)
+        if not curuser:
+            curuser = user.objects.filter(tel=request.POST['tel'],dele=False)[0]
+        attention = nestofpet_attention(nestofpet_id=obj,user=curuser,appoint_time=datetime.datetime.now(),trans='drive',attention_type=1)
         attention.save()
         
         return __errorcode__(0)

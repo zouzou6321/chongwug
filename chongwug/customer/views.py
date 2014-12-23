@@ -64,6 +64,7 @@ def buy_detail_view(request,petid='-1'):
             return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
 
 def buy_gettel_view(request):
+    adapters.UVPVIPtongji(request)
     return HttpResponse(adapters.buy_gettel(request))
         
 
