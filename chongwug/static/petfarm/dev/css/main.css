@@ -96,6 +96,10 @@
       padding-right: 40px;
       padding-left: 40px; } }
 
+.navbar-inverse {
+  background-color: #ffd401;
+  color: #fff; }
+
 .modal-auto-width {
   text-align: center; }
   .modal-auto-width .modal-title {
