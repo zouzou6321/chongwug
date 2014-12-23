@@ -3729,11 +3729,7 @@ label {
       background-color: #ffd401; }
 
 .btn-order, .btn-consult {
-  margin-right: 0.5em; }
-
-.btn-order {
-  padding-left: 3em;
-  padding-right: 3em; }
+  margin-left: 1em; }
 
 .cwg-clause {
   font-size: 12px;
