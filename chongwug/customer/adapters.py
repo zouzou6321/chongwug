@@ -296,6 +296,7 @@ def buy_detail_adapter(re,petid):
         return False
 
 def buy_gettel(request):
+    print request.POST
     if 'tel' in request.POST:
         if 'getteltime' in request.session:
             old = datetime.datetime.strptime(request.session['getteltime'],'%Y-%m-%d %H:%M:%S')
@@ -309,7 +310,7 @@ def buy_gettel(request):
         if 'getteltimes' not in request.session:
             request.session['getteltimes'] = 1
         else:
-            request.session['getteltimes'] = request.session['verifytimes'] + 1
+            request.session['getteltimes'] = request.session['getteltimes'] + 1
         if request.session['getteltimes'] > 3:
             return __errorcode__(23)
         request.session['getteltime'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -329,7 +330,7 @@ def buy_gettel(request):
         attention.save()
         
         return __errorcode__(0)
-    __errorcode__(1)
+    return __errorcode__(1)
     
 def attention_sendsms(req):
     if not req.user.is_authenticated():
