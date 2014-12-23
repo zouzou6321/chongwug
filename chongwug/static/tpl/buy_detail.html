@@ -66,7 +66,7 @@
                              来<span class="middle-space"></span>源：
                         </div>
                         <div class="info-td-right">
-                            xxxx
+                            {{ from }}
                         </div>
                     </div>
                     <div class="info-row clearfix">
@@ -74,7 +74,7 @@
                             价<span class="middle-space"></span>格：
                         </div>
                         <div class="info-td-right">
-                           <span class="price price-dark price-sm"><span class="price-symbol">&yen;</span>{{ price.min_price }}<span class="price-desc">元/只</span></span>
+                           <span class="price price-dark price-sm"><span class="price-symbol">&yen;</span>{{ price.min_price }}-{{ price.max_price }}<span class="price-desc">元/只</span></span>
                         </div>
                     </div>
                     <div class="info-row clearfix">
@@ -82,7 +82,7 @@
                             地<span class="middle-space"></span>址：
                         </div>
                         <div class="info-td-right">
-                           xxxx
+                           {{ petfarmlocation }}
                         </div>
                     </div>
                     <div class="info-row clearfix">

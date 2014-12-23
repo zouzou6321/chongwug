@@ -6,12 +6,11 @@ from manager.models import ad,dog123,pclady,supplies
 from petfarm.models import pet_farm,pet_farm_img,nestofpet,nestofpet_img,pet
 from customer.models import user,nestofpet_attention,smssend_countor,buyselectinfo,appointorders,pviptongji,adclicktongji,uvpviptongji
 from django.db.models import Q
-from chongwug.config import __petfarmtypes,__knowledgetypes,__onepageofdata__,__petfeaturescore,__transpay,__servpay,__appointtime,__addresses,__petpictypes,__pettypes,__prices,__ages,__epidemics,__directs,__regular_expression_username,__regular_expression_chinatelnum
+from chongwug import config
 import datetime,string,re,json
 from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.contrib.auth.models import User
 from django.contrib import auth
-from _mysql import NULL
 
 def redict_wap(request):
     if 'HTTP_USER_AGENT' in request.META:
@@ -96,7 +95,7 @@ def buy_home_adapter(request):
             city_farm.save()
         except:
             None
-    types = __petfarmtypes
+    types = config.__petfarmtypes
     for typeone in types:
         tmp_farm = city_farms.filter(type=typeone['type'],dele=False).order_by('-manage_score')
         if tmp_farm.count() > 0:
@@ -121,12 +120,12 @@ def buy_home_adapter(request):
 '''
 def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,epidemickey='all',searchkey='all',curpage=1,farmtype=1):
     #筛选条件
-    types = __pettypes
-    princes = __prices
-    directs = __directs
-    epidemics = __epidemics
-    ages = __ages
-    if farmtype < 1 or farmtype > len(__petfarmtypes):
+    types = config.__pettypes
+    princes = config.__prices
+    directs = config.__directs
+    epidemics = config.__epidemics
+    ages = config.__ages
+    if farmtype < 1 or farmtype > len(config.__petfarmtypes):
         farmtype = 1
     if princekey < 0 or princekey > len(princes):
         princekey = 0
@@ -178,7 +177,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
         if epidemickey != 'all' and pet_one.pet_set.filter(epidemic_period=epidemickey).count() <= 0:
             continue;
         try:
-            petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor=__petpictypes[0][1])[0]
+            petimg = nestofpet_img.objects.filter(nestofpet_id = pet_one,dele=False,img_usefor=config.__petpictypes[0][1])[0]
         except:
             petimg = None
         othor_pets = pet_one.pet_set.filter(dele=False)
@@ -187,7 +186,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
         if princekey > 0:
             if (max_price < princes[princekey - 1]['b'] or min_price > princes[princekey - 1]['c']):
                 continue
-        for epidemic in __epidemics:
+        for epidemic in config.__epidemics:
             if othor_pets.filter(epidemic_period = epidemic).count() > 0:
                 epidemic_period = epidemic
                 break
@@ -195,14 +194,14 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     selectinfo = buyselectinfo(directkey=directkey,typekey=typekey,princekey=princekey,agekey=agekey,epidemickey=epidemickey,searchkey=searchkey,curpage=curpage)
     selectinfo.save()
     #分页实现
-    startpos = (curpage - 1) * __onepageofdata__  
-    endpos = startpos + __onepageofdata__  
+    startpos = (curpage - 1) * config.__onepageofdata__  
+    endpos = startpos + config.__onepageofdata__  
     petscount = len(pets_imgs)
     pets_imgs = pets_imgs[startpos:endpos]  
     pages = []
     allPostCounts = petscount
-    allpage = allPostCounts / __onepageofdata__  
-    remainPost = allPostCounts % __onepageofdata__  
+    allpage = allPostCounts / config.__onepageofdata__  
+    remainPost = allPostCounts % config.__onepageofdata__  
     if remainPost > 0:  
         allpage += 1
     i = 0
@@ -210,7 +209,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
         i += 1
         pages.append(i)
     return {'pets_imgs':pets_imgs,'petscount':petscount,'urls': '/buy/','types':types,'typekey':typekey,'princes':princes,'princekey':str(princekey),
-            'petfarmtypes':__petfarmtypes,'farmtype':farmtype,'title':title,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,'epidemickey':epidemickey,
+            'petfarmtypes':config.__petfarmtypes,'farmtype':farmtype,'title':title,'directs':directs,'directkey':directkey,'searchkey':searchkey,'epidemics':epidemics,'epidemickey':epidemickey,
             'ages':ages,'agekey':str(agekey),'curpage':curpage,'pageup':curpage-1,'pagedown':curpage+1,'pages':pages,'allpage':allpage,'page':'buy'}
 
 '''
@@ -220,7 +219,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
 '''
 def buy_detail_adapter(re,petid):
     if 'range' in re.GET:
-        addresses = __addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
+        addresses = config.__addresses[string.atoi(re.REQUEST.get('range'))]['sublist'][string.atoi(re.REQUEST.get('province'))]
         if 'city' in re.GET:
             addresses = addresses['sublist'][string.atoi(re.REQUEST.get('city'))]
         if 'district' in re.GET:
@@ -253,7 +252,7 @@ def buy_detail_adapter(re,petid):
         farm_pets = nest_pet.farm.nestofpet_set.filter(dele=False,sale_out=False)
         for farm_pet in farm_pets:
             try:
-                img = farm_pet.nestofpet_img_set.filter(dele=False,img_usefor=__petpictypes[0][1])[0]
+                img = farm_pet.nestofpet_img_set.filter(dele=False,img_usefor=config.__petpictypes[0][1])[0]
             except:
                 img = None
             othor_pets = farm_pet.pet_set.filter(dele=False)
@@ -272,7 +271,7 @@ def buy_detail_adapter(re,petid):
         recommendpets = recommendpets.exclude(id=nest_pet.id)
         for recommendpet in recommendpets:
             try:
-                img = nestofpet_img.objects.filter(nestofpet_id = recommendpet,dele=False,img_usefor=__petpictypes[0][1])[0]
+                img = nestofpet_img.objects.filter(nestofpet_id = recommendpet,dele=False,img_usefor=config.__petpictypes[0][1])[0]
             except:
                 img = None
             othor_pets = recommendpet.pet_set.filter(dele=False)
@@ -291,7 +290,7 @@ def buy_detail_adapter(re,petid):
             delta = datetime.timedelta(days=days)
             n_days = now + delta
             appointdays.append({'day':n_days.day,'year':n_days.year,'mouth':n_days.month,'week':weeks[n_days.weekday()],'selectable':{'time1':True,'time2':True}})
-        return {'petfarmlocation':nest_pet.farm.detail_address,'cuser':cuser,'appointtime':__appointtime,'appointdays':appointdays,'addresses':__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
+        return {'from':config.__petfarmtypes[nest_pet.farm.type - 1]['title'],'petfarmlocation':nest_pet.farm.detail_address,'cuser':cuser,'appointtime':config.__appointtime,'appointdays':appointdays,'addresses':config.__addresses,'nestpet':nest_pet,'price':price,'nowimgs':petimgs[1:],'farmimgs':farm_imgs,'pets_img':pets_img,'curtype':curtype,
                 'pet_types':farm_pet_types,'petimg_a':petimg_first,'recommendpets_img':recommendpets_img,'allpets':allpets,'page':'buy','urls':'/buy/detail/'}
     else:
         return False
@@ -425,7 +424,7 @@ def buy_attention_sure(req):
     return __errorcode__(0)
 
 def get_waitpoint(_district):
-    for addresse in __addresses:
+    for addresse in config.__addresses:
         for province in addresse['sublist']:
             for city in province['sublist']:
                 for district in city['sublist']:
@@ -443,15 +442,15 @@ def buy_attention_adapter(req):
         cupet = nestofpet.objects.get(id=petid,dele=False,sale_out=False)
     except:
         return __errorcode__(8)
-    p = re.compile(__regular_expression_username)
+    p = re.compile(config.__regular_expression_username)
     if not p.match(name):
         return __errorcode__(10)
-    p = re.compile(__regular_expression_chinatelnum)
+    p = re.compile(config.__regular_expression_chinatelnum)
     if not p.match(tel):
         return __errorcode__(9)
     try:
         location = json.loads(req.POST['location'])
-        province = __addresses[location['range']]['sublist'][location['province']]
+        province = config.__addresses[location['range']]['sublist'][location['province']]
         city = province['sublist'][location['city']]
         district = city['sublist'][location['district']]
         street = district['sublist'][location['street']]
@@ -464,9 +463,9 @@ def buy_attention_adapter(req):
         return __errorcode__(12)
     
     if transport == 'lift':
-        totalpay = __transpay + __servpay
+        totalpay = config.__transpay + config.__servpay
     else:
-        totalpay = __transpay + __servpay
+        totalpay = config.__transpay + config.__servpay
     attentions = nestofpet_attention.objects.filter(dele=False,nestofpet_id=cupet)
     
     if req.user.is_authenticated() and auth.get_user(req).username != tel:
@@ -518,7 +517,7 @@ def get_knowledge_bringup_category(page,category):
         page = 1
     else:
         page = string.atoi(page)
-    for knowledgetype in __knowledgetypes:
+    for knowledgetype in config.__knowledgetypes:
         if category == knowledgetype[2]:
             categoryinfo = knowledgetype
             break
@@ -578,9 +577,9 @@ def get_knowledge_buy(request):
                     key = request.REQUEST.get(enum[0])
                     args = Q( name__icontains = key )|Q( nickname__icontains = key )|Q( ename__icontains = key )
                 else:
-                    kwargs[enum[1] + '__lte'] = __petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 1]
+                    kwargs[enum[1] + '__lte'] = config.__petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 1]
                     if string.atoi(request.REQUEST.get(enum[0])) >= 2:
-                        kwargs[enum[1] + '__gt'] = __petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 2]
+                        kwargs[enum[1] + '__gt'] = config.__petfeaturescore[string.atoi(request.REQUEST.get(enum[0])) - 2]
         if args == ():
             dogsinfo = dog123.objects.filter(**kwargs)
         else:
