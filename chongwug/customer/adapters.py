@@ -170,7 +170,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     
     #查询数据库获取数据
     pets_imgs = []
-    pets = nestofpet.objects.filter(**kwargs)
+    pets = nestofpet.objects.filter(**kwargs).order_by('-id')
     if searchkey != 'all':
         pets = pets.filter(Q(farm__name__contains=searchkey)|Q(farm__detail_address__contains=searchkey))
     for pet_one in pets:
@@ -268,7 +268,7 @@ def buy_detail_adapter(re,petid):
         '''
         recommendpets_img = []
         recommendpets = nestofpet.objects.filter(Q(type = nest_pet.type)|Q(color=nest_pet.color)|Q(farm__district=nest_pet.farm.district),dele=False,sale_out=False)
-        recommendpets = recommendpets.exclude(id=nest_pet.id)
+        recommendpets = recommendpets.exclude(id=nest_pet.id)[0:7]
         for recommendpet in recommendpets:
             try:
                 img = nestofpet_img.objects.filter(nestofpet_id = recommendpet,dele=False,img_usefor=config.__petpictypes[0][1])[0]
