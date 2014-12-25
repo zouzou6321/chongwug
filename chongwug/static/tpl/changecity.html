@@ -1,0 +1,24 @@
+{% extends 'tpl/base/base.html' %}
+{% load assets %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="cwg-container workchance">
+    <div class="container breadcrumb-container">
+        <ol class="breadcrumb">
+          <li><a href="/">首页</a></li>
+          <li class="active">城市切换</li>
+        </ol>
+    </div>
+    <div class="container content-container">
+        {% for range in addresses %}
+        {% for province in range.sublist %}
+        <p>
+        {{ province.name }}:{% for city in province.sublist %}&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="./?ipprovince={{ province.index }}&ipcity={{ city.index }}">{{ city.name }}</a>{% endfor %}
+        </p>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

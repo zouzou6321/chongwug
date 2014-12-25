@@ -11,7 +11,7 @@ import datetime,string,re,json
 from chongwug.commom import __errorcode__,sendSMS,getalipayurl
 from django.contrib.auth.models import User
 from django.contrib import auth
-
+from chongwug import settings
 def redict_wap(request):
     if 'HTTP_USER_AGENT' in request.META:
         clientkeywords = [ 
@@ -58,6 +58,40 @@ def ADclicktongji(request):
         return __errorcode__(0)
     except:
         return __errorcode__(2)
+
+from chongwug.ipinfo import QQWry
+def getipcity(request):
+    if 'city' in request.session:
+        return request.session['city']
+    if 'HTTP_X_FORWARDED_FOR' in request.META:
+        ip = request.META['HTTP_X_FORWARDED_FOR']
+    else:
+        ip = request.META['REMOTE_ADDR']
+    qqwry = QQWry(settings.ROOT + '/chongwug/qqwry.dat')
+    c, a = qqwry.query(ip)
+    request.session['city'] = '成都'
+    if c != 'IANA':
+        for range in config.__addresses:
+            for province in range['sublist']:
+                if c.find(province['name']):
+                    for city in province['sublist']:
+                        if c.find(city['name']):
+                            request.session['city'] = city['name']
+                            return request.session['city']
+                            
+    return request.session['city']
+
+def setipcity(request):
+    for range in config.__addresses:
+        for province in range['sublist']:
+            if province['index'] == string.atoi(request.REQUEST.get('ipprovince')):
+                for city in province['sublist']:
+                    if city['index'] == string.atoi(request.REQUEST.get('ipcity')):
+                        request.session['city'] = city['name']
+                        return True
+    if 'city' not in request.session:
+        request.session['city'] = '成都'
+    return False
 
 '''
 函数功能：首页数据适配器
@@ -125,6 +159,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     directs = config.__directs
     epidemics = config.__epidemics
     ages = config.__ages
+    city = getipcity(request)
     if farmtype < 1 or farmtype > len(config.__petfarmtypes):
         farmtype = 1
     if princekey < 0 or princekey > len(princes):
@@ -160,6 +195,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     kwargs['dele'] = False
     kwargs['sale_out'] = False
     kwargs['farm__type'] = farmtype
+    kwargs['farm__city'] = city
     if directkey != 'all':
         kwargs['farm__direct'] = directkey
     if typekey != 'all':
@@ -267,7 +303,7 @@ def buy_detail_adapter(re,petid):
                             以下部分是获取本页面推荐的内容
         '''
         recommendpets_img = []
-        recommendpets = nestofpet.objects.filter(Q(type = nest_pet.type)|Q(color=nest_pet.color)|Q(farm__district=nest_pet.farm.district),dele=False,sale_out=False)
+        recommendpets = nestofpet.objects.filter(Q(farm__city=getipcity(re))&(Q(type = nest_pet.type)|Q(color=nest_pet.color)|Q(farm__district=nest_pet.farm.district)),dele=False,sale_out=False)
         recommendpets = recommendpets.exclude(id=nest_pet.id)[0:7]
         for recommendpet in recommendpets:
             try:

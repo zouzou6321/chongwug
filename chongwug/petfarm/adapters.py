@@ -485,14 +485,6 @@ def manage_pet_farm_mod(request):
         if error:
             return __errorcode__(11)
         
-        error = True
-        for _direct in config.__directs:
-            if _direct == request.POST['direct']:
-                error = False
-                break
-        if error:
-            return __errorcode__(18)
-        
         p = re.compile(config.__regular_expression_chinatelnum)
         if not p.match(request.POST['tel']):
             return __errorcode__(9)
@@ -513,7 +505,6 @@ def manage_pet_farm_mod(request):
         curuser.petfarm.province = province
         curuser.petfarm.city = city
         curuser.petfarm.district = request.POST['district']
-        curuser.petfarm.direct = request.POST['direct']
         curuser.petfarm.save()
         curuser.save()
         if 'img-main' not in request.POST:
