@@ -13,6 +13,7 @@ from chongwug import config
 #date:2014/8/16
 #discription:购宠首页展示
 def buy_home_view(request):
+    
     adapters.UVPVIPtongji(request)
     data = adapters.buy_home_adapter(request)
     if 'visitor' not in request.session:
@@ -23,6 +24,7 @@ def buy_home_view(request):
         data['visitor'] = True
     else:
         data['visitor'] = False
+    data['city'] = adapters.getipcity(request)
     data['title'] = u'首页 | 宠物购交易平台-呵护爱犬和爱犬的您-国内首个活体宠物O2O交易平台'
     data['keywords'] = u'成都买狗网，成都淘狗网，成都宠物交易网，宠物购'
     data['description'] = u'狗狗宠物养殖场销售，创新平台，提供买狗建议，注册芯片，通过与养殖场和客户签订买狗协议，保障爱狗人士权益。提供全程接送养殖场看犬买犬服务。要买哈士奇，泰迪，金毛犬，阿拉斯加，比熊犬，罗威纳，贵宾犬，拉布拉多，史宾格犬，边境牧羊犬，松狮犬，博美犬,买狗，淘狗。宠物GPS定位器。请到宠物购平台。'
