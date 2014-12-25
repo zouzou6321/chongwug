@@ -195,6 +195,18 @@ def aboutus_view(request):
     else:
         return render_to_response('tpl/aboutus.html',data)
 
+def changecity_view(request):
+    adapters.UVPVIPtongji(request)
+    if 'ipcity' and 'ipprovince' in request.GET:
+        adapters.setipcity(request)
+        return HttpResponseRedirect('/')
+    data = {}
+    data['title'] = u'城市切换|宠物购怎么样 宠物购交易平台-国内首个活体宠物O2O交易平台'
+    data['keywords'] = u''
+    data['description'] = u'城市切换'
+    data['addresses'] = config.__addresses
+    return render_to_response('tpl/changecity.html',data)
+
 def adclicktongji_view(request):
     return HttpResponse(adapters.ADclicktongji(request))
 

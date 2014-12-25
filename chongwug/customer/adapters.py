@@ -82,7 +82,16 @@ def getipcity(request):
     return request.session['city']
 
 def setipcity(request):
-    request.session['city'] = request.REQUEST.get('ipcity')
+    for range in config.__addresses:
+        for province in range['sublist']:
+            if province['index'] == string.atoi(request.REQUEST.get('ipprovince')):
+                for city in province['sublist']:
+                    if city['index'] == string.atoi(request.REQUEST.get('ipcity')):
+                        request.session['city'] = city['name']
+                        return True
+    if 'city' not in request.session:
+        request.session['city'] = '成都'
+    return False
 
 '''
 函数功能：首页数据适配器
