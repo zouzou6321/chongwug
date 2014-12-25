@@ -136,7 +136,8 @@
 	</div>
 	<div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-          <button type="submit" id="js-btn-submit" data-loading-text="提交中..." class="btn btn-primary form-control">提交</button>
+          <button type="submit" id="js-btn-submit" data-loading-text="提交中..." class="btn btn-success form-control">提交</button>
+          <a href="/petfarm/" class="form-control btn btn-primary" style="margin-top: 10px;">返回登录</a>
         </div>
     </div>
 	</form>
@@ -223,8 +224,11 @@ var validator = $('form').validate(commonvalidateConfig);
     });
 
     $city.on('change', function(){
-        var data = getSelectedId($province);
-        param.city = data.id;
+        var data = getSelectedId($province),
+            city = getSelectedId($city);
+        param.city = city.id;
+        param.province = data.id;
+        param.range = data.range;
 
         renderData();
     });

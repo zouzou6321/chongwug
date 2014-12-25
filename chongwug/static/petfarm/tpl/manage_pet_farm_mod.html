@@ -195,8 +195,11 @@ $('.uploadAndCrop').uploadAndCrop({
     });
 
     $city.on('change', function(){
-        var data = getSelectedId($province);
-        param.city = data.id;
+        var data = getSelectedId($province),
+            city = getSelectedId($city);
+        param.city = city.id;
+        param.province = data.id;
+        param.range = data.range;
 
         renderData();
     });
@@ -211,7 +214,6 @@ $('.uploadAndCrop').uploadAndCrop({
             data: param,
             dataType: 'json',
             success: function(data){
-                console.log(data)
                 for(var i in data){
                     var options = '';
 
