@@ -426,14 +426,33 @@ def addressHandle(re):
     provinces = []
     citys = []
     districts = []
+    _rangeindex = 0
+    _provinceindex = 0
+    rangeindex = 0
+    try:
+        manager = user.objects.get(id=re.session['petfarmid'],dele = False)
+    except:
+        manager = None
     for _addresse in config.__addresses:
         rangeid = _addresse['index']
         _provinces = _addresse['sublist']
+        rangeindex += 1
+        provinceindex = 0
         for _province in _provinces:
+            provinceindex += 1
+            if manager != None and _province['name'] == manager.petfarm.province:
+                _rangeindex = rangeindex - 1
+                _provinceindex = provinceindex - 1
             provinces.append({'rangeid':rangeid,'id':_province['index'], 'name':_province['name']})
-    for _city in config.__addresses[0]['sublist'][0]['sublist']:
+    
+    _cityindex = 0
+    cityindex = 0
+    for _city in config.__addresses[_rangeindex]['sublist'][_provinceindex]['sublist']:
+        cityindex += 1
+        if manager != None and _city['name'] == manager.petfarm.city:
+            _cityindex = cityindex - 1
         citys.append({'id': _city['index'], 'name': _city['name']})
-    for _district in config.__addresses[0]['sublist'][0]['sublist'][0]['sublist']:
+    for _district in config.__addresses[_rangeindex]['sublist'][_provinceindex]['sublist'][_cityindex]['sublist']:
         districts.append({'id': _district['index'], 'name': _district['name']})
     return {'provinces':provinces, 'citys':citys, 'districts':districts}
 

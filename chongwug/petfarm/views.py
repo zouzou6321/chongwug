@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from chongwug import config
-import adapters
+import adapters,json
 from chongwug.commom import __errorcode__
 PETFARM_ROOT='/petfarm/'
 
@@ -54,7 +54,7 @@ def manage_home_view(request):
 
 def address_handle_view(request):
     data = adapters.addressHandle(request);
-    return HttpResponse(data.__str__())
+    return HttpResponse(json.dumps(data))
 
 def manage_pet_farm_mod_view(request):
     if adapters.manage_authentication(request) == False:

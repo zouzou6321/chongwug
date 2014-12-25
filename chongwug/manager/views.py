@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-import adapters,config,string
+import adapters,config,string,json
 from chongwug.commom import __errorcode__
 from chongwug.config import __adtypes,__knowledgetypes
 MANAGE_ROOT='/manage/'
@@ -30,7 +30,7 @@ def manage_home_view(request):
 
 def address_handle_view(request):
     data = adapters.addressHandle(request)
-    return HttpResponse(data.__str__())
+    return HttpResponse(json.dumps(data))
     
 def manage_pet_farm_add_view(request):
     if adapters.manage_authentication(request) == False:
