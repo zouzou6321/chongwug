@@ -136,24 +136,24 @@ def attention_data(request):
     length = request.REQUEST.get('length')
     datas = []
     if filter == 'appoint':
-        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=1).order_by('id')
+        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=1).order_by('-id')
     elif filter == 'processed':
-        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=2).order_by('id')
+        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=2).order_by('-id')
     elif filter == 'untreated':
-        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=3).order_by('id')
+        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=3).order_by('-id')
     elif filter == 'fail':
-        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=4).order_by('id')
+        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=4).order_by('-id')
     elif filter == 'success':
-        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=5).order_by('id')
+        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=5).order_by('-id')
     elif filter == 'unpay':
         kwargs = {}
         kwargs['dele'] = False
         kwargs['attention_type'] = 0
         now = datetime.datetime.now()
         kwargs['time__lte'] = now - datetime.timedelta(days = 1)
-        attentions = nestofpet_attention.objects.filter(**kwargs).order_by('id')
+        attentions = nestofpet_attention.objects.filter(**kwargs).order_by('-id')
     elif filter == 'unpayclose':
-        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=6).order_by('id')
+        attentions = nestofpet_attention.objects.filter(dele=False,attention_type=6).order_by('-id')
     count = attentions.count()
     attentions = attentions[start:start + length]
     for attention in attentions:
