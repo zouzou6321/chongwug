@@ -4,6 +4,17 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+<style>
+    .dog-select-title{
+        font-weight: bold;
+    }
+    .content-container{
+        padding-top: 20px;
+    }
+    .dog-select-row .nav-pills a{
+        color: #0074D9;
+    }
+</style>
 <div class="cwg-container workchance">
     <div class="container breadcrumb-container">
         <ol class="breadcrumb">
@@ -14,9 +25,18 @@
     <div class="container content-container">
         {% for range in addresses %}
         {% for province in range.sublist %}
-        <p>
-        {{ province.name }}:{% for city in province.sublist %}&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="./?ipprovince={{ province.index }}&ipcity={{ city.index }}">{{ city.name }}</a>{% endfor %}
-        </p>
+        <div class="row dog-select-row">
+            <div class="col-1 dog-select-title">{{ province.name }}：</div>
+            <div class="col-11">
+                <ul class="nav nav-pills">
+                    {% for city in province.sublist %}
+                        <li>
+                        <a href="./?ipprovince={{ province.index }}&ipcity={{ city.index }}">{{ city.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
         {% endfor %}
         {% endfor %}
     </div>
