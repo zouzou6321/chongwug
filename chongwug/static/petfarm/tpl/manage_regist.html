@@ -103,7 +103,7 @@
 	    <div class="col-sm-8">
 	        <select name="province" id="farm-province" class="form-control">
 	        	{% for province in provinces %}
-	            <option data-range="{{ province.rangeid }}" value="{{ province.name }}">{{ province.name }}</option>
+	            <option data-range="{{ province.rangeid }}" data-id="{{ province.id }}" value="{{ province.name }}">{{ province.name }}</option>
 	            {% endfor %}
 	        </select>
 	    </div>
@@ -113,7 +113,7 @@
 	    <div class="col-sm-8">
 	      	<select name="city" id="farm-city" class="form-control">
                 {% for city in citys %}
-                <option value="{{ city.name }}">{{ city.name }}</option>
+                <option value="{{ city.name }}" data-id="{{ city.id }}">{{ city.name }}</option>
                 {% endfor %}
             </select>
 	    </div>
@@ -123,7 +123,7 @@
 	    <div class="col-sm-8">
 	      	<select name="district" id="farm-district" class="form-control">
             	{% for district in districts %}
-                <option value="{{ district.name }}">{{ district.name }}</option>
+                <option value="{{ district.name }}" data-id="{{ district.id }}">{{ district.name }}</option>
                 {% endfor %}
             </select>
 	    </div>
