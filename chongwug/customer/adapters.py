@@ -73,9 +73,9 @@ def getipcity(request):
     if c != 'IANA':
         for range in config.__addresses:
             for province in range['sublist']:
-                if c.find(province['name'].encode('utf8')):
+                if c.find(province['name'].encode('utf8')) != -1:
                     for city in province['sublist']:
-                        if c.find(city['name'].encode('utf8')):
+                        if c.find(city['name'].encode('utf8')) != -1:
                             request.session['city'] = city['name']
                             return request.session['city']
                             
