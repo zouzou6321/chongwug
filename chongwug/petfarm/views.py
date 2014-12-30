@@ -18,6 +18,8 @@ def manage_regist_view(request):
         data = adapters.petfarm_regist(request)
         return HttpResponse(data)
     if 'tel' in request.GET:
+        if request.session['validate'].upper() != request.REQUEST.get('verify').upper():
+            return HttpResponse(__errorcode__(30))
         data = adapters.petfarm_regist_sendcheck(request)
         return HttpResponse(data)
     data = adapters.addressHandle(request)
@@ -29,6 +31,22 @@ def manage_regist_picadd_view(request):
     photo = request.FILES.get('Filedata',None)
     imgw,imgh = 500,500
     return HttpResponse(adapters.manage_picupload(photo,imgw,imgh))
+
+from chongwug.validatecode import create_validate_code
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
+def manage_validate_view(request):
+    mstream = StringIO.StringIO()
+    
+    validate_code = create_validate_code()
+    img = validate_code[0]
+    img.save(mstream, "GIF")
+    
+    request.session['validate'] = validate_code[1]
+    
+    return HttpResponse(mstream.getvalue(), "image/gif")
 
 def manage_pwdforgot_view(request):
     if 'email' in request.POST:
