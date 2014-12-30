@@ -38,6 +38,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://www.chongwug.com/static/'
     CKEDITOR_STATIC_URL = '//chongwug-cdn.b0.upaiyun.com/lib/'
+    FONT_TYPE = 'sans-serif.ttf'
 elif 'TEST_SERVER' in os.environ:
     DEBUG = False
     TEMPLATE_DEBUG = False
@@ -67,6 +68,7 @@ elif 'TEST_SERVER' in os.environ:
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://www.chongwug.com/static/'
     CKEDITOR_STATIC_URL = '//chongwug-cdn.b0.upaiyun.com/lib/'
+    FONT_TYPE = 'Arial.ttf'
 else:
     DEBUG = True
     TEMPLATE_DEBUG = True
@@ -97,6 +99,7 @@ else:
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://localhost:8000/static/'
     CKEDITOR_STATIC_URL = 'http://localhost:8000/static/lib/dist/'
+    FONT_TYPE = 'Arial.ttf'
 
 MANAGERS = ADMINS
 

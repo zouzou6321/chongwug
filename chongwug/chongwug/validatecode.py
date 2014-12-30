@@ -2,7 +2,7 @@
 
 import random
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
-
+import settings
 _letter_cases = "abcdefghjkmnpqrstuvwxy" # 小写字母，去除可能干扰的i，l，o，z
 _upper_cases = _letter_cases.upper() # 大写字母
 _numbers = ''.join(map(str, range(3, 10))) # 数字
@@ -15,7 +15,7 @@ def create_validate_code(size=(100, 34),
                          bg_color=(255, 255, 255),
                          fg_color=(0, 0, 255),
                          font_size=18,
-                         font_type="Arial.ttf",
+                         font_type=settings.FONT_TYPE,
                          length=4,
                          draw_lines=True,
                          n_line=(1, 2),
