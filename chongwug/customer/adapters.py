@@ -194,6 +194,7 @@ def buy_main_adapter(request,directkey='all',typekey='all',princekey=0,agekey=0,
     kwargs = {}
     kwargs['dele'] = False
     kwargs['sale_out'] = False
+    kwargs['verify__in'] = [0,1]
     kwargs['farm__type'] = farmtype
     kwargs['farm__city'] = city
     if directkey != 'all':
