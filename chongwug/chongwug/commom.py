@@ -14,7 +14,7 @@ from random import Random
 
 def random_str(randomlength=16):
     str = ''
-    chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
+    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
     length = len(chars) - 1
     random = Random()
     for i in range(randomlength):

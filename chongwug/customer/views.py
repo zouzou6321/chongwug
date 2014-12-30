@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 import adapters,traceback,string
 from chongwug.commom import __errorcode__,sendSMS,getalipayurl
+from manager.adapters import manage_authentication
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from chongwug.settings import WAP_ROOT
@@ -52,7 +53,7 @@ def buy_detail_view(request,petid='-1'):
     adapters.UVPVIPtongji(request)
     data = adapters.buy_detail_adapter(request,string.atoi(petid))
     if data == False:
-        return HttpResponse(__errorcode__(2))
+        return render_to_response('500.html')
 
     if 'locations' in data:
         return HttpResponse(__errorcode__(0,data))
@@ -63,6 +64,8 @@ def buy_detail_view(request,petid='-1'):
         if adapters.is_wap(request):
             return render_to_response('mobile/tpl/buy_detail.html',data,context_instance=RequestContext(request))
         else:
+            if manage_authentication(request) == True and request.session['score'] >= 50:
+                data['manager'] = True
             return render_to_response('tpl/buy_detail.html',data,context_instance=RequestContext(request))
 
 def buy_gettel_view(request):

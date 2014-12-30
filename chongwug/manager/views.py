@@ -187,3 +187,14 @@ def manage_verify_view(request):
     data = adapters.manage_home_data_get(request)
     data['users'] = adapters.manage_get_newusers()
     return render_to_response('manager/tpl/manage_verify.html',data)
+
+def manage_verifyinfo_view(request):
+    if adapters.manage_authentication(request) == False:
+        return HttpResponseRedirect(MANAGE_ROOT)
+    if request.session['score'] < 50:
+        return render_to_response('404.html')
+    if 'verify' in request.GET:
+        adapters.manage_verify_newpets(request)
+    data = adapters.manage_home_data_get(request)
+    data['pets'] = adapters.manage_get_newpets()
+    return render_to_response('manager/tpl/manage_verifyinfo.html',data)

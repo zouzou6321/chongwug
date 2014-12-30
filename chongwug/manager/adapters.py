@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from back_manager.models import manage
 from manager.models import ad,tmppic_monitor,supplies,pclady
 from customer.models import user
-from petfarm.models import pet_farm
+from petfarm.models import pet_farm,nestofpet
 from PIL import Image
 from chongwug import settings
 from upyun import UpYun
@@ -532,9 +532,17 @@ def manage_config(request,who):
     return None,None
 
 def manage_get_newusers():
-    return user.objects.filter(verify=0,dele=False)
+    return user.objects.filter(verify=0,dele=False,type=1)
 
 def manage_verify_newusers(request):
     obj = user.objects.get(id=string.atoi(request.REQUEST.get('id')),verify=0,dele=False)
+    obj.verify = string.atoi(request.REQUEST.get('verify'))
+    obj.save()
+
+def manage_get_newpets():
+    return nestofpet.objects.filter(verify=0,dele=False,sale_out=False)
+
+def manage_verify_newpets(request):
+    obj = nestofpet.objects.get(id=string.atoi(request.REQUEST.get('id')),verify=0,dele=False,sale_out=False)
     obj.verify = string.atoi(request.REQUEST.get('verify'))
     obj.save()

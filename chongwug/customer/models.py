@@ -14,7 +14,7 @@ class user(models.Model):
     #身份证号码
     id_num = models.TextField(blank=True, null=True)
     id_card = models.URLField(blank=True, null=True)
-    #0是未验证通过,1是验证通过
+    #0是未验证,1是验证通过,2是未通过,3是不需要验证的非养殖场用户
     verify = models.IntegerField(default=0)
     pwd = models.TextField(blank=True, null=True)
     desc = models.TextField(blank=True, null=True)

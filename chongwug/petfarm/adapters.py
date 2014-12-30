@@ -112,7 +112,7 @@ def petfarm_regist(request):
             del request.session['verifycode']
             del request.session['verifytimes']
             return __errorcode__(25)
-        if request.session['verifycode'] != request.POST['verify']:
+        if request.session['verifycode'] != request.POST['verify'].upper():
             return __errorcode__(25)
     if 'pwd' not in request.POST or request.POST['pwd'] == '':
         return __errorcode__(21)
@@ -505,6 +505,7 @@ def manage_pet_farm_mod(request):
         curuser.petfarm.province = province
         curuser.petfarm.city = city
         curuser.petfarm.district = request.POST['district']
+        curuser.petfarm.verify = 0
         curuser.petfarm.save()
         curuser.save()
         if 'img-main' not in request.POST:
@@ -602,6 +603,7 @@ def manage_nestofpet_mod(request):
         curnestofpet.type = request.POST['type']
         curnestofpet.short_desc = request.POST['short_desc']
         curnestofpet.txt_desc = request.POST['nest-longdesc']
+        curnestofpet.verify = 0
         curnestofpet.save()
         petids = request.POST.getlist('pets[]')
         for petid in petids:

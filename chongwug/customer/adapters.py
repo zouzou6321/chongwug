@@ -267,7 +267,7 @@ def buy_detail_adapter(re,petid):
     elif petid != -1:
         '''获取当前这窝宠物信息'''
         try:
-            nest_pet = nestofpet.objects.filter(id=petid,dele=False,sale_out=False)[0]
+            nest_pet = nestofpet.objects.get(id=petid,dele=False,sale_out=False)
             curtype = nest_pet.type
         except:
             return False
@@ -332,7 +332,6 @@ def buy_detail_adapter(re,petid):
         return False
 
 def buy_gettel(request):
-    print request.POST
     if 'tel' in request.POST:
         if 'getteltime' in request.session:
             old = datetime.datetime.strptime(request.session['getteltime'],'%Y-%m-%d %H:%M:%S')
@@ -356,7 +355,7 @@ def buy_gettel(request):
         curuser = None
         try:
             auth_user = User.objects.create_user(username=request.POST['tel'],email='',password='123456')
-            curuser =  user(nickname=u'未设置',tel=request.POST['tel'],location='',auth_user=auth_user,type=0,pwd='123456')
+            curuser =  user(nickname=u'未设置',tel=request.POST['tel'],location='',auth_user=auth_user,type=0,pwd='123456',verify=3)
             curuser.save()
         except:
             pass
