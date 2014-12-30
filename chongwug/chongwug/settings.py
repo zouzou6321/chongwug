@@ -38,7 +38,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = 'http://www.chongwug.com/static/'
     CKEDITOR_STATIC_URL = '//chongwug-cdn.b0.upaiyun.com/lib/'
-    FONT_TYPE = 'Droid Sans Fallback.ttf'
+    FONT_TYPE = '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf'
 elif 'TEST_SERVER' in os.environ:
     DEBUG = False
     TEMPLATE_DEBUG = False
