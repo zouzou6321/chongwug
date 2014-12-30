@@ -73,8 +73,10 @@ def create_validate_code(size=(100, 34),
         '''绘制验证码字符'''
         c_chars = get_chars()
         strs = ' %s ' % ' '.join(c_chars) # 每个字符前后以空格隔开
-       
-        font = ImageFont.truetype(font_type, font_size)
+        try:
+            font = ImageFont.truetype(font_type, font_size)
+        except:
+            font = ImageFont.load_default()
         font_width, font_height = font.getsize(strs)
 
         draw.text(((width - font_width) / 3, (height - font_height) / 3),
