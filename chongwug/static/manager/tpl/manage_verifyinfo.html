@@ -20,21 +20,14 @@
 <h1 class="page-header">新用户列表</h1>
 
 <div class="panel-group" id="accordion">
-{% for user in users %}
+{% for pet in pets %}
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
-            {{ user.nickname }} - {{ user.tel }} - {{ user.email }}
+        <a href="/buy/detail/{{ pet.id }}/" target="_blank">
+            {{ pet.farm.name }}——{{ pet.short_desc }}-{{ pet.start_time }}
         </a>
       </h4>
-    </div>
-    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
-      <div class="panel-body">
-        <a class="btn btn-primary" href="?verify=1&id={{ user.id }}">通过</a>
-        <a class="btn btn-default" href="?verify=2&id={{ user.id }}">不通过</a>
-        {{ user.id_card }}
-      </div>
     </div>
   </div>
 {% endfor %}

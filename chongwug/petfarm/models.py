@@ -56,6 +56,7 @@ class nestofpet(models.Model):
     #上架时间
     start_time = models.DateTimeField(default=datetime.datetime.now)
     sale_out = models.BooleanField(default=False)
+    verify = models.IntegerField(default=0)
     dele = models.BooleanField(default=False)
 
 class pet(models.Model):
