@@ -217,7 +217,7 @@ def petfarm_regist_sendcheck(request):
             return __errorcode__(23)
         request.session['verifytime'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         request.session['verifycode'] = random_str(4)
-        message = u'有客户使用此电话号码注册宠物购平台账号，如果不是本人操作，请忽略。您的验证码是%s,登陆宠物购www.chongwug.com【宠物购科技】' % request.session['verifycode']
+        message = u'有客户使用此电话号码注册宠物购平台账号，如果不是本人操作，请忽略。您的验证码是%s,登陆宠物购www.chongwug.com' % request.session['verifycode']
         sendSMS(request.REQUEST.get('tel'),message)
         return __errorcode__(0)
     return __errorcode__(26)
