@@ -1,6 +1,8 @@
 <header class="bar bar-nav header">
   <h1 class="title">宠物购</h1>
+    {% if page == 'home' %}
     <a class="btn btn-link btn-nav pull-right" href="/changecity/">
       {{ city }}<span class="icon icon-down-dir"></span>
     </a>
+    {% endif %}
 </header>

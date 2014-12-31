@@ -681,7 +681,7 @@ select {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 3px; }
-  .segmented-control .control-item {
+  .segmented-control .control-item, .segmented-control .control-item-link {
     display: table-cell;
     width: 1%;
     padding-top: 6px;
@@ -693,11 +693,11 @@ select {
     text-overflow: ellipsis;
     white-space: nowrap;
     border-left: 1px solid #ccc; }
-    .segmented-control .control-item:first-child {
+    .segmented-control .control-item:first-child, .segmented-control .control-item-link:first-child {
       border-left-width: 0; }
-    .segmented-control .control-item:active {
+    .segmented-control .control-item:active, .segmented-control .control-item-link:active {
       background-color: #eee; }
-    .segmented-control .control-item.active {
+    .segmented-control .control-item.active, .segmented-control .control-item-link.active {
       background-color: #ccc; }
 
 .segmented-control-primary {

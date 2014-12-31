@@ -3,6 +3,13 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+<div class="bar bar-header-secondary">
+  <div class="segmented-control content-padded font-sm">
+    {% for petfarmtype in petfarmtypes %}
+    <a class="control-item-link{% ifequal farmtype petfarmtype.type %} active{% endifequal %}" href="{{ urls }}{{ directkey }}-{{ typekey }}-{{ princekey }}-{{ agekey }}-{{ epidemickey }}-{{ searchkey }}-{{ petfarmtype.type }}-{{ curpage }}/">{{ petfarmtype.title }}</a>
+    {% endfor %}
+  </div>
+</div>
 <div class="content content-common buy">
     {% if pets_imgs%}
     <ul class="table-view table-view-extend border-top-none" style="margin-top: 0; padding-top: 1px;">
