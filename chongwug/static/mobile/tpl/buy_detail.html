@@ -151,7 +151,14 @@
 
 {% block scripts %}
 <script>
-(function(){
+//slider
+;(function($){
+    $('.swipe').Swipe({
+        auto: 3000
+    });
+})(jQuery);
+
+;(function(){
     var $telModal = $('#js-order-modal'),
         $form = $telModal.find('.form'),
         $csrf = $form.find('input[name="csrfmiddlewaretoken"]'),
