@@ -29,6 +29,7 @@
 <glyph glyph-name="right-open" unicode="&#xe814;" d="m618 361l-414-415q-11-10-25-10t-26 10l-92 93q-11 11-11 25t11 25l296 297-296 296q-11 11-11 25t11 25l92 93q11 10 26 10t25-10l414-414q10-11 10-25t-10-25z" horiz-adv-x="714.3" />
 <glyph glyph-name="cancel" unicode="&#xe815;" d="m654 349l346-346-154-154-346 346-346-346-154 154 346 346-346 346 154 154 346-346 346 346 154-154z" horiz-adv-x="1000" />
 <glyph glyph-name="filter" unicode="&#xe816;" d="m0 850l1000 0-346-346 0-402-308-252 0 654z" horiz-adv-x="1000" />
+<glyph glyph-name="down-dir" unicode="&#xe817;" d="m571 457q0-14-10-25l-250-250q-11-11-25-11t-25 11l-250 250q-11 11-11 25t11 25 25 11h500q14 0 25-11t10-25z" horiz-adv-x="571.4" />
 </font>
 </defs>
 </svg>

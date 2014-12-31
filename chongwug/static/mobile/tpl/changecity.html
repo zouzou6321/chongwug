@@ -1,0 +1,27 @@
+{% extends 'mobile/tpl/base/base.html' %}
+{% load mobile %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="content content-common">
+    {% for range in addresses %}
+    {% for province in range.sublist %}
+    <div class="row dog-select-row">
+        <div class="col-1 dog-select-title">{{ province.name }}：</div>
+        <div class="col-11">
+            <ul class="nav nav-pills">
+                {% for city in province.sublist %}
+                    <li>
+                    <a href="./?ipprovince={{ province.index }}&ipcity={{ city.index }}">{{ city.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+
+{% endblock %}

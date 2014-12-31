@@ -970,6 +970,10 @@ select {
   content: '\e816'; }
 
 /* '' */
+.icon-down-dir:before {
+  content: '\e817'; }
+
+/* '' */
 /**
  * Generic utility styles etc.
  */
@@ -1272,6 +1276,13 @@ a {
   padding: 10px 0 20px 0; }
   .switch-desktop a {
     color: #333; }
+
+.header .btn-link, .header .btn-link:active {
+  color: #fff; }
+.header .btn-link .icon {
+  font-size: 16px;
+  top: 1px;
+  left: 1px; }
 
 .guide {
   position: fixed;
