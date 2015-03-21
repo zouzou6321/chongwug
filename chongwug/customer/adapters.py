@@ -59,7 +59,7 @@ def ADclicktongji(request):
     except:
         return __errorcode__(2)
 
-from chongwug.ipinfo import QQWry
+from chongwug.settings import qqwry
 def getipcity(request):
     if 'city' in request.session:
         return request.session['city']
@@ -67,7 +67,6 @@ def getipcity(request):
         ip = request.META['HTTP_X_FORWARDED_FOR']
     else:
         ip = request.META['REMOTE_ADDR']
-    qqwry = QQWry(settings.ROOT + '/chongwug/qqwry.dat')
     c, a = qqwry.query(ip)
     request.session['city'] = '成都'
     if c != 'IANA':
