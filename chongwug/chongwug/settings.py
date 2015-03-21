@@ -22,7 +22,7 @@ if 'SERVER_SOFTWARE' in os.environ:
     EMAIL_HOST_USER = 'fccsl6321@163.com'
     EMAIL_HOST_PASSWORD = '8792833'
     
-    MYSQL_HOST = 'rdsaera2yaera2y.mysql.rds.aliyuncs.com'
+    MYSQL_HOST = 'rdsrayzenzjnv7v.mysql.rds.aliyuncs.com'
     MYSQL_PORT = '3306'
     MYSQL_USER = 'chongwug'
     MYSQL_PASS = 'weet6321'
@@ -118,7 +118,7 @@ DATABASES = {
 PROD_TEST = False
 CDN_TEST = False
 
-
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -256,6 +256,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+from chongwug.ipinfo import QQWry
+qqwry = QQWry(ROOT + '/chongwug/qqwry.dat')
 
 from django.utils.log import AdminEmailHandler
 from django.core.mail  import  send_mail
