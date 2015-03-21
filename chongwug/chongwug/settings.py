@@ -9,8 +9,8 @@ from django.conf.urls import url
 STATIC_ROOT = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'static').replace('\\','/')
 
 if 'SERVER_SOFTWARE' in os.environ:
-    DEBUG = False
-    TEMPLATE_DEBUG = False
+    DEBUG = True
+    TEMPLATE_DEBUG = True
     
     ADMINS = [
               '692673390@qq.com',
