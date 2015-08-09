@@ -87,7 +87,7 @@ else:
     MYSQL_HOST = 'localhost'
     MYSQL_PORT = '3306'
     MYSQL_USER = 'root'
-    MYSQL_PASS = ''
+    MYSQL_PASS = 'root'
     MYSQL_DB   = 'chongwug'
     
     # Hosts/domain names that are valid for this site; required if DEBUG is False

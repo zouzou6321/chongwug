@@ -67,8 +67,9 @@ def getipcity(request):
         ip = request.META['HTTP_X_FORWARDED_FOR']
     else:
         ip = request.META['REMOTE_ADDR']
+    #ip = '218.94.121.239'
     c, a = qqwry.query(ip)
-    request.session['city'] = '成都'
+    #request.session['city'] = '成都'
     if c != 'IANA':
         for range in config.__addresses:
             for province in range['sublist']:
